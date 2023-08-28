@@ -1,0 +1,546 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+  <div class="wrap">
+    <!-- main_con  -->
+    <div id="main_con">
+      <div id="nav_menu">
+        <div id="lnb">
+          <h2 class="title">공지사항</h2>
+          <div class="menu">
+            <ul>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
+                <ul class="sub" style="display: none;">
+                  <li><a href="#">모집공고 등록</a></li>
+                  <li><a href="#">모집공고 목록</a></li>
+                </ul>
+              </li>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
+                <ul class="sub" style="display: none;">
+                  <li><a href="#">공지사항 등록</a></li>
+                  <li><a href="#">공지사항 목록</a></li>
+                </ul>
+              </li>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
+                <ul class="sub" style="display: none;">
+                  <li><a href="#">FAQ 등록</a></li>
+                  <li><a href="#">FAQ 목록</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div id="contents">
+
+          <style>
+        @media screen and (max-width: 1024px) {
+          .table-responsive > table > tbody > tr td[data-cell-header]:before {
+            width: 30%;
+            margin: 0 0 0 0;
+            vertical-align: unset;
+          }
+        }
+        .table-responsive > table > tbody > tr:hover {
+          background-color: #e6f8ff;
+        }
+        @media screen and (min-width: 1100px) {
+          #select-box-margin-left-10 {
+            margin-left: 6px;
+          }
+        }
+      </style>
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+
+      <article id="detail-content">
+        <form
+          id="listForm"
+          name="listForm"
+          action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
+          method="post"
+        >
+          <input
+            type="hidden"
+            id="cd_appeal_form"
+            name="cd_appeal_form"
+            value="ALL"
+          />
+          <input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
+          <input
+            type="hidden"
+            id="srch_cd_appeal_form"
+            name="srch_cd_appeal_form"
+            value=""
+          />
+          <input
+            type="hidden"
+            id="search_capp_biz_cd"
+            name="search_capp_biz_cd"
+            value=""
+          />
+          <input type="hidden" id="cate_name" name="cate_name" value="" />
+          <input
+            type="hidden"
+            id="sub_cate_name"
+            name="sub_cate_name"
+            value=""
+          />
+          <div class="heading-wrap container">
+            <h3 class="heading1">
+              <span>재판조력자 모집공고</span>
+            </h3>
+          </div>
+
+          <!-- 본문컨텐츠 영역 -->
+          <div class="container">
+            <div class="box box1">
+              <p>
+                재판조력자 공고 페이지입니다. ~~ 안내멘트
+              </p>
+            </div>
+            <!-- 분류 탭 -->
+            <div class="tab-wrap">
+              <ul class="tab tab1 outlineIE">
+                <li id="liFirst1">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '', 1, 1, '전체');"
+                  >
+                    <span>전체</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '010000', 1, 1, '일자리지원');"
+                  >
+                    <span>일자리지원</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '020000', 2, 10, '고용보험');"
+                  >
+                    <span>고용보험</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '030000', 3, 13, '직업능력');"
+                  >
+                    <span>직업능력</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '040000', 4, 18, '고용평등');"
+                  >
+                    <span>고용평등</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '050000', 5, 22, '고용안정');"
+                  >
+                    <span>고용안정</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '060000', 6, 24, '노사협력');"
+                  >
+                    <span>노사협력</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '070000', 7, 33, '근로기준');"
+                  >
+                    <span>근로기준</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '080000', 8, 45, '산재예방');"
+                  >
+                    <span>산재예방</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '090000', 9, 55, '외국인력');"
+                  >
+                    <span>외국인력</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a
+                    href="#"
+                    onclick="srchMinwonDoc('lCate', '100000', 10, 57, '일반행정');"
+                  >
+                    <span>일반행정</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab-wrap">
+              <ul class="tab tab2"></ul>
+            </div>
+
+            <div class="searchform searchform2">
+              <div class="searchform-wrap">
+                <div class="select-box">
+                  <label for="selectTit"></label>
+                  <select
+                    class="info-select"
+                    id="selectTit"
+                    name="search_field"
+                    title="검색조건을 선택해주세요."
+                  >
+                    <option value="0">전체</option>
+                    <option value="1">개인</option>
+                    <option value="2">기업</option>
+                  </select>
+                </div>
+
+                <div class="search-input-wrap">
+                  <div class="input-wrap">
+                    <input
+                      type="text"
+                      name="q_string"
+                      value=""
+                      onkeypress="if(window.event.keyCode == 13) srchMinwonDoc();"
+                      class="form-control"
+                      placeholder="검색어를 입력해주세요"
+                      title="검색어를 입력해주세요"
+                      id="q_string"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="search-btn"
+                    onclick="srchMinwonDoc()"
+                  >
+                    <i class="xi-search"></i>
+                    <span class="sr-only">검색</span>
+                  </button>
+                </div>
+
+                <div class="select-box" id="select-box-margin-left-10">
+                  <label for="selectTit"></label>
+                  <select
+                    name="view_cnt"
+                    id="view_cnt"
+                    class="info-select"
+                    title="게시판 목록보기 갯수선택"
+                    style="min-width: 170px"
+                  >
+                    <!-- onchange="chgViewCount(this.value);" -->
+                    <option value="10" selected=" selected">10개씩 보기</option>
+                    <option value="20">20개씩 보기</option>
+                    <option value="50">50개씩 보기</option>
+                    <option value="100">100개씩 보기</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-t-wrap">
+              <div class="total-num">총 게시글 <em>248</em>건</div>
+
+            </div>
+            <!-- 게시판 시작 부분 -->
+            <div class="table table-responsive">
+              <table>
+                <caption>
+                  번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
+                  정보 제공
+                </caption>
+                <colgroup>
+                  <col style="width: 10%" />
+                  <col style="width: 40%" />
+                  <col style="width: 15%" />
+                  <col style="width: 11.666%" />
+                  <col style="width: 11.666%" />
+                  <col style="width: 11.666%" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">민원서식명</th>
+                    <th scope="col">민원분류</th>
+                    <th scope="col">처리기간</th>
+                    <th scope="col">서식파일</th>
+                    <th scope="col">신청</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서"
+                    style="cursor: pointer"
+                  >
+                    <td data-cell-header="번호">248</td>
+                    <td
+                      data-cell-header="민원서식명"
+                      tabindex="0"
+                      onkeypress="if(event.keyCode ==13){$(this).click()}"
+                      onclick="jsSamuDetail('TMP00000204')"
+                    >
+                      임금체불 진정서
+                    </td>
+                    <td data-cell-header="민원분류">근로기준</td>
+                    <td data-cell-header="처리기간">25 일</td>
+                    <td
+                      data-cell-header="서식파일"
+                      onclick="javascript: eval($(this).children().attr('onclick'));"
+                    >
+                      <a
+                        style="cursor: pointer"
+                        tabindex="0"
+                        onkeypress="if(event.keyCode ==13){event.stopPropagation(); $(this).click();}"
+                        onclick="javascript:openDownloadPost('B2931E943723D4446C0C18BB6512EB12BFC2D32DA34707853A2EFDD52F1DAD0D','54066F49F05070E7B71473D009652F4678A1A8D955D7E09642B455977AD50CD3BD7C3F5BF0298C4D245C6146456E6408C454C2349C1E83EB0DA3E998C1300FF8',event);"
+                        ><img src="../../img/icn/hwp_icn.gif" alt="파일(HWP)"
+                      /></a>
+                    </td>
+                    <td onclick="event.stopPropagation();">
+                      <a href="javascript:submitUrl('/minwon2008/lc_minwon/AH038_C.do?capp_biz_cd=&proc_sys_cd=01&cd_appeal_form_map=AH038','AH038');"
+                         class="case case1"
+                      ><em>신청</em></a
+                      >
+                    </td>
+                  </tr>
+
+                  <tr
+                    title="직업능력 &gt; 기술/자격 &gt; 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+                    style="cursor: pointer"
+                  >
+                    <td data-cell-header="번호">247</td>
+                    <td
+                      data-cell-header="민원서식명"
+                      tabindex="0"
+                      onkeypress="if(event.keyCode ==13){$(this).click()}"
+                      onclick="jsSamuDetail('TMP00000121')"
+                    >
+                      국가기술자격 부정행위 신고서
+                    </td>
+                    <td data-cell-header="민원분류">직업능력</td>
+                    <td data-cell-header="처리기간">60 일</td>
+                    <td
+                      data-cell-header="서식파일"
+                      onclick="javascript: eval($(this).children().attr('onclick'));"
+                    >
+                      <a
+                        href="https://www.law.go.kr/踰뺣졊蹂꾪몴�쒖떇/(援��湲곗닠�먭꺽踰� �쒗뻾洹쒖튃,�쒖떇17��3)"
+                        style="cursor: pointer"
+                        tabindex="0"
+                        target="_blank"
+                        title="새창열기"
+                        ><img src="../../img/btn/open_file.gif"
+                      /></a>
+                    </td>
+                    <td onclick="event.stopPropagation();">
+                      <a
+                        href="javascript:submitUrl('/minwon2008/lc_minwon/T00062_C.do?capp_biz_cd=TMP00000121&amp;proc_sys_cd=01&amp;cd_appeal_form_map=T00062','T00062');"
+                        class="case case1"
+                        ><em>신청</em></a
+                      >
+                    </td>
+                  </tr>
+
+                  <tr
+                    title="산재예방 &gt; 산업재해 &gt; 산업재해 조사표 / 산업재해 조사표"
+                    style="cursor: pointer"
+                  >
+                    <td data-cell-header="번호">246</td>
+                    <td
+                      data-cell-header="민원서식명"
+                      tabindex="0"
+                      onkeypress="if(event.keyCode ==13){$(this).click()}"
+                      onclick="jsSamuDetail('14921000459')"
+                    >
+                      산업재해 조사표
+                    </td>
+                    <td data-cell-header="민원분류">산재예방</td>
+                    <td data-cell-header="처리기간">14 일</td>
+                    <td
+                      data-cell-header="서식파일"
+                      onclick="javascript: eval($(this).children().attr('onclick'));"
+                    >
+                      <a
+                        href="https://www.law.go.kr/踰뺣졊蹂꾪몴�쒖떇/(�곗뾽�덉쟾蹂닿굔踰� �쒗뻾洹쒖튃,�쒖떇30)"
+                        style="cursor: pointer"
+                        tabindex="0"
+                        target="_blank"
+                        title="새창열기"
+                        ><img src="../../img/btn/open_file.gif"
+                      /></a>
+                    </td>
+                    <td onclick="event.stopPropagation();">
+                      <a
+                        href="javascript:submitUrl('/minwon2008/lc_minwon/AH038_C.do?capp_biz_cd=&proc_sys_cd=01&cd_appeal_form_map=AH038','AH038');"
+                        class="case case1"
+                        ><em>신청</em></a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- pagenation -->
+            <div class="pager">
+              <div class="pager-wrap">
+                <a
+                  href="#"
+                  class="arr first"
+                  title="처음으로"
+                  onclick="fn_egov_link_page(1); return false;"
+                  ><strong class="sr-only">맨 처음 목록으로 이동</strong></a
+                ><a
+                  href="#"
+                  class="arr prev"
+                  title="이전으로"
+                  onclick="fn_egov_link_page(1); return false;"
+                  ><strong class="sr-only">이전페이지로 이동</strong></a
+                ><a
+                  href="#"
+                  class="active"
+                  title="현재 선택된 페이지는 1 페이지 입니다."
+                  onclick=""
+                  >1</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(2); return false;"
+                  >2</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(3); return false;"
+                  >3</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(4); return false;"
+                  >4</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(5); return false;"
+                  >5</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(6); return false;"
+                  >6</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(7); return false;"
+                  >7</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(8); return false;"
+                  >8</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(9); return false;"
+                  >9</a
+                ><a
+                  href="#"
+                  class=""
+                  onclick="fn_egov_link_page(10); return false;"
+                  >10</a
+                ><a
+                  href="#"
+                  class="arr next"
+                  title="다음으로"
+                  onclick="fn_egov_link_page(11); return false;"
+                  ><strong class="sr-only">다음페이지로 이동</strong></a
+                ><a
+                  href="#"
+                  class="arr last"
+                  title="마지막으로"
+                  onclick="fn_egov_link_page(25); return false;"
+                  ><strong class="sr-only">맨 마지막 목록으로 이동</strong></a
+                >
+
+                <input
+                  id="pageIndex"
+                  name="pageIndex"
+                  type="hidden"
+                  value="1"
+                />
+                <input id="pageSize" name="pageSize" type="hidden" value="10" />
+                <input id="pageUnit" name="pageUnit" type="hidden" value="10" />
+                <input
+                  id="large_category_idx"
+                  name="large_category_idx"
+                  type="hidden"
+                  value=""
+                />
+                <input
+                  id="middle_category_idx"
+                  name="middle_category_idx"
+                  type="hidden"
+                  value=""
+                />
+                <input
+                  id="tot_middle_category_idx"
+                  name="tot_middle_category_idx"
+                  type="hidden"
+                  value=""
+                />
+                <input
+                  id="large_category_cd"
+                  name="large_category_cd"
+                  type="hidden"
+                  value=""
+                />
+                <input
+                  id="middle_category_cd"
+                  name="middle_category_cd"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <!-- //본문컨텐츠 영역 -->
+        </form>
+      </article>
+    </div>
+    </div>
+    <!-- //main_con  -->
+  </div>
+
+</th:block>
+</html>
