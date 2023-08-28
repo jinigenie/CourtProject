@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/app/info.css}" />
+<script th:src="@{../../js/app/info.js}"></script>
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+
+    <div class="wrap">
+        <div id="main_con">
+            <div id="nav_menu">
+                <div id="lnb">
+                    <h2 class="title">조력자등재신청</h2>
+                    <div class="menu">
+                        <ul>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재신청</a>
+                            </li>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재명단</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div id="contents">
+                <div class="heading-wrap container">
+                    <h3 class="heading1">
+                        <span>재판조력자 등재신청</span>
+                    </h3>
+                </div>
+
+                <div id="crumbs">
+                    <ul>
+                        <li><a href="#1" style="color:#357DFD;">기본정보</a></li>
+                        <li><a href="#2">경력상세</a></li>
+                        <li><a href="#3">학력상세</a></li>
+                        <li><a href="#4">서류제출</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</th:block>
+</html>
