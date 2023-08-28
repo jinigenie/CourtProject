@@ -13,4 +13,5 @@ public class UserController {
 	public String main() {
 		return "index";
 	}
+
 }
