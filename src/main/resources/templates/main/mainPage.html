@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+
+
+	<script th:src="@{../js/main/swiper.animate1.0.2.min.js}"></script>
+	<link rel="stylesheet" th:href="@{../css/main/main.css}" />
+	<script th:src="@{../js/main/main.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+
+</head>
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap2})}">
+
+
+
+
+	<div class="main_body">
+		<div class="wrap2">
+			<article id="main_article">
+				<div class="main_section visual">
+
+					<div class="main_wrap">
+						<div class="boxL" data-aos="fade-right">
+							<h1><strong>국민</strong>과 <strong>함께</strong>하는 <br>
+								<strong class="t2">재판조력자</strong>
+							</h1>
+							<p><strong>공정성과 </strong> 정확성을 위한 <strong>도움의 손길</strong></p>
+							<hr />
+
+						</div>
+						<div class="boxR" data-aos="fade-left" data-aos-delay="300">
+
+							<div class="main_search">
+								<a href="https://www.ndmi.go.kr/home/sub.do?menukey=6072">
+									<strong>재판조력자란?</strong>
+									<p>재판조력자 제도안내</p>
+
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+			<div class="wrap2">
+
+				<div class="box2">
+					<!--공고-->
+
+					<swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3"
+						space-between="0" free-mode="true">
+						<swiper-slide>Slide 1</swiper-slide>
+						<swiper-slide>Slide 2</swiper-slide>
+						<swiper-slide>Slide 3</swiper-slide>
+						<swiper-slide>Slide 4</swiper-slide>
+						<swiper-slide>Slide 5</swiper-slide>
+						<swiper-slide>Slide 6</swiper-slide>
+						<swiper-slide>Slide 7</swiper-slide>
+						<swiper-slide>Slide 8</swiper-slide>
+						<swiper-slide>Slide 9</swiper-slide>
+					</swiper-container>
+
+					<div class="swiper-button-prev"></div>
+					<!-- 다음 버튼 -->
+					<div class="swiper-button-next"></div>
+					<div class="main_faqList">
+						faq 불러오기
+
+
+					</div>
+				</div>
+
+			</div>
+
+			<!--모달창 작업-->
+			<div>
+
+
+
+				<!-- The Modal -->
+				<div id="popup_layer">
+					<div class="popup_box">
+						<!--팝업 컨텐츠 영역-->
+						<div class="popup_cont">
+							<h2>[ 공 지 사 항 ]</h2>
+							<p>
+								공 지 내 용
+							</p>
+						</div>
+						<!--팝업 버튼 영역-->
+						<div class="popup_btn">
+							<!--하루동안 보지않기-->
+							<a id="chk_today" href="javascript:closeToday();" class="close_day">하루동안 열지 않기</a>
+							<!--7일간 보지않기-->
+							<!-- <a id="chk_today" href="javascript:closeToday();" class="close_day">Do not open for 7 days</a>-->
+							<a href="javascript:closePop();">닫기</a>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					// 쿠키 생성
+					function setCookie(name, value, expiredays) {  // 쿠키저장
+						var todayDate = new Date();  //date객체 생성 후 변수에 저장
+						todayDate.setDate(todayDate.getDate() + expiredays);
+						// 시간지정(현재시간 + 지정시간)
+						document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toUTCString() + ";"
+						//위 정보를 쿠키에 굽는다
+					}
+					$(function () {
+						$(".popup_box").draggable({containment: 'parent', scroll: false}); // 레이어 팝업 창 드래그 가능
+						//{containment:'parent', scroll:false} 화면 영역 밖으로 드래그 안됌.
+
+						if (document.cookie.indexOf("popToday=close") < 0) {      // 쿠키 저장여부 체크
+							document.getElementById("popup_layer").style.display = "block";
+						} else {
+							document.getElementById("popup_layer").style.display = "none";
+						}
+					});
+
+					//오늘하루만보기 닫기버튼 스크립트
+					function closeToday() {
+						setCookie("popToday", "close", 1);
+						$("#popup_layer").css("display", "none");
+						document.getElementById("popup_layer").style.display = "none";
+					}
+					//그냥 닫기버튼 스크립트
+					function closePop() {
+						document.getElementById("popup_layer").style.display = "none";
+					}
+				</script>
+
+			</div>
+			<!--모달차 끝-->
+		</div>
+
+	</div>
+</th:block>
+
+</html>
