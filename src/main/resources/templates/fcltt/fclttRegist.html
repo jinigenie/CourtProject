@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+
+
+</head>
+
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<div class="wrap">
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">조력자확인</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a th:href="@{/fcltt/fclttRegist}" title="이용문의 닫기 (열림)">조력자 등재</a>
+							</li>
+							<li class="has-sub"><a th:href="@{/fcltt/fclttList}" title="이용문의 닫기 (열림)">조력자 등재명단</a></li>
+							<li class="has-sub"><a th:href="@{/fcltt/pause}" title="이용문의 닫기 (열림)">조력자 활동신청관리</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div id="contents">
+				<div class="heading-wrap container">
+					<h3 class="heading1">
+						<span style="margin-bottom: 20px;">재판조력자 등재</span>
+					</h3>
+					<!--                    <div class="fclttRegist_wrap">
+						<form action="fclttRegForm"  name="fclttRegForm">
+							<input type="text" value="" name="" />
+							
+							
+							
+						</form>
+					</div>-->
+
+					<div class="table table-responsive">
+						<table>
+							<caption>
+								재판조력자등재
+							</caption>
+
+							<colgroup>
+								<col style="width: 30%">
+								<col style="width: 70%">
+							</colgroup>
+							<tbody>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="�ʼ��׸�">조력자 이름</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+												<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="�ʼ��׸�">합격자고유번호</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>휴대폰번호</span>
+									</th>
+									<td data-cell-header="휴대폰번호" class="txt-left">
+										<div class="fcltt_phone" style="display: inline-block">
+											<div class="fcltt_phone">
+												<input name="fcltt_phone" maxlength="4" id="cvl_cel1" value="010"
+													class="cm_inptxt" title="휴대폰번호 앞자리" type="text"
+													onkeydown="return num_only(event)" readonly="" />
+
+
+												<input name="cvl_cel2" maxlength="4" id="cvl_cel2" value="7325"
+													class="cm_inptxt" title="휴대폰번호 중간자리" type="text"
+													onkeydown="return num_only(event)" readonly="" />
+
+
+												<input name="cvl_cel3" maxlength="4" id="cvl_cel3" value="1252"
+													class="cm_inptxt" title="휴대폰번호 뒷자리" type="text"
+													onkeydown="return num_only(event)" readonly="" />
+
+												<em class="fcltt_comment">숫자만 기입</em>
+											</div>
+										</div>
+
+
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="essential-txt" title="�ʼ��׸�">조력자 분류</span>
+									</th>
+									<td data-cell-header="생년월일" class="txt-left">
+										<select name="" id="" class="cm_inptxt fclttCategory">
+											<option value="">대분류</option>
+											<option value="">대분류1</option>
+											<option value="">대분류2</option>
+											<option value="">대분류3</option>
+											<option value="">대분류5</option>
+										</select>
+										<select name="" id="" class="cm_inptxt fclttCategory">
+											<option value="">중분류</option>
+											<option value="">중분류1</option>
+											<option value="">중분류2</option>
+											<option value="">중분류3</option>
+											<option value="">중분류5</option>
+										</select>
+										<select name="" id="" class="cm_inptxt fclttCategory">
+											<option value="">소분류</option>
+											<option value="">소분류1</option>
+											<option value="">소분류2</option>
+											<option value="">소분류3</option>
+											<option value="">소분류5</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>법원 분류</span>
+									</th>
+									<td data-cell-header="전화번호" class="txt-left">
+										<select name="" id="" class="cm_inptxt">
+											<option value="">지역</option>
+											<option value="">지역1</option>
+											<option value="">지역2</option>
+											<option value="">지역3</option>
+											<option value="">지역5</option>
+										</select>
+										<select name="" id="" class="cm_inptxt">
+											<option value="">법원명</option>
+											<option value="">법원명1</option>
+											<option value="">법원명2</option>
+											<option value="">법원명3</option>
+											<option value="">법원명5</option>
+										</select>
+
+									</td>
+								</tr>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>기타 내용</span>
+									</th>
+									<td data-cell-header="이메일" class="txt-left">
+										<textarea rows="4" cols="50" style="width: 550px; height: 150px;"></textarea>
+									</td>
+								</tr>
+
+
+							</tbody>
+						</table>
+
+					</div>
+					<div class="fclttRegist_btn">
+						<button type="button" class="fcltt_btn1">등록</button>
+						<button type="button" class="fcltt_btn2">취소</button>
+					</div>
+
+
+				</div>
+
+				<div id="crumbs">
+					<ul>
+
+
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</th:block>
+
+
+
+
+</html>

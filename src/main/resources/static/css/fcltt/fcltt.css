@@ -1,0 +1,195 @@
+
+/* ------------------조력자 등재 page  fclttRegist --------------------*/
+
+
+.fclttRegist_btn{
+	margin-top: 20px;
+	text-align: center;
+	
+}
+.fclttRegist_btn > button{
+	
+	height: 50px;
+	width: 150px;
+	border: 1px solid #2065c6;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 10px;
+	
+
+}
+
+.fclttRegist_btn > button:hover{
+		color: white;
+		background-color: #2065c6;
+	
+}
+
+
+.fcltt_comment{
+	font-size: 15px;
+	color: rgb(0, 0, 128);
+}
+
+.cm_inptxt{
+	width: 180px;
+	height: 38px;
+}
+
+
+
+/* ---------------------------------------------------------------------*/
+
+/* ------------------조력자 등재명단 목록 fclttList --------------------*/
+
+.fclttSearch_content {
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.cm_inptxt {
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.fclttCheck{
+	padding-top: 10px;
+	margin-right: 5px;
+}
+.fclttSearch {
+	height: 38px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.fclttCheck {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fclttSerch_Btn {
+    width: 70px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 38px;
+    border: none;
+    background-color: #2065c6;
+    color: white;
+    text-decoration: none;
+    margin-right: 50px;
+}
+
+.fclttSearch1{
+	width: 200px;
+	
+}
+.fclttSearch2{
+	width: 500px;
+}
+
+.fclttSearch3{
+	 margin-left: auto; 
+
+}
+.fclttSearch_check{
+	width: 20px;
+	height: 20px;
+}
+
+
+.fclttStatus1{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background:#2065c6;
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.fclttStatus2{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background: rgb(255, 128, 0);
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* -----------------------------------------------------------------------*/
+
+/* ------------------조력자중지신청 fclttPause --------------------*/
+
+.pauseResult1{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background: rgb(255, 255, 255);
+  color:  #2065c6;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #2065c6;
+}
+
+.pauseResult1:hover{
+  background: rgb(255, 0, 0);
+  color:  rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+	
+}
+
+.pauseResult2{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background: rgb(255, 255, 255);
+  color:  #2065c6;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #2065c6;
+}
+
+.pauseResult2:hover{
+  background: #2065c6;
+  color:  rgb(255, 255, 255);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------------------------*/
+
+
+
+
