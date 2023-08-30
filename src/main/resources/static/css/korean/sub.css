@@ -151,7 +151,7 @@ body.start #detail-content {
   transform: translateY(-50%);
   width: 3.7rem;
   height: 2.95rem;
-  background-image: url(../../img/korean/sub/icon1.png);
+  /*background-image: url(../../img/korean/sub/recruit.png);*/
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -216,6 +216,26 @@ body.start #detail-content {
   vertical-align: middle;
   padding-top: 3.5rem;
 }
+/* *********************************************************************************
+* 달력
+* *********************************************************************************/
+.calander-box{
+  padding: 20px;
+}
+
+.calander-box .datepicker {
+  width: 100px;
+  border: 1px solid #cdcdcd;
+  background: url('../../img/korean/sub/calander.png');
+  background-repeat: no-repeat;
+  background-position-x: 75px;
+  background-position-y: 5px;
+  background-color: white;
+}
+
+/* *********************************************************************************
+* 컨텐츠 이미지
+* *********************************************************************************/
 .tab-wrap .tab1 > li > a > span:before {
   position: absolute;
   top: 1rem;
@@ -223,41 +243,46 @@ body.start #detail-content {
   width: 62px;
   height: 62px;
   transform: translateX(-50%);
-  background-image: url(../../img/korean/sub/icon2.png);
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
   content: '';
 }
+.tab-wrap .tab1 > li > a > span:before {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  transform: translateX(-50%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+}
+
+.tab-wrap .tab1 > li:nth-of-type(1) > a > span:before {
+  background-image: url('../../img/korean/sub/img1.png');
+  background-position: 0 0;
+}
+
 .tab-wrap .tab1 > li:nth-of-type(2) > a > span:before {
-  background-position: -62px 0;
+  background-image: url('../../img/korean/sub/img2.png');
+  background-position: 0 0;
 }
+
 .tab-wrap .tab1 > li:nth-of-type(3) > a > span:before {
-  background-position: -124px 0;
+  background-image: url('../../img/korean/sub/img3.png');
+  background-position: 0 0;
 }
+
 .tab-wrap .tab1 > li:nth-of-type(4) > a > span:before {
-  background-position: -186px 0;
+  background-image: url('../../img/korean/sub/img4.png');
+  background-position: 0 0;
 }
+
 .tab-wrap .tab1 > li:nth-of-type(5) > a > span:before {
-  background-position: -248px 0;
-}
-.tab-wrap .tab1 > li:nth-of-type(6) > a > span:before {
-  background-position: -310px 0;
-}
-.tab-wrap .tab1 > li:nth-of-type(7) > a > span:before {
-  background-position: -372px 0;
-}
-.tab-wrap .tab1 > li:nth-of-type(8) > a > span:before {
-  background-position: -434px 0;
-}
-.tab-wrap .tab1 > li:nth-of-type(9) > a > span:before {
-  background-position: -496px 0;
-}
-.tab-wrap .tab1 > li:nth-of-type(10) > a > span:before {
-  background-position: -558px 0;
-}
-.tab-wrap .tab1 > li.active > a > span:before {
-  background-image: url(../../img/korean/sub/icon2_over.png);
+  background-image: url('../../img/korean/sub/img5.png');
+  background-position: 0 0;
 }
 
 .tab-wrap .tab2 {
@@ -413,10 +438,11 @@ body.start #detail-content {
   background-position: -76px 0;
 }
 
-.table {
+.table
+{
   overflow: hidden;
-  border-top: 3px solid #2065c6;
-  border-bottom: 1px solid #2065c6;
+  border-top: 2.5px solid #4860cc;
+  border-bottom: 2.5px solid #4860cc;
   margin: 0.5rem 0 0.65rem;
   width: 100%;
 }
@@ -435,9 +461,10 @@ body.start #detail-content {
   padding: 0.75rem;
   border-bottom: 1px solid #2065c6;
   color: #2065c6;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-align: center;
   font-weight: 400;
+  width: 35%;
 }
 .table > table tbody th {
   border-bottom: 1px solid #cdcdcd;
@@ -453,8 +480,10 @@ body.start #detail-content {
   color: #444;
   text-align: center;
   position: relative;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   transition: color 0.3s;
+  width: 65%;
+
 }
 .table > table td > a > span {
   display: block;
@@ -587,10 +616,10 @@ body.start #detail-content {
   background: #f5f5f8 !important;
 }
 .table-fixed
-  tbody
-  .mCS-minimal-dark.mCSB_scrollTools
-  .mCSB_dragger
-  .mCSB_dragger_bar {
+tbody
+.mCS-minimal-dark.mCSB_scrollTools
+.mCSB_dragger
+.mCSB_dragger_bar {
   background: #5d73fa !important;
 }
 .table-fixed tbody.mCustomScrollbar .folding-lst {
@@ -776,6 +805,7 @@ body.start #detail-content {
   height: 100%;
   padding: 0 0.5rem;
   border: 0;
+  font-size: 0.8rem;
 }
 .input-wrap > input::placeholder {
   color: #929292;
@@ -1011,7 +1041,7 @@ body.start #detail-content {
 /* *********************************************************************************
 * responsive
 * *********************************************************************************/
-/* 2020.12.09 異붽� */
+/* 2020.12.09 異붽  */
 .pc_searchArea {
   display: block;
 }
@@ -1270,7 +1300,7 @@ body.start #detail-content {
   transform: translateY(-50%);
   width: 3.7rem;
   height: 2.95rem;
-  background-image: url(../../img/korean/sub/icon1.png);
+  background-image: url(../../img/korean/sub/recruit.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1289,7 +1319,7 @@ body.start #detail-content {
   width: 100%;
   padding: 12.5rem 3.25rem 3.75rem;
   background: #f7f7f7 url(../../img/korean/sub/box3_bg.png) no-repeat right
-    top/cover;
+  top/cover;
 }
 .box3:before {
   position: absolute;
@@ -1340,7 +1370,7 @@ body.start #detail-content {
   width: 100%;
   height: 4px;
   background: url(../../img/korean/sub/border_pattern.png) no-repeat
-    center/cover;
+  center/cover;
   content: '';
 }
 .box4:after {
@@ -1350,7 +1380,7 @@ body.start #detail-content {
   width: 100%;
   height: 4px;
   background: url(../../img/korean/sub/border_pattern.png) no-repeat
-    center/cover;
+  center/cover;
   content: '';
 }
 .box5 {
@@ -1502,93 +1532,93 @@ body.start #detail-content {
   background-position: center;
 }
 .btn-style {
-    width: 148px;
-    height: 33px;
-    line-height: 31px;
-    font-size: 0.6rem;
-  }
-  .btn-style > i {
-    font-size: 0.8rem;
-  }
-  .btn-style-right {
-    padding: 0 40px 0 18px;
-  }
-  .btn-style-left {
-    padding: 0 18px 0 40px;
-  }
-  .btn-style-right > i {
-    right: 10px;
-  }
-  .btn-style-left > i {
-    left: 10px;
-  }
-  .btn-style.btn-style1,
-  .btn-style.btn-style8 {
-    height: 30px;
-    line-height: 28px;
-  }
-  .btn-style.btn-style1:after {
-    width: 12px;
-    height: 12px;
-    right: 9px;
-  }
-  .btn-style.btn-style2 {
-    height: 35px;
-    line-height: 33px;
-  }
-  .btn-style.btn-style1:hover:after,
-  .btn-style.btn-style1:focus:after {
-    background-position: -12px 0;
-  }
-  .btn-style.btn-style3 {
-    height: 45px;
-    line-height: 43px;
-    font-size: 0.7rem;
-  }
-  .btn-style-wrap:after {
-    width: 45px;
-    height: 45px;
-  }
-  .btn-style.btn-style4 {
-    font-size: 0.6rem;
-  }
-  .btn-style.btn-style7 {
-    height: 45px;
-    line-height: 43px;
-    font-size: 0.7rem;
-  }
-  .btn-style.btn-style14,
-  .btn-style.btn-style15,
-  .btn-style.btn-style16,
-  .btn-style.btn-style17,
-  .btn-style.btn-style18,
-  .btn-style.btn-style19,
-  .btn-style.btn-style20,
-  .btn-style.btn-style21 {
-    height: 35px;
-    line-height: 33px;
-    font-size: 0.6rem;
-  }
-  .btn-style.btn-style22,
-  .btn-style.btn-style23,
-  .btn-style.btn-style24 {
-    height: 35px;
-    line-height: 33px;
-    font-size: 0.7rem;
-  }
-  .txt-left .btn-style.btn-style22 {
-    text-align: center;
-  }
-  .txt-left .btn-style.btn-style22 > i {
-    left: calc(50% - 4rem);
-    transform: translate(-50%, -50%);
-  }
-  .btn-style.btn-style25,
-  .btn-style.btn-style26 {
-    height: 45px;
-    line-height: 43px;
-  }
-  .btn-style-wrap + .btn-style-wrap {
+  width: 148px;
+  height: 33px;
+  line-height: 31px;
+  font-size: 0.6rem;
+}
+.btn-style > i {
+  font-size: 0.8rem;
+}
+.btn-style-right {
+  padding: 0 40px 0 18px;
+}
+.btn-style-left {
+  padding: 0 18px 0 40px;
+}
+.btn-style-right > i {
+  right: 10px;
+}
+.btn-style-left > i {
+  left: 10px;
+}
+.btn-style.btn-style1,
+.btn-style.btn-style8 {
+  height: 30px;
+  line-height: 28px;
+}
+.btn-style.btn-style1:after {
+  width: 12px;
+  height: 12px;
+  right: 9px;
+}
+.btn-style.btn-style2 {
+  height: 35px;
+  line-height: 33px;
+}
+.btn-style.btn-style1:hover:after,
+.btn-style.btn-style1:focus:after {
+  background-position: -12px 0;
+}
+.btn-style.btn-style3 {
+  height: 45px;
+  line-height: 43px;
+  font-size: 0.7rem;
+}
+.btn-style-wrap:after {
+  width: 45px;
+  height: 45px;
+}
+.btn-style.btn-style4 {
+  font-size: 0.6rem;
+}
+.btn-style.btn-style7 {
+  height: 45px;
+  line-height: 43px;
+  font-size: 0.7rem;
+}
+.btn-style.btn-style14,
+.btn-style.btn-style15,
+.btn-style.btn-style16,
+.btn-style.btn-style17,
+.btn-style.btn-style18,
+.btn-style.btn-style19,
+.btn-style.btn-style20,
+.btn-style.btn-style21 {
+  height: 35px;
+  line-height: 33px;
+  font-size: 0.6rem;
+}
+.btn-style.btn-style22,
+.btn-style.btn-style23,
+.btn-style.btn-style24 {
+  height: 35px;
+  line-height: 33px;
+  font-size: 0.7rem;
+}
+.txt-left .btn-style.btn-style22 {
+  text-align: center;
+}
+.txt-left .btn-style.btn-style22 > i {
+  left: calc(50% - 4rem);
+  transform: translate(-50%, -50%);
+}
+.btn-style.btn-style25,
+.btn-style.btn-style26 {
+  height: 45px;
+  line-height: 43px;
+}
+.btn-style-wrap + .btn-style-wrap {
   margin-left: 1rem;
 }
 .btn-style-wrap .btn-style:hover > span:before,
