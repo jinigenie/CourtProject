@@ -114,30 +114,28 @@
 										정보 제공
 									</caption>
 									<colgroup>
+										<col style="width: 20%" />
 										<col style="width: 15%" />
-										<col style="width: 10%" />
-										<col style="width: 30%" />
 										<col style="width: 35%" />
-										<col style="width: 5%" />
-										<col style="width: 5%" />
+										<col style="width: 15%" />
+										<col style="width: 15%" />
 									</colgroup>
 									<thead>
 										<tr>
 											<th scope="col">신청일</th>
 											<th scope="col">신청자이름</th>
 											<th scope="col">중지기간</th>
-											<th scope="col">사유</th>
 											<th scope="col">활동상태</th>
 											<th scope="col">처리</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
+
+										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer"
+											onclick="pauseOpen();">
 											<td data-cell-header="신청자이름">2023/08/11</td>
-						
 											<td data-cell-header="신청자이름" tabindex="0">김혜민</td>
 											<td data-cell-header="중지기간">2022/08/12~ 2023/08/10</td>
-											<td data-cell-header="사유">아포쏘요 ㅜㅜ</td>
 											<td data-cell-header="현재활동상태">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
@@ -145,12 +143,19 @@
 												<a href="#" class="pauseResult1"><em>중지승인</em></a>
 											</td>
 										</tr>
-																				<tr>
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;"
+											>
+											
+											<td colspan="5" tabindex="0">사유보</td>
+											
+										</tr>
+
+										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/01/16</td>
-						
+
 											<td data-cell-header="신청자이름" tabindex="0">김현진</td>
 											<td data-cell-header="중지기간">2023/01/05~ 2023/01/17</td>
-											<td data-cell-header="사유">노래방가야합니다</td>
+
 											<td data-cell-header="현재활동상태">
 												<a class="fclttStatus2"><em>중지중</em></a>
 											</td>
@@ -158,12 +163,12 @@
 												<a href="#" class="pauseResult2"><em>활동승인</em></a>
 											</td>
 										</tr>
-																				<tr>
+										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/02/16</td>
-						
+
 											<td data-cell-header="신청자이름" tabindex="0">석이서</td>
 											<td data-cell-header="중지기간">20223/03/12~ 2023/04/10</td>
-											<td data-cell-header="사유">배고파요</td>
+
 											<td data-cell-header="현재활동상태">
 												<a class="fclttStatus2"><em>중지중</em></a>
 											</td>
@@ -171,12 +176,12 @@
 												<a href="#" class="pauseResult2"><em>활동승인</em></a>
 											</td>
 										</tr>
-																				<tr>
+										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/04/29</td>
-						
+
 											<td data-cell-header="신청자이름" tabindex="0">신명근</td>
 											<td data-cell-header="중지기간">2023/04/23~ 2023/05/13</td>
-											<td data-cell-header="사유">집에가야합니다</td>
+
 											<td data-cell-header="현재활동상태">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
@@ -184,12 +189,12 @@
 												<a href="#" class="pauseResult1"><em>중지승인</em></a>
 											</td>
 										</tr>
-																				<tr>
+										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/05/11</td>
-						
+
 											<td data-cell-header="신청자이름" tabindex="0">김민철</td>
 											<td data-cell-header="중지기간">2023/07/11~ 2023/08/10</td>
-											<td data-cell-header="사유">짜샤한테가야해요</td>
+
 											<td data-cell-header="현재활동상태">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
@@ -197,12 +202,12 @@
 												<a href="#" class="pauseResult1"><em>중지승인</em></a>
 											</td>
 										</tr>
-																				<tr>
+										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/08/14</td>
-						
+
 											<td data-cell-header="신청자이름" tabindex="0">이태주</td>
 											<td data-cell-header="중지기간">2023/08/01~ 2023/08/02</td>
-											<td data-cell-header="사유">막내하기시러여</td>
+
 											<td data-cell-header="현재활동상태">
 												<a class="fclttStatus2"><em>중지승인</em></a>
 											</td>
