@@ -4,7 +4,7 @@
 
 /* lnb. s. 2021.02.03 수정 */
 #lnb {position:relative;display:inline-block;width:220px; min-height: 600px; float:left; padding-top:40px;}
-#lnb>.title {min-height:40px; font-family:"Nanum Gothic"; font-size:24px;line-height: 1.4;color:#1c449c;margin:0; padding:0; border-bottom:2px solid #1c449c;}
+#lnb>.title {min-height:40px; font-family:"Nanum Gothic"; font-size:24px;line-height: 1.4;color:#13548a;margin:0; padding:0; border-bottom:2px solid #13548a;}
 #lnb>.menu {margin-bottom:50px;}
 #lnb>.menu a {display:block;font-family:"Nanum Gothic";}
 #lnb>.menu a:hover{text-decoration:none;}
