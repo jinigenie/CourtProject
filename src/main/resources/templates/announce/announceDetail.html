@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<!-- wrap start -->
+	<div class="wrap">
+		<!-- main_con start -->
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">공지사항</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">모집공고 등록</a></li>
+									<li><a href="#">모집공고 목록</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">공지사항 등록</a></li>
+									<li><a href="#">공지사항 목록</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">FAQ 등록</a></li>
+									<li><a href="#">FAQ 목록</a></li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<!-- contents start -->
+			<div id="contents">
+
+				<style>
+					@media screen and (max-width: 1024px) {
+						.table-responsive>table>tbody>tr td[data-cell-header]:before {
+							width: 30%;
+							margin: 0 0 0 0;
+							vertical-align: unset;
+						}
+					}
+
+					.table-responsive>table>tbody>tr:hover {
+						background-color: #e6f8ff;
+					}
+
+					@media screen and (min-width: 1100px) {
+						#select-box-margin-left-10 {
+							margin-left: 6px;
+						}
+					}
+				</style>
+				<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+				<!-- detail-content -->
+				<article id="detail-content">
+					<form id="listForm" name="listForm"
+						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
+						method="post">
+						<div class="heading-wrap container">
+							<h3 class="heading1">
+								<span>재판 조력자 모집공고 상세</span>
+							</h3>
+						</div>
+
+						<!-- 공고 제목 start -->
+						<thead>
+							<tr>
+								<th scope="col" colspan="2">공고 제목</th>
+							</tr>
+						</thead>
+
+						<!-- 최초입력일시,최종변경일시 start -->
+						<tr>
+							<td colspan="2">
+								<ul>
+									<li>
+										<strong>작성자 : 관리자</strong>
+									</li>
+
+									<li>
+										<strong>최초입력일시 : </strong>
+										2023-08-18
+									</li>
+									<!-- 조회수 start -->
+									<li>
+										<strong>최종변경일시 : </strong>
+										116,845
+									</li>
+								</ul>
+							</td>
+						</tr>
+
+						<!-- 본문컨텐츠 영역 start -->
+						<div class="container">
+							<div class="box box1">
+								<!-- 첨부파일 start -->
+								<h3>첨부파일</h3>
+								<tr>
+									<th scope="row">첨부</th>
+									<td>
+										<div id="fileControl" style="display: none"></div>
+										<!--
+					파일 확장자에 따른 아이콘입니다.
+					<a href="#" class="btnAttach v1">.pdf</a>
+					<a href="#" class="btnAttach v2">.hwp</a>
+					<a href="#" class="btnAttach v3">.xls</a>
+					<a href="#" class="btnAttach v4">.ppt</a>
+					<a href="#" class="btnAttach v5">.doc</a>
+					<a href="#" class="btnAttach v6">.txt</a>
+					<a href="#" class="btnAttach v7">.png</a>
+					<a href="#" class="btnAttach v8">.mp4</a>
+					<a href="#" class="btnAttach v9">.mp3</a>
+					<a href="#" class="btnAttach v10">.zip</a>
+					<a href="#" class="btnAttach v11">.etc</a>
+					-->
+
+										<a href="#" class="btnAttach v1" onclick="existFile('0'); return false;">
+											[공고문] 2023년 2차 장기미임대 매입임대주택 입주자모집(23_08_18).pdf
+										</a>
+										<a href="https://www.i-sh.co.kr/app/com/util/htmlConverter.do?brd_id=GS0401&amp;seq=264867&amp;data_tp=A&amp;file_seq=4"
+											class="btn btnWhite h32 icoView" target="_blank"
+											title="파일 미리보기"><span>미리보기</span></a>
+									</td>
+								</tr>
+								<br>
+								<tr>
+									<th scope="row">첨부</th>
+									<td>
+										<div id="fileControl" style="display: none"></div>
+										<!--
+					파일 확장자에 따른 아이콘입니다.
+					<a href="#" class="btnAttach v1">.pdf</a>
+					<a href="#" class="btnAttach v2">.hwp</a>
+					<a href="#" class="btnAttach v3">.xls</a>
+					<a href="#" class="btnAttach v4">.ppt</a>
+					<a href="#" class="btnAttach v5">.doc</a>
+					<a href="#" class="btnAttach v6">.txt</a>
+					<a href="#" class="btnAttach v7">.png</a>
+					<a href="#" class="btnAttach v8">.mp4</a>
+					<a href="#" class="btnAttach v9">.mp3</a>
+					<a href="#" class="btnAttach v10">.zip</a>
+					<a href="#" class="btnAttach v11">.etc</a>
+					-->
+
+										<a href="#" class="btnAttach v1" onclick="existFile('1'); return false;">
+											[주택목록] 2023년 2차 장기미임대 매입임대주택 공급대상 주택목록(600호).pdf
+										</a>
+										<a href="https://www.i-sh.co.kr/app/com/util/htmlConverter.do?brd_id=GS0401&amp;seq=264867&amp;data_tp=A&amp;file_seq=5"
+											class="btn btnWhite h32 icoView" target="_blank"
+											title="파일 미리보기"><span>미리보기</span></a>
+									</td>
+								</tr>
+							</div>
+						</div>
+						<!-- 공고 내용 start -->
+						<div class="searchform searchform2">
+							<div class="searchform-wrap">
+								<tr>
+									<td colspan="2" class="cont">
+										<p style="text-align: center;"><span style="font-size: 12pt;"><strong>2023년 2차
+													장기미임대 매입임대주택 입주자 모집공고(2023.08.18)</strong></span></p>
+										<p><br /></p>
+										<p><span style="font-size: 12pt;">서울주택도시공사에서 무주택 서울시민의 주거안정을 위하여 아래와 같이 장기미임대
+												매입임대주택 입주자를 모집하오니 공고문을 참고하시어 지원하여 주시기 바랍니다.</span></p>
+										<p><br /></p>
+										<p><span style="font-size: 12pt;">■ </span><span
+												style="color: rgb(0, 37, 222); font-size: 12pt;">모집공고일: 2023년 08월
+												18일(금)</span></p>
+										<p><br /></p>
+										<p style="line-height: 140%;"><span style="font-size: 12pt;">■ <span
+													style="color: rgb(0, 37, 222);">공급호수 : 총 600호</span></span></p>
+										<p style="line-height: 140%;"><span style="color: rgb(0, 37, 222);">○ 다가구 가형 :
+												459호(50㎡이하, 모든가구)</span></p>
+										<p style="line-height: 140%;"><span style="color: rgb(0, 37, 222);">○ 다가구 나형 :
+												141호(50㎡초과 ~ 85㎡이하, 3인이상 가구(1~2인가구 신청불가))</span></p>
+										<p style="line-height: 140%;">※ 세대원수는 공고일('23.08.18)기준 "무주택세대구성원"의 범위에 포함되는 구성원의
+											수로 산정함</p>
+										<p style="line-height: 140%;">※&nbsp;주택단지별 공급호수 등 자세한 사항은 공고문을 확인하여 주시기 바랍니다.
+										</p>
+										<p style="line-height: 140%;"><br /></p>
+										<p style="line-height: 140%;"><span style="font-size: 12pt;">■ 신청자격:
+											</span><span style="color: rgb(0, 37, 222); font-size: 12pt;">신청자는
+												입주자모집공고일(2023.08.18) 현재 서울특별시에 주민등록이 등재된 성년자인 무주택세대 구성원</span><span
+												style="font-size: 12pt;">(외국인 신청불가)</span></p>
+										<p style="line-height: 140%;">○ 1순위 : 전년도 도시근로자 가구원수별 가구당 월평균 소득 100% 이하세대</p>
+										<p style="line-height: 140%;">○ 2순위 : 전년도 도시근로자 가구원수별 가구당 월평균 소득 100% 초과세대</p>
+										<p style="line-height: 140%;">※ 동일순위자 경합시 추첨에 의해 순위결정하며, 소득기준과 산정방법은 공고문을 확인하여
+											주시기 바랍니다.</p>
+										<p><br /></p>
+										<p><span style="font-size: 12pt;">■ 공급일정</span></p>
+										<p style="line-height: 140%;"><br /></p>
+										<p style="line-height: 140%;">○ <span style="color: rgb(0, 37, 222);">주택공개(현장방문)
+												: 2023.08.28(월) ~ 2023.08.31(목) 10:00~17:00</span></p>
+										<p style="line-height: 140%;">&nbsp;- 기간 내 단지별 지정된&nbsp;1개호실만 공개되며, 개별 임의 방문은
+											불가합니다.&nbsp;</p>
+										<p><br /></p>
+										<p style="line-height: 140%;">○ <span style="color: rgb(0, 37, 222);">청약신청(인터넷,
+												우편) : 인터넷(모바일) 신청 원칙</span></p>
+										<p style="line-height: 140%;">&nbsp;- <span style="color: rgb(255, 0, 0);"><span
+													style="color: rgb(0, 37, 222);">인터넷(모바일) 신청 : </span>2023.08.28(월)
+												10:00 ~ 2023.08.31(목) 17:00 [신청시간까지만 접수]</span></p>
+										<p style="line-height: 140%;">&nbsp;- <span style="color: rgb(255, 0, 0);"><span
+													style="color: rgb(0, 37, 222);">등기우편신청(인터넷 취약계층) :
+												</span>2023.08.28(월) ~ 2023.08.31(목) [08.31(목) 소인분까지 인정]</span></p>
+										<p style="line-height: 140%;">&nbsp;※ 등기우편 신청은 인터넷 취약계층(중증장애인 및 고령자)에 한해 가능하며,
+											취약계층이라 하더라도 인터넷 신청이 가능합니다.</p>
+										<p style="line-height: 140%;">&nbsp;※ 1세대 1호 주택만 선택하여 신청 가능하므로 동일세대 무주택구성원 내 1주택
+											이상 중복 신청 시 전부 무효처리 됩니다.</p>
+										<p style="line-height: 140%;">&nbsp;※ 등기우편 청약대행은 2023.08.31(목) 소인분까지 인정되며, 해당일
+											이후 소인분과 일반우편은 청약접수 제외되므로 유의하시기 바랍니다.</p>
+										<p style="line-height: 140%;">&nbsp;- 등기우편 접수 시 제출서류[우편접수 양식] 참조</p>
+										<p><br /></p>
+										<p>○ 서류심사 대상자 발표 : 2023.09.15(금)</p>
+										<p><br /></p>
+										<p>○ 서류심사 대상자 서류제출 : 2023.09.20(수) ~ 2023.09.22(금)</p>
+										<p><br /></p>
+										<p>○ 최종 당첨자 및 예비자 발표 : 2023.11.17(금)</p>
+										<p><br /></p>
+										<p>○ 계 약 : 2023.12.04(월) ~ 2023.12.08(금)</p>
+										<p><br /></p>
+										<p>○ 입 주 : 2023.12.18(월) ~ 2024.02.15(목)</p>
+										<p><br /></p>
+										<p>※ 상기 공급일정은 변경 될 수 있으며, 변경 시 별도 안내 예정</p>
+										<p><br /></p>
+										<p><span style="font-size: 12pt;">■ 유의사항</span></p>
+										<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+										<p>○ 문의전화 : (서울주택도시공사 콜센터 T.1600-3456)</p>
+										<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+										<p>○ 공사에서는 입주자 모집공고 내용과 관련된 상담을 진행하고 있으나 신청자 개인의 다양한 정보나 상황에 대한 자료없이 상담을 진행하오니,
+											상담정보는 참고자료로만 활용해 주시기 바라며, 입주자 모집공고문을 숙지하신 후 신청해 주시기 바랍니다.</p>
+										<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+										<p>○ 입주자 모집공고일(2023.08.18) 현재 신청자격에 의거하여 입주자를 선정하며, 입주자 모집공고문의 내용을 정확히 숙지하시어
+											신청과정에서 불이익이 발생하지 않도록 유의하시기 바랍니다.</p>
+
+
+
+
+
+
+
+										<div class="btnCenter mt30">
+											<a href="#" class="btn btnGreen2 v2"
+												onclick="selectHouseList(1,'202320439',null,null,'main','264867');">
+												주택정보 보러가기
+											</a>
+										</div>
+										<div class="txtC">
+											</br>
+											※SH주택정보 홈페이지의 내용은 참고사항으로 반드시 공고문 등을 확인하시기 바랍니다.
+										</div>
+
+
+
+
+									</td>
+								</tr>
+
+
+								<tr class="tableNav">
+									<th scope="row"><a href="#" class="btnPrev"
+											onclick="javascript:getDetailView('264986');return false;">이전글</a></th>
+									<td><a href="#" onclick="javascript:getDetailView('264986');return false;">장기안심주택
+											2023년 11월 2차 재계약대상자 입주자격 심사결과 </a><span>2023-08-18</span></td>
+								</tr>
+
+
+
+
+
+								<tr class="tableNav">
+									<th scope="row"><a href="#" class="btnNext"
+											onclick="javascript:getDetailView('264903');return false;">다음글</a></th>
+									<td><a href="#" onclick="javascript:getDetailView('264903');return false;">(수정)
+											2023년 하반기 매입임대 공동생활가정 운영기관 모집공고(2023.08.17)</a><span>2023-08-17</span></td>
+								</tr>
+							</div>
+						</div>
+						<!-- //공고 내용 end -->
+						<!-- //본문컨텐츠 영역 end -->
+					</form>
+				</article>
+				<!-- //detail-content end -->
+
+				<!-- 페이지 이동 버튼 end -->
+				<div class="movepage-btn">
+					<div class="function-btn">
+						<button type="button" class="delete-btn" onclick="srchMinwonDoc()">
+							<a href="#" class="movetext-btn">삭제하기</a>
+						</button>
+					</div>
+					<div class="function-btn">
+						<button type="button" class="modify-btn" onclick="srchMinwonDoc()">
+							<a href="#" class="movetext-btn">수정하기</a>
+						</button>
+					</div>
+					<div class="function-btn">
+						<button type="button" class="list-btn" onclick="srchMinwonDoc()">
+							<a href="#" class="movetext-btn">목록보기</a>
+						</button>
+					</div>
+				</div>
+				<!-- //페이지 이동 버튼 end -->
+
+			</div>
+			<!-- //contents end -->
+		</div>
+		<!-- //main_con end -->
+	</div>
+	<!-- //wrap end -->
+
+</th:block>
+
+</html>
