@@ -12,6 +12,11 @@ public class MypageController {
 	public String mypage() {
 		return "userMypage/mypage";
 	}
+
+	@GetMapping("/modify")
+	public String modify() {
+		return "userMypage/modify";
+	}
 	
 	@GetMapping("/history")
 	public String history() {

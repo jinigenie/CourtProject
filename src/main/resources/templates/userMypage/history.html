@@ -165,68 +165,43 @@
             </div>
 
             <div class="table-t-wrap">
-              <div class="total-num">총 게시글 <em>248</em>건</div>
+              <div class="total-num">총 활동내역 <em>2</em>건</div>
 
             </div>
             <!-- 게시판 시작 부분 -->
             <div class="table table-responsive">
               <table>
                 <caption>
-                  번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
-                  정보 제공
+                  활동내역고유번호, 선정일, 출석일자, 완료여부
                 </caption>
                 <colgroup>
-                  <col style="width: 10%" />
+                  <col style="width: 20%" />
                   <col style="width: 40%" />
-                  <col style="width: 15%" />
-                  <col style="width: 11.666%" />
-                  <col style="width: 11.666%" />
-                  <col style="width: 11.666%" />
+                  <col style="width: 20%" />
+                  <col style="width: 20%" />
                 </colgroup>
                 <thead>
                   <tr>
-                    <th scope="col">번호</th>
-                    <th scope="col">민원서식명</th>
-                    <th scope="col">민원분류</th>
-                    <th scope="col">처리기간</th>
-                    <th scope="col">서식파일</th>
-                    <th scope="col">신청</th>
+                    <th scope="col">선정일</th>
+                    <th scope="col">활동내역 고유번호</th>
+                    <th scope="col">출석일자</th>
+                    <th scope="col">완료여부</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서"
-                    style="cursor: pointer"
-                  >
-                    <td data-cell-header="번호">248</td>
+                  <tr style="cursor: pointer" >
+                    <td data-cell-header="활동내역고유번호">23.04.28</td>
                     <td
-                      data-cell-header="민원서식명"
+                      data-cell-header="선정일"
                       tabindex="0"
                       onkeypress="if(event.keyCode ==13){$(this).click()}"
                       onclick="jsSamuDetail('TMP00000204')"
                     >
-                      임금체불 진정서
+                      25465412HFDL
                     </td>
-                    <td data-cell-header="민원분류">근로기준</td>
-                    <td data-cell-header="처리기간">25 일</td>
-                    <td
-                      data-cell-header="서식파일"
-                      onclick="javascript: eval($(this).children().attr('onclick'));"
-                    >
-                      <a
-                        style="cursor: pointer"
-                        tabindex="0"
-                        onkeypress="if(event.keyCode ==13){event.stopPropagation(); $(this).click();}"
-                        onclick="javascript:openDownloadPost('B2931E943723D4446C0C18BB6512EB12BFC2D32DA34707853A2EFDD52F1DAD0D','54066F49F05070E7B71473D009652F4678A1A8D955D7E09642B455977AD50CD3BD7C3F5BF0298C4D245C6146456E6408C454C2349C1E83EB0DA3E998C1300FF8',event);"
-                        ><img src="../../img/icn/hwp_icn.gif" alt="파일(HWP)"
-                      /></a>
-                    </td>
-                    <td onclick="event.stopPropagation();">
-                      <a href="javascript:submitUrl('/minwon2008/lc_minwon/AH038_C.do?capp_biz_cd=&proc_sys_cd=01&cd_appeal_form_map=AH038','AH038');"
-                         class="case case1"
-                      ><em>신청</em></a
-                      >
-                    </td>
+                    <td data-cell-header="출석일자">23.08.07</td>
+                    <td data-cell-header="완료여부">완료</td>
+                    
                   </tr>
 
 
@@ -275,31 +250,6 @@
                   class=""
                   onclick="fn_egov_link_page(5); return false;"
                   >5</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(6); return false;"
-                  >6</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(7); return false;"
-                  >7</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(8); return false;"
-                  >8</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(9); return false;"
-                  >9</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(10); return false;"
-                  >10</a
                 ><a
                   href="#"
                   class="arr next"
