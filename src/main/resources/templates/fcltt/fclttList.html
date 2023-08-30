@@ -4,6 +4,7 @@
 <head>
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
 	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -18,8 +19,7 @@
 					<h2 class="title">조력자확인</h2>
 					<div class="menu">
 						<ul>
-							<li class="has-sub"><a th:href="@{/fcltt/fclttRegist}" title="이용문의 닫기 (열림)">조력자 등재</a>
-							</li>
+							<li class="has-sub"><a th:href="@{/fcltt/fclttRegist}" title="이용문의 닫기 (열림)">조력자 등재</a></li>
 							<li class="has-sub"><a th:href="@{/fcltt/fclttList}" title="이용문의 닫기 (열림)">조력자 등재명단</a></li>
 							<li class="has-sub"><a th:href="@{/fcltt/pause}" title="이용문의 닫기 (열림)">조력자 활동신청관리</a></li>
 						</ul>
@@ -49,10 +49,7 @@
 						}
 					}
 				</style>
-				<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-      <![endif]-->
+		
 
 
 				<article id="detail-content">
@@ -89,9 +86,9 @@
 										<option value="">법원3</option>
 										<option value="">법원5</option>
 									</select>
-									<input type="text" class="fclttSearch fclttSearch2" value="검색어를 입력해주세요"/>
+									<input type="text" class="fclttSearch fclttSearch2" value="검색어를 입력해주세요" />
 									<label class="fclttCheck">
-										활동여부 <input type="checkbox" class="fclttSearch_check"/> 
+										활동여부 <input type="checkbox" class="fclttSearch_check" />
 									</label>
 									<a href="#" class="fclttSerch_Btn">조회</a>
 									<select name="" id="" class="fclttSearch fclttSearch3">
@@ -102,8 +99,7 @@
 								</div>
 							</div>
 							<hr />
-							<!--
-							<div class="tab-wrap">
+							<!--<div class="tab-wrap">
 								<ul class="tab tab2"></ul>
 							</div>-->
 
@@ -115,10 +111,12 @@
 										정보 제공
 									</caption>
 									<colgroup>
-										<col style="width: 15%" />
+										<col style="width: 10%" />
 										<col style="width: 20%" />
-										<col style="width: 25%" />
-										<col style="width: 25%" />
+										<col style="width: 15%" />
+										<col style="width: 10%" />
+										<col style="width: 15%" />
+										<col style="width: 15%" />
 										<col style="width: 15%" />
 									</colgroup>
 									<thead>
@@ -126,158 +124,178 @@
 											<th scope="col">번호</th>
 											<th scope="col">재판조력자 고유번호</th>
 											<th scope="col">법원명</th>
+											<th scope="col">이름</th>
 											<th scope="col">선발날짜</th>
+											<th scope="col">상세보기</th>
 											<th scope="col">활동여부</th>
+
 										</tr>
 									</thead>
 									<tbody>
-										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" >
 											<td data-cell-header="번호">1</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">서울고등법원</td>
-											<td data-cell-header="처리기간">2023/01/20</td>
-
+											<td data-cell-header="법원명">서울고등법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/01/20</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
 										</tr>
-
-										<tr title="직업능력 &gt; 기술/자격 &gt; 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
 											<td data-cell-header="번호">2</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('TMP00000121')">
+												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">대전지방법원</td>
-											<td data-cell-header="처리기간">2023/02/13</td>
-
+											<td data-cell-header="법원명">전주지방법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/04/15</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
 												<a class="fclttStatus2"><em>중지중</em></a>
 											</td>
 										</tr>
-
-										<tr title="산재예방 &gt; 산업재해 &gt; 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" >
 											<td data-cell-header="번호">3</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">광주고등법원</td>
-											<td data-cell-header="처리기간">2022/08/11</td>
-
+											<td data-cell-header="법원명">제주지방법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/05/15</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
-												<a class="fclttStatus1"><em>활동중</em></a>
+												<a class="fclttStatus2"><em>중지중</em></a>
 											</td>
 										</tr>
-										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
 											<td data-cell-header="번호">4</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">서울고등법원</td>
-											<td data-cell-header="처리기간">2023/01/20</td>
-
+											<td data-cell-header="법원명">서울중앙법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/05/16</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
 										</tr>
-
-										<tr title="직업능력 &gt; 기술/자격 &gt; 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
 											<td data-cell-header="번호">5</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('TMP00000121')">
-												고유번호
-											</td>
-											<td data-cell-header="민원분류">대전지방법원</td>
-											<td data-cell-header="처리기간">2023/02/13</td>
-
-											<td onclick="event.stopPropagation();">
-												<a class="fclttStatus2"><em>중지중</em></a>
-											</td>
-										</tr>
-
-										<tr title="산재예방 &gt; 산업재해 &gt; 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호">6</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
-												고유번호
-											</td>
-											<td data-cell-header="민원분류">광주고등법원</td>
-											<td data-cell-header="처리기간">2022/08/11</td>
-
-											<td onclick="event.stopPropagation();">
-												<a class="fclttStatus1"><em>활동중</em></a>
-											</td>
-										</tr>
-										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-											<td data-cell-header="번호">7</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">서울고등법원</td>
-											<td data-cell-header="처리기간">2023/01/20</td>
-
+											<td data-cell-header="법원명">서울중앙법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/01/20</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
 										</tr>
-
-										<tr title="직업능력 &gt; 기술/자격 &gt; 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
-											<td data-cell-header="번호">8</td>
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" >
+											<td data-cell-header="번호">6</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('TMP00000121')">
+												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">대전지방법원</td>
-											<td data-cell-header="처리기간">2023/02/13</td>
-
+											<td data-cell-header="법원명">경기중앙법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/04/15</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
-												<a class="fclttStatus2"><em>중지중</em></a>
+												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
 										</tr>
-
-										<tr title="산재예방 &gt; 산업재해 &gt; 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
+											<td data-cell-header="번호">7</td>
+											<td data-cell-header="민원서식명" tabindex="0">
+												고유번호
+											</td>
+											<td data-cell-header="법원명">제주지방법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/05/15</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
+											<td onclick="event.stopPropagation();">
+												<a class="fclttStatus1"><em>활동중</em></a>
+											</td>
+										</tr>
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
+											<td data-cell-header="번호">8</td>
+											<td data-cell-header="민원서식명" tabindex="0">
+												고유번호
+											</td>
+											<td data-cell-header="법원명">경기북부법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/02/16</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
+											<td onclick="event.stopPropagation();">
+												<a class="fclttStatus1" ><em>활동중</em></a>
+											</td>
+										</tr>
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
 											<td data-cell-header="번호">9</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">광주고등법원</td>
-											<td data-cell-header="처리기간">2022/08/11</td>
-
+											<td data-cell-header="법원명">서초고등법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/05/15</td>
+											<td onclick="openPop2();" >
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
 												<a class="fclttStatus1"><em>활동중</em></a>
 											</td>
 										</tr>
-																				<tr title="산재예방 &gt; 산업재해 &gt; 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호">10</td>
+										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서">
+											<td data-cell-header="번호" >10</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+												onclick="jsSamuDetail('TMP00000204')">
 												고유번호
 											</td>
-											<td data-cell-header="민원분류">제주지방법원</td>
-											<td data-cell-header="처리기간">2022/08/25</td>
-
+											<td data-cell-header="법원명">경기북부법원</td>
+											<td data-cell-header="이름">이름</td>
+											<td data-cell-header="날짜">2023/02/16</td>
+											<td onclick="openPop2();">
+												<a class="fcltt_content"  style="cursor: pointer"><em>상세보기</em></a>
+											</td>
 											<td onclick="event.stopPropagation();">
-												<a class="fclttStatus1"><em>활동중</em></a>
+												<a class="fclttStatus2"><em>중지중</em></a>
 											</td>
 										</tr>
 									</tbody>
@@ -320,6 +338,203 @@
 							</div>
 						</div>
 						<!-- //본문컨텐츠 영역 -->
+								<!-- The Modal -->
+			<div id="popup_layer2">
+				<div class="popup_box2">
+					<!--팝업 컨텐츠 영역-->
+					<div class="popup_cont2">
+						<div class="popup_contText">
+							<h3> 재판조력자</h3>
+							<h2>박인욱님</h2>
+							<h3>상세정보</h3>
+						</div>
+						<div class="fclttDetail_wrap">
+							<div class="table1 table-responsive">
+								<table>
+									<colgroup>
+										<col style="width: 30%">
+										<col style="width: 70%">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left" title="">재판조력자분류</span>
+											</th>
+											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left">통번역인 > 번역인</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left" title="">신청법원</span>
+											</th>
+											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left">서울 > 서초법원</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left" title="">소송사건 유무내역</span>
+											</th>
+											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left"> </span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left" title="">보험업계 내역</span>
+											</th>
+											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left"> </span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left" title="">형사처벌 내역</span>
+											</th>
+											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
+												<span class="fclttSpan txt-left"> </span>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+							<div class="table2 table-responsive">
+								
+								<table class="table3 table-responsive">
+									<colgroup>
+										<col style="width: 30%">
+										<col style="width: 70%">
+									</colgroup>
+
+									<tbody>
+										
+										<tr style="border-top: 1px solid #888;">
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan_title txt-left" title="">학력 상세 정보</span>
+											</th>
+											
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">학교이름</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">학과전공</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">학위</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+									
+
+										<tr style="border-top: 1px solid #888;;">
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan_title txt-left" title="" > 경력 상세 정보</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">경력구분</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr style="border-top: 1px solid #888;">
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan_title txt-left" title="" > 자격증 상세 정보</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">자격증명2</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">자격증명3</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row" class="txt-left">
+												<span class="fclttSpan1 txt-left" title="txt-left">자격증명4</span>
+											</th>
+											<td data-cell-header="성명" class="txt-left">
+												<span class="fclttSpan2 txt-left"></span>
+											</td>
+										</tr>
+	
+
+									</tbody>
+								</table>
+
+
+
+
+							</div>
+						</div>
+
+
+					</div>
+											<!--팝업 버튼 영역-->
+						<div class="popup_btn2">
+							<!--하루동안 보지않기-->
+							<!--<a id="chk_today2" href="javascript:closeToday2();" class="close_day2">하루동안 열지 않기</a>-->
+							<!--7일간 보지않기-->
+							<!-- <a id="chk_today2" href="javascript:closeToday2();" class="close_day2">Do not open for 7 days</a>-->
+							<a href="javascript:closePop2();">닫기</a>
+						</div>
+				</div>
+
+
+
+			</div>
 					</form>
 				</article>
 			</div>
@@ -327,7 +542,13 @@
 		<!-- //main_con  -->
 	</div>
 	<!-- 메뉴바 여기까지-->
+	<!--모달창 작업-->
+	<div>
 
+
+	</div>
+	<!--모달차 끝-->
+	
 
 	</div>
 
