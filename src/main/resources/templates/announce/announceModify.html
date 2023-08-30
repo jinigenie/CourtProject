@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<div class="wrap">
+		<!-- main_con  -->
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">공지사항</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">모집공고 등록</a></li>
+									<li><a href="#">모집공고 목록</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">공지사항 등록</a></li>
+									<li><a href="#">공지사항 목록</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">FAQ 등록</a></li>
+									<li><a href="#">FAQ 목록</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+</th:block>
+
+</html>

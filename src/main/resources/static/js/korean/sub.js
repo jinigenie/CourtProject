@@ -2,11 +2,10 @@
 Author      :parkgahye
 Create date :2020-07-27
 -------------------------------------------------*/
-
 $(function() {
 	
   snbMenu(); //snb
-  filePath(); //ÆÄÀÏÃ·ºÎ
+  filePath(); //ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½
 
   $(window).trigger("resize");
 
@@ -14,24 +13,24 @@ $(function() {
    * folding-List
    * *********************************************************************************/
   $(".folding-lst .folding-tit").on("click", function() {
-    $(this).attr("title", "Å¬¸¯½Ã ÇØ´ç ÇÏÀ§ ³»¿ë ¿­¸² (È®Àå¿©ºÎ : Ãà¼Ò)");
+    $(this).attr("title", "Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (È®ï¿½å¿©ï¿½ï¿½ : ï¿½ï¿½ï¿½)");
     $(this).parent().find(".folding-tit").removeClass("active");
     $(this).parent().find(".folding-cont").slideUp(300);
     if ($(this).next(".folding-cont").is(":hidden")) {
       $(this).next(".folding-cont").slideToggle(300);
       $(this).toggleClass("active");
-      $(this).parent().find(".folding-tit").attr("title", "Å¬¸¯½Ã ÇØ´ç ÇÏÀ§ ³»¿ë Á¢Èû (È®Àå¿©ºÎ : È®Àå)");
+      $(this).parent().find(".folding-tit").attr("title", "Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (È®ï¿½å¿©ï¿½ï¿½ : È®ï¿½ï¿½)");
     }
     return false;
   });
-  //folding-List Á¢±Ù¼º
+  //folding-List ï¿½ï¿½ï¿½Ù¼ï¿½
   $(".folding-lst > li .folding-cont .bul-lst01 > li:last-of-type > a").on("focusout", function() {
-    $(this).parents().find(".folding-tit").attr("title", "Å¬¸¯½Ã ÇØ´ç ÇÏÀ§ ³»¿ë ¿­¸² (È®Àå¿©ºÎ : Ãà¼Ò)");
+    $(this).parents().find(".folding-tit").attr("title", "Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (È®ï¿½å¿©ï¿½ï¿½ : ï¿½ï¿½ï¿½)");
     $(this).parents(".folding-cont").siblings(".folding-tit").removeClass("active");
     $(this).parents(".folding-cont").slideUp(300);
     return false;
   });
-
+  
   /* *********************************************************************************
    * tab
    * *********************************************************************************/
@@ -67,13 +66,13 @@ $(function() {
   });
 
   function layer_popup(el) {
-    var $el = $(el); //·¹ÀÌ¾îÀÇ id¸¦ $el º¯¼ö¿¡ ÀúÀå
+    var $el = $(el); //ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ idï¿½ï¿½ $el ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     $el.fadeIn();
   }
 
   function layer_popupClose(el) {
-    var $el = $(el); //·¹ÀÌ¾îÀÇ id¸¦ $el º¯¼ö¿¡ ÀúÀå
+    var $el = $(el); //ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ idï¿½ï¿½ $el ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     $el.fadeOut();
   }
@@ -148,7 +147,7 @@ $(function() {
 		$(this).prev('label').css('outline','');
 	});
 	
-	$('.essential-txt').attr('title','ÇÊ¼öÇ×¸ñ');
+	$('.essential-txt').attr('title','ï¿½Ê¼ï¿½ï¿½×¸ï¿½');
 });
 
 
@@ -181,7 +180,7 @@ function snbMenu() {
     relate_btn.parent().removeClass("fold");
     relate_obj.stop(true, true).slideUp(300);
   });
-  //Á¢±Ù¼º
+  //ï¿½ï¿½ï¿½Ù¼ï¿½
   relate_obj.children().find("li:last-of-type > a").on("focusout", function(event) {
     event.preventDefault();
     relate_btn.parent().removeClass("fold");

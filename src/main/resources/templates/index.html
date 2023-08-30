@@ -102,9 +102,13 @@
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
             <div class="box box1">
-              <p>
-                재판조력자 공고 페이지입니다. ~~ 안내멘트
-              </p>
+              <p>재판 조력자를 모집하는 공고문 입니다 .<br />검색되지 않거나 오프라인으로만 접수되는 서식들은
+            	<!-- <a href="" class="blank-new"> -->
+            	<a class="blank-new" href="https://www.gov.kr/search/applyMw?lrgAstCd=&amp;mdmAstCd=&amp;smallAstCd=&amp;deptIncCD=1492000&amp;procIncGrpCD=&amp;dvsPet=on&amp;dvsDir=on&amp;srhQuery=&amp;realQuery=&amp;reQueryFlag=&amp;moblAppYN=&amp;sort=&amp;DVS_ID=" title="정부24 새창열림" target="_blank" >
+            	정부24
+            	</a>
+            	에서 다운받을 수 있습니다.
+            </p>
             </div>
             <!-- 분류 탭 -->
             <div class="tab-wrap">
@@ -121,92 +125,39 @@
                 <li class="">
                   <a
                     href="#"
-                    onclick="srchMinwonDoc('lCate', '010000', 1, 1, '일자리지원');"
+                    onclick="srchMinwonDoc('lCate', '010000', 1, 1, '통번역인');"
                   >
-                    <span>일자리지원</span>
+                    <span>통번역인</span>
                   </a>
                 </li>
 
                 <li class="">
                   <a
                     href="#"
-                    onclick="srchMinwonDoc('lCate', '020000', 2, 10, '고용보험');"
+                    onclick="srchMinwonDoc('lCate', '020000', 2, 10, '조정위원');"
                   >
-                    <span>고용보험</span>
+                    <span>조정위원</span>
                   </a>
                 </li>
 
                 <li class="">
                   <a
                     href="#"
-                    onclick="srchMinwonDoc('lCate', '030000', 3, 13, '직업능력');"
+                    onclick="srchMinwonDoc('lCate', '030000', 3, 13, '전문심리위원');"
                   >
-                    <span>직업능력</span>
+                    <span>전문심리위원</span>
                   </a>
                 </li>
 
                 <li class="">
                   <a
                     href="#"
-                    onclick="srchMinwonDoc('lCate', '040000', 4, 18, '고용평등');"
+                    onclick="srchMinwonDoc('lCate', '040000', 4, 18, '상담위원');"
                   >
-                    <span>고용평등</span>
+                    <span>상담위원</span>
                   </a>
                 </li>
 
-                <li class="">
-                  <a
-                    href="#"
-                    onclick="srchMinwonDoc('lCate', '050000', 5, 22, '고용안정');"
-                  >
-                    <span>고용안정</span>
-                  </a>
-                </li>
-
-                <li class="">
-                  <a
-                    href="#"
-                    onclick="srchMinwonDoc('lCate', '060000', 6, 24, '노사협력');"
-                  >
-                    <span>노사협력</span>
-                  </a>
-                </li>
-
-                <li class="">
-                  <a
-                    href="#"
-                    onclick="srchMinwonDoc('lCate', '070000', 7, 33, '근로기준');"
-                  >
-                    <span>근로기준</span>
-                  </a>
-                </li>
-
-                <li class="">
-                  <a
-                    href="#"
-                    onclick="srchMinwonDoc('lCate', '080000', 8, 45, '산재예방');"
-                  >
-                    <span>산재예방</span>
-                  </a>
-                </li>
-
-                <li class="">
-                  <a
-                    href="#"
-                    onclick="srchMinwonDoc('lCate', '090000', 9, 55, '외국인력');"
-                  >
-                    <span>외국인력</span>
-                  </a>
-                </li>
-
-                <li class="">
-                  <a
-                    href="#"
-                    onclick="srchMinwonDoc('lCate', '100000', 10, 57, '일반행정');"
-                  >
-                    <span>일반행정</span>
-                  </a>
-                </li>
               </ul>
             </div>
 
@@ -225,8 +176,8 @@
                     title="검색조건을 선택해주세요."
                   >
                     <option value="0">전체</option>
-                    <option value="1">개인</option>
-                    <option value="2">기업</option>
+                    <option value="1">제목</option>
+                    <option value="2">내용</option>
                   </select>
                 </div>
 
@@ -266,21 +217,25 @@
                     <option value="10" selected=" selected">10개씩 보기</option>
                     <option value="20">20개씩 보기</option>
                     <option value="50">50개씩 보기</option>
-                    <option value="100">100개씩 보기</option>
                   </select>
                 </div>
               </div>
+              <!-- 달력 -->
+              <div class="calander-box">
+				<span class="search_th">기간</span>
+					<input type="text" class="datepicker" readonly placeholder="날짜선택" name="startDate" value=""/> - 
+					<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate"   value=""/>
+			  </div>
             </div>
-
             <div class="table-t-wrap">
-              <div class="total-num">총 게시글 <em>248</em>건</div>
+              <div class="total-num">총 게시글 <em>#</em>건</div>
 
             </div>
             <!-- 게시판 시작 부분 -->
             <div class="table table-responsive">
               <table>
                 <caption>
-                  번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
+                  번호, 대분류, 중분류, 소분류, 작성일자, 진행상황, 신청의 대한
                   정보 제공
                 </caption>
                 <colgroup>
@@ -294,10 +249,11 @@
                 <thead>
                   <tr>
                     <th scope="col">번호</th>
-                    <th scope="col">민원서식명</th>
-                    <th scope="col">민원분류</th>
-                    <th scope="col">처리기간</th>
-                    <th scope="col">서식파일</th>
+                    <th scope="col">대분류</th>
+                    <th scope="col">중분류</th>
+                    <th scope="col">소분류</th>
+                    <th scope="col">작성일자</th>
+                    <th scope="col">진행상황</th>
                     <th scope="col">신청</th>
                   </tr>
                 </thead>
@@ -308,19 +264,18 @@
                   >
                     <td data-cell-header="번호">248</td>
                     <td
-                      data-cell-header="민원서식명"
+                      data-cell-header="대분류"
                       tabindex="0"
                       onkeypress="if(event.keyCode ==13){$(this).click()}"
                       onclick="jsSamuDetail('TMP00000204')"
                     >
-                      임금체불 진정서
+                      통번역인
                     </td>
-                    <td data-cell-header="민원분류">근로기준</td>
-                    <td data-cell-header="처리기간">25 일</td>
-                    <td
-                      data-cell-header="서식파일"
-                      onclick="javascript: eval($(this).children().attr('onclick'));"
-                    >
+                    <td data-cell-header="중분류">통역</td>
+                    <td data-cell-header="소분류"> - </td>
+                    <td data-cell-header="작성일자">작성일자
+                    <!--
+						onclick="javascript: eval($(this).children().attr('onclick'));"
                       <a
                         style="cursor: pointer"
                         tabindex="0"
@@ -328,16 +283,25 @@
                         onclick="javascript:openDownloadPost('B2931E943723D4446C0C18BB6512EB12BFC2D32DA34707853A2EFDD52F1DAD0D','54066F49F05070E7B71473D009652F4678A1A8D955D7E09642B455977AD50CD3BD7C3F5BF0298C4D245C6146456E6408C454C2349C1E83EB0DA3E998C1300FF8',event);"
                         ><img src="../../img/icn/hwp_icn.gif" alt="파일(HWP)"
                       /></a>
+                      -->
+                    </td>
+                    <td>
+						<p>진행중</p>
+						<!--
+							<em>대기중</em>
+						<em>마감</em>
+						-->
                     </td>
                     <td onclick="event.stopPropagation();">
-                      <a href="javascript:submitUrl('/minwon2008/lc_minwon/AH038_C.do?capp_biz_cd=&proc_sys_cd=01&cd_appeal_form_map=AH038','AH038');"
+                      <a href="#"
                          class="case case1"
                       ><em>신청</em></a
                       >
                     </td>
                   </tr>
 
-                  <tr
+                 <!-- 
+					 <tr
                     title="직업능력 &gt; 기술/자격 &gt; 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
                     style="cursor: pointer"
                   >
@@ -410,6 +374,7 @@
                       >
                     </td>
                   </tr>
+                  -->
                 </tbody>
               </table>
             </div>
