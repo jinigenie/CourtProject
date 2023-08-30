@@ -5,6 +5,10 @@ body {
     background: #FFF;
 }
 
+/* *********************************************************************************
+* progress 메뉴바
+* *********************************************************************************/
+
 #crumbs {
     text-align: center;
     > ul {
@@ -18,7 +22,7 @@ body {
                 float: left;
                 width: 200px;
                 height: 50px;
-                background: #F3F5FA;
+                background: #e5eaf3;
 
                 text-align: center;
                 padding: 15px 20px 0 60px;
@@ -33,7 +37,7 @@ body {
                     content: "";
                     border-top: 25px solid transparent;
                     border-bottom: 25px solid transparent;
-                    border-left: 30px solid #F3F5FA;
+                    border-left: 30px solid #e5eaf3;
                     position: absolute;
                     right: -30px;
                     top: 0;
@@ -53,6 +57,17 @@ body {
     }
 }
 
+#crumbs {
+    > ul > li > .highlight {
+        background-color: #4860cc;
+        color: white;
+        &:after {
+            border-left: 30px solid #4860cc;
+        }
+    }
+
+}
+
 #crumbs ul li:first-child a {
     border-top-left-radius: 10px; border-bottom-left-radius: 10px;
 }
@@ -69,11 +84,83 @@ body {
 }
 
 #crumbs ul li a:hover {
-    background: #357DFD;
-    color:#fff !important;
+    color: #2344d0 !important;
 }
 #crumbs ul li a:hover:after {
-    border-left-color: #357DFD;
-    color:#fff;
 }
 
+
+/* *********************************************************************************
+* 이전, 다음버튼
+* *********************************************************************************/
+:active, :hover, :focus {
+    outline: 0!important;
+    outline-offset: 0;
+}
+::before,
+::after {
+    position: absolute;
+    content: "";
+}
+
+.btn-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 30px auto 35px;
+}
+.btn {
+    position: relative;
+    display: inline-block;
+    width: auto; height: auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0px 25px 15px;
+    min-width: 160px;
+}
+.btn span {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 15px 15px;
+    transition: 0.3s;
+}
+.btn-2::before {
+    background-color: #4860cc;
+    transition: 0.3s ease-out;
+}
+.btn-2 span {
+    color: #4860cc;
+    border: 1px solid #4860cc;
+    transition: 0.2s;
+}
+.btn-2 span:hover {
+    color: rgb(255,255,255);
+    transition: 0.2s 0.1s;
+}
+.btn.hover-opacity::before {
+    top:0; bottom: 0; left: 4px;
+    height: 100%; width: 95%;
+    opacity: 0;
+}
+.btn.hover-opacity:hover::before {
+    opacity: 1;
+}
+
+/* *********************************************************************************
+* 표 타이틀
+* *********************************************************************************/
+.sub_title {
+    font-size: 18px;
+}
+
+.add {
+    color: #1c449c;
+    font-weight: 600;
+}
