@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/mypage/mypage.css}"/>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -101,7 +102,71 @@
 
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
-          
+     
+
+					<div class="table table-responsive">
+						<table>
+							<caption>
+								재판조력자등재
+							</caption>
+
+							<colgroup>
+								<col style="width: 30%">
+								<col style="width: 70%">
+							</colgroup>
+							<tbody>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="essential-txt" style="margin-left: 80px;">현재 상태</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="활동중" class="cm_inptxt" type="text" readonly="readonly">
+									</td>
+								</tr>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="essential-txt" style="margin-left: 80px;">신청 분류</span>
+									</th>
+									<td data-cell-header="생년월일" class="txt-left">
+										<select name="" id="" class="cm_inptxt fclttCategory">
+											<option value="">중지</option>
+											<option value="">해제</option>
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="essential-txt" style="margin-left: 80px;">신청기간</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text" readonly="readonly">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="essential-txt" style="margin-left: 80px;">신청 사유</span>
+									</th>
+									<td data-cell-header="이메일" class="txt-left">
+										<textarea rows="4" cols="50" style="width: 550px; height: 200px;"></textarea>
+									</td>
+								</tr>
+
+
+							</tbody>
+						</table>
+
+					</div>
+					<div class="btn-wrap txt-center">
+						<a href="#" class="btn-style btn-style39 btn-style-icon-none">
+							<span>취소</span>
+						</a>
+						<a href="#" class="btn-style btn-style39 btn-style-icon-none">
+							<span>신청</span>
+						</a>
+					</div>
           
           
           

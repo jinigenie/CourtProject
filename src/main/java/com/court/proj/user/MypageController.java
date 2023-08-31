@@ -5,31 +5,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/userMypage")
+@RequestMapping("/mypage")
 public class MypageController {
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String mypage() {
-		return "userMypage/mypage";
+		return "mypage/main";
 	}
 
 	@GetMapping("/modify")
 	public String modify() {
-		return "userMypage/modify";
+		return "mypage/modify";
 	}
 	
 	@GetMapping("/history")
 	public String history() {
-		return "userMypage/history";
+		return "mypage/history";
 	}
 	
 	@GetMapping("/pause")
 	public String pause() {
-		return "userMypage/pause";
+		return "mypage/pause";
 	}
 	
 	@GetMapping("/status")
 	public String status() {
-		return "userMypage/status";
+		return "mypage/status";
 	}
 }
