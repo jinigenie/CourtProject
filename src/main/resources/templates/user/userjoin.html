@@ -1,330 +1,183 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+</head>
+
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<div class="wrap">
 		<div id="main_con">
-			<style>
-				#contents {
-					float: none !important;
-					width: 90% !important;
-					margin-left: 300px;
-				}
-			</style>
-			<!-- contents 시작 -->
-			<div id="contents">
-				<div id="snb" class="snb snb1">
-					<div class="container" style="display: none" id="menuContainer1">
-						<script>
-							$(document).ready(function () {
-								$('#menuContainer1').show();
-							});
-						</script>
 
-						<h3 class="heading1 m-heading1">
-							<span id="m-heading1-check">민원</span>
-						</h3>
+			<div id="contents" style="width: 70%; float: none; margin: 0 auto; padding-left: 120px;">
+				<div class="heading-wrap container">
+					<h3 class="heading1">
+						<span style="margin-bottom: 20px;">회원가입</span>
+					</h3>
+
+					<div class="table table-responsive">
+						<table>
+							<caption>
+								재판조력자등재
+							</caption>
+
+							<colgroup>
+								<col style="width: 30%">
+								<col style="width: 70%">
+							</colgroup>
+							<tbody>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">이름</span>
+									</th>
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">아이디</span>
+									</th>
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">비밀번호</span>
+									</th>
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">비밀번호확인</span>
+									</th>
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title=""></span>주민번호</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>휴대폰번호</span>
+									</th>
+									<td data-cell-header="휴대폰번호" class="txt-left">
+										<div class="fcltt_phone" style="display: inline-block">
+											<div class="fcltt_phone">
+												<input name="fcltt_phone" maxlength="4" id="cvl_cel1" value="010"
+													class="cm_inptxt" title="휴대폰번호 앞자리" type="text"
+													onkeydown="return num_only(event)" readonly="" />
+
+												<em class="fcltt_comment">&nbsp; '-'을 제외한 숫자만 기입</em>
+											</div>
+										</div>
+
+
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left"> 
+										<span class="essential-txt" title="">이메일</span>
+									</th>
+
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+										<span>@</span>
+										<select name="" id="" class="cm_inptxt fclttCategory">
+											<option value="">직접입력</option>
+											<option value="">naver.com</option>
+											<option value="">hanmail.net</option>
+											<option value="">gmail.com</option>
+											<option value="">daum.net</option>
+										</select>
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>주소</span>
+									</th>
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+										<a class="fclttStatus1" style="width: 100px;"><em>우편번호찾기</em></a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>상세주소</span>
+									</th>
+									<td class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title=""></span>직업</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title=""></span>은행명</span>
+									</th>
+									<td class="txt-left">
+										<select name="" id="" class="cm_inptxt fclttCategory">
+											<option value="">은행명</option>
+											<option value="">naver.com</option>
+											<option value="">gmail.com</option>
+											<option value="">daum.net</option>
+										</select>
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title=""></span>예금주</span>
+									</th>
+									<td class="txt-left">
+
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
 
 					</div>
+					<div class="fclttRegist_btn">
+						<button type="button" class="fcltt_btn1">등록</button>
+						<button type="button" class="fcltt_btn2">취소</button>
+					</div>
+
+
 				</div>
 
-				<!-- sub css 지우면 안됨  -->
-				<link rel="stylesheet" type="text/css" href="../../css/korean/sub.css" />
-				<style>
-					@media screen and (max-width: 1024px) {
-						.table-responsive>table>tbody>tr td[data-cell-header]:before {
-							width: 30%;
-							margin: 0 0 0 0;
-							vertical-align: unset;
-						}
-					}
 
-					.table-responsive>table>tbody>tr:hover {
-						background-color: #afeeee;
-					}
 
-					@media screen and (min-width: 1100px) {
-						#select-box-margin-left-10 {
-							margin-left: 6px;
-						}
-					}
-				</style>
-
-				<!-- sub js -->
-				<script type="text/javascript" src="../../js/korean/sub.js"></script>
-				<div class="container">
-					<div class="box box1">
-						<p>기록하신 개인정보는 개인정보보호법에 의거 철저하게 보호됩니다.</p>
-					</div>
-					<h4 class="heading2">회원가입</h4>
-
-					<div class="box10">
-						<ul class="bul-lst010">
-							<li>너 내 조력자가 돼라.</li>
-							<li>재판조력자가 되고싶은자 가입해라.</li>
-							<li>배아푸당 희희 재밌당.</li>
-						</ul>
-					</div>
-					<div> </div>
-					<span class="bul012">필수입력 항목입니다.</span>
-
-					<form id="form1" name="form1" method="post">
-						<div class="table table-responsive">
-							<table>
-								<colgroup>
-									<col style="width: 30%" />
-									<col style="width: 70%" />
-								</colgroup>
-								<tbody>
-									<tr>
-										<th scope="row" class="txt-left">
-											<label for="id" class="essential-txt" title="필수항목">아이디</label>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<div class="input-wrap-three write-wrap-m"
-												style="width: 162px; display: inline-block">
-												<div class="input-wrap" style="width: 162px">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-														type="text" />
-												</div>
-											</div>
-											<a href="javascript:jsChangeName();" name="cm_btn_s"
-												class="btn-style btn-style11 btn-style-w-auto btn-style-icon-none"
-												style="margin-top: -28px">
-												<span>중복 확인</span>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<label for="pw" class="essential-txt" title="필수항목">비밀번호</label>
-										</th>
-
-										<td data-cell-header="성명" class="txt-left">
-											<div class="input-wrap-three write-wrap-m"
-												style="width: 162px; display: inline-block">
-												<div class="input-wrap" style="width: 162px">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-														type="text" />
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<label for="pw" class="essential-txt" title="필수항목">비밀번호 확인</label>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<div class="input-wrap-three write-wrap-m"
-												style="width: 162px; display: inline-block">
-												<div class="input-wrap" style="width: 162px">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-														type="text" />
-												</div>
-											</div>
-										</td>
-									</tr>
-
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="essential-txt" title="필수항목">성명</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<div class="input-wrap-three write-wrap-m"
-												style="width: 162px; display: inline-block">
-												<div class="input-wrap" style="width: 162px">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-														type="text" />
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="essential-txt" title="필수항목">생년월일</span>
-										</th>
-										<td data-cell-header="생년월일" class="txt-left">
-											<div class="input-wrap" style="width: 162px; display: inline-block">
-												<input name="cvl_birth" id="cvl_birth" value="" class="cm_inptxt"
-													type="text" maxlength="8" onkeydown="return num_only(event)" />
-											</div>
-											<span class="txt_noti">※ 예) 19800102</span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="essential-txt" title="필수항목">직업</span>
-										</th>
-										<td data-cell-header="생년월일" class="txt-left">
-											<div class="input-wrap" style="width: 162px; display: inline-block">
-												<input name="cvl_birth" id="cvl_birth" value="" class="cm_inptxt"
-													type="text" maxlength="8" onkeydown="return num_only(event)" />
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span>계좌번호</span>
-										</th>
-										<td data-cell-header="전화번호" class="txt-left" >
-											<select name="" id="" class="cm_inptxt" style="height: 30px; line-height: 30px;">
-												<option value="">은행목록</option>
-												<option value="">은행목록1</option>
-												<option value="">은행목록2</option>
-												<option value="">은행목록3</option>
-												<option value="">은행목록5</option>
-											</select>
-											<div class="input-wrap-three write-wrap-m" style="display: inline-block">
-												<div class="input-wrap">
-													<input name="cvl_cel1" maxlength="4" id="cvl_cel1" value="010"
-														class="cm_inptxt" title="휴대폰번호 앞자리" type="text"
-														onkeydown="return num_only(event)" readonly="">
-												</div>
-												<em>&nbsp;&nbsp;</em>
-												<div class="input-wrap">
-													<input name="cvl_cel2" maxlength="4" id="cvl_cel2" value="7325"
-														class="cm_inptxt" title="휴대폰번호 중간자리" type="text"
-														onkeydown="return num_only(event)" readonly="">
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span>휴대폰번호</span>
-										</th>
-										<td data-cell-header="휴대폰번호" class="txt-left">
-											<div class="input-wrap-three write-wrap-m" style="display: inline-block">
-												<div class="input-wrap">
-													<input name="cvl_cel1" maxlength="4" id="cvl_cel1" value="010"
-														class="cm_inptxt" title="휴대폰번호 앞자리" type="text"
-														onkeydown="return num_only(event)" readonly="" />
-												</div>
-												<em>-</em>
-												<div class="input-wrap">
-													<input name="cvl_cel2" maxlength="4" id="cvl_cel2" value="7325"
-														class="cm_inptxt" title="휴대폰번호 중간자리" type="text"
-														onkeydown="return num_only(event)" readonly="" />
-												</div>
-												<em>-</em>
-												<div class="input-wrap">
-													<input name="cvl_cel3" maxlength="4" id="cvl_cel3" value="1252"
-														class="cm_inptxt" title="휴대폰번호 뒷자리" type="text"
-														onkeydown="return num_only(event)" readonly="" />
-												</div>
-											</div>
-											<a href="javascript:jsChangeHp();" name="cm_btn_s" id="cm_btn_s"
-												class="btn-style btn-style11 btn-style-w-auto btn-style-icon-none"
-												style="margin-top: -28px">
-												<span>인증번호받기</span>
-											</a>
-											<span class="bul08">이동전화를 지재할 경우 민원처리 진행과정을 SMS로 받으실
-												수 있습니다.</span>
-											<ul class="checkbox-radio-custom write-wrap-m">
-												<li>
-													<input id="yn_receipt_yes" class="cm_inpchkrd" name="yn_receipt"
-														type="radio" value="Y" />
-													<label for="yn_receipt_yes">수신함</label>
-												</li>
-												<li>
-													<input id="yn_receipt_no" class="cm_inpchkrd" name="yn_receipt"
-														type="radio" value="N" />
-													<label for="yn_receipt_no">수신안함</label>
-												</li>
-											</ul>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span>이메일</span>
-										</th>
-										<td data-cell-header="이메일" class="txt-left">
-											<div class="mail-wrap write-wrap-m">
-												<input style="width: 290px" name="cvl_mail" maxlength="70" id="cvl_mail"
-													class="cm_inptxt" title="이메일 아이디" type="text" value="" />
-											</div>
-											<span class="bul08">이메일을 기재 할 경우 민원처리 진행과정을 이메일로 받으
-												실 수 있습니다.
-											</span>
-											<ul class="checkbox-radio-custom write-wrap-m">
-												<li>
-													<input id="yn_receipt_yes" class="cm_inpchkrd" name="yn_receipt"
-														type="radio" value="Y" />
-													<label for="yn_receipt_yes">수신함</label>
-												</li>
-												<li>
-													<input id="yn_receipt_no" class="cm_inpchkrd" name="yn_receipt"
-														type="radio" value="N" />
-													<label for="yn_receipt_no">수신안함</label>
-												</li>
-											</ul>
-										</td>
-									</tr>
-
-									<tr>
-										<th scope="row" class="border-none txt-left">
-											<label for="address1" class="essential-txt" title="필수항목">주소</label>
-										</th>
-										<td data-cell-header="주소" class="txt-left essential-responsive">
-											<input type="hidden" id="cvl_zip1" name="cvl_zip1" value="" />
-											<input type="hidden" id="cvl_zip2" name="cvl_zip2" value="" />
-											<div class="address-wrap write-wrap-m">
-												<div class="address-btn-wrap">
-													<div class="input-wrap">
-														<input id="cvl_zip3" name="cvl_zip3" class="cm_inptxt"
-															readonly="readonly" value="" title="우편번호 앞자리" type="text" />
-													</div>
-													<button type="button" class="address-btn"
-														onclick="javascript:jsZipCodeSearch_api('form1', 'cvl_zip1', 'cvl_zip2', 'cvl_zip3', 'cvl_addr1', 'cvl_addr2', 'member_road_code');"
-														title="새창열림">
-														우편번호 찾기
-													</button>
-												</div>
-												<div class="input-wrap input-wrap-ful">
-													<input name="cvl_addr1" id="cvl_addr1" maxlength="100"
-														class="cm_inptxt" title="시군구주소 입력" type="text" value=""
-														readonly="readonly" />
-												</div>
-												<div class="input-wrap input-wrap-ful">
-													<input name="cvl_addr2" id="cvl_addr2" maxlength="50"
-														class="cm_inptxt" title="상세주소 입력" type="text" value="" />
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-						<div class="btn-wrap txt-center">
-							<div class="btn-style-wrap btn-style-wrap2">
-								<a href="javascript:jsMembershipUpdate();"
-									class="btn-style btn-style7 btn-style-icon-none">
-									<span>수정</span>
-								</a>
-							</div>
-							<div class="btn-style-wrap btn-style-wrap1">
-								<a href="javascript:jsCancel();" class="btn-style btn-style3 btn-style-icon-none">
-									<span>취소</span>
-								</a>
-							</div>
-						</div>
-						<div id="divpop2" class="popup" style="
-              width: 362px;
-              height: 285px;
-              left: 700px;
-              top: 760px;
-              visibility: hidden;
-              display: none;
-            "></div>
-					</form>
-				</div>
 			</div>
-			<!-- <div id="contents"  -->
-		</div>
-	</div>
 
+		</div>
+
+	</div>
 </th:block>
+
+
+
 
 </html>
