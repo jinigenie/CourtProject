@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+</head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<!-- wrap start -->
@@ -78,16 +82,16 @@
 						<div class="container">
 
 							<!-- box box1 start -->
-							<div class="box box1">
+							<div class="top-box">
 
 								<!-- 첨부파일 start -->
-								<tr>
+								<tr class="top-box-one">
 									<td>
 										<div id="fileControl" style="display: none"></div>
 										<span>작성자 : 관리자</span>
 									</td>
 								</tr>
-								<tr>
+								<tr class="top-box-two">
 									<td>
 										<div id="fileControl" style="display: none"></div>
 										<span>최초 입력일 시 : 2023.08.30</span>
@@ -107,109 +111,110 @@
 
 								<!-- 등록 양식 start -->
 								<div class="table table-responsive">
+
+
 									<table>
 
 										<colgroup>
-											<col style="width: 30%" />
-											<col style="width: 70%" />
+											<col style="width: 30%">
+											<col style="width: 70%">
 										</colgroup>
 										<tbody>
+
 											<tr>
 												<th scope="row" class="txt-left">
-													<label for="id" class="essential-txt" title="필수항목">제목</label>
+													<span class="txt-left" title="�ʼ��׸�">공고 제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
-													<div class="input-wrap-three write-wrap-m"
-														style="width: 162px; display: inline-block">
-														<div class="input-wrap" style="width: 162px">
-															<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-																type="text" />
-														</div>
-													</div>
-													<a href="javascript:jsChangeName();" name="cm_btn_s"
-														class="btn-style btn-style11 btn-style-w-auto btn-style-icon-none"
-														style="margin-top: -28px">
-													</a>
+													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
+														type="text">
 												</td>
 											</tr>
 											<tr>
 												<th scope="row" class="txt-left">
-													<label for="pw" class="essential-txt" title="필수항목">재판 조력자 분류</label>
+													<span class="search_th">게시 시작일</span>
 												</th>
-												
-												<!-- 재판 조력자 분류 start-->
-											<tr>
-
-												<select name="" id="" class="cm_inptxt">
-													<option value="">대분류</option>
-													<option value="">통번역인</option>
-													<option value="">조정위원</option>
-													<option value="">전문 심리위원</option>
-													<option value="">상담위원</option>
-												</select>
-
-											</tr>
-											<tr>
-
-												<select name="" id="" class="cm_inptxt">
-													<option value="">중분류</option>
-													<option value="">중분류1</option>
-													<option value="">중분류2</option>
-													<option value="">중분류3</option>
-													<option value="">중분류5</option>
-												</select>
-
-											</tr>
-											<tr>
-												<select name="" id="" class="cm_inptxt">
-													<option value="">소분류</option>
-													<option value="">소분류1</option>
-													<option value="">소분류2</option>
-													<option value="">소분류3</option>
-													<option value="">소분류5</option>
-												</select>
-
-											</tr>
-											<!-- //재판 조력자 분류 end-->
-											<td data-cell-header="성명" class="txt-left">
-												<div class="input-wrap-three write-wrap-m"
-													style="width: 162px; display: inline-block">
-													<div class="input-wrap" style="width: 162px">
-														<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-															type="text" />
+												<td data-cell-header="게시 시작일" class="txt-left">
+													<div class="fcltt_phone" style="display: inline-block">
+														<!-- 달력 start -->
+														<div class="calander-box">
+															
+															<input type="text" class="datepicker" readonly
+																placeholder="날짜선택" name="startDate" value="" /> -
+															<input type="text" class="datepicker" readonly
+																placeholder="날짜선택" name="endDate" value="" />
+														</div>
+														<!-- 달력 end -->
 													</div>
-												</div>
-											</td>
+
+
+												</td>
 											</tr>
 											<tr>
 												<th scope="row" class="txt-left">
-													<label for="pw" class="essential-txt" title="필수항목">게시 시작 일자</label>
+													<span class="essential-txt" title="�ʼ��׸�">조력자 분류</span>
 												</th>
-												<td data-cell-header="성명" class="txt-left">
-													<div class="input-wrap-three write-wrap-m"
-														style="width: 162px; display: inline-block">
-														<div class="input-wrap" style="width: 162px">
-															<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-																type="text" />
-														</div>
-													</div>
+												<td data-cell-header="생년월일" class="txt-left">
+													<select name="" id="" class="cm_inptxt fclttCategory">
+														<option value="">대분류</option>
+														<option value="">대분류1</option>
+														<option value="">대분류2</option>
+														<option value="">대분류3</option>
+														<option value="">대분류5</option>
+													</select>
+													<select name="" id="" class="cm_inptxt fclttCategory">
+														<option value="">중분류</option>
+														<option value="">중분류1</option>
+														<option value="">중분류2</option>
+														<option value="">중분류3</option>
+														<option value="">중분류5</option>
+													</select>
+													<select name="" id="" class="cm_inptxt fclttCategory">
+														<option value="">소분류</option>
+														<option value="">소분류1</option>
+														<option value="">소분류2</option>
+														<option value="">소분류3</option>
+														<option value="">소분류5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" class="txt-left">
+													<span>법원 분류</span>
+												</th>
+												<td data-cell-header="전화번호" class="txt-left">
+													<select name="" id="" class="cm_inptxt">
+														<option value="">지역</option>
+														<option value="">지역1</option>
+														<option value="">지역2</option>
+														<option value="">지역3</option>
+														<option value="">지역5</option>
+													</select>
+													<select name="" id="" class="cm_inptxt">
+														<option value="">법원명</option>
+														<option value="">법원명1</option>
+														<option value="">법원명2</option>
+														<option value="">법원명3</option>
+														<option value="">법원명5</option>
+													</select>
+
 												</td>
 											</tr>
 
 											<tr>
 												<th scope="row" class="txt-left">
-													<span class="essential-txt" title="필수항목">내용 작성</span>
+													<span>공고 내용</span>
 												</th>
-												<td data-cell-header="성명" class="txt-left">
-													<div class="input-wrap-three write-wrap-m"
-														style="width: 162px; display: inline-block">
-														<div class="input-wrap" style="width: 162px">
-															<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-																type="text" />
-														</div>
+												<td data-cell-header="이메일" class="txt-left">
+													<!-- ckEditor start -->
+
+													<div id="editor">
 													</div>
+													<!-- //ckEditor end -->
 												</td>
 											</tr>
+
+
 										</tbody>
 									</table>
 								</div>
@@ -227,20 +232,12 @@
 			<!-- //contents end -->
 		</div>
 		<!-- //contents end -->
-		
+
 		<!-- 페이지 이동 버튼 -->
-		<div class="movepage-btn">
-			<div class="function-btn">
-				<button type="button" class="delete-btn" onclick="srchMinwonDoc()">
-					<a href="#" class="movetext-btn">등록하기</a>
-				</button>
-			</div>
-			<div class="function-btn">
-				<button type="button" class="modify-btn" onclick="srchMinwonDoc()">
-					<a href="#" class="movetext-btn">목록보기</a>
-				</button>
-			</div>
-		</div>
+		<div class="fclttRegist_btn">
+						<button type="button" class="fcltt_btn1">등록</button>
+						<button type="button" class="fcltt_btn2">취소</button>
+					</div>
 		<!-- //페이지 이동 버튼 end -->
 	</div>
 	<!-- //main_con end -->
@@ -248,5 +245,22 @@
 	<!-- //wrap end -->
 
 </th:block>
+<!-- ckEditor start -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<script>
+	ClassicEditor.create(document.querySelector('#editor'), {
+		language: "ko"
+	});
+</script>
+<style>
+	.ck-editor__editable {
+		height: 400px;
+	}
+
+	.ck-content {
+		font-size: 12px;
+	}
+</style>
 
 </html>
