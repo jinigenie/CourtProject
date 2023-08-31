@@ -5,8 +5,8 @@
 /* 아티클영역 */
 #main_article {
 	position: relative;
-	height: 400px;
-	background-image: url('../../img/main/gateImage.jpg');
+	height: 80%;
+	background-image: url('../../img/main/222.jpg');
 	background-color: rgb(235, 235, 235);
 	background-repeat: no-repeat;
 	background-position: center;
@@ -89,9 +89,12 @@
 }
 
 .visual .boxL {
+	line-height: 5;
+
 	color: #fff;
 	display: inline-block;
-	margin-left: 400px;
+	margin-left: 1000px;
+	margin-top:100px;
 	flex: -1%;
 }
 
@@ -220,7 +223,7 @@
 	margin-top: 58px;
 	position: absolute;
 	top: 180px;
-	right: 400px;
+	left: 500px;
 
 
 }
@@ -512,13 +515,21 @@ a:hover {
 
 
 
+
+
 .box2 {
+	
 	position: relative;
 	padding: 0 50px;
 	overflow: hidden;
 	width: 1900px;
 	margin: 0 50px;
 	background-color: rgb(255, 255, 255) !important;
+}
+.wrap3 {
+	width: 1800px;
+	margin:0 auto;
+
 }
 
 
@@ -531,25 +542,48 @@ a:hover {
 swiper-slide {
 
 	margin: 0 !important;
-	height: 400px;
+	height: 450px!important;
 	width: 448px !important;
 	text-align: center;
 	font-size: 18px;
 	background: #fff;
-	display: flex;
+	
 	justify-content: center;
 	align-items: center;
-	border: 1px solid rgb(240, 240, 240);
+	/*border: 1px solid rgb(240, 240, 240);*/
 
 
 }
 
-swiper-slide img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
+
+.main_slid_notice { min-height: 600px;}
+.main_slid_notice .notice { padding: 3.125rem 0;}
+.main_slid_notice .notice_tabs { margin-top: 19px; padding-bottom: 2px; text-align: center;}
+.main_slid_notice .notice_tabs a {min-width: 600px; display: inline-block; position: relative; margin-left: 13px; padding-left: 17px; font-size: 1.25rem; color: #363636;}
+.main_slid_notice .notice_tabs a::after { content: ''; display: block; position: absolute; left: 0; top: 50%; width: 5px; height: 5px; margin-top: -2px; background-color: #898989; border-radius: 50%;}
+.main_slid_notice .notice_tabs a:hover,
+.main_slid_notice .notice_tabs a.active { font-weight: 500; color: #111; text-decoration: underline;}
+.main_slid_notice .notice_tabs a:first-child { margin-left: 0; padding-left: 0;}
+.main_slid_notice .notice_tabs a:first-child::after { display: none;}
+.main_slid_notice .notice .target { margin-top: 20px;}
+.main_slid_notice .notice_lists { display: flex; align-content: stretch;min-height: 450px;}
+.main_slid_notice .notice_lists li{ height: 100%;}
+.main_slid_notice .notice_lists li a{ margin-left: 20px;}
+.main_slid_notice .notice_lists li:first-child { margin-left: 0;}
+	.main_slid_notice .notice_lists li a { display: block; position: relative; min-height: 320px; padding: 25px; border: 1px solid #ccc; background-color: #fff; border-radius: 30px;}
+.main_slid_notice .notice_lists li a .div { display: inline-block; width: 90px; padding: 5px 2px; font-size: 0.875rem; color: #fff; text-align: center; background-color: #707070; border-radius: 12px;}
+.main_slid_notice .notice_lists li a .new { display: inline-block; position: absolute; left: 106px; top: 22px; font-size: 14px; font-weight: 700; color: #bb4f1a;}
+.main_slid_notice .notice_lists li a dl  { margin-top: 25px;}
+.main_slid_notice .notice_lists li a dl dt { overflow: hidden; height: 62px; font-size: 1.25rem; font-weight: 700; color: #111; text-align: center; line-height: 30px;}
+.main_slid_notice .notice_lists li a dl dd { margin-top: 25px; color: #111; text-align: center;}
+.main_slid_notice .notice_lists li a dl dd.oh { overflow: hidden; height: 77px; margin-top: 5px; line-height: 25px;}
+.main_slid_notice .notice_lists li a .date { position: absolute; right: 26px; top: 30px; font-size: 0.875rem;}
+.main_slid_notice .notice_lists li:hover a { border: 1px solid #4b63c3; background-color: #eff5ff;}
+.main_slid_notice .notice_lists li a:hover .div { background-color: #4b63c3;}
+.main_slid_notice .notice_lists li a:hover dl dt { color: #4b63c3; text-decoration: underline;}
+.main_slid_notice .notice_lists li.all_empty { width: 100%; padding: 114px 0; text-align: center;}
+
+
 
 
 
@@ -562,15 +596,15 @@ swiper-slide img {
 }
 
 /* Left arrow */
-.box2::before {
+.swiper-button-prev::before {
 	content: "";
 	position: absolute;
-	left: 3.5%;
-	top: 51%;
-	z-index: 2;
+	left: 4%;
+	top: 40%;
+	z-index: 1000;
 	transform: translateY(-50%);
-	width: 30px;
-	height: 30px;
+	width: 15px;
+	height: 15px;
 	background-color: #ccc;
 	/* Adjust color as needed */
 	clip-path: polygon(100% 0, 0 50%, 100% 100%);
@@ -581,11 +615,11 @@ swiper-slide img {
 	content: "";
 	position: absolute;
 	right: 27%;
-	top: 51%;
+	top: 40%;
 	z-index: 2;
 	transform: translateY(-50%);
-	width: 30px;
-	height: 30px;
+	width: 15px;
+	height: 15px;
 	background-color: #ccc;
 	/* Adjust color as needed */
 	clip-path: polygon(0 0, 100% 50%, 0 100%);
@@ -596,17 +630,19 @@ swiper-slide img {
 
 .main_faqList {
 	margin-left: 30px;
-	height: 400px;
+	min-height: 400px;
 	width: 300px;
 	text-align: center;
 	font-size: 18px;
 	background: #fff;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid rgb(240, 240, 240);
 	float: left;
 
 }
+
+
+
 
 
 
