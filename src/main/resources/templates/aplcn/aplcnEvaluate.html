@@ -108,7 +108,7 @@
 
 
 				<article id="detail-content">
-					<form id="listForm" name="listForm" action="http://localhost:8585/aplcn/aplcnResult" method="get">
+					<form id="listForm" name="listForm" action="http://localhost:8585/aplcn/aplcnDetails" method="get">
 						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
 						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
 						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
@@ -224,29 +224,26 @@
 											</td>
 										</tr>
 									</table>
-
 								</div>
-
 								<script>
-									let myWindow;
-									function openPopup() {
-									}
-									function closeTabClick() {
-										if (myWindow) {
-											myWindow.close();
-										}
+									function completeEvaluation() {
+										// 현재 팝업 창에서 메인 페이지로 이동
+										window.location.href = "http://localhost:8585/aplcn/aplctDetails"; // 변경할 URL을 입력하세요.
+										window.close();
 									}
 								</script>
-
 								<!-- pagenation -->
 								<div class="point-insert">
 									<a href="" onclick="openPopup();" class="case case2">
-										<span class="close-button"><button onclick="closeTabClick()"
-												style="color: white">평가완료</button></span></a>
+										<span class="close-button">
+											<button onclick="completeEvaluation()" style="color: white">평가완료</button>
+										</span>
+									</a>
 								</div>
-							</div>
+							</div>	
 					</form>
 					<p id="result"></p>
+
 					<script>
 						function calculateAverage() {
 							const point1 = parseFloat(document.getElementsByName("point1")[0].value);
