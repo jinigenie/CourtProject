@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
+<script th:src="@{../../js/app/info.js}"></script>
+<script th:src="@{../../js/app/jquery-1.11.3.min.js}"></script>
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+
+    <div class="wrap">
+        <div id="main_con">
+            <div id="nav_menu">
+                <div id="lnb">
+                    <h2 class="title">조력자등재신청</h2>
+                    <div class="menu">
+                        <ul>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재신청</a>
+                            </li>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재명단</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div id="contents">
+                <div class="heading-wrap container">
+                    <h3 class="heading1">
+                        <span>재판조력자 등재신청</span>
+                    </h3>
+                </div>
+
+                <div id="crumbs">
+                    <ul>
+                        <li><a href="#1">기본정보</a></li>
+                        <li><a href="#2">경력상세</a></li>
+                        <li><a href="#3" class="highlight">학력상세</a></li>
+                        <li><a href="#4">서류제출</a></li>
+                    </ul>
+                </div>
+
+                <div style="overflow: hidden">
+                    <div style="margin-top: 40px; float: left; display: inline-block">
+                        <span class="sub_title">최종학력</span>
+                    </div>
+                    <div class="select-box" style="margin: 30px 0 0 15px; float:left;">
+                        <label for="selectEdu"></label>
+                        <select class="info-select" id="selectEdu">
+                            <option value="">선택</option>
+                            <option value="a">학사</option>
+                            <option value="석사">석사</option>
+                            <option value="박사">박사</option>
+                            <option value="전문">전문학사</option>
+                            <option value="고졸">고졸</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="highschool">
+                    <div style="overflow: hidden">
+                        <div style="margin-top: 40px; float: left">
+                            <span class="sub_title">고등학교 정보</span>
+                        </div>
+                    </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th scope="col">학교명</th>
+                                <th scope="col">졸업구분</th>
+                                <th scope="col">입학일</th>
+                                <th scope="col">졸업일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="cursor: pointer">
+                                <td data-cell-header="학교명"><input type="text" class="input-wrap"></td>
+                                <td data-cell-header="졸업구분">
+                                    <div class="select-box">
+
+                                        <label>선택</label><select class="info-select" id="selectState" name="search_field">
+                                        <option value="">선택</option>
+                                        <option value="">졸업</option>
+                                        <option value="">중퇴</option>
+                                        <option value="">검정고시</option>
+                                        <option value="">해당없음</option>
+                                    </select>
+                                    </div>
+                                </td>
+                                <td data-cell-header="입학일"><input type="text" class="input-wrap" style="width: 150px">
+                                </td>
+                                <td data-cell-header="졸업일"><input type="text" class="input-wrap" style="width: 150px">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="university">
+                    <div style="overflow: hidden">
+                        <div style="margin-top: 40px; float: left">
+                            <span class="sub_title">대학/대학원 정보</span>
+                        </div>
+                        <button type="button" class="add" id="eduAddBtn" style="float: right; padding: 43px 27px 0 0">학력
+                            추가
+                        </button>
+                    </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th scope="col">학교명</th>
+                                <th scope="col">학과</th>
+                                <th scope="col">학위</th>
+                                <th scope="col">졸업구분</th>
+                                <th scope="col">입학일</th>
+                                <th scope="col">졸업일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="cursor: pointer">
+                                <td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">
+                                </td>
+                                <td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">
+                                </td>
+                                <td data-cell-header="학위">
+                                    <div class="select-box2" style="width: 100px">
+                                        <label for="selectEdu2"></label>
+                                        <select class="info-select" id="selectEdu2" name="search_field">
+                                            <option value="">선택</option>
+                                            <option value="">학사</option>
+                                            <option value="">석사</option>
+                                            <option value="">박사</option>
+                                            <option value="">전문학사</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td data-cell-header="졸업구분">
+                                    <div class="select-box2">
+                                        <label for="selectState2"></label>
+                                        <select class="info-select" id="selectState2"
+                                                name="search_field" title="검색조건을 선택해주세요.">
+                                            <option value="" selected="selected">선택</option>
+                                            <option value="">졸업</option>
+                                            <option value="">졸업예정</option>
+                                            <option value="">수료</option>
+                                            <option value="">중퇴</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td data-cell-header="입학일"><input type="text" class="input-wrap" style="width: 140px">
+                                </td>
+                                <td data-cell-header="졸업일"><input type="text" class="input-wrap" style="width: 140px">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="overflow: hidden">
+                    <div style="margin-top: 40px; float: left">
+                        <span class="sub_title">자격증 정보</span>
+                    </div>
+                    <button type="button" class="add" id="certAddBtn" style="float: right; padding: 43px 27px 0 0">자격증
+                        추가
+                    </button>
+                </div>
+                <div class="table table-responsive">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th scope="col">회사/활동기관명</th>
+                            <th scope="col">부서</th>
+                            <th scope="col">직책</th>
+                            <th scope="col">근무시작일자</th>
+                            <th scope="col">근무종료일자</th>
+                            <th scope="col">업무내용</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="cursor: pointer">
+                            <td data-cell-header="회사"><input type="text" class="input-wrap"></td>
+                            <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px"></td>
+                            <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 100px"></td>
+                            <td data-cell-header="근무시작"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td data-cell-header="근무종료"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td>
+                                <button class="case case1 careerInfo"><em>작성</em></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-holder">
+                    <button class="btn btn-2 hover-opacity" onclick="location.href='/app/career'">
+                        <span>◀ 이전 단계</span>
+                    </button>
+
+                    <em style="padding-top: 15px"> 3 / 4</em>
+
+                    <button class="btn btn-2 hover-opacity">
+                        <span>다음 단계 ▶</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</th:block>
+
+<script>
+
+
+    $("#selectEdu").change(function () {
+        let state = $("#selectEdu option:selected").val();
+        if (state == "" || state == null) {
+            $(".university").hide();
+            $(".highschool").hide();
+        } else if(state == "고졸") {
+            $(".university").hide();
+            $(".highschool").show();
+        } else{
+            $(".highschool").show();
+            $(".university").show();
+        }
+    });
+
+</script>
+
+</html>

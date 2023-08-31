@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
 <script th:src="@{../../js/app/info.js}"></script>
+<script th:src="@{../../js/app/jquery-1.11.3.min.js}"></script>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -41,56 +42,59 @@
 
 
                 <div style="margin-top: 40px">
-                <span class="sub_title">사건내역</span>
+                    <span class="sub_title">사건내역</span>
                 </div>
                 <div class="table table-responsive">
                     <table>
                         <tbody>
-                        <tr style="padding-top: 20px">
+                        <tr style="padding-top: 20px; height: 75px">
                             <th scope="row" class="txt-left" style="width: 20% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 40px;">소송사건 경력</span>
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">소송사건 경력</span>
                             </th>
                             <td data-cell-header="소송경력" class="txt-left" style="width: 30%">
-                                <input type="checkbox" style="margin-left: 40px"><span style="margin-left: 7px">경력 있음</span>
+                                <input type="checkbox" name="check1"><span style="margin-left: 7px">경력 있음</span>
                             </td>
                             <td data-cell-header="소송경력" class="txt-left lawtd" style="width: 50%">
-                                <div class="input-wrap" style="width: 450px; display: inline-block; margin-right: 20px">
+                                <div class="input-wrap lawRecord" style="width: 450px; margin-right: 20px;">
                                     <input name="lawsuit" value="" class="cm_inptxt" type="text"/>
                                 </div>
                             </td>
                             <td>
-                                <button type="button" class="add" id="exprAddBtn1">추가</button>
+                                <button type="button" class="add" id="exprAddBtn1" style="margin-right: 60px">추가
+                                </button>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 75px">
                             <th scope="row" class="txt-left" style="width: 40% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 40px;">보험업계 경력</span>
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">보험업계 경력</span>
                             </th>
                             <td data-cell-header="보험경력" class="txt-left">
-                                <input type="checkbox" style="margin-left: 40px"><span style="margin-left: 7px">경력 있음</span>
+                                <input type="checkbox" name="check2"><span style="margin-left: 7px">경력 있음</span>
                             </td>
                             <td data-cell-header="보험경력" class="txt-left instd">
-                                <div class="input-wrap" style="width: 450px; display: inline-block; margin-right: 20px">
-                                    <input name="lawsuit" value="" class="cm_inptxt" type="text"/>
+                                <div class="input-wrap insRecord" style="width: 450px; margin-right: 20px">
+                                    <input name="insurance" value="" class="cm_inptxt" type="text"/>
                                 </div>
                             <td>
-                                <button type="button" class="add" id="exprAddBtn2">추가</button>
+                                <button type="button" class="add" id="exprAddBtn2" style="margin-right: 60px">추가
+                                </button>
                             </td>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 75px">
                             <th scope="row" class="txt-left" style="width: 40% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 40px;">형사처벌 경력</span>
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">형사처벌 경력</span>
                             </th>
                             <td data-cell-header="형사경력" class="txt-left">
-                                <input type="checkbox" style="margin-left: 40px"><span style="margin-left: 7px">경력 있음</span>
+                                <input type="checkbox" name="check3"><span style="margin-left: 7px">경력 있음</span>
                             </td>
                             <td data-cell-header="형사경력" class="txt-left detectd">
-                                <div class="input-wrap" style="width: 450px; display: inline-block; margin-right: 20px">
+                                <div class="input-wrap detRecord" style="width: 450px; margin-right: 20px">
                                     <input name="detective" value="" class="cm_inptxt" type="text"/>
                                 </div>
                             <td>
-                                <button type="button" class="add" id="exprAddBtn3">추가</button>
+                                <button type="button" class="add" id="exprAddBtn3" style="margin-right: 60px">추가
+                                </button>
                             </td>
                             </td>
                         </tr>
@@ -98,10 +102,13 @@
                     </table>
                 </div>
 
-                <div style="margin-top: 40px">
-                    <span class="sub_title">경력상세</span>
+                <div style="overflow: hidden">
+                    <div style="margin-top: 40px; float: left">
+                        <span class="sub_title">경력상세</span>
+                    </div>
+                    <button type="button" class="add" id="caAddBtn" style="float: right; padding: 43px 27px 0 0">경력 추가
+                    </button>
                 </div>
-
                 <div class="table table-responsive">
                     <table>
                         <thead>
@@ -116,15 +123,13 @@
                         </thead>
                         <tbody>
                         <tr style="cursor: pointer">
-                            <td data-cell-header="회사"><input></td>
-                            <td data-cell-header="부서">임금체불 진정서</td>
-                            <td data-cell-header="직책">근로기준</td>
-                            <td data-cell-header="근무시작">25 일</td>
-                            <td data-cell-header="근무종료">25 일</td>
-                            <td onclick="event.stopPropagation();">
-                                <a href="javascript:submitUrl('/minwon2008/lc_minwon/AH038_C.do?capp_biz_cd=&proc_sys_cd=01&cd_appeal_form_map=AH038','AH038');"
-                                   class="case case1"
-                                ><em>신청</em></a>
+                            <td data-cell-header="회사"><input type="text" class="input-wrap"></td>
+                            <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px"></td>
+                            <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 100px"></td>
+                            <td data-cell-header="근무시작"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td data-cell-header="근무종료"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td>
+                                <button class="case case1 careerInfo"><em>작성</em></button>
                             </td>
                         </tr>
                         </tbody>
@@ -132,24 +137,107 @@
                 </div>
 
                 <div class="btn-holder">
-                    <button class="btn btn-2 hover-opacity">
+                    <button class="btn btn-2 hover-opacity prev_btn">
                         <span>◀ 이전 단계</span>
                     </button>
 
-                    <em style="padding-top: 15px"> 1 / 4</em>
+                    <em style="padding-top: 15px"> 2 / 4</em>
 
-                    <button class="btn btn-2 hover-opacity">
+                    <button class="btn btn-2 hover-opacity next_btn">
                         <span>다음 단계 ▶</span>
                     </button>
 
                 </div>
 
+                <div class="modal">
+                    <div class="modal__background">
+                        <div class="modal_body2">
+                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                     style="outline: none;" tabindex="-1">
+                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1></div>
+                                    <div class="dmui_dialog_body" tabindex="0">
+                                        <div class="saveIcon">
+                                            <img src="../img/app/saveicon.png">
+                                        </div>
+                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                            <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
+                                                <br>변경된 내용은 반영되지 않습니다.</strong></p>
+                                        </div>
+                                        <p><strong>저장하시겠습니까?</strong></p>
+                                    </div>
+                                </div>
+                                <div class="dmui_dialog_footer">
+                                    <span><button class="dmui_dialog_footer_btn save">저장</button></span>
+                                    <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                </div>
+                                <div class="dmui_dialog_btn"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal2">
+                    <div class="modal__background">
+                        <div class="modal_body">
+                            <div class="modalOff">X</div>
+
+                            <form action="" method="">
+                                <div class="modal_con">
+
+                                    <form>
+                                        <p style="font-size: 18px; font-weight: 600; margin: 15px; color: #1c449c;">업무
+                                            내용</p>
+                                        <div class="table">
+                                            <table>
+                                                <tbody>
+                                                <tr style="padding-top: 20px">
+                                                    <th scope="row" class="txt-left">
+                                                        <span class="essential-txt" title="필수항목">수행업무</span>
+                                                    </th>
+                                                    <td data-cell-header="수행업무" class="txt-left worktd">
+                                                        <div class="input-wrap"
+                                                             style="width: 400px; display: inline-block; margin-right: 20px">
+                                                            <input name="workType" value="" class="cm_inptxt"
+                                                                   type="text"/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="txt-left">
+                                                        <span class="essential-txt" title="필수항목">상세설명</span>
+                                                    </th>
+                                                    <td data-cell-header="상세설명" class="txt-left instd">
+                                                        <textarea style="width: 400px; height: 150px"></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="txt-left">
+                                                        <span class="essential-txt" title="필수항목">특기사항</span>
+                                                    </th>
+                                                    <td data-cell-header="특기사항" class="txt-left instd">
+                                                        <textarea style="width: 400px; height: 150px"></textarea>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <input type="submit" class="submitCareer modalOff2" style="border: none; cursor: pointer"
+                                               value="제출">
+                                    </form>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
         </div>
 
     </div>
+
 
 </th:block>
 
@@ -170,7 +258,7 @@
         inp1.style.display = 'inline-block';
         inp1.style.float = 'left';
         inp1.style.width = '90%';
-        del1.innerHTML='[X]';
+        del1.innerHTML = '[X]';
         del1.style.float = 'right';
 
         td1.appendChild(inp1);
@@ -214,6 +302,99 @@
         third.appendChild(td1);
 
     })
+
+</script>
+<script>
+    const modal2 = document.querySelector('.modal2');
+    $(".careerInfo").click(function () {
+        modal2.style.display = 'block';
+    })
+
+    $(".modalOff").click(function () {
+        modal2.style.display = 'none';
+    })
+
+    $(".modalOff2").click(function () {
+        modal2.style.display = 'none';
+    })
+
+</script>
+
+
+<script>
+
+    const modal = document.querySelector('.modal');
+    let x = 0;
+
+    $(".prev_btn").click(function () {
+        modal.style.display = 'block';
+        x = 1;
+    })
+    $(".next_btn").click(function () {
+        modal.style.display = 'block';
+        x = 2;
+    })
+
+    $(".save").click(function () {
+        if(x == 1) {
+            $(location).attr("href", "../app/info");
+        } else {
+            $(location).attr("href", "../app/edu");
+        }
+        x = 0;
+    })
+
+    $(".cancel").click(function () {
+        if(x == 1) {
+            $(location).attr("href", "../app/info");
+        } else {
+            $(location).attr("href", "../app/edu");
+        }
+        x = 0;
+    })
+
+    $(".dmui_dialog_btn").click(function () {
+        modal.style.display = 'none';
+    })
+
+</script>
+
+<script>
+
+    $(function () {
+        $(".lawtd").css("visibility", "hidden");
+        $(".insRecord").css("visibility", "hidden");
+        $(".detRecord").css("visibility", "hidden");
+    });
+
+
+    $('input[name="check1"]').change(function () {
+        var checked1 = $(this).prop('checked');
+        if (checked1)
+            if (checked1)
+                $(".lawtd").css("visibility", "visible");
+            else
+                $(".lawtd").css("visibility", "hidden");
+    });
+
+    $('input[name="check2"]').change(function () {
+        var checked2 = $(this).prop('checked');
+
+        if (checked2)
+            $(".insRecord").css("visibility", "visible");
+        else
+            $(".insRecord").css("visibility", "hidden");
+    });
+
+    $('input[name="check3"]').change(function () {
+        var checked3 = $(this).prop('checked');
+
+        if (checked3)
+            $(".detRecord").css("visibility", "visible");
+        else
+            $(".detRecord").css("visibility", "hidden");
+    });
+
 
 </script>
 
