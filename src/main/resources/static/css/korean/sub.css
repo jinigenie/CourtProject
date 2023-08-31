@@ -51,7 +51,7 @@ body.start #detail-content {
 }
 
 /* *********************************************************************************
-* 정부24 - 20230829 이태주 추가
+* List 정부24 글  - 20230829 이태주 추가
 * *********************************************************************************/
 .blank-new {
     position: relative;
@@ -125,6 +125,40 @@ body.start #detail-content {
 }
 
 /* *********************************************************************************
+* announce-top
+* *********************************************************************************/
+.announce-top > .announce-title > ul > li {
+            text-align: center;
+            font-size: 25px;
+            padding-bottom: 20px;
+        }
+
+        .announce-top > .announce-date > ul {
+            overflow: hidden;
+        }
+
+        .announce-top > .announce-date > ul > li {
+            float: right;
+        }
+
+        .announce-top > .announce-date > ul > .second-date {
+            padding-left: 10px;
+        }
+
+        .announce-top > .announce-date > ul::before,
+        .announce-top > .announce-date > ul::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .announce-top > .announce-date > ul > li {
+            margin-right: 10px;
+        }
+
+
+
+/* *********************************************************************************
 * box
 * *********************************************************************************/
 .box {
@@ -171,6 +205,9 @@ body.start #detail-content {
   margin: 0 0 0.25rem;
 }
 
+/* *********************************************************************************
+* top-box
+* *********************************************************************************/
 
 
 /* *********************************************************************************
@@ -234,13 +271,13 @@ body.start #detail-content {
 }
 
 .calander-box .datepicker {
-  width: 100px;
-  border: 1px solid #cdcdcd;
-  background: url('../../img/korean/sub/calander.png');
-  background-repeat: no-repeat;
-  background-position-x: 75px;
-  background-position-y: 5px;
-  background-color: white;
+	height: 38px;
+	width: 100px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    background: url('../../img/korean/sub/calander.png');
 }
 
 /* *********************************************************************************
