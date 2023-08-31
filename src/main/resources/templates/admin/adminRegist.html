@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+
+</head>
+
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<div class="wrap">
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">사용자 관리</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a href="#" title="">관리자 등록</a>
+							</li>
+							<li class="has-sub"><a href="#" title="">관리자 목록</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="contents" style="width: 50%; float: left; padding-left: 100px;">
+				<div class="heading-wrap container">
+					<h3 class="heading1">
+						<span style="margin-bottom: 20px;">관리자 등록</span>
+					</h3>
+					<div class="table table-responsive">
+						<table>
+							<caption>
+								관리자 등록
+							</caption>
+							<colgroup>
+								<col style="width: 30%">
+								<col style="width: 70%">
+							</colgroup>
+							<style>
+								.btn-style.btn-style11 {
+									background: #2065c6;
+									height: 40px;
+									line-height: 38px;
+									border-color: #2065c6;
+									font-size: 0.7rem;
+									color: white;
+								}
+								.btn-style.btn-style12 {
+									background: #2065c6;
+									height: 30px;
+									line-height: 30px;
+									border-color: #2065c6;
+									font-size: 0.7rem;
+									color: white;
+								}
+							</style>
+							<tbody>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">아이디</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">&nbsp;&nbsp;
+										<button type="button" class="btn-style btn-style12">아이디 중복확인</button>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">비밀번호</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">비밀번호 확인</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" class="txt-left">
+										<span class="txt-left" title="">관리자 식별</span>
+									</th>
+									<td data-cell-header="성명" class="txt-left">
+										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									</td>
+								</tr>
+
+								<tr>
+									<th scope="row" class="txt-left">
+										<span>관리자 권한</span>
+									</th>
+									<style>
+										.checkbox-radio-custom>li {
+											float: left;
+											margin-left: 1rem;
+										}
+									</style>
+									<td data-cell-header="휴대폰번호" class="txt-left">
+										<ul class="checkbox-radio-custom write-wrap-m">
+											<li>
+												<input id="yn_receipt_yes" class="cm_inpchkrd" name="yn_receipt"
+													type="radio" value="Y" />
+												<label for="yn_receipt_yes">사법 담당자</label>
+											</li>
+											<li>
+												<input id="yn_receipt_no" class="cm_inpchkrd" name="yn_receipt"
+													type="radio" value="N" />
+												<label for="yn_receipt_no">각급 법원 담당자</label>
+											</li>
+											<li>
+												<input id="yn_receipt_no" class="cm_inpchkrd" name="yn_receipt"
+													type="radio" value="N" />
+												<label for="yn_receipt_no">서비스 관리자</label>
+											</li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="fclttRegist_btn" style="text-align: center;">
+						<button type="button" class="btn-style btn-style11">등록</button>
+						<button type="button" class="btn-style btn-style11">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+</html>
