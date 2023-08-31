@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
 	<script th:src="@{../js/fcltt/fcltt.js}"></script>
@@ -83,21 +84,24 @@
 
 							<!-- box box1 start -->
 							<div class="top-box">
+								<table>
+									<!-- 첨부파일 start -->
+									<tr class="top-box-tr-one">
+										<td class="top-box-one">
+											<div id="fileControl" style="display: none"></div>
+											<span class="top-box-one-span-one">작성자 : 관리자</span>
+										</td>
+										<td class="top-box-two">
+											<div id="fileControl" style="display: none"></div>
+											<span>최초 입력일 시 : 2023.08.30</span>
+											<span> / </span>
+											<span>최종 변경일 시 : 2023.08.30</span>
+										</td>
+									</tr>
+									<tr class="top-box-tr-two">
 
-								<!-- 첨부파일 start -->
-								<tr class="top-box-one">
-									<td>
-										<div id="fileControl" style="display: none"></div>
-										<span>작성자 : 관리자</span>
-									</td>
-								</tr>
-								<tr class="top-box-two">
-									<td>
-										<div id="fileControl" style="display: none"></div>
-										<span>최초 입력일 시 : 2023.08.30</span>
-										<span>최종 변경일 시 : 2023.08.30</span>
-									</td>
-								</tr>
+									</tr>
+								</table>
 							</div>
 							<!-- //box box1 end -->
 						</div>
@@ -138,7 +142,7 @@
 													<div class="fcltt_phone" style="display: inline-block">
 														<!-- 달력 start -->
 														<div class="calander-box">
-															
+
 															<input type="text" class="datepicker" readonly
 																placeholder="날짜선택" name="startDate" value="" /> -
 															<input type="text" class="datepicker" readonly
@@ -235,9 +239,9 @@
 
 		<!-- 페이지 이동 버튼 -->
 		<div class="fclttRegist_btn">
-						<button type="button" class="fcltt_btn1">등록</button>
-						<button type="button" class="fcltt_btn2">취소</button>
-					</div>
+			<button type="button" class="fcltt_btn1">등록</button>
+			<button type="button" class="fcltt_btn2">취소</button>
+		</div>
 		<!-- //페이지 이동 버튼 end -->
 	</div>
 	<!-- //main_con end -->
