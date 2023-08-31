@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<style>
+		.right-align {
+			text-align: right;
+		}
+	</style>
+
+	<div class="wrap">
+		<!-- main_con  -->
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">조력자 등재신청</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">조력자 등재신청</a></li>
+									<li><a href="#">조력자 등재목록</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">신청자 목록</a></li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div id="contents">
+
+				<style>
+					@media screen and (max-width: 1024px) {
+						.table-responsive>table>tbody>tr td[data-cell-header]:before {
+							width: 30%;
+							margin: 0 0 0 0;
+							vertical-align: unset;
+						}
+					}
+
+					.table-responsive>table>tbody>tr:hover {
+						background-color: #e6f8ff;
+					}
+
+					@media screen and (min-width: 1100px) {
+						#select-box-margin-left-10 {
+							margin-left: 6px;
+						}
+					}
+
+
+					.tbl-view .view-title {
+						background: rgb(245, 245, 245);
+						border-top: 2px solid rgb(211, 211, 211);
+						border-bottom: 1px solid rgb(211, 211, 211);
+						padding: 7px 20px;
+					}
+
+					.center-text {
+						text-align: center;
+					}
+
+					.tbl-view .view-title strong {
+						font-size: 1.3rem;
+						line-height: 1.5;
+						display: inline-block;
+					}
+
+					.tbl-view .view-title .date {
+						display: block;
+						text-align: right;
+					}
+
+
+					.transparent-input {
+						text-align: center;
+						width: 50%;
+					}
+
+					.point-insert {
+						text-align: right;
+					}
+
+					.case>span {
+						display: inline-block;
+						vertical-align: middle;
+						width: 77px;
+						height: 35px;
+						line-height: 35px;
+						background: #2065c6;
+						color: #fff;
+						font-size: 0.8rem;
+						text-align: center;
+						border-radius: 5px;
+					}
+				</style>
+				<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+
+				<article id="detail-content">
+					<form id="listForm" name="listForm" action="http://localhost:8585/aplcn/aplcnResult" method="get">
+						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
+						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
+						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
+						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
+						<input type="hidden" id="cate_name" name="cate_name" value="" />
+						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
+						<div class="heading-wrap container">
+							<h3 class="heading1">
+								<span>홍길동 신청자 평가</span>
+							</h3>
+						</div>
+
+						<div class="contents">
+
+							<script type="text/javascript" src="/2017e/js/common/common_share_util.js"
+								charset="EUC-KR"></script>
+
+							<script type="text/javascript">
+								$(document).ready(function () {
+									Fn.TitleIcon.Call();
+								});
+							</script>
+
+							<!-- 게시판 시작 부분 -->
+							<div class="table table-responsive">
+								<table>
+									<caption>
+
+									</caption>
+									<colgroup>
+										<col style="width: 25%">
+										<col style="width: 25%">
+										<col style="width: 25%">
+										<col style="width: 25%">
+										<col style="width: 25%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col">평가항목</th>
+											<th scope="col">점수</th>
+											<th scope="col">평가항목</th>
+											<th scope="col">점수</th>
+											<th scope="col"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+											<td data-cell-header="번호">통산경력</td>
+											<td data-cell-header="민원서식명" tabindex="0"
+												onkeypress="if(event.keyCode ==13){$(this).click()}"
+												onclick="jsSamuDetail('14921000459')"><input type="text" name="point1"
+													class="transparent-input">
+
+											</td>
+											<td data-cell-header="점수">관내경력</td>
+											<td data-cell-header="민원서식명" tabindex="0"
+												onkeypress="if(event.keyCode ==13){$(this).click()}"
+												onclick="jsSamuDetail('14921000459')"><input type="text" name="point2"
+													class="transparent-input">
+											</td>
+										</tr>
+
+										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+											style="cursor: pointer">
+											<td data-cell-header="번호">사무소 소재지</td>
+											<td data-cell-header="민원서식명" tabindex="0"><input type="text" name="point3"
+													class="transparent-input">
+											</td>
+											<td data-cell-header="담당법원">인성평가</td>
+											<td data-cell-header="민원서식명" tabindex="0"
+												onkeypress="if(event.keyCode ==13){$(this).click()}"
+												onclick="jsSamuDetail('14921000459')"><input type="text" name="point4"
+													class="transparent-input">
+										</tr>
+
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td data-cell-header="번호">면접</td>
+											<td data-cell-header="민원서식명" tabindex="0"><input type="text" name="point5"
+													class="transparent-input">
+											</td>
+											<td data-cell-header="담당법원">자격증</td>
+											<td data-cell-header="민원서식명" tabindex="0"
+												onkeypress="if(event.keyCode ==13){$(this).click()}"
+												onclick="jsSamuDetail('14921000459')"><input type="text" name="point6"
+													class="transparent-input">
+											</td>
+										</tr>
+
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td data-cell-header="번호">감정인 평가</td>
+											<td data-cell-header="민원서식명" tabindex="0"
+												onkeypress="if(event.keyCode ==13){$(this).click()}"
+												onclick="jsSamuDetail('14921000459')"><input type="text" name="point7"
+													class="transparent-input">
+											</td>
+											<td data-cell-header="담당법원">심사위원 추천</td>
+											<td data-cell-header="민원서식명" tabindex="0"
+												onkeypress="if(event.keyCode ==13){$(this).click()}"
+												onclick="jsSamuDetail('14921000459')"><input type="text" name="point8"
+													class="transparent-input">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<div class="table table-responsive">
+									<table>
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td>
+											<td class="shifted-td">검토 의견</td>
+											<td><textarea rows="4" cols="50"
+													style="width: 800px; height: 150px;"></textarea></td>
+											</td>
+										</tr>
+									</table>
+
+								</div>
+
+								<script>
+									let myWindow;
+									function openPopup() {
+									}
+									function closeTabClick() {
+										if (myWindow) {
+											myWindow.close();
+										}
+									}
+								</script>
+
+								<!-- pagenation -->
+								<div class="point-insert">
+									<a href="" onclick="openPopup();" class="case case2">
+										<span class="close-button"><button onclick="closeTabClick()"
+												style="color: white">평가완료</button></span></a>
+								</div>
+							</div>
+					</form>
+					<p id="result"></p>
+					<script>
+						function calculateAverage() {
+							const point1 = parseFloat(document.getElementsByName("point1")[0].value);
+							const point2 = parseFloat(document.getElementsByName("point2")[0].value);
+							const point3 = parseFloat(document.getElementsByName("point3")[0].value);
+							const point4 = parseFloat(document.getElementsByName("point4")[0].value);
+							const point5 = parseFloat(document.getElementsByName("point5")[0].value);
+							const point6 = parseFloat(document.getElementsByName("point6")[0].value);
+							const point7 = parseFloat(document.getElementsByName("point7")[0].value);
+							const point8 = parseFloat(document.getElementsByName("point8")[0].value);
+
+							if (!isNaN(point1) && !isNaN(point2) && !isNaN(point3) && !isNaN(point4) && !isNaN(point5)) {
+								const average = (point1 + point2 + point3 + point4 + point5 + point6 + point7 + point8) / 8;
+								document.getElementById("result").textContent = "평균값: " + average.toFixed(2);
+							} else {
+								document.getElementById("result").textContent = "올바른 숫자를 입력하세요.";
+							}
+						}
+					</script>
+				</article>
+			</div>
+		</div>
+		<!-- //main_con  -->
+	</div>
+
+</th:block>
+
+</html>
