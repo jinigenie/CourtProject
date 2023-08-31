@@ -6,6 +6,22 @@ body {
 }
 
 /* *********************************************************************************
+* 신청안내
+* *********************************************************************************/
+.regInfo {
+    width: 90%;
+    height: auto;
+    border: 1px solid #dcdcde;
+    text-align: center;
+    margin-left: 5%;
+}
+
+.regInfo > img {
+    width: 90%;
+}
+
+
+/* *********************************************************************************
 * progress 메뉴바
 * *********************************************************************************/
 
@@ -153,6 +169,19 @@ body {
     opacity: 1;
 }
 
+.submitCareer {
+    display: inline-block;
+    vertical-align: middle;
+    width: 77px;
+    height: 35px;
+    line-height: 35px;
+    background: #2065c6;
+    color: #fff;
+    font-size: 0.8rem;
+    text-align: center;
+    border-radius: 5px;
+}
+
 /* *********************************************************************************
 * 표 타이틀
 * *********************************************************************************/
@@ -164,3 +193,233 @@ body {
     color: #1c449c;
     font-weight: 600;
 }
+
+
+/* *********************************************************************************
+* 모달
+* *********************************************************************************/
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+}
+
+.modal2.show {
+    display: block;
+}
+
+.modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 600px;
+    height: 600px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 1px 2px 3px 1px rgba(109, 110, 110, 0.18);
+
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
+}
+
+.modal2 .modalOff {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: url(../../img/app/deleteicon.svg) no-repeat center center;
+    background-size: 1rem 1rem;
+    font-size: 0;
+    line-height: 0;
+    right: 1.5rem;
+    top: 1.5rem;
+    cursor: pointer;
+}
+
+
+.modal_body2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 500px;
+    height: 400px;
+
+    padding-top: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 1px 2px 3px 1px rgba(109, 110, 110, 0.18);
+
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 3;
+}
+
+.modal__background{
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+    background: rgba(0, 0, 0, 0.24);
+    z-index: 2;
+}
+
+
+element.style {
+}
+.dmui_dialog .dmui_dialog_btn {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: url(../../img/app/deleteicon.svg) no-repeat center center;
+    background-size: 1rem 1rem;
+    font-size: 0;
+    line-height: 0;
+    right: 1.5rem;
+    top: 1.5rem;
+    cursor: pointer;
+}
+
+.dmui_dialog_body {
+    width: 80%;
+    height: auto;
+    text-align: center;
+    margin-left: 10%;
+}
+.saveIcon > img {
+    padding: 30px 0 10px 0;
+    width: 60%;
+}
+
+.dmui_dialog_footer{
+    width: 500px;
+    overflow: hidden;
+    margin : 0;
+}
+
+.dmui_dialog_footer_btn {
+    width: 250px;
+    height: 50px;
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.dmui_dialog_footer .save {
+    float: right;
+    background-color: black;
+    padding-top: 5px;
+    color: white;
+    border-radius: 0 0 10px 0;
+}
+.dmui_dialog_footer .cancel {
+    float: left;
+    background-color: #7b7b7c;
+    padding-top: 5px;
+    color: white;
+    border-radius: 0 0 0 10px;
+}
+
+/* *********************************************************************************
+* select-box2
+* *********************************************************************************/
+.select-box2 {
+    display: inline-block;
+    position: relative;
+    width: auto;
+    min-width: 125px;
+    height: 40px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #cdcdcd;
+    transition: border-color 0.3s ease;
+}
+.select-box2 + .select-box2 {
+    margin-left: 0.25rem;
+}
+.select-box2 label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 3rem 0 1rem;
+    line-height: 38px;
+    color: #2065c6;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.select-box2 label:after {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+    font-size: 1rem;
+    font-family: 'xeicon';
+    transition: transform 0.3s ease;
+    content: '\e942';
+    color: #2065c6;
+}
+.select-box2 select.info-select {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0 none;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 1;
+}
+.select-box2:hover,
+.select-box2:active,
+.select-box2:focus {
+    border-color: #555 !important;
+}
+.select-box2:hover label {
+    color: #333;
+}
+.select-box2:hover label:after,
+.select-box2:active label:after,
+.select_box2:focus label:after {
+    color: #333;
+    transform: translateY(-50%) rotate(180deg);
+}
+.select-box2.select-box-ful {
+    width: 100%;
+    min-width: inherit;
+}
+.select-box2.focus {
+    outline: -webkit-focus-ring-color auto 1px;
+}
+

@@ -19,7 +19,7 @@
 #lnb>.menu>ul>li>.sub>li>a:hover {color:#fff;background-color:#06C;}
 #lnb>.menu>ul>li>.sub>li.on>a {color:#fff;background-color:#06C;}
 
-#lnb > .menu > ul > li.has-sub > a {background: url('/ei/images/common/arrow-unfold.png') no-repeat right 10px top 50%;}
+#lnb > .menu > ul > li.has-sub > a {background: url(#) no-repeat right 10px top 50%;}
 #lnb > .menu > ul > li.has-sub.on > a {border-bottom: 1px solid #1c449c; color: #333; font-weight: 700; background: url('/ei/images/common/arrow-fold.png') no-repeat right 10px top 50%; transition: all 0.3s;}
 #lnb > .menu > ul > li .sub a {font-weight: 400; font-size: 16px; letter-spacing: -1px;}
 /* lnb. e. */

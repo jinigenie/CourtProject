@@ -8,19 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/app")
 public class AplcnRegController {
 
+    //신청안내페이지
+    @GetMapping("/start")
+    public String getRegStart() {
+        return "app/aplcnRegStart";
+    }
+
+    //기본정보 입력페이지
     @GetMapping("/info")
     public String getInfo() {
         return "app/aplcnRegInfo";
     }
 
+    //경력사항 입력페이지
     @GetMapping("/career")
     public String getCareer() {
         return "app/aplcnRegCareerAndCert";
     }
 
-    @GetMapping("/test")
+    //학력사항 입력페이지
+    @GetMapping("/edu")
     public String teste() {
-        return "app/test";
+        return "app/aplcnRegEducation";
     }
 
 

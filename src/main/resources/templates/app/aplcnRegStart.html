@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
+<script th:src="@{../../js/app/info.js}"></script>
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+
+    <div class="wrap">
+        <div id="main_con">
+            <div id="nav_menu">
+                <div id="lnb">
+                    <h2 class="title">조력자등재신청</h2>
+                    <div class="menu">
+                        <ul>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재신청</a>
+                            </li>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재명단</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div id="contents">
+                <div class="heading-wrap container">
+                    <h3 class="heading1">
+                        <span>재판조력자 등재신청</span>
+                    </h3>
+                </div>
+
+                <div class="regInfo">
+                    <img src="../img/app/aplcnRegInfo.png">
+                </div>
+
+                <div class="table table-responsive" style="margin: 50px 0 50px 0">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">대분류</th>
+                            <th scope="col">중분류</th>
+                            <th scope="col">소분류</th>
+                            <th scope="col">작성일자</th>
+                            <th scope="col">진행상황</th>
+                            <th scope="col">신청</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+                            <td data-cell-header="번호">248</td>
+                            <td data-cell-header="대분류" tabindex="0"
+                                onkeypress="if(event.keyCode ==13){$(this).click()}"
+                                onclick="jsSamuDetail('TMP00000204')">
+                                통번역인
+                            </td>
+                            <td data-cell-header="중분류">통역</td>
+                            <td data-cell-header="소분류"> - </td>
+                            <td data-cell-header="작성일자">작성일자</td>
+                            <td>
+                                <p>진행중</p>
+                                <!--
+            <em>대기중</em>
+        <em>마감</em>
+        -->
+                            </td>
+                            <td onclick="event.stopPropagation();">
+                                <a href="../app/info" class="case case1"><em>신청</em></a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pager" style="margin-bottom: 60px">
+                    <div class="pager-wrap">
+                        <a href="#" class="arr first" title="처음으로"
+                           onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
+                            이동</strong></a><a href="#" class="arr prev" title="이전으로"
+                                              onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
+                        이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
+                                          onclick="">1</a><a href="#" class=""
+                                                             onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
+                                                                                                                   onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
+                                                                                                                                                                         onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
+                                                                                                                                                                                                                               onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
+                                                                                                                                                                                                                                                                                     onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
+                                                                                                                                                                                                                                                                                                                                           onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
+                                                                                                                                                                                                                                                                                                                                                                                                 onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
+                                                                                                                                                                                                                                                                                                                                                                                                                                                       onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             onclick="fn_egov_link_page(10); return false;">10</a><a href="#"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     class="arr next" title="다음으로"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     onclick="fn_egov_link_page(11); return false;"><strong class="sr-only">다음페이지로
+                        이동</strong></a><a href="#" class="arr last" title="마지막으로"
+                                          onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
+                        목록으로 이동</strong></a>
+
+                        <input id="pageIndex" name="pageIndex" type="hidden" value="1" />
+                        <input id="pageSize" name="pageSize" type="hidden" value="10" />
+                        <input id="pageUnit" name="pageUnit" type="hidden" value="10" />
+                        <input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
+                        <input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
+                        <input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
+                               value="" />
+                        <input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
+                        <input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</th:block>
+</html>
