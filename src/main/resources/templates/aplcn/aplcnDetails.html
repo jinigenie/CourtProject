@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<style>
+		.right-align {
+			text-align: right;
+		}
+	</style>
+
+	<div class="wrap">
+		<!-- main_con  -->
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">조력자 등재신청</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">조력자 등재신청</a></li>
+									<li><a href="#">조력자 등재목록</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
+								<ul class="sub" style="display: none;">
+									<li><a href="#">신청자 목록</a></li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div id="contents">
+
+				<style>
+					@media screen and (max-width: 1024px) {
+						.table-responsive>table>tbody>tr td[data-cell-header]:before {
+							width: 30%;
+							margin: 0 0 0 0;
+							vertical-align: unset;
+						}
+					}
+
+					.table-responsive>table>tbody>tr:hover {
+						background-color: #e6f8ff;
+					}
+
+					@media screen and (min-width: 1100px) {
+						#select-box-margin-left-10 {
+							margin-left: 6px;
+						}
+					}
+
+
+					.tbl-view .view-title {
+						background: rgb(245, 245, 245);
+						border-top: 2px solid rgb(211, 211, 211);
+						border-bottom: 1px solid rgb(211, 211, 211);
+						padding: 7px 20px;
+					}
+
+					.center-text {
+						text-align: center;
+					}
+
+					.tbl-view .view-title strong {
+						font-size: 1.3rem;
+						line-height: 1.5;
+						display: inline-block;
+					}
+
+					.tbl-view .view-title .date {
+						display: block;
+						text-align: right;
+					}
+
+
+					.transparent-input {
+						text-align: center;
+						width: 50%;
+					}
+
+					.point-insert {
+						text-align: right;
+					}
+
+					.case>span {
+						display: inline-block;
+						vertical-align: middle;
+						width: 77px;
+						height: 35px;
+						line-height: 35px;
+						background: #2065c6;
+						color: #fff;
+						font-size: 0.8rem;
+						text-align: center;
+						border-radius: 5px;
+					}
+
+					.aplcnDetails_btn {
+						display: flex;
+						justify-content: flex-end;
+					}
+
+					.aplcnDetails_btn a {
+						text-decoration: none;
+						padding: 10px;
+						background-color: #333;
+						color: white;
+						border: none;
+						cursor: pointer;
+					}
+
+					.details_btn2 a {
+						height: 35px;
+						width: 77px;
+						border: 1px solid #2065c6;
+						border-radius: 5px;
+						margin: 5px;
+						padding: 5px;
+						text-align: center;
+						display: inline-block;
+						background: #2065c6;
+					}
+
+					.table table-responsive>left-align {
+						text-align: left;
+						/* 텍스트를 왼쪽으로 정렬 */
+					}
+
+					.details_btn1 a {
+						height: 35px;
+						width: 77px;
+						border: 1px solid #2065c6;
+						border-radius: 5px;
+						margin: 5px;
+						padding: 5px;
+						text-align: center;
+						display: inline-block;
+						background: white;
+						color: black;
+					}
+
+					.aplcnDetails_btn {
+						margin-top: 20px;
+						text-align: center;
+					}
+					
+				</style>
+				<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+
+				<article id="detail-content">
+					<form id="listForm" name="listForm" action="" method="get">
+						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
+						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
+						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
+						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
+						<input type="hidden" id="cate_name" name="cate_name" value="" />
+						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
+						<div class="heading-wrap container">
+							<h3 class="heading1">
+								<span>홍길동님 상세 정보</span>
+							</h3>
+						</div>
+
+						<div class="contents">
+
+							<script type="text/javascript" src="/2017e/js/common/common_share_util.js"
+								charset="EUC-KR"></script>
+
+							<script type="text/javascript">
+								$(document).ready(function () {
+									Fn.TitleIcon.Call();
+								});
+							</script>
+
+							<!-- 게시판 시작 부분 -->
+							<div class="table table-responsive">
+								<table>
+									<caption></caption>
+									<colgroup>
+										<col style="width: 45%">
+										<col style="width: 55%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" colspan="5"><strong>중요 상세정보</strong></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+											<td data-cell-header="번호">소송사건 당사자 경력</td>
+											<td data-cell-header="민원서식명">5년
+											</td>
+										</tr>
+										<tr>
+											<td data-cell-header="점수">소송사건 당사자 경력 내용</td>
+											<td data-cell-header="민원서식명">OOO</td>
+											</td>
+										</tr>
+
+										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+											style="cursor: pointer">
+											<td data-cell-header="번호">보험업계 경력</td>
+											<td data-cell-header="민원서식명">3년
+											</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">보험업계 경력 내용</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td data-cell-header="번호">형사처벌 받은 경력</td>
+											<td data-cell-header="민원서식명">1년</td>
+											</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">형사처벌 받은 경력 내용</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="table table-responsive">
+								<table>
+									<caption></caption>
+									<colgroup>
+										<col style="width: 45%">
+										<col style="width: 55%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" colspan="5"><strong>학력 상세정보</strong></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+											<td data-cell-header="번호">학교 이름</td>
+											<td data-cell-header="민원서식명">서울대학교</td>
+										</tr>
+										<tr>
+											<td data-cell-header="점수">학과 전공</td>
+											<td data-cell-header="민원서식명">법학과</td>
+										</tr>
+
+										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+											style="cursor: pointer">
+											<td data-cell-header="번호">입학일</td>
+											<td data-cell-header="민원서식명">2009년 3월 15일</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">졸업일</td>
+											<td data-cell-header="민원서식명">2012년 3월 5일</td>
+										</tr>
+
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td data-cell-header="번호">학위</td>
+											<td data-cell-header="민원서식명">학사</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">최종학력 여부</td>
+											<td data-cell-header="민원서식명">졸업</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+							<div class="table table-responsive">
+								<table>
+									<caption></caption>
+									<colgroup>
+										<col style="width: 45%">
+										<col style="width: 55%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" colspan="5"><strong>자격증 상세정보</strong></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+											<td data-cell-header="번호">자격증 종목</td>
+											<td data-cell-header="민원서식명">국가자격증</td>
+										</tr>
+										<tr>
+											<td data-cell-header="점수">자격증 명</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+
+										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+											style="cursor: pointer">
+											<td data-cell-header="번호">발급 기관</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">법무부</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td data-cell-header="번호">자격증/면허번호</td>
+											<td data-cell-header="민원서식명">123456789</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">발급일</td>
+											<td data-cell-header="민원서식명">2016년 9월 9일</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+							<div class="table table-responsive">
+								<table>
+									<caption></caption>
+									<colgroup>
+										<col style="width: 45%">
+										<col style="width: 55%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" colspan="5"><strong>경력 상세정보</strong></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+											<td data-cell-header="번호">회사명/활동기관명</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+										<tr>
+											<td data-cell-header="점수">경력 구분</td>
+											<td data-cell-header="민원서식명">4년</td>
+										</tr>
+
+										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+											style="cursor: pointer">
+											<td data-cell-header="번호">근무 시작 일자</td>
+											<td data-cell-header="민원서식명">2019년 5월 1일</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">근무 종료 일자</td>
+											<td data-cell-header="민원서식명">2023년 5월 6일</td>
+										</tr>
+
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td data-cell-header="번호">부서</td>
+											<td data-cell-header="민원서식명">OOO</td>
+										</tr>
+										<tr>
+											<td data-cell-header="담당법원">직책</td>
+											<td data-cell-header="민원서식명">과장</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<div class="table table-responsive">
+									<colgroup>
+										<col style="width: 20%">
+										<col style="width: 80%">
+									</colgroup>
+
+									<table>
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td>
+											<td data-cell-header="번호" style="width: 250px">수행업무</td>
+											<td rows="4" cols="50" style="width: 800px; height: 100px;"
+												class="left-align">안녕하세요.</td>
+											</td>
+										</tr>
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td>
+											<td data-cell-header="번호">활동 경력 설명</t>
+											<td rows="4" cols="50" style="width: 800px; height: 100px;">안녕하세요.</td>
+											</td>
+										</tr>
+										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+											<td>
+											<td data-cell-header="번호">특기사항</td>
+											<td rows="4" cols="50" style="width: 800px; height: 100px;">안녕하세요.</td>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div class="aplcnDetails_btn">
+									<button type="button" class="details_btn1"><a
+											href="http://localhost:8585/aplcn/aplcnResult">목록으로</a></button>
+									<button type="button" class="details_btn2"><a
+											href="http://localhost:8585/aplcn/aplcnEvaluate">평가하기</a></button>
+								</div>
+
+							</div>
+						</div>
+					</form>
+				</article>
+			</div>
+		</div>
+		<!-- //main_con  -->
+	</div>
+
+</th:block>
+
+</html>
