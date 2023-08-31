@@ -35,9 +35,6 @@ function closePop2() {
 }
 
 /*//--------------------------pause List-----------------------//*/
-function pauseOpen(){
-	document.getElementById("pause_text2").style.display = "block";
-}
 
 document.addEventListener("DOMContentLoaded", function() {
   var toggleRows = document.querySelectorAll(".toggle-row");

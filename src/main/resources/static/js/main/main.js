@@ -61,7 +61,7 @@ $(function() {
 /*------------------*/
 
     // 스와이퍼 초기화
-    var mySwiper = new Swiper('.mySwiper', {
+    var mySwiper = new mySwiper('.mySwiper', {
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
