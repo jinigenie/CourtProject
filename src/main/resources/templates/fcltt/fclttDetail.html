@@ -1,238 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
-<script th:src="@{../js/fcltt/fcltt.js}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
-	<div class="wrap">
-		<div id="main_con">
-			<div id="nav_menu">
-				<div id="lnb">
-					<h2 class="title">조력자확인</h2>
-					<div class="menu">
-						<ul>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
-							</li>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재명단</a>
-							</li>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 활동신청관리</a>
-							</li>
 
-						</ul>
-					</div>
+		<div class="wrap">
+			<!-- main_con  -->
+			<div id="main_con">
+				<div id="nav_menu">
+					<div id="lnb">
+						<h2 class="title">공지사항</h2>
+						<div class="menu">
+							<ul>
+								<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
+									<ul class="sub" style="display: none;">
+										<li><a href="#">모집공고 등록</a></li>
+										<li><a href="#">모집공고 목록</a></li>
+									</ul>
+								</li>
+								<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
+									<ul class="sub" style="display: none;">
+										<li><a href="#">공지사항 등록</a></li>
+										<li><a href="#">공지사항 목록</a></li>
+									</ul>
+								</li>
+								<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
+									<ul class="sub" style="display: none;">
+										<li><a href="#">FAQ 등록</a></li>
+										<li><a href="#">FAQ 목록</a></li>
+									</ul>
+								</li>
 
-				</div>
-			</div>
-
-
-
-			<div id="popup_layer2">
-				<div class="popup_box2">
-					<!--팝업 컨텐츠 영역-->
-					<div class="popup_cont2">
-						<div class="popup_contText">
-							<h3> 재판조력자</h3>
-							<h2>박인욱님</h2>
-							<h3>상세정보</h3>
+							</ul>
 						</div>
-						<div class="fclttDetail_wrap">
-							<div class="table1 table-responsive">
-								<table>
-									<colgroup>
-										<col style="width: 30%">
-										<col style="width: 70%">
-									</colgroup>
-									<tbody>
-										<tr>
-											<th scope="row" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left" title="">재판조력자분류</span>
-											</th>
-											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left">통번역인 > 번역인</span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left" title="">신청법원</span>
-											</th>
-											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left">서울 > 서초법원</span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left" title="">소송사건 유무내역</span>
-											</th>
-											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left"> </span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left" title="">보험업계 내역</span>
-											</th>
-											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left"> </span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left" title="">형사처벌 내역</span>
-											</th>
-											<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-												<span class="fclttSpan txt-left"> </span>
-											</td>
-										</tr>
-										
-									</tbody>
-								</table>
-							</div>
-							<div class="table2 table-responsive">
-								
-								<table class="table3 table-responsive">
-									<colgroup>
-										<col style="width: 30%">
-										<col style="width: 70%">
-									</colgroup>
-
-									<tbody>
-										
-										<tr style="border-top: 1px solid #888;">
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan_title txt-left" title="">학력 상세 정보</span>
-											</th>
-											
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">학교이름</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">학과전공</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">학위</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-									
-
-										<tr style="border-top: 1px solid #888;;">
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan_title txt-left" title="" > 경력 상세 정보</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">경력구분</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr style="border-top: 1px solid #888;">
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan_title txt-left" title="" > 자격증 상세 정보</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">자격증명2</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">자격증명3</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row" class="txt-left">
-												<span class="fclttSpan1 txt-left" title="txt-left">자격증명4</span>
-											</th>
-											<td data-cell-header="성명" class="txt-left">
-												<span class="fclttSpan2 txt-left"></span>
-											</td>
-										</tr>
-	
-
-									</tbody>
-								</table>
-
-
-
-
-							</div>
-						</div>
-
 
 					</div>
-											<!--팝업 버튼 영역-->
-						<div class="popup_btn2">
-							<!--하루동안 보지않기-->
-							<!--<a id="chk_today2" href="javascript:closeToday2();" class="close_day2">하루동안 열지 않기</a>-->
-							<!--7일간 보지않기-->
-							<!-- <a id="chk_today2" href="javascript:closeToday2();" class="close_day2">Do not open for 7 days</a>-->
-							<a href="javascript:closePop2();">닫기</a>
-						</div>
 				</div>
+				<div id="contents">
 
+					<style>
+						@media screen and (max-width: 1024px) {
+							.table-responsive>table>tbody>tr td[data-cell-header]:before {
+								width: 30%;
+								margin: 0 0 0 0;
+								vertical-align: unset;
+							}
+						}
 
+						.table-responsive>table>tbody>tr:hover {
+							background-color: #e6f8ff;
+						}
 
+						@media screen and (min-width: 1100px) {
+							#select-box-margin-left-10 {
+								margin-left: 6px;
+							}
+						}
+					</style>
+				</div>
 			</div>
-
 		</div>
 
-
-
-
-</th:block>
+	</th:block>
 
 </html>

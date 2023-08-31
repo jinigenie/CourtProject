@@ -8,16 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 public class MainController {
 
+	// 메인화면
 	@GetMapping("/")
 	public String main() {
 		
 		return "/main/mainPage";
 	}
 	
-	@GetMapping("/modal")
-	public String modal() {
-		
-		return "/main/recentAnnouncement";
-	}
+
 	
 }

@@ -1609,3 +1609,61 @@ a.filedownload::after {
 #wrap .c_result {
 	color: #008763;
 }
+
+.faq_btn{
+	margin-top: 20px;
+	text-align: center;
+	}
+.faq_btn > button{
+	height: 50px;
+	width: 150px;
+	border: 1px solid #2065c6;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 10px;
+	
+}
+
+.faq_btn > button:hover{
+		color: white;
+		background-color: #2065c6;
+}
+
+.faq_modify_btn1{
+	margin-left: 30px;
+	padding-left: 15px;
+	display: inline;
+	text-align: center;
+	border: 1px solid #2065c6;
+	height: 30px;
+	width: 60px;
+	border-radius: 5px;
+}
+
+.faq_modify_btn2{
+	padding-left: 15px;
+	display: inline;
+	text-align: center;
+	border: 1px solid #2065c6;
+	height: 30px;
+	width: 60px;
+	border-radius: 5px;
+	
+}
+
+.faq_modify_btn1:hover{
+		color: white;
+		background-color: #2065c6;
+}
+.faq_modify_btn2:hover{
+		color: white;
+		background-color: #2065c6;
+}
+
+
+
+
+
+
+
+

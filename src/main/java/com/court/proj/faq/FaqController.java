@@ -8,23 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/faq")
 public class FaqController {
 
+	
+	// FAQ 리스트
 	@GetMapping("/list")
 	public String list() {
 		
 		return "/faq/faqList";
 	}
 	
-	@GetMapping("/detail")
+	// FAQ 작성/수정
+	@GetMapping("/regist")
 	public String detail() {
 		
-		return "/faq/faqDetail";
+		return "/faq/faqRegist";
 	}
 	
-	@GetMapping("/modify")
-	public String modify() {
-		
-		return "/faq/faqModify";
-	}
+
 	
 	
 }

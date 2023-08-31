@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/fcltt")	
 public class FclttController {
 	
+	// 등재명단
 	@GetMapping("/fclttList")
 	public String fclttList() {
 		
 		return "fcltt/fclttList";
 	}
+	
+	
 	@GetMapping("/fclttDetail")
 	public String fclttDetail() {
 		

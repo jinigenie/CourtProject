@@ -570,7 +570,7 @@ swiper-slide {
 .main_slid_notice .notice_lists li{ height: 100%;}
 .main_slid_notice .notice_lists li a{ margin-left: 20px;}
 .main_slid_notice .notice_lists li:first-child { margin-left: 0;}
-	.main_slid_notice .notice_lists li a { display: block; position: relative; min-height: 320px; padding: 25px; border: 1px solid #ccc; background-color: #fff; border-radius: 30px;}
+	.main_slid_notice .notice_lists li a { display: block; position: relative; min-height: 320px; padding: 40px; border: 1px solid #ccc; background-color: #fff; border-radius: 30px;}
 .main_slid_notice .notice_lists li a .div { display: inline-block; width: 90px; padding: 5px 2px; font-size: 0.875rem; color: #fff; text-align: center; background-color: #707070; border-radius: 12px;}
 .main_slid_notice .notice_lists li a .new { display: inline-block; position: absolute; left: 106px; top: 22px; font-size: 14px; font-weight: 700; color: #bb4f1a;}
 .main_slid_notice .notice_lists li a dl  { margin-top: 25px;}
@@ -765,3 +765,30 @@ swiper-slide {
 	;
 	background: rgba(0, 0, 0, 0.5);
 }
+
+
+
+/*위로 가기 버튼*/
+
+      #topButton {
+		  height: 40px;
+		  width: 50px;
+            display: none;
+            position: fixed;
+            bottom: 50%;
+            right: 50%x;
+            z-index:1010;
+            font-size: 25px;
+            border: none;
+            outline: none;
+            background-color: #4b63c3;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 4px;
+            
+        }
+
+        #topButton:hover {
+            background-color: #333;
+        }

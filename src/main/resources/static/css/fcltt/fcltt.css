@@ -1,4 +1,5 @@
 
+
 /* ------------------조력자 등재 page  fclttRegist --------------------*/
 
 
@@ -211,145 +212,6 @@
 
 /* ----------------------------------------------------------------------*/
 
-/* ---------- 상세내역 모달창 ----------------------------------------------*/
-#popup_layer2 {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 10000;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.4);
-	overflow: hidden;
-	display: none;
-}
-
-
-/*팝업 박스*/
-.popup_box2 {
-	position: relative;
-	top: 50%;
-	left: 50%;
-	width: 700px;
-	height: 600px;
-	transform: translate(-50%, -50%);
-	z-index: 1002;
-	box-sizing: border-box;
-	background: #fff;
-	box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-	-webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-	-moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
-}
-
-/*컨텐츠 영역*/
-.popup_box2 .popup_cont2 {
-	padding: 50px;
-	line-height: 1.4rem;
-	font-size: 14px;
-	word-break: break-word;
-    overflow: auto; /* 컨텐츠가 모달을 벗어나면 스크롤 표시 */
-    max-height: 600px; 
-}
-.popup_contText{
-	margin-bottom: 20px;
-	margin :0 auto;
-	
-}
-.popup_contText >h3, h2 {
-	padding: 15px;
-	float: left;
-	display: block;
-	color: #5d5d5d;
-}
-
-
-.popup_box2 .popup_cont2 h2 {
-	padding: 15px 0;
-	color: #333;
-	margin: 0;
-}
-
- .popup_ptag {
-	border-top: 1px solid #666;
-
-}
-
-/*버튼영역*/
-.popup_box2 .popup_btn2 {
-	display: table;
-	table-layout: fixed;
-	width: 100%;
-	height: 30px;
-	background: #5d5d5d;
-	word-break: break-word;
-	z-index: 1005;
-}
-
-.popup_box2 .popup_btn2 a {
-	position: relative;
-	display: table-cell;
-	height: 70px;
-	color: #fff;
-	font-size: 17px;
-	text-align: center;
-	vertical-align: middle;
-	text-decoration: none;
-	background: #102c5c;
-}
-
-.popup_box2 .popup_btn2 a:before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 26px;
-	right: 29px;
-	width: 1px;
-	height: 21px;
-	background: #fff;
-	-moz-transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
-	-ms-transform: rotate(-45deg);
-	-o-transform: rotate(-45deg);
-	transform: rotate(-45deg);
-}
-
-.popup_box2 .popup_btn2 a:after {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 26px;
-	right: 29px;
-	width: 1px;
-	height: 21px;
-	background: #fff;
-	-moz-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	transform: rotate(45deg);
-}
-
-.popup_box2 .popup_btn2 a.close_day2 {
-	background: #5d5d5d;
-}
-
-.popup_box2 .popup_btn2 a.close_day2:before,
-.popup_box2 .popup_btn2 a.close_day2:after {
-	display: none;
-}
-
-/*오버레이 뒷배경*/
-.popup_overlay2 {
-	position: fixed;
-	top: 0px;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	z-index: 1001;
-	;
-	background: rgba(0, 0, 0, 0.5);
-}
-/* ----------------------------------------------------------------------*/
 
 /* ------------------- pause --------------------------------------------------------*/
 
@@ -397,6 +259,27 @@
 
 
 
+/* lnb. s. 2021.02.03 수정 */
+#lnb {position:relative;display:inline-block;width:220px; min-height: 600px; float:left; padding-top:40px;}
+#lnb>.title {min-height:40px; font-family:"Nanum Gothic"; font-size:24px;line-height: 1.4;color:#13548a;margin:0; padding:0; border-bottom:2px solid #13548a;}
+#lnb>.menu {margin-bottom:50px;}
+#lnb>.menu a {display:block;font-family:"Nanum Gothic";}
+#lnb>.menu a:hover{text-decoration:none;}
+#lnb>.menu>ul>li {border-bottom:1px solid #e8e9ee;}
+#lnb>.menu>ul>li>a {padding: 8px 0; font-size:16px; color:#525252; letter-spacing: -1px;}
+#lnb>.menu>ul>li.line2>a {line-height: 20px; padding: 5px;}
+#lnb>.menu>ul>li>a:hover {font-size:16px;color:#06C; font-weight:bold;}
+#lnb>.menu>ul>li.on>a {font-size:16px;color:#1c449c; font-weight:bold;}
+
+#lnb > .menu > ul > li > .sub {display: none; background-color:#f6f6f6;}
+#lnb>.menu>ul>li>.sub>li>a {padding: 8px 0 8px 8px; color:#666;}
+#lnb>.menu>ul>li>.sub>li>a:hover {color:#fff;background-color:#06C;}
+#lnb>.menu>ul>li>.sub>li.on>a {color:#fff;background-color:#06C;}
+
+#lnb > .menu > ul > li.has-sub > a {background: url(#) no-repeat right 10px top 50%;}
+#lnb > .menu > ul > li.has-sub.on > a {border-bottom: 1px solid #1c449c; color: #333; font-weight: 700; background: url('/ei/images/common/arrow-fold.png') no-repeat right 10px top 50%; transition: all 0.3s;}
+#lnb > .menu > ul > li .sub a {font-weight: 400; font-size: 16px; letter-spacing: -1px;}
+/* lnb. e. */
 
 
 
