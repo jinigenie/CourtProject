@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/mypage/mypage.css}"/>
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+  <div class="wrap">
+    <!-- main_con  -->
+    <div id="main_con">
+      <div id="nav_menu">
+        <div id="lnb">
+          <h2 class="title">Mypage</h2>
+          <div class="menu">
+            <ul>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 정보관리</a>
+              </li>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 신청현황</a>
+              </li>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
+              </li>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지/해제신청관리</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div id="contents">
+
+          <style>
+        @media screen and (max-width: 1024px) {
+          .table-responsive > table > tbody > tr td[data-cell-header]:before {
+            width: 30%;
+            margin: 0 0 0 0;
+            vertical-align: unset;
+          }
+        }
+        .table-responsive > table > tbody > tr:hover {
+          background-color: #e6f8ff;
+        }
+        @media screen and (min-width: 1100px) {
+          #select-box-margin-left-10 {
+            margin-left: 6px;
+          }
+        }
+      </style>
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+
+      <article id="detail-content">
+        <form
+          id="listForm"
+          name="listForm"
+          action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
+          method="post"
+        >
+          <input
+            type="hidden"
+            id="cd_appeal_form"
+            name="cd_appeal_form"
+            value="ALL"
+          />
+          <input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
+          <input
+            type="hidden"
+            id="srch_cd_appeal_form"
+            name="srch_cd_appeal_form"
+            value=""
+          />
+          <input
+            type="hidden"
+            id="search_capp_biz_cd"
+            name="search_capp_biz_cd"
+            value=""
+          />
+          <input type="hidden" id="cate_name" name="cate_name" value="" />
+          <input
+            type="hidden"
+            id="sub_cate_name"
+            name="sub_cate_name"
+            value=""
+          />
+          <div class="heading-wrap container">
+            <h3 class="heading1">
+              <span>나의 정보 관리</span>
+            </h3>
+          </div>
+
+          <!-- 본문컨텐츠 영역 -->
+          <div class="container">
+          
+          	<article id="detail-content">
+<div class="container">
+
+	<form name="form1" method="post">
+	<input type="hidden" name="workName" value="Q">
+	 
+	<input type="hidden" name="cvl_seq" value="0">
+
+  <div class="box box1">
+    <p>기록하신 개인정보는 개인정보보호법에 의거 철저하게 보호됩니다.</p>
+  </div>
+
+  <h4 class="heading2">회원정보 변경 및 탈퇴</h4>
+
+  <div class="table table-responsive">
+    <table>
+      <caption>회원정보입력 - 아이디, 성명, 성별, 전화번호, 휴대폰번호, 이메일주소, 수신여부 확인, 주소의 대한정보의 입력폼 제공</caption>
+
+      <colgroup>
+        <col style="width:30%;">
+        <col style="width:70%;">
+      </colgroup>
+      <tbody>
+        <tr>
+          <th scope="row" class="txt-left">
+            <label for="cvl_id">아이디</label>
+          </th>
+          <td data-cell-header="아이디" class="txt-left">
+               <span id="cvl_id">sis6710</span>
+               
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="txt-left">
+            <span>성명</span>
+          </th>
+          <td data-cell-header="성명" class="txt-left">
+          	<span id="cvl_nm">석이서</span>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row" class="txt-left">
+            <span>비밀번호</span>
+          </th>
+          <td data-cell-header="전화번호" class="txt-left">
+          	<input type="password"/>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="txt-left">
+            <span>휴대폰번호</span>
+          </th>
+          <td data-cell-header="휴대폰번호" class="txt-left">
+			<span id="cvl_cel">010-3937-6448</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="txt-left">
+            <span>이메일</span>
+          </th>
+          <td data-cell-header="이메일" class="txt-left">
+            <span id="cvl_mail">yuyu659@naver.com</span>
+          </td>
+        </tr>
+       
+        <tr>
+          <th scope="row" class="border-none txt-left">
+            <label for="address1">주소</label>
+          </th>
+          <td data-cell-header="주소" class="txt-left">
+            <span id="cvl_zip_addr">[ 08856 ] 서울특별시 관악구 난곡로24다길 30 (신림동) 102호</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="btn-wrap txt-center">
+    <div class="btn-style-wrap btn-style-wrap2">
+      <a href="javascript:jsMemberUpdate();" class="btn-style btn-style39 btn-style-icon-none">
+        <span>회원정보 변경</span>
+      </a>
+    </div>
+    <div class="btn-style-wrap btn-style-wrap1" >
+      <a href="javascript:jsMemberDelete();" class="btn-style btn-style39 btn-style-icon-none" style="background-color: #8c8c8c; border: #8c8c8c;">
+        <span>회원탈퇴</span>
+      </a>
+    </div>
+  </div>
+</form></div>
+</article>
+          
+          
+          </div>
+          <!-- //본문컨텐츠 영역 -->
+        </form>
+      </article>
+    </div>
+    </div>
+    <!-- //main_con  -->
+  </div>
+
+</th:block>
+</html>
