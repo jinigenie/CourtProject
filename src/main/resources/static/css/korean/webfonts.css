@@ -9,81 +9,36 @@
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 100;
-  src: url(../../font/NotoKR/NotoSans-Thin.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-Thin.eot?#iefix) format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-Thin.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-Thin.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-Thin.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 200;
-  src: url(../../font/NotoKR/NotoSans-Light.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-Light.eot?#iefix) format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-Light.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-Light.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-Light.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 300;
-  src: url(../../font/NotoKR/NotoSans-DemiLight.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-DemiLight.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-DemiLight.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-DemiLight.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-DemiLight.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 400;
-  src: url(../../font/NotoKR/NotoSans-Regular.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-Regular.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-Regular.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-Regular.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
-  src: url(../../font/NotoKR/NotoSans-Medium.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-Medium.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-Medium.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-Medium.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-Medium.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
-  src: url(../../font/NotoKR/NotoSans-Bold.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-Bold.eot?#iefix) format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-Bold.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-Bold.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-Bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 900;
-  src: url(../../font/NotoKR/NotoSans-Black.eot);
-  src: local('Noto Sans CJK KR Thin'),
-    url(../../font/NotoKR/NotoSans-Black.eot?#iefix) format('embedded-opentype'),
-    url(../../font/NotoKR/NotoSans-Black.woff2) format('woff2'),
-    url(../../font/NotoKR/NotoSans-Black.woff) format('woff'),
-    url(../../font/NotoKR/NotoSans-Black.ttf) format('truetype');
 }
 
 /*
@@ -93,12 +48,6 @@
   font-family: 'DXPnM';
   font-style: normal;
   font-weight: 400;
-  src: url(../../font/DXPnM/DXPnM-KSCpc-EUC-H.eot);
-  src: local('※'),
-    url(../../font/DXPnM/DXPnM-KSCpc-EUC-H.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/DXPnM/DXPnM-KSCpc-EUC-H.woff) format('woff'),
-    url(../../font/DXPnM/DXPnM-KSCpc-EUC-H.ttf) format('truetype');
 }
 
 /*
@@ -108,100 +57,46 @@
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 100;
-  src: url(../../font/SCDream/S-CoreDream-1Thin.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-1Thin.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-1Thin.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-1Thin.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 200;
-  src: url(../../font/SCDream/S-CoreDream-2ExtraLight.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-2ExtraLight.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-2ExtraLight.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-2ExtraLight.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 300;
-  src: url(../../font/SCDream/S-CoreDream-3Light.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-3Light.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-3Light.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-3Light.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 400;
-  src: url(../../font/SCDream/S-CoreDream-4Regular.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-4Regular.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-4Regular.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-4Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 500;
-  src: url(../../font/SCDream/S-CoreDream-5Medium.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-5Medium.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-5Medium.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-5Medium.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 600;
-  src: url(../../font/SCDream/S-CoreDream-6Bold.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-6Bold.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-6Bold.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-6Bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 700;
-  src: url(../../font/SCDream/S-CoreDream-7ExtraBold.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-7ExtraBold.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-7ExtraBold.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-7ExtraBold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 800;
-  src: url(../../font/SCDream/S-CoreDream-8Heavy.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-8Heavy.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-8Heavy.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-8Heavy.ttf) format('truetype');
 }
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
   font-weight: 900;
-  src: url(../../font/SCDream/S-CoreDream-9Black.eot);
-  src: local('※'),
-    url(../../font/SCDream/S-CoreDream-9Black.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/SCDream/S-CoreDream-9Black.woff) format('woff'),
-    url(../../font/SCDream/S-CoreDream-9Black.ttf) format('truetype');
 }
 
 /*
@@ -211,98 +106,44 @@
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 100;
-  src: url(../../font/Montserrat/Montserrat-Thin.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-Thin.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-Thin.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-Thin.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 200;
-  src: url(../../font/Montserrat/Montserrat-ExtraLight.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-ExtraLight.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-ExtraLight.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-ExtraLight.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 300;
-  src: url(../../font/Montserrat/Montserrat-Light.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-Light.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-Light.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-Light.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  src: url(../../font/Montserrat/Montserrat-Regular.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-Regular.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-Regular.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
-  src: url(../../font/Montserrat/Montserrat-Medium.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-Medium.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-Medium.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-Medium.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
-  src: url(../../font/Montserrat/Montserrat-SemiBold.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-SemiBold.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-SemiBold.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-SemiBold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
-  src: url(../../font/Montserrat/Montserrat-Bold.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-Bold.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-Bold.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-Bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 800;
-  src: url(../../font/Montserrat/Montserrat-ExtraBold.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-ExtraBold.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-ExtraBold.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-ExtraBold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 900;
-  src: url(../../font/Montserrat/Montserrat-Bold.eot);
-  src: local('※'),
-    url(../../font/Montserrat/Montserrat-Bold.eot?#iefix)
-      format('embedded-opentype'),
-    url(../../font/Montserrat/Montserrat-Bold.woff) format('woff'),
-    url(../../font/Montserrat/Montserrat-Bold.ttf) format('truetype');
 }

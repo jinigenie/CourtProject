@@ -48,7 +48,7 @@
                         <label for="selectEdu"></label>
                         <select class="info-select" id="selectEdu">
                             <option value="">선택</option>
-                            <option value="a">학사</option>
+                            <option value="학사">학사</option>
                             <option value="석사">석사</option>
                             <option value="박사">박사</option>
                             <option value="전문">전문학사</option>
@@ -75,11 +75,13 @@
                             </thead>
                             <tbody>
                             <tr style="cursor: pointer">
-                                <td data-cell-header="학교명"><input type="text" class="input-wrap"></td>
+                                <td data-cell-header="학교명"><input type="text" class="input-wrap"
+                                                                  style="margin-left: 40px"></td>
                                 <td data-cell-header="졸업구분">
                                     <div class="select-box">
 
-                                        <label>선택</label><select class="info-select" id="selectState" name="search_field">
+                                        <label>선택</label><select class="info-select" id="selectState"
+                                                                 name="search_field">
                                         <option value="">선택</option>
                                         <option value="">졸업</option>
                                         <option value="">중퇴</option>
@@ -88,9 +90,19 @@
                                     </select>
                                     </div>
                                 </td>
-                                <td data-cell-header="입학일"><input type="text" class="input-wrap" style="width: 150px">
+                                <td data-cell-header="입학일">
+                                    <div class="calander-box" style="padding: 0">
+                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                               name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+                                    </div>
                                 </td>
-                                <td data-cell-header="졸업일"><input type="text" class="input-wrap" style="width: 150px">
+                                <td data-cell-header="졸업일">
+                                    <div class="calander-box" style="padding: 0; margin-right: 40px">
+                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                               name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -117,16 +129,17 @@
                                 <th scope="col">졸업구분</th>
                                 <th scope="col">입학일</th>
                                 <th scope="col">졸업일</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="eduTable">
                             <tr style="cursor: pointer">
                                 <td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">
                                 </td>
                                 <td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">
                                 </td>
                                 <td data-cell-header="학위">
-                                    <div class="select-box2" style="width: 100px">
+                                    <div class="select-box2" style="width: 90px">
                                         <label for="selectEdu2"></label>
                                         <select class="info-select" id="selectEdu2" name="search_field">
                                             <option value="">선택</option>
@@ -138,7 +151,7 @@
                                     </div>
                                 </td>
                                 <td data-cell-header="졸업구분">
-                                    <div class="select-box2">
+                                    <div class="select-box2" style="width: 90px">
                                         <label for="selectState2"></label>
                                         <select class="info-select" id="selectState2"
                                                 name="search_field" title="검색조건을 선택해주세요.">
@@ -150,9 +163,22 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td data-cell-header="입학일"><input type="text" class="input-wrap" style="width: 140px">
+                                <td data-cell-header="입학일">
+                                    <div class="calander-box" style="padding: 0">
+                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                               name="startDate" value="" style="width: 130px; height: 40px; border-radius: 0;
+                                           background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>
+                                    </div>
                                 </td>
-                                <td data-cell-header="졸업일"><input type="text" class="input-wrap" style="width: 140px">
+                                <td data-cell-header="졸업일">
+                                    <div class="calander-box" style="padding: 0">
+                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                               name="endDate" value="" style="width: 130px; height: 40px; border-radius: 0;
+                                           background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>
+                                    </div>
+                                </td>
+                                <td style="padding: 0.5rem 0">
+                                    <button class="case case1 deleteInfo" style="visibility: hidden">지우기</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -172,23 +198,30 @@
                     <table>
                         <thead>
                         <tr>
-                            <th scope="col">회사/활동기관명</th>
-                            <th scope="col">부서</th>
-                            <th scope="col">직책</th>
-                            <th scope="col">근무시작일자</th>
-                            <th scope="col">근무종료일자</th>
-                            <th scope="col">업무내용</th>
+                            <th scope="col">자격증 종목</th>
+                            <th scope="col">발급기관</th>
+                            <th scope="col">자격증/면허번호</th>
+                            <th scope="col">발급일</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="certiTable">
                         <tr style="cursor: pointer">
-                            <td data-cell-header="회사"><input type="text" class="input-wrap"></td>
-                            <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px"></td>
-                            <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 100px"></td>
-                            <td data-cell-header="근무시작"><input type="text" class="input-wrap" style="width: 150px"></td>
-                            <td data-cell-header="근무종료"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td data-cell-header="종목"><input type="text" class="input-wrap"
+                                                             style="width: 180px; margin-left: 30px"></td>
+                            <td data-cell-header="기관"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td data-cell-header="면허번호"><input type="text" class="input-wrap" style="width: 150px"></td>
+                            <td data-cell-header="발급일">
+                                <div class="calander-box" style="padding: 0">
+                                    <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                           name="issueDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+                                </div>
+                            </td>
                             <td>
-                                <button class="case case1 careerInfo"><em>작성</em></button>
+                                <button class="case case1 deleteInfo" style="margin-right: 30px; visibility: hidden">
+                                    지우기
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -196,16 +229,44 @@
                 </div>
 
                 <div class="btn-holder">
-                    <button class="btn btn-2 hover-opacity" onclick="location.href='/app/career'">
+                    <button class="btn btn-2 hover-opacity prev_btn">
                         <span>◀ 이전 단계</span>
                     </button>
 
                     <em style="padding-top: 15px"> 3 / 4</em>
 
-                    <button class="btn btn-2 hover-opacity">
+                    <button class="btn btn-2 hover-opacity next_btn">
                         <span>다음 단계 ▶</span>
                     </button>
 
+                </div>
+
+                <div class="modal">
+                    <div class="modal__background">
+                        <div class="modal_body2">
+                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                     style="outline: none;" tabindex="-1">
+                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1></div>
+                                    <div class="dmui_dialog_body" tabindex="0">
+                                        <div class="saveIcon">
+                                            <img src="../img/app/saveicon.png">
+                                        </div>
+                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                            <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
+                                                <br>변경된 내용은 반영되지 않습니다.</strong></p>
+                                        </div>
+                                        <p><strong>저장하시겠습니까?</strong></p>
+                                    </div>
+                                </div>
+                                <div class="dmui_dialog_footer">
+                                    <span><button class="dmui_dialog_footer_btn save">저장</button></span>
+                                    <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                </div>
+                                <div class="dmui_dialog_btn"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -217,22 +278,147 @@
 
 </th:block>
 
+<!-- 학력 선택에 따라 테이블 보이기 -->
 <script>
-
 
     $("#selectEdu").change(function () {
         let state = $("#selectEdu option:selected").val();
         if (state == "" || state == null) {
             $(".university").hide();
             $(".highschool").hide();
-        } else if(state == "고졸") {
+        } else if (state == "고졸") {
             $(".university").hide();
             $(".highschool").show();
-        } else{
+        } else {
             $(".highschool").show();
             $(".university").show();
         }
     });
+
+</script>
+
+<!-- 자격증 추가하기 -->
+<script>
+
+    $('#certAddBtn').click(function () {
+        var addtr = '<tr style="cursor: pointer">';
+        addtr += '<td data-cell-header="종목"><input type="text" class="input-wrap" style="width: 180px; margin-left: 30px"></td>';
+        addtr += '<td data-cell-header="기관"><input type="text" class="input-wrap" style="width: 150px"></td>';
+        addtr += '<td data-cell-header="면허번호"><input type="text" class="input-wrap" style="width: 150px"></td>';
+        addtr += '<td data-cell-header="발급일">';
+        addtr += '<div class="calander-box" style="padding: 0">';
+        addtr += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
+        addtr += 'name="issueDate" value="" style="width: 150px; height: 40px; border-radius: 0;';
+        addtr += 'background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>';
+        addtr += '</div>';
+        addtr += '</td>';
+        addtr += '<td>';
+        addtr += '<button class="case case1" onclick="deleteLine(this);" style="margin-right: 30px">지우기</button>';
+        addtr += '</td></tr>';
+        addtr += '</tr>';
+
+        $('#certiTable').append(addtr);
+
+    });
+
+    function deleteLine(obj) {
+        var tr = $(obj).parent().parent();
+        tr.remove();
+    }
+</script>
+
+<!-- 학력 추가하기 -->
+<script>
+
+    $('#eduAddBtn').click(function () {
+        var addtr2 = '<tr style="cursor: pointer">';
+        addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">';
+        addtr2 += '</td>';
+        addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">';
+        addtr2 += '</td>';
+        addtr2 += '<td data-cell-header="학위">';
+        addtr2 += '<div class="select-box2" style="width: 90px">';
+        addtr2 += '<label for="selectEdu3"></label>';
+        addtr2 += '<select class="info-select" id="searchEdu3" name="search_field">';
+        addtr2 += '<option value="">선택</option>';
+        addtr2 += '<option value="">학사</option>';
+        addtr2 += '<option value="">석사</option>';
+        addtr2 += '<option value="">박사</option>';
+        addtr2 += '<option value="">전문학사</option>';
+        addtr2 += '</select>';
+        addtr2 += '</div>';
+        addtr2 += '</td>';
+        addtr2 += '<td data-cell-header="졸업구분">';
+        addtr2 += '<div class="select-box2" style="width: 90px">';
+        addtr2 += '<label for="selectState2"></label>';
+        addtr2 += '<select class="info-select" name="search_field" title="검색조건을 선택해주세요.">';
+        addtr2 += '<option value="" selected="selected">선택</option>';
+        addtr2 += '<option value="">졸업</option>';
+        addtr2 += '<option value="">졸업예정</option>';
+        addtr2 += '<option value="">수료</option>';
+        addtr2 += '<option value="">중퇴</option>';
+        addtr2 += '</select></div></td>';
+        addtr2 += '<td data-cell-header="입학일">';
+        addtr2 += '<div class="calander-box" style="padding: 0">';
+        addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
+        addtr2 += 'name="startDate" value="" style="width: 130px; height: 40px; border-radius: 0; background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
+        addtr2 += '</div></td>';
+        addtr2 += '<td data-cell-header="졸업일">';
+        addtr2 += '<div class="calander-box" style="padding: 0">';
+        addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate" value=""';
+        addtr2 += 'style="width: 130px; height: 40px; border-radius: 0;background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
+        addtr2 += '</div></td>';
+        addtr2 += '<td style="padding: 0.5rem 0">';
+        addtr2 += '<button class="case case1 deleteInfo" onclick="deleteLine(this)">지우기</button>';
+        addtr2 += '</td>';
+        addtr2 += '</tr>';
+
+        $('#eduTable').append(addtr2);
+
+    });
+
+    function deleteLine(obj) {
+        var tr = $(obj).parent().parent();
+        tr.remove();
+    }
+</script>
+
+<!--모달창 : 저장-->
+<script>
+
+    const modal = document.querySelector('.modal');
+    let x = 0;
+
+    $(".prev_btn").click(function () {
+        modal.style.display = 'block';
+        x = 1;
+    })
+    $(".next_btn").click(function () {
+        modal.style.display = 'block';
+        x = 2;
+    })
+
+    $(".save").click(function () {
+        if (x == 1) {
+            $(location).attr("href", "../app/career");
+        } else {
+            $(location).attr("href", "../app/file");
+        }
+        x = 0;
+    })
+
+    $(".cancel").click(function () {
+        if (x == 1) {
+            $(location).attr("href", "../app/career");
+        } else {
+            $(location).attr("href", "../app/file");
+        }
+        x = 0;
+    })
+
+    $(".dmui_dialog_btn").click(function () {
+        modal.style.display = 'none';
+    })
 
 </script>
 

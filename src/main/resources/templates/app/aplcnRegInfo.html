@@ -5,7 +5,6 @@
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
-
     <div class="wrap">
         <div id="main_con">
             <div id="nav_menu">
@@ -259,16 +258,24 @@
                                 <span style="margin-left: 80px">계좌번호</span>
                             </th>
                             <td data-cell-header="계좌번호" class="txt-left">
-                                <div class="select-box" style="margin-bottom: 10px;">
-                                    <label for="selectTit"></label>
-                                    <select class="info-select" id="selectTit"
-                                            name="search_field" title="검색조건을 선택해주세요.">
-                                        <option value="">은행목록</option>
-                                        <option value="">은행목록1</option>
-                                        <option value="">은행목록2</option>
-                                        <option value="">은행목록3</option>
-                                        <option value="">은행목록5</option>
-                                    </select>
+                                <div style="overflow: hidden; width: 500px">
+                                    <div class="select-box" style="margin-bottom: 10px; float: left">
+                                        <label for="selectBank"></label>
+                                        <select class="info-select" id="selectBank"
+                                                name="search_field" title="검색조건을 선택해주세요.">
+                                            <option value="">은행목록</option>
+                                            <option value="kb">국민은행</option>
+                                            <option value="ibk">기업은행</option>
+                                            <option value="nh">농협은행</option>
+                                            <option value="sh">신한은행</option>
+                                            <option value="wr">우리은행</option>
+                                            <option value="hn">하나은행</option>
+                                            <option value="sc">SC제일은행</option>
+                                        </select>
+                                    </div>
+                                    <div class="selectedBank" style="float: left">
+                                        <img src="#" alt="" id="bankIcon"><p style="float:right;" class="selBank"></p>
+                                    </div>
                                 </div>
                                 <div class="input-wrap-three write-wrap-m">
                                     <div class="input-wrap" style="width: 320px; display: inline-block">
@@ -291,6 +298,7 @@
                     </table>
                 </div>
 
+                <!-- prev, next 버튼 -->
                 <div class="btn-holder">
                     <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
                         <span>◀ 신청 안내</span>
@@ -303,32 +311,33 @@
                     </button>
                 </div>
 
+                <!-- 임시 저장 확인창 -->
                 <div class="modal">
-                <div class="modal__background">
-                    <div class="modal_body2">
-                        <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
-                            <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
-                                 style="outline: none;" tabindex="-1">
-                                <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1></div>
-                                <div class="dmui_dialog_body" tabindex="0">
-                                    <div class="saveIcon">
-                                        <img src="../img/app/saveicon.png">
+                    <div class="modal__background">
+                        <div class="modal_body2">
+                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                     style="outline: none;" tabindex="-1">
+                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1></div>
+                                    <div class="dmui_dialog_body" tabindex="0">
+                                        <div class="saveIcon">
+                                            <img src="../img/app/saveicon.png">
+                                        </div>
+                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                            <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
+                                                <br>변경된 내용은 반영되지 않습니다.</strong></p>
+                                        </div>
+                                        <p><strong>저장하시겠습니까?</strong></p>
                                     </div>
-                                    <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
-                                        <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
-                                            <br>변경된 내용은 반영되지 않습니다.</strong></p>
-                                    </div>
-                                    <p><strong>저장하시겠습니까?</strong></p>
                                 </div>
+                                <div class="dmui_dialog_footer">
+                                    <span><button class="dmui_dialog_footer_btn save">저장</button></span>
+                                    <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                </div>
+                                <div class="dmui_dialog_btn"></div>
                             </div>
-                            <div class="dmui_dialog_footer">
-                                <span><button class="dmui_dialog_footer_btn save">저장</button></span>
-                                <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
-                            </div>
-                            <div class="dmui_dialog_btn"></div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
 
@@ -343,7 +352,7 @@
 <script>
     function execDaumPostcode() {
         new daum.Postcode({
-            oncomplete: function(data) {
+            oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -367,6 +376,39 @@
     }
 </script>
 
+<!--은행정보 확인-->
+<script>
+    $("#selectBank").change(function () {
+        let selected = $("#selectBank option:selected").val();
+        if(selected == 'kb') {
+            $("#bankIcon").attr("src", "/img/app/kbIcon.png");
+            $(".selBank").html('국민은행');
+        } else if(selected == 'ibk') {
+            $("#bankIcon").attr("src", "/img/app/ibkIcon.png");
+            $(".selBank").html('기업은행');
+        } else if(selected == 'nh') {
+            $("#bankIcon").attr("src", "/img/app/nhIcon.png");
+            $(".selBank").html('농협은행');
+        } else if(selected == 'sh') {
+            $("#bankIcon").attr("src", "/img/app/shIcon.png");
+            $(".selBank").html('신한은행');
+        } else if(selected == 'wr') {
+            $("#bankIcon").attr("src", "/img/app/wrIcon.png");
+            $(".selBank").html('우리은행');
+        } else if(selected == 'hn') {
+            $("#bankIcon").attr("src", "/img/app/hnIcon.png");
+            $(".selBank").html('하나은행');
+        } else if(selected == 'sc') {
+            $("#bankIcon").attr("src", "/img/app/scIcon.png");
+            $(".selBank").html('SC제일은행');
+        } else {
+            $("#bankIcon").attr("src", "#");
+            $(".selBank").html('');
+        }
+
+    });
+
+</script>
 
 <!--모달창-->
 <script>
@@ -384,7 +426,7 @@
     })
 
     $(".save").click(function () {
-        if(x == 1) {
+        if (x == 1) {
             $(location).attr("href", "../app/start");
         } else {
             $(location).attr("href", "../app/career");
@@ -393,7 +435,7 @@
     })
 
     $(".cancel").click(function () {
-        if(x == 1) {
+        if (x == 1) {
             $(location).attr("href", "../app/start");
         } else {
             $(location).attr("href", "../app/career");

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
-<script th:src="@{../../js/app/info.js}"></script>
-<script th:src="@{../../js/app/jquery-1.11.3.min.js}"></script>
+<link rel="stylesheet" th:href="@{/css/app/info.css}"/>
+<script th:src="@{/js/app/jquery-1.11.3.min.js}"></script>
+<script th:src="@{/js/korean/jquery-ui.min.js}"></script>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -222,7 +222,8 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <input type="submit" class="submitCareer modalOff2" style="border: none; cursor: pointer"
+                                        <input type="submit" class="submitCareer modalOff2"
+                                               style="border: none; cursor: pointer"
                                                value="제출">
                                     </form>
                                 </div>
@@ -240,6 +241,7 @@
 
 
 </th:block>
+
 
 <script>
     var btn1 = document.getElementById("exprAddBtn1");
@@ -304,6 +306,8 @@
     })
 
 </script>
+
+<!--모달창 : 경력내용 작성-->
 <script>
     const modal2 = document.querySelector('.modal2');
     $(".careerInfo").click(function () {
@@ -320,7 +324,7 @@
 
 </script>
 
-
+<!--모달창 : 저장-->
 <script>
 
     const modal = document.querySelector('.modal');
@@ -336,7 +340,7 @@
     })
 
     $(".save").click(function () {
-        if(x == 1) {
+        if (x == 1) {
             $(location).attr("href", "../app/info");
         } else {
             $(location).attr("href", "../app/edu");
@@ -345,7 +349,7 @@
     })
 
     $(".cancel").click(function () {
-        if(x == 1) {
+        if (x == 1) {
             $(location).attr("href", "../app/info");
         } else {
             $(location).attr("href", "../app/edu");
@@ -359,43 +363,56 @@
 
 </script>
 
+<!--사건내역 상세내용 숨기기/보이기-->
 <script>
-
-    $(function () {
+    (function() {
+        console.log(1);
         $(".lawtd").css("visibility", "hidden");
         $(".insRecord").css("visibility", "hidden");
         $(".detRecord").css("visibility", "hidden");
-    });
-
+        $("#exprAddBtn1").css("visibility", "hidden");
+        $("#exprAddBtn2").css("visibility", "hidden");
+        $("#exprAddBtn3").css("visibility", "hidden");
+    })();
 
     $('input[name="check1"]').change(function () {
         var checked1 = $(this).prop('checked');
-        if (checked1)
-            if (checked1)
-                $(".lawtd").css("visibility", "visible");
-            else
-                $(".lawtd").css("visibility", "hidden");
+        if (checked1) {
+            $(".lawtd").css("visibility", "visible");
+            $("#exprAddBtn1").css("visibility", "visible");
+        }
+        else {
+            $(".lawtd").css("visibility", "hidden");
+            $("#exprAddBtn1").css("visibility", "hidden");
+        }
     });
 
     $('input[name="check2"]').change(function () {
         var checked2 = $(this).prop('checked');
-
-        if (checked2)
+        if (checked2) {
             $(".insRecord").css("visibility", "visible");
-        else
+            $("#exprAddBtn2").css("visibility", "visible");
+        }
+        else {
             $(".insRecord").css("visibility", "hidden");
+            $("#exprAddBtn2").css("visibility", "hidden");
+        }
     });
 
     $('input[name="check3"]').change(function () {
         var checked3 = $(this).prop('checked');
-
-        if (checked3)
+        if (checked3) {
             $(".detRecord").css("visibility", "visible");
-        else
+            $("#exprAddBtn3").css("visibility", "visible");
+        }
+        else {
             $(".detRecord").css("visibility", "hidden");
+            $("#exprAddBtn3").css("visibility", "hidden");
+        }
     });
 
 
 </script>
 
 </html>
+
