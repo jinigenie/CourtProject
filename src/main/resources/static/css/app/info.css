@@ -346,6 +346,13 @@ element.style {
     color: white;
     border-radius: 0 0 0 10px;
 }
+.dmui_dialog_footer .cancel2 {
+    float: left;
+    background-color: #7b7b7c;
+    padding-top: 5px;
+    color: white;
+    border-radius: 0 0 0 10px;
+}
 
 /* *********************************************************************************
 * select-box2
@@ -423,3 +430,18 @@ element.style {
     outline: -webkit-focus-ring-color auto 1px;
 }
 
+
+/* *********************************************************************************
+* 은행선택
+* *********************************************************************************/
+
+.selectedBank {
+    margin-left: 30px;
+    padding-top: 10px;
+    font-size: 18px;
+}
+#bankIcon {
+    width: 25px;
+    height: auto;
+    margin-right: 10px;
+}

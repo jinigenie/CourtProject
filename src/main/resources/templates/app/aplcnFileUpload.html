@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
+<script th:src="@{../../js/app/info.js}"></script>
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+    <div class="wrap">
+        <div id="main_con">
+            <div id="nav_menu">
+                <div id="lnb">
+                    <h2 class="title">조력자등재신청</h2>
+                    <div class="menu">
+                        <ul>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재신청</a>
+                            </li>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재명단</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div id="contents">
+                <div class="heading-wrap container">
+                    <h3 class="heading1">
+                        <span>재판조력자 등재신청</span>
+                    </h3>
+                </div>
+
+                <div id="crumbs">
+                    <ul>
+                        <li><a href="#1">기본정보</a></li>
+                        <li><a href="#2">경력상세</a></li>
+                        <li><a href="#3">학력상세</a></li>
+                        <li><a href="#4" class="highlight">서류제출</a></li>
+                    </ul>
+                </div>
+                <div style="margin-top: 40px">
+                    <span class="sub_title">공통서류 제출</span>
+                </div>
+                <div class="table table-responsive">
+                    <table>
+                        <tbody>
+                        <tr style="padding-top: 20px">
+                            <th scope="row" class="txt-left">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 40px">사업자등록증</span>
+                            </th>
+                            <td data-cell-header="사업자등록증" class="txt-left" style="padding: 0.5rem 0; width: 420px">
+                                <div class="input-wrap" style="width: 100%">
+                                    <input name="requiredFile1" value="" class="cm_inptxt" type="text"
+                                           readonly="readonly"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="case case1"><em style="width: 100px;">파일찾기</em></button>
+                                <button class="case case1" style="margin-right: 20px"><em>초기화</em></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="txt-left">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 40px">업무관련등록신고현황</span>
+                            </th>
+                            <td data-cell-header="업무등록현황" class="txt-left" style="padding: 0.5rem 0">
+                                <div class="input-wrap" style="width: 100%">
+                                    <input name="requiredFile2" value="" class="cm_inptxt" type="text"
+                                           readonly="readonly"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="case case1"><em style="width: 100px;">파일찾기</em></button>
+                                <button class="case case1" style="margin-right: 20px"><em>초기화</em></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="txt-left">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 40px">납세증명확인서</span>
+                            </th>
+                            <td data-cell-header="납세증명확인서" class="txt-left" style="padding: 0.5rem 0">
+                                <div class="input-wrap" style="width: 100%">
+                                    <input name="requiredFile3" value="" class="cm_inptxt" type="text"
+                                           readonly="readonly"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="case case1"><em style="width: 100px;">파일찾기</em></button>
+                                <button class="case case1" style="margin-right: 20px"><em>초기화</em></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 40px">
+                    <span class="sub_title">개인서류 제출</span>
+                </div>
+                <div class="table table-responsive">
+                    <table>
+                        <tbody>
+                        <tr style="padding-top: 20px">
+                            <th scope="row" class="txt-left">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 40px">경력증빙서류</span>
+                            </th>
+                            <td data-cell-header="사업자등록증" class="txt-left" style="padding: 0.5rem 0; width: 420px">
+                                <div class="input-wrap" style="width: 100%">
+                                    <input name="personalFile1" value="" class="cm_inptxt" type="text"
+                                           readonly="readonly"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="case case1"><em style="width: 100px;">파일찾기</em></button>
+                                <button class="case case1" style="margin-right: 20px"><em>초기화</em></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="txt-left">
+                                <span class="essential-txt" title="필수항목" style="margin: 0 50px 0 40px">학력증빙서류</span>
+                            </th>
+                            <td data-cell-header="업무등록현황" class="txt-left" style="padding: 0.5rem 0">
+                                <div class="input-wrap" style="width: 100%">
+                                    <input name="personalFile2" value="" class="cm_inptxt" type="text"
+                                           readonly="readonly"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="case case1"><em style="width: 100px;">파일찾기</em></button>
+                                <button class="case case1" style="margin-right: 20px"><em>초기화</em></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="txt-left">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 40px">자격증증빙서류</span>
+                            </th>
+                            <td data-cell-header="납세증명확인서" class="txt-left" style="padding: 0.5rem 0">
+                                <div class="input-wrap" style="width: 100%">
+                                    <input name="personalFile3" value="" class="cm_inptxt" type="text"
+                                           readonly="readonly"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="case case1"><em style="width: 100px;">파일찾기</em></button>
+                                <button class="case case1" style="margin-right: 20px"><em>초기화</em></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- prev, next 버튼 -->
+                <div class="btn-holder">
+                    <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
+                        <span>◀ 이전 단계</span>
+                    </button>
+
+                    <em style="padding-top: 15px"> 4 / 4</em>
+
+                    <button class="btn btn-2 hover-opacity submit_btn">
+                        <span>최종 제출 ▶</span>
+                    </button>
+                </div>
+
+                <!-- 임시 저장 확인창 -->
+                <div class="modal">
+                    <div class="modal__background">
+                        <div class="modal_body2">
+                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                     style="outline: none;" tabindex="-1">
+                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1></div>
+                                    <div class="dmui_dialog_body" tabindex="0">
+                                        <div class="saveIcon">
+                                            <img src="../img/app/saveicon.png">
+                                        </div>
+                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                            <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
+                                                <br>변경된 내용은 반영되지 않습니다.</strong></p>
+                                        </div>
+                                        <p><strong>저장하시겠습니까?</strong></p>
+                                    </div>
+                                </div>
+                                <div class="dmui_dialog_footer">
+                                    <span><button class="dmui_dialog_footer_btn save">저장</button></span>
+                                    <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                </div>
+                                <div class="dmui_dialog_btn"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 최종제출 확인창 -->
+                <div class="modal2">
+                    <div class="modal__background">
+                        <div class="modal_body2">
+                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                     style="outline: none;" tabindex="-1">
+                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 제출 안내</h1></div>
+                                    <div class="dmui_dialog_body" tabindex="0">
+                                        <div class="saveIcon">
+                                            <img src="../img/app/submitIcon.png">
+                                        </div>
+                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                            <p class="LtextCenter"><strong><br> 최종 제출 후에는,
+                                                <br>신청 내용을 변경할 수 없습니다.</strong></p>
+                                        </div>
+                                        <p><strong>제출하시겠습니까?</strong></p>
+                                    </div>
+                                </div>
+                                <div class="dmui_dialog_footer">
+                                    <span><button class="dmui_dialog_footer_btn save">제출</button></span>
+                                    <span><button class="dmui_dialog_footer_btn cancel2">취소</button></span>
+                                </div>
+                                <div class="dmui_dialog_btn"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+</th:block>
+
+<!--모달창-->
+<script>
+
+    const modal = document.querySelector('.modal');
+
+    $(".prev_btn").click(function () {
+        modal.style.display = 'block';
+    })
+
+    $(".save").click(function () {
+        $(location).attr("href", "../app/edu");
+    })
+
+    $(".cancel").click(function () {
+        $(location).attr("href", "../app/edu");
+    })
+
+    $(".dmui_dialog_btn").click(function () {
+        modal.style.display = 'none';
+    })
+
+</script>
+
+<script>
+
+    const modal2 = document.querySelector('.modal2');
+
+    $(".submit_btn").click(function () {
+        modal2.style.display = 'block';
+    })
+
+    $(".save").click(function () {
+        $(location).attr("href", "../app/submit");
+    })
+
+    $(".cancel2").click(function () {
+        modal2.style.display = 'none';
+    })
+
+    $(".dmui_dialog_btn").click(function () {
+        modal2.style.display = 'none';
+    })
+
+</script>
+
+</html>
