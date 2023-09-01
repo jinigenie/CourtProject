@@ -32,4 +32,9 @@ public class MypageController {
 	public String status() {
 		return "mypage/status";
 	}
+
+	@GetMapping("/modal")
+	public String modal() {
+		return "mypage/modal";
+	}
 }
