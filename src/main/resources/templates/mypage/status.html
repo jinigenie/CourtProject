@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/mypage/modal.css}"/>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -61,38 +62,7 @@
 
 
       <article id="detail-content">
-        <form
-          id="listForm"
-          name="listForm"
-          action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-          method="post"
-        >
-          <input
-            type="hidden"
-            id="cd_appeal_form"
-            name="cd_appeal_form"
-            value="ALL"
-          />
-          <input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-          <input
-            type="hidden"
-            id="srch_cd_appeal_form"
-            name="srch_cd_appeal_form"
-            value=""
-          />
-          <input
-            type="hidden"
-            id="search_capp_biz_cd"
-            name="search_capp_biz_cd"
-            value=""
-          />
-          <input type="hidden" id="cate_name" name="cate_name" value="" />
-          <input
-            type="hidden"
-            id="sub_cate_name"
-            name="sub_cate_name"
-            value=""
-          />
+ 
           <div class="heading-wrap container">
             <h3 class="heading1">
               <span>나의 신청 현황</span>
@@ -101,69 +71,6 @@
 
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
- 
-
-            <div class="tab-wrap">
-              <ul class="tab tab2"></ul>
-            </div>
-
-            <div class="searchform searchform2">
-              <div class="searchform-wrap">
-                <div class="select-box">
-                  <label for="selectTit"></label>
-                  <select
-                    class="info-select"
-                    id="selectTit"
-                    name="search_field"
-                    title="검색조건을 선택해주세요."
-                  >
-                    <option value="0">전체</option>
-                    <option value="1">개인</option>
-                    <option value="2">기업</option>
-                  </select>
-                </div>
-
-                <div class="search-input-wrap">
-                  <div class="input-wrap">
-                    <input
-                      type="text"
-                      name="q_string"
-                      value=""
-                      onkeypress="if(window.event.keyCode == 13) srchMinwonDoc();"
-                      class="form-control"
-                      placeholder="검색어를 입력해주세요"
-                      title="검색어를 입력해주세요"
-                      id="q_string"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    class="search-btn"
-                    onclick="srchMinwonDoc()"
-                  >
-                    <i class="xi-search"></i>
-                    <span class="sr-only">검색</span>
-                  </button>
-                </div>
-
-                <div class="select-box" id="select-box-margin-left-10">
-                  <label for="selectTit"></label>
-                  <select
-                    name="view_cnt"
-                    id="view_cnt"
-                    class="info-select"
-                    title="게시판 목록보기 갯수선택"
-                    style="min-width: 170px"
-                  >
-                    <!-- onchange="chgViewCount(this.value);" -->
-                    <option value="10" selected=" selected">10개씩 보기</option>
-                    <option value="20">20개씩 보기</option>
-                    <option value="50">50개씩 보기</option>
-                    <option value="100">100개씩 보기</option>
-                  </select>
-                </div>
-              </div>
-            </div>
 
             <div class="table-t-wrap">
               <div class="total-num">총 신청내역 <em>248</em>건</div>
@@ -198,16 +105,13 @@
                       통번역 재판조력자
                     </td>
                     <td data-cell-header="신청상태">심사중</td>
-                    <td onclick="event.stopPropagation();">
-                      <a href="javascript:submitUrl('/minwon2008/lc_minwon/AH038_C.do?capp_biz_cd=&proc_sys_cd=01&cd_appeal_form_map=AH038','AH038');"
-                         class="case case1"
+                    <td>
+                      <a href="#"
+                         class="case case1" id="btn-modal"
                       ><em>확인하기</em></a
                       >
                     </td>
                   </tr>
-
-
-
                 </tbody>
               </table>
             </div>
@@ -234,26 +138,6 @@
                   >1</a
                 ><a
                   href="#"
-                  class=""
-                  onclick="fn_egov_link_page(2); return false;"
-                  >2</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(3); return false;"
-                  >3</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(4); return false;"
-                  >4</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(5); return false;"
-                  >5</a
-                ><a
-                  href="#"
                   class="arr next"
                   title="다음으로"
                   onclick="fn_egov_link_page(11); return false;"
@@ -265,45 +149,6 @@
                   onclick="fn_egov_link_page(25); return false;"
                   ><strong class="sr-only">맨 마지막 목록으로 이동</strong></a
                 >
-
-                <input
-                  id="pageIndex"
-                  name="pageIndex"
-                  type="hidden"
-                  value="1"
-                />
-                <input id="pageSize" name="pageSize" type="hidden" value="10" />
-                <input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-                <input
-                  id="large_category_idx"
-                  name="large_category_idx"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="middle_category_idx"
-                  name="middle_category_idx"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="tot_middle_category_idx"
-                  name="tot_middle_category_idx"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="large_category_cd"
-                  name="large_category_cd"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="middle_category_cd"
-                  name="middle_category_cd"
-                  type="hidden"
-                  value=""
-                />
               </div>
             </div>
          
@@ -312,12 +157,95 @@
           
           </div>
           <!-- //본문컨텐츠 영역 -->
-        </form>
+        
       </article>
     </div>
     </div>
     <!-- //main_con  -->
   </div>
+  
+  <!-- 모달 영역-->
+  <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="title">
+                <h3>제출서류확인</h3>
+            </div>
+            <div class="close-area">X</div>
+            <div class="content">
+        <div class="table table-responsive">
+              <table>
+                <colgroup>
+                  <col style="width: 80%">
+                  <col style="width: 20%">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">공통서류</th>
+                    <th scope="col">제출여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor: pointer">
+                    <td data-cell-header="신청일">23.07.15</td>
+                    <td data-cell-header="신청내용">
+                      o
+                    </td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th scope="col">개인서류</th>
+                    <th scope="col">제출여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor: pointer">
+                    <td data-cell-header="신청일">23.07.15</td>
+                    <td data-cell-header="신청내용">
+                      o
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+        </div>
+    </div>
+  
+  <!-- 모달 영역 끝-->
+  
+  <script>
+        const modal = document.getElementById("modal")
+		function modalOn() {
+		    modal.style.display = "block"
+		}
+		function isModalOn() {
+		    return modal.style.display === "flex"
+		}
+		function modalOff() {
+		    modal.style.display = "none"
+		}
+		const btnModal = document.getElementById("btn-modal")
+		btnModal.addEventListener("click", e => {
+			e.preventDefault()
+		    modalOn()
+		})
+		const closeBtn = modal.querySelector(".close-area")
+		closeBtn.addEventListener("click", e => {
+		    modalOff()
+		})
+		modal.addEventListener("click", e => {
+		    const evTarget = e.target
+		    if(evTarget.classList.contains("modal-overlay")) {
+		        modalOff()
+		    }
+		})
+		window.addEventListener("keyup", e => {
+		    if(isModalOn() && e.key === "Escape") {
+		        modalOff()
+		    }
+		}) 
+    </script>
 
 </th:block>
 </html>
