@@ -183,41 +183,34 @@
                             <th scope="row" class="txt-left">
                                 <span style="margin-left: 80px">휴대폰번호</span>
                             </th>
-                            <td data-cell-header="휴대폰번호" class="txt-left">
-                                <div class="input-wrap-three write-wrap-m"
-                                     style="display: inline-block">
-                                    <div class="input-wrap" style="width: 80px; display: inline-block">
-                                        <input name="cvl_cel1" maxlength="4" id="cvl_cel1" value="010"
-                                               class="cm_inptxt" title="휴대폰번호 앞자리"
-                                               type="text" onkeydown="return num_only(event)"
-                                               readonly/>
-                                    </div>
-                                    <em>-</em>
-                                    <div class="input-wrap" style="width: 80px; display: inline-block">
-                                        <input name="cvl_cel2" maxlength="4" id="cvl_cel2" value="7325"
-                                               class="cm_inptxt" title="휴대폰번호 중간자리"
-                                               type="text" onkeydown="return num_only(event)"
-                                               readonly/>
-                                    </div>
-                                    <em>-</em>
-                                    <div class="input-wrap" style="width: 80px; display: inline-block">
-                                        <input name="cvl_cel3" maxlength="4" id="cvl_cel3" value="1252"
-                                               class="cm_inptxt" title="휴대폰번호 뒷자리"
-                                               type="text" onkeydown="return num_only(event)"
-                                               readonly/>
-                                    </div>
+                            <td data-cell-header="직업" class="txt-left">
+                                <div class="input-wrap" style="width: 200px; display: inline-block">
+                                    <input name="cvl_job" id="cvl_phone" value="" placeholder="01022221111"
+                                           class="cm_inptxt" type="text" maxlength="8" />
                                 </div>
+                                <em class="fcltt_comment">&nbsp; '-' 을 제외한 숫자만 기입</em>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row" class="txt-left">
-                                <span style="margin-left: 80px">이메일</span>
+                                <span class="essential-txt" title="" style="margin-left: 80px">이메일</span>
                             </th>
-                            <td data-cell-header="이메일" class="txt-left">
-                                <div class="input-wrap" style="width: 268px; display: inline-block">
-                                    <input name="cvl_mail" maxlength="70"
-                                           id="cvl_mail" class="cm_inptxt"
-                                           title="이메일 아이디" type="text" value="genie9185@gmail.com"/>
+                            <td class="txt-left">
+                                <div class="input-wrap" style="width: 200px; display: inline-block">
+                                    <input name="cvl_nm" id="cvl_mail" value="" class="cm_inptxt" type="text">
+                                </div>
+                                <span>@</span>
+                                <div class="select-box" style="padding: 10px;">
+                                    <select name="" id="" class="info-select" >
+                                        <option value="">직접입력</option>
+                                        <option value="">naver.com</option>
+                                        <option value="">hanmail.net</option>
+                                        <option value="">gmail.com</option>
+                                        <option value="">daum.net</option>
+                                    </select>
+                                </div>
+                                <div class="input-wrap" style="width: 200px; display: inline-block">
+                                    <input name="cvl_nm" id="cvl_mail2" value="" class="cm_inptxt" type="text">
                                 </div>
                             </td>
                         </tr>
