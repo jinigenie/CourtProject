@@ -13,6 +13,8 @@
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1.5px);
     border: 1px solid rgba(255, 255, 255, 0.18);
+    display: none;
+    z-index: 2;
 }
 #modal .modal-window {
     background:white;
@@ -23,9 +25,11 @@
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 500px;
     height: 450px;
-    position: relative;
-    top: -100px;
+    position: absolute;
+    top: 20%;
+    left: 40%;
     padding: 10px;
+    z-index: 2;
 }
 #modal .title {
     padding-left: 10px;
