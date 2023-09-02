@@ -6,11 +6,16 @@
 <head>
 
 
-	<script th:src="@{../js/main/swiper.animate1.0.2.min.js}"></script>
+	
 	<link rel="stylesheet" th:href="@{../css/main/main.css}" />
 	<script th:src="@{../js/main/main.js}"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+	<style>
+		body {
+			background-color: rgb(246, 246, 246);
+		}
+	</style>
 
 </head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap2})}">
@@ -19,248 +24,393 @@
 
 
 	<div class="main_body">
-		
+
 		<div class="wrap2">
-			<article id="main_article">
-				<div class="main_section visual">
+			<div>
+				<article id="main_article">
+					<div class="main_section visual" style="border-bottom: 3px solid #ccc;">
 
-					<div class="main_wrap">
-						<div class="boxL" data-aos="fade-right">
-							<h1><strong>국민</strong>과 <strong>함께</strong>하는 <br>
-								<strong class="t2">재판조력자</strong>
-							</h1>
-							<p><strong>공정성과 </strong> 정확성을 위한 <strong>도움의 손길</strong></p>
-							<hr />
+						<div class="main_wrap">
+							<div class="boxL" data-aos="fade-right">
+								<h1><strong>국민</strong>과 <strong>함께</strong>하는 <br>
+									<strong class="t2">재판조력자</strong>
+								</h1>
+								<p><strong>공정성과 </strong> 정확성을 위한 <strong>도움의 손길</strong></p>
+								<hr />
 
-						</div>
-						<div class="boxR" data-aos="fade-left" data-aos-delay="300">
-
-							<div class="main_search">
-								<a href="https://www.ndmi.go.kr/home/sub.do?menukey=6072">
-									<strong>재판조력자란?</strong>
-									<p>재판조력자 제도안내</p>
-
-								</a>
 							</div>
+							<div class="boxR" data-aos="fade-left" data-aos-delay="300">
+
+								<div class="main_search">
+									<a href="https://www.ndmi.go.kr/home/sub.do?menukey=6072">
+										<strong>재판조력자란?</strong>
+										<p>재판조력자 제도안내</p>
+
+									</a>
+								</div>
+							</div>
+							<button onclick="scrollToTop()" id="topButton" title="Go to top"><img
+									src="../../img/main/top_btn.png"></button>
 						</div>
 					</div>
-				</div>
-			</article>
+				</article>
 
 
-			<div class="warp2 wrap3">
+				<div class="warp2 wrap3">
+					<div>
 
-				<div class="box2">
-					<!--공고-->
+					</div>
+					<div class="box2" style="background-color: #ccc;">
+						<!--공고-->
 
-					<swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3"
-						space-between="0" free-mode="true">
-						<swiper-slide>
-							<div class="main_slid_notice">
-								<ul class="notice_lists" >
-									<li class="notice_li" style="height: 600px;">
-										<a href="javascript:void(0);"
-											title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
-											onclick="fn_dtalSrch('118', '3','7','','')">
+				<!--ssssss		<swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
+							slides-per-view="3" space-between="0" free-mode="true">-->
+							<swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
+    slides-per-view="4" space-between="0" free-mode="true" autoplay="true" autoplay-delay="4000">
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li class="notice_li" style="height: 600px;">
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고1</span>
+												<dl>
+													<dt>
+														[통번역가]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
-											<span class="div">모집공고1</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li>
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고2</span>
+												<dl>
+													<dt>
+														[감정사]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li>
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고3</span>
+												<dl>
+													<dt>
+														[의료인]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li>
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고3</span>
+												<dl>
+													<dt>
+														[개발자]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li>
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고3</span>
+												<dl>
+													<dt>
+														[프론트]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
-											<dl>
-												<dt>
-													[공지1] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지)
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li>
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고4</span>
+												<dl>
+													<dt>
+														[백엔드]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
-												</dt>
-												<dd class="oh"><br/>
-		안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를 고려하여
-													업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
-													바랍니다.감사합니다.
-												</dd>
-											</dl>
-											<p class="date">2023-08-10</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="main_slid_notice">
-								<ul class="notice_lists">
-									<li>
-										<a href="javascript:void(0);"
-											title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
-											onclick="fn_dtalSrch('118', '3','7','','')">
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+							<swiper-slide>
+								<div class="main_slid_notice">
+									<ul class="notice_lists">
+										<li>
+											<a href="javascript:void(0);"
+												title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
+												onclick="fn_dtalSrch('118', '3','7','','')">
+												<span class="div">모집공고5</span>
+												<dl>
+													<dt>
+														[강사]
+													</dt>
+													<dd class="oh"><br />
+														안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를
+														고려하여
+														업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
+														바랍니다.감사합니다.
+													</dd>
+												</dl>
 
-											<span class="div">모집공고2</span>
-
-
-
-
-											<dl>
-												<dt>
-													[공지2] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지)
-
-												</dt>
-												<dd class="oh"><br/>
-		안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를 고려하여
-													업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
-													바랍니다.감사합니다.
-												</dd>
-											</dl>
-											<p class="date">2023-08-10</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="main_slid_notice">
-								<ul class="notice_lists">
-									<li>
-										<a href="javascript:void(0);"
-											title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
-											onclick="fn_dtalSrch('118', '3','7','','')">
-
-											<span class="div">모집공고3</span>
-
-
-
-
-											<dl>
-												<dt>
-													[공지3] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지)
-
-												</dt>
-												<dd class="oh"><br/>
-													안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를 고려하여
-													업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
-													바랍니다.감사합니다.
-												</dd>
-											</dl>
-											<p class="date">2023-08-10</p>
-										</a>
-									</li>
-								</ul>
-
-
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="main_slid_notice">
-								<ul class="notice_lists">
-									<li>
-										<a href="javascript:void(0);"
-											title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
-											onclick="fn_dtalSrch('118', '3','7','','')">
-
-											<span class="div">모집공고4</span>
-
-
-
-
-											<dl>
-												<dt>
-													[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지)
-
-												</dt>
-												<dd class="oh"><br/>
-													안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를 고려하여
-													업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
-													바랍니다.감사합니다.
-												</dd>
-											</dl>
-											<p class="date">2023-08-10</p>
-										</a>
-									</li>
-								</ul>
-
-
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="main_slid_notice">
-								<ul class="notice_lists">
-									<li>
-										<a href="javascript:void(0);"
-											title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
-											onclick="fn_dtalSrch('118', '3','7','','')">
-
-											<span class="div">모집공고5</span>
-
-
-
-
-											<dl>
-												<dt>
-													[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지)
-
-												</dt>
-												<dd class="oh"><br/>
-													안녕하세요.국민취업지원제도 전산운영자입니다.금일(8월 10일) 제6호 태풍 '카눈'의 상륙시간 및 이동 경로를 고려하여
-													업무시간이 오후5시까지로 조정되어고객센터(온라인, 전화) 문의 및 상담 이용이 불가능하오니 업무에 참고하시기
-													바랍니다.감사합니다.
-												</dd>
-											</dl>
-											<p class="date">2023-08-10</p>
-										</a>
-									</li>
-								</ul>
-
-
-							</div>
-						</swiper-slide>
-						<!--					<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>
-						<swiper-slide><div></div></swiper-slide>-->
-					</swiper-container>
-
+											</a>
+										</li>
+									</ul>
+								</div>
+							</swiper-slide>
+						</swiper-container>
+					</div>
 					<div class="swiper-button-prev"></div>
 					<!-- 다음 버튼 -->
 					<div class="swiper-button-next"></div>
 					<!-- FAQ 게시물 -->
-					<div class="main_faqList" >
-						<div class="main_slid_notice" >
-							<ul class="notice_lists" >
-								<li style="width: 300px; " >
-									<a href="javascript:void(0);"
-										title="[공지] 금일(8월 10일) 고객센터(온라인, 전화) 문의 및 상담 이용시간 변경 안내(오후5시까지) 상세보기"
-										onclick="fn_dtalSrch('118', '3','7','','')">
-										<span class="div">FAQ</span>
-										<dl>
-											<dt>
-												자주묻는 질문
-											</dt>
-											<dd class="oh">
-												질문 1
-											</dd>
-									
-											<dd class="oh">
-												질문 2
-											</dd>
-											<dd class="oh">
-												질문 3
-											</dd>
-										
-										</dl>
-									</a>
-								</li>
-							</ul>
+					<div class="faqList">
+						
+						<ul class="faqList_left">
+							<li class="faq_left1" style="overflow: hidden; margin-bottom: 10px;">
+								<h3 onclick="main_notice_view()" class="main_notice"
+									style="border-bottom: 3px solid rgb(128, 128, 128); width: 100px; float: left; text-align: center; cursor: pointer;">
+									공지사항</h3>
+								<h3 onclick="main_faq_view()" class="main_faq"
+									style="border-bottom: 3px solid rgb(240, 240, 240); width: 100px; float: left; margin-left: 10px; text-align: center;cursor: pointer;">
+									FAQ</h3>
+								<a class="main_noticeLink" href="/faq/list"><img src="../../img/main/faq_btn.png"></a>
+								<a class="main_faqList" href="/faq/list"><img src="../../img/main/faq_btn.png"></a>
+							</li>
+							<!-- 탭 한 상태에 따라 공지-->
+							<li class="notice_left">
+								<a href="#">
+									<h4>[공지]</h4>2023.09.26 프로젝트발표
+								</a>
+							</li>
+							<li class="notice_left">
+								<a href="#">
+										<h4>[공지]</h4>2023.09.26 마감기한잘지키기
+								</a>
+							</li>
+							<li class="notice_left">
+								<a href="#">
+										<h4>[공지]</h4>2023.09.09 기능구현완성하자
+								</a>
+							</li>
+							<li class="notice_left">
+								<a href="#">
+										<h4>[공지]</h4>2023.09.01 화이팅
+								</a>
+							</li>
+							<li class="notice_left">
+								<a href="#">
+										<h4>[공지]</h4>2023.08.26 공지공지공지
+								</a>
+							</li>
+							<!-- 탭 한 상태에 따라 FAQ -->
+							<li class="faq_left faq_none">
+								<a href="#">
+									<h3>Q</h3>유형 참여를 위해 취업지원 신청서를 2021.2.1.제출했습니다. 1회차 구직촉진수당은 언제 지급되나요?
+								</a>
+							</li>
+							<li class="faq_left">
+								<a href="#">
+									<h3>Q</h3>구직촉진수당을 지급받고 있는데 다음달 이사 예정입니다.(서울에서 대전으로) 이럴 경우 어떤 절차를 밟아야 할까요?
+								</a>
+							</li>
+							<li class="faq_left">
+								<a href="#">
+									<h3>Q</h3>국민취업지원제도 업무 진행 절차를 요약하면 어떻게 되나요?
+								</a>
+							</li>
+							<li class="faq_left">
+								<a href="#">
+									<h3>Q</h3>취업지원 신청 시 추가 제출서류가 있나요?
+								</a>
+							</li>
+							<li class="faq_left">
+								<a href="#">
+									<h3>Q</h3>소득과 재산 산정 시 가구단위의 범위는 어디까지인가요?
+								</a>
+							</li>
+						</ul>
+						<ul class="faqList_right">
+
+							<li class="faq_right">
+								<a href="https://www.scourt.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/대법원.png');">
+									</div>
+									<p>대법원</p>
+								</a>
+							</li>
+							<li class="faq_right">
+								<a href="http://ecfs.scourt.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/전자소송.png');">
+									</div>
+									<p>전자소송</p>
+								</a>
+							</li>
+							<li class="faq_right">
+								<a href="http://glaw.scourt.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/법률정보.png');">
+									</div>
+									<p>종합법률정보</p>
+								</a>
+							</li>
+							<li class="faq_right">
+								<a href="http://www.iros.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/등기소.png');">
+									</div>
+									<p>인터넷등기소</p>
+								</a>
+							</li>
+							<li class="faq_right">
+								<a href="https://data.iros.go.kr/" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/등기광장.png');">
+									</div>
+									<p>등기정보광장</p>
+								</a>
+							</li>
+
+							<li class="faq_right">
+								<a href="https://wrs.scourt.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/기록열람.png');">
+									</div>
+									<p>기록열람</p>
+								</a>
+							</li>
+							<li class="faq_right">
+								<a href="https://www.gov.kr/portal/main/nologin" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/정부2.png');">
+									</div>
+									<p>정부24</p>
+								</a>
+							</li>
+														<li class="faq_right">
+								<a href="https://ekt.scourt.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/전자공탁.png');">
+									</div>
+									<p>전자공탁</p>
+								</a>
+							</li>
+							<li class="faq_right">
+								<a href="https://gamjung.scourt.go.kr" target="_blank">
+									<div class="main_logo_img"
+										style="background-image: url('../../img/main/감정인.png');">
+									</div>
+									<p>온라인감정인</p>
+								</a>
+							</li>
 
 
-						</div>
-
-
+						</ul>
 					</div>
+
+
+
 				</div>
-<button onclick="scrollToTop()" id="topButton" title="Go to top">TOP</button>
+
 			</div>
+
+
+
+
+			<script>
+				$(".relatedSystem").each(function () {
+					$(".relatedSystem .rTit .moreBtn").click(function () {
+						$(".relatedSystem ul li.mHide").toggleClass("mShow");
+						$(this).toggleClass("mHideHidden");
+					});
+				});
+			</script>
 
 			<!--모달창 작업-->
 			<div>
@@ -274,7 +424,22 @@
 						<div class="popup_cont">
 							<h2>[ 공 지 사 항 ]</h2>
 							<p>
-								공 지 내 용
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
+								공 지 내 용<br/> 
 							</p>
 						</div>
 						<!--팝업 버튼 영역-->
