@@ -80,30 +80,37 @@
 									<div class="controls mt10 reset_form">
 										<div class="only_pc">
 											<div class="box" style="font-size: 17px;">
-												<input type="radio" name="" id="" checked="" value=""><label for="">전체</label>
+												<input type="radio" name="" id="" checked="" value=""><label
+													for="">전체</label>
 												<input type="radio" name="" id="" value=""><label for="">지원 대상</label>
 												<input type="radio" name="" id="" value=""><label for="">지원 내용</label>
-												<input type="radio" name="" id="" value=""><labelfor="">지원 신청</label>
-												<input type="radio" name="" id="" value=""><labelfor="">지원 절차</label>
+												<input type="radio" name="" id="" value="">
+												<labelfor="">지원 신청</label>
+													<input type="radio" name="" id="" value="">
+													<labelfor="">지원 절차</label>
 											</div>
 										</div>
 
 										<div>
 											<div class="box">
-												<select id="srchTycd" title="검색어 조건 선택"	 style="height: 40px; width: 200px;">
+												<select id="srchTycd" title="검색어 조건 선택"
+													style="height: 40px; width: 200px;">
 													<option value="1">제목+내용</option>
 													<option value="2">제목</option>
 													<option value="3">내용</option>
 												</select>
-												<input type="search" id="srchKwrd" name="srchKwrd" title="검색어 입력" placeholder="검색어를 입력하세요"
+												<input type="search" id="srchKwrd" name="srchKwrd" title="검색어 입력"
+													placeholder="검색어를 입력하세요"
 													onfocus="input_limit_string(this,'/kor,/eng,/d,/symbol5,/s');"
 													value="" style="height: 40px; width: 580px;" />
 											</div>
 										</div>
 
 										<div class="btn" style="margin-right: 50px;">
-											<button type="button" class="btn_small bg_blue" onclick="" style="text-decoration: none;">검색</button>
-											<button type="reset" class="btn_small white_line" style="text-decoration: none;">초기화</button>
+											<button type="button" class="btn_small bg_blue" onclick=""
+												style="text-decoration: none;">검색</button>
+											<button type="reset" class="btn_small white_line"
+												style="text-decoration: none;">초기화</button>
 										</div>
 
 									</div>
@@ -130,15 +137,16 @@
 							<ul class="accordion">
 								<li class="faqList list-item" value="1">
 									<h5>
-										<button type="button" id="header1" aria-controls="pane11" title="축소됨" class="">
+										<button type="button" id="header1" aria-controls="pane11"
+											style=" border: none; outline: none;" title="축소됨" class="">
 											<!-- id, aria-controls 값과 (아래) -->
 											<abbr title="Question">Q.</abbr>
-											<p id="faq_question" style="font-size: 17px;">질문1</p>
+											<span id="faq_question" style="font-size: 17px;">질문1</span>
 											<!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->
 											<button type="button" onclick="faqRegist()"
 												class="faq_modify_btn1">수정</button>
 											<button type="button" class="faq_modify_btn2">삭제</button>
-											<!--   ===============================================     -->
+											<!--   \=============================================== \-->
 										</button>
 									</h5>
 									<div id="pane11" class="accopanel" aria-labelledby="header1">
@@ -149,12 +157,13 @@
 										<p></p>
 									</div>
 								</li>
-																<li class="faqList list-item" value="2">
+								<li class="faqList list-item" value="2">
 									<h5>
-										<button type="button" id="header1" aria-controls="pane11" title="축소됨" class="">
+										<button type="button" id="header1" style=" border: none; outline: none;"
+											aria-controls="pane11" title="축소됨" class="">
 											<!-- id, aria-controls 값과 (아래) -->
 											<abbr title="Question">Q.</abbr>
-											<p id="faq_question" style="font-size: 17px;">질문2</p>
+											<span id="faq_question" style="font-size: 17px;">질문1</span>
 											<!--                    관리자로그인 일떄만 보여지는 버튼            -->
 											<button type="button" onclick="faqRegist()"
 												class="faq_modify_btn1">수정</button>
@@ -187,7 +196,7 @@
 
 							</div>
 							<!-- pagination -->
-	
+
 							<!-- 페이지폼 -->
 							<form id="pagingForm" name="pagingForm"
 								action="/uapae010/selectQstn.do?pageIndex=3&amp;pageUnit=10&amp;srchSecd=A&amp;srchTy=&amp;srchKwrd="
@@ -201,9 +210,9 @@
 									<input type="hidden" name="_csrf" value="9211468d-d0b1-41e2-ac75-239c0505057c">
 								</div>
 							</form>
-							<br/><br/><br/><br/><br/>
+							<br /><br /><br /><br /><br />
 							<!-- 페이지폼 -->
-	
+
 						</div><!-- //group -->
 					</div>
 				</div>

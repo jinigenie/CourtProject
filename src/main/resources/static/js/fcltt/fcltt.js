@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
 /* ------------------조력자 등재명단 목록 fclttList --------------------*/
 /* ------------------조력자 등재명단 목록 fclttList --------------------*/
 
