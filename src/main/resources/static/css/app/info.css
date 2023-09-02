@@ -445,3 +445,18 @@ element.style {
     height: auto;
     margin-right: 10px;
 }
+
+/* *********************************************************************************
+* 자격증 검색창 버튼
+* *********************************************************************************/
+
+.certiSearch {
+    background: url(../../img/app/search.png);
+    border: none;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    position: absolute;
+    margin-left: -38px;
+    margin-top: 5px;
+}

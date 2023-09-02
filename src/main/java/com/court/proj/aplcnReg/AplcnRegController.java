@@ -44,4 +44,10 @@ public class AplcnRegController {
         return "app/aplcnSubmission";
     }
 
+    @GetMapping("/api")
+    public String test() {
+
+        return "app/certi_api";
+    }
+
 }

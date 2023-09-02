@@ -199,18 +199,18 @@
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
                                     <input name="cvl_nm" id="cvl_mail" value="" class="cm_inptxt" type="text">
                                 </div>
-                                <span>@</span>
-                                <div class="select-box" style="padding: 10px;">
-                                    <select name="" id="" class="info-select" >
-                                        <option value="">직접입력</option>
-                                        <option value="">naver.com</option>
-                                        <option value="">hanmail.net</option>
-                                        <option value="">gmail.com</option>
-                                        <option value="">daum.net</option>
-                                    </select>
-                                </div>
+                                <span style="margin: 7px">@</span>
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
                                     <input name="cvl_nm" id="cvl_mail2" value="" class="cm_inptxt" type="text">
+                                </div>
+                                <div class="select-box" style="padding: 9px;">
+                                    <select name="" id="mailAddr" class="info-select" >
+                                        <option value="">직접입력</option>
+                                        <option value="naver">naver.com</option>
+                                        <option value="hanmail">hanmail.net</option>
+                                        <option value="gmail">gmail.com</option>
+                                        <option value="daum">daum.net</option>
+                                    </select>
                                 </div>
                             </td>
                         </tr>
@@ -439,6 +439,17 @@
     $(".dmui_dialog_btn").click(function () {
         modal.style.display = 'none';
     })
+
+</script>
+
+<!--메일주소 선택입력-->
+<script>
+
+$("#mailAddr").change(function () {
+    let selmail = $("#mailAddr option:selected").html();
+    $("#cvl_mail2").attr("value", selmail);
+
+});
 
 </script>
 
