@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-
-
-
-</head>
-
-
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<div class="wrap">
@@ -48,6 +41,7 @@
 									font-size: 0.7rem;
 									color: white;
 								}
+
 								.btn-style.btn-style12 {
 									background: #2065c6;
 									height: 30px;
@@ -58,43 +52,69 @@
 								}
 							</style>
 							<tbody>
-								<tr>
+								<tr style="padding-top: 20px">
 									<th scope="row" class="txt-left">
-										<span class="txt-left" title="">아이디</span>
+										<span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
 									</th>
-									<td data-cell-header="성명" class="txt-left">
-										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">&nbsp;&nbsp;
-										<button type="button" class="btn-style btn-style12">아이디 중복확인</button>
+									<td class="txt-left">
+										<div class="address-wrap write-wrap-m">
+											<div class="address-btn-wrap">
+												<div class="input-wrap">
+													<input id="userid" name="" class="cm_inptxt" value="" title=""
+														type="text" />
+												</div>
+												<button type="button" class="address-btn"> 아이디 중복확인
+												</button>
+											</div>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="txt-left" title="">비밀번호</span>
+										<span class="essential-txt" title="" style="margin-left: 80px">비밀번호</span>
 									</th>
-									<td data-cell-header="성명" class="txt-left">
-										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									<td class="txt-left">
+										<div class="input-wrap-three write-wrap-m"
+											style="width: 162px; display: inline-block">
+											<div class="input-wrap" style="width: 200px">
+												<input name="username" id="cvl_nm" value="" class="cm_inptxt"
+													type="text" />
+											</div>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="txt-left" title="">비밀번호 확인</span>
+										<span class="essential-txt" title="" style="margin-left: 80px">비밀번호확인</span>
 									</th>
-									<td data-cell-header="성명" class="txt-left">
-										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									<td class="txt-left">
+										<div class="input-wrap-three write-wrap-m"
+											style="width: 162px; display: inline-block">
+											<div class="input-wrap" style="width: 200px">
+												<input name="username" id="cvl_nm" value="" class="cm_inptxt"
+													type="text" />
+											</div>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="txt-left" title="">관리자 식별</span>
+										<span class="essential-txt" title="" style="margin-left: 80px">관리자 식별</span>
 									</th>
-									<td data-cell-header="성명" class="txt-left">
-										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
+									<td class="txt-left">
+										<div class="input-wrap-three write-wrap-m"
+											style="width: 162px; display: inline-block">
+											<div class="input-wrap" style="width: 200px">
+												<input name="username" id="cvl_nm" value="" class="cm_inptxt"
+													type="text" />
+											</div>
+										</div>
 									</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="txt-left">
-										<span>관리자 권한</span>
+										<span style="margin-left: 80px">관리자 권한</span>
 									</th>
 									<style>
 										.checkbox-radio-custom>li {
@@ -125,10 +145,58 @@
 							</tbody>
 						</table>
 					</div>
+					<style>
+						.btn-holder {
+							display: flex;
+							flex-wrap: wrap;
+							justify-content: center;
+							max-width: 1000px;
+							margin: 30px auto 35px;
+						}
 
-					<div class="fclttRegist_btn" style="text-align: center;">
-						<button type="button" class="btn-style btn-style11">등록</button>
-						<button type="button" class="btn-style btn-style11">취소</button>
+						.btn {
+							position: relative;
+							display: inline-block;
+							width: auto;
+							height: auto;
+							background-color: transparent;
+							border: none;
+							cursor: pointer;
+							margin: 0px 25px 15px;
+							min-width: 160px;
+						}
+
+						.btn span {
+							position: relative;
+							display: inline-block;
+							font-size: 14px;
+							font-weight: bold;
+							letter-spacing: 2px;
+							top: 0;
+							left: 0;
+							width: 100%;
+							padding: 15px 15px;
+							transition: 0.3s;
+						}
+
+						.btn-2::before {
+							background-color: #4860cc;
+							transition: 0.3s ease-out;
+						}
+
+						.btn-2 span {
+							color: #4860cc;
+							border: 1px solid #4860cc;
+							transition: 0.2s;
+						}
+					</style>
+					<div class="btn-holder">
+						<button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
+							<span>가입</span>
+						</button>
+						<button class="btn btn-2 hover-opacity next_btn">
+							<span>취소</span>
+						</button>
 					</div>
 				</div>
 			</div>

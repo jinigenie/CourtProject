@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+
+	<div class="wrap">
+		<!--메뉴바-->
+		<div id="main_con">
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">사용자 관리</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">관리자 등록</a>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">관리자 목록</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--   내용 시작 -->
+			<div id="contents">
+				<article id="detail-content">
+					<div class="heading-wrap container">
+						<h3 class="heading1">
+							<span>관리자 목록</span>
+						</h3>
+					</div>
+
+					<!-- 본문컨텐츠 영역 -->
+					<div class="container">
+
+
+						<!-- 게시판 시작 부분 -->
+						<div class="table table-responsive">
+							<table>
+								<colgroup>
+									<col style="width: 10%" />
+									<col style="width: 20%" />
+									<col style="width: 15%" />
+									<col style="width: 15%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col">번호</th>
+										<th scope="col">관리자 아이디</th>
+										<th scope="col">사용자 식별</th>
+										<th scope="col">관리자 권한</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td tabindex="0">
+											admin1
+										</td>
+										<td>길동1234</td>
+										<td>각급법원 담당자</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td tabindex="0">
+											고유번호
+										</td>
+										<td>서울고등법원</td>
+										<td>이름</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- //본문컨텐츠 영역 -->
+
+				</article>
+			</div>
+		</div>
+		<!-- //main_con  -->
+	</div>
+	<!-- 메뉴바 여기까지-->
+
+
+</th:block>
+
+</html>

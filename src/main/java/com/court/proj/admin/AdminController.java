@@ -13,4 +13,10 @@ public class AdminController {
 		
 		return "admin/adminRegist";
 	}
+	
+	@GetMapping("/list")
+	public String adminList() {
+		
+		return "admin/adminList";
+	}
 }
