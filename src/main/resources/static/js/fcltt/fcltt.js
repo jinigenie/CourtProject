@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //상세보기 스크립트
 function openPop2(){
-	window.scrollTo(0, 0);
 	document.getElementById("popup_layer2").style.display = "block";
+	document.querySelector(".popup_contText").scrollTo(0);
 }
 
 //그냥 닫기버튼 스크립트
@@ -51,3 +51,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+

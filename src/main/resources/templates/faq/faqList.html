@@ -62,60 +62,7 @@
 						}
 					}
 				</style>
-				<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-      <![endif]-->
 
-				<script>
-					var depth = [1, 5]; /* 현재메뉴 활성화 용: gnb에 있는 data-menu 값과 일치하게 해주세요. */
-
-
-					$(document).ready(function () {
-
-						intro.accordion(); // FAQ 아코디언
-
-						//메인에서선택하여넘어오는경우
-						var ntceStno = "";
-
-						$(".faqList").each(function () {
-
-							if (ntceStno != "") {
-								if ($(this).val() == ntceStno) {
-									$(this).find('button').click();
-								}
-							}
-						});
-
-
-						$("#srchKwrd").keypress(function (e) {
-							if (e.which == 13) {
-								fn_srch(1);
-							}
-						});
-
-						//검색조건 초기화
-						$("button[type='reset']").click(function (event) {
-							event.preventDefault();
-							var form = $(this).parents("form");
-							form.find("input:radio").eq(0).prop("checked", true);
-							form.find("select>option:nth-child(1)").prop("selected", true);
-							form.find("input[type='text'],input[type='search']").val("");
-						});
-					});
-
-
-
-
-
-					function fn_pagingSrch(currPageno) {
-
-						$("#pagingForm > input[name='pageIndex']").val(currPageno);
-						$("#pagingForm").attr("action", "/uapae010/selectQstn.do");
-						ComLib.submit("pagingForm");
-					}
-
-				</script>
 
 				<div id="wrap">
 					<div class="contents intro" id="container_id">
@@ -124,68 +71,39 @@
 						<div class="group">
 
 							<!-- 검색영역 -->
-							<form id="srchForm" name="srchForm"
-								action="/uapae010/selectQstn.do?pageIndex=3&amp;pageUnit=10&amp;srchSecd=A&amp;srchTy=&amp;srchKwrd="
-								method="post">
+							<form id="srchForm" name="srchForm" action="" method="post">
 								<input type="hidden" name="pageIndex">
 								<input type="hidden" name="srchTy">
 								<input type="hidden" name="srchSecd">
 								<input type="text" id="dummy" name="dummy" style="display:none">
-
 								<fieldset>
 									<div class="controls mt10 reset_form">
-										<!-- 피씨 -->
 										<div class="only_pc">
-
 											<div class="box" style="font-size: 17px;">
-												<input type="radio" name="srchSecdP" id="srchSecd_01" checked=""
-													value="A"><label for="srchSecd_01">전체</label>
-												<input type="radio" name="srchSecdP" id="srchSecd_02" value="1"><label
-													for="srchSecd_02">지원 대상</label>
-												<input type="radio" name="srchSecdP" id="srchSecd_03" value="2"><label
-													for="srchSecd_03">지원 내용</label>
-												<input type="radio" name="srchSecdP" id="srchSecd_04" value="3"><label
-													for="srchSecd_04">지원 신청</label>
-												<input type="radio" name="srchSecdP" id="srchSecd_05" value="4"><label
-													for="srchSecd_05">지원 절차</label>
+												<input type="radio" name="" id="" checked="" value=""><label for="">전체</label>
+												<input type="radio" name="" id="" value=""><label for="">지원 대상</label>
+												<input type="radio" name="" id="" value=""><label for="">지원 내용</label>
+												<input type="radio" name="" id="" value=""><labelfor="">지원 신청</label>
+												<input type="radio" name="" id="" value=""><labelfor="">지원 절차</label>
 											</div>
 										</div>
-										<!-- //피씨 -->
-
-										<!-- 모바일 -->
-										<div class="only_mobile">
-
-											<select id="srchSecdM" class="wp100" title="구분 선택">
-												<option selected="selected" value="A">전체</option>
-												<option value="1">지원대상</option>
-												<option value="2">지원내용</option>
-												<option value="3">신청및접수</option>
-												<option value="4">지원절차</option>
-											</select>
-										</div>
-										<!-- //모바일 -->
 
 										<div>
-
 											<div class="box">
-												<select id="srchTycd" title="검색어 조건 선택"
-													style="height: 40px; width: 200px;">
+												<select id="srchTycd" title="검색어 조건 선택"	 style="height: 40px; width: 200px;">
 													<option value="1">제목+내용</option>
 													<option value="2">제목</option>
 													<option value="3">내용</option>
 												</select>
-												<input type="search" id="srchKwrd" name="srchKwrd" title="검색어 입력"
-													placeholder="검색어를 입력하세요"
+												<input type="search" id="srchKwrd" name="srchKwrd" title="검색어 입력" placeholder="검색어를 입력하세요"
 													onfocus="input_limit_string(this,'/kor,/eng,/d,/symbol5,/s');"
 													value="" style="height: 40px; width: 580px;" />
 											</div>
 										</div>
 
 										<div class="btn" style="margin-right: 50px;">
-											<button type="button" class="btn_small bg_blue" onclick="fn_srch(1)"
-												style="text-decoration: none;">검색</button>
-											<button type="reset" class="btn_small white_line"
-												style="text-decoration: none;">초기화</button>
+											<button type="button" class="btn_small bg_blue" onclick="" style="text-decoration: none;">검색</button>
+											<button type="reset" class="btn_small white_line" style="text-decoration: none;">초기화</button>
 										</div>
 
 									</div>
@@ -200,229 +118,64 @@
 												<option value="15">15개씩 보기</option>
 												<option value="20">20개씩 보기</option>
 											</select>
-											<button type="button" class="btn" onclick="fn_srch(1)">보기</button>
 										</div>
 									</div>
 								</fieldset>
 								<div>
-									<input type="hidden" name="_csrf" value="9211468d-d0b1-41e2-ac75-239c0505057c">
+									<input type="hidden" name="" value="">
 								</div>
 							</form>
 							<!-- 검색영역 -->
 
 							<ul class="accordion">
-
-
-								<li class="faqList list-item" value="13">
+								<li class="faqList list-item" value="1">
 									<h5>
 										<button type="button" id="header1" aria-controls="pane11" title="축소됨" class="">
 											<!-- id, aria-controls 값과 (아래) -->
 											<abbr title="Question">Q.</abbr>
-											<p id="faq_question" style="font-size: 17px;">유형 참여를 위해 취업지원 신청서를 2021.2.1.
-												제출했습니다. 1회차
-												구직촉진수당은 언제 지급되나요?</p>
-												<!--                    관리자로그인 일떄만 보여지는 버튼            -->
+											<p id="faq_question" style="font-size: 17px;">질문1</p>
+											<!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->
 											<button type="button" onclick="faqRegist()"
 												class="faq_modify_btn1">수정</button>
 											<button type="button" class="faq_modify_btn2">삭제</button>
-											<!--   ////////////////////////////////////////////     -->
+											<!--   ===============================================     -->
 										</button>
 									</h5>
 									<div id="pane11" class="accopanel" aria-labelledby="header1">
 										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
 										<abbr title="Answer">A.</abbr>
 										<p></p>
-										<p>구직촉진수당 지급 절차는 ① 수급자격신청에 대한 심사 및 인정(1개월), ② 취업활동계획 수립(1개월)과 동시에 1회차 구직촉진수당
-											지급됩니다.<br>따라서 2021.2.1. 신청의 경우 총 2개월 정도 소요되어 2021.4.1.경 지급됩니다.<br></p>
+										<p>답변.<br>내용.<br></p>
 										<p></p>
 									</div>
 								</li>
-
-								<li class="faqList" value="12">
-									<h5 id="faq_question">
-										<button type="button" id="header2" aria-controls="pane12" title="확장됨"
-											class="active"> <!-- id, aria-controls 값과 (아래) -->
-											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">구직촉진수당을 지급받고 있는데 다음달 이사 예정입니다.(서울에서 대전으로) 이럴 경우
-												어떤 절차를 밟아야 할까요?</p>
-													<!--   ////// 관리자 로그인에만 보이는 버튼////////////     -->
-											<button type="button" onclick="faqRegist()"
-												class="faq_modify_btn1">수정</button>
-											<button type="button" class="faq_modify_btn2">삭제</button>
-												<!--   ////////////////////////////////////////////     -->
-										</button>
-									</h5>
-									<div id="pane12" class="accopanel" aria-labelledby="header2">
-										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
-										<abbr title="Answer">A.</abbr>
-										<p></p>
-										<p>구직촉진수당을 지급 받던 중 거주지 이전으로 현재의 고용서비스기관(서울)을 통한 취업지원이 어려워진 경우<br>이관신청서를 제출하면 새로운
-											고용서비스기관(대전)에서 취업지원을 받으실 수 있습니다.<br></p>
-										<p></p>
-									</div>
-								</li>
-
-								<li class="faqList" value="11">
+																<li class="faqList list-item" value="2">
 									<h5>
-										<button type="button" id="header3" aria-controls="pane13" title="축소됨" class="">
+										<button type="button" id="header1" aria-controls="pane11" title="축소됨" class="">
 											<!-- id, aria-controls 값과 (아래) -->
 											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">국민취업지원제도 업무 진행 절차를 요약하면 어떻게 되나요?</p>
-												<!--   //////////  관리자 로그인에만 보이기 /////////////////     -->
+											<p id="faq_question" style="font-size: 17px;">질문2</p>
+											<!--                    관리자로그인 일떄만 보여지는 버튼            -->
 											<button type="button" onclick="faqRegist()"
 												class="faq_modify_btn1">수정</button>
 											<button type="button" class="faq_modify_btn2">삭제</button>
-												<!--   ////////////////////////////////////////////     -->
+											<!--   ===============================================     -->
 										</button>
 									</h5>
-									<div id="pane13" class="accopanel" aria-labelledby="header3">
+									<div id="pane11" class="accopanel" aria-labelledby="header1">
 										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
 										<abbr title="Answer">A.</abbr>
 										<p></p>
-										<p>국민취업지원제도는<br>「① 수급자격신청(심사) 및 인정(1개월) → ② 취업활동계획 수립(1개월) → ③ 취업지원 서비스
-											지원(구직촉진수당 지급, 취업지원 및 구직활동지원 프로그램 &lt;12개월 + 최대 6개월 연장 가능&gt;) → ④ 사후관리
-											(3개월+1개월 연장 가능) 로 진행됩니다. <br></p>
+										<p>답변.<br>내용<br></p>
 										<p></p>
 									</div>
 								</li>
 
-								<li class="faqList" value="10">
-									<h5>
-										<button type="button" id="header4" aria-controls="pane14" title="축소됨" class="">
-											<!-- id, aria-controls 값과 (아래) -->
-											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">취업지원 신청 시 추가 제출서류가 있나요?</p>
-												<!--   /////////////////     관리자 에게만 보이기 ///////////////////     -->
-											<button type="button" onclick="faqRegist()"
-												class="faq_modify_btn1">수정</button>
-											<button type="button" class="faq_modify_btn2">삭제</button>
-												<!--   ////////////////////////////////////////////     -->
-										</button>
-									</h5>
-									<div id="pane14" class="accopanel" aria-labelledby="header4">
-										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
-										<abbr title="Answer">A.</abbr>
-										<p></p>
-										<p>고용센터는 신청자가 취업지원신청서와 개인정보수집·이용 및 제공 동의서를 제출하면 가구원의 소득·재산 등의 관련정보를 공적시스템으로 연계하여
-											파악할 수 있습니다.<br>다만, 전산망으로 확인이 어렵거나 실시간으로 파악되지 않는 별도 자료가 있을 경우 증빙서류를 제출해 입증하면
-											됩니다. <br></p>
-										<p></p>
-									</div>
-								</li>
-
-								<li class="faqList" value="9">
-									<h5>
-										<button type="button" id="header5" aria-controls="pane15" title="축소됨" class="">
-											<!-- id, aria-controls 값과 (아래) -->
-											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">소득은 어떻게 산정이 되나요? 소득의 범위는 어떻게 되나요?</p>
-											<button type="button" onclick="faqRegist()"
-												class="faq_modify_btn1">수정</button>
-											<button type="button" class="faq_modify_btn2">삭제</button>
-										</button>
-									</h5>
-									<div id="pane15" class="accopanel" aria-labelledby="header5">
-										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
-										<abbr title="Answer">A.</abbr>
-										<p></p>
-										<p>가구단위로 산정하며 개인정보 활용동의를 통해 공적시스템으로 연계되어 파악됩니다. </p>
-										<p>이때 연계되는 소득은 근로소득, 사업소득, 재산소득, 이전소득입니다.</p>
-										<p><br>- (근로소득) 상시근로자 소득, 일용근로자 소득, 자활근로 소득, 공공일자리 소득<br>- (사업소득) 업종별 사업소득,
-											임대소득, 기타 영리목적 사업소득 등<br>- (재산소득) 이자소득, 배당소득<br>- (이전소득) 국민연금법, 공무원연금법,
-											군인연금법, 사립학교교직원 연금법, 별정우체국연금법에서</p>
-										<p>정기적으로 지급되는 급여, 수당 등<br></p>
-										<p></p>
-									</div>
-								</li>
-
-								<li class="faqList" value="8">
-									<h5>
-										<button type="button" id="header6" aria-controls="pane16" title="축소됨">
-											<!-- id, aria-controls 값과 (아래) -->
-											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">대학교 및 대학원 졸업예정자도 참여가능한가요?</p>
-												<!--   //////////////////       관리자만 보이기 ///////////////////////     -->
-											<button type="button" onclick="faqRegist()"
-												class="faq_modify_btn1">수정</button>
-											<button type="button" class="faq_modify_btn2">삭제</button>
-												<!--   ////////////////////////////////////////////     -->
-										</button>
-									</h5>
-									<div id="pane16" class="accopanel" aria-labelledby="header6" style="" ;>
-										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
-										<abbr title="Answer">A.</abbr>
-										<p></p>
-										<p><span>
-												대학교
-												및 대학원 최종학년 마지막 학기 재학생은 참여가 가능합니다. </span></p>
-										다만,
-										마지막 학기 여부에 대한 증빙서류 (재학증명서와 성적증명서)는 참여자가 제출하셔야 합니다.</span></p>
-										<br></span>
-										</p>
-										<p><span>
-
-												병행하여 취업이 가능한 경우에 참여 가능</span></p>
-										<p></p>
-									</div>
-								</li>
-
-								<li class="faqList" value="7">
-									<h5>
-										<button type="button" id="header7" aria-controls="pane17" title="축소됨">
-											<!-- id, aria-controls 값과 (아래) -->
-											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">소득과 재산 산정 시 가구단위의 범위는 어디까지인가요?</p>
-											<button type="button" onclick="faqRegist()"
-												class="faq_modify_btn1">수정</button>
-											<button type="button" class="faq_modify_btn2">삭제</button>
-										</button>
-									</h5>
-									<div id="pane17" class="accopanel" aria-labelledby="header7" style="">
-										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
-										<abbr title="Answer">A.</abbr>
-										<p></p>
-										<p>주민등록표에 등재된 신청인 본인, 신청인의 배우자, 신청인의 1촌 이내 직계혈족 (부모, 자녀)으로 </p>
-										<p>한정해 판단합니다.</p>
-										<p><br></p>
-										<p>&nbsp; - 단, 취업지원 신청인과 생계와 주거를 같이* 하는 경우 또는 같이하지 않는 경우에는 </p>
-										<p>&nbsp;&nbsp;&nbsp; 가구원의 범주에 포함 또는 제외 가능(이에 대한 입증자료는 신청인이 제출)</p>
-										<p>&nbsp; * 민법상 가족이면서 주민등록표에 등재된 경우에 한함</p>
-										<p></p>
-									</div>
-								</li>
-
-								<li class="faqList" value="1">
-									<h5>
-										<button type="button" id="header8" aria-controls="pane18" title="축소됨">
-											<!-- id, aria-controls 값과 (아래) -->
-											<abbr title="Question">Q.</abbr>
-											<p style="font-size: 17px;">실업급여를 받고 있는데 국민취업지원제도 참여가 가능한가요?</p>
-											<button type="button" onclick="faqRegist()"
-												class="faq_modify_btn1">수정</button>
-											<button type="button" class="faq_modify_btn2">삭제</button>
-										</button>
-									</h5>
-									<div id="pane18" class="accopanel" aria-labelledby="header8" style="">
-										<!-- id, aria-labelledby 값이 서로 같게 맞춰주세요. -->
-										<abbr title="Answer">A.</abbr>
-										<p></p>
-										<p><span>
-
-												<br>(Ⅱ유형)실업급여
-												수급 중인 자는 참여가 불가하며, 실업급여 수급 종료 후에는 참여하실 수 있습니다.<br></span></p>
-										<p class="mt10"
-											style="color: rgb(0, 0, 0); text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: Malgun Gothic; font-size: medium; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
-										</p>
-										<p></p>
-									</div>
-								</li>
 
 							</ul>
 							<!-- 검색결과 -->
 
 							<!--  display 조정 -->
-
-
 
 
 

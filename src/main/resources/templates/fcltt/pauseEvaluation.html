@@ -18,10 +18,11 @@
 					<h2 class="title">조력자확인</h2>
 					<div class="menu">
 						<ul>
-							<li class="has-sub"><a th:href="@{/fcltt/fclttRegist}" title="이용문의 닫기 (열림)">조력자 등재</a>
+							<li class="has-sub">
+							<li style="display: bolck !important;"><a href="/fcltt/fclttRegist">조력자 등재</a></li>
+							<li style="display: bolck !important;"><a href="/fcltt/fclttList">조력자 등재명단</a></li>
+							<li style="display: bolck !important;"><a href="/fcltt/pause">조력자 활동신청관리</a></li>
 							</li>
-							<li class="has-sub"><a th:href="@{/fcltt/fclttList}" title="이용문의 닫기 (열림)">조력자 등재명단</a></li>
-							<li class="has-sub"><a th:href="@{/fcltt/pause}" title="이용문의 닫기 (열림)">조력자 활동신청관리</a></li>
 						</ul>
 					</div>
 
@@ -75,11 +76,6 @@
 						<div class="container">
 
 							<hr />
-
-							<!--						<div class="tab-wrap">
-								<ul class="tab tab2"></ul>
-							</div>-->
-
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
 									<select name="" id="" class="fclttSearch fclttSearch1">
@@ -87,7 +83,6 @@
 										<option value="">법원명</option>
 										<option value="">분류번호</option>
 										<option value="">모두</option>
-
 									</select>
 									<input type="text" class="fclttSearch fclttSearch2" value="검색어를 입력해주세요" />
 
@@ -142,14 +137,13 @@
 												<a href="#" class="pauseResult1"><em>중지승인</em></a>
 											</td>
 										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;"
-											>
-											
-											<td colspan="5" tabindex="0">사유보</td>
-											
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
+
+											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
+
 										</tr>
 
-										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
+										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/01/16</td>
 
 											<td data-cell-header="신청자이름" tabindex="0">김현진</td>
@@ -162,7 +156,12 @@
 												<a href="#" class="pauseResult2"><em>활동승인</em></a>
 											</td>
 										</tr>
-										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
+
+											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
+
+										</tr>
+										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/02/16</td>
 
 											<td data-cell-header="신청자이름" tabindex="0">석이서</td>
@@ -175,7 +174,11 @@
 												<a href="#" class="pauseResult2"><em>활동승인</em></a>
 											</td>
 										</tr>
-										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
+
+											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
+										</tr>
+										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/04/29</td>
 
 											<td data-cell-header="신청자이름" tabindex="0">신명근</td>
@@ -188,7 +191,12 @@
 												<a href="#" class="pauseResult1"><em>중지승인</em></a>
 											</td>
 										</tr>
-										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
+
+											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
+
+										</tr>
+										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/05/11</td>
 
 											<td data-cell-header="신청자이름" tabindex="0">김민철</td>
@@ -201,18 +209,28 @@
 												<a href="#" class="pauseResult1"><em>중지승인</em></a>
 											</td>
 										</tr>
-										<tr id="pause_text" class="pause_text1" style="cursor: pointer">
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
+
+											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
+
+										</tr>
+										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
 											<td data-cell-header="신청자이름">2023/08/14</td>
 
 											<td data-cell-header="신청자이름" tabindex="0">이태주</td>
 											<td data-cell-header="중지기간">2023/08/01~ 2023/08/02</td>
 
 											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus2"><em>중지승인</em></a>
+												<a class="fclttStatus2"><em>중지둥</em></a>
 											</td>
 											<td data-cell-header="처리">
 												<a href="#" class="pauseResult2"><em>활동승인</em></a>
 											</td>
+										</tr>
+										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
+
+											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
+
 										</tr>
 									</tbody>
 								</table>
