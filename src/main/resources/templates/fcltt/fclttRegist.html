@@ -18,10 +18,13 @@
 					<h2 class="title">조력자확인</h2>
 					<div class="menu">
 						<ul>
-							<li class="has-sub"><a th:href="@{/fcltt/fclttRegist}" title="이용문의 닫기 (열림)">조력자 등재</a>
+							<li class="has-sub">
+							<li style="display: bolck !important;"><a href="/fcltt/fclttRegist">조력자 등재</a></li>
+							<li style="display: bolck !important;"><a href="/fcltt/fclttList">조력자 등재명단</a></li>
+							<li style="display: bolck !important;"><a href="/fcltt/pause">조력자 활동신청관리</a></li>
 							</li>
-							<li class="has-sub"><a th:href="@{/fcltt/fclttList}" title="이용문의 닫기 (열림)">조력자 등재명단</a></li>
-							<li class="has-sub"><a th:href="@{/fcltt/pause}" title="이용문의 닫기 (열림)">조력자 활동신청관리</a></li>
+
+
 						</ul>
 					</div>
 
@@ -55,7 +58,7 @@
 
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="txt-left" title="�ʼ��׸�">조력자 이름</span>
+										<span class="txt-left">조력자 이름</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
 										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
@@ -63,7 +66,7 @@
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="txt-left" title="�ʼ��׸�">합격자고유번호</span>
+										<span class="txt-left">합격자고유번호</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
 										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text">
@@ -76,20 +79,9 @@
 									<td data-cell-header="휴대폰번호" class="txt-left">
 										<div class="fcltt_phone" style="display: inline-block">
 											<div class="fcltt_phone">
-												<input name="fcltt_phone" maxlength="4" id="cvl_cel1" value="010"
+												<input name="fcltt_phone" maxlength="4" id="cvl_cel1" value="010-1234-5678"
 													class="cm_inptxt" title="휴대폰번호 앞자리" type="text"
-													onkeydown="return num_only(event)" readonly="" />
-
-
-												<input name="cvl_cel2" maxlength="4" id="cvl_cel2" value="7325"
-													class="cm_inptxt" title="휴대폰번호 중간자리" type="text"
-													onkeydown="return num_only(event)" readonly="" />
-
-
-												<input name="cvl_cel3" maxlength="4" id="cvl_cel3" value="1252"
-													class="cm_inptxt" title="휴대폰번호 뒷자리" type="text"
-													onkeydown="return num_only(event)" readonly="" />
-
+													onkeydown="return num_only(event)"  />
 												<em class="fcltt_comment">숫자만 기입</em>
 											</div>
 										</div>
