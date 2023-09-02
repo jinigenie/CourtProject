@@ -3,6 +3,8 @@
 
 <head>
 	<link rel="stylesheet" th:href="@{../../css/app/info.css}" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
 
@@ -16,13 +18,14 @@
 					<h3 class="heading1">
 						<span style="margin-bottom: 20px;">회원가입</span>
 					</h3>
-
+					<span style="color: crimson;">* 는 필수입력 항목 입니다.</span>
 					<div class="table table-responsive">
 						<table>
 							<tbody>
 								<tr style="padding-top: 20px">
 									<th scope="row" class="txt-left">
-										<span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
+										<em>*</em>
+										<span class="essential-txt" title="필수항목" style="margin-left:75px">아이디</span>
 									</th>
 									<td class="txt-left">
 										<div class="address-wrap write-wrap-m">
@@ -39,6 +42,7 @@
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
+										<em>*</em>
 										<span class="essential-txt" title="" style="margin-left: 80px">성명</span>
 									</th>
 									<td class="txt-left">
@@ -53,6 +57,7 @@
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
+										<em>*</em>
 										<span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호</span>
 									</th>
 									<td class="txt-left">
@@ -67,29 +72,32 @@
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
+										<em>*</em>
 										<span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호확인</span>
 									</th>
 									<td class="txt-left">
 										<div class="input-wrap-three write-wrap-m"
 											style="width: 162px; display: inline-block">
 											<div class="input-wrap" style="width: 200px">
-												<input id="passwordCh" value="" class="cm_inptxt"
-													type="text" />
+												<input id="passwordCh" value="" class="cm_inptxt" type="text" />
 											</div>
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
+										<em>*</em>
 										<span class="essential-txt" title="" style="margin-left: 80px">주민등록번호</span>
 									</th>
 									<td class="txt-left">
 										<div class="input-wrap" style="width: 200px; display: inline-block">
-											<input name="usersnfirst" id="cvl_nm" value="" class="cm_inptxt" type="text">
+											<input name="usersnfirst" id="cvl_nm" value="" class="cm_inptxt"
+												type="text">
 										</div>
 										<span>-</span>
 										<div class="input-wrap" style="width: 200px; display: inline-block">
-											<input name="usersnsecond" id="cvl_nm" value="" class="cm_inptxt" type="text">
+											<input name="usersnsecond" id="cvl_nm" value="" class="cm_inptxt"
+												type="text">
 										</div>
 									</td>
 								</tr>
@@ -104,20 +112,37 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
+								<tr style="padding-top: 20px">
 									<th scope="row" class="txt-left">
-										<span style="margin-left: 80px">휴대폰번호</span>
+										<em>*</em>
+										<span class="essential-txt" title="필수항목" style="margin-left: 80px">전화번호</span>
 									</th>
 									<td class="txt-left">
-										<div class="input-wrap" style="width: 200px; display: inline-block">
-											<input name="phonenum" id="cvl_job" value="" placeholder="01022221111"
-												class="cm_inptxt" type="text" maxlength="11" />
+										<div class="address-wrap write-wrap-m" style="width: 600px;">
+											<div class="address-btn-wrap">
+												<div class="input-wrap">
+													<input id="phone" name="" class="cm_inptxt" value="" title=""
+														type="text" />
+												</div>
+												<button type="button" class="address-btn" id="phoneBtn">인증번호 받기
+												</button>
+											</div>
+											<div class="address-btn-wrap"
+												style="padding-top: 0.5rem; display: inline-block;">
+												<div class="input-wrap" style="float: left;">
+													<input id="phoneCheck" name="" class="cm_inptxt" value="" title=""
+														type="text" />
+
+												</div>
+												<button type="button" class="address-btn" id="phoneCheckBtn">인증번호 확인
+												</button>
+											</div>
 										</div>
-										<em class="fcltt_comment">&nbsp; '-' 을 제외한 숫자만 기입</em>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
+										<em>*</em>
 										<span class="essential-txt" title="" style="margin-left: 80px">이메일</span>
 									</th>
 									<td class="txt-left">
@@ -169,6 +194,7 @@
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
+										<em>*</em>
 										<span style="margin-left: 80px">계좌번호</span>
 									</th>
 									<td data-cell-header="계좌번호" class="txt-left">
@@ -279,6 +305,40 @@
 		}
 
 	});
+
+	//폰 인증받기
+	let certification = 0;
+	$("#phoneBtn").click(() => {
+		const phone = $('#phone').val();
+		$.ajax({
+			url: "send-one",
+			method: "POST",
+			data: {
+				"phone": phone
+			},
+			dataType: "json",
+			success: (data) => {
+				console.log("통", certification);
+				console.log(data);
+				certification = data;
+				console.log("통신하고 나서 콘솔", certification);
+			},
+			error: (status, error) => {
+				console.log(status, error);
+			}
+		})
+	})
+	$("#phoneCheckBtn").click(()=>{
+		
+		let checkNumber = $('#phoneCheck').val();
+		console.log(certification, checkNumber);
+		if(checkNumber == certification){
+			alert("인증되었습니다.")
+		}else {
+			alert("인증실패")
+		}
+	})
+
 </script>
 
 
