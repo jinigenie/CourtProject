@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<div class="wrap">
@@ -77,8 +80,8 @@
 										<div class="input-wrap-three write-wrap-m"
 											style="width: 162px; display: inline-block">
 											<div class="input-wrap" style="width: 200px">
-												<input name="username" id="cvl_nm" value="" class="cm_inptxt"
-													type="text" />
+												<input name="username" id="password" value="" class="cm_inptxt"
+													type="password" />
 											</div>
 										</div>
 									</td>
@@ -91,10 +94,12 @@
 										<div class="input-wrap-three write-wrap-m"
 											style="width: 162px; display: inline-block">
 											<div class="input-wrap" style="width: 200px">
-												<input name="username" id="cvl_nm" value="" class="cm_inptxt"
-													type="text" />
+												<input name="username" id="password-confirm" value="" class="cm_inptxt"
+													type="password" />
 											</div>
+											<span style="color: crimson;" id="password-confirm-message"></span>
 										</div>
+										
 									</td>
 								</tr>
 								<tr>
@@ -192,7 +197,7 @@
 					</style>
 					<div class="btn-holder">
 						<button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
-							<span>가입</span>
+							<span>등록</span>
 						</button>
 						<button class="btn btn-2 hover-opacity next_btn">
 							<span>취소</span>
@@ -203,5 +208,17 @@
 		</div>
 	</div>
 </th:block>
+<script>
+	
+		$('#password-confirm').on('keyup', function () {
+			var password = $('#password').val();
+			var passwordConfirm = $(this).val();
+			if (password === passwordConfirm) {
+				$('#password-confirm-message').removeClass('password-mismatch').text('');
+			} else {
+				$('#password-confirm-message').addClass('password-mismatch').text('비밀번호가 일치하지 않습니다.');
+			}
+		});
+</script>
 
 </html>

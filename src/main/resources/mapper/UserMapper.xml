@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.court.proj.user.UserMapper">
+
+    <select id="checkId">
+    	select count(*) as count from TB_001 where user_id = #{user_id}
+    </select>
+
+	<insert id="userJoin" parameterType="UserVO">
+		insert into TB_001 (USER_ID,USER_PW, USER_NAME, USER_AGE, USER_EMAIL, USER_PHONE,
+							USER_JOB, USER_AR, USER_AR_ZONECODE, USER_AR_DETAIL, USER_BANK,
+							USER_BANK_ACCOUNT, USER_BANK_HOLDER)
+				VALUES (#{user_id},#{user_pw},#{user_name},#{user_age},#{user_email},#{user_phone},
+						#{user_job},#{user_ar},#{user_ar_zonecode},#{user_ar_detail},#{user_bank},
+						#{user_bank_account},#{user_bank_holder})
+	</insert>
+
+</mapper>
