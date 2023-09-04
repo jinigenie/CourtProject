@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	
+
+<link rel="stylesheet" th:href="@{../../css/user/login.css}" />
+
+<!-- sub css 지우면 안됨  -->
+<link rel="stylesheet" type="text/css" href="../../css/korean/sub.css">
 
 
-</head>
-
+<!-- sub js -->
+<script type="text/javascript" src="../../js/korean/sub.js"></script>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -29,30 +32,7 @@
 					</div>
 				</div>
 
-				<!-- sub css 지우면 안됨  -->
-				<link rel="stylesheet" type="text/css" href="../../css/korean/sub.css">
-				<style>
-					@media screen and (max-width: 1024px) {
-						.table-responsive>table>tbody>tr td[data-cell-header]:before {
-							width: 30%;
-							margin: 0 0 0 0;
-							vertical-align: unset;
-						}
-					}
 
-					.table-responsive>table>tbody>tr:hover {
-						background-color: #afeeee;
-					}
-
-					@media screen and (min-width: 1100px) {
-						#select-box-margin-left-10 {
-							margin-left: 6px;
-						}
-					}
-				</style>
-
-				<!-- sub js -->
-				<script type="text/javascript" src="../../js/korean/sub.js"></script>
 
 				<article id="detail-content">
 					<div class="heading-wrap container">
@@ -67,330 +47,7 @@
 							<p>다양한 인증방법으로 로그인이 가능합니다.</p>
 						</div>
 						<!-- login css -->
-						<style>
-							.btn-style.btn-style22 {
-								width: 100%;
-								height: 52px;
-								line-height: 50px;
-								background: #02478a;
-								color: #fff;
-								border-color: #02478a;
-								font-size: 0.8rem;
-								text-align: center;
-								border-radius: 3px;
-							}
 
-							.btn-style {
-								position: relative;
-								display: inline-block;
-								vertical-align: middle;
-								width: 282px;
-								height: 50px;
-								margin: 0.25rem 0 0 0.25rem;
-								padding: 0 2rem;
-								line-height: 48px;
-								border-width: 1px;
-								border-style: solid;
-								border-color: #4e71d7;
-								background: #4e71d7;
-								overflow: hidden;
-								font-size: 0.85rem;
-								font-weight: 400;
-								color: #fff;
-								text-align: center;
-								transition: color 0.3s, background 0.3s, border-color 0.3s;
-							}
-
-							a {
-								color: inherit;
-								text-decoration: none;
-							}
-
-							.btn-style:before {
-								position: absolute;
-								top: 100%;
-								left: 0;
-								width: 100%;
-								height: 100%;
-								background: #fff;
-								content: '';
-								transition: top 0.3s;
-							}
-
-							.btn-style.btn-style22:before {
-								background: #fff;
-							}
-
-							/* 로그인 버튼 끝 */
-							.tab-wrap {
-								overflow: hidden;
-							}
-
-							.tab-wrap .tab3 {
-								display: block;
-								table-layout: fixed;
-								position: relative;
-								margin: 1rem 0 0.5rem;
-								padding-bottom: 3px;
-								border-top: 2px solid #0062ad;
-								border-bottom: 1px solid #c8d6e8;
-								overflow: hidden;
-							}
-
-							.tab-wrap .tab {
-								display: table;
-								table-layout: fixed;
-							}
-
-							ul {
-								display: block;
-								list-style-type: disc;
-								margin-block-start: 1em;
-								margin-block-end: 1em;
-								margin-inline-start: 0px;
-								margin-inline-end: 0px;
-								padding-inline-start: 40px;
-							}
-
-							.tab-wrap .tab>li {
-								display: table-cell;
-								width: 1%;
-								vertical-align: middle;
-							}
-
-							.tab-wrap .tab3>li>a {
-								position: relative;
-								display: block;
-								width: 100%;
-								height: 50px;
-								line-height: 50px;
-								font-size: 0.9rem;
-								color: #222;
-								text-align: center;
-								font-weight: 400;
-							}
-
-							/* 로그인 위에 탭 버튼 끝  */
-							.login-wrapper .box12 {
-								overflow: hidden;
-								margin-top: 0.5rem;
-								padding: 1.5rem 9rem;
-							}
-
-							.box12 {
-								padding: 3rem 3.25rem;
-								background: #f6f6f6;
-							}
-
-							.login-wrapper .login-greeting {
-								margin-bottom: 1.5rem;
-								text-align: center;
-								font-family: 'SCDream';
-								font-weight: 500;
-								color: #02478a;
-								font-size: 1.5rem;
-							}
-
-							#tab-cont1 .btn-wrap222 {
-								width: 550px;
-								margin: auto;
-							}
-
-							.txt-left {
-								text-align: left !important;
-							}
-
-							.btn_easy_on {
-								border: 2px solid #02478a;
-								color: #fff;
-								background: #02478a url(../../img/korean/sub/easy_btn_on.png) no-repeat 5% 50%;
-							}
-
-							.btn_list {
-								display: block;
-								height: 52px;
-								line-height: 50px;
-								font-size: 18px;
-								text-align: left;
-								width: 80%;
-								margin: 0 auto;
-								padding-left: 10%;
-								border-radius: 3px;
-								margin-bottom: 5px;
-							}
-
-							.btn_joint_on {
-								border: 2px solid #02478a;
-								color: #fff;
-								background: #02478a url(../../img/korean/sub/cavit_btn_on.png) no-repeat 5% 50%;
-							}
-
-							.btn_finan_on {
-								border: 2px solid #02478a;
-								color: #fff;
-								background: #02478a url(../../img/korean/sub/fin_btn_on.png) no-repeat 5% 50%;
-							}
-
-							.login-wrapper .box12 {
-								overflow: hidden;
-								margin-top: 0.5rem;
-								padding: 1.5rem 9rem;
-							}
-
-							.box12 {
-								padding: 3rem 3.25rem;
-								background: #f6f6f6;
-							}
-
-							#tab-cont2 .btn-wrap222 {
-								width: 550px;
-								margin: auto;
-							}
-
-							.btn_digital_on {
-								border: 2px solid #02478a;
-								color: #fff;
-								background: #02478a url(../../img/korean/sub/digital_btn_on.png) no-repeat 5% 50%;
-							}
-
-							/* 아이디 로그인 */
-							.login-wrapper .box12 {
-								overflow: hidden;
-								margin-top: 0.5rem;
-								padding: 1.5rem 9rem;
-							}
-
-							.box12 {
-								padding: 3rem 3.25rem;
-								background: #f6f6f6;
-							}
-
-							.login-wrapper .login-greeting {
-								margin-bottom: 1.5rem;
-								text-align: center;
-								font-family: 'SCDream';
-								font-weight: 500;
-								color: #02478a;
-								font-size: 1.5rem;
-							}
-
-							#tab-cont3 .login-lst-wrap {
-								width: 350px;
-								margin: auto;
-							}
-
-							ul,
-							ol,
-							li,
-							dl,
-							dt,
-							dd {
-								margin: 0;
-								padding: 0;
-								list-style: none;
-							}
-
-							#tab-cont3 .login-lst-wrap>li {
-								padding: 0;
-							}
-
-							.login-wrapper .login-lst-wrap>li {
-								position: relative;
-								padding: 0 2.25rem;
-							}
-
-							li {
-								display: list-item;
-								text-align: -webkit-match-parent;
-							}
-
-							form,
-							figure,
-							figcaption {
-								padding: 0;
-								margin: 0;
-							}
-
-							.login-wrapper .login-input-wrap .input-wrap {
-								position: relative;
-								height: 50px;
-								border-radius: 3px;
-								border: 1px solid #023668;
-							}
-
-							.input-wrap {
-								height: 40px;
-								background: #fff;
-								border: 1px solid #cdcdcd;
-							}
-
-							.login-wrapper .login-input-wrap .input-wrap:before {
-								position: absolute;
-								top: 50%;
-								left: 1rem;
-								transform: translateY(-50%);
-								font-family: 'xeicon';
-								color: #707070;
-								font-size: 1rem;
-								content: '\e9f5';
-							}
-
-							.login-wrapper .login-input-wrap .input-wrap input {
-								padding-left: 3rem;
-							}
-
-							.input-wrap>input {
-								display: block;
-								width: 100%;
-								height: 100%;
-								padding: 0 0.5rem;
-								border: 0;
-							}
-
-							.input-wrap>input {
-								display: block;
-								width: 100%;
-								height: 100%;
-								border: 0;
-								background: transparent;
-							}
-
-							.login-wrapper .login-input-wrap .input-wrap+.input-wrap:before {
-								content: '\e966';
-							}
-
-							.login-wrapper .login-input-wrap .input-wrap+.input-wrap {
-								margin-top: 0.25rem;
-							}
-
-							/* 로그인버튼 끝 */
-
-							.login-side-lst {
-								overflow: hidden;
-							}
-
-							.login-side-lst>li {
-								float: left;
-								color: #505050;
-								font-size: 0.7rem;
-								width: 33.333%;
-							}
-
-							.login-side-lst>li:first-of-type>a {
-								text-align: left;
-							}
-
-							.login-side-lst>li>a {
-								position: relative;
-								display: block;
-								padding: 0.2rem 0;
-								text-align: center;
-							}
-
-							.login-side-lst>li:last-of-type>a {
-								text-align: right;
-							}
-						</style>
 						<div class="login-wrapper">
 							<div class="tab-wrapper">
 								<div class="tab-wrap">
@@ -413,11 +70,11 @@
 									</ul>
 								</div>
 
-								<div class="tab-cont" id="tab-cont1" style="display: none;">
+								<div class="tab-cont" id="tab-cont1" style="display: none; padding-bottom: 150px;">
 									<div class="box12">
 										<div class="login-wrap">
 											<div class="login-greeting">
-												재판조력자 민원을 방문해 주셔서 감사합니다.
+												편리하고 간편한 재판조력자 신청
 											</div>
 
 											<div class="btn-wrap txt-left btn-wrap222">
@@ -449,22 +106,13 @@
 										</div>
 									</div>
 
-									<div class="box9">
-										<ul class="depth-lst depth-lst-depth1">
-											<li>
-												<strong class="bul010">전자정부법 시행령 제 90조(민감정보 및 고유식별정보의
-													처리)</strong>
-												<ul class="bul-lst03 depth-lst-depth2"></ul>
-											</li>
-										</ul>
-									</div>
 								</div>
 
 								<div class="tab-cont" id="tab-cont2" style="display: none;">
 									<div class="box12">
 										<div class="login-wrap">
 											<div class="login-greeting">
-												고용노동부 민원마당을 방문해 주셔서 감사합니다.
+												편리하고 간편한 재판조력자 신청
 											</div>
 
 											<div class="btn-wrap txt-left btn-wrap222">
@@ -483,36 +131,19 @@
 										</div>
 									</div>
 
-									<div class="box9">
-										<ul class="depth-lst depth-lst-depth1">
-											<li>
-												<strong class="bul010">전자정부법 시행령 제 90조(민감정보 및 고유식별정보의
-													처리)</strong>
-												<ul class="bul-lst03 depth-lst-depth2"></ul>
-											</li>
-										</ul>
-									</div>
 								</div>
 
-								<div class="tab-cont" id="tab-cont3" style="">
+								<div class="tab-cont" id="tab-cont3" style="padding-bottom: 150px;">
 									<div class="box12">
 										<div class="login-wrap">
 											<div class="login-greeting">
-												고용노동부 민원마당을 방문해 주셔서 감사합니다.
+												편리하고 간편한 재판조력자 신청
 											</div>
 
 											<ul class="login-lst-wrap">
 												<li>
 													<form id="loginForm" name="loginForm" method="post"
 														autocomplete="off">
-														<input type="hidden" name="referer">
-														<input type="hidden" name="login_type" id="login_type">
-														<input type="hidden" name="key_def_use_yn" value="N">
-														<input type="hidden" name="rsaPublicKeyModulus"
-															id="rsaPublicKeyModulus"
-															value="daf37b90695064b6a02baa1b87c2a5deaadb1fb5269ab81363bc7e9aef0881d6ca1d6955963c9b57859d87157d596768aa51a19166c1aaba96e782d558aa56ca36be35453c31d236dd079567f9b9bdac8fa01873acaae565bff91440a5cd510130bd50cab8e6577edbe2511c210ff23a36305e80fcb40f21e2e314b627ad794f1a7770f6b5b1de615ba5bf0914acfed8343fa69dda7ab86193b5c06d2e6f194944170af603149594d09014d2e896ed83fd7950dfe160f275418d94575c591acf912befdbe9c948f150c5a25c0f527df637fdd9f880e2fa8cef3c0c1cc2dca078c1986bbb92254aca4eccb74d3c9d5fbcbfb9f23f610fee6e4fbba510546a6901">
-														<input type="hidden" name="rsaPublicKeyExponent"
-															id="rsaPublicKeyExponent" value="10001">
 														<input type="text" placeholder="" name="cookieHiddenAlertStop"
 															autocomplete="off" style="display: none">
 														<input type="password" placeholder=""
@@ -532,7 +163,8 @@
 																	onkeyup="if(event.keyCode ==13){id_login()}">
 															</div>
 														</div>
-														<div class="btn-wrap txt-center" style="margin: 6px 0 0 -3px; width: 348px;">
+														<div class="btn-wrap txt-center"
+															style="margin: 6px 0 0 -3px; width: 348px;">
 															<a class="btn-style btn-style22" id="id_login"
 																href="javascript:id_login();" title="아이디 로그인">
 																<i class="xi-log-in"></i>
@@ -542,214 +174,21 @@
 
 														<ul class="login-side-lst">
 															<li>
-																<a href="/minwon2008/join/join_first.do">회원가입</a>
+																<a href="agree">회원가입</a>
 															</li>
 															<li>
-																<a href="javascript:find_id_layer();"
-																	id="btn_find_id">아이디 찾기</a>
+																<a href="javascript:openPopup();" id="btn_find_id">아이디
+																	찾기</a>
 															</li>
 															<li>
-																<a href="#layer2" id="btn_find_pwd"
-																	onclick="find_pass_layer()">비밀번호 찾기</a>
+																<a href="javascript:openPopup2();"
+																	id="btn_find_pwd">비밀번호 찾기</a>
 															</li>
 														</ul>
 													</form>
 												</li>
 											</ul>
 										</div>
-									</div>
-
-									<div class="box9">
-										<ul class="depth-lst depth-lst-depth1">
-											<li>
-												<strong class="bul010">전자정부법 시행령 제 90조(민감정보 및 고유식별정보의
-													처리)</strong>
-												<ul class="bul-lst03 depth-lst-depth2"></ul>
-											</li>
-										</ul>
-									</div>
-								</div>
-
-								<div class="tab-cont" id="tab-cont4" style="display: none;">
-									<h2 class="tab-hidden">비회원</h2>
-									<div class="box12">
-										<div class="login-wrap">
-											<div class="login-greeting">
-												재판조력자 민원마당을 방문해 주셔서 감사합니다.
-											</div>
-											<!-- 비회원 민원신청 영역 -->
-											<script type="text/javascript">
-												$(function () {
-													$("input[name='native_div']").change(function () {
-														//console.log($(this).val());
-														if ($(this).val() == '03') {
-															$('.noneUser').hide();
-															$('.noneCorp').show();
-															document.form_finCert.login_type.value = 'C';
-														} else {
-															$('.noneCorp').hide();
-															$('.noneUser').show();
-															document.form_finCert.login_type.value = 'P';
-														}
-													});
-												});
-											</script>
-
-											<form action="/gpki_login.do" id="formNone" name="formNone" method="post"
-												autocomplete="off">
-												<input type="hidden" name="mailAddress" id="mailAddress" value="">
-												<input type="hidden" name="cellNumber" id="cellNumber" value="">
-												<input type="hidden" name="isNonMember" value="true">
-												<input type="hidden" name="call_refer" value="">
-												<input type="hidden" name="sessionid"
-													value="niukfAtqHrDGa0BgVt2rhSJ1O16Oo6ntT3XVG89wyRCnI84UxSk35zgmtPLFDafK.minwon-was_servlet_minwon1">
-												<input type="hidden" name="key_def_use_yn" value="N">
-												<input type="text" placeholder="" name="cookieHiddenAlertStop2"
-													autocomplete="off" style="display: none">
-												<input type="password" placeholder="" name="cookieHiddenAlertStop2"
-													autocomplete="off" style="display: none">
-
-												<ul class="login-lst-wrap">
-													<li class="col-md-6 col-xs-12">
-														<!-- END -->
-													</li>
-
-													<li class="col-md-6 col-xs-12">
-														<div class="btn-wrap txt-left" style="padding: 0">
-															<a href="#"
-																onclick="javascript:goNonUserLogin('06');return false;"
-																class="btn_list2 btn_easy_on noneUser"><span>간편인증</span><span
-																	class="fin_list"><img
-																		src="/img/korean/sub/payco_icon.png"
-																		alt="payco_icon">&nbsp;<img
-																		src="/img/korean/sub/samsung_icon.png"
-																		alt="samsung_icon"><img
-																		src="/img/korean/sub/pass_icon.png"
-																		alt="pass_icon"><img
-																		src="/img/korean/sub/kb_icon.png"
-																		alt="kb_icon"><img
-																		src="/img/korean/sub/kakao_icon.png"
-																		alt="kakao_icon"></span>
-															</a>
-															<a href="#"
-																onclick="javascript:goNonUserLogin('01');return false;"
-																class="btn_list2 btn_joint_on"><span>공동·브라우저인증서</span></a>
-															<a href="#"
-																onclick="javascript:goNonUserLogin('07');return false;"
-																class="btn_list2 btn_finan_on"><span>금융인증서</span></a>
-															<a href="#"
-																onclick="javascript:goNonUserLogin('03');return false;"
-																class="btn_list2 btn_phone_on noneUser"><span>휴대폰</span></a>
-															<a href="#"
-																onclick="javascript:goNonUserLogin('04');return false;"
-																class="btn_list2 btn_i_on noneUser"><span>아이핀</span></a>
-														</div>
-													</li>
-												</ul>
-											</form>
-										</div>
-									</div>
-
-									<div class="box9">
-										<ul class="depth-lst depth-lst-depth1">
-											<li>
-												<strong class="bul010">전자정부법 시행령 제 90조(민감정보 및 고유식별정보의
-													처리)</strong>
-												<ul class="bul-lst03 depth-lst-depth2">
-													<li>
-														중앙행정기관등의 장 또는 중앙사무관장기관의 장(해당
-														권한의 위임·위탁된 경우에는 그 권한을 위임·위탁받은
-														자를 포합한다.)은 법 제9조 제2항 또는 제3항에 따라
-														전자민원창구 또는 통합전자민원창구를 통한 민원처리에
-														관한 사무를 수행하기 위하여 불가피한 경우
-														<em class="point1">개인정보 보호법 시행령 제 19조 제 1호에 따른
-															주민등록번호가 포함된 자료를 처리할 수 있다.</em>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-
-									<div>
-										<!-- 과거 NPKI 인증을 위한 form 인듯 -->
-										<form id="form2" name="form2" method="post">
-											<input type="hidden" name="pSeq" value="">
-											<input type="hidden" name="pRtn" value="1">
-											<input type="hidden" name="pCert" value="CTC">
-											<input type="hidden" name="pUrl" value="">
-											<input type="hidden" name="name" value="">
-											<input type="hidden" name="jumin1" value="">
-											<input type="hidden" name="jumin2" value="">
-											<input type="hidden" name="native_div" value="">
-											<input type="hidden" name="cvl_mail" value="">
-											<input type="hidden" name="cvl_cel" value="">
-											<input type="hidden" name="resend_yn" value="N">
-											<input type="hidden" name="auth_type" value="">
-											<input type="hidden" name="key_def_use_yn" value="N">
-										</form>
-
-										<form id="form_SignDataCMS" name="form_SignDataCMS" method="post"
-											action="/anySign_login.do">
-											<input type="hidden" name="aXgateAddress">
-											<input type="hidden" name="aCAList">
-											<input type="hidden" name="aPlain">
-											<input type="hidden" name="aDescription">
-											<input type="hidden" name="aLimitPassword">
-											<input type="hidden" name="any_sign_login_type" value="P">
-											<input type="hidden" id="output_id1" name="aResult">
-											<input type="hidden" name="key_def_use_yn" value="N">
-										</form>
-
-										<form id="form_SignDataWithVID" name="form_SignDataWithVID" method="post"
-											action="/any_sign_none_login.do">
-											<input type="hidden" name="aXgateAddress">
-											<input type="hidden" name="aCAList">
-											<input type="hidden" name="aPlain">
-											<input type="hidden" name="aDescription">
-											<input type="hidden" name="aLimitPassword">
-											<input type="hidden" id="aIdn" name="aIdn">
-											<input type="hidden" name="aSerial">
-											<input type="hidden" name="aLocation">
-											<input type="hidden" name="any_sign_login_type" value="P">
-											<input type="hidden" name="aSignedMsg">
-											<input type="hidden" name="aVidMsg">
-											<input type="hidden" name="isNonMbr" id="isNonMbr" value="false">
-											<input type="hidden" name="native_div" id="native_div" value="01">
-											<input type="hidden" name="any_name">
-											<input type="hidden" name="any_jumin">
-
-											<input type="hidden" name="saup_no1">
-											<input type="hidden" name="saup_no2">
-											<input type="hidden" name="saup_no3">
-											<input type="hidden" id="verify_gbn" name="verify_gbn">
-											<input type="hidden" name="key_def_use_yn" value="N">
-										</form>
-
-										<form name="xecure">
-											<input type="hidden" name="p">
-										</form>
-
-										<!-- 금융인증서(회원/비회원) -->
-										<form id="form_finCert" name="form_finCert" method="post"
-											action="/fincert_none_login.do">
-											<input type="hidden" name="native_div" value="01">
-											<input type="hidden" name="login_type" value="P">
-											<input type="hidden" name="user_name">
-											<input type="hidden" name="user_ssn">
-											<input type="hidden" name="isMember" value="false">
-											<input type="hidden" name="aSignedVals">
-											<input type="hidden" name="key_def_use_yn" value="N">
-										</form>
-
-										<!-- 간편인증(회원/비회원) -->
-										<form id="form_esign" name="form_esign" method="post"
-											action="/oacx_sample/parse_token.jsp">
-											<input type="hidden" name="token">
-											<input type="hidden" name="key_def_use_yn" value="N">
-											<input type="hidden" name="isMember" value="false">
-											<input type="hidden" name="ses_doc_url_login_sso"
-												value="/minwon2008/my/my_minwon_list.do">
-										</form>
 									</div>
 								</div>
 							</div>
@@ -763,7 +202,30 @@
 	</div>
 </th:block>
 
+<script>
+	// 팝업 창 열기 함수
+	function openPopup() {
+		// 팝업 창을 가운데 정렬하려면 화면의 가로 및 세로 중앙 위치 계산
+		var width = 500;
+		var height = 350;
+		var left = (window.innerWidth - width) / 2;
+		var top = (window.innerHeight - height) / 2;
 
+		// 팝업 창 열기
+		window.open('idSearch', '팝업 창', 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+	}
 
+	// 팝업 창 열기 함수
+	function openPopup2() {
+		// 팝업 창을 가운데 정렬하려면 화면의 가로 및 세로 중앙 위치 계산
+		var width = 500;
+		var height = 350;
+		var left = (window.innerWidth - width) / 2;
+		var top = (window.innerHeight - height) / 2;
+
+		// 팝업 창 열기
+		window.open('pwSearch', '팝업 창', 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+	}
+</script>
 
 </html>

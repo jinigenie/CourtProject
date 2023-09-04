@@ -2,6 +2,10 @@ package com.court.proj.user;
 
 import java.util.Random;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,10 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	@Autowired
+	UserService userService;
+	
 	
 	final DefaultMessageService messageService;
 
@@ -43,6 +51,39 @@ public class UserController {
 		return "user/agree";
 	}
 	
+	@GetMapping("/idSearch")
+	public String idSearch() {
+		return "user/idSearch";
+	}
+	
+	@GetMapping("/pwSearch")
+	public String pwSearch() {
+		return "user/pwSearch";
+	}
+	
+	//회원가입
+	@PostMapping("/joinForm")
+	public String joinForm(@Valid UserVO vo) {
+		
+		userService.joinUser(vo);
+		
+		return "user/userjoin";
+	}
+	
+	//아이디 중복확인
+	@PostMapping("/checkDuplicateUsername")
+	public @ResponseBody ResponseEntity<Boolean> checkDuplicate(@RequestParam("userid") String userid){
+		
+		boolean bool = false;
+		int re = userService.checkId(userid);
+		if(re == 0) {
+			bool = true;
+		}
+		
+		return new ResponseEntity<Boolean>(bool, HttpStatus.OK);  
+	}
+	
+	//휴대폰 인증번호
 	@PostMapping("/send-one")
 	public @ResponseBody ResponseEntity<Integer> sendOne(@RequestParam("phone") String phone) {
         //Message message = new Message();
