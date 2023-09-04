@@ -786,7 +786,7 @@ swiper-slide {
 	max-height: 430px;
 	height: 431px;
 	width: 428px;
-	background-color: #4b63c3;
+	background-color: #ababab;
 	/*background-color: rgb(255, 255, 255);*/
 
 	
@@ -914,6 +914,7 @@ swiper-slide {
 
 /*컨텐츠 영역*/
 .popup_box .popup_cont {
+	min-height: 400px;
 	padding: 50px;
 	line-height: 1.4rem;
 	font-size: 14px;
