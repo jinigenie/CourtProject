@@ -15,4 +15,6 @@ public class CertiVO {
     @JsonProperty("종목명")
     private String certiName;
 
+    private String searchkeyword;
+
 }

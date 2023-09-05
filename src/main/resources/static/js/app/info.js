@@ -1,3 +1,198 @@
+<!-- 학력 선택에 따라 테이블 보이기 -->
+$("#selectEdu").change(function () {
+    let state = $("#selectEdu option:selected").val();
+    if (state == "" || state == null) {
+        $(".university").hide();
+        $(".highschool").hide();
+    } else if (state == "고졸") {
+        $(".university").hide();
+        $(".highschool").show();
+    } else {
+        $(".highschool").show();
+        $(".university").show();
+    }
+});
+
+<!-- 자격증 추가하기 -->
+$('#certAddBtn').click(function () {
+    var addtr = '<tr style="cursor: pointer">';
+    addtr += '<td data-cell-header="종목"><input type="text" class="input-wrap" style="width: 200px; margin-left: 30px">';
+    addtr += '<input type="button" class="certiSearch"';
+    addtr += 'style="background: url(../../img/app/search.png); border: none; width: 30px; height: 30px; background-size: cover; position: absolute;';
+    addtr += 'margin-left: -38px; margin-top: 5px; cursor: pointer"></td>';
+    addtr += '<td data-cell-header="기관"><input type="text" class="input-wrap" style="width: 150px"></td>';
+    addtr += '<td data-cell-header="면허번호"><input type="text" class="input-wrap" style="width: 150px"></td>';
+    addtr += '<td data-cell-header="발급일">';
+    addtr += '<div class="calander-box" style="padding: 0">';
+    addtr += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
+    addtr += 'name="issueDate" value="" style="width: 150px; height: 40px; border-radius: 0;';
+    addtr += 'background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>';
+    addtr += '</div>';
+    addtr += '</td>';
+    addtr += '<td>';
+    addtr += '<button class="case case1" onclick="deleteLine(this);" style="margin-right: 30px">지우기</button>';
+    addtr += '</td></tr>';
+    addtr += '</tr>';
+
+    $('#certiTable').append(addtr);
+    $(".datepicker").datepicker({
+        dateFormat: 'yy-mm-dd',
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    });
+    $(".datepicker").prop('readonly', false);
+
+});
+function deleteLine(obj) {
+    var tr = $(obj).parent().parent();
+    tr.remove();
+}
 
 
+<!-- 학력 추가하기 -->
+const uniId = Date.now();
+$('#eduAddBtn').click(function () {
+    var addtr2 = '<tr style="cursor: pointer">';
+    addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">';
+    addtr2 += '</td>';
+    addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">';
+    addtr2 += '</td>';
+    addtr2 += '<td data-cell-header="학위">';
+    addtr2 += '<div class="select-box2" style="width: 90px">';
+    addtr2 += '<label for="xx">선택</label>';
+    addtr2 += '<select class="info-select" id="edu"' + uniId + ' name="search_field">';
+    addtr2 += '<option value="">학사</option>';
+    addtr2 += '<option value="">석사</option>';
+    addtr2 += '<option value="">박사</option>';
+    addtr2 += '<option value="">전문학사</option>';
+    addtr2 += '</select>';
+    addtr2 += '</div>';
+    addtr2 += '</td>';
+    addtr2 += '<td data-cell-header="졸업구분">';
+    addtr2 += '<div class="select-box2" style="width: 90px">';
+    addtr2 += '<label for="yy">선택</label>';
+    addtr2 += '<select class="info-select" name="search_field" title="검색조건을 선택해주세요." id="st"' + uniId + '>';
+    addtr2 += '<option value="">졸업</option>';
+    addtr2 += '<option value="">졸업예정</option>';
+    addtr2 += '<option value="">수료</option>';
+    addtr2 += '<option value="">중퇴</option>';
+    addtr2 += '</select></div></td>';
+    addtr2 += '<td data-cell-header="입학일">';
+    addtr2 += '<div class="calander-box" style="padding: 0">';
+    addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
+    addtr2 += 'name="startDate" value="" style="width: 130px; height: 40px; border-radius: 0; background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
+    addtr2 += '</div></td>';
+    addtr2 += '<td data-cell-header="졸업일">';
+    addtr2 += '<div class="calander-box" style="padding: 0">';
+    addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate" value=""';
+    addtr2 += 'style="width: 130px; height: 40px; border-radius: 0;background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
+    addtr2 += '</div></td>';
+    addtr2 += '<td style="padding: 0.5rem 0">';
+    addtr2 += '<button class="case case1 deleteInfo" onclick="deleteLine(this)">지우기</button>';
+    addtr2 += '</td>';
+    addtr2 += '</tr>';
+
+    $('#eduTable').append(addtr2);
+    $(".datepicker").datepicker({
+        dateFormat: 'yy-mm-dd',
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    });
+    $(".datepicker").prop('readonly', false);
+
+});
+function deleteLine(obj) {
+    var tr = $(obj).parent().parent();
+    tr.remove();
+}
+
+
+<!-- 모달창 : 저장-->
+const modal = document.querySelector('.modal');
+let x = 0;
+
+$(".prev_btn").click(function () {
+    modal.style.display = 'block';
+    x = 1;
+})
+$(".next_btn").click(function () {
+    modal.style.display = 'block';
+    x = 2;
+})
+
+$(".save").click(function () {
+    if (x == 1) {
+        $(location).attr("href", "../app/career");
+    } else {
+        $(location).attr("href", "../app/file");
+    }
+    x = 0;
+})
+
+$(".cancel").click(function () {
+    if (x == 1) {
+        $(location).attr("href", "../app/career");
+    } else {
+        $(location).attr("href", "../app/file");
+    }
+    x = 0;
+})
+
+$(".dmui_dialog_btn").click(function () {
+    modal.style.display = 'none';
+})
+
+
+//모달창2 : 자격증 검색창
+const modal2 = document.querySelector('.modal2');
+$("#certiTable").on("click", ".certiSearch", function () {
+
+    $("#certification").val('');
+    $(".addLi").remove();
+    $(".defaultLi").show();
+
+    modal2.style.display = 'block';
+    dataApi();
+})
+
+$(".modalOff").click(function () {
+    modal2.style.display = 'none';
+})
+
+
+// 자격증 검색
+let apiData = [];
+
+function dataApi(){
+    $.ajax({
+        url:"http://api.odcloud.kr/api/15082998/v1/uddi:950a6280-b56a-417e-b97c-de941adbfc9f?page=1&perPage=600&serviceKey=wVFM1V%2FCXCg4fUs1i3%2FxM8%2BC6l9ymKY%2BXAUoe9PbRw68Jah1QmTPEIPKtYx4jF0HUKVUI4YPZqW%2F0EH%2FWDwIjg%3D%3D",
+        type:"GET",
+        success:function(data){
+            apiData = data.data;
+
+        },error:function(status,err){
+            console.log(err)
+        }
+
+    })
+}
+
+$('#searchCerti-btn').click(()=>{
+    var search = $('#certification').val();
+    var addLi='';
+    const filteredData = apiData.filter(item => item.종목명.includes(search));
+
+    if (filteredData.length > 0) {
+        $(".defaultLi").hide();
+        for (const f of filteredData){
+            addLi += '<li class="addLi">'+f.종목명+'</li>';
+
+        }
+    }
+
+    $('#searchResult').append(addLi);
+
+})
 
