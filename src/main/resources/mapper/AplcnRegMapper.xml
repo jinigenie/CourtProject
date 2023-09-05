@@ -10,6 +10,9 @@
            insert into CERTI(CERTINAME) values (#{certiName})
     </insert>
 
+    <select id="getCerti" resultType="CertiVO">
+        select * from CERTI where CERTINAME like concat('%',#{vo.searchkeyword},'%')
+    </select>
 
 
 </mapper>

@@ -62,18 +62,18 @@ $(document).ready(function() {
 });
 
 //사이드
-$(document).ready(function () {
-	var sidenav = document.querySelector(".sidenav");
-	var menuBtn = document.querySelector(".menuBtn");
-	menuBtn.onclick = function () {
-		var btn = sidenav.style.width;
-		if (btn === "0px" || btn === "") {
-			sidenav.style.width = "200px";
-		} else {
-			sidenav.style.width = "0px";
-		}
-	}
-});
+// $(document).ready(function () {
+// 	var sidenav = document.querySelector(".sidenav");
+// 	var menuBtn = document.querySelector(".menuBtn");
+// 	menuBtn.onclick = function () {
+// 		var btn = sidenav.style.width;
+// 		if (btn === "0px" || btn === "") {
+// 			sidenav.style.width = "200px";
+// 		} else {
+// 			sidenav.style.width = "0px";
+// 		}
+// 	}
+// });
 
 $(document).ready(function() {
 	$('.sub_menu_toggle > a').click(function(){

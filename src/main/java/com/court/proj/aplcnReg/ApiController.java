@@ -20,10 +20,12 @@ public class ApiController {
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
-            aplcnRegService.setCerti(list.get(i));
+//            aplcnRegService.setCerti(list.get(i));
         }
 
         return "b";
     }
+
+
 
 }

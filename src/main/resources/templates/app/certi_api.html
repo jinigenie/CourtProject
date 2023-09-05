@@ -10,30 +10,40 @@
 
 <div id="wrap">
     <button onclick="dataApi()">정보내려받기(최초 한 번만 실행해야 함!)</button>
+    <input type="text" id="searchInput">
+    <button id="btn">검색</button>
+     검색결과
+    <div id="result">
+
+    </div>
+
 </div>
 
 <script>
+    let apiData = [];
+
     function dataApi(){
-        console.log(1);
         $.ajax({
             url:"http://api.odcloud.kr/api/15082998/v1/uddi:950a6280-b56a-417e-b97c-de941adbfc9f?page=1&perPage=600&serviceKey=wVFM1V%2FCXCg4fUs1i3%2FxM8%2BC6l9ymKY%2BXAUoe9PbRw68Jah1QmTPEIPKtYx4jF0HUKVUI4YPZqW%2F0EH%2FWDwIjg%3D%3D",
             type:"GET",
             success:function(data){
+                apiData = data.data;
+                console.log(apiData);
 
-                var data2 = data.data;
-                console.log(data2);
-                $.ajax({
-                    url:"../api/setData",
-                    type:"POST",
-                    contentType: "application/json; charset=UTF-8",
-                    dataType: "json",
-                    data:JSON.stringify({"list":data2}),
-                    success:function(data2){
-                        console.log(data2);
-                    },error:function(status,err){
-                        console.log(status);
-                    }
-                })
+                // var data2 = data.data;
+                // console.log(data2);
+                // $.ajax({
+                //     url:"../api/setData",
+                //     type:"POST",
+                //     contentType: "application/json; charset=UTF-8",
+                //     dataType: "json",
+                //     data:JSON.stringify({"list":data2}),
+                //     success:function(data2){
+                //         console.log(data2);
+                //     },error:function(status,err){
+                //         console.log(status);
+                //     }
+                // })
 
             },error:function(status,err){
                 console.log(err)
@@ -41,6 +51,20 @@
 
         })
     }
+
+    $('#btn').click(()=>{
+        var search = $('#searchInput').val();
+        console.log(search);
+        console.log(1)
+        const filteredData = apiData.filter(item => item.종목명.includes(search));
+        console.log(filteredData);
+        console.log(Array.isArray(filteredData))
+        for (const f of filteredData){
+            console.log(f.종목명);
+        }
+        $('#result').html(filteredData);
+    })
+
 
 </script>
 

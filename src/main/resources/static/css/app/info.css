@@ -16,8 +16,20 @@ body {
     margin-left: 5%;
 }
 
+.regInfo > .regCheck {
+    width: 120px;
+    margin: 30px 0;
+}
+
 .regInfo > img {
-    width: 90%;
+    width: 80%;
+    margin: 0 50px;
+}
+
+.regInfo p {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 4px 0;
 }
 
 
@@ -339,6 +351,15 @@ element.style {
     color: white;
     border-radius: 0 0 10px 0;
 }
+
+.dmui_dialog_footer .save2 {
+    float: right;
+    background-color: black;
+    padding-top: 5px;
+    color: white;
+    border-radius: 0 0 10px 0;
+}
+
 .dmui_dialog_footer .cancel {
     float: left;
     background-color: #7b7b7c;
@@ -352,6 +373,30 @@ element.style {
     padding-top: 5px;
     color: white;
     border-radius: 0 0 0 10px;
+}
+
+.search-btn-wrap {
+    overflow: hidden;
+    padding-left: 12%;
+    margin: 20px;
+}
+.search-btn-wrap .input-wrap {
+    width: 300px;
+    float: left;
+}
+.search-btn-wrap #searchCerti-btn {
+    float: left;
+    border: 1px solid #777;
+    width: 50px;
+    height: 40px;
+    margin-left: 7px;
+}
+
+.addLi {
+    margin-left: 55px;
+    padding: 6px;
+    cursor: pointer;
+    width: 50px;
 }
 
 /* *********************************************************************************

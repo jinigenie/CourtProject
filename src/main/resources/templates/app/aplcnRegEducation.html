@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
-<script th:src="@{../../js/app/info.js}"></script>
 <script th:src="@{../../js/app/jquery-1.11.3.min.js}"></script>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
@@ -40,6 +39,7 @@
                     </ul>
                 </div>
 
+                <!-- 최종학력 선택 -->
                 <div style="overflow: hidden">
                     <div style="margin-top: 40px; float: left; display: inline-block">
                         <span class="sub_title">최종학력</span>
@@ -57,6 +57,7 @@
                     </div>
                 </div>
 
+                <!-- 고등학교 정보입력 -->
                 <div class="highschool">
                     <div style="overflow: hidden">
                         <div style="margin-top: 40px; float: left">
@@ -110,6 +111,7 @@
                     </div>
                 </div>
 
+                <!-- 대학/대학원 정보입력 -->
                 <div class="university">
                     <div style="overflow: hidden">
                         <div style="margin-top: 40px; float: left">
@@ -147,9 +149,11 @@
                                             <option value="">석사</option>
                                             <option value="">박사</option>
                                             <option value="">전문학사</option>
+
                                         </select>
                                     </div>
                                 </td>
+
                                 <td data-cell-header="졸업구분">
                                     <div class="select-box2" style="width: 90px">
                                         <label for="selectState2"></label>
@@ -181,11 +185,13 @@
                                     <button class="case case1 deleteInfo" style="visibility: hidden">지우기</button>
                                 </td>
                             </tr>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
 
+                <!-- 자격 정보입력 -->
                 <div style="overflow: hidden">
                     <div style="margin-top: 40px; float: left">
                         <span class="sub_title">자격증 정보</span>
@@ -209,7 +215,7 @@
                         <tr style="cursor: pointer">
                             <td data-cell-header="종목"><input type="text" class="input-wrap"
                                                              style="width: 200px; margin-left: 30px">
-                                <input type="button" class=".certiSearch"
+                                <input type="button" class="certiSearch"
                                        style="background: url(../../img/app/search.png); border: none; width: 30px;
                                         height: 30px; background-size: cover; position: absolute;
                                         margin-left: -38px; margin-top: 5px; cursor: pointer"></td>
@@ -245,6 +251,7 @@
 
                 </div>
 
+                <!-- 임시저장 모달창 -->
                 <div class="modal">
                     <div class="modal__background">
                         <div class="modal_body2">
@@ -273,6 +280,36 @@
                     </div>
                 </div>
 
+                <!-- 자격증 검색 모달창 -->
+                <div class="modal2">
+                    <div class="modal__background">
+                        <div class="modal_body" style="height: 350px">
+                            <div class="modalOff">X</div>
+                            <form action="searchCer" method="get">
+                                <div class="modal_con">
+                                    <p style="font-size: 18px; font-weight: 600; margin: 15px; color: #1c449c;">자격증
+                                        검색</p>
+                                    <div class="search-btn-wrap">
+                                        <div class="input-wrap">
+                                            <input id="certification" class="cm_inptxt" name="searchkeyword"
+                                                   type="text"/>
+                                        </div>
+                                        <input type="button" id="searchCerti-btn" th:value="검색">
+                                    </div>
+
+                                    <div class="table table-responsive">
+                                        <ul id="searchResult" style="padding: 20px">
+                                            <li class="defaultLi">정보 없음</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
         </div>
@@ -282,151 +319,7 @@
 
 </th:block>
 
-<!-- 학력 선택에 따라 테이블 보이기 -->
-<script>
+<script th:src="@{../../js/app/info.js}"></script>
 
-    $("#selectEdu").change(function () {
-        let state = $("#selectEdu option:selected").val();
-        if (state == "" || state == null) {
-            $(".university").hide();
-            $(".highschool").hide();
-        } else if (state == "고졸") {
-            $(".university").hide();
-            $(".highschool").show();
-        } else {
-            $(".highschool").show();
-            $(".university").show();
-        }
-    });
-
-</script>
-
-<!-- 자격증 추가하기 -->
-<script>
-
-    $('#certAddBtn').click(function () {
-        var addtr = '<tr style="cursor: pointer">';
-        addtr += '<td data-cell-header="종목"><input type="text" class="input-wrap" style="width: 200px; margin-left: 30px">';
-        addtr += '<input type="button" className=".certiSearch"';
-        addtr += 'style="background: url(../../img/app/search.png); border: none; width: 30px; height: 30px; background-size: cover; position: absolute;';
-        addtr += 'margin-left: -38px; margin-top: 5px; cursor: pointer"></td>';
-        addtr += '<td data-cell-header="기관"><input type="text" class="input-wrap" style="width: 150px"></td>';
-        addtr += '<td data-cell-header="면허번호"><input type="text" class="input-wrap" style="width: 150px"></td>';
-        addtr += '<td data-cell-header="발급일">';
-        addtr += '<div class="calander-box" style="padding: 0">';
-        addtr += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
-        addtr += 'name="issueDate" value="" style="width: 150px; height: 40px; border-radius: 0;';
-        addtr += 'background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>';
-        addtr += '</div>';
-        addtr += '</td>';
-        addtr += '<td>';
-        addtr += '<button class="case case1" onclick="deleteLine(this);" style="margin-right: 30px">지우기</button>';
-        addtr += '</td></tr>';
-        addtr += '</tr>';
-
-        $('#certiTable').append(addtr);
-
-    });
-
-    function deleteLine(obj) {
-        var tr = $(obj).parent().parent();
-        tr.remove();
-    }
-</script>
-
-<!-- 학력 추가하기 -->
-<script>
-
-    $('#eduAddBtn').click(function () {
-        var addtr2 = '<tr style="cursor: pointer">';
-        addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">';
-        addtr2 += '</td>';
-        addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">';
-        addtr2 += '</td>';
-        addtr2 += '<td data-cell-header="학위">';
-        addtr2 += '<div class="select-box2" style="width: 90px">';
-        addtr2 += '<label for="selectEdu3"></label>';
-        addtr2 += '<select class="info-select" id="searchEdu3" name="search_field">';
-        addtr2 += '<option value="">선택</option>';
-        addtr2 += '<option value="">학사</option>';
-        addtr2 += '<option value="">석사</option>';
-        addtr2 += '<option value="">박사</option>';
-        addtr2 += '<option value="">전문학사</option>';
-        addtr2 += '</select>';
-        addtr2 += '</div>';
-        addtr2 += '</td>';
-        addtr2 += '<td data-cell-header="졸업구분">';
-        addtr2 += '<div class="select-box2" style="width: 90px">';
-        addtr2 += '<label for="selectState2"></label>';
-        addtr2 += '<select class="info-select" name="search_field" title="검색조건을 선택해주세요.">';
-        addtr2 += '<option value="" selected="selected">선택</option>';
-        addtr2 += '<option value="">졸업</option>';
-        addtr2 += '<option value="">졸업예정</option>';
-        addtr2 += '<option value="">수료</option>';
-        addtr2 += '<option value="">중퇴</option>';
-        addtr2 += '</select></div></td>';
-        addtr2 += '<td data-cell-header="입학일">';
-        addtr2 += '<div class="calander-box" style="padding: 0">';
-        addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
-        addtr2 += 'name="startDate" value="" style="width: 130px; height: 40px; border-radius: 0; background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
-        addtr2 += '</div></td>';
-        addtr2 += '<td data-cell-header="졸업일">';
-        addtr2 += '<div class="calander-box" style="padding: 0">';
-        addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate" value=""';
-        addtr2 += 'style="width: 130px; height: 40px; border-radius: 0;background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
-        addtr2 += '</div></td>';
-        addtr2 += '<td style="padding: 0.5rem 0">';
-        addtr2 += '<button class="case case1 deleteInfo" onclick="deleteLine(this)">지우기</button>';
-        addtr2 += '</td>';
-        addtr2 += '</tr>';
-
-        $('#eduTable').append(addtr2);
-
-    });
-
-    function deleteLine(obj) {
-        var tr = $(obj).parent().parent();
-        tr.remove();
-    }
-</script>
-
-<!--모달창 : 저장-->
-<script>
-
-    const modal = document.querySelector('.modal');
-    let x = 0;
-
-    $(".prev_btn").click(function () {
-        modal.style.display = 'block';
-        x = 1;
-    })
-    $(".next_btn").click(function () {
-        modal.style.display = 'block';
-        x = 2;
-    })
-
-    $(".save").click(function () {
-        if (x == 1) {
-            $(location).attr("href", "../app/career");
-        } else {
-            $(location).attr("href", "../app/file");
-        }
-        x = 0;
-    })
-
-    $(".cancel").click(function () {
-        if (x == 1) {
-            $(location).attr("href", "../app/career");
-        } else {
-            $(location).attr("href", "../app/file");
-        }
-        x = 0;
-    })
-
-    $(".dmui_dialog_btn").click(function () {
-        modal.style.display = 'none';
-    })
-
-</script>
 
 </html>
