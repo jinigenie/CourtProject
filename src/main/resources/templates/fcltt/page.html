@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<th:block th:fragment="pageNation( FclttPageVO)">
+										<div class="page">
+												<ul>
+													
+													<li><a th:href="@{fcltttList(page=1,
+																				 amount=${FclttpageVO.amount},
+																				 searchCourt=${FclttpageVO.cri.searchCourt},
+																				 searchAct=${FclttpageVO.cri.searchAct},
+																				 searchDate=${FclttpageVO.cri.searchDate},
+																				 )}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+													<!-- 2. 이전버튼 활성화 여부-->
+													<th:block th:if="${FclttpageVO.prev}">
+													<li style="margin-right:5px;"><a th:href="@{fcltttList(page=${FclttpageVO.start-1}, 
+																				 amount=${FclttpageVO.amount},
+																				 searchCourt=${FclttpageVO.cri.searchCourt},
+																				 searchAct=${FclttpageVO.cri.searchAct},
+																				 searchDate=${FclttpageVO.cri.searchDate},
+																				 )}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+													</li>
+													</th:block>
+													
+												<!--	 1. 페이지반복   -->
+													<th:block th:each= "page : ${FclttpageVO.pageList} "> 
+													<li th:class="${ page == FclttpageVO.page ? 'on' : '' }">
+														<a th:href="@{fclttList(page=${page}, 
+																				amount=${FclttpageVO.amount},
+																				 searchCourt=${FclttpageVO.cri.searchCourt},
+																				 searchAct=${FclttpageVO.cri.searchAct},
+																				 searchDate=${FclttpageVO.cri.searchDate},
+																				 )}">[[${page}]]</a></li>
+													</th:block>
+												
+													<!-- 3. 다음버튼 활성화 여부-->
+													<th:blcok th:if ="${pageVO.next}">
+													<li style="margin-left:5px;"><a th:href="@{FclttpageVO(page=${FclttpageVO.end + 1}, 
+																				amount=${FclttpageVO.amount},
+																				 searchCourt=${FclttpageVO.cri.searchCourt},
+																				 searchAct=${FclttpageVO.cri.searchAct},
+																				 searchDate=${FclttpageVO.cri.searchDate},
+																				 )}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+													</th:blcok>
+													
+												<!--	 4 다음버튼-->
+													
+													<li>
+														<a th:href="@{productList(page=${FclttpageVO.realEnd}, amount=${FclttpageVO.amount},
+																				 amount=${FclttpageVO.amount},
+																				 searchCourt=${FclttpageVO.cri.searchCourt},
+																				 searchAct=${FclttpageVO.cri.searchAct},
+																				 searchDate=${FclttpageVO.cri.searchDate},
+																				 )}"><i class="fa fa-angle-double-right"aria-hidden="true"></i></a></li>
+													
+												</ul>
+												
+											
+												
+												
+												
+												
+												
+											</div>
+	
+</th:block>
+	
+	

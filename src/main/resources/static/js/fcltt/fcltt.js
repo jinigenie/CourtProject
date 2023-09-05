@@ -1,5 +1,5 @@
 /* ------------------조력자 등재 page  fclttRegist --------------------*/
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
 	var registerButton = document.querySelector('.register-button');
 	var cancelButton = document.querySelector('.cancel-button');
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		// 취소 버튼 클릭 시 수행할 동작
 		alert("취소되었습니다.");
 	});
-});
+});*/
 /* ------------------조력자 등재 page  fclttRegist --------------------*/
 
 

@@ -19,6 +19,34 @@
 				)
 	
     </insert>
+    
+    <select id="getList">
+	    SELECT tb14.accept_date,
+		       tb14.accept_act_yn,
+		       tb14.accept_etc,
+		       tb11.court_name,
+		       tb10.trial_fcltt_description,
+		       tb1.user_name
+		FROM TB_014 tb14
+		JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
+		JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
+		JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
+
+		<where>
+		
+			<if test="cri.searchCourt !='' and cri.searchCourt != null"> 
+				court_name like concat('%', #{cri.searchCourt},'%')
+			</if>
+			<if test="cri.searchAct !='' and cri.searchAct != null"> 
+				 and accept_act_yn like concat('%', #{cri.searchAct},'%')
+			</if>
+				
+		</where>
+		
+		
+		
+    </select>
+    
 
 
 </mapper>
