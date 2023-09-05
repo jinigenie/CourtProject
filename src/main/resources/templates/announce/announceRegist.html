@@ -13,12 +13,12 @@
 		<div id="main_con">
 			<div id="nav_menu">
 				<div id="lnb">
-					<h2 class="title">공지사항</h2>
+					<h2 class="title">모집공고</h2>
 					<div class="menu">
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 상세</a></li>
+									<li><a href="#">모집공고 등록</a></li>
 									<li><a href="#">모집공고 목록</a></li>
 								</ul>
 							</li>
@@ -89,13 +89,13 @@
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : 관리자</span>
+											<span class="top-box-one-span-one">작성자 : <span
+													th:text="${admin_id}"></span></span>
 										</td>
 										<td class="top-box-two">
 											<div id="fileControl" style="display: none"></div>
-											<span>최초 입력일 시 : 2023.08.30</span>
-											<span> / </span>
-											<span>최종 변경일 시 : 2023.08.30</span>
+											<span>최초 입력일 시 : <span th:text="${announce_first_date}"></span></span>
+											<span>최종 변경일 시 : <span th:text="${announce_last_date}"></span></span>
 										</td>
 									</tr>
 									<tr class="top-box-tr-two">
@@ -127,7 +127,7 @@
 
 											<tr>
 												<th scope="row" class="txt-left">
-													<span class="txt-left" title="�ʼ��׸�">공고 제목</span>
+													<span class="txt-left" title="제목">제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
 													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
@@ -160,21 +160,21 @@
 												</th>
 												<td data-cell-header="생년월일" class="txt-left">
 													<select name="" id="" class="cm_inptxt fclttCategory">
-														<option value="">대분류</option>
-														<option value="">대분류1</option>
-														<option value="">대분류2</option>
-														<option value="">대분류3</option>
-														<option value="">대분류5</option>
+														<option value="">조력자 대분류</option>
+														<option value="">통번역인</option>
+														<option value="">조정위원</option>
+														<option value="">전문심리위원</option>
+														<option value="">상담위원</option>
 													</select>
 													<select name="" id="" class="cm_inptxt fclttCategory">
-														<option value="">중분류</option>
+														<option value="">조력자 중분류</option>
 														<option value="">중분류1</option>
 														<option value="">중분류2</option>
 														<option value="">중분류3</option>
 														<option value="">중분류5</option>
 													</select>
 													<select name="" id="" class="cm_inptxt fclttCategory">
-														<option value="">소분류</option>
+														<option value="">조력자 소분류</option>
 														<option value="">소분류1</option>
 														<option value="">소분류2</option>
 														<option value="">소분류3</option>
@@ -207,7 +207,7 @@
 
 											<tr>
 												<th scope="row" class="txt-left">
-													<span>공고 내용</span>
+													<span>내용</span>
 												</th>
 												<td data-cell-header="이메일" class="txt-left">
 													<!-- ckEditor start -->

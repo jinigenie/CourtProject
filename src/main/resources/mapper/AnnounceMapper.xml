@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.court.proj.announce.AnnounceMapper">
+  	
+    <!-- TB_002 테이블에 데이터 삽입 -->
+<insert id="announceRegist" parameterType="AnnounceVO">
+    INSERT INTO TB_002 (
+        announce_proper_num,
+        trial_fcltt_proper_num,
+        announce_title,
+        announce_content,
+        announce_start_date,
+        announce_end_date,
+        announce_first_date,
+        announce_last_date
+    )
+    VALUES (
+        #{announce_proper_num},
+        #{trial_fcltt_proper_num},
+        #{announce_title},
+        #{announce_content},
+        #{announce_start_date},
+        #{announce_end_date},
+        #{announce_first_date},
+        #{announce_last_date}
+    )
+</insert>
+
+<!-- TB_002 테이블 조회 -->
+<select id="getList" resultType="com.court.proj.announce.AnnounceVO">
+    select
+        a.announce_proper_num,
+        a.admin_proper_num,
+        a.trial_fcltt_proper_num,
+        a.announce_title,
+        a.announce_content,
+        a.announce_start_date,
+        a.announce_end_date,
+        a.announce_first_date,
+        a.announce_last_date,
+        b.admin_id,
+        b.admin_pw,
+        b.admin_auth
+    from tb_002 a
+    inner join tb_015 b on a.admin_proper_num = b.admin_proper_num
+    where a.announce_proper_num = #{announce_proper_num}
+</select>
+
+
+  	
+</mapper>
