@@ -479,9 +479,7 @@ body.start #detail-content {
 /* *********************************************************************************
 * 달력
 * *********************************************************************************/
-.calander-box {
-	padding: 20px;
-}
+
 
 .calander-box .datepicker {
 	position: relative;
@@ -980,10 +978,8 @@ body.start #detail-content {
 * *********************************************************************************/
 input[type='text'].datepicker {
 	width: 150px;
-	background: url('../../img/korean/sub/calander.png');
+	background: url('../../img/korean/sub/calander.png') no-repeat 120px 10px, white;
 	background-repeat: no-repeat;
-	background-position-x: 75px;
-	background-position-y: 10px;
 }
 
 

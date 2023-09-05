@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+	<head>
+	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+</head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<!-- wrap start -->
@@ -8,7 +12,7 @@
 		<div id="main_con">
 			<div id="nav_menu">
 				<div id="lnb">
-					<h2 class="title">모집공고</h2>
+					<h2 class="title">공지사항</h2>
 					<div class="menu">
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
@@ -68,7 +72,7 @@
 						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
 						<div class="heading-wrap container">
 							<h3 class="heading1">
-								<span>재판 조력자 모집공고</span>
+								<span>공지사항</span>
 							</h3>
 						</div>
 
@@ -86,46 +90,6 @@
 								</p>
 							</div>
 
-							<!-- 분류 탭 start -->
-							<div class="tab-wrap">
-								<ul class="tab tab1 outlineIE">
-									<li id="liFirst1">
-										<a href="#" onclick="srchMinwonDoc('lCate', '', 1, 1, '전체');">
-											<span>전체</span>
-										</a>
-									</li>
-
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '010000', 1, 1, '통번역인');">
-											<span>통번역인</span>
-										</a>
-									</li>
-
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '020000', 2, 10, '조정위원');">
-											<span>조정위원</span>
-										</a>
-									</li>
-
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '030000', 3, 13, '전문심리위원');">
-											<span>전문심리위원</span>
-										</a>
-									</li>
-
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '040000', 4, 18, '상담위원');">
-											<span>상담위원</span>
-										</a>
-									</li>
-
-								</ul>
-							</div>
-							<!-- 분류 탭 end -->
-
-							<div class="tab-wrap">
-								<ul class="tab tab2"></ul>
-							</div>
 
 							<!-- searchform searchform2 start -->
 							<div class="searchform searchform2">
@@ -185,25 +149,20 @@
 							<div class="table table-responsive">
 								<table>
 									<caption>
-										번호, 대분류, 중분류, 소분류, 작성일자, 진행상황, 신청의 대한
-										정보 제공
+										번호, 제목, 작성자, 등록일
 									</caption>
 									<colgroup>
 										<col style="width: 10%" />
+										<col style="width: 60%" />
 										<col style="width: 15%" />
-										<col style="width: 40%" />
-										<col style="width: 11.666%" />
-										<col style="width: 11.666%" />
 										<col style="width: 11.666%" />
 									</colgroup>
 									<thead>
 										<tr>
 											<th scope="col">번호</th>
-											<th scope="col">조력자 분류</th>
 											<th scope="col">제목</th>
-											<th scope="col">작성일자</th>
-											<th scope="col">진행상황</th>
-											<th scope="col">신청</th>
+											<th scope="col">작성자</th>
+											<th scope="col">등록일</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -216,13 +175,7 @@
 											<td data-cell-header="작성일자">작성일자
 
 											</td>
-											<td>
-												<p>진행중</p>
 
-											</td>
-											<td onclick="event.stopPropagation();">
-												<a href="#" class="case case1"><em>신청</em></a>
-											</td>
 										</tr>
 
 									</tbody>
