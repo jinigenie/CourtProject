@@ -1,7 +1,10 @@
 package com.court.proj.fcltt;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +19,16 @@ public class FclttController {
 	
 	// 등재명단
 	@GetMapping("/fclttList")
-	public String fclttList() {
+	public String fclttList(Model model, FclttCriteria cri) {
+			
 		
-		return "fcltt/fclttList";
+			ArrayList<FclttVO>list= fclttService.getList(cri);
+			
+			model.addAttribute("list",list);
+			System.out.println(cri.getSearchCourt());
+			System.out.println(list.toString());
+			return "fcltt/fclttList";
+	
 	}
 	
 	

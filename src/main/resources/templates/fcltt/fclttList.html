@@ -57,7 +57,7 @@
 
 
 				<article id="detail-content">
-					<form id="listForm" name="fcltt_listForm" action="fcltt_listForm" method="post">
+					<form id="listForm" name="fcltt_listForm" action="fclttList" method="get">
 						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
 						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
 						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
@@ -77,80 +77,85 @@
 
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
-									<select name="" id="" class="fclttSearch fclttSearch1">
-										<option value="">법원</option>
-										<option value="">법원1</option>
-										<option value="">법원2</option>
-										<option value="">법원3</option>
-										<option value="">법원5</option>
+									<select name="searchCourt" id="fcltt_searchC"
+										class="fclttSearch fclttSearch1">
+										<option value="">지역</option>
+										<option value="서울">서울</option>
+										<option value="대전">대전</option>
+										<option value="대구">대구</option>
+										<option value="부산">부산</option>
+										<option value="광주">광주</option>
+										<option value="수원">수원</option>
 									</select>
 									<input type="text" class="fclttSearch fclttSearch2" value="검색어를 입력해주세요" />
 									<label class="fclttCheck">
 										활동여부 <input type="checkbox" class="fclttSearch_check" />
 									</label>
-									<a href="#" class="fclttSerch_Btn">조회</a>
+									<a href="#" id="fclttSearch_btn" class="fclttSerch_Btn">조회</a>
 									<select name="" id="" class="fclttSearch fclttSearch3">
-										<option value="">10개씩 보기</option>
-										<option value="">20개씩 보기</option>
-										<option value="">50개씩 보기</option>
+										<option value="10">10개씩 보기</option>
+										<option value="20">20개씩 보기</option>
+										<option value="30">30개씩 보기</option>
 									</select>
 								</div>
 							</div>
 							<hr />
 
+					</form>
+					<!-- 게시판 시작 부분 -->
+					<div class="table table-responsive">
+						<table>
+							<caption>
+								번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
+								정보 제공
+							</caption>
+							<colgroup>
+								<col style="width: 10%" />
+								<col style="width: 20%" />
+								<col style="width: 15%" />
+								<col style="width: 10%" />
+								<col style="width: 15%" />
+								<col style="width: 15%" />
+								<col style="width: 15%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="col">번호</th>
+									<th scope="col">재판조력자분류</th>
+									<th scope="col">법원명</th>
+									<th scope="col">이름</th>
+									<th scope="col">선발날짜</th>
+									<th scope="col">상세보기</th>
+									<th scope="col">활동여부</th>
 
-							<!-- 게시판 시작 부분 -->
-							<div class="table table-responsive">
-								<table>
-									<caption>
-										번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
-										정보 제공
-									</caption>
-									<colgroup>
-										<col style="width: 10%" />
-										<col style="width: 20%" />
-										<col style="width: 15%" />
-										<col style="width: 10%" />
-										<col style="width: 15%" />
-										<col style="width: 15%" />
-										<col style="width: 15%" />
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col">번호</th>
-											<th scope="col">재판조력자 고유번호</th>
-											<th scope="col">법원명</th>
-											<th scope="col">이름</th>
-											<th scope="col">선발날짜</th>
-											<th scope="col">상세보기</th>
-											<th scope="col">활동여부</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="vo, status : ${list}" title="">
+									<td data-cell-header="번호">[[${status.count}]]</td>
+									<td data-cell-header="민원서식명" tabindex="0">
+										[[${vo.trial_fcltt_description}]]
+									</td>
+									<td data-cell-header="법원명">[[${vo.court_name}]]</td>
+									<td data-cell-header="이름">[[${vo.user_name}]]</td>
+									<td data-cell-header="날짜">[[${ #temporals.format(vo.accept_date,
+										'yyyy-MM-dd')}]]</td>
+									<td onclick="openPop2();">
+										<a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
+									</td>
+									<td>
+										<a th:class="${vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2'}">
+											<em th:text="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'}"></em>
+										</a>
+									</td>
+								</tr>
 
-										</tr>
-									</thead>
-									<tbody>
-										<tr title="">
-											<td data-cell-header="번호">1</td>
-											<td data-cell-header="민원서식명" tabindex="0">
-												[[${vo.user_}]]
-											</td>
-											<td data-cell-header="법원명">[[${vo.trial_fcltt_proper_num}]]</td>
-											<td data-cell-header="이름">[[${vo.user_name}]]</td>
-											<td data-cell-header="날짜">[[${vo.accept_date}]]</td>
-											<td onclick="openPop2();">
-												<a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
-											</td>
-											<td>
-												<a th:class="${vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2'}">
-													<em th:text="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'}"></em>
-												</a>
-											</td>
-										</tr>
+							</tbody>
+						</table>
+					</div>
 
-									</tbody>
-								</table>
-							</div>
-							<!-- pagenation -->
-							<div class="pager">
+					<!-- pagenation -->
+					<!--<div class="pager">
 								<div class="pager-wrap">
 									<a href="#" class="arr first" title="처음으로"
 										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
@@ -184,11 +189,11 @@
 									<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
 								</div>
 							</div>
-						</div>
-						<!-- //본문컨텐츠 영역 -->
-						<!-- The Modal -->
+						</div>-->
+					<!-- //본문컨텐츠 영역 -->
+					<!-- The Modal -->
 
-					</form>
+
 				</article>
 			</div>
 		</div>
@@ -403,20 +408,23 @@
 
 
 </th:block>
-<script th:inline="javascript">
+<script>
+	var fclttSearch_btn = document.getElementById("fclttSearch_btn");
+	fclttSearch_btn.onclick = function () {
+		event.preventDefault(); // a 태그 중지버튼
+		document.fcltt_listForm.submit();
+	}
+	
+	var fcltt_searchC = document.getElementById("fcltt_searchC");
+	fcltt_searchC.onchange= function () {
+		document.fcltt_listForm.searchCourt.value = event.target.value;
+		document.fcltt_listForm.submit();
+		console.log(event.target.value);
+	}
 
-	var msg = '[[${msg}]]';
-	if (msg != 'null') {
-		alert(msg);
-	}
-	var msgUp = '[[${msgUp}]]';
-	if (msgUp != 'null') {
-		alert(msgUp);
-	}
-	var msgDel = '[[${msgDel}]]';
-	if (msgDel != 'null') {
-		alert(msgDel);
-	}
+
+
+
 </script>
 
 
