@@ -505,3 +505,177 @@ element.style {
     margin-left: -38px;
     margin-top: 5px;
 }
+
+/* *********************************************************************************
+* 희망법원선택
+* *********************************************************************************/
+
+table.list td {
+    height: 20px;
+    padding: 3px 5px 2px 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+ul.ullistscourt {
+    margin: 10px 0 10px 10px;
+}
+
+* html ul.ullistscourt {
+    margin: 10px 0 0 10px;
+}
+
+*+html ul.ullistscourt {
+    height: 110px;
+}
+
+ul.ullistscourt:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+html[xmlns] ul.ullistscourt {
+    display: block;
+}
+
+* html ul.ullistscourt {
+    height: 1%;
+}
+
+ul.ullistscourt li {
+    float: left;
+    width: 180px;
+}
+
+ul.ullistscourt li.center {
+    width: 140px;
+    text-align: center;
+    padding: 70px 0 0 15px;
+}
+
+* html ul.ullistscourt li.center {
+    padding: 40px 0 0 0;
+}
+
+ul.ullistscourt li p.title {
+    position: relative;
+    line-height: 15px;
+
+}
+
+
+ul.ullistscourt li select.listscourt {
+    width: 200px;
+    height: 150px;
+    border: 1px solid #ddd;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+#from_bub_cd {
+    padding: 0;
+    color: #737373;
+    font-size: 14px;
+    line-height: 19px;
+    background: #fff;
+}
+
+#lblWishText {
+    display: inline-block;
+    margin: 7px 20% 0 10px;
+    /*vertical-align: top;*/
+    font-size: 14px;
+    color: #3e8fee;
+    float: right;
+}
+
+/* 테이블안에 버튼 */
+.btnin, .btnin *{
+    display:inline-block;
+    overflow:visible;
+    position:relative;
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:11px;
+    color: #72a8fe;
+    line-height:20px;
+    letter-spacing:-1px;
+    text-decoration:none;
+    vertical-align:top;
+    white-space:nowrap;
+    background:url('../../img/app/bg_btnin.gif') no-repeat;
+    cursor:pointer;
+}
+/* 셀렉트 버튼 */
+.btninSel, .btninSel *{
+    display:inline-block;
+    overflow:visible;
+    position:relative;
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:11px;
+    color: #000;
+    line-height:20px;
+    letter-spacing:-1px;
+    text-decoration:middle;
+    vertical-align:top;
+    white-space:nowrap;
+    background:url('/ogidocs/images/bg_btnin.gif') no-repeat;
+    cursor:pointer;
+}
+.btnin, .btnin *{
+    height:20px;
+    line-height:20px;
+}
+.btnin{
+    background-position:left top;
+    margin-right:4px;
+}
+.btnin *{
+    padding:1px 7px 0 3px;
+    background-position:right top;
+    text-decoration:none;
+    left:4px;
+}
+.btnin a:hover, .btnin a:active, .btnin a:hover{
+    color:#4f58bc;
+    text-decoration:none;
+}
+
+/* *********************************************************************************
+* 희망법원선택
+* *********************************************************************************/
+
+.txtInfo {
+    width: 450px;
+    margin: 5px 100px 0 0;
+    border: 1px solid #c9c8c8;
+
+}
+
+.txtInfo2 {
+    width: 600px;
+    height: 80px;
+    margin: 5px 50px 0 50px;
+    border: 1px solid #c9c8c8;
+
+}
+
+/* *********************************************************************************
+* 경력테이블
+* *********************************************************************************/
+
+.careerTable {
+    width: 100%;
+    overflow: scroll;
+}
+

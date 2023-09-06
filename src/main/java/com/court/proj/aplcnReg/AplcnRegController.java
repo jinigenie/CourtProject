@@ -21,6 +21,12 @@ public class AplcnRegController {
         return "app/aplcnRegStart";
     }
 
+    //결격사유 확인
+    @GetMapping("/confirm")
+    public String confirm() {
+        return "app/aplcnRegConfirm";
+    }
+
     //기본정보 입력페이지
     @GetMapping("/info")
     public String getInfo() {
