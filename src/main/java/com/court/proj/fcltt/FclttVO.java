@@ -22,4 +22,5 @@ public class FclttVO {
 	private String accept_etc;//기타내용
 	private String accept_act_yn;//활동여부
 	
+	
 }
