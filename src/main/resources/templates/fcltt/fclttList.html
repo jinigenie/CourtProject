@@ -32,6 +32,7 @@
 				</div>
 			</div>
 			<!--   내용 시작 -->
+
 			<div id="contents">
 
 				<style>
@@ -77,9 +78,9 @@
 
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
-									<select name="searchCourt" id="fcltt_searchC"
-										class="fclttSearch fclttSearch1">
+									<select name="searchCourt" id="fcltt_searchC" class="fclttSearch fclttSearch1">
 										<option value="">지역</option>
+										<option value="">전체</option>
 										<option value="서울">서울</option>
 										<option value="대전">대전</option>
 										<option value="대구">대구</option>
@@ -87,9 +88,14 @@
 										<option value="광주">광주</option>
 										<option value="수원">수원</option>
 									</select>
-									<input type="text" class="fclttSearch fclttSearch2" value="검색어를 입력해주세요" />
+									<input type="text" class="fclttSearch fclttSearch2" name="searchContent" />
 									<label class="fclttCheck">
-										활동여부 <input type="checkbox" class="fclttSearch_check" />
+										<select name="searchAct" id="fcltt_searchC" class="fclttSearch fclttSearch1"
+											style="width: 120px; margin-bottom: 10px;">
+											<option value="">활동여부</option>
+											<option value="Y">활동중</option>
+											<option value="N">중지중</option>
+										</select>
 									</label>
 									<a href="#" id="fclttSearch_btn" class="fclttSerch_Btn">조회</a>
 									<select name="" id="" class="fclttSearch fclttSearch3">
@@ -140,10 +146,15 @@
 									<td data-cell-header="이름">[[${vo.user_name}]]</td>
 									<td data-cell-header="날짜">[[${ #temporals.format(vo.accept_date,
 										'yyyy-MM-dd')}]]</td>
+									<!--									<td class="modal_ajax"  onclick="openPop2()">
+										<a class="modal_ajax fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
+									</td>-->
 									<td onclick="openPop2();">
 										<a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
 									</td>
 									<td>
+										<input type="hidden" name="accept_proper_num"
+											th:value="${vo.accept_proper_num}" />
 										<a th:class="${vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2'}">
 											<em th:text="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'}"></em>
 										</a>
@@ -155,251 +166,54 @@
 					</div>
 
 					<!-- pagenation -->
-					<!--<div class="pager">
-								<div class="pager-wrap">
-									<a href="#" class="arr first" title="처음으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
-											이동</strong></a><a href="#" class="arr prev" title="이전으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
-											이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-										onclick="">1</a><a href="#" class=""
-										onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
-										onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
-										onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
-										onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
-										onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
-										onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
-										onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
-										onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
-										onclick="fn_egov_link_page(10); return false;">10</a><a href="#"
-										class="arr next" title="다음으로"
-										onclick="fn_egov_link_page(11); return false;"><strong class="sr-only">다음페이지로
-											이동</strong></a><a href="#" class="arr last" title="마지막으로"
-										onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
-											목록으로 이동</strong></a>
+					<div class="pager">
+						<div class="pager-wrap">
+							<a href="#" class="arr first" title="처음으로"
+								onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
+									이동</strong></a><a href="#" class="arr prev" title="이전으로"
+								onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
+									이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
+								onclick="">1</a><a href="#" class=""
+								onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
+								onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
+								onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
+								onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
+								onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
+								onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
+								onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
+								onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
+								onclick="fn_egov_link_page(10); return false;">10</a><a href="#" class="arr next"
+								title="다음으로" onclick="fn_egov_link_page(11); return false;"><strong
+									class="sr-only">다음페이지로
+									이동</strong></a><a href="#" class="arr last" title="마지막으로"
+								onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
+									목록으로 이동</strong></a>
 
-									<input id="pageIndex" name="pageIndex" type="hidden" value="1" />
-									<input id="pageSize" name="pageSize" type="hidden" value="10" />
-									<input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-									<input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
-									<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
-									<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
-										value="" />
-									<input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
-									<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
-								</div>
-							</div>
-						</div>-->
-					<!-- //본문컨텐츠 영역 -->
-					<!-- The Modal -->
-
-
-				</article>
+							<input id="pageIndex" name="pageIndex" type="hidden" value="1" />
+							<input id="pageSize" name="pageSize" type="hidden" value="10" />
+							<input id="pageUnit" name="pageUnit" type="hidden" value="10" />
+							<input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
+							<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
+							<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden" value="" />
+							<input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
+							<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
+						</div>
+					</div>
 			</div>
+			<!-- //본문컨텐츠 영역 -->
+			<!-- The Modal -->
+
+
+			</article>
 		</div>
-		<!-- //main_con  -->
 		<div id="popup_layer2">
 			<div class="popup_box2">
-				<!--팝업 컨텐츠 영역-->
-				<div class="popup_cont2">
-					<div class="popup_cont2_title">
-						<p>조력자 상세정보</p>
-					</div>
-					<div class="popup_contText">
-						<h3 id="fcltt_h3"> 재판조력자</h3>
-						<h2 id="fcltt_h2">박인욱님</h2>
-						<p id="fcltt_p_right">등재번호: 123125</p>
-					</div>
-
-					<div class="fcltt_wrap">
-						<div class="fcltt_wrap_top">
-							<table>
-								<colgroup>
-									<col style="width: 30%">
-									<col style="width: 70%">
-								</colgroup>
-								<tbody>
-									<tr>
-										<th scope="row" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left" title="">재판조력자분류</span>
-										</th>
-										<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left">통번역인 > 번역인</span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left" title="">신청법원</span>
-										</th>
-										<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left">서울 > 서초법원</span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left" title="">소송사건 유무내역</span>
-										</th>
-										<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left"> </span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left" title="">보험업계 내역</span>
-										</th>
-										<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left"> </span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left" title="">형사처벌 내역</span>
-										</th>
-										<td data-cell-header="성" class="fclttSpan_wrap txt-left">
-											<span class="fclttSpan txt-left"> </span>
-										</td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-
-						<div class="fcltt_popup_wrap">
-
-							<table class="fcltt_popup_content">
-								<colgroup>
-									<col style="width: 30%">
-									<col style="width: 70%">
-								</colgroup>
-
-								<tbody id="fcltt_detail_bottom">
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan_title txt-left" title="">학력 상세
-												정보</span>
-										</th>
-
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">학교이름</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">학과전공</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">학위</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-
-								</tbody>
-								<!-- 경력 상세 -->
-								<tbody id="fcltt_detail_bottom" style="margin-top: 20px;">
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan_title txt-left" title=""> 경력 상세
-												정보</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">경력구분</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-								</tbody>
-								<!--   자격증상세 -->
-								<tbody id="fcltt_detail_bottom">
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan_title txt-left" title=""> 자격증 상세
-												정보</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">자격증명2</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">자격증명3</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" class="txt-left">
-											<span class="fclttSpan1 txt-left" title="txt-left">자격증명4</span>
-										</th>
-										<td data-cell-header="성명" class="txt-left">
-											<span class="fclttSpan2 txt-left"></span>
-										</td>
-									</tr>
-
-
-								</tbody>
-							</table>
-
-
-
-
-						</div>
-					</div>
-				</div>
-
-				<div class="popup_btn2">
-					<a href="javascript:closePop2();">닫기</a>
-				</div>
-			</div>
+			
 		</div>
 
-
 	</div>
+	<!-- //main_con  -->
+
 	<!-- 메뉴바 여기까지-->
 	<!--모달창 작업-->
 
@@ -409,23 +223,92 @@
 
 </th:block>
 <script>
+
 	var fclttSearch_btn = document.getElementById("fclttSearch_btn");
 	fclttSearch_btn.onclick = function () {
 		event.preventDefault(); // a 태그 중지버튼
 		document.fcltt_listForm.submit();
 	}
-	
-	var fcltt_searchC = document.getElementById("fcltt_searchC");
-	fcltt_searchC.onchange= function () {
-		document.fcltt_listForm.searchCourt.value = event.target.value;
-		document.fcltt_listForm.submit();
-		console.log(event.target.value);
+
+	//상세보기 스크립트
+	function openPop2() {
+		document.getElementById("popup_layer2").style.display = "block";
 	}
 
 
-
-
 </script>
+
+
+
+
+<script th:inline="javascript">
+
+	$(".modal_ajax").click(function () {
+
+
+		var closestTr = $(this).closest("tr");
+		// <tr> 요소 내에서 숨겨진 input 필드 값을 가져오기
+		var accept_proper_num = closestTr.find("input[name='accept_proper_num']").val();
+		console.log(accept_proper_num);
+
+		$.ajax({
+
+			url: "getfclttModal",
+			type: "post",
+			contentType: "application/json", //보낼데이터형식
+			data: JSON.stringify({accept_proper_num: accept_proper_num}),
+			success: function (data) {
+				console.log(data);
+				
+				var str ="";
+				str += '<div class="popup_cont2">';
+					str += '<div class="popup_cont2_title">';
+				str += '<p>조력자 상세정보</p></div>';
+					str += '<div class="popup_contText">';
+						str += '<h3 id="fcltt_h3"> 재판조력자</h3>';
+						str += '<h2 id="fcltt_h2">박인욱님</h2>';
+						str += '<p id="fcltt_p_right">등재번호: 123125</p></div>';
+					str += '<div class="fcltt_wrap">';
+						str += '<div class="fcltt_wrap_top">';
+							str += '<table><colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>';
+								str += '<tbody>';
+									str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">재판조력자분류</span>';
+										str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
+											str += '<span class="fclttSpan txt-left">통번역인 > 번역인</span></td></tr>';
+									str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">신청법원</span>';
+										str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
+											str += '<span class="fclttSpan txt-left">서울 > 서초법원</span></td></tr>';
+									str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">소송사건 유무내역</span>';
+										str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
+											str += '<span class="fclttSpan txt-left"> </span></td></tr>';
+							
+				str += '<div class="popup_btn2"><a href="javascript:closePop2();">닫기</a></div></div>';
+				
+				
+				
+				
+				
+				
+				openPop2();
+				
+
+
+			},
+			error: function (status, error) {
+				console.log(status);
+			}
+		})
+
+
+	})
+
+	
+</script>
+
+
+
+
+
 
 
 </html>

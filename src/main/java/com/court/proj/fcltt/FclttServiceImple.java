@@ -28,4 +28,9 @@ public class FclttServiceImple implements FclttService {
 		return fclttMapper.getTotal(cri);
 	}
 
+	@Override
+	public ArrayList<FclttVO> getFclttContent(int accept_proper_num) {
+		return fclttMapper.getFclttContent(accept_proper_num);
+	}
+
 }

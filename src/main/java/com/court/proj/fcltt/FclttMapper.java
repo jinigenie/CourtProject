@@ -16,4 +16,6 @@ public interface FclttMapper {
 	public int getTotal(@Param("cri") FclttCriteria cri);
 	
 
+	//명단에서 상세보기 ajax
+	public ArrayList<FclttVO> getFclttContent(int accept_proper_num);
 }
