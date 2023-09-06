@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
-<script th:src="@{../../js/app/info.js}"></script>
+<!--<script th:src="@{../../js/app/info.js}"></script>-->
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -32,9 +32,9 @@
                 <div id="crumbs">
                     <ul>
                         <li><a href="#1" class="highlight">기본정보</a></li>
-                        <li><a href="#2">경력상세</a></li>
-                        <li><a href="#3">학력상세</a></li>
-                        <li><a href="#4">서류제출</a></li>
+                        <li><a href="../app/career">경력상세</a></li>
+                        <li><a href="../app/edu">학력상세</a></li>
+                        <li><a href="../app/file">서류제출</a></li>
                     </ul>
                 </div>
                 <div style="margin-top: 40px">
@@ -49,7 +49,7 @@
                             </th>
                             <td data-cell-header="재판조력자" class="txt-left">
                                 <div class="select-box">
-                                    <label for="selectTit"></label>
+                                    <label for="selectType1"></label>
                                     <select class="info-select" id="selectType1"
                                             name="search_field" title="검색조건을 선택해주세요.">
                                         <option value="">구분1</option>
@@ -60,7 +60,7 @@
                                     </select>
                                 </div>
                                 <div class="select-box">
-                                    <label for="selectTit"></label>
+                                    <label for="selectType2"></label>
                                     <select class="info-select" id="selectType2"
                                             name="search_field" title="검색조건을 선택해주세요.">
                                         <option value="">중분류1</option>
@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                                 <div class="select-box">
-                                    <label for="selectTit"></label>
+                                    <label for="selectType3"></label>
                                     <select class="info-select" id="selectType3"
                                             name="search_field" title="검색조건을 선택해주세요.">
                                         <option value="">소분류1</option>
@@ -88,30 +88,205 @@
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">희망법원 선택</span>
                             </th>
                             <td data-cell-header="희망법원" class="txt-left">
-                                <div class="input-wrap-three write-wrap-m"
-                                     style="display: inline-block">
-                                    <div class="select-box">
-                                        <label for="selectTit"></label>
-                                        <select class="info-select" id="selectCourt1"
-                                                name="search_field" title="검색조건을 선택해주세요.">
-                                            <option value="">지역1</option>
-                                            <option value="">지역2</option>
-                                            <option value="">지역3</option>
-                                            <option value="">지역4</option>
-                                            <option value="">지역5</option>
-                                        </select>
-                                    </div>
-                                    <div class="select-box">
-                                        <label for="selectTit"></label>
-                                        <select class="info-select" id="selectCourt2"
-                                                name="search_field" title="검색조건을 선택해주세요.">
-                                            <option value="">법원1</option>
-                                            <option value="">법원2</option>
-                                            <option value="">법원3</option>
-                                            <option value="">법원4</option>
-                                            <option value="">법원5</option>
-                                        </select>
-                                    </div>
+                                <ul class="ullistscourt">
+                                    <li>
+                                        <!-- 법원목록 start-->
+                                        <div class="scourtlistbox">
+                                            <p class="title">법원목록<span class="allcheck"><input type="checkbox"
+                                                                                               id="chkAll" class="check"
+                                                                                               title="전체선택"
+                                                                                               name="chkAll"
+                                                                                               style="display: none;"><label
+                                                    id="chkAllText" style="display: none;">전체선택</label></span></p>
+                                            <select multiple="" name="from_bub_cd" id="from_bub_cd" class="listscourt"
+                                                    size="20" title="법원목록">
+
+                                                <option value="000200">서울고등법원</option>
+
+                                                <option value="000600">대전고등법원</option>
+
+                                                <option value="000300">대구고등법원</option>
+
+                                                <option value="000400">부산고등법원</option>
+
+                                                <option value="000500">광주고등법원</option>
+
+                                                <option value="000302">수원가정법원</option>
+
+                                                <option value="000800">수원고등법원</option>
+
+                                                <option value="000700">특허법원</option>
+
+                                                <option value="000210">서울중앙지방법원</option>
+
+                                                <option value="000211">서울동부지방법원</option>
+
+                                                <option value="000212">서울남부지방법원</option>
+
+                                                <option value="000213">서울북부지방법원</option>
+
+                                                <option value="000215">서울서부지방법원</option>
+
+                                                <option value="000214">의정부지방법원</option>
+
+                                                <option value="214807">의정부지방법원 고양지원</option>
+
+                                                <option value="000220">서울행정법원</option>
+
+                                                <option value="000230">서울가정법원</option>
+
+                                                <option value="000240">인천지방법원</option>
+
+                                                <option value="000241">인천지방법원 부천지원</option>
+
+                                                <option value="000250">수원지방법원</option>
+
+                                                <option value="000249">수원회생법원</option>
+
+                                                <option value="000251">수원지방법원 성남지원</option>
+
+                                                <option value="000252">수원지방법원 여주지원</option>
+
+                                                <option value="000253">수원지방법원 평택지원</option>
+
+                                                <option value="250826">수원지방법원 안산지원</option>
+
+                                                <option value="000254">수원지방법원 안양지원</option>
+
+                                                <option value="000260">춘천지방법원</option>
+
+                                                <option value="000261">춘천지방법원 강릉지원</option>
+
+                                                <option value="000262">춘천지방법원 원주지원</option>
+
+                                                <option value="000263">춘천지방법원 속초지원</option>
+
+                                                <option value="000264">춘천지방법원 영월지원</option>
+
+                                                <option value="000280">대전지방법원</option>
+
+                                                <option value="000281">대전지방법원 홍성지원</option>
+
+                                                <option value="000284">대전지방법원 공주지원</option>
+
+                                                <option value="000282">대전지방법원 논산지원</option>
+
+                                                <option value="000285">대전지방법원 서산지원</option>
+
+                                                <option value="000286">대전가정법원</option>
+
+                                                <option value="000283">대전지방법원 천안지원</option>
+
+                                                <option value="000270">청주지방법원</option>
+
+                                                <option value="000271">청주지방법원 충주지원</option>
+
+                                                <option value="000272">청주지방법원 제천지원</option>
+
+                                                <option value="000273">청주지방법원 영동지원</option>
+
+                                                <option value="000310">대구지방법원</option>
+
+                                                <option value="000311">대구지방법원 안동지원</option>
+
+                                                <option value="000312">대구지방법원 경주지원</option>
+
+                                                <option value="000318">대구가정법원</option>
+
+                                                <option value="000317">대구지방법원 포항지원</option>
+
+                                                <option value="000320">대구지방법원 서부지원</option>
+
+                                                <option value="000313">대구지방법원 김천지원</option>
+
+                                                <option value="000314">대구지방법원 상주지원</option>
+
+                                                <option value="000315">대구지방법원 의성지원</option>
+
+                                                <option value="000316">대구지방법원 영덕지원</option>
+
+                                                <option value="000443">부산회생법원</option>
+
+                                                <option value="000410">부산지방법원</option>
+
+                                                <option value="000412">부산지방법원 동부지원</option>
+
+                                                <option value="000413">부산가정법원</option>
+
+                                                <option value="000414">부산지방법원 서부지원</option>
+
+                                                <option value="000411">울산지방법원</option>
+
+                                                <option value="000477">울산가정법원</option>
+
+                                                <option value="000420">창원지방법원</option>
+
+                                                <option value="000431">창원지방법원 마산지원</option>
+
+                                                <option value="000421">창원지방법원 진주지원</option>
+
+                                                <option value="000422">창원지방법원 통영지원</option>
+
+                                                <option value="000423">창원지방법원 밀양지원</option>
+
+                                                <option value="000424">창원지방법원 거창지원</option>
+
+                                                <option value="000510">광주지방법원</option>
+
+                                                <option value="000511">광주지방법원 목포지원</option>
+
+                                                <option value="000512">광주지방법원 장흥지원</option>
+
+                                                <option value="000513">광주지방법원 순천지원</option>
+
+                                                <option value="000515">광주가정법원</option>
+
+                                                <option value="000514">광주지방법원 해남지원</option>
+
+                                                <option value="000520">전주지방법원</option>
+
+                                                <option value="000521">전주지방법원 군산지원</option>
+
+                                                <option value="000522">전주지방법원 정읍지원</option>
+
+                                                <option value="000523">전주지방법원 남원지원</option>
+
+                                                <option value="000530">제주지방법원</option>
+
+                                                <option value="214804">의정부지방법원 남양주지원</option>
+
+                                                <option value="000999">테스트교육법원</option>
+
+                                                <option value="000228">인천가정법원</option>
+
+                                                <option value="000010">테스트법원 테스트시</option>
+
+                                                <option value="000221">서울회생법원</option>
+
+                                                <option value="000110">법원행정처</option>
+
+                                            </select>
+                                        </div>
+                                        <!-- 법원목록 end-->
+                                    </li>
+                                    <li class="center">
+                                        <span class="btnin"><a onclick="javascript:addCourt()";>▶</a></span><br>
+                                        <span class="btnin mart10" style="margin-top: 5px"><a onclick="javascript:removeCourt()">◀</a></span>
+                                    </li>
+
+                                    <li>
+                                        <!-- 선택목록 start-->
+                                        <div class="scourtlistbox">
+                                            <p class="title">희망법원</p>
+                                            <select multiple="" name="wish_bub_cd" id="wish_bub_cd" class="listscourt"
+                                                    size="20" title="희망법원">
+                                            </select>
+                                        </div>
+                                        <!-- 선택목록 end-->
+                                    </li>
+                                </ul>
+                                <div>
+                                <span class="ex"><label id="lblWishText">* 희망법원은 2개까지 신청 가능하며 1지망, 2지망 순서입니다.</label></span>
                                 </div>
                             </td>
                         </tr>
@@ -186,7 +361,7 @@
                             <td data-cell-header="직업" class="txt-left">
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
                                     <input name="cvl_job" id="cvl_phone" value="" placeholder="01022221111"
-                                           class="cm_inptxt" type="text" maxlength="8" />
+                                           class="cm_inptxt" type="text" maxlength="8"/>
                                 </div>
                                 <em class="fcltt_comment">&nbsp; '-' 을 제외한 숫자만 기입</em>
                             </td>
@@ -204,7 +379,7 @@
                                     <input name="cvl_nm" id="cvl_mail2" value="" class="cm_inptxt" type="text">
                                 </div>
                                 <div class="select-box" style="padding: 9px;">
-                                    <select name="" id="mailAddr" class="info-select" >
+                                    <select name="" id="mailAddr" class="info-select">
                                         <option value="">직접입력</option>
                                         <option value="naver">naver.com</option>
                                         <option value="hanmail">hanmail.net</option>
@@ -267,7 +442,8 @@
                                         </select>
                                     </div>
                                     <div class="selectedBank" style="float: left">
-                                        <img src="#" alt="" id="bankIcon"><p style="float:right;" class="selBank"></p>
+                                        <img src="#" alt="" id="bankIcon">
+                                        <p style="float:right;" class="selBank"></p>
                                     </div>
                                 </div>
                                 <div class="input-wrap-three write-wrap-m">
@@ -291,10 +467,55 @@
                     </table>
                 </div>
 
+                <div style="margin-top: 40px">
+                    <span class="sub_title">추가 정보</span>
+                </div>
+                <div class="table table-responsive">
+                    <table>
+                        <tbody>
+                        <tr style="padding-top: 20px; height: 75px">
+                            <th scope="row" class="txt-left" style="width: 20% !important;">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">소송사건 당사자 경력</span>
+                            </th>
+                            <td data-cell-header="소송경력" class="txt-left" style="width: 30%">
+                                <input type="checkbox" name="check1"><span style="margin-left: 7px">경력 있음</span>
+                            </td>
+                            <td data-cell-header="소송경력" class="txt-left lawtd" style="width: 50%">
+                                <textarea name="lawsuit" placeholder="경력 내용 기입" class="txtInfo"></textarea>
+                            </td>
+
+                        </tr>
+                        <tr style="height: 75px">
+                            <th scope="row" class="txt-left" style="width: 30% !important;">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">보험업계 자문 경력</span>
+                            </th>
+                            <td data-cell-header="보험경력" class="txt-left">
+                                <input type="checkbox" name="check2"><span style="margin-left: 7px">경력 있음</span>
+                            </td>
+                            <td data-cell-header="보험경력" class="txt-left insurance">
+                                <textarea name="insurance" placeholder="경력 내용 기입" class="txtInfo"></textarea>
+                            </td>
+                        </tr>
+                        <tr style="height: 75px">
+                            <th scope="row" class="txt-left" style="width: 40% !important;">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">형사처벌 받은 경력</span>
+                            </th>
+                            <td data-cell-header="형사경력" class="txt-left">
+                                <input type="checkbox" name="check3"><span style="margin-left: 7px">경력 있음</span>
+                            </td>
+                            <td data-cell-header="형사경력" class="txt-left detective">
+                                <textarea name="detective" placeholder="경력 내용 기입" class="txtInfo"></textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
                 <!-- prev, next 버튼 -->
                 <div class="btn-holder">
                     <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
-                        <span>◀ 신청 안내</span>
+                        <span>◀ 이전 단계</span>
                     </button>
 
                     <em style="padding-top: 15px"> 1 / 4</em>
@@ -373,25 +594,25 @@
 <script>
     $("#selectBank").change(function () {
         let selected = $("#selectBank option:selected").val();
-        if(selected == 'kb') {
+        if (selected == 'kb') {
             $("#bankIcon").attr("src", "/img/app/kbIcon.png");
             $(".selBank").html('국민은행');
-        } else if(selected == 'ibk') {
+        } else if (selected == 'ibk') {
             $("#bankIcon").attr("src", "/img/app/ibkIcon.png");
             $(".selBank").html('기업은행');
-        } else if(selected == 'nh') {
+        } else if (selected == 'nh') {
             $("#bankIcon").attr("src", "/img/app/nhIcon.png");
             $(".selBank").html('농협은행');
-        } else if(selected == 'sh') {
+        } else if (selected == 'sh') {
             $("#bankIcon").attr("src", "/img/app/shIcon.png");
             $(".selBank").html('신한은행');
-        } else if(selected == 'wr') {
+        } else if (selected == 'wr') {
             $("#bankIcon").attr("src", "/img/app/wrIcon.png");
             $(".selBank").html('우리은행');
-        } else if(selected == 'hn') {
+        } else if (selected == 'hn') {
             $("#bankIcon").attr("src", "/img/app/hnIcon.png");
             $(".selBank").html('하나은행');
-        } else if(selected == 'sc') {
+        } else if (selected == 'sc') {
             $("#bankIcon").attr("src", "/img/app/scIcon.png");
             $(".selBank").html('SC제일은행');
         } else {
@@ -403,7 +624,22 @@
 
 </script>
 
-<!--모달창-->
+
+<!--메일주소 선택입력-->
+<script>
+
+    $("#mailAddr").change(function () {
+        let selmail = $("#mailAddr option:selected").html();
+        $("#cvl_mail2").attr("value", selmail);
+
+    });
+
+    $(".addCourt").click(function () {
+        console.log("추가");
+    })
+</script>
+
+<!--모달창 : 저장-->
 <script>
 
     const modal = document.querySelector('.modal');
@@ -420,7 +656,7 @@
 
     $(".save").click(function () {
         if (x == 1) {
-            $(location).attr("href", "../app/start");
+            $(location).attr("href", "../app/confirm");
         } else {
             $(location).attr("href", "../app/career");
         }
@@ -429,7 +665,7 @@
 
     $(".cancel").click(function () {
         if (x == 1) {
-            $(location).attr("href", "../app/start");
+            $(location).attr("href", "../app/confirm");
         } else {
             $(location).attr("href", "../app/career");
         }
@@ -442,14 +678,69 @@
 
 </script>
 
-<!--메일주소 선택입력-->
+<!--법원선택-->
 <script>
 
-$("#mailAddr").change(function () {
-    let selmail = $("#mailAddr option:selected").html();
-    $("#cvl_mail2").attr("value", selmail);
+    function removeCourt() {
+        return !$('#wish_bub_cd option:selected').remove().appendTo('#from_bub_cd');
+    };
 
-});
+    function addCourt() {
+        !$('#from_bub_cd option:selected').remove().appendTo('#wish_bub_cd');
+
+        var left = $("#from_bub_cd option:selected").size();
+        var right = $("#wish_bub_cd option").size();
+
+        var cnt = left + right;
+        //alert(cnt);
+        if (cnt > 3) {
+            alert('희망법원은 3개까지 신청가능합니다.');
+            return;
+        } else {
+            return !$('#from_bub_cd option:selected').remove().appendTo('#wish_bub_cd');
+        }
+    }
+</script>
+
+<!--사건내역 상세내용 숨기기/보이기-->
+<script>
+    (function() {
+        $(".lawtd").css("visibility", "hidden");
+        $(".insurance").css("visibility", "hidden");
+        $(".detective").css("visibility", "hidden");
+
+    })();
+
+    $('input[name="check1"]').change(function () {
+        var checked1 = $(this).prop('checked');
+        if (checked1) {
+            $(".lawtd").css("visibility", "visible");
+        }
+        else {
+            $(".lawtd").css("visibility", "hidden");
+        }
+    });
+
+    $('input[name="check2"]').change(function () {
+        var checked2 = $(this).prop('checked');
+        if (checked2) {
+            $(".insurance").css("visibility", "visible");
+        }
+        else {
+            $(".insurance").css("visibility", "hidden");
+        }
+    });
+
+    $('input[name="check3"]').change(function () {
+        var checked3 = $(this).prop('checked');
+        if (checked3) {
+            $(".detective").css("visibility", "visible");
+        }
+        else {
+            $(".detective").css("visibility", "hidden");
+        }
+    });
+
 
 </script>
 

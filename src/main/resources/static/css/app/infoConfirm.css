@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+
+#contents .contentsin {
+    text-align: left;
+    margin-left: 60px;
+    font-size: 14px;
+    letter-spacing: -1px;
+    border-bottom: 1px solid #ddd;
+}
+
+.contentsin > .ogi214 {
+    width: 200px;
+    height: 28px;
+}
+
+.contentsin > h3 {
+    background: url(../../img/app/h3_ogi214.gif) no-repeat;
+    background-size: cover;
+}
+
+#contents .contentsin .contentsinbox {
+    width: auto;
+    margin: 0 0 0 15px;
+}
+
+#contents h4 {
+    clear: both;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1.3em;
+    padding: 0 15px;
+    margin: 20px 0 10px 0;
+    /*background: url(/ogidocs/images/bullet_h4.gif) no-repeat 0 35%;*/
+}
+
+.contentsinbox>h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.box340 {
+    height: 370px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    overflow-y: scroll;
+    margin: 0 0 5px 15px;
+}
+
+#chkGyul {
+    text-align: center;
+    padding-top: 15px;
+}
+.check > label {
+    display: inline-block;
+    width: 99%;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: right;
+}
+

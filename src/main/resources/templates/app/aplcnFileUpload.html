@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
-<script th:src="@{../../js/app/info.js}"></script>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -31,10 +30,10 @@
 
                 <div id="crumbs">
                     <ul>
-                        <li><a href="#1">기본정보</a></li>
-                        <li><a href="#2">경력상세</a></li>
-                        <li><a href="#3">학력상세</a></li>
-                        <li><a href="#4" class="highlight">서류제출</a></li>
+                        <li><a href="../app/info">기본정보</a></li>
+                        <li><a href="../app/career">경력상세</a></li>
+                        <li><a href="../app/edu">학력상세</a></li>
+                        <li><a href="#" class="highlight">서류제출</a></li>
                     </ul>
                 </div>
                 <div style="margin-top: 40px">

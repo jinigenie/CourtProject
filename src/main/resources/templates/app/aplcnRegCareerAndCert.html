@@ -33,74 +33,13 @@
 
                 <div id="crumbs">
                     <ul>
-                        <li><a href="#1">기본정보</a></li>
+                        <li><a href="../app/info">기본정보</a></li>
                         <li><a href="#2" class="highlight">경력상세</a></li>
-                        <li><a href="#3">학력상세</a></li>
-                        <li><a href="#4">서류제출</a></li>
+                        <li><a href="../app/edu">학력상세</a></li>
+                        <li><a href="../app/file">서류제출</a></li>
                     </ul>
                 </div>
 
-
-                <div style="margin-top: 40px">
-                    <span class="sub_title">사건내역</span>
-                </div>
-                <div class="table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr style="padding-top: 20px; height: 75px">
-                            <th scope="row" class="txt-left" style="width: 20% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">소송사건 경력</span>
-                            </th>
-                            <td data-cell-header="소송경력" class="txt-left" style="width: 30%">
-                                <input type="checkbox" name="check1"><span style="margin-left: 7px">경력 있음</span>
-                            </td>
-                            <td data-cell-header="소송경력" class="txt-left lawtd" style="width: 50%">
-                                <div class="input-wrap lawRecord" style="width: 450px; margin-right: 20px;">
-                                    <input name="lawsuit" value="" class="cm_inptxt" type="text"/>
-                                </div>
-                            </td>
-                            <td>
-                                <button type="button" class="add" id="exprAddBtn1" style="margin-right: 60px">추가
-                                </button>
-                            </td>
-                        </tr>
-                        <tr style="height: 75px">
-                            <th scope="row" class="txt-left" style="width: 40% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">보험업계 경력</span>
-                            </th>
-                            <td data-cell-header="보험경력" class="txt-left">
-                                <input type="checkbox" name="check2"><span style="margin-left: 7px">경력 있음</span>
-                            </td>
-                            <td data-cell-header="보험경력" class="txt-left instd">
-                                <div class="input-wrap insRecord" style="width: 450px; margin-right: 20px">
-                                    <input name="insurance" value="" class="cm_inptxt" type="text"/>
-                                </div>
-                            <td>
-                                <button type="button" class="add" id="exprAddBtn2" style="margin-right: 60px">추가
-                                </button>
-                            </td>
-                            </td>
-                        </tr>
-                        <tr style="height: 75px">
-                            <th scope="row" class="txt-left" style="width: 40% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">형사처벌 경력</span>
-                            </th>
-                            <td data-cell-header="형사경력" class="txt-left">
-                                <input type="checkbox" name="check3"><span style="margin-left: 7px">경력 있음</span>
-                            </td>
-                            <td data-cell-header="형사경력" class="txt-left detectd">
-                                <div class="input-wrap detRecord" style="width: 450px; margin-right: 20px">
-                                    <input name="detective" value="" class="cm_inptxt" type="text"/>
-                                </div>
-                            <td>
-                                <button type="button" class="add" id="exprAddBtn3" style="margin-right: 60px">추가
-                                </button>
-                            </td>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
 
                 <div style="overflow: hidden">
                     <div style="margin-top: 40px; float: left">
@@ -109,27 +48,88 @@
                     <button type="button" class="add" id="caAddBtn" style="float: right; padding: 43px 27px 0 0">경력 추가
                     </button>
                 </div>
-                <div class="table table-responsive">
-                    <table>
+                <div class="table careerTable" style="overflow: auto">
+                    <table style="white-space: nowrap">
                         <thead>
                         <tr>
                             <th scope="col">회사/활동기관명</th>
+                            <th scope="col">경력구분</th>
                             <th scope="col">부서</th>
                             <th scope="col">직책</th>
+                            <th scope="col">수행업무</th>
                             <th scope="col">근무시작일자</th>
                             <th scope="col">근무종료일자</th>
-                            <th scope="col">업무내용</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="careerTable">
                         <tr style="cursor: pointer">
                             <td data-cell-header="회사"><input type="text" class="input-wrap"></td>
+                            <td data-cell-header="경력구분" style="text-align: left">
+                                <div class="radio1">
+                                    <input type="radio" name="ct" id="radio-1" value="CA">
+                                    <label class="custom-control-label" for="radio-1">법정감정인 경력</label>
+                                </div>
+                                <div class="radio2" style="margin-top: 3px">
+                                    <input type="radio" name="ct" id="radio-2" value="OT" checked>
+                                    <label class="custom-control-label" for="radio-2">기타 경력</label>
+                                </div>
+                            </td>
                             <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px"></td>
-                            <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 100px"></td>
-                            <td data-cell-header="근무시작"><input type="text" class="input-wrap" style="width: 150px"></td>
-                            <td data-cell-header="근무종료"><input type="text" class="input-wrap" style="width: 150px"></td>
-                            <td>
-                                <button class="case case1 careerInfo"><em>작성</em></button>
+                            <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 120px"></td>
+                            <td data-cell-header="수행업무"><input type="text" class="input-wrap" style="width: 180px"></td>
+                            <td data-cell-header="근무시작일">
+                                <div class="calander-box" style="padding: 0">
+                                    <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                           name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+                                </div>
+                            </td>
+                            <td data-cell-header="근무종료일">
+                                <div class="calander-box" style="padding: 0">
+                                    <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                           name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="overflow: hidden">
+                    <div style="margin-top: 40px; float: left">
+                        <span class="sub_title">활동경력</span>
+                    </div>
+                </div>
+                <div class="table table-responsive">
+                    <table>
+                        <tbody>
+                        <tr style="padding-top: 20px; height: 75px">
+                            <th scope="row" class="txt-left" style="width: 20% !important;">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">활동경력</span>
+                            </th>
+                            <td data-cell-header="활동경력" class="txt-left lawtd" style="width: 80%">
+                                <textarea name="lawsuit" placeholder="경력 내용 기입" class="txtInfo2"></textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="overflow: hidden">
+                    <div style="margin-top: 40px; float: left">
+                        <span class="sub_title">특기사항</span>
+                    </div>
+                </div>
+                <div class="table table-responsive">
+                    <table>
+                        <tbody>
+                        <tr style="padding-top: 20px; height: 75px">
+                            <th scope="row" class="txt-left" style="width: 20% !important;">
+                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">특기사항</span>
+                            </th>
+                            <td data-cell-header="특기사항" class="txt-left lawtd" style="width: 80%">
+                                <textarea name="lawsuit" placeholder="경력 내용 기입" class="txtInfo2"></textarea>
                             </td>
                         </tr>
                         </tbody>
@@ -178,63 +178,6 @@
                     </div>
                 </div>
 
-                <!-- 경력 상세내용 모달창 -->
-                <div class="modal2">
-                    <div class="modal__background">
-                        <div class="modal_body">
-                            <div class="modalOff">X</div>
-
-                            <form action="" method="">
-                                <div class="modal_con">
-
-                                    <form>
-                                        <p style="font-size: 18px; font-weight: 600; margin: 15px; color: #1c449c;">업무
-                                            내용</p>
-                                        <div class="table">
-                                            <table>
-                                                <tbody>
-                                                <tr style="padding-top: 20px">
-                                                    <th scope="row" class="txt-left">
-                                                        <span class="essential-txt" title="필수항목">수행업무</span>
-                                                    </th>
-                                                    <td data-cell-header="수행업무" class="txt-left worktd">
-                                                        <div class="input-wrap"
-                                                             style="width: 400px; display: inline-block; margin-right: 20px">
-                                                            <input name="workType" value="" class="cm_inptxt"
-                                                                   type="text"/>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" class="txt-left">
-                                                        <span class="essential-txt" title="필수항목">상세설명</span>
-                                                    </th>
-                                                    <td data-cell-header="상세설명" class="txt-left instd">
-                                                        <textarea style="width: 400px; height: 150px"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" class="txt-left">
-                                                        <span class="essential-txt" title="필수항목">특기사항</span>
-                                                    </th>
-                                                    <td data-cell-header="특기사항" class="txt-left instd">
-                                                        <textarea style="width: 400px; height: 150px"></textarea>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <input type="submit" class="submitCareer modalOff2"
-                                               style="border: none; cursor: pointer"
-                                               value="제출">
-                                    </form>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -244,87 +187,6 @@
 
 </th:block>
 
-<!-- 사건내역 추가 -->
-<script>
-    var btn1 = document.getElementById("exprAddBtn1");
-    var first = document.querySelector(".lawtd");
-
-    btn1.addEventListener('click', function () {
-
-        var td1 = document.createElement('div');
-        td1.classList.add('input-wrap');
-        td1.style.width = '450px';
-        td1.style.margin = '5px 0 0 0';
-        td1.style.overflow = 'hidden';
-        var inp1 = document.createElement('input');
-        var del1 = document.createElement('button');
-        inp1.type = 'text';
-        inp1.style.display = 'inline-block';
-        inp1.style.float = 'left';
-        inp1.style.width = '90%';
-        del1.innerHTML = '[X]';
-        del1.style.float = 'right';
-
-        td1.appendChild(inp1);
-        td1.appendChild(del1);
-        first.appendChild(td1);
-
-        del1.addEventListener('click', function () {
-            td1.remove();
-        })
-
-    })
-
-    var btn2 = document.getElementById("exprAddBtn2");
-    var second = document.querySelector(".instd");
-
-    btn2.addEventListener('click', function () {
-
-        var td1 = document.createElement('div');
-        td1.classList.add('input-wrap');
-        td1.style.width = '450px';
-        td1.style.margin = '5px 0 0 0';
-        var inp1 = document.createElement('input');
-        inp1.type = 'text';
-        td1.appendChild(inp1);
-        second.appendChild(td1);
-
-    })
-
-    var btn3 = document.getElementById("exprAddBtn3");
-    var third = document.querySelector(".detectd");
-
-    btn3.addEventListener('click', function () {
-
-        var td1 = document.createElement('div');
-        td1.classList.add('input-wrap');
-        td1.style.width = '450px';
-        td1.style.margin = '5px 0 0 0';
-        var inp1 = document.createElement('input');
-        inp1.type = 'text';
-        td1.appendChild(inp1);
-        third.appendChild(td1);
-
-    })
-
-</script>
-
-<!--모달창 : 경력내용 작성-->
-<script>
-    const modal2 = document.querySelector('.modal2');
-    $(".careerInfo").click(function () {
-        modal2.style.display = 'block';
-    })
-
-    $(".modalOff").click(function () {
-        modal2.style.display = 'none';
-    })
-
-    $(".modalOff2").click(function () {
-        modal2.style.display = 'none';
-    })
-
-</script>
 
 <!--모달창 : 저장-->
 <script>
@@ -365,55 +227,42 @@
 
 </script>
 
-<!--사건내역 상세내용 숨기기/보이기-->
 <script>
-    (function() {
-        console.log(1);
-        $(".lawtd").css("visibility", "hidden");
-        $(".insRecord").css("visibility", "hidden");
-        $(".detRecord").css("visibility", "hidden");
-        $("#exprAddBtn1").css("visibility", "hidden");
-        $("#exprAddBtn2").css("visibility", "hidden");
-        $("#exprAddBtn3").css("visibility", "hidden");
-    })();
+    $('#caAddBtn').click(function () {
 
-    $('input[name="check1"]').change(function () {
-        var checked1 = $(this).prop('checked');
-        if (checked1) {
-            $(".lawtd").css("visibility", "visible");
-            $("#exprAddBtn1").css("visibility", "visible");
-        }
-        else {
-            $(".lawtd").css("visibility", "hidden");
-            $("#exprAddBtn1").css("visibility", "hidden");
-        }
-    });
+        const ctId = Date.now();
 
-    $('input[name="check2"]').change(function () {
-        var checked2 = $(this).prop('checked');
-        if (checked2) {
-            $(".insRecord").css("visibility", "visible");
-            $("#exprAddBtn2").css("visibility", "visible");
-        }
-        else {
-            $(".insRecord").css("visibility", "hidden");
-            $("#exprAddBtn2").css("visibility", "hidden");
-        }
-    });
+        var career = '<tr style="cursor: pointer">'
+        career += '<td data-cell-header="회사"><input type="text" class="input-wrap"></td>'
+        career += '<td data-cell-header="경력구분" style="text-align: left">'
+        career += '<div class="radio1">'
+        career += '<input type="radio" name="ct'+ ctId +'" id="radio-1'+ ctId +'">'
+        career += '<label class="custom-control-label" for="radio-1'+ ctId +'">법정감정인 경력</label></div>'
+        career += '<div class="radio2" style="margin-top: 3px">'
+        career += '<input type="radio" name="ct'+ ctId +'" id="radio-2'+ ctId +'" checked>'
+        career += '<label class="custom-control-label" for="radio-2'+ ctId +'">기타 경력</label></div></td>'
+        career += '<td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px"></td>'
+        career += '<td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 120px"></td>'
+        career += '<td data-cell-header="수행업무"><input type="text" class="input-wrap" style="width: 180px"></td>'
+        career += '<td data-cell-header="근무시작일">'
+        career += '<div class="calander-box" style="padding: 0">'
+        career += '<input type="text" class="datepicker" readonly placeholder="날짜선택"'
+        career += 'name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0; background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/></div></td>'
+        career += '<td data-cell-header="근무종료일">'
+        career += '<div class="calander-box" style="padding: 0">'
+        career += '<input type="text" class="datepicker" readonly placeholder="날짜선택"'
+        career += 'name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0; background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/></div></td></tr>'
 
-    $('input[name="check3"]').change(function () {
-        var checked3 = $(this).prop('checked');
-        if (checked3) {
-            $(".detRecord").css("visibility", "visible");
-            $("#exprAddBtn3").css("visibility", "visible");
-        }
-        else {
-            $(".detRecord").css("visibility", "hidden");
-            $("#exprAddBtn3").css("visibility", "hidden");
-        }
-    });
+        $('#careerTable').append(career);
 
-
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        });
+        $(".datepicker").prop('readonly', false);
+    })
 </script>
 
 </html>

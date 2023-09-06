@@ -464,13 +464,13 @@ body.header-fixed #header.t-search-btn-active .t-total-search-wrap {
   background: url(../../img/korean/layout/phone.png) no-repeat center/cover;
   content: '';
 }
-#footer .footer .copyright {
-  display: block;
-  margin-top: 0.75rem;
-}
-#footer .direct-link-lst-wrap dt {
-  display: none;
-}
+/*#footer .footer .copyright {*/
+/*  display: block;*/
+/*  margin-top: 0.75rem;*/
+/*}*/
+/*#footer .direct-link-lst-wrap dt {*/
+/*  display: none;*/
+/*}*/
 #footer
   .familysite-wrap
   dd
