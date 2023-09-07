@@ -1,5 +1,6 @@
 package com.court.proj.aplcnReg;
 
+import com.court.proj.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +13,16 @@ public class AplcnRegServiceImpl implements AplcnRegService{
     AplcnRegMapper aplcnRegMapper;
 
     @Override
-    public void setCerti(CertiVO vo) {
-        aplcnRegMapper.setCerti(vo);
+    public UserVO getInfo(String userId) {
+        return aplcnRegMapper.getInfo(userId);
     }
 
-    @Override
-    public ArrayList<CertiVO> getCerti(CertiVO vo) {
-        return aplcnRegMapper.getCerti(vo);
-    }
+//    @Override
+//    public void setCerti(CertiVO vo) {
+//        aplcnRegMapper.setCerti(vo);
+//    }
+//    @Override
+//    public ArrayList<CertiVO> getCerti(CertiVO vo) {
+//        return aplcnRegMapper.getCerti(vo);
+//    }
 }

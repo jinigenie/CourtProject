@@ -1,7 +1,9 @@
 package com.court.proj.aplcnReg;
 
+import com.court.proj.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,7 +31,13 @@ public class AplcnRegController {
 
     //기본정보 입력페이지
     @GetMapping("/info")
-    public String getInfo() {
+    public String getInfo(Model model) {
+
+        String id = "genie85";
+
+        UserVO vo = aplcnRegService.getInfo(id);
+        model.addAttribute("vo", vo);
+
         return "app/aplcnRegInfo";
     }
 
@@ -57,25 +65,8 @@ public class AplcnRegController {
         return "app/aplcnSubmission";
     }
 
-    //자격증 데이터 내려받기
-    @GetMapping("/api")
-    public String test() {
+    //////////////////////////////////////////////////////////////////////
 
-        return "app/certi_api";
-    }
 
-    //자격증 조회
-//    @GetMapping("/searchCer")
-//    public String searchCer(CertiVO vo) {
-//
-//        ArrayList<CertiVO> list = aplcnRegService.getCerti(vo);
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i));
-//        }
-//
-//        return "/app/edu";
-//
-//    }
 
 }
