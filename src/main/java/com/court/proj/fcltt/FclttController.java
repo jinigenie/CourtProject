@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,11 +66,12 @@ public class FclttController {
 	
 	
 	@PostMapping("/getfclttModal")
-	public @ResponseBody ResponseEntity<ArrayList<FclttVO>>getfclttModal(@RequestBody FclttVO vo){
-		ArrayList<FclttVO> list = fclttService.getFclttContent(vo.getAccept_proper_num());
+	public @ResponseBody ResponseEntity<FclttVO>getfclttModal(@RequestParam("accept_proper_num") String accept_proper_num){
+		System.out.println(accept_proper_num);
+		FclttVO list = fclttService.getFclttContent(accept_proper_num);
 		System.out.println(list.toString());
 		
-		return new ResponseEntity<>(list,  HttpStatus.OK);
+		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	

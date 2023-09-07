@@ -12,8 +12,8 @@
 
 	<div class="wrap">
 
-		<!--메뉴바-->
 		<div id="main_con">
+			<!--메뉴바-->
 			<div id="nav_menu">
 				<div id="lnb">
 					<h2 class="title">조력자확인</h2>
@@ -31,7 +31,8 @@
 
 				</div>
 			</div>
-			<!--   내용 시작 -->
+			<!-- 메뉴바 여기까지-->
+			<!--   본문 contents 내용 시작 -->
 
 			<div id="contents">
 
@@ -59,12 +60,6 @@
 
 				<article id="detail-content">
 					<form id="listForm" name="fcltt_listForm" action="fclttList" method="get">
-						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
-						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
-						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
-						<input type="hidden" id="cate_name" name="cate_name" value="" />
-						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
 						<div class="heading-wrap container">
 							<h3 class="heading1">
 								<span>재판조력자 등재 명단</span>
@@ -146,15 +141,13 @@
 									<td data-cell-header="이름">[[${vo.user_name}]]</td>
 									<td data-cell-header="날짜">[[${ #temporals.format(vo.accept_date,
 										'yyyy-MM-dd')}]]</td>
-									<!--									<td class="modal_ajax"  onclick="openPop2()">
-										<a class="modal_ajax fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
-									</td>-->
-									<td onclick="openPop2();">
+									<td class="modal_ajax">
 										<a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
+										<input type="hidden" name="accept_proper_num" th:value="${vo.accept_proper_num}" />
 									</td>
+
 									<td>
-										<input type="hidden" name="accept_proper_num"
-											th:value="${vo.accept_proper_num}" />
+
 										<a th:class="${vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2'}">
 											<em th:text="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'}"></em>
 										</a>
@@ -199,30 +192,129 @@
 							<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
 						</div>
 					</div>
+
+
+				</article>
 			</div>
-			<!-- //본문컨텐츠 영역 -->
-			<!-- The Modal -->
+								<!--모달창 작업-->
+					<div id="popup_layer2">
+						<div class="popup_box2">
+							<!--팝업 컨텐츠 영역-->
 
 
-			</article>
+						</div>
+					</div>
+
 		</div>
-		<div id="popup_layer2">
-			<div class="popup_box2">
-			
-		</div>
+		<!-- //본문컨텐츠 영역 -->
+
+
+
 
 	</div>
 	<!-- //main_con  -->
 
-	<!-- 메뉴바 여기까지-->
-	<!--모달창 작업-->
 
-	<!--모달창 끝-->
+
+
+
 
 
 
 </th:block>
-<script>
+
+
+
+
+<script th:inline="javascript">
+	document.addEventListener("DOMContentLoaded", function () {
+    var modalAjaxElements = document.querySelectorAll(".fcltt_content");
+    modalAjaxElements.forEach(function (element) {
+        element.addEventListener("click", function () {
+            var closestTr = this.closest("tr");
+            var accept_proper_num = closestTr.querySelector("input[name='accept_proper_num']").value;
+            console.log(accept_proper_num);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "getfclttModal", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var fclttData = JSON.parse(xhr.responseText);
+                    console.log(fclttData.trial_fcltt_sbcls_code);
+
+                    var modal = document.getElementById("popup_layer2");
+                    modal.style.display = "block";
+
+                    var str ="";
+					str = '<div class="popup_cont2">' ;
+					str+= '<div class="popup_cont2_title">'; 
+					str+= '<p>조력자 상세정보</p></div>';
+					str+= '<div class="popup_contText">' ;
+					str+= '<h3 id="fcltt_h3"> 재판조력자</h3>' ;
+					str+= '<h2 id="fcltt_h2">' + fclttData.user_name + '</h2>' ;
+					str+= '<p id="fcltt_p_right">등재번호: ' + fclttData.accept_proper_num + '</p></div>' ;
+					str+= '<div class="fcltt_wrap"><div class="fcltt_wrap_top">' ;
+					str+= '<table><colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>' ;
+					str+= '<tbody>' ;
+					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">재판조력자분류</span>' ;
+					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">'; 
+					str+= '<span class="fclttSpan txt-left">' + fclttData.trial_fcltt_clasifi_code +' > '+ fclttData.trial_fcltt_sbcls_code + '</span></td></tr>'; 
+					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">신청법원</span>' 
+					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">' ;
+					str+= '<span class="fclttSpan txt-left">' + fclttData.court_region + ' > '+ fclttData.court_name + '</span></td></tr>' ;
+					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">소송사건 유무내역</span>' ;
+					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">' ;
+					str+= '<span class="fclttSpan txt-left"> </span></td></tr>' ;
+					str+= '</tbody ></table ></div >' ;
+					str+= '<div class="fcltt_popup_wrap">'; 
+					str+= '<table class="fcltt_popup_content">' ;
+					str+= '<colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>' ;
+					str+= '<tbody id="fcltt_detail_bottom"><tr><th scope="row" class="txt-left">'; 
+					str+= '<span class="fclttSpan_title txt-left" title="">학력 상세 정보</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left">' ;
+					str+= '<span class="fclttSpan2 txt-left"></span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학교이름</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left">' ;
+					str+= '<span class="fclttSpan2 txt-left">' + fclttData.edctn_school_name + '</span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학과전공</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.edctn_major + '</span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학위</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.edctn_degree + '</span></td></tr></tbody>' ;
+					str+= '<!-- 경력 상세 --><tbody id="fcltt_detail_bottom" style="margin-top: 20px;">' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 경력 상세 정보</span></th>'; 
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.company_name + '</span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">경력구분</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' +fclttData.career_type + '</span></td></tr></tbody>' ;
+					str+= '<tbody id="fcltt_detail_bottom">' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 자격증 상세 정보</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>' ;
+					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명2</span></th>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>' ;
+					str+= '</tbody></table></div></div></div>' ;
+					str+= '<div class="popup_btn2"><a href="javascript:closePop2();">닫기</a></div></div>';
+
+                    console.log(str);
+
+                    var popupBox = document.querySelector('.popup_box2');
+                    popupBox.innerHTML = str;
+                }
+            };
+
+            xhr.send("accept_proper_num=" + accept_proper_num);
+        });
+    });
+});
+</script>
+
+
+
+<script th:inline="javascript">
 
 	var fclttSearch_btn = document.getElementById("fclttSearch_btn");
 	fclttSearch_btn.onclick = function () {
@@ -230,10 +322,6 @@
 		document.fcltt_listForm.submit();
 	}
 
-	//상세보기 스크립트
-	function openPop2() {
-		document.getElementById("popup_layer2").style.display = "block";
-	}
 
 
 </script>
@@ -241,69 +329,7 @@
 
 
 
-<script th:inline="javascript">
 
-	$(".modal_ajax").click(function () {
-
-
-		var closestTr = $(this).closest("tr");
-		// <tr> 요소 내에서 숨겨진 input 필드 값을 가져오기
-		var accept_proper_num = closestTr.find("input[name='accept_proper_num']").val();
-		console.log(accept_proper_num);
-
-		$.ajax({
-
-			url: "getfclttModal",
-			type: "post",
-			contentType: "application/json", //보낼데이터형식
-			data: JSON.stringify({accept_proper_num: accept_proper_num}),
-			success: function (data) {
-				console.log(data);
-				
-				var str ="";
-				str += '<div class="popup_cont2">';
-					str += '<div class="popup_cont2_title">';
-				str += '<p>조력자 상세정보</p></div>';
-					str += '<div class="popup_contText">';
-						str += '<h3 id="fcltt_h3"> 재판조력자</h3>';
-						str += '<h2 id="fcltt_h2">박인욱님</h2>';
-						str += '<p id="fcltt_p_right">등재번호: 123125</p></div>';
-					str += '<div class="fcltt_wrap">';
-						str += '<div class="fcltt_wrap_top">';
-							str += '<table><colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>';
-								str += '<tbody>';
-									str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">재판조력자분류</span>';
-										str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
-											str += '<span class="fclttSpan txt-left">통번역인 > 번역인</span></td></tr>';
-									str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">신청법원</span>';
-										str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
-											str += '<span class="fclttSpan txt-left">서울 > 서초법원</span></td></tr>';
-									str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">소송사건 유무내역</span>';
-										str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
-											str += '<span class="fclttSpan txt-left"> </span></td></tr>';
-							
-				str += '<div class="popup_btn2"><a href="javascript:closePop2();">닫기</a></div></div>';
-				
-				
-				
-				
-				
-				
-				openPop2();
-				
-
-
-			},
-			error: function (status, error) {
-				console.log(status);
-			}
-		})
-
-
-	})
-
-	
-</script>
 
 
 
