@@ -17,6 +17,11 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         return aplcnRegMapper.getInfo(userId);
     }
 
+    @Override
+    public ArrayList<CourtVO> getCourt() {
+        return aplcnRegMapper.getCourt();
+    }
+
 //    @Override
 //    public void setCerti(CertiVO vo) {
 //        aplcnRegMapper.setCerti(vo);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public interface AplcnRegService {
 
     public UserVO getInfo(String userId);
+    public ArrayList<CourtVO> getCourt();
 
 
 //    void setCerti(CertiVO vo);

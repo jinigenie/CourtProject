@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface AplcnRegMapper {
 
     public UserVO getInfo(String userId);
+    public ArrayList<CourtVO> getCourt();
 
 //    void setCerti(CertiVO vo);
 //    public ArrayList<CertiVO> getCerti(@Param("vo") CertiVO vo);
