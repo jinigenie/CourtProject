@@ -23,10 +23,9 @@
 /* ------------------조력자 등재명단 목록 fclttList --------------------*/
 
 //상세보기 스크립트
-function openPop2(){
+/*function openPop2(){
 	document.getElementById("popup_layer2").style.display = "block";
-	document.querySelector(".popup_contText").scrollTo(0);
-}
+}*/
 
 //그냥 닫기버튼 스크립트
 function closePop2() {

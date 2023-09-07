@@ -17,5 +17,5 @@ public interface FclttMapper {
 	
 
 	//명단에서 상세보기 ajax
-	public ArrayList<FclttVO> getFclttContent(int accept_proper_num);
+	public FclttVO getFclttContent(String accept_proper_num);
 }

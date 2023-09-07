@@ -20,7 +20,7 @@
 	
     </insert>
     
-    <select id="getList">
+    <select id="getList" resultType="FclttVO">
 	    SELECT tb14.accept_date,
 		       tb14.accept_act_yn,
 		       tb14.accept_etc,
@@ -53,20 +53,32 @@
     
 	<!-- List에서 상세모기 모달창 ajax -->
 	<select id="getFclttContent" resultType="FclttVO">
-		SELECT tb14.accept_date,
-		       tb14.accept_act_yn,
-		       tb14.accept_etc,
-		       tb11.court_name,
-		       tb10.trial_fcltt_description,
-		       tb1.user_name,
-		       tb14.accept_proper_num
-
-		FROM TB_014 tb14
-		JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
-		JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
-		JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
+		select tb1.user_proper_num,
+			   tb1.user_name,
+			   tb14.accept_proper_num,
+		       tb10.trial_fcltt_clasifi_code,
+		       tb10.trial_fcltt_sbcls_code,
+		       tb6.edctn_school_name,
+		       tb6.edctn_major,
+		       tb6.edctn_degree,
+		       tb7.company_name,
+		       tb7.career_type,
+		       tb8.crtfc_type,
+               tb11.court_region,
+               tb11.court_name     
+		from TB_014 tb14 
+		join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb14.trial_fcltt_proper_num
+		join TB_001 tb1 on tb1.user_proper_num = tb14.user_proper_num
+		join TB_005 tb5 on tb5.user_proper_num = tb14.user_proper_num
+		join TB_006 tb6 on tb6.aplcn_dtls_proper_num = tb5.aplcn_dtls_proper_num
+		join TB_007 tb7 on tb7.aplcn_dtls_proper_num = tb6.aplcn_dtls_proper_num
+		join TB_008 tb8 on tb8.aplcn_dtls_proper_num = tb7.aplcn_dtls_proper_num
+        join TB_011 tb11 on tb11.court_proper_num = tb14.court_proper_num
 		where accept_proper_num = #{accept_proper_num}
 	</select>
+
+
+
 
 
 

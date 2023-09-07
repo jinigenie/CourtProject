@@ -29,7 +29,7 @@ public class FclttServiceImple implements FclttService {
 	}
 
 	@Override
-	public ArrayList<FclttVO> getFclttContent(int accept_proper_num) {
+	public FclttVO getFclttContent(String accept_proper_num) {
 		return fclttMapper.getFclttContent(accept_proper_num);
 	}
 
