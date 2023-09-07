@@ -6,12 +6,8 @@
 
 <mapper namespace="com.court.proj.aplcnReg.AplcnRegMapper">
 
-    <insert id="setCerti">
-           insert into CERTI(CERTINAME) values (#{certiName})
-    </insert>
-
-    <select id="getCerti" resultType="CertiVO">
-        select * from CERTI where CERTINAME like concat('%',#{vo.searchkeyword},'%')
+    <select id="getInfo" resultType="UserVO">
+        SELECT * FROM TB_001 WHERE USER_ID = #{user_id};
     </select>
 
 
