@@ -1,5 +1,6 @@
 package com.court.proj.user;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -9,7 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,11 +68,18 @@ public class UserController {
 	
 	//회원가입
 	@PostMapping("/joinForm")
-	public String joinForm(@Valid UserVO vo) {
+	public String joinForm(@Valid @ModelAttribute("vo") UserVO vo, Errors errors, Model model) {
 		
-		userService.joinUser(vo);
-		
-		return "user/userjoin";
+		//userService.joinUser(vo);
+		if(errors.hasErrors()) {
+			List<FieldError> list = errors.getFieldErrors();
+			for(FieldError err : list) {
+				model.addAttribute("valid_"+err.getField(),err.getDefaultMessage());
+				System.out.println(err.getDefaultMessage());
+			}
+			return "user/userjoin";
+		}
+		return "../main/";
 	}
 	
 	//아이디 중복확인
@@ -103,4 +115,33 @@ public class UserController {
         return new ResponseEntity<Integer>(randomNumber, HttpStatus.OK);
     }
 	
+	//ID 찾기
+	@PostMapping("/searchId")
+	public @ResponseBody ResponseEntity<String> searchId(@RequestParam("phone") String phone){
+		
+		//어차피 성공했을 때 이 요청을 실행할거니까 괜찮음
+		//실행되면 전달받은 휴대폰으로 아이디 찾아서 전달하기
+		
+		
+		return new ResponseEntity<>(userService.searchId(phone),HttpStatus.OK);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

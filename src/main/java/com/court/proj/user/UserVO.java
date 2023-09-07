@@ -33,9 +33,11 @@ public class UserVO {
 	 */
 	
 	private Integer user_proper_num;
+	@Pattern(regexp = "^[a-z0-9]{7,16}$", message = "7~16자의 영문 소문자, 숫자의 조합으로 작성해주세요")
 	private String user_id;
 	@Pattern(regexp = "/^(?=.*\\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/", message = "8~16자 영문+숫자 조합으로 작성바랍니다.")
 	private String user_pw;
+	@Pattern(regexp = "^[가-힣]*$", message = "한글만 입력 가능합니다.")
 	private String user_name;
 	private String user_age;
 	private String user_email;

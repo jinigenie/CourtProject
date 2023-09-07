@@ -19,4 +19,9 @@
 						#{user_bank_account},#{user_bank_holder})
 	</insert>
 
+	<select id="searchId">
+		select user_id from TB_001 where user_phone = #{phone}
+	</select>
+
+
 </mapper>

@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 	public int checkId(String user_id);
 	public int userJoin(UserVO vo);
+	public String searchId(String phone);
 }
