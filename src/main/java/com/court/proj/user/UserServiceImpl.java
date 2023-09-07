@@ -19,4 +19,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.userJoin(vo);
 	}
 
+	@Override
+	public String searchId(String phone) {
+		return userMapper.searchId(phone);
+	}
+
 }

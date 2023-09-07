@@ -31,14 +31,17 @@
 											<div class="address-wrap write-wrap-m">
 												<div class="address-btn-wrap">
 													<div class="input-wrap">
-														<input id="userid" name="user_id" class="cm_inptxt" value=""
-															title="" type="text" />
+														<input id="userid" name="user_id" class="cm_inptxt"
+															th:value="${vo !=null? vo.user_id : ''}" title=""
+															type="text" />
+
 													</div>
 													<button type="button" class="address-btn" id="checkDuple" title="">
 														아이디 중복확인
 													</button>
 												</div>
-												<em id="resultMessage">ddd</em>
+												<em id="resultMessage"></em>
+												<em>[[${valid_user_id}]]</em>
 											</div>
 										</td>
 									</tr>
@@ -50,11 +53,13 @@
 										<td class="txt-left">
 											<div class="input-wrap-three write-wrap-m"
 												style="width: 162px; display: inline-block">
-												<div class="input-wrap" style="width: 200px">
+												<div class="input-wrap" style="width: 200px;">
 													<input name="user_name" id="cvl_nm" value="" class="cm_inptxt"
 														type="text" />
+
 												</div>
 											</div>
+											<em style="padding-left: 70px;">[[${valid_user_name}]]</em>
 										</td>
 									</tr>
 									<tr>
@@ -67,10 +72,11 @@
 											<div class="input-wrap-three write-wrap-m"
 												style="width: 162px; display: inline-block">
 												<div class="input-wrap" style="width: 200px">
-													<input name="user_pw" id="password" value="" class="cm_inptxt"
+													<input name="user_pw" id="password" class="cm_inptxt"
 														type="password" />
 												</div>
 											</div>
+											<em style="padding-left: 70px;">[[${valid_user_pw}]]</em>
 										</td>
 									</tr>
 									<tr>
@@ -133,18 +139,20 @@
 													</div>
 													<button type="button" class="address-btn" id="phoneBtn">인증번호 받기
 													</button>
+
 												</div>
+
 												<div class="address-btn-wrap"
 													style="padding-top: 0.5rem; display: inline-block;">
 													<div class="input-wrap" style="float: left;">
 														<input id="phoneCheck" name="" class="cm_inptxt" value=""
 															title="" type="text" />
-
 													</div>
 													<button type="button" class="address-btn" id="phoneCheckBtn">인증번호 확인
 													</button>
 												</div>
 											</div>
+											<em style="padding-left: 10px; padding-top: 5px;">[[${valid_user_pw}]]</em>
 										</td>
 									</tr>
 									<tr>
@@ -154,22 +162,22 @@
 										</th>
 										<td class="txt-left">
 											<div class="input-wrap" style="width: 200px; display: inline-block">
-												<input name="user_email" id="cvl_nm" value="" class="cm_inptxt"
+												<input name="cvl_nm" id="cvl_mail" value="" class="cm_inptxt"
 													type="text">
 											</div>
-											<span>@</span>
-											<div class="select-box" style="padding: 10px;">
-												<select name="" id="" class="info-select">
-													<option value="">직접입력</option>
-													<option value="">naver.com</option>
-													<option value="">hanmail.net</option>
-													<option value="">gmail.com</option>
-													<option value="">daum.net</option>
-												</select>
-											</div>
+											<span style="margin: 7px">@</span>
 											<div class="input-wrap" style="width: 200px; display: inline-block">
-												<input name="emaillast" id="cvl_nm" value="" class="cm_inptxt"
+												<input name="cvl_nm" id="cvl_mail2" value="직접입력" class="cm_inptxt"
 													type="text">
+											</div>
+											<div class="select-box" style="padding: 9px;">
+												<select name="" id="mailAddr" class="info-select">
+													<option value="">직접입력</option>
+													<option>naver.com</option>
+													<option>hanmail.net</option>
+													<option>gmail.com</option>
+													<option>daum.net</option>
+												</select>
 											</div>
 										</td>
 									</tr>
@@ -230,14 +238,14 @@
 											</div>
 											<div class="input-wrap-three write-wrap-m">
 												<div class="input-wrap" style="width: 320px; display: inline-block">
-													<input name="user_bank_account" id="cvl_account1"
-														value="" class="cm_inptxt" title="계좌번호" type="text"
+													<input name="user_bank_account" id="cvl_account1" value=""
+														class="cm_inptxt" title="계좌번호" type="text"
 														onkeydown="return num_only(event)" placeholder="계좌번호" />
 												</div>
 												<div class="input-wrap"
 													style="width: 150px; display: inline-block; margin-left: 5px">
-													<input name="user_bank_holder" id="cvl_account2"
-														value="" class="cm_inptxt" title="예금주" type="text"
+													<input name="user_bank_holder" id="cvl_account2" value=""
+														class="cm_inptxt" title="예금주" type="text"
 														onkeydown="return num_only(event)" placeholder="예금주" />
 												</div>
 											</div>
@@ -359,7 +367,7 @@
 			$('#password-confirm-message').addClass('password-mismatch').text('비밀번호가 일치하지 않습니다.');
 		}
 	});
-	
+
 	//가입버튼
 	$('#joinBtn').click(function () {
 		// 폼을 제출
@@ -370,7 +378,7 @@
 	$("#checkDuple").click(function () {
 		const userid = $("#userid").val();
 		$("#resultMessage").text("");
- 		$.ajax({
+		$.ajax({
 			url: "checkDuplicateUsername",
 			method: "POST",
 			data: {userid: userid},
@@ -387,6 +395,11 @@
 			}
 		});
 	});
+
+	//이메일 선택 시 값 넣기
+	$('#mailAddr').change(() => {
+		$('#cvl_mail2').val($('#mailAddr').val())
+	})
 </script>
 
 
