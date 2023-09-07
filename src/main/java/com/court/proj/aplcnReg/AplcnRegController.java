@@ -38,6 +38,9 @@ public class AplcnRegController {
         UserVO vo = aplcnRegService.getInfo(id);
         model.addAttribute("vo", vo);
 
+        ArrayList<CourtVO> clist = aplcnRegService.getCourt();
+        model.addAttribute("clist", clist);
+
         return "app/aplcnRegInfo";
     }
 
@@ -66,7 +69,6 @@ public class AplcnRegController {
     }
 
     //////////////////////////////////////////////////////////////////////
-
 
 
 }

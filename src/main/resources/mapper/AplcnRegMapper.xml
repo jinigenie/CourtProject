@@ -10,5 +10,8 @@
         SELECT * FROM TB_001 WHERE USER_ID = #{user_id};
     </select>
 
+    <select id="getCourt" resultType="CourtVO">
+        SELECT * FROM TB_011;
+    </select>
 
 </mapper>
