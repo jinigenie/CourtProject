@@ -9,6 +9,7 @@ public interface AplcnRegService {
 
     public UserVO getInfo(String userId);
     public ArrayList<CourtVO> getCourt();
+    public ArrayList<TrialVO> getTrial();
 
 
 //    void setCerti(CertiVO vo);

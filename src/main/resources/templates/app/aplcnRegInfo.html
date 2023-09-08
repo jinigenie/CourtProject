@@ -48,37 +48,29 @@
                                 <span style="margin-left: 80px">재판조력자 구분</span>
                             </th>
                             <td data-cell-header="재판조력자" class="txt-left">
-                                <div class="select-box">
+                                <div class="select-box" style="width: 180px">
                                     <label for="selectType1"></label>
-                                    <select class="info-select" id="selectType1"
-                                            name="search_field" title="검색조건을 선택해주세요.">
-                                        <option value="">구분1</option>
-                                        <option value="">구분2</option>
-                                        <option value="">구분3</option>
-                                        <option value="">구분4</option>
-                                        <option value="">구분5</option>
+                                    <select class="info-select" id="selectType1" name="selectType1">
+                                        <option value="">선택</option>
+                                        <option value="조력자">조력자</option>
+                                        <option value="통번역인">통번역인</option>
+                                        <option value="조정위원">조정위원</option>
+                                        <option value="전문심리위원">전문심리위원</option>
+                                        <option value="상담위원">상담위원</option>
                                     </select>
                                 </div>
-                                <div class="select-box">
+                                <div class="select-box" style="width: 180px">
                                     <label for="selectType2"></label>
-                                    <select class="info-select" id="selectType2"
-                                            name="search_field" title="검색조건을 선택해주세요.">
-                                        <option value="">중분류1</option>
-                                        <option value="">중분류2</option>
-                                        <option value="">중분류3</option>
-                                        <option value="">중분류4</option>
-                                        <option value="">중분류5</option>
+                                    <select class="info-select" id="selectType2" name="selectType2">
+                                        <option class="defaultOpt">선택</option>
+                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_main_code}">[[${tvo.trial_fcltt_clasifi_code}]]</option>
                                     </select>
                                 </div>
-                                <div class="select-box">
+                                <div class="select-box selectBox3" style="width: 180px">
                                     <label for="selectType3"></label>
-                                    <select class="info-select" id="selectType3"
-                                            name="search_field" title="검색조건을 선택해주세요.">
-                                        <option value="">소분류1</option>
-                                        <option value="">소분류2</option>
-                                        <option value="">소분류3</option>
-                                        <option value="">소분류4</option>
-                                        <option value="">소분류5</option>
+                                    <select class="info-select" id="selectType3" name="selectType3">
+                                        <option class="defaultOpt">선택</option>
+                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_clasifi_code}">[[${tvo.trial_fcltt_sbcls_code}]]</option>
                                     </select>
                                 </div>
                             </td>
@@ -409,202 +401,7 @@
     </div>
 
 </th:block>
-
-<!--주소찾기-->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("addr1").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("addr2").focus();
-            }
-        }).open();
-    }
-</script>
-
-<!--은행정보 확인-->
-<script>
-    $("#selectBank").change(function () {
-        let selected = $("#selectBank option:selected").val();
-        if (selected == 'kb') {
-            $("#bankIcon").attr("src", "/img/app/kbIcon.png");
-            $(".selBank").html('국민은행');
-        } else if (selected == 'ibk') {
-            $("#bankIcon").attr("src", "/img/app/ibkIcon.png");
-            $(".selBank").html('기업은행');
-        } else if (selected == 'nh') {
-            $("#bankIcon").attr("src", "/img/app/nhIcon.png");
-            $(".selBank").html('농협은행');
-        } else if (selected == 'sh') {
-            $("#bankIcon").attr("src", "/img/app/shIcon.png");
-            $(".selBank").html('신한은행');
-        } else if (selected == 'wr') {
-            $("#bankIcon").attr("src", "/img/app/wrIcon.png");
-            $(".selBank").html('우리은행');
-        } else if (selected == 'hn') {
-            $("#bankIcon").attr("src", "/img/app/hnIcon.png");
-            $(".selBank").html('하나은행');
-        } else if (selected == 'sc') {
-            $("#bankIcon").attr("src", "/img/app/scIcon.png");
-            $(".selBank").html('SC제일은행');
-        } else {
-            $("#bankIcon").attr("src", "#");
-            $(".selBank").html('');
-        }
-
-    });
-
-</script>
-
-<!--메일주소 선택입력-->
-<script>
-
-    $("#mailAddr").change(function () {
-        let selmail = $("#mailAddr option:selected").html();
-        $("#cvl_mail2").attr("value", selmail);
-
-    });
-
-    $(".addCourt").click(function () {
-        console.log("추가");
-    })
-</script>
-
-<!--모달창 : 저장-->
-<script>
-
-    const modal = document.querySelector('.modal');
-    let x = 0;
-
-    $(".prev_btn").click(function () {
-        modal.style.display = 'block';
-        x = 1;
-    })
-    $(".next_btn").click(function () {
-        modal.style.display = 'block';
-        x = 2;
-    })
-
-    $(".save").click(function () {
-        if (x == 1) {
-            $(location).attr("href", "../app/confirm");
-        } else {
-            $(location).attr("href", "../app/career");
-        }
-        x = 0;
-    })
-
-    $(".cancel").click(function () {
-        if (x == 1) {
-            $(location).attr("href", "../app/confirm");
-        } else {
-            $(location).attr("href", "../app/career");
-        }
-        x = 0;
-    })
-
-    $(".dmui_dialog_btn").click(function () {
-        modal.style.display = 'none';
-    })
-
-</script>
-
-<!--법원선택-->
-<script>
-
-    $('#selectRegion').change(function () {
-
-        $("#from_bub_cd option").hide();
-
-        let selRegion = $("#selectRegion option:selected").val();
-        if(selRegion === '전체') {
-            $("#from_bub_cd option").show();
-        } else {
-            $("#from_bub_cd option").filter(function () {
-                return selRegion === $(this).attr("class");
-            }).show();
-        }
-    })
-
-
-    function removeCourt() {
-        return !$('#wish_bub_cd option:selected').remove().appendTo('#from_bub_cd');
-    };
-
-    function addCourt() {
-        // !$('#from_bub_cd option:selected').remove().appendTo('#wish_bub_cd');
-
-        var left = $("#from_bub_cd option:selected").size();
-        var right = $("#wish_bub_cd option").size();
-
-        var cnt = left + right;
-        //alert(cnt);
-        if (cnt > 2) {
-            alert('희망법원은 2개까지 신청가능합니다.');
-            return;
-        } else {
-            return !$('#from_bub_cd option:selected').remove().appendTo('#wish_bub_cd');
-        }
-    }
-</script>
-
-<!--사건내역 상세내용 숨기기/보이기-->
-<script>
-    (function() {
-        $(".lawtd").css("visibility", "hidden");
-        $(".insurance").css("visibility", "hidden");
-        $(".detective").css("visibility", "hidden");
-
-    })();
-
-    $('input[name="check1"]').change(function () {
-        var checked1 = $(this).prop('checked');
-        if (checked1) {
-            $(".lawtd").css("visibility", "visible");
-        }
-        else {
-            $(".lawtd").css("visibility", "hidden");
-        }
-    });
-
-    $('input[name="check2"]').change(function () {
-        var checked2 = $(this).prop('checked');
-        if (checked2) {
-            $(".insurance").css("visibility", "visible");
-        }
-        else {
-            $(".insurance").css("visibility", "hidden");
-        }
-    });
-
-    $('input[name="check3"]').change(function () {
-        var checked3 = $(this).prop('checked');
-        if (checked3) {
-            $(".detective").css("visibility", "visible");
-        }
-        else {
-            $(".detective").css("visibility", "hidden");
-        }
-    });
-
-
-</script>
+<script th:src="@{../../js/app/regInfo.js}"></script>
 
 </html>

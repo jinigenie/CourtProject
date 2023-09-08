@@ -54,9 +54,12 @@ function deleteLine(obj) {
 const uniId = Date.now();
 $('#eduAddBtn').click(function () {
     var addtr2 = '<tr style="cursor: pointer">';
-    addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">';
-    addtr2 += '</td>';
-    addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">';
+    addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 200px; margin-left: 50px">';
+    addtr2 += '<input type="button" class="UnivSearch"'
+    addtr2 += 'style="background: url(../../img/app/search.png); border: none; width: 30px;' ;
+    addtr2 += 'height: 30px; background-size: cover; position: absolute;' ;
+    addtr2 += 'margin-left: -38px; margin-top: 5px; cursor: pointer"></td>';
+    addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 150px">';
     addtr2 += '</td>';
     addtr2 += '<td data-cell-header="학위">';
     addtr2 += '<div class="select-box2" style="width: 90px">';
@@ -157,8 +160,34 @@ $("#certiTable").on("click", ".certiSearch", function () {
     dataApi();
 })
 
+//모달창3 : 고등학교 검색창
+const modal3 = document.querySelector('.modal3');
+$("#highTable").on("click", ".highSearch", function () {
+
+    $("#highschool").val('');
+    $(".addLi2").remove();
+    $(".defaultLi2").show();
+
+    modal3.style.display = 'block';
+    dataApi2();
+})
+
+//모달창4 : 대학교 검색창
+const modal4 = document.querySelector('.modal4');
+$("#eduTable").on("click", ".UnivSearch", function () {
+
+    $("#univercity").val('');
+    $(".addLi3").remove();
+    $(".defaultLi3").show();
+
+    modal4.style.display = 'block';
+    dataApi3();
+})
+
 $(".modalOff").click(function () {
     modal2.style.display = 'none';
+    modal3.style.display = 'none';
+    modal4.style.display = 'none';
 })
 
 
@@ -196,3 +225,71 @@ $('#searchCerti-btn').click(()=>{
 
 })
 
+// 고등학교 검색
+let highData = [];
+
+function dataApi2(){
+    $.ajax({
+        url:"https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=0a0d73e5c24d9109a976b4fd0793c531&svcType=api&svcCode=SCHOOL&contentType=json&gubun=high_list&perPage=2370",
+        type:"GET",
+        success:function(data){
+            highData = data.dataSearch.content;
+
+        },error:function(status,err){
+            console.log(err)
+        }
+
+    })
+}
+
+$('#searchHigh_btn').click(()=>{
+    var search2 = $('#highschool').val();
+    var addLi2='';
+    const filteredData = highData.filter(item => item.schoolName.includes(search2));
+
+    console.log(filteredData);
+    if (filteredData.length > 0) {
+        $(".defaultLi2").hide();
+        for (const f of filteredData){
+            addLi2 += '<li class="addLi2">'+f.schoolName+'</li>';
+
+        }
+    }
+
+    $('#searchResult2').append(addLi2);
+
+})
+
+// 대학교 검색
+let UnivData = [];
+
+function dataApi3(){
+    $.ajax({
+        url:"https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=0a0d73e5c24d9109a976b4fd0793c531&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list&perPage=443",
+        type:"GET",
+        success:function(data){
+            UnivData = data.dataSearch.content;
+
+        },error:function(status,err){
+            console.log(err)
+        }
+
+    })
+}
+
+$('#searchUniv_btn').click(()=>{
+    var search3 = $('#univercity').val();
+    var addLi3='';
+    const filteredData = UnivData.filter(item => item.schoolName.includes(search3));
+
+    if (filteredData.length > 0) {
+        $(".defaultLi3").hide();
+        for (const f of filteredData){
+            addLi3 += '<li class="addLi3">'+f.schoolName+'</li>';
+
+        }
+    }
+
+    $('#searchResult3').append(addLi3);
+
+})

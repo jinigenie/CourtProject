@@ -11,6 +11,7 @@ public interface AplcnRegMapper {
 
     public UserVO getInfo(String userId);
     public ArrayList<CourtVO> getCourt();
+    public ArrayList<TrialVO> getTrial();
 
 //    void setCerti(CertiVO vo);
 //    public ArrayList<CertiVO> getCerti(@Param("vo") CertiVO vo);
