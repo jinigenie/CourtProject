@@ -3,12 +3,167 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.court.proj.aplcn.AplcnMapper">
-	
+<mapper namespace="com.court.proj.aplcn.AplcnMapper">
+
+	<insert id="aplcn_evaluate">
+	</insert>
+
+	<select id="getList">
+		SELECT
+		t1.user_proper_num AS user_proper_num,
+		t1.user_name AS
+		user_name,
+		t3.court_name AS
+		court_name,
+		t4.trial_fcltt_clasifi_code
+		AS
+		trial_fcltt_clasifi_code,
+		t2.aplicn_dtls_sts AS aplicn_dtls_sts,
+		t2.aplcn_dtls_proper_num AS
+		aplcn_dtls_proper_num
+		FROM tb_001 t1
+		INNER
+		JOIN tb_005 t2 ON
+		t1.user_proper_num = t2.user_proper_num
+		INNER JOIN
+		tb_011 t3
+		ON
+		t2.court_proper_num = t3.court_proper_num
+		INNER JOIN
+		tb_010
+		t4
+		ON
+		t2.trial_fcltt_proper_num = t4.trial_fcltt_proper_num
+
+
+		<where>
+			<if test="cri.searchFcltt != '' and cri.searchFcltt != null ">
+				and t4.trial_fcltt_clasifi_code like concat('%',
+				#{cri.searchFcltt}, '%')
+			</if>
+
+
+			<if test="cri.searchFcltt == 'asc' ">
+				t4.trial_fcltt_clasifi_code ascFcltt,
+			</if>
+			<if test="cri.searchCourt == 'asc' ">
+				t3.court_name ascCourt,
+			</if>
+			<if test="cri.searchStatus == 'desc' ">
+				t2.aplicn_dtls_sts unsuccess,
+			</if>
+		</where>
+		limit #{cri.pageStart}, #{cri.amount}
+
+	</select>
+
+	<select id="getTotal" resultType="int">
+		select count(*) as total
+		from tb_001 t1
+		where t1.user_proper_num =
+		#{user_proper_num}
+
+		<if test="cri.searchContent != '' and cri.searchContent != null ">
+			and user_name like concat('%', #{cri.searchContent}, '%')
+		</if>
+
+	</select>
+
+	<select id="getDetails">
+
+		SELECT
+		t1.user_name AS user_name,
+		t1.user_id AS
+		user_id,
+		t2.aplcn_dtls_proper_num AS aplcn_dtls_proper_num,
+		t5.ligtn_case_carer_yn AS
+		ligtn_case_carer_yn,
+		t5.ligtn_case_carer_etc AS ligtn_case_carer_etc,
+		t5.insrn_indst_carer_yn AS insrn_indst_carer_yn,
+		t5.insrn_indst_carer_etc AS insrn_indst_carer_etc,
+		t5.criminal_penalty_carer_yn AS criminal_penalty_carer_yn,
+		t5.criminal_penalty_carer_etc AS criminal_penalty_carer_etc,
+		t2.aplicn_dtls_sts AS aplicn_dtls_sts,
+		t6.edctn_school_name AS
+		edctn_school_name,
+		t6.edctn_major AS edctn_major,
+		t6.edctn_admsn_date AS
+		edctn_admsn_date,
+		t6.edctn_grdtn_date AS edctn_grdtn_date,
+		t6.edctn_degree AS edctn_degree,
+		t6.edctn_final_yn AS edctn_final_yn,
+		t7.company_name AS company_name,
+		t7.carer_type AS carer_type,
+		t7.work_start_date AS work_start_date,
+		t7.work_end_date AS
+		work_end_date,
+		t7.work_department AS work_department,
+		t7.work_position
+		AS work_position,
+		t7.work_description AS work_description,
+		t7.carer_description AS carer_description,
+		t7.special_note_description
+		AS special_note_description,
+		t8.crtfc_type AS crtfc_type,
+		t8.issue_agency AS issue_agency,
+		t8.crtfc_number AS crtfc_number,
+		t8.issue_date AS issue_date,
+		t10.trial_fcltt_clasifi_code AS
+		trial_fcltt_clasifi_code,
+		t10.trial_fcltt_sbcls_code AS
+		trial_fcltt_sbcls_code,
+		t11.court_region AS court_region,
+		t11.court_name AS court_name
+		FROM tb_001 t1
+		INNER JOIN tb_005 t2 ON
+		t1.user_proper_num = t2.user_proper_num
+		INNER JOIN tb_011 t3 ON
+		t2.court_proper_num = t3.court_proper_num
+		INNER JOIN tb_010 t4 ON
+		t2.trial_fcltt_proper_num =
+		t4.trial_fcltt_proper_num
+		INNER JOIN tb_005
+		t5 ON t1.user_proper_num = t5.user_proper_num
+		INNER JOIN tb_006 t6 ON
+		t2.aplcn_dtls_proper_num = t6.aplcn_dtls_proper_num
+		INNER JOIN tb_007
+		t7 ON t2.aplcn_dtls_proper_num =
+		t7.aplcn_dtls_proper_num
+		INNER JOIN
+		tb_008 t8 ON t2.aplcn_dtls_proper_num = t8.aplcn_dtls_proper_num
+		INNER
+		JOIN tb_010 t10 ON t2.trial_fcltt_proper_num =
+		t10.trial_fcltt_proper_num
+		INNER JOIN tb_011 t11 ON t2.court_proper_num
+		= t11.court_proper_num
+		WHERE t2.aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num}
+
+	</select>
+
+
+	<insert id="getEvaluate" parameterType="ListVO">
+		insert into
+		tb_013(all_carer_score,
+		jrsdc_carer_score,
+		office_score,
+		personality_score,
+		interview_score,
+		certificate_score,
+		evaluate_score,
+		judge_recom_score,
+		review_etc
+		)
+		values(#{all_carer_score},
+		#{jrsdc_carer_score},
+		#{office_score},
+		#{personality_score},
+		#{interview_score},
+		#{certificate_score},
+		#{evaluate_score},
+		#{judge_recom_score},
+		#{review_etc}
+		)
+	</insert>
 
 </mapper>
-  
-  
-  
-  
