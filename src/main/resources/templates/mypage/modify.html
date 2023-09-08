@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{../../css/mypage/mypage.css}"/>
+<link rel="stylesheet" th:href="@{../../css/app/info.css}"/>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -18,7 +19,7 @@
               </li>
               <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지/해제신청관리</a>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지 및 해제신청</a>
               </li>
             </ul>
           </div>
@@ -57,32 +58,7 @@
           action="#"
           method="post"
         >
-          <input
-            type="hidden"
-            id="cd_appeal_form"
-            name="cd_appeal_form"
-            value="ALL"
-          />
-          <input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-          <input
-            type="hidden"
-            id="srch_cd_appeal_form"
-            name="srch_cd_appeal_form"
-            value=""
-          />
-          <input
-            type="hidden"
-            id="search_capp_biz_cd"
-            name="search_capp_biz_cd"
-            value=""
-          />
-          <input type="hidden" id="cate_name" name="cate_name" value="" />
-          <input
-            type="hidden"
-            id="sub_cate_name"
-            name="sub_cate_name"
-            value=""
-          />
+         
           <div class="heading-wrap container">
             <h3 class="heading1">
               <span>회원정보 변경</span>
@@ -100,19 +76,19 @@
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
                             </th>
                             <td data-cell-header="아이디" class="txt-left">
-                                <span id="cvl_id">sis6710</span>
+                                <span id="cvl_id" th:text="${userVO.user_id}"></span>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row" class="txt-left">
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호</span>
                             </th>
-                            <td data-cell-header="성명" class="txt-left">
+                            <td data-cell-header="비밀번호" class="txt-left">
                                 <div class="input-wrap-three write-wrap-m"
                                      style="width: 162px; display: inline-block">
                                     <div class="input-wrap" style="width: 200px">
                                         <input name="cvl_nm" id="cvl_nm"
-                                               value="*******" class="cm_inptxt"
+                                               th:value="${userVO.user_pw}" class="cm_inptxt"
                                                type="password"/>
                                     </div>
                                 </div>
@@ -122,12 +98,12 @@
                             <th scope="row" class="txt-left">
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호 확인</span>
                             </th>
-                            <td data-cell-header="성명" class="txt-left">
+                            <td data-cell-header="비밀번호 확인" class="txt-left">
                                 <div class="input-wrap-three write-wrap-m"
                                      style="width: 162px; display: inline-block">
                                     <div class="input-wrap" style="width: 200px">
                                         <input name="cvl_nm" id="cvl_nm"
-                                               value="*******" class="cm_inptxt"
+                                               th:value="${userVO.user_pw}" class="cm_inptxt"
                                                type="password"/>
                                     </div>
                                 </div>
@@ -138,7 +114,7 @@
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">성명</span>
                             </th>
                             <td data-cell-header="성명" class="txt-left">
-                                <span id="cvl_id">ㅎㅎㅎ</span>
+                                <span id="cvl_id" th:text="${userVO.user_name}"></span>
                             </td>
                         </tr>
                         <tr>
@@ -155,8 +131,8 @@
                             </th>
                             <td data-cell-header="직업" class="txt-left">
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_job" id="cvl_job"
-                                           value="직업" class="cm_inptxt"
+                                    <input name="userVO.user_job" id="cvl_job"
+                                           th:value="${userVO.user_job}" class="cm_inptxt"
                                            type="text" maxlength="8"/>
                                 </div>
                             </td>
@@ -169,7 +145,7 @@
                                 <div class="input-wrap-three write-wrap-m"
                                      style="display: inline-block">
                                     <div class="input-wrap" style="width: 200px; display: inline-block">
-                                        <input name="cvl_cel1" maxlength="4" id="cvl_cel1" value="01012345678"
+                                        <input name="userVO.user_phone" maxlength="4" id="cvl_cel1" th:value="${userVO.user_phone}"
                                                class="cm_inptxt" title="휴대폰번호"
                                                type="text" onkeydown="return num_only(event)"
                                                readonly/>
@@ -180,13 +156,24 @@
                         </tr>
                         <tr>
                             <th scope="row" class="txt-left">
-                                <span style="margin-left: 80px">이메일</span>
+                                <span class="essential-txt" title="" style="margin-left: 80px">이메일</span>
                             </th>
-                            <td data-cell-header="이메일" class="txt-left">
-                                <div class="input-wrap" style="width: 268px; display: inline-block">
-                                    <input name="cvl_mail" maxlength="70"
-                                           id="cvl_mail" class="cm_inptxt"
-                                           title="이메일 아이디" type="text" value="xxxx123@gmail.com"/>
+                            <td class="txt-left">
+                                <div class="input-wrap" style="width: 200px; display: inline-block">
+                                    <input name="" id="cvl_mail" th:value="${#strings.substringBefore(userVO.user_email, '@')}" class="cm_inptxt" type="text">
+                                </div>
+                                <span style="margin: 7px">@</span>
+                                <div class="input-wrap" style="width: 200px; display: inline-block">
+                                    <input name="cvl_nm" id="cvl_mail2" th:value="${#strings.substringAfter(userVO.user_email, '@')}" class="cm_inptxt" type="text">
+                                </div>
+                                <div class="select-box" style="padding: 9px;">
+                                    <select name="" id="mailAddr" class="info-select" >
+                                        <option value="">직접입력</option>
+                                        <option value="naver">naver.com</option>
+                                        <option value="hanmail">hanmail.net</option>
+                                        <option value="gmail">gmail.com</option>
+                                        <option value="daum">daum.net</option>
+                                    </select>
                                 </div>
                             </td>
                         </tr>
@@ -200,49 +187,67 @@
                                 <div class="address-wrap write-wrap-m">
                                     <div class="address-btn-wrap">
                                         <div class="input-wrap">
-                                            <input id="cvl_zip3" name="cvl_zip3"
-                                                   class="cm_inptxt" value="" title="우편번호 앞자리" type="text"
+                                            <input id="postcode" name="postAddr user_ar_zonecode"
+                                                   class="cm_inptxt" th:value="${userVO.user_ar_zonecode}" title="우편번호 앞자리" type="text"
                                                    readonly="readonly"/>
                                         </div>
                                         <button type="button" class="address-btn"
-                                                onclick="javascript:jsZipCodeSearch_api('form1', 'cvl_zip1', 'cvl_zip2', 'cvl_zip3', 'cvl_addr1', 'cvl_addr2', 'member_road_code');"
+                                                onclick="execDaumPostcode()"
                                                 title="새창열림">우편번호 찾기
                                         </button>
                                     </div>
                                     <div class="input-wrap" style="width: 478px">
-                                        <input name="cvl_addr1" id="cvl_addr1" maxlength="100"
+                                        <input name="addr1 user_ar" id="addr1" maxlength="100"
                                                class="cm_inptxt" title="시군구주소 입력" type="text"
-                                               value="" readonly="readonly"/>
+                                               th:value="${userVO.user_ar}" readonly="readonly"/>
                                     </div>
                                     <div class="input-wrap" style="width: 478px">
-                                        <input name="cvl_addr2" id="cvl_addr2" maxlength="50"
+                                        <input name="addr2 user_ar_detail" id="addr2" maxlength="50"
                                                class="cm_inptxt" title="상세주소 입력"
-                                               type="text" value="" placeholder="상세주소"/>
+                                               type="text" value="" placeholder="상세주소"
+                                               th:value="${userVO.user_ar_detail}"/>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-<tr>
+						<tr>
                             <th scope="row" class="txt-left">
                                 <span style="margin-left: 80px">계좌번호</span>
                             </th>
                             <td data-cell-header="계좌번호" class="txt-left">
-                                <div class="select-box" style="margin-bottom: 10px;">
-                                    
-                                    <label>은행목록</label><select class="info-select" id="selectTit" name="search_field" title="검색조건을 선택해주세요.">
-                                        <option value="">은행목록</option>
-                                        <option value="">은행목록1</option>
-                                        <option value="">은행목록2</option>
-                                        <option value="">은행목록3</option>
-                                        <option value="">은행목록5</option>
-                                    </select>
+                                <div style="overflow: hidden; width: 500px">
+                                    <div class="select-box" style="margin-bottom: 10px; float: left">
+                                        <label for="selectBank"></label>
+                                        <select class="info-select" id="selectBank"
+                                                name="user_bank" title="검색조건을 선택해주세요.">
+                                            <option value="">은행목록</option>
+                                            <option value="kb">국민은행</option>
+                                            <option value="ibk">기업은행</option>
+                                            <option value="nh">농협은행</option>
+                                            <option value="sh">신한은행</option>
+                                            <option value="wr">우리은행</option>
+                                            <option value="hn">하나은행</option>
+                                            <option value="sc">SC제일은행</option>
+                                        </select>
+                                    </div>
+                                    <div class="selectedBank" style="float: left">
+                                        <img src="#" alt="" id="bankIcon">
+                                        <p style="float:right;" class="selBank"></p>
+                                    </div>
                                 </div>
                                 <div class="input-wrap-three write-wrap-m">
                                     <div class="input-wrap" style="width: 320px; display: inline-block">
-                                        <input name="cvl_cel1" maxlength="4" id="cvl_account1" value="" class="cm_inptxt" title="계좌번호" type="text" onkeydown="return num_only(event)" placeholder="계좌번호">
+                                        <input name="user_bank_account" maxlength="4" id="cvl_account1"
+                                               th:value="${userVO.user_bank_account}" class="cm_inptxt"
+                                               title="계좌번호" type="text"
+                                               onkeydown="return num_only(event)" placeholder="계좌번호"/>
                                     </div>
-                                    <div class="input-wrap" style="width: 150px; display: inline-block; margin-left: 5px">
-                                        <input name="cvl_cel2" maxlength="4" id="cvl_account2" value="" class="cm_inptxt" title="예금주" type="text" onkeydown="return num_only(event)" placeholder="예금주">
+                                    <div class="input-wrap"
+                                         style="width: 150px; display: inline-block; margin-left: 5px">
+                                        <input name="user_bank_holder" maxlength="4" id="cvl_account2"
+                                               th:value="${userVO.user_bank_holder}" class="cm_inptxt"
+                                               title="예금주"
+                                               type="text" onkeydown="return num_only(event)" placeholder="예금주"/>
                                     </div>
                                 </div>
                             </td>
@@ -252,10 +257,10 @@
                 </div>
           
 				<div class="btn-wrap txt-center"  style=" margin-bottom: 20px;">
-					<a href="#" class="btn-style btn-style39">
+					<a href="../mypage/main" class="btn-style btn-style39">
 						<span>취소</span>
 					</a>
-					<a href="#" class="btn-style btn-style39">
+					<a href="#" class="btn-style btn-style39" id="infoChange">
 						<span>변경</span>
 					</a>
 				</div>
@@ -270,4 +275,79 @@
   </div>
 
 </th:block>
+
+
+<!-- 주소찾기 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				var addr = '';
+				
+				if (data.userSelectedType === 'R'){
+					addr = data.roadAddress;
+				} else {
+					addr = data.jibunAddress;
+				}
+				
+				document.getElementById('postcode').value = data.zonecode;
+				document.getElementById("addr1").value = addr;
+				document.getElementById("addr2").focus();
+			}
+		}).open();
+	}	
+</script>
+
+
+<!--은행정보 확인-->
+<script>
+    $("#selectBank").change(function () {
+        let selected = $("#selectBank option:selected").val();
+        if (selected == 'kb') {
+            $("#bankIcon").attr("src", "/img/app/kbIcon.png");
+            $(".selBank").html('국민은행');
+        } else if (selected == 'ibk') {
+            $("#bankIcon").attr("src", "/img/app/ibkIcon.png");
+            $(".selBank").html('기업은행');
+        } else if (selected == 'nh') {
+            $("#bankIcon").attr("src", "/img/app/nhIcon.png");
+            $(".selBank").html('농협은행');
+        } else if (selected == 'sh') {
+            $("#bankIcon").attr("src", "/img/app/shIcon.png");
+            $(".selBank").html('신한은행');
+        } else if (selected == 'wr') {
+            $("#bankIcon").attr("src", "/img/app/wrIcon.png");
+            $(".selBank").html('우리은행');
+        } else if (selected == 'hn') {
+            $("#bankIcon").attr("src", "/img/app/hnIcon.png");
+            $(".selBank").html('하나은행');
+        } else if (selected == 'sc') {
+            $("#bankIcon").attr("src", "/img/app/scIcon.png");
+            $(".selBank").html('SC제일은행');
+        } else {
+            $("#bankIcon").attr("src", "#");
+            $(".selBank").html('');
+        }
+
+    });
+
+</script>
+
+
+<!--메일주소 선택입력-->
+<script>
+
+    $("#mailAddr").change(function () {
+        let selmail = $("#mailAddr option:selected").html();
+        $("#cvl_mail2").attr("value", selmail);
+
+    });
+
+    $(".addCourt").click(function () {
+        console.log("추가");
+    })
+</script>
+
+
 </html>

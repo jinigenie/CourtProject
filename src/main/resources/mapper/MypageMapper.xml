@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.court.proj.user.MypageMapper" >
+	
+	<select id="getUser" resultType="UserVO">
+		select * 
+		from tb_001 
+		where user_proper_num = #{user_proper_num}
+	</select>
+	
+	<update id="deleteUpdate">
+		update tb_001 
+		set user_delete_yn = 'Y' 
+		where user_proper_num = #{user_proper_num}
+	</update>
+
+</mapper>       

@@ -9,30 +9,20 @@
     <div id="main_con">
       <div id="nav_menu">
         <div id="lnb">
-          <h2 class="title">공지사항</h2>
+          <h2 class="title">Mypage</h2>
           <div class="menu">
             <ul>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
-                <ul class="sub" style="display: none;">
-                  <li><a href="#">모집공고 등록</a></li>
-                  <li><a href="#">모집공고 목록</a></li>
-                </ul>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 정보관리</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
-                <ul class="sub" style="display: none;">
-                  <li><a href="#">공지사항 등록</a></li>
-                  <li><a href="#">공지사항 목록</a></li>
-                </ul>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 신청현황</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
-                <ul class="sub" style="display: none;">
-                  <li><a href="#">FAQ 등록</a></li>
-                  <li><a href="#">FAQ 목록</a></li>
-                </ul>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
               </li>
-
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지 및 해제신청</a>
+              </li>
             </ul>
           </div>
+
 
         </div>
       </div>
@@ -142,7 +132,15 @@
 										<span class="essential-txt" style="margin-left: 80px;">신청기간</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
-										<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt" type="text" readonly="readonly">
+		                                <div class="calander-box" style="padding: 0">
+		                                    <input type="text" class="datepicker" readonly placeholder="시작일"
+		                                           name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+		                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+		                                    <span>~</span>
+		                                    <input type="text" class="datepicker" readonly placeholder="종료일"
+		                                           name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+		                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
+		                                </div>
 									</td>
 								</tr>
 								<tr>
@@ -160,7 +158,7 @@
 
 					</div>
 					<div class="btn-wrap txt-center">
-						<a href="#" class="btn-style btn-style39 btn-style-icon-none">
+						<a href="../mypage/main" class="btn-style btn-style39 btn-style-icon-none">
 							<span>취소</span>
 						</a>
 						<a href="#" class="btn-style btn-style39 btn-style-icon-none">
