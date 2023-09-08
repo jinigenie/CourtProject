@@ -145,6 +145,11 @@
 						margin-top: 20px;
 						margin-left: 5px;
 					}
+
+					.case>em:hover {
+						color: black;
+						background-color: lightgrey;
+					}
 				</style>
 				<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -156,12 +161,7 @@
 					<form id="listForm" name="listForm"
 						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
 						method="post">
-						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
-						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
-						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
-						<input type="hidden" id="cate_name" name="cate_name" value="" />
-						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
+						<!--<input type="hidden" id="sub_cate_name" name="aplcn_dtls_proper_num" value="" />-->
 						<div class="heading-wrap container">
 							<h3 class="heading1">
 								<span>재판조력자 신청자 목록</span>
@@ -186,21 +186,24 @@
 								<div class="searchform-wrap">
 									<div class="select-box">
 
-										<label>전체</label><select class="info-select" id="selectTit" name="search_field"
-											title="검색조건을 선택해주세요.">
-											<option value="" selected="selected">이름</option>
-											<option value="재판조력자분류">재판조력자분류</option>
-											<option value="법원 분류">법원 분류</option>
-											<option value="소송사건 당사자 경력">소송사건 당사자 경력</option>
-											<option value="보험업계 경력유무">보험업계 경력유무</option>
-											<option value="형사처벌 받은 경력유무">형사처벌 받은 경력유무</option>
-											<option value="자격증 종목">자격증 종목</option>
+										<label>전체</label><select class="info-select" id="selectTit" name="searchField"
+											title="검색조건을 선택해주세요." style="min-width: 200px">
+											<option value="none" th:selected="${pageVO.cri.searchName == 'none' }">이름
+											</option>
+											<option value="ascFcltt"
+												th:selected="${pageVO.cri.searchFcltt == 'ascFcltt' }">재판조력자분류</option>
+											<option value="ascCourt"
+												th:selected="${pageVO.cri.searchCourt == 'ascCourt' }">법원 분류</option>
+											<option value="unsuccess"
+												th:selected="${pageVO.cri.searchStatus == 'unsuccess' }">신청 상태여부
+											</option>
 										</select>
 									</div>
 
 									<div class="search-input-wrap">
 										<div class="input-wrap">
-											<input type="text" name="q_string" value=""
+											<input type="text" name="searchContent"
+												th:value="${pageVO.cri.searchContent}"
 												onkeypress="if(window.event.keyCode == 13) srchMinwonDoc();"
 												class="form-control" placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요"
 												id="q_string">
@@ -214,12 +217,12 @@
 									<div class="select-box" id="select-box-margin-left-10">
 
 										<label>10개씩 보기</label><select name="view_cnt" id="view_cnt" class="info-select"
-											title="게시판 목록보기 갯수선택" style="min-width: 170px">
+											title="게시판 목록보기 갯수선택" style="min-width: 170px" onchage="handleChange()">
 											<!-- onchange="chgViewCount(this.value);" -->
-											<option value="10" selected=" selected">10개씩 보기</option>
-											<option value="20">20개씩 보기</option>
-											<option value="50">50개씩 보기</option>
-											<option value="100">100개씩 보기</option>
+											<option value="10" th:selected="${pageVO.amount == 10}">10개씩 보기</option>
+											<option value="20" th:selected="${pageVO.amount == 20}">20개씩 보기</option>
+											<option value="50" th:selected="${pageVO.amount == 50}">50개씩 보기</option>
+											<option value="100" th:selected="${pageVO.amount == 100}">100개씩 보기</option>
 										</select>
 									</div>
 								</div>
@@ -228,7 +231,7 @@
 								<div class="total-num">총 게시글 <em>3</em>건</div>
 							</div>
 							<!-- 게시판 시작 부분 -->
-							<div class="table table-responsive">
+							<div class="table">
 								<table>
 									<caption>
 										번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
@@ -236,37 +239,39 @@
 									</caption>
 									<colgroup>
 										<col style="width: 10%">
-										<col style="width: 40%">
+										<col style="width: 15%">
+										<col style="width: 15%">
 										<col style="width: 15%">
 										<col style="width: 11.666%">
-										<col style="width: 11.666%">
-										<col style="width: 11.666%">
+										<col style="width: 16.666%">
+										<col style="width: 16.666%">
 									</colgroup>
 									<thead>
 										<tr>
 											<th scope="col">번호</th>
 											<th scope="col">이름</th>
+											<th scope="col">조력자 분류</th>
 											<th scope="col">담당법원</th>
-											<th scope="col">채점여부</th>
 											<th scope="col">서식파일</th>
+											<th scope="col">신청상태</th>
 											<th scope="col">비고</th>
 										</tr>
 									</thead>
 									<tbody>
-										    <script>
-										        function openPopup() {
-										            window.location.href = '/aplcn/aplcnDetails';
-										        }
-										    </script>
-										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-											<td data-cell-header="번호">3</td>
-											<td data-cell-header="민원서식명" tabindex="0"
+										<script>
+											function openPopup() {
+												window.location.href = '/aplcn/aplcnDetails';
+											}
+										</script>
+										<tr title="etc" style="cursor: pointer" th:each="vo:${vo}">
+											<td data-cell-header="신청자 상세정보 고유번호">[[${vo.user_proper_num}]]</td>
+											<td data-cell-header="신청자 이름" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('TMP00000204')">
-												홍길동
+												[[${vo.user_name}]]
 											</td>
-											<td data-cell-header="담당법원">서울중앙지방법원</td>
-											<td data-cell-header="처리기간">O</td>
+											<td data-cell-header="조력자 분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
+											<td data-cell-header="담당법원">[[${vo.court_name}]]</td>
 											<td data-cell-header="서식파일"
 												onclick="javascript: eval($(this).children().attr('onclick'));">
 												<a style="cursor: pointer" tabindex="0"
@@ -274,58 +279,16 @@
 													onclick="javascript:openDownloadPost('B2931E943723D4446C0C18BB6512EB12BFC2D32DA34707853A2EFDD52F1DAD0D','54066F49F05070E7B71473D009652F4678A1A8D955D7E09642B455977AD50CD3BD7C3F5BF0298C4D245C6146456E6408C454C2349C1E83EB0DA3E998C1300FF8',event);"><img
 														src="../../img/icn/hwp_icn.gif" alt="파일(HWP)"
 														style="filter: invert(0);"></a>
+											<td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
 											</td>
 											<td onclick="event.stopPropagation();">
-												<a href="javascript:submitUrl('/aplcn/aplcnDetails');"
-													onclick="openPopup();" class="case case1"><em>상세보기</em></a>
+												<a th:href="@{/aplcn/aplcnDetails(aplcn_dtls_proper_num=${vo.aplcn_dtls_proper_num})}"
+													onclick="openPopup();" class="case case1">
+													<em>상세보기</em>
+												</a>
 											</td>
 										</tr>
 
-										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
-											<td data-cell-header="번호">2</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('TMP00000121')">
-												이순신
-											</td>
-											<td data-cell-header="담당법원">대전고등법원</td>
-											<td data-cell-header="처리기간">X</td>
-											<td data-cell-header="서식파일"
-												onclick="javascript: eval($(this).children().attr('onclick'));">
-												<a href="https://www.law.go.kr/踰뺣졊蹂꾪몴�쒖떇/(援��湲곗닠�먭꺽踰� �쒗뻾洹쒖튃,�쒖떇17��3)"
-													style="cursor: pointer" tabindex="0" target="_blank" title="새창열기"
-													class="bg1"><img src="../../img/btn/open_file.gif"
-														style="filter: invert(0);"></a>
-											</td>
-											
-											<td onclick="event.stopPropagation();">
-												<a href="javascript:submitUrl('/aplcn/aplcnDetails');"
-													onclick="openPopup();" class="case case1"><em>상세보기</em></a>
-											</td>
-										</tr>
-
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호">1</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
-												신사임당
-											</td>
-											<td data-cell-header="담당법원">특허법원</td>
-											<td data-cell-header="처리기간">X</td>
-											<td data-cell-header="서식파일"
-												onclick="javascript: eval($(this).children().attr('onclick'));">
-												<a href="https://www.law.go.kr/踰뺣졊蹂꾪몴�쒖떇/(�곗뾽�덉쟾蹂닿굔踰� �쒗뻾洹쒖튃,�쒖떇30)"
-													style="cursor: pointer" tabindex="0" target="_blank" title="새창열기"
-													class="bg1"><img src="../../img/btn/open_file.gif"
-														style="filter: invert(0);"></a>
-											</td>
-											<td onclick="event.stopPropagation();">
-												<a href="javascript:submitUrl('/aplcn/aplcnDetails');"
-													onclick="openPopup();" class="case case1"><em>상세보기</em></a>
-											</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>

@@ -1,104 +1,61 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+<th:block th:replace="~{./include/basicLayout2 :: setContent(~{::.wrap})}">
 
-	<style>
-		.right-align {
-			text-align: right;
-		}
-	</style>
 
 	<div class="wrap">
 		<!-- main_con  -->
 		<div id="main_con">
-			<div id="nav_menu">
-				<div id="lnb">
-					<h2 class="title">조력자 등재신청</h2>
-					<div class="menu">
-						<ul>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
-								<ul class="sub" style="display: none;">
-									<li><a href="#">조력자 등재신청</a></li>
-									<li><a href="#">조력자 등재목록</a></li>
-								</ul>
-							</li>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
-								<ul class="sub" style="display: none;">
-									<li><a href="#">신청자 목록</a></li>
-								</ul>
-							</li>
-
-						</ul>
-					</div>
-
-				</div>
-			</div>
 			<div id="contents">
 
 				<style>
-					@media screen and (max-width: 1024px) {
-						.table-responsive>table>tbody>tr td[data-cell-header]:before {
-							width: 30%;
-							margin: 0 0 0 0;
-							vertical-align: unset;
-						}
-					}
-
-					.table-responsive>table>tbody>tr:hover {
-						background-color: #e6f8ff;
-					}
-
-					@media screen and (min-width: 1100px) {
-						#select-box-margin-left-10 {
-							margin-left: 6px;
-						}
-					}
-
-
-					.tbl-view .view-title {
-						background: rgb(245, 245, 245);
-						border-top: 2px solid rgb(211, 211, 211);
-						border-bottom: 1px solid rgb(211, 211, 211);
-						padding: 7px 20px;
-					}
-
-					.center-text {
+					.fclttRegist_btn {
+						margin-top: 20px;
 						text-align: center;
 					}
 
-					.tbl-view .view-title strong {
-						font-size: 1.3rem;
-						line-height: 1.5;
+					.fclttRegist_btn .fcltt_btn1 {
 						display: inline-block;
+						height: 43px;
+						width: 150px;
+						border: 1px solid #2065c6;
+						border-radius: 5px;
+						margin: 5px;
+						padding: 10px;
 					}
 
-					.tbl-view .view-title .date {
-						display: block;
-						text-align: right;
+					.fclttRegist_btn>.fcltt_btn1:hover {
+						color: black;
+						background-color: lightgrey;
+						border: none;
 					}
 
+					.fclttRegist_btn .fcltt_btn2 {
+						height: 44px;
+						width: 150px;
+						background-color: #2065c6;
+						color: white;
+						border: 1px solid #2065c6;
+						border-radius: 5px;
+						margin: 5px;
+						padding: 10px;
+					}
+
+
+					.fclttRegist_btn>.fcltt_btn2:hover {
+						color: #2065c6;
+						background-color: white;
+					}
 
 					.transparent-input {
 						text-align: center;
 						width: 50%;
 					}
 
-					.point-insert {
-						text-align: right;
-					}
-
-					.case>span {
-						display: inline-block;
-						vertical-align: middle;
-						width: 77px;
-						height: 35px;
-						line-height: 35px;
-						background: #2065c6;
-						color: #fff;
-						font-size: 0.8rem;
+					.tab-wrap {
+						padding-top: 10px;
 						text-align: center;
-						border-radius: 5px;
 					}
 				</style>
 				<!--[if lt IE 9]>
@@ -108,32 +65,18 @@
 
 
 				<article id="detail-content">
-					<form id="listForm" name="listForm" action="http://localhost:8585/aplcn/aplcnDetails" method="get">
-						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
-						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
-						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
-						<input type="hidden" id="cate_name" name="cate_name" value="" />
-						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
+					<form id="evaluateForm" name="evaluateForm" action="/aplcnAppraisal" method="post">
+						
 						<div class="heading-wrap container">
 							<h3 class="heading1">
-								<span>홍길동 신청자 평가</span>
+								<span>[[${vo.user_name}]] 신청자님 평가</span>
 							</h3>
 						</div>
 
 						<div class="contents">
 
-							<script type="text/javascript" src="/2017e/js/common/common_share_util.js"
-								charset="EUC-KR"></script>
-
-							<script type="text/javascript">
-								$(document).ready(function () {
-									Fn.TitleIcon.Call();
-								});
-							</script>
-
 							<!-- 게시판 시작 부분 -->
-							<div class="table table-responsive">
+							<div class="table" style="border-bottom: none;">
 								<table>
 									<caption>
 
@@ -155,75 +98,77 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
+										<input type="hidden" name="aplcn_dtls_proper_num" th:value="${vo.aplcn_dtls_proper_num}">
+										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">통산경력</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')"><input type="text" name="point1"
-													class="transparent-input">
+												onclick="jsSamuDetail('14921000459')">
+												<input type="text" id="input1" class="transparent-input" name="all_carer_score">
 
 											</td>
 											<td data-cell-header="점수">관내경력</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')"><input type="text" name="point2"
-													class="transparent-input">
+												onclick="jsSamuDetail('14921000459')">
+												<input type="text" id="input2" class="transparent-input" name="jrsdc_carer_score">
 											</td>
 										</tr>
 
-										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
+										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">사무소 소재지</td>
-											<td data-cell-header="민원서식명" tabindex="0"><input type="text" name="point3"
-													class="transparent-input">
+											<td data-cell-header="민원서식명" tabindex="0">
+												<input type="text" id="input3" class="transparent-input" name="office_score">
 											</td>
 											<td data-cell-header="담당법원">인성평가</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')"><input type="text" name="point4"
-													class="transparent-input">
+												onclick="jsSamuDetail('14921000459')">
+												<input type="text" id="input4" class="transparent-input" name="personality_score">
 										</tr>
 
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">면접</td>
-											<td data-cell-header="민원서식명" tabindex="0"><input type="text" name="point5"
-													class="transparent-input">
+											<td data-cell-header="민원서식명" tabindex="0">
+												<input type="text" id="input5" class="transparent-input" name="interview_score">
 											</td>
 											<td data-cell-header="담당법원">자격증</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')"><input type="text" name="point6"
-													class="transparent-input">
+												onclick="jsSamuDetail('14921000459')">
+												<input type="text" id="input6" class="transparent-input" name="certificate_score">
 											</td>
 										</tr>
 
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">감정인 평가</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')"><input type="text" name="point7"
-													class="transparent-input">
-											</td>
+												onclick="jsSamuDetail('14921000459')">
+												<input type="text" id="input7" class="transparent-input" name="evaluate_score">
 											<td data-cell-header="담당법원">심사위원 추천</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')"><input type="text" name="point8"
-													class="transparent-input">
+												onclick="jsSamuDetail('14921000459')">
+												<input type="text" id="input8" class="transparent-input" name="judge_recom_score">
 											</td>
 										</tr>
 									</tbody>
 								</table>
 
-								<div class="table table-responsive">
+								<div class="table">
 									<table>
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td>
-											<td class="shifted-td">검토 의견</td>
+										<tr title="etc" style="cursor: pointer">
+											<td class="shifted-td" style="left: 0.5cm";>검토 의견</td>
 											<td><textarea rows="4" cols="50"
-													style="width: 800px; height: 150px;"></textarea></td>
-											</td>
+													style="width: 650px; height: 150px;" name="review_etc"></textarea></td>
 										</tr>
 									</table>
+								</div>
+								<div class="tab-wrap">
+									<strong>
+										<div id="result"></div>
+									</strong>
 								</div>
 								<script>
 									function completeEvaluation() {
@@ -233,36 +178,50 @@
 									}
 								</script>
 								<!-- pagenation -->
-								<div class="point-insert">
-									<a href="" onclick="openPopup();" class="case case2">
-										<span class="close-button">
-											<button onclick="completeEvaluation()" style="color: white">평가완료</button>
-										</span>
-									</a>
+								<div class="fclttRegist_btn">
+									<button type="button" class="fcltt_btn1"><a onclick="calculateAverage()">평가
+											수정하기</a></button>
+									<button type="button" class="fcltt_btn2"><a
+											onclick="calculateAverageAndSendToParent()">평가완료</button>
+
 								</div>
-							</div>	
+							</div>
 					</form>
-					<p id="result"></p>
 
-					<script>
-						function calculateAverage() {
-							const point1 = parseFloat(document.getElementsByName("point1")[0].value);
-							const point2 = parseFloat(document.getElementsByName("point2")[0].value);
-							const point3 = parseFloat(document.getElementsByName("point3")[0].value);
-							const point4 = parseFloat(document.getElementsByName("point4")[0].value);
-							const point5 = parseFloat(document.getElementsByName("point5")[0].value);
-							const point6 = parseFloat(document.getElementsByName("point6")[0].value);
-							const point7 = parseFloat(document.getElementsByName("point7")[0].value);
-							const point8 = parseFloat(document.getElementsByName("point8")[0].value);
+					<script type="text/javascript">
+						var evaluateForm = document.getElementById("evaluateForm");
+						function calculateAverageAndSendToParent() {
+							// 8개의 입력 필드에서 값을 가져옵니다.
+							var input1 = Number(document.getElementById("input1").value);
+							var input2 = Number(document.getElementById("input2").value);
+							var input3 = Number(document.getElementById("input3").value);
+							var input4 = Number(document.getElementById("input4").value);
+							var input5 = Number(document.getElementById("input5").value);
+							var input6 = Number(document.getElementById("input6").value);
+							var input7 = Number(document.getElementById("input7").value);
+							var input8 = Number(document.getElementById("input8").value);
 
-							if (!isNaN(point1) && !isNaN(point2) && !isNaN(point3) && !isNaN(point4) && !isNaN(point5)) {
-								const average = (point1 + point2 + point3 + point4 + point5 + point6 + point7 + point8) / 8;
-								document.getElementById("result").textContent = "평균값: " + average.toFixed(2);
+							// 입력된 값의 유효성을 확인하고, 숫자로 변환한 후 평균값을 계산합니다.
+							if (!isNaN(input1) && !isNaN(input2) && !isNaN(input3) && !isNaN(input4) &&
+								!isNaN(input5) && !isNaN(input6) && !isNaN(input7) && !isNaN(input8)) {
+								var average = (input1 + input2 + input3 + input4 + input5 + input6 + input7 + input8) / 8;
+
+								// 평균값을 부모 창으로 전달합니다.
+								window.opener.handleChildResult(average);
+
+								if(confirm("평가를 저장하시겠습니까?")){
+									evaluateForm.submit();
+								}
+								
+
+								// 팝업 창 닫기
+								//window.close();
 							} else {
-								document.getElementById("result").textContent = "올바른 숫자를 입력하세요.";
+								alert("유효한 숫자를 입력하세요.");
 							}
 						}
 					</script>
+
 				</article>
 			</div>
 		</div>
