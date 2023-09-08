@@ -34,20 +34,5 @@ function closePop2() {
 
 /*//--------------------------pause List-----------------------//*/
 
-document.addEventListener("DOMContentLoaded", function() {
-  var toggleRows = document.querySelectorAll(".toggle-row");
-
-  toggleRows.forEach(function(row) {
-    row.addEventListener("click", function() {
-      var hiddenRow = this.nextElementSibling;
-
-      if (hiddenRow.style.display === "none") {
-        hiddenRow.style.display = "table-row";
-      } else {
-        hiddenRow.style.display = "none";
-      }
-    });
-  });
-});
 
 
