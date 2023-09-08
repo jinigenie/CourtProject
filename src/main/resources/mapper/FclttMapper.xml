@@ -25,7 +25,7 @@
 		       tb14.accept_act_yn,
 		       tb14.accept_etc,
 		       tb11.court_name,
-		       tb10.trial_fcltt_description,
+		       tb10.trial_fcltt_sbcls_code,
 		       tb1.user_name,
 		       tb14.accept_proper_num
 		FROM TB_014 tb14
@@ -77,9 +77,30 @@
 		where accept_proper_num = #{accept_proper_num}
 	</select>
 
-
-
-
+	
+	<!-- 중지 or 활동신청 리스트  -->
+<select id="getPauseList" resultType="PauseVO">
+    SELECT tb14_2.accept_pause,
+           tb14_2.user_proper_num,
+           tb14_2.pause_status,
+           tb14_2.accept_proper_num,
+           tb14_2.pause_start_date,
+           tb14_2.pause_end_date,
+           tb14_2.pause_submit_date,
+           tb14_2.accept_pause_etc,
+           tb1.user_name,
+           tb14.accept_act_yn
+    FROM TB_014_2 tb14_2
+    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14_2.user_proper_num
+    JOIN TB_014 tb14 ON tb14.user_proper_num = tb1.user_proper_num
+    WHERE pause_status = 'Y'
+    <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
+        AND accept_act_yn = #{cri.searchAccept_act_yn}
+    </if>
+    <if test="cri.searchUser_name != '' and cri.searchUser_name != null">
+        AND user_name = #{cri.searchUser_name}
+    </if>
+</select>
 
 
 </mapper>

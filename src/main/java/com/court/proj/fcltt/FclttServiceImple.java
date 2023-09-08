@@ -33,4 +33,9 @@ public class FclttServiceImple implements FclttService {
 		return fclttMapper.getFclttContent(accept_proper_num);
 	}
 
+	@Override
+	public ArrayList<PauseVO> getPauseList(FclttCriteria cri) {
+		return fclttMapper.getPauseList(cri);
+	}
+
 }
