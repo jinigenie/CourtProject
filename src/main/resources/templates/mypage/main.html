@@ -17,7 +17,7 @@
               </li>
               <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지/해제신청관리</a>
+              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지 및 해제신청</a>
               </li>
             </ul>
           </div>
@@ -50,38 +50,8 @@
 
 
       <article id="detail-content">
-        <form
-          id="listForm"
-          name="listForm"
-          action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-          method="post"
-        >
-          <input
-            type="hidden"
-            id="cd_appeal_form"
-            name="cd_appeal_form"
-            value="ALL"
-          />
-          <input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-          <input
-            type="hidden"
-            id="srch_cd_appeal_form"
-            name="srch_cd_appeal_form"
-            value=""
-          />
-          <input
-            type="hidden"
-            id="search_capp_biz_cd"
-            name="search_capp_biz_cd"
-            value=""
-          />
-          <input type="hidden" id="cate_name" name="cate_name" value="" />
-          <input
-            type="hidden"
-            id="sub_cate_name"
-            name="sub_cate_name"
-            value=""
-          />
+
+
           <div class="heading-wrap container">
             <h3 class="heading1">
               <span>나의 정보 관리</span>
@@ -91,13 +61,9 @@
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
           
-          	<article id="detail-content">
+<article id="detail-content">
 <div class="container">
 
-	<form name="form1" method="post">
-	<input type="hidden" name="workName" value="Q">
-	 
-	<input type="hidden" name="cvl_seq" value="0">
 
   <div class="box box1">
     <p>기록하신 개인정보는 개인정보보호법에 의거 철저하게 보호됩니다.</p>
@@ -113,13 +79,15 @@
         <col style="width:30%;">
         <col style="width:70%;">
       </colgroup>
+      <form action="deleteform" id="del" name="delete" method="post">
+		  <input type="hidden" name="user_proper_num" th:value="${userVO.user_proper_num}"/>
       <tbody>
         <tr>
           <th scope="row" class="txt-left">
             <label for="cvl_id">아이디</label>
           </th>
           <td data-cell-header="아이디" class="txt-left">
-               <span id="cvl_id">sis6710</span>
+               <span id="cvl_id">[[${userVO.user_id}]]</span>
                
           </td>
         </tr>
@@ -128,7 +96,7 @@
             <span>성명</span>
           </th>
           <td data-cell-header="성명" class="txt-left">
-          	<span id="cvl_nm">석이서</span>
+          	<span id="cvl_nm">[[${userVO.user_name}]]</span>
           </td>
         </tr>
         
@@ -137,7 +105,8 @@
             <span>비밀번호</span>
           </th>
           <td data-cell-header="전화번호" class="txt-left">
-          	<input type="password"/>
+          	<input id="pw" type="password"/>
+          	<input id="user_pw" hidden th:value="${userVO.user_pw}"/>
           </td>
         </tr>
         <tr>
@@ -145,7 +114,7 @@
             <span>휴대폰번호</span>
           </th>
           <td data-cell-header="휴대폰번호" class="txt-left">
-			<span id="cvl_cel">010-3937-6448</span>
+			<span id="cvl_cel">[[${userVO.user_phone}]]</span>
           </td>
         </tr>
         <tr>
@@ -153,7 +122,7 @@
             <span>이메일</span>
           </th>
           <td data-cell-header="이메일" class="txt-left">
-            <span id="cvl_mail">yuyu659@naver.com</span>
+            <span id="cvl_mail">[[${userVO.user_email}]]</span>
           </td>
         </tr>
        
@@ -162,27 +131,28 @@
             <label for="address1">주소</label>
           </th>
           <td data-cell-header="주소" class="txt-left">
-            <span id="cvl_zip_addr">[ 08856 ] 서울특별시 관악구 난곡로24다길 30 (신림동) 102호</span>
+            <span id="cvl_zip_addr" th:text="|[ ${userVO.user_ar_zonecode} ]  ${userVO.user_ar} ${userVO.user_ar_detail}|"/>
           </td>
         </tr>
       </tbody>
+      </form>
     </table>
   </div>
 
   <div class="btn-wrap txt-center" 
   	   style=" margin-bottom: 20px; margin-top: 20px;">
     <div class="btn-style-wrap btn-style-wrap2">
-      <a href="javascript:jsMemberUpdate();" class="btn-style btn-style39 btn-style-icon-none">
+      <a href="#" id="modify" class="btn-style btn-style39 btn-style-icon-none">
         <span>회원정보 변경</span>
       </a>
     </div>
     <div class="btn-style-wrap btn-style-wrap1" >
-      <a href="javascript:jsMemberDelete();" class="btn-style btn-style39 btn-style-icon-none" style="background-color: #8c8c8c; border: #8c8c8c;">
+      <a href="#" id="leave" class="btn-style btn-style39 btn-style-icon-none" style="background-color: #8c8c8c; border: #8c8c8c;">
         <span>회원탈퇴</span>
       </a>
     </div>
   </div>
-</form></div>
+</div>
 </article>
           
           
@@ -196,4 +166,45 @@
   </div>
 
 </th:block>
+
+<!-- 회원정보 변경-->
+<script>
+	const user_pw1 = document.getElementById("user_pw").value;	
+	const modify = document.getElementById("modify");
+
+	modify.onclick = function(e){
+		const pw = document.getElementById("pw").value;
+		e.preventDefault();
+		if(user_pw1 == pw){
+			window.location.href = "../mypage/modify";
+		} else {
+			alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
+		}
+	}
+	
+</script>
+
+
+<!-- 회원탈퇴-->
+<script>
+	const user_pw2 = document.getElementById("user_pw").value;	
+	const leave = document.getElementById("leave");
+	const del = document.getElementById("del");
+	
+	leave.onclick = function(e){
+		const pw = document.getElementById("pw").value;
+		e.preventDefault();
+		if(user_pw2 == pw){
+			if(confirm("탈퇴하시겠습니까?")){
+				del.submit();
+				alert("탈퇴 되었습니다.");
+			}
+		} else {
+			alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
+		}
+	}
+	
+</script>
+
+
 </html>
