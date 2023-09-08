@@ -166,7 +166,7 @@
 								</div>
 							</div>
 							<!-- //searchform searchform2 end -->
-							
+
 							<!-- table-t-wrap start -->
 							<div class="table-t-wrap">
 								<div class="total-num">총 게시글 <em>#</em>건</div>
@@ -180,7 +180,7 @@
 								<!-- 달력 end -->
 							</div>
 							<!-- //table-t-wrap end -->
-							
+
 							<!-- 게시판 시작 부분 start -->
 							<div class="table table-responsive">
 								<table>
@@ -207,23 +207,27 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-											<td data-cell-header="번호">248</td>
-											<td data-cell-header="대분류">
-												통번역인
-											</td>
-											<td data-cell-header="중분류">제목 부분</td>
-											<td data-cell-header="작성일자">작성일자
-
-											</td>
-											<td>
-												<p>진행중</p>
-
-											</td>
-											<td onclick="event.stopPropagation();">
-												<a href="#" class="case case1"><em>신청</em></a>
-											</td>
+										<tr title="공고 게시물" style="cursor: pointer" th:each="vo, status : ${list}">
+											<td data-cell-header="번호"><a
+													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
+													th:text="${vo.announce_proper_num}"></a></td>
+											<td data-cell-header="대분류"><a
+													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
+													th:text="${vo.trial_fcltt_main_code}"></a></td>
+											<td data-cell-header="중분류"><a
+													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
+													th:text="${vo.announce_title}"></a></td>
+											<td data-cell-header="작성일자"><a
+													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
+													th:text="${vo.announce_start_date}"></a></td>
+											<td data-cell-header="진행여부"><a
+													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}">
+													<p>진행중</p>
+												</a></td>
+											<td onclick="event.stopPropagation();"><a href="#"
+													class="case case1"><em>신청</em></a></td>
 										</tr>
+
 
 									</tbody>
 								</table>
