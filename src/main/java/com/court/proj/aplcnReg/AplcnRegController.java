@@ -1,25 +1,45 @@
 package com.court.proj.aplcnReg;
 
+import com.court.proj.announce.AnnounceService;
+import com.court.proj.announce.AnnounceVO;
 import com.court.proj.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/app")
 public class AplcnRegController {
 
     @Autowired
+    @Qualifier("aplcnRegService")
     private AplcnRegService aplcnRegService;
+
+    @Autowired
+    @Qualifier("announceService")
+    private AnnounceService announceService;
 
     //신청안내페이지
     @GetMapping("/start")
-    public String getRegStart() {
+    public String getRegStart(Model model) {
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar now = Calendar.getInstance();
+        System.out.println(sdf.format(now.getTime()));
+        ArrayList<AnnounceVO> alist = aplcnRegService.getAnnounce(sdf.format(now.getTime()));
+
+        model.addAttribute("alist", alist);
         return "app/aplcnRegStart";
     }
 

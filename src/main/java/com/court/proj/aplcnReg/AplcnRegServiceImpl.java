@@ -1,12 +1,13 @@
 package com.court.proj.aplcnReg;
 
+import com.court.proj.announce.AnnounceVO;
 import com.court.proj.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-@Service("AplcnRegService")
+@Service("aplcnRegService")
 public class AplcnRegServiceImpl implements AplcnRegService{
 
     @Autowired
@@ -25,6 +26,11 @@ public class AplcnRegServiceImpl implements AplcnRegService{
     @Override
     public ArrayList<TrialVO> getTrial() {
         return aplcnRegMapper.getTrial();
+    }
+
+    @Override
+    public ArrayList<AnnounceVO> getAnnounce(String date) {
+        return aplcnRegMapper.getAnnounce(date);
     }
 
 //    @Override
