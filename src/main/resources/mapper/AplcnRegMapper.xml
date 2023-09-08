@@ -14,4 +14,8 @@
         SELECT * FROM TB_011;
     </select>
 
+    <select id="getTrial" resultType="TrialVO">
+        SELECT * FROM TB_010;
+    </select>
+
 </mapper>

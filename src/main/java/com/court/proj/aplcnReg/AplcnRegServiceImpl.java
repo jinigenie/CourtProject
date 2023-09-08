@@ -22,6 +22,11 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         return aplcnRegMapper.getCourt();
     }
 
+    @Override
+    public ArrayList<TrialVO> getTrial() {
+        return aplcnRegMapper.getTrial();
+    }
+
 //    @Override
 //    public void setCerti(CertiVO vo) {
 //        aplcnRegMapper.setCerti(vo);

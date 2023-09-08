@@ -41,6 +41,9 @@ public class AplcnRegController {
         ArrayList<CourtVO> clist = aplcnRegService.getCourt();
         model.addAttribute("clist", clist);
 
+        ArrayList<TrialVO> tlist = aplcnRegService.getTrial();
+        model.addAttribute("tlist", tlist);
+
         return "app/aplcnRegInfo";
     }
 
@@ -70,5 +73,9 @@ public class AplcnRegController {
 
     //////////////////////////////////////////////////////////////////////
 
+    @GetMapping("/api")
+    public String apiTest() {
+        return "app/certi_api";
+    }
 
 }
