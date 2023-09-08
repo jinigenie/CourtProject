@@ -20,8 +20,8 @@ public class AnnounceServiceImpl implements AnnounceService{
 
 	// 조회
 	@Override
-	public ArrayList<AnnounceVO> getList(String announce_proper_num) {
-		return announceMapper.getList(announce_proper_num);
+	public ArrayList<AnnounceVO> getannounceList() {
+		return announceMapper.getannounceList();
 	}
 	
 }
