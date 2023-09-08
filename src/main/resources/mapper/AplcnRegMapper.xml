@@ -18,4 +18,8 @@
         SELECT * FROM TB_010;
     </select>
 
+    <select id="getAnnounce" resultType="AnnounceVO">
+        SELECT * FROM TB_002 WHERE ANNOUNCE_END_DATE >= #{date}
+    </select>
+
 </mapper>

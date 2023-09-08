@@ -48,8 +48,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-                            <td data-cell-header="번호">248</td>
+                        <tr th:each="avo, status : ${alist}" style="cursor: pointer">
+                            <td data-cell-header="번호">[[${status.count}]]</td>
                             <td data-cell-header="대분류" tabindex="0"
                                 onkeypress="if(event.keyCode ==13){$(this).click()}"
                                 onclick="jsSamuDetail('TMP00000204')">
