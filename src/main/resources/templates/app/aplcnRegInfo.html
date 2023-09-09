@@ -51,26 +51,25 @@
                                 <div class="select-box" style="width: 180px">
                                     <label for="selectType1"></label>
                                     <select class="info-select" id="selectType1" name="selectType1">
-                                        <option value="">선택</option>
-                                        <option value="조력자">조력자</option>
-                                        <option value="통번역인">통번역인</option>
-                                        <option value="조정위원">조정위원</option>
-                                        <option value="전문심리위원">전문심리위원</option>
-                                        <option value="상담위원">상담위원</option>
+                                        <option value="조력자" th:selected="${trial.trial_fcltt_main_code == '조력자'}">조력자</option>
+                                        <option value="통번역인" th:selected="${trial.trial_fcltt_main_code == '통번역인'}">통번역인</option>
+                                        <option value="조정위원" th:selected="${trial.trial_fcltt_main_code == '조정위원'}">조정위원</option>
+                                        <option value="전문심리위원" th:selected="${trial.trial_fcltt_main_code == '전문심리위원'}">전문심리위원</option>
+                                        <option value="상담위원" th:selected="${trial.trial_fcltt_main_code == '상담위원'}">상담위원</option>
                                     </select>
                                 </div>
                                 <div class="select-box" style="width: 180px">
                                     <label for="selectType2"></label>
                                     <select class="info-select" id="selectType2" name="selectType2">
-                                        <option class="defaultOpt">선택</option>
-                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_main_code}">[[${tvo.trial_fcltt_clasifi_code}]]</option>
+                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_main_code}"
+                                                    th:selected="${trial.getTrial_fcltt_clasifi_code == tvo.getTrial_fcltt_clasifi_code()}">[[${tvo.trial_fcltt_clasifi_code}]]</option>
                                     </select>
                                 </div>
                                 <div class="select-box selectBox3" style="width: 180px">
                                     <label for="selectType3"></label>
                                     <select class="info-select" id="selectType3" name="selectType3">
-                                        <option class="defaultOpt">선택</option>
-                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_clasifi_code}">[[${tvo.trial_fcltt_sbcls_code}]]</option>
+                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_clasifi_code}"
+                                                th:selected="${trial.getTrial_fcltt_sbcls_code == tvo.getTrial_fcltt_sbcls_code()}">[[${tvo.trial_fcltt_sbcls_code}]]</option>
                                     </select>
                                 </div>
                             </td>

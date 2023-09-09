@@ -1,6 +1,14 @@
 // 첫 세팅
 $(document).ready(function () {
+
     $(".selectBox3").hide();
+
+    var selectedValue = $("#selectType3").val();
+
+    if(selectedValue !== '') {
+        $(".selectBox3").show();
+    }
+
     $(".lawtd").css("visibility", "hidden");
     $(".insurance").css("visibility", "hidden");
     $(".detective").css("visibility", "hidden");
@@ -155,13 +163,10 @@ $('#selectType1').change(function () {
     $("#selectType2 option").hide();
 
     let selType2 = $("#selectType1 option:selected").val();
-    if (selType2 === '선택') {
-        $(".defaultOpt").show();
-    } else {
-        $("#selectType2 option").filter(function () {
-            return selType2 === $(this).attr("class") && $(this).prev().val() !== $(this).val();
-        }).show();
-    }
+
+    $("#selectType2 option").filter(function () {
+        return selType2 === $(this).attr("class") && $(this).prev().val() !== $(this).val();
+    }).show();
 })
 $('#selectType2').change(function () {
 
@@ -169,21 +174,14 @@ $('#selectType2').change(function () {
     $("#selectType3 option").hide();
 
     let selType3 = $("#selectType2 option:selected").val();
-    console.log(selType3);
-    if(selType3 === '공사비등' || selType3 === '조종위원') {
+
+    if (selType3 === '공사비등' || selType3 === '조정위원') {
         $(".selectBox3").show();
-        if (selType3 === '선택') {
-            $(".defaultOpt").show();
-        } else {
-            $("#selectType3 option").filter(function () {
-                return selType3 === $(this).attr("class");
-            }).show();
-        }
+        $("#selectType3 option").filter(function () {
+            return selType3 === $(this).attr("class");
+        }).show();
     }
 })
-
-
-
 
 
 // 사건내역 상세내용 숨기기/보이기
