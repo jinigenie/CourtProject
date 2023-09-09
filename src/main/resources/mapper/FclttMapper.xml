@@ -25,26 +25,33 @@
 		       tb14.accept_act_yn,
 		       tb14.accept_etc,
 		       tb11.court_name,
-		       tb10.trial_fcltt_sbcls_code,
+		       tb10.trial_fcltt_description,
 		       tb1.user_name,
 		       tb14.accept_proper_num
 		FROM TB_014 tb14
 		JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
 		JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
 		JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
+		
 
 		<where>
 		
 			<if test="cri.searchCourt !='' and cri.searchCourt != null"> 
 			<!-- 	court_region like concat('%',#{cri.searchCourt},'%') -->
-				court_region = #{cri.searchCourt}
+				and court_region like concat('%',#{cri.searchCourt},'%')
 			</if>
-			<if test="cri.searchAct !='' and cri.searchAct != null"> 
-				 and accept_act_yn = #{cri.searchAct}
+			<if test="cri.searchCourtName !='' and cri.searchCourtName != null"> 
+				and court_name like concat('%',#{cri.searchCourtName},'%')
 			</if>
 			<if test="cri.searchContent !='' and cri.searchContent != null"> 
-				and user_name = #{cri.searchContent}
+				and court_region like concat('%',#{cri.searchContent},'%')
+				or court_name like concat('%',#{cri.searchContent},'%')
+				or user_name like  concat('%',#{cri.searchUser_name},'%') 
 			</if>
+			<if test="cri.searchAct !='' and cri.searchAct != null"> 
+				and  accept_act_yn = #{cri.searchAct}
+			</if>
+
 		</where>
 		
 		
@@ -57,12 +64,12 @@
 			   tb1.user_name,
 			   tb14.accept_proper_num,
 		       tb10.trial_fcltt_clasifi_code,
-		       tb10.trial_fcltt_sbcls_code,
+		       tb10.trial_fcltt_description,
 		       tb6.edctn_school_name,
 		       tb6.edctn_major,
 		       tb6.edctn_degree,
 		       tb7.company_name,
-		       tb7.career_type,
+		       tb7.carer_type,
 		       tb8.crtfc_type,
                tb11.court_region,
                tb11.court_name     

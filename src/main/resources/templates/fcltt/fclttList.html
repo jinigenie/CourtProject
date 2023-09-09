@@ -135,7 +135,7 @@
 								<tr th:each="vo, status : ${list}" title="">
 									<td data-cell-header="번호">[[${status.count}]]</td>
 									<td data-cell-header="민원서식명" tabindex="0">
-										[[${vo.trial_fcltt_sbcls_code}]]
+										[[${vo.trial_fcltt_description}]]
 									</td>
 									<td data-cell-header="법원명">[[${vo.court_name}]]</td>
 									<td data-cell-header="이름">[[${vo.user_name}]]</td>
@@ -242,7 +242,6 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var fclttData = JSON.parse(xhr.responseText);
-                    console.log(fclttData.trial_fcltt_sbcls_code);
 
                     var modal = document.getElementById("popup_layer2");
                     modal.style.display = "block";
@@ -260,7 +259,7 @@
 					str+= '<tbody>' ;
 					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">재판조력자분류</span>' ;
 					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">'; 
-					str+= '<span class="fclttSpan txt-left">' + fclttData.trial_fcltt_clasifi_code +' > '+ fclttData.trial_fcltt_sbcls_code + '</span></td></tr>'; 
+					str+= '<span class="fclttSpan txt-left">' + fclttData.trial_fcltt_clasifi_code +' > '+ fclttData.trial_fcltt_description + '</span></td></tr>'; 
 					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">신청법원</span>' 
 					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">' ;
 					str+= '<span class="fclttSpan txt-left">' + fclttData.court_region + ' > '+ fclttData.court_name + '</span></td></tr>' ;
@@ -288,13 +287,11 @@
 					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span></th>' ;
 					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.company_name + '</span></td></tr>' ;
 					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">경력구분</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' +fclttData.career_type + '</span></td></tr></tbody>' ;
+					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' +fclttData.carer_type + '</span></td></tr></tbody>' ;
 					str+= '<tbody id="fcltt_detail_bottom">' ;
 					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 자격증 상세 정보</span></th>' ;
 					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>' ;
 					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명2</span></th>' ;
 					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>' ;
 					str+= '</tbody></table></div></div></div>' ;
 					str+= '<div class="popup_btn2"><a href="javascript:closePop2();">닫기</a></div></div>';
