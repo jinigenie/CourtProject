@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
@@ -25,9 +26,7 @@ public class AplcnRegController {
     @Qualifier("aplcnRegService")
     private AplcnRegService aplcnRegService;
 
-    @Autowired
-    @Qualifier("announceService")
-    private AnnounceService announceService;
+    int trial_pn = 0;
 
     //신청안내페이지
     @GetMapping("/start")
@@ -45,7 +44,8 @@ public class AplcnRegController {
 
     //결격사유 확인
     @GetMapping("/confirm")
-    public String confirm() {
+    public String confirm(@RequestParam("trial_fcltt_proper_num") int tfpn) {
+        trial_pn = tfpn;
         return "app/aplcnRegConfirm";
     }
 
@@ -57,6 +57,9 @@ public class AplcnRegController {
 
         UserVO vo = aplcnRegService.getInfo(id);
         model.addAttribute("vo", vo);
+
+        TrialVO tvo = aplcnRegService.getTrialVO(trial_pn);
+        model.addAttribute("trial", tvo);
 
         ArrayList<CourtVO> clist = aplcnRegService.getCourt();
         model.addAttribute("clist", clist);

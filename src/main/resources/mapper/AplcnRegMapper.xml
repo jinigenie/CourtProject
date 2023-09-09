@@ -18,8 +18,20 @@
         SELECT * FROM TB_010;
     </select>
 
+    <select id="getTrialVO" resultType="TrialVO">
+        SELECT * FROM TB_010 WHERE TRIAL_FCLTT_PROPER_NUM = #{trial_pn}
+    </select>
+
     <select id="getAnnounce" resultType="AnnounceVO">
-        SELECT * FROM TB_002 WHERE ANNOUNCE_END_DATE >= #{date}
+        SELECT TB_002.*,
+               TB_010.TRIAL_FCLTT_MAIN_CODE,
+               TB_010.TRIAL_FCLTT_CLASIFI_CODE,
+               TB_010.TRIAL_FCLTT_SBCLS_CODE,
+               TB_010.TRIAL_FCLTT_DESCRIPTION
+        FROM TB_002
+                 LEFT OUTER JOIN
+             TB_010 ON TB_002.TRIAL_FCLTT_PROPER_NUM = TB_010.TRIAL_FCLTT_PROPER_NUM
+        WHERE ANNOUNCE_END_DATE >= #{date}
     </select>
 
 </mapper>
