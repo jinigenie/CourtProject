@@ -28,7 +28,7 @@ public class FclttVO {
 	private String edctn_major; //전공 6tb
 	private String edctn_degree; //학위 6tb
 	private String company_name;// 회사명 7tb
-	private String career_type;// 경력구분 7tb
+	private String carer_type;// 경력구분 7tb
 	private String crtfc_type;// 자격증 8tb
 	private Integer trial_fcltt_proper_num;
 	

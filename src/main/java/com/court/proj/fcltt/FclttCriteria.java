@@ -13,6 +13,7 @@ public class FclttCriteria {
 	//검색에 필요한 키워드 선언
 	
 	private String searchCourt; //법원
+	private String searchCourtName; //법원
 	private String searchAct; //활동여부
 	private String searchDate; // 등록날짜
 	private String searchContent; //검색내용

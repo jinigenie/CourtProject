@@ -180,7 +180,7 @@
 					var vo = data[i]; 
 					var str = "";
 
-					str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" style="cursor: pointer">';
+					str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" onclick="toggleRows()" style="cursor: pointer">';
 					str += '<td data-cell-header="신청일">' + moment(vo.pause_submit_date).format('YYYY-MM-DD') + '</td>';
 					str += '<td data-cell-header="신청자이름" tabindex="0">' + vo.user_name + '</td>';
 					str += '<td data-cell-header="중지기간">' + moment(vo.pause_start_date).format('YYYY-MM-DD') + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
@@ -203,20 +203,17 @@
 </script>
 <script>
 	
-	
-		var toggleRows = document.querySelectorAll(".toggle-row");
 
-		toggleRows.forEach(function (row) {
-			row.addEventListener("click", function () {
-				var hiddenRow = this.nextElementSibling;
 
+	function toggleRows(){
+		var hiddenRow = event.currentTarget.nextSibling;
+		console.log(hiddenRow);		
 				if (hiddenRow.style.display === "none") {
-					hiddenRow.style.display = "table-row";
+					hiddenRow.style.display = "block";
 				} else {
 					hiddenRow.style.display = "none";
 				}
-			});
-		});
+	}
 
 
 

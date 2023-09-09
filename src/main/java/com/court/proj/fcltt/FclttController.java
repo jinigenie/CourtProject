@@ -24,10 +24,7 @@ public class FclttController {
 	// 등재명단
 	@GetMapping("/fclttList")
 	public String fclttList(Model model, FclttCriteria cri) {
-
-
 		ArrayList<FclttVO>list= fclttService.getList(cri);
-
 		model.addAttribute("list",list);
 		return "fcltt/fclttList";
 
