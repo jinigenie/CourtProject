@@ -25,7 +25,6 @@ public class FclttPageVO {
 	private List<Integer> pageList; //페이지네이션 리스트로 저장할변수
 
 	public FclttPageVO(FclttCriteria cri, int total) {
-
 		this.cri = cri;
 		this.page= cri.getPage();
 		this.amount = cri.getAmount();
