@@ -70,20 +70,18 @@
 									<div class="main_slid_notice">
 										<ul class="notice_lists">
 											<li class="notice_li" style="height: 600px;">
-												<a href="javascript:void(0);" title=""
-													onclick="fn_dtalSrch('118', '3','7','','')">
+												<a th:href="'/announce/announceDetail?id=' + ${vo1.announce_proper_num}" title="">
+													
 													<span class="div">모집공고</span>
 													<dl>
 														<dt>
 															[<span th:text="${vo1.trial_fcltt_description}"></span>]
 														</dt>
-
 														<dd class="oh"><br />
 														[[${vo1.announce_start_date}]] ~ [[${vo1.announce_end_date}]]
 															[[${vo1.announce_content}]]
 														</dd>
 													</dl>
-
 												</a>
 											</li>
 										</ul>
@@ -114,14 +112,14 @@
 							</li>
 							<!-- 탭 한 상태에 따라 공지-->
 							<li th:each=" vo2, status : ${list2}" class="notice_left">
-								<a href="#" style="overflow: hidden;">
+								<a href="#">
 									<h4>[공지]</h4>[[${vo2.notice_title}]] <span style="text-align: right; float: right;">[[${ #temporals.format(vo2.notice_date,'yyyy-MM-dd')}]] </span>
 								</a>
 							</li>
 							
 							<!-- 탭 한 상태에 따라 FAQ -->
 							<li th:each="vo3, status : ${list3}" class="faq_left faq_none">
-								<a th:href="#">
+								<a href="#">
 									<h3>Q</h3>[[${vo3.faq_ask_content}]]<br/>
 								</a>
 							</li>
