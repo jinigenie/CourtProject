@@ -17,7 +17,7 @@ import com.court.proj.notice.NoticeVO;
 @Controller
 @RequestMapping("/main")
 public class MainController {
-	
+
 	@Autowired
 	private FaqService faqService;
 	@Autowired
@@ -30,15 +30,27 @@ public class MainController {
 	public String main(Model model) {
 		ArrayList<AnnounceVO> list1 = mainService.getAnnList();
 		ArrayList<NoticeVO>list2= mainService.getNoticeList();
+
+		// 중요 공지사항 모달창에  저장
+		ArrayList<String> modalContent = new ArrayList<>(); 
+
+		for (NoticeVO notice : list2) {
+			if (notice.getNotice_title().contains("중요")) {
+				modalContent.add(notice.getNotice_title());
+				modalContent.add(notice.getNotice_content()); // 중요 공지사항 내용을 리스트에 추가
+			}
+		}
+
 		ArrayList<FaqVO>list3= mainService.getFaqList();
 
 		model.addAttribute("list1",list1);
 		model.addAttribute("list2",list2);
 		model.addAttribute("list3",list3);
-		
+		model.addAttribute("modalContent",modalContent);
+
 		return "/main/mainPage";
 	}
-	
 
-	
+
+
 }

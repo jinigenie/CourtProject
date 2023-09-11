@@ -59,31 +59,7 @@ public class FclttController {
 		return "fcltt/fclttRegist";
 	}
 
-	// 중지신청 목록진입
-	
-	 @GetMapping("/pause") public String pause() {
-	 return "fcltt/pauseEvaluation"; }
-	 
-
-	 // 목록 ajax
-	@GetMapping("/pauseAjax")
-	@ResponseBody
-	public ResponseEntity<ArrayList<PauseVO>> pauseList(FclttCriteria cri) {
-	    ArrayList<PauseVO> list = fclttService.getPauseList(cri);
-	    return new ResponseEntity<>(list, HttpStatus.OK);
-	}
-	// 페이징 ajax 
-	@GetMapping("/getTotal")
-	@ResponseBody
-	public ResponseEntity<FclttPageVO> getTotal(FclttCriteria cri) {
-		
-		int total = fclttService.getTotal(cri);
-		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
-	    return new ResponseEntity<>(FclttPageVO, HttpStatus.OK);
-	}
-	
-	
-
+	// 명단 등록하기 
 	@PostMapping("/fclttRegistForm")
 	public String fclttRegistFom(FclttVO vo, RedirectAttributes ra) {
 
@@ -95,8 +71,37 @@ public class FclttController {
 
 		return "redirect:/fcltt/fclttList";
 	}
+	
+	
+	
+	// Pause -------------------------------------------------------------------------------------------
+	// 중지신청 목록진입
+	
+	 @GetMapping("/pause") public String pause() {
+	 return "fcltt/pauseEvaluation"; }
+	 
 
+	 // 중지, 활동신청 목록 불러오기 ajax
+	@GetMapping("/pauseAjax")
+	@ResponseBody
+	public ResponseEntity<ArrayList<PauseVO>> pauseList(FclttCriteria cri) {
+	    ArrayList<PauseVO> list = fclttService.getPauseList(cri);
+	    return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
+	
+	// 페이징 ajax 
+	@GetMapping("/getTotal")
+	@ResponseBody
+	public ResponseEntity<FclttPageVO> getTotal(FclttCriteria cri) {
+		
+		int total = fclttService.getTotal(cri);
+		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
+	    return new ResponseEntity<>(FclttPageVO, HttpStatus.OK);
+	}
+	
 
+	// 승인처리 ajax 컨트롤러
 	@PostMapping("/pauseResultSubmit")
 	public ResponseEntity<Integer>pauseResultSubmit(@RequestParam("user_proper_num") String user_proper_num,
 													@RequestParam("accept_act_yn") String accept_act_yn){
@@ -109,6 +114,8 @@ public class FclttController {
 		System.out.println("결과: " + result);
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
+
+	
 
 
 

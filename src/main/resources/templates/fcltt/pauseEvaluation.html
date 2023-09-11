@@ -160,12 +160,11 @@
 						str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';
 						str += '<em>' + (vo.accept_act_yn == 'Y' ? '중지승인' : '활동승인') + '</em></a></td></tr>';
 						str += '<tr class="hidden-row" style="display: none;">';
-						str += '<td  data-cell-header="신청일" ><p>중지사유 : </p>' + vo.accept_pause_etc + '</td>';
-						str += '<td data-cell-header="신청자이름"><p>중지사유 : </p>' + vo.accept_pause_etc + '</td>';
-						str += '<td  data-cell-header="중지기간"><p>중지사유 : </p>' + vo.accept_pause_etc + '</td>';
-						str += '<td data-cell-header="현재활동상태"><p>중지사유 : </p>' + vo.accept_pause_etc + '</td>';
-						str += '<td  data-cell-header="처리"><p>중지사유 : </p>' + vo.accept_pause_etc + '</td></tr>';
-
+						str += '<td data-cell-header="신청일"></td>';
+						str += '<td data-cell-header="신청자이름">중 지 사 유 : ' + vo.accept_pause_etc + '</td>';
+						str += '<td data-cell-header="중지기간"></td>';
+						str += '<td data-cell-header="현재활동상태"></td>';
+						str += '<td data-cell-header="처리"></td></tr>';
 						// 표에 행 추가
 						tbody.append(str);
 					}
