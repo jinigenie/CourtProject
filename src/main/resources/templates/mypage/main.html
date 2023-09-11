@@ -79,7 +79,7 @@
         <col style="width:30%;">
         <col style="width:70%;">
       </colgroup>
-      <form action="deleteform" id="del" name="delete" method="post">
+      <form action="deleteForm" id="del" name="delete" method="post">
 		  <input type="hidden" name="user_proper_num" th:value="${userVO.user_proper_num}"/>
       <tbody>
         <tr>
@@ -122,7 +122,7 @@
             <span>이메일</span>
           </th>
           <td data-cell-header="이메일" class="txt-left">
-            <span id="cvl_mail">[[${userVO.user_email}]]</span>
+            <span id="cvl_mail" th:text="|${userVO.user_email_f}@${userVO.user_email_b}|"></span>
           </td>
         </tr>
        
