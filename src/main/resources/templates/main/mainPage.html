@@ -59,9 +59,6 @@
 				<div class="warp2 wrap3">
 					<div class="box2" style="background-color: #ccc;">
 						<!--공고-->
-
-						<!--ssssss		<swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
-							slides-per-view="3" space-between="0" free-mode="true">-->
 						<swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
 							slides-per-view="4" space-between="0" free-mode="true" autoplay="true"
 							autoplay-delay="4000">
@@ -70,15 +67,17 @@
 									<div class="main_slid_notice">
 										<ul class="notice_lists">
 											<li class="notice_li" style="height: 600px;">
-												<a th:href="'/announce/announceDetail?id=' + ${vo1.announce_proper_num}" title="">
-													
+												<a th:href="'/announce/announceDetail?id=' + ${vo1.announce_proper_num}"
+													title="">
+
 													<span class="div">모집공고</span>
 													<dl>
 														<dt>
 															[<span th:text="${vo1.trial_fcltt_description}"></span>]
 														</dt>
 														<dd class="oh"><br />
-														[[${vo1.announce_start_date}]] ~ [[${vo1.announce_end_date}]]
+															[[${vo1.announce_start_date}]] ~
+															[[${vo1.announce_end_date}]]
 															[[${vo1.announce_content}]]
 														</dd>
 													</dl>
@@ -113,17 +112,19 @@
 							<!-- 탭 한 상태에 따라 공지-->
 							<li th:each=" vo2, status : ${list2}" class="notice_left">
 								<a href="#">
-									<h4>[공지]</h4>[[${vo2.notice_title}]] <span style="text-align: right; float: right;">[[${ #temporals.format(vo2.notice_date,'yyyy-MM-dd')}]] </span>
+									<h4>[공지]</h4>[[${vo2.notice_title}]] <span
+										style="text-align: right; float: right;">[[${
+										#temporals.format(vo2.notice_date,'yyyy-MM-dd')}]] </span>
 								</a>
 							</li>
-							
+
 							<!-- 탭 한 상태에 따라 FAQ -->
 							<li th:each="vo3, status : ${list3}" class="faq_left faq_none">
 								<a href="#">
-									<h3>Q</h3>[[${vo3.faq_ask_content}]]<br/>
+									<h3>Q</h3>[[${vo3.faq_ask_content}]]<br />
 								</a>
 							</li>
-							
+
 						</ul>
 						<ul class="faqList_right">
 
@@ -207,9 +208,6 @@
 
 			</div>
 
-
-
-
 			<script>
 				$(".relatedSystem").each(function () {
 					$(".relatedSystem .rTit .moreBtn").click(function () {
@@ -219,37 +217,29 @@
 				});
 			</script>
 
-			<!--모달창 작업-->
+			<!--//////////////////////////모달창 작업////////////////////////////////////-->
 			<div>
-
-
-
 				<!-- The Modal -->
-				<div id="popup_layer">
-					<div class="popup_box">
+				<div id="popup_layer" style="border-radius: 8px;">
+					
+					<div class="popup_box" style="border-radius: 8px;">
+						
 						<!--팝업 컨텐츠 영역-->
-						<div class="popup_cont">
-							<h2>[ 공 지 사 항 ]</h2>
-							<p>
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-								공 지 내 용<br />
-							</p>
+						<div class="popup_cont" style="text-align: center;">
+
+							<h1>[[${modalContent[0]}]]</h1><br />
+							<div style="text-align: left;   line-height: 2;">
+								<p>
+								<h2>[[${modalContent[1]}]]</h2>
+								<br />
+								<br /><br /><br />
+								</p>
+								
+							</div>
+							<img src="../../img/korean/layout/court_main_icon.png" style="height: 30px; width: 130px; margin: 20px 0 ;">	
 						</div>
 						<!--팝업 버튼 영역-->
+						
 						<div class="popup_btn">
 							<!--하루동안 보지않기-->
 							<a id="chk_today" href="javascript:closeToday();" class="close_day">하루동안 열지 않기</a>
@@ -258,6 +248,7 @@
 							<a href="javascript:closePop();">닫기</a>
 						</div>
 					</div>
+
 				</div>
 
 				<script>
