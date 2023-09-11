@@ -118,7 +118,6 @@
 											<col style="width: 70%">
 										</colgroup>
 										<tbody>
-
 											<tr>
 												<th scope="row" class="txt-left">
 													<span class="txt-left" title="제목">제목</span>
@@ -151,31 +150,42 @@
 											</tr>
 											<tr>
 												<th scope="row" class="txt-left">
-													<span class="essential-txt" title="조력자 분류">조력자 분류</span>
+													<span style="margin-left: 80px">재판조력자 구분</span>
 												</th>
-												<td data-cell-header="조력자 분류" class="txt-left">
-													<select name="trial_fcltt_main_code_box" id=""
-														class="cm_inptxt fclttCategory">
-														<option id="trial_fcltt_main_code"
-															value="trial_fcltt_main_code">조력자 대분류</option>
-														<option id="fcltt" value="fcltt">조력자</option>
-														<option id="interpreter" value="interpreter">통번역인</option>
-														<option id="arbitrator" value="arbitrator">조정위원</option>
-														<option id="expertPsychologist" value="expertPsychologist">
-															전문심리위원</option>
-														<option id="counselor" value="counselor">상담위원</option>
-													</select>
-													<select name="trial_fcltt_clasifi_code_box" id=""
-														class="cm_inptxt fclttCategory">
-														<option value="trial_fcltt_clasifi_code">조력자 중분류</option>
+												<td data-cell-header="재판조력자" class="txt-left">
+													<div class="select-box" style="width: 180px">
+														<label for="selectType1"></label>
+														<select class="info-select" id="selectType1" name="selectType1">
+															<option value="">선택</option>
+															<option value="조력자">조력자</option>
+															<option value="통번역인">통번역인</option>
+															<option value="조정위원">조정위원</option>
+															<option value="전문심리위원">전문심리위원</option>
+															<option value="상담위원">상담위원</option>
+														</select>
+													</div>
+													<div class="select-box" style="width: 180px">
+														<label for="selectType2"></label>
+														<select class="info-select" id="selectType2" name="selectType2">
+															<option class="defaultOpt">선택</option>
+															<option th:each="tvo : ${tlist}"
+																th:class="${tvo.trial_fcltt_main_code}">
+																[[${tvo.trial_fcltt_clasifi_code}]]</option>
 
 
-													</select>
-													<select name="trial_fcltt_sbcls_code_box" id=""
-														class="cm_inptxt fclttCategory">
-														<option value="trial_fcltt_sbcls_code">조력자 소분류</option>
+														</select>
+													</div>
+													<div class="select-box selectBox3" style="width: 180px">
+														<label for="selectType3"></label>
+														<select class="info-select" id="selectType3" name="selectType3">
+															<option class="defaultOpt">선택</option>
+															<option th:each="tvo : ${tlist}"
+																th:class="${tvo.trial_fcltt_clasifi_code}">
+																[[${tvo.trial_fcltt_sbcls_code}]]</option>
 
-													</select>
+
+														</select>
+													</div>
 
 												</td>
 											</tr>
@@ -187,67 +197,12 @@
 												<td data-cell-header="이메일" class="txt-left">
 													<!-- ckEditor start -->
 
-													<div id="editor">
-													</div>
+													<textarea id="editor" name="announce_content">
+													</textarea>
 													<!-- //ckEditor end -->
 												</td>
 											</tr>
-											<script>
-												// 데이터베이스에서 중분류를 가져와 중분류 선택 상자를 채웁니다.
-$("#trial_fcltt_main_code").change(function () {
-    var selectedMainCode = $(this).val();
 
-    // AJAX 요청을 사용하여 중분류 데이터를 가져옵니다.
-    $.ajax({
-        url: "/getMiddleCategoriesForMainCategory", // 중분류 데이터를 가져올 엔드포인트 URL로 변경해야 합니다.
-        method: "GET",
-        data: { mainCategory: selectedMainCode }, // 서버 측에서 이 파라미터를 사용하여 중분류 데이터를 필터링합니다.
-        success: function (data) {
-            // 중분류 선택 상자를 비웁니다.
-            $("#trial_fcltt_clasifi_code").empty();
-
-            // 가져온 중분류 데이터로 옵션을 만들어 추가합니다.
-            $.each(data, function (key, value) {
-                $("#trial_fcltt_clasifi_code").append(
-                    $("<option>").text(value).val(key)
-                );
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        },
-    });
-});
-
-// 중분류 선택 상자 이벤트 핸들러
-$("#trial_fcltt_clasifi_code_box").change(function () {
-    var selectedMainCode = $("#trial_fcltt_main_code_box").val();
-    var selectedMiddleCode = $(this).val();
-
-    // AJAX 요청을 사용하여 소분류 데이터를 가져옵니다.
-    $.ajax({
-        url: "/getSubCategoriesForMainCategoryAndMiddleCategory",
-        method: "GET",
-        data: { mainCategory: selectedMainCode, middleCategory: selectedMiddleCode },
-        success: function (data) {
-            // 소분류 선택 상자를 비웁니다.
-            $("#trial_fcltt_sbcls_code_box").empty();
-
-            // 가져온 소분류 데이터로 옵션을 만들어 추가합니다.
-            $.each(data, function (key, value) {
-                $("#trial_fcltt_sbcls_code_box").append(
-                    $("<option>").text(value).val(key)
-                );
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        },
-    });
-});
-
-
-											</script>
 										</tbody>
 									</table>
 								</div>
@@ -256,9 +211,15 @@ $("#trial_fcltt_clasifi_code_box").change(function () {
 							<!-- //searchform-wrap end -->
 						</div>
 						<!-- //공고 내용 end -->
+
+						<!-- 페이지 이동 버튼 -->
+						<div class="fclttRegist_btn">
+							<button type="submit" class="fcltt_btn1">등록</button>
+							<button type="button" class="fcltt_btn2">취소</button>
+						</div>
+						<!-- //페이지 이동 버튼 end -->
 					</form>
 					<!-- //form end -->
-
 				</article>
 				<!-- //detail-content end -->
 			</div>
@@ -266,12 +227,7 @@ $("#trial_fcltt_clasifi_code_box").change(function () {
 		</div>
 		<!-- //contents end -->
 
-		<!-- 페이지 이동 버튼 -->
-		<div class="fclttRegist_btn">
-			<button type="button" class="fcltt_btn1">등록</button>
-			<button type="button" class="fcltt_btn2">취소</button>
-		</div>
-		<!-- //페이지 이동 버튼 end -->
+
 	</div>
 	<!-- //main_con end -->
 	</div>
@@ -311,9 +267,37 @@ $("#trial_fcltt_clasifi_code_box").change(function () {
 <!-- //ckEditor end -->
 
 <!-- 조력자 분류 start -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:src="@{../../js/app/announce.js}"></script>
+
 <script>
+	function cancelRegistration() {
+		if (confirm("등록을 취소하시겠습니까?")) {
+		}
+	}
+
+	document.getElementById("announceForm").addEventListener("submit", function (event) {
+		var title = document.getElementById("title").value;
+		var startDate = document.getElementsByName("announce_start_date")[0].value;
+		var endDate = document.getElementsByName("announce_end_date")[0].value;
+		var selectType1 = document.getElementById("selectType1").value;
+		var selectType2 = document.getElementById("selectType2").value;
+		var selectType3 = document.getElementById("selectType3").value;
+		var mydata = editor.getData();
+
+		if (title === "" || startDate === "" || endDate === "" || selectType1 === "" || selectType2 === "" || selectType3 === "" || mydata === "") {
+			alert("입력하지 않은 정보가 있습니다. 다시 확인해주세요.");
+			event.preventDefault();
+		} else {
+
+			if (confirm("등록하시겠습니까?")) {
+
+			} else {
+				event.preventDefault();
+			}
+		}
+	});
 
 </script>
-<!-- 조력자 분류 end -->
 
 </html>
