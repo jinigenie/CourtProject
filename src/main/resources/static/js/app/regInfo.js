@@ -5,16 +5,39 @@ $(document).ready(function () {
 
     var selectedValue = $("#selectType3").val();
 
-    if(selectedValue !== '') {
+    if (selectedValue !== '') {
         $(".selectBox3").show();
     }
 
-    $(".lawtd").css("visibility", "hidden");
-    $(".insurance").css("visibility", "hidden");
-    $(".detective").css("visibility", "hidden");
+
+
+    if($('input[name="ligtn_case_carer_yn"]').prop('checked')){
+        $(".lawtd").css("visibility", "show");
+        $('input[name="ligtn_case_carer_yn"]').val('Y');
+    }else {
+        $(".lawtd").css("visibility", "hidden");
+        $('input[name="ligtn_case_carer_yn"]').val('N');
+    }
+
+    if($('input[name="insrn_indst_carer_yn"]').prop('checked')){
+        $(".insurance").css("visibility", "show");
+        $('input[name="insrn_indst_carer_yn"]').val('Y');
+    }else {
+        $(".insurance").css("visibility", "hidden");
+        $('input[name="insrn_indst_carer_yn"]').val('N');
+    }
+
+    if($('input[name="criminal_penalty_carer_yn"]').prop('checked')){
+        $(".detective").css("visibility", "show");
+        $('input[name="criminal_penalty_carer_yn"]').val('Y');
+    }else {
+        $(".detective").css("visibility", "hidden");
+        $('input[name="criminal_penalty_carer_yn"]').val('N');
+    }
+
 });
 
-<!--주소찾기-->
+// <!--주소찾기-->
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -41,7 +64,7 @@ function execDaumPostcode() {
 }
 
 
-<!--은행정보 확인-->
+// <!--은행정보 확인-->
 $("#selectBank").change(function () {
     let selected = $("#selectBank option:selected").val();
     if (selected == 'kb') {
@@ -73,7 +96,7 @@ $("#selectBank").change(function () {
 });
 
 
-<!--메일주소 선택입력-->
+// 메일주소 선택입력-->
 $("#mailAddr").change(function () {
     let selmail = $("#mailAddr option:selected").html();
     $("#cvl_mail2").attr("value", selmail);
@@ -92,19 +115,20 @@ let x = 0;
 $(".prev_btn").click(function () {
     modal.style.display = 'block';
     x = 1;
+    $("#xField").val(x);
 })
 $(".next_btn").click(function () {
     modal.style.display = 'block';
     x = 2;
+    $("#xField").val(x);
 })
 
 $(".save").click(function () {
-    if (x == 1) {
-        $(location).attr("href", "../app/confirm");
-    } else {
-        $(location).attr("href", "../app/career");
-    }
+    var form = document.forms["actionForm"];
+    form.submit();
+
     x = 0;
+    $("#xField").val(x);
 })
 
 $(".cancel").click(function () {
@@ -185,29 +209,35 @@ $('#selectType2').change(function () {
 
 
 // 사건내역 상세내용 숨기기/보이기
-$('input[name="check1"]').change(function () {
+$('input[name="ligtn_case_carer_yn"]').change(function () {
     var checked1 = $(this).prop('checked');
     if (checked1) {
         $(".lawtd").css("visibility", "visible");
+        $(this).val('Y');
     } else {
         $(".lawtd").css("visibility", "hidden");
+        $(".lawtdTxt").val('');
     }
 });
 
-$('input[name="check2"]').change(function () {
+$('input[name="insrn_indst_carer_yn"]').change(function () {
     var checked2 = $(this).prop('checked');
     if (checked2) {
         $(".insurance").css("visibility", "visible");
+        $(this).val('Y');
     } else {
         $(".insurance").css("visibility", "hidden");
+        $(".insuranceTxt").val('');
     }
 });
 
-$('input[name="check3"]').change(function () {
+$('input[name="criminal_penalty_carer_yn"]').change(function () {
     var checked3 = $(this).prop('checked');
     if (checked3) {
         $(".detective").css("visibility", "visible");
+        $(this).val('Y');
     } else {
         $(".detective").css("visibility", "hidden");
+        $(".detectiveTxt").val('');
     }
 });

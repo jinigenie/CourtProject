@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserVO {
 	/*
-	 * 
 	 USER_PROPER_NUM	INT auto_increment,
 	 USER_ID 	VARCHAR(10) NOT NULL,
 	 USER_PW 	VARCHAR(100) NOT NULL,
@@ -35,7 +34,7 @@ public class UserVO {
      USER_EDCTN_FINAL  VARCHAR(50) DEFAULT NULL,
      USER_ROLE VARCHAR(20) DEFAULT 'USER',
 	 */
-	
+
 	private Integer user_proper_num;
 	@Pattern(regexp = "^[a-z0-9]{7,16}$", message = "7~16자의 영문 소문자, 숫자의 조합으로 작성해주세요")
 	private String user_id;
@@ -60,5 +59,5 @@ public class UserVO {
 	private String user_edctn_final;
 	private String user_delete_yn;
 	private String user_role;
-	
+
 }

@@ -37,362 +37,409 @@
                         <li><a href="../app/file">서류제출</a></li>
                     </ul>
                 </div>
-                <div style="margin-top: 40px">
-                    <span class="sub_title">신청 정보</span>
-                </div>
-                <div class="table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span style="margin-left: 80px">재판조력자 구분</span>
-                            </th>
-                            <td data-cell-header="재판조력자" class="txt-left">
-                                <div class="select-box" style="width: 180px">
-                                    <label for="selectType1"></label>
-                                    <select class="info-select" id="selectType1" name="selectType1">
-                                        <option value="조력자" th:selected="${trial.trial_fcltt_main_code == '조력자'}">조력자</option>
-                                        <option value="통번역인" th:selected="${trial.trial_fcltt_main_code == '통번역인'}">통번역인</option>
-                                        <option value="조정위원" th:selected="${trial.trial_fcltt_main_code == '조정위원'}">조정위원</option>
-                                        <option value="전문심리위원" th:selected="${trial.trial_fcltt_main_code == '전문심리위원'}">전문심리위원</option>
-                                        <option value="상담위원" th:selected="${trial.trial_fcltt_main_code == '상담위원'}">상담위원</option>
-                                    </select>
-                                </div>
-                                <div class="select-box" style="width: 180px">
-                                    <label for="selectType2"></label>
-                                    <select class="info-select" id="selectType2" name="selectType2">
-                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_main_code}"
-                                                    th:selected="${trial.getTrial_fcltt_clasifi_code == tvo.getTrial_fcltt_clasifi_code()}">[[${tvo.trial_fcltt_clasifi_code}]]</option>
-                                    </select>
-                                </div>
-                                <div class="select-box selectBox3" style="width: 180px">
-                                    <label for="selectType3"></label>
-                                    <select class="info-select" id="selectType3" name="selectType3">
-                                        <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_clasifi_code}"
-                                                th:selected="${trial.getTrial_fcltt_sbcls_code == tvo.getTrial_fcltt_sbcls_code()}">[[${tvo.trial_fcltt_sbcls_code}]]</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">희망법원 선택</span>
-                            </th>
-                            <td data-cell-header="희망법원" class="txt-left">
-                                <ul class="ullistscourt">
-                                    <li>
-                                        <!-- 법원목록 start-->
-                                        <div class="scourtlistbox">
-                                            <p class="title">법원목록</p>
-                                            <div class="select-box" style="margin: 7px 0 3px 0; width: 200px">
-                                                <label for="selectRegion"></label>
-                                                <select class="info-select" id="selectRegion"
-                                                        name="search_region">
-                                                    <option value="전체">전체</option>
-                                                    <option value="서울">서울</option>
-                                                    <option value="인천/경기">인천/경기</option>
-                                                    <option value="강원">강원</option>
-                                                    <option value="충북">충북</option>
-                                                    <option value="대전/충남">대전/충남</option>
-                                                    <option value="대구/경북">대구/경북</option>
-                                                    <option value="부산/울산/경남">부산/울산/경남</option>
-                                                    <option value="광주/전북/전남">광주/전북/전남</option>
-                                                    <option value="제주">제주</option>
-                                                </select>
-                                            </div>
-                                            <select multiple="" name="from_bub_cd" id="from_bub_cd" class="listscourt"
-                                                    size="20" title="법원목록">
-                                                <option th:each="cvo : ${clist}" th:class="${cvo.court_region}">[[${cvo.court_name}]]</option>
 
-                                            </select>
-                                        </div>
-                                        <!-- 법원목록 end-->
-                                    </li>
-                                    <li class="center">
-                                        <span class="btnin"><a onclick="javascript:addCourt()";>▶</a></span><br>
-                                        <span class="btnin mart10" style="margin-top: 5px"><a onclick="javascript:removeCourt()">◀</a></span>
-                                    </li>
+                <form name="actionForm" action="saveInfoForm" method="post">
+                    <input type="hidden" name="x" id="xField" value="">
+<!--                    <input type="hidden" name="trial_fcltt_proper_num" id="trialpn" th:value="${ivo.trial_fcltt_proper_num}">-->
+                    <input type="hidden" name="user_proper_num" id="userpn" th:value="${vo.user_proper_num}">
 
-                                    <li>
-                                        <!-- 선택목록 start-->
-                                        <div class="scourtlistbox">
-                                            <p class="title">희망법원</p>
-                                            <select multiple="" name="wish_bub_cd" id="wish_bub_cd" class="listscourt2"
-                                                    size="20" title="희망법원">
-                                            </select>
-                                        </div>
-                                        <!-- 선택목록 end-->
-                                    </li>
-                                </ul>
-                                <div>
-                                <span class="ex"><label id="lblWishText">* 희망법원은 2개까지 신청 가능하며 1지망, 2지망 순서입니다.</label></span>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div style="margin-top: 40px">
-                    <span class="sub_title">기본 정보</span>
-                </div>
-                <div class="table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr style="padding-top: 20px">
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
-                            </th>
-                            <td data-cell-header="아이디" class="txt-left">
-                                <div class="input-wrap-three write-wrap-m"
-                                     style="width: 162px; display: inline-block">
-                                    <div class="input-wrap" style="width: 200px">
-                                        <input name="cvl_nm" th:value="${vo.user_id}" class="cm_inptxt" type="text"
-                                               readonly="readonly"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">성명</span>
-                            </th>
-                            <td data-cell-header="성명" class="txt-left">
-                                <div class="input-wrap-three write-wrap-m"
-                                     style="width: 162px; display: inline-block">
-                                    <div class="input-wrap" style="width: 200px">
-                                        <input name="cvl_nm" id="cvl_nm"
-                                               th:value="${vo.user_name}" class="cm_inptxt"
-                                               type="text" readonly="readonly"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">생년월일</span>
-                            </th>
-                            <td data-cell-header="생년월일" class="txt-left">
-                                <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_birth" id="cvl_birth"
-                                           th:value="${vo.user_age}" class="cm_inptxt"
-                                           type="text" maxlength="8"
-                                           onkeydown="return num_only(event)" readonly="readonly"/>
-                                </div>
-                                <span class="txt_noti" style="margin-left: 5px">※ 주민번호 앞 6자리 기입, 예) 950102</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">직업</span>
-                            </th>
-                            <td data-cell-header="직업" class="txt-left">
-                                <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_job" id="cvl_job"
-                                           th:value="${vo.user_job == null? '': vo.user_job}" class="cm_inptxt"
-                                           type="text" maxlength="8"/>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span style="margin-left: 80px">휴대폰번호</span>
-                            </th>
-                            <td data-cell-header="직업" class="txt-left">
-                                <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_job" id="cvl_phone" th:value="${vo.user_phone}"
-                                           class="cm_inptxt" type="text" maxlength="8"/>
-                                </div>
-                                <em class="fcltt_comment">&nbsp; '-' 을 제외한 숫자만 기입</em>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="" style="margin-left: 80px">이메일</span>
-                            </th>
-                            <td class="txt-left">
-                                <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_nm" id="cvl_mail" value="" class="cm_inptxt" type="text">
-                                </div>
-                                <span style="margin: 7px">@</span>
-                                <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_nm" id="cvl_mail2" value="" class="cm_inptxt" type="text">
-                                </div>
-                                <div class="select-box" style="padding: 9px;">
-                                    <select name="" id="mailAddr" class="info-select">
-                                        <option value="">직접입력</option>
-                                        <option value="naver">naver.com</option>
-                                        <option value="hanmail">hanmail.net</option>
-                                        <option value="gmail">gmail.com</option>
-                                        <option value="daum">daum.net</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="border-none txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">주소</span>
-                            </th>
-                            <td data-cell-header="주소" class="txt-left essential-responsive">
-                                <input type="hidden" id="cvl_zip1" name="cvl_zip1" value=""/>
-                                <input type="hidden" id="cvl_zip2" name="cvl_zip2" value=""/>
-                                <div class="address-wrap write-wrap-m">
-                                    <div class="address-btn-wrap">
-                                        <div class="input-wrap">
-                                            <input id="postcode" name="postAddr"
-                                                   class="cm_inptxt" th:value="${vo.user_ar_zonecode == null? '': vo.user_ar_zonecode}" title="우편번호 앞자리" type="text"
-                                                   readonly="readonly"/>
-                                        </div>
-                                        <button type="button" class="address-btn"
-                                                onclick="execDaumPostcode()"
-                                                title="새창열림">우편번호 찾기
-                                        </button>
-                                    </div>
-                                    <div class="input-wrap" style="width: 478px">
-                                        <input name="addr1" id="addr1" maxlength="100"
-                                               class="cm_inptxt" title="시군구주소 입력" type="text"
-                                               th:value="${vo.user_ar == null? '': vo.user_ar}" readonly="readonly"/>
-                                    </div>
-                                    <div class="input-wrap" style="width: 478px">
-                                        <input name="addr2" id="addr2" maxlength="50"
-                                               class="cm_inptxt" title="상세주소 입력"
-                                               type="text" th:value="${vo.user_ar_detail == null? '': vo.user_ar_detail}" placeholder="상세주소"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span style="margin-left: 80px">계좌번호</span>
-                            </th>
-                            <td data-cell-header="계좌번호" class="txt-left">
-                                <div style="overflow: hidden; width: 500px">
-                                    <div class="select-box" style="margin-bottom: 10px; float: left">
-                                        <label for="selectBank"></label>
-                                        <select class="info-select" id="selectBank"
-                                                name="search_field" title="검색조건을 선택해주세요.">
-                                            <option value="">은행목록</option>
-                                            <option value="kb" th:selected="${vo.user_bank == 'kb'}">국민은행</option>
-                                            <option value="ibk" th:selected="${vo.user_bank == 'ibk'}">기업은행</option>
-                                            <option value="nh" th:selected="${vo.user_bank == 'nh'}">농협은행</option>
-                                            <option value="sh" th:selected="${vo.user_bank == 'sh'}">신한은행</option>
-                                            <option value="wr" th:selected="${vo.user_bank == 'wr'}">우리은행</option>
-                                            <option value="hn" th:selected="${vo.user_bank == 'hn'}">하나은행</option>
-                                            <option value="sc" th:selected="${vo.user_bank == 'sc'}">SC제일은행</option>
+                    <div style="margin-top: 40px">
+                        <span class="sub_title">신청 정보</span>
+                    </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span style="margin-left: 80px">재판조력자 구분</span>
+                                </th>
+                                <td data-cell-header="재판조력자" class="txt-left">
+                                    <div class="select-box" style="width: 180px">
+                                        <label for="selectType1"></label>
+                                        <select class="info-select" id="selectType1" name="selectType1">
+                                            <option value="조력자" th:selected="${trial.trial_fcltt_main_code == '조력자'}">
+                                                조력자
+                                            </option>
+                                            <option value="통번역인" th:selected="${trial.trial_fcltt_main_code == '통번역인'}">
+                                                통번역인
+                                            </option>
+                                            <option value="조정위원" th:selected="${trial.trial_fcltt_main_code == '조정위원'}">
+                                                조정위원
+                                            </option>
+                                            <option value="전문심리위원"
+                                                    th:selected="${trial.trial_fcltt_main_code == '전문심리위원'}">전문심리위원
+                                            </option>
+                                            <option value="상담위원" th:selected="${trial.trial_fcltt_main_code == '상담위원'}">
+                                                상담위원
+                                            </option>
                                         </select>
                                     </div>
-                                    <div class="selectedBank" style="float: left">
-                                        <img src="#" alt="" id="bankIcon">
-                                        <p style="float:right;" class="selBank"></p>
+                                    <div class="select-box" style="width: 180px">
+                                        <label for="selectType2"></label>
+                                        <select class="info-select" id="selectType2" name="selectType2">
+                                            <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_main_code}"
+                                                    th:selected="${trial.getTrial_fcltt_clasifi_code == tvo.getTrial_fcltt_clasifi_code()}">
+                                                [[${tvo.trial_fcltt_clasifi_code}]]
+                                            </option>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="input-wrap-three write-wrap-m">
-                                    <div class="input-wrap" style="width: 320px; display: inline-block">
-                                        <input name="cvl_cel1" maxlength="4" id="cvl_account1"
-                                               th:value="${vo.user_bank_account}" class="cm_inptxt"
-                                               title="계좌번호" type="text"
-                                               onkeydown="return num_only(event)" placeholder="계좌번호"/>
+                                    <div class="select-box selectBox3" style="width: 180px">
+                                        <label for="selectType3"></label>
+                                        <select class="info-select" id="selectType3" name="selectType3">
+                                            <option th:each="tvo : ${tlist}" th:class="${tvo.trial_fcltt_clasifi_code}"
+                                                    th:selected="${trial.getTrial_fcltt_sbcls_code == tvo.getTrial_fcltt_sbcls_code()}">
+                                                [[${tvo.trial_fcltt_sbcls_code}]]
+                                            </option>
+                                        </select>
                                     </div>
-                                    <div class="input-wrap"
-                                         style="width: 150px; display: inline-block; margin-left: 5px">
-                                        <input name="cvl_cel2" maxlength="4" id="cvl_account2"
-                                               th:value="${vo.user_bank_holder}" class="cm_inptxt"
-                                               title="예금주"
-                                               type="text" onkeydown="return num_only(event)" placeholder="예금주"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 80px">희망법원 선택</span>
+                                </th>
+                                <td data-cell-header="희망법원" class="txt-left">
+                                    <ul class="ullistscourt">
+                                        <li>
+                                            <!-- 법원목록 start-->
+                                            <div class="scourtlistbox">
+                                                <p class="title">법원목록</p>
+                                                <div class="select-box" style="margin: 7px 0 3px 0; width: 200px">
+                                                    <label for="selectRegion"></label>
+                                                    <select class="info-select" id="selectRegion"
+                                                            name="">
+                                                        <option value="전체">전체</option>
+                                                        <option value="서울">서울</option>
+                                                        <option value="인천/경기">인천/경기</option>
+                                                        <option value="강원">강원</option>
+                                                        <option value="충북">충북</option>
+                                                        <option value="대전/충남">대전/충남</option>
+                                                        <option value="대구/경북">대구/경북</option>
+                                                        <option value="부산/울산/경남">부산/울산/경남</option>
+                                                        <option value="광주/전북/전남">광주/전북/전남</option>
+                                                        <option value="제주">제주</option>
+                                                    </select>
+                                                </div>
+                                                <select multiple="" name="" id="from_bub_cd"
+                                                        class="listscourt"
+                                                        size="20" title="법원목록">
+                                                    <option th:each="cvo : ${clist}" th:class="${cvo.court_region}">
+                                                        [[${cvo.court_name}]]
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                            <!-- 법원목록 end-->
+                                        </li>
+                                        <li class="center">
+                                            <span class="btnin"><a onclick="javascript:addCourt()" ;>▶</a></span><br>
+                                            <span class="btnin mart10" style="margin-top: 5px"><a
+                                                    onclick="javascript:removeCourt()">◀</a></span>
+                                        </li>
+
+                                        <li>
+                                            <!-- 선택목록 start-->
+                                            <div class="scourtlistbox">
+                                                <p class="title">희망법원</p>
+                                                <select multiple="" name="selectCourts[]" id="wish_bub_cd"
+                                                        class="listscourt2" title="희망법원">
+                                                    <option id="court_p1" selected th:if="${ivo != null && ivo.court_proper1 != null}">[[${ivo.court_proper1}]]</option>
+                                                    <option id="court_p2" selected th:if="${ivo != null && ivo.court_proper2 != null}">[[${ivo.court_proper2}]]</option>
+                                                </select>
+                                            </div>
+                                            <!-- 선택목록 end-->
+                                        </li>
+                                    </ul>
+                                    <div>
+                                        <span class="ex"><label
+                                                id="lblWishText">* 희망법원은 2개까지 신청 가능하며 1지망, 2지망 순서입니다.</label></span>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- 추가정보 테이블 -->
-                <div style="margin-top: 40px">
-                    <span class="sub_title">추가 정보</span>
-                </div>
-                <div class="table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr style="padding-top: 20px; height: 75px">
-                            <th scope="row" class="txt-left" style="width: 20% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">소송사건 당사자 경력</span>
-                            </th>
-                            <td data-cell-header="소송경력" class="txt-left" style="width: 30%">
-                                <input type="checkbox" name="check1"><span style="margin-left: 7px">경력 있음</span>
-                            </td>
-                            <td data-cell-header="소송경력" class="txt-left lawtd" style="width: 50%">
-                                <textarea name="lawsuit" placeholder="경력 내용 기입" class="txtInfo"></textarea>
-                            </td>
-
-                        </tr>
-                        <tr style="height: 75px">
-                            <th scope="row" class="txt-left" style="width: 30% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">보험업계 자문 경력</span>
-                            </th>
-                            <td data-cell-header="보험경력" class="txt-left">
-                                <input type="checkbox" name="check2"><span style="margin-left: 7px">경력 있음</span>
-                            </td>
-                            <td data-cell-header="보험경력" class="txt-left insurance">
-                                <textarea name="insurance" placeholder="경력 내용 기입" class="txtInfo"></textarea>
-                            </td>
-                        </tr>
-                        <tr style="height: 75px">
-                            <th scope="row" class="txt-left" style="width: 40% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">형사처벌 받은 경력</span>
-                            </th>
-                            <td data-cell-header="형사경력" class="txt-left">
-                                <input type="checkbox" name="check3"><span style="margin-left: 7px">경력 있음</span>
-                            </td>
-                            <td data-cell-header="형사경력" class="txt-left detective">
-                                <textarea name="detective" placeholder="경력 내용 기입" class="txtInfo"></textarea>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-                <!-- prev, next 버튼 -->
-                <div class="btn-holder">
-                    <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
-                        <span>◀ 이전 단계</span>
-                    </button>
-
-                    <em style="padding-top: 15px"> 1 / 4</em>
-
-                    <button class="btn btn-2 hover-opacity next_btn">
-                        <span>다음 단계 ▶</span>
-                    </button>
-                </div>
-
-                <!-- 임시 저장 확인창 -->
-                <div class="modal">
-                    <div class="modal__background">
-                        <div class="modal_body2">
-                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
-                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
-                                     style="outline: none;" tabindex="-1">
-                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1></div>
-                                    <div class="dmui_dialog_body" tabindex="0">
-                                        <div class="saveIcon">
-                                            <img src="../img/app/saveicon.png">
+                    <!-- 기본정보 테이블 -->
+                    <div style="margin-top: 40px">
+                        <span class="sub_title">기본 정보</span>
+                    </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <tbody>
+                            <tr style="padding-top: 20px">
+                                <th scope="row" class="txt-left">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
+                                </th>
+                                <td data-cell-header="아이디" class="txt-left">
+                                    <div class="input-wrap-three write-wrap-m"
+                                         style="width: 162px; display: inline-block">
+                                        <div class="input-wrap" style="width: 200px">
+                                            <input name="user_id" th:value="${vo.user_id}" class="cm_inptxt" type="text"
+                                                   readonly="readonly"/>
                                         </div>
-                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
-                                            <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
-                                                <br>변경된 내용은 반영되지 않습니다.</strong></p>
-                                        </div>
-                                        <p><strong>저장하시겠습니까?</strong></p>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 80px">성명</span>
+                                </th>
+                                <td data-cell-header="성명" class="txt-left">
+                                    <div class="input-wrap-three write-wrap-m"
+                                         style="width: 162px; display: inline-block">
+                                        <div class="input-wrap" style="width: 200px">
+                                            <input name="user_name" id="cvl_nm"
+                                                   th:value="${vo.user_name}" class="cm_inptxt"
+                                                   type="text" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 80px">생년월일</span>
+                                </th>
+                                <td data-cell-header="생년월일" class="txt-left">
+                                    <div class="input-wrap" style="width: 200px; display: inline-block">
+                                        <input name="user_rrn_f" id="cvl_birth"
+                                               th:value="${vo.user_rrn_f}" class="cm_inptxt"
+                                               type="text" maxlength="8"
+                                               onkeydown="return num_only(event)" readonly="readonly"/>
+                                    </div>
+                                    <span class="txt_noti" style="margin-left: 5px">※ 주민번호 앞 6자리 기입, 예) 950102</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 80px">직업</span>
+                                </th>
+                                <td data-cell-header="직업" class="txt-left">
+                                    <div class="input-wrap" style="width: 200px; display: inline-block">
+                                        <input name="user_job" id="cvl_job"
+                                               th:value="${vo.user_job == null? '': vo.user_job}" class="cm_inptxt"
+                                               type="text" maxlength="8"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span style="margin-left: 80px">휴대폰번호</span>
+                                </th>
+                                <td data-cell-header="직업" class="txt-left">
+                                    <div class="input-wrap" style="width: 200px; display: inline-block">
+                                        <input name="user_phone" id="cvl_phone" th:value="${vo.user_phone}"
+                                               class="cm_inptxt" type="text" maxlength="11"/>
+                                    </div>
+                                    <em class="fcltt_comment">&nbsp; '-' 을 제외한 숫자만 기입</em>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span class="essential-txt" title="" style="margin-left: 80px">이메일</span>
+                                </th>
+                                <td class="txt-left">
+                                    <div class="input-wrap" style="width: 200px; display: inline-block">
+                                        <input name="user_email_f" id="cvl_mail" th:value="${vo.user_email_f}" class="cm_inptxt" type="text">
+                                    </div>
+                                    <span style="margin: 7px">@</span>
+                                    <div class="input-wrap" style="width: 200px; display: inline-block">
+                                        <input name="user_email_b" id="cvl_mail2" value="" class="cm_inptxt" type="text">
+                                    </div>
+                                    <div class="select-box" style="padding: 9px;">
+                                        <select name="" id="mailAddr" class="info-select">
+                                            <option value="">직접입력</option>
+                                            <option value="naver" th:selected="${vo.user_email_b == 'naver.com'}">naver.com</option>
+                                            <option value="hanmail" th:selected="${vo.user_email_b == 'hanmail.net'}">hanmail.net</option>
+                                            <option value="gmail" th:selected="${vo.user_email_b == 'gmail.com'}">gmail.com</option>
+                                            <option value="daum" th:selected="${vo.user_email_b == 'daum.net'}">daum.net</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="border-none txt-left">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 80px">주소</span>
+                                </th>
+                                <td data-cell-header="주소" class="txt-left essential-responsive">
+                                    <input type="hidden" id="cvl_zip1" name="cvl_zip1" value=""/>
+                                    <input type="hidden" id="cvl_zip2" name="cvl_zip2" value=""/>
+                                    <div class="address-wrap write-wrap-m">
+                                        <div class="address-btn-wrap">
+                                            <div class="input-wrap">
+                                                <input id="postcode" name="user_ar_zonecode"
+                                                       class="cm_inptxt"
+                                                       th:value="${vo.user_ar_zonecode == null? '': vo.user_ar_zonecode}"
+                                                       title="우편번호 앞자리" type="text"
+                                                       readonly="readonly"/>
+                                            </div>
+                                            <button type="button" class="address-btn"
+                                                    onclick="execDaumPostcode()"
+                                                    title="새창열림">우편번호 찾기
+                                            </button>
+                                        </div>
+                                        <div class="input-wrap" style="width: 478px">
+                                            <input name="user_ar" id="addr1" maxlength="100"
+                                                   class="cm_inptxt" title="시군구주소 입력" type="text"
+                                                   th:value="${vo.user_ar == null? '': vo.user_ar}"
+                                                   readonly="readonly"/>
+                                        </div>
+                                        <div class="input-wrap" style="width: 478px">
+                                            <input name="user_ar_detail" id="addr2" maxlength="50"
+                                                   class="cm_inptxt" title="상세주소 입력"
+                                                   type="text"
+                                                   th:value="${vo.user_ar_detail == null? '': vo.user_ar_detail}"
+                                                   placeholder="상세주소"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="txt-left">
+                                    <span style="margin-left: 80px">계좌번호</span>
+                                </th>
+                                <td data-cell-header="계좌번호" class="txt-left">
+                                    <div style="overflow: hidden; width: 500px">
+                                        <div class="select-box" style="margin-bottom: 10px; float: left">
+                                            <label for="selectBank"></label>
+                                            <select class="info-select" id="selectBank"
+                                                    name="user_bank" title="검색조건을 선택해주세요.">
+                                                <option value="">은행목록</option>
+                                                <option value="kb" th:selected="${vo.user_bank == 'kb'}">국민은행</option>
+                                                <option value="ibk" th:selected="${vo.user_bank == 'ibk'}">기업은행</option>
+                                                <option value="nh" th:selected="${vo.user_bank == 'nh'}">농협은행</option>
+                                                <option value="sh" th:selected="${vo.user_bank == 'sh'}">신한은행</option>
+                                                <option value="wr" th:selected="${vo.user_bank == 'wr'}">우리은행</option>
+                                                <option value="hn" th:selected="${vo.user_bank == 'hn'}">하나은행</option>
+                                                <option value="sc" th:selected="${vo.user_bank == 'sc'}">SC제일은행</option>
+                                            </select>
+                                        </div>
+                                        <div class="selectedBank" style="float: left">
+                                            <img src="#" alt="" id="bankIcon">
+                                            <p style="float:right;" class="selBank"></p>
+                                        </div>
+                                    </div>
+                                    <div class="input-wrap-three write-wrap-m">
+                                        <div class="input-wrap" style="width: 320px; display: inline-block">
+                                            <input name="user_bank_account" maxlength="4" id="cvl_account1"
+                                                   th:value="${vo.user_bank_account}" class="cm_inptxt"
+                                                   title="계좌번호" type="text"
+                                                   onkeydown="return num_only(event)" placeholder="계좌번호"/>
+                                        </div>
+                                        <div class="input-wrap"
+                                             style="width: 150px; display: inline-block; margin-left: 5px">
+                                            <input name="user_bank_holder" maxlength="4" id="cvl_account2"
+                                                   th:value="${vo.user_bank_holder}" class="cm_inptxt"
+                                                   title="예금주"
+                                                   type="text" onkeydown="return num_only(event)" placeholder="예금주"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 추가정보 테이블 -->
+                    <div style="margin-top: 40px">
+                        <span class="sub_title">추가 정보</span>
+                    </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <tbody>
+                            <tr style="padding-top: 20px; height: 75px">
+                                <th scope="row" class="txt-left" style="width: 20% !important;">
+                                    <span class="essential-txt" title="필수항목"
+                                          style="margin-left: 60px;">소송사건 당사자 경력</span>
+                                </th>
+
+                                <td data-cell-header="소송경력" class="txt-left" style="width: 30%">
+                                    <input type="checkbox" name="ligtn_case_carer_yn" th:checked="${ivo != null && ivo.ligtn_case_carer_yn == 'Y'}"><span
+                                        style="margin-left: 7px">경력 있음</span>
+                                </td>
+                                <td data-cell-header="소송경력" class="txt-left lawtd" style="width: 50%">
+                                    <textarea name="ligtn_case_carer_etc" placeholder="경력 내용 기입"
+                                              class="txtInfo lawtdTxt" th:text="${ivo == null? '' : ivo.ligtn_case_carer_etc}"></textarea>
+                                </td>
+
+                            </tr>
+                            <tr style="height: 75px">
+                                <th scope="row" class="txt-left" style="width: 30% !important;">
+                                    <span class="essential-txt" title="필수항목"
+                                          style="margin-left: 60px;">보험업계 자문 경력</span>
+                                </th>
+                                <td data-cell-header="보험경력" class="txt-left">
+                                    <input type="checkbox" name="insrn_indst_carer_yn" th:checked="${ivo != null && ivo.insrn_indst_carer_yn=='Y'}"><span
+                                        style="margin-left: 7px">경력 있음</span>
+                                </td>
+                                <td data-cell-header="보험경력" class="txt-left insurance">
+                                    <textarea name="insrn_indst_carer_etc" placeholder="경력 내용 기입"
+                                              class="txtInfo insuranceTxt" th:text ="${ivo == null? '' : ivo.insrn_indst_carer_etc}"></textarea>
+                                </td>
+                            </tr>
+                            <tr style="height: 75px">
+                                <th scope="row" class="txt-left" style="width: 40% !important;">
+                                    <span class="essential-txt" title="필수항목"
+                                          style="margin-left: 60px;">형사처벌 받은 경력</span>
+                                </th>
+                                <td data-cell-header="형사경력" class="txt-left">
+                                    <input type="checkbox" name="criminal_penalty_carer_yn" th:checked="${ivo != null && ivo.criminal_penalty_carer_yn == 'Y'}"><span
+                                        style="margin-left: 7px">경력 있음</span>
+                                </td>
+                                <td data-cell-header="형사경력" class="txt-left detective">
+                                    <textarea name="criminal_penalty_carer_etc" placeholder="경력 내용 기입"
+                                              class="txtInfo detectiveTxt" th:text="${ivo == null? '' : ivo.criminal_penalty_carer_etc}"></textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                    <!-- prev, next 버튼 -->
+                    <div class="btn-holder">
+                        <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
+                            <span>◀ 이전 단계</span>
+                        </button>
+
+                        <em style="padding-top: 15px"> 1 / 4</em>
+
+                        <button class="btn btn-2 hover-opacity next_btn">
+                            <span>다음 단계 ▶</span>
+                        </button>
+                    </div>
+
+                    <!-- 임시 저장 확인창 -->
+                    <div class="modal">
+                        <div class="modal__background">
+                            <div class="modal_body2">
+                                <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                    <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                         style="outline: none;" tabindex="-1">
+                                        <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1>
+                                        </div>
+                                        <div class="dmui_dialog_body" tabindex="0">
+                                            <div class="saveIcon">
+                                                <img src="../img/app/saveicon.png">
+                                            </div>
+                                            <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                                <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
+                                                    <br>변경된 내용은 반영되지 않습니다.</strong></p>
+                                            </div>
+                                            <p><strong>저장하시겠습니까?</strong></p>
+                                        </div>
+                                    </div>
+                                    <div class="dmui_dialog_footer">
+                                        <span><button class="dmui_dialog_footer_btn save">저장</button></span>
+                                        <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                    </div>
+                                    <div class="dmui_dialog_btn"></div>
                                 </div>
-                                <div class="dmui_dialog_footer">
-                                    <span><button class="dmui_dialog_footer_btn save">저장</button></span>
-                                    <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
-                                </div>
-                                <div class="dmui_dialog_btn"></div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+
             </div>
 
         </div>
