@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/mypage")
@@ -58,11 +59,22 @@ public class MypageController {
 		return "mypage/modal";
 	}
 	
-	@PostMapping("/deleteform")
+	@PostMapping("/deleteForm")
 	public String del(UserVO vo) {
 		
 		int result = mypageService.deleteUpdate(vo);
 		System.out.println(result);
+		
 		return "redirect:../main/";
+	}
+
+	@PostMapping("/modifyForm")
+	public String modifyForm(UserVO vo, RedirectAttributes rra) {
+		
+		int result = mypageService.modifyUpdate(vo);
+		String msg = result == 1? "회원정보가 변경되었습니다." : "변경실패. 관리자에게 문의하세요";
+		rra.addFlashAttribute("msg", msg);
+		
+		return "mypage/main";
 	}
 }

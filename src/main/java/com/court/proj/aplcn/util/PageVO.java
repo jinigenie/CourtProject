@@ -20,6 +20,7 @@ public class PageVO {
 	private int amount; //cri에 있는 데이터 개수
 	private Criteria cri; //페이지 기준
 	
+	
 	private int pnCount = 10; //페이지네이션 개수 (화면에 보여지는 페이지 칸 수들)
 	
 	private List<Integer> pageList; //페이지네이션을 리스트로 저장 

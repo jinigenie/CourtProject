@@ -38,4 +38,21 @@ public class FclttServiceImple implements FclttService {
 		return fclttMapper.getPauseList(cri);
 	}
 
+	@Override
+	public int getPauseTotal(FclttCriteria cri) {
+		return fclttMapper.getPauseTotal(cri);
+	}
+
+	@Override
+	public int setPauseY(FclttVO vo) {
+		return fclttMapper.setPauseY(vo);
+	}
+
+	@Override
+	public int setPauseN(FclttVO vo) {
+		return fclttMapper.setPauseN(vo);
+	}
+
+
+
 }

@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserVO {
 	/*
-	 *
 	 USER_PROPER_NUM	INT auto_increment,
 	 USER_ID 	VARCHAR(10) NOT NULL,
 	 USER_PW 	VARCHAR(100) NOT NULL,

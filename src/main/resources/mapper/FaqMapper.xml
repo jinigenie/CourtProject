@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.court.proj.faq.FaqMapper">
+
+    <select id="getList" resultType="FaqVO">
+    	select * from TB_004
+    </select>
+
+
+</mapper>

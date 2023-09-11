@@ -52,12 +52,7 @@
 
 
       <article id="detail-content">
-        <form
-          id="listForm"
-          name="listForm"
-          action="#"
-          method="post"
-        >
+  
          
           <div class="heading-wrap container">
             <h3 class="heading1">
@@ -68,8 +63,10 @@
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
           
-          	                <div class="table table-responsive">
+          	  <div class="table table-responsive">
                     <table>
+						<form action="modifyForm" method="post" name="modify" id="info">
+							 <input type="hidden" name="user_proper_num" th:value="${userVO.user_proper_num}"/>
                         <tbody>
                         <tr style="padding-top: 20px">
                             <th scope="row" class="txt-left">
@@ -87,7 +84,7 @@
                                 <div class="input-wrap-three write-wrap-m"
                                      style="width: 162px; display: inline-block">
                                     <div class="input-wrap" style="width: 200px">
-                                        <input name="cvl_nm" id="cvl_nm"
+                                        <input name="user_pw" id="cvl_nm"
                                                th:value="${userVO.user_pw}" class="cm_inptxt"
                                                type="password"/>
                                     </div>
@@ -117,21 +114,23 @@
                                 <span id="cvl_id" th:text="${userVO.user_name}"></span>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">생년월일</span>
-                            </th>
-                            <td data-cell-header="생년월일" class="txt-left">
-                                <span id="cvl_id">19910101</span>
-                            </td>
-                        </tr>
+						<tr>
+							<th scope="row" class="txt-left">
+								<span class="essential-txt" title="" style="margin-left: 80px">주민등록번호</span>
+							</th>
+							<td class="txt-left">
+								<span id="cvl_id" th:text="${userVO.user_rrn_f}"></span>
+								<span>-</span>
+								<span id="cvl_id" th:text="${userVO.user_rrn_b}"></span>
+							</td>
+						</tr>
                         <tr>
                             <th scope="row" class="txt-left">
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">직업</span>
                             </th>
                             <td data-cell-header="직업" class="txt-left">
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="userVO.user_job" id="cvl_job"
+                                    <input name="user_job" id="cvl_job"
                                            th:value="${userVO.user_job}" class="cm_inptxt"
                                            type="text" maxlength="8"/>
                                 </div>
@@ -145,10 +144,10 @@
                                 <div class="input-wrap-three write-wrap-m"
                                      style="display: inline-block">
                                     <div class="input-wrap" style="width: 200px; display: inline-block">
-                                        <input name="userVO.user_phone" maxlength="4" id="cvl_cel1" th:value="${userVO.user_phone}"
+                                        <input name="user_phone" id="cvl_cel1" th:value="${userVO.user_phone}"
                                                class="cm_inptxt" title="휴대폰번호"
-                                               type="text" onkeydown="return num_only(event)"
-                                               readonly/>
+                                               type="text"/>
+                                               
                                     </div>
                                     
                                 </div>
@@ -160,11 +159,11 @@
                             </th>
                             <td class="txt-left">
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="" id="cvl_mail" th:value="${#strings.substringBefore(userVO.user_email, '@')}" class="cm_inptxt" type="text">
+                                    <input name="user_email_f" id="cvl_mail" th:value="${userVO.user_email_f}" class="cm_inptxt" type="text">
                                 </div>
                                 <span style="margin: 7px">@</span>
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="cvl_nm" id="cvl_mail2" th:value="${#strings.substringAfter(userVO.user_email, '@')}" class="cm_inptxt" type="text">
+                                    <input name="user_email_b" id="cvl_mail2" th:value="${userVO.user_email_b}" class="cm_inptxt" type="text">
                                 </div>
                                 <div class="select-box" style="padding: 9px;">
                                     <select name="" id="mailAddr" class="info-select" >
@@ -237,10 +236,9 @@
                                 </div>
                                 <div class="input-wrap-three write-wrap-m">
                                     <div class="input-wrap" style="width: 320px; display: inline-block">
-                                        <input name="user_bank_account" maxlength="4" id="cvl_account1"
+                                        <input name="user_bank_account" id="cvl_account1"
                                                th:value="${userVO.user_bank_account}" class="cm_inptxt"
-                                               title="계좌번호" type="text"
-                                               onkeydown="return num_only(event)" placeholder="계좌번호"/>
+                                               title="계좌번호" type="text"/>
                                     </div>
                                     <div class="input-wrap"
                                          style="width: 150px; display: inline-block; margin-left: 5px">
@@ -253,6 +251,7 @@
                             </td>
                         </tr>
                         </tbody>
+						</form>
                     </table>
                 </div>
           
@@ -267,7 +266,7 @@
       
           </div>
           <!-- //본문컨텐츠 영역 -->
-        </form>
+        
       </article>
     </div>
     </div>
@@ -349,5 +348,18 @@
     })
 </script>
 
+
+<!--회원정보 수정-->
+<script>
+	const change = document.getElementById("infoChange");
+	const info = document.getElementById("info");
+	
+	change.onclick = function(e) {
+		e.preventDefault();
+		console.log(1);
+		info.submit();
+	}
+	
+</script>
 
 </html>

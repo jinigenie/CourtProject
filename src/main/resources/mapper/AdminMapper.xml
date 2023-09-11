@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.court.proj.admin.AdminMapper">
+	
+	
+	<select id="login">
+		select * from TB_015 where admin_id = #{admin_id}
+	</select>
+	
+	
+	
+</mapper>

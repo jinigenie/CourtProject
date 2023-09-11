@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FclttVO {
 	
-	private Integer user_proper_num; // 사용자 고유번호 1tb
+	private String user_proper_num; // 사용자 고유번호 1tb
 	private String user_name; //유저정보 1tb
 	private String accept_proper_num; //재판조력자 합격자 고유번호 14 tb
 	private String trial_fcltt_description; //재판조력자 고유번호 
@@ -28,9 +28,10 @@ public class FclttVO {
 	private String edctn_major; //전공 6tb
 	private String edctn_degree; //학위 6tb
 	private String company_name;// 회사명 7tb
-	private String career_type;// 경력구분 7tb
+	private String carer_type;// 경력구분 7tb
 	private String crtfc_type;// 자격증 8tb
 	private Integer trial_fcltt_proper_num;
+	private String pause_status;  // tb14_2 중지처리현황
 	
 	
 }

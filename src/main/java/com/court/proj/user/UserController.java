@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -31,8 +32,10 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 public class UserController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	final DefaultMessageService messageService;
 
@@ -47,9 +50,32 @@ public class UserController {
 	}
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@RequestParam(value = "err", required = false) String err, Model model) {
+		
+		if(err != null) {
+			model.addAttribute("msg","아이디 혹은 비밀번호를 확인해주세요.");
+		}
 		return "user/login";
 	}
+	
+	
+	//로그인할거
+//	@PostMapping("/loginForm")
+//	public String loginForm() {
+//		System.out.println("ㅇ");
+//		return "redirect:../main/";
+//	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "user/test";
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "user/403error";
+	}
+	
 	
 	@GetMapping("/agree")
 	public String agree() {
@@ -70,7 +96,6 @@ public class UserController {
 	@PostMapping("/joinForm")
 	public String joinForm(@Valid @ModelAttribute("vo") UserVO vo, Errors errors, Model model) {
 		
-		//userService.joinUser(vo);
 		if(errors.hasErrors()) {
 			List<FieldError> list = errors.getFieldErrors();
 			for(FieldError err : list) {
@@ -79,7 +104,11 @@ public class UserController {
 			}
 			return "user/userjoin";
 		}
-		return "../main/";
+		System.out.println(vo.toString());
+		String pw = bCryptPasswordEncoder.encode(vo.getUser_pw());
+		vo.setUser_pw(pw);
+		userService.joinUser(vo);
+		return "redirect:/login";
 	}
 	
 	//아이디 중복확인

@@ -113,38 +113,7 @@
 							</div>
 							<!-- pagenation -->
 							<div class="pager">
-								<div class="pager-wrap">
-									<a href="#" class="arr first" title="처음으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
-											이동</strong></a><a href="#" class="arr prev" title="이전으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
-											이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-										onclick="">1</a><a href="#" class=""
-										onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
-										onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
-										onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
-										onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
-										onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
-										onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
-										onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
-										onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
-										onclick="fn_egov_link_page(10); return false;">10</a><a href="#"
-										class="arr next" title="다음으로"
-										onclick="fn_egov_link_page(11); return false;"><strong class="sr-only">다음페이지로
-											이동</strong></a><a href="#" class="arr last" title="마지막으로"
-										onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
-											목록으로 이동</strong></a>
 
-									<input id="pageIndex" name="pageIndex" type="hidden" value="1" />
-									<input id="pageSize" name="pageSize" type="hidden" value="10" />
-									<input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-									<input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
-									<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
-									<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
-										value="" />
-									<input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
-									<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
-								</div>
 							</div>
 						</div>
 						<!-- //본문컨텐츠 영역 -->
@@ -154,7 +123,6 @@
 		</div><!-- //main_con  -->
 
 	</div>
-
 
 </th:block>
 <script th:inline="javascript">
@@ -169,59 +137,173 @@
 
 <script th:inline="javascript">
 	$(document).ready(function () {
-		$.ajax({
-			url: "pauseAjax", 
-			type: "GET",
-			success: function (data) { 
-			
-				var tbody = $("#yourTableId"); 
+		// 목록 불러오기 ajax
+		function loadList() {
+			$.ajax({
+				url: "pauseAjax",
+				type: "GET",
+				success: function (data) {
+					var tbody = $("#yourTableId");
+					tbody.empty(); // 테이블 내용 초기화
 
-				for (var i = 0; i < data.length; i++) {
-					var vo = data[i]; 
-					var str = "";
+					for (var i = 0; i < data.length; i++) {
+						var vo = data[i];
+						var str = "";
 
-					str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" style="cursor: pointer">';
-					str += '<td data-cell-header="신청일">' + moment(vo.pause_submit_date).format('YYYY-MM-DD') + '</td>';
-					str += '<td data-cell-header="신청자이름" tabindex="0">' + vo.user_name + '</td>';
-					str += '<td data-cell-header="중지기간">' + moment(vo.pause_start_date).format('YYYY-MM-DD') + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
-					str += '<td data-cell-header="현재활동상태"><a class="' + (vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2') + '">';
-					str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
-					str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';
-					str += '<em>' + (vo.accept_act_yn == 'Y' ? '중지승인' : '활동승인') + '</em></a></td></tr>';
-					str += '<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;"><td colspan="5" tabindex="0">';
-					str += '<p>중지사유 : </p>' + vo.accept_pause_etc + '</td></tr>';
-
-					// 표에 행 추가
-					tbody.append(str);
+						str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" onclick="toggleRows()" style="cursor: pointer">';
+						str += '<input type="hidden" name="user_proper_num" value="' + vo.user_proper_num + '"/>';
+						str += '<td data-cell-header="신청일">' + moment(vo.pause_submit_date).format('YYYY-MM-DD') + '</td>';
+						str += '<td data-cell-header="신청자이름">' + vo.user_name + '</td>';
+						str += '<td data-cell-header="중지기간">' + moment(vo.pause_start_date).format('YYYY-MM-DD') + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
+						str += '<td data-cell-header="현재활동상태"><a class="' + (vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2') + '">';
+						str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
+						str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';
+						str += '<em>' + (vo.accept_act_yn == 'Y' ? '중지승인' : '활동승인') + '</em></a></td></tr>';
+						str += '<tr class="hidden-row" style="display: none;">';
+						str += '<td data-cell-header="신청일"></td>';
+						str += '<td data-cell-header="신청자이름">중 지 사 유 : ' + vo.accept_pause_etc + '</td>';
+						str += '<td data-cell-header="중지기간"></td>';
+						str += '<td data-cell-header="현재활동상태"></td>';
+						str += '<td data-cell-header="처리"></td></tr>';
+						// 표에 행 추가
+						tbody.append(str);
+					}
 				}
-			}
-		});
-	});
-	
-	
-	
-</script>
-<script>
-	
-	
-		var toggleRows = document.querySelectorAll(".toggle-row");
+			});
+		}
 
-		toggleRows.forEach(function (row) {
-			row.addEventListener("click", function () {
-				var hiddenRow = this.nextElementSibling;
+		// 페이지 로드 시 목록을 불러옵니다.
+		loadList();
 
-				if (hiddenRow.style.display === "none") {
-					hiddenRow.style.display = "table-row";
-				} else {
-					hiddenRow.style.display = "none";
+
+		// 페이징 AJAX
+		function loadPaging() {
+			$.ajax({
+				url: "getTotal",
+				type: "GET",
+				success: function (data) {
+					// data를 JavaScript 변수로 할당
+					var FclttPageVO = data;
+					var pager = $(".pager");
+					var str2 = '<div class="pager-wrap">';
+
+					if (FclttPageVO.pageList.length > 1) {
+						str2 += '<a href="/fcltt/pause?page=1&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">맨 처음 목록으로 이동</strong></a>';
+					}
+					if (FclttPageVO.pageList.length > 1 && FclttPageVO.prev) {
+						str2 += '<a href="/fcltt/pause?page=' + (FclttPageVO.start - 1) +
+							'&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">이전페이지로 이동</strong></a>';
+					}
+					for (var i = 0; i < FclttPageVO.pageList.length; i++) {
+						var page = FclttPageVO.pageList[i];
+						str2 += '<a href="/fcltt/pause?page=' + page +
+							'&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '" ';
+						if (page == FclttPageVO.page) {
+							str2 += 'class="active"';
+						}
+
+						str2 += '>' + page + '</a>';
+					}
+					if (FclttPageVO.pageList.length > 1 && FclttPageVO.next) {
+						str2 += '<a href="/fcltt/pause?page=' + (FclttPageVO.end + 1) +
+							'&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">다음페이지로 이동</strong></a>';
+					}
+					if (FclttPageVO.pageList.length > 1) {
+						str2 += '<a href="/fcltt/pause?page=' + FclttPageVO.realEnd +
+							'&amount=' + FclttPageVO.amount +
+							'&searchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">맨 마지막목록으로 이동</strong></a>';
+					}
+
+					str2 += '</div>';
+					// 표에 행 추가
+					pager.empty().append(str2);
+				}
+			});
+		}
+
+		// 페이지 로드 시 페이징을 불러옵니다.
+		loadPaging();
+
+
+		// 승인처리 ajax
+		$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
+			event.preventDefault(); // a 링크의 기본 동작 중지
+			var user_proper_num = $(this).closest("tr").find("input[name='user_proper_num']").val();
+			var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
+
+			console.log(user_proper_num);
+			console.log(accept_act_yn);
+
+			// 여기에 AJAX 요청 코드를 작성합니다.
+			$.ajax({
+				url: "pauseResultSubmit", // 요청을 보낼 URL을 지정합니다.
+				type: "POST", // HTTP 요청 메서드 (GET 또는 POST)
+				data: {
+					"user_proper_num": user_proper_num,
+					"accept_act_yn": accept_act_yn
+				},
+				success: function (response) {
+					// 성공적으로 응답을 받았을 때 실행될 코드를 작성합니다.
+					console.log("AJAX 요청 성공");
+					// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다.
+
+					// 목록을 다시 불러오는 AJAX 요청
+					loadList(); // 목록을 다시 불러오는 함수 호출
+					loadPaging();
+					alert("승인되었습니다.");
+				},
+				error: function (xhr, status, error) {
+					// AJAX 요청 중 오류가 발생했을 때 실행될 코드를 작성합니다.
+					console.error("AJAX 요청 오류: " + error);
 				}
 			});
 		});
 
 
+	});
+</script>
+
+<script>
+
+	function toggleRows() {
+		var hiddenRow = event.currentTarget.nextSibling;
+		if (hiddenRow.style.display === "none") {
+			hiddenRow.style.display = "block";
+		} else {
+			hiddenRow.style.display = "none";
+		}
+	}
 
 
 </script>
+
+
+
+
 
 
 </html>

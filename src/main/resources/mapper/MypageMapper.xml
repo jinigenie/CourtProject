@@ -16,5 +16,21 @@
 		set user_delete_yn = 'Y' 
 		where user_proper_num = #{user_proper_num}
 	</update>
+	
+	<update id="modifyUpdate">
+		update tb_001 
+		set user_pw = #{user_job},
+			user_job = #{user_job},
+		    user_phone = #{user_phone},
+		    user_email_f = #{user_email_f},
+		    user_email_b = #{user_email_b},
+			user_ar = #{user_ar}, 
+		    user_ar_zonecode = #{user_ar_zonecode}, 
+		    user_ar_detail = #{user_ar_detail}, 
+		    user_bank = #{user_bank}, 
+		    user_bank_account = #{user_bank_account},
+		    user_bank_holder = #{user_bank_holder}
+		where user_proper_num =  #{user_proper_num};
+	</update>
 
 </mapper>       

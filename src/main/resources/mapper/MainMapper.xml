@@ -6,8 +6,32 @@
 
 <mapper namespace="com.court.proj.main.MainMapper">
 
-    <insert id="">
-    </insert>
+    <select id="getAnnList" resultType="com.court.proj.announce.AnnounceVO">
+        select
+		        a.announce_proper_num,
+		        c.trial_fcltt_description,
+		        a.announce_title,
+		        a.announce_content,
+		        a.announce_start_date,
+		        a.announce_end_date,
+		        a.announce_first_date,
+		        a.announce_last_date
+	    from tb_002 a
+	    join tb_010 c on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+	    ORDER BY ANNOUNCE_START_DATE DESC  
+	    LIMIT 8;
+    </select>
+    
+    <select id="getFaqList" resultType="com.court.proj.faq.FaqVO">
+       select * from TB_004
+       ORDER BY FAQ_ASK_DATE DESC;
+    </select>
 
+	<select id="getNoticeList" resultType="com.court.proj.notice.NoticeVO">
+       select * from TB_003
+       ORDER BY NOTICE_DATE DESC;
+		
+    </select>
+	
 
 </mapper>

@@ -24,11 +24,13 @@ public class FclttController {
 	// 등재명단
 	@GetMapping("/fclttList")
 	public String fclttList(Model model, FclttCriteria cri) {
-
-
+		
 		ArrayList<FclttVO>list= fclttService.getList(cri);
-
+		int total = fclttService.getTotal(cri);
+		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
+		
 		model.addAttribute("list",list);
+		model.addAttribute("FclttPageVO",FclttPageVO);
 		return "fcltt/fclttList";
 
 	}
@@ -57,32 +59,7 @@ public class FclttController {
 		return "fcltt/fclttRegist";
 	}
 
-	// 중지신청 목록진입
-	
-	 @GetMapping("/pause") public String pause() {
-	 return "fcltt/pauseEvaluation"; }
-	 
-
-
-	@GetMapping("/pauseAjax")
-	@ResponseBody
-	public ResponseEntity<ArrayList<PauseVO>> pauseList(FclttCriteria cri) {
-	    ArrayList<PauseVO> list = fclttService.getPauseList(cri);
-	    return new ResponseEntity<>(list, HttpStatus.OK);
-	}
-
-	
-	
-	
-	
-	/*
-	 * @GetMapping("/pause") public String pauseList(Model model, FclttCriteria
-	 * cri){
-	 * 
-	 * ArrayList<PauseVO>list= fclttService.getPauseList(cri);
-	 * model.addAttribute("list",list); return "fcltt/pauseEvaluation"; }
-	 */
-
+	// 명단 등록하기 
 	@PostMapping("/fclttRegistForm")
 	public String fclttRegistFom(FclttVO vo, RedirectAttributes ra) {
 
@@ -94,8 +71,51 @@ public class FclttController {
 
 		return "redirect:/fcltt/fclttList";
 	}
+	
+	
+	
+	// Pause -------------------------------------------------------------------------------------------
+	// 중지신청 목록진입
+	
+	 @GetMapping("/pause") public String pause() {
+	 return "fcltt/pauseEvaluation"; }
+	 
 
+	 // 중지, 활동신청 목록 불러오기 ajax
+	@GetMapping("/pauseAjax")
+	@ResponseBody
+	public ResponseEntity<ArrayList<PauseVO>> pauseList(FclttCriteria cri) {
+	    ArrayList<PauseVO> list = fclttService.getPauseList(cri);
+	    return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
+	
+	// 페이징 ajax 
+	@GetMapping("/getTotal")
+	@ResponseBody
+	public ResponseEntity<FclttPageVO> getTotal(FclttCriteria cri) {
+		
+		int total = fclttService.getTotal(cri);
+		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
+	    return new ResponseEntity<>(FclttPageVO, HttpStatus.OK);
+	}
+	
 
+	// 승인처리 ajax 컨트롤러
+	@PostMapping("/pauseResultSubmit")
+	public ResponseEntity<Integer>pauseResultSubmit(@RequestParam("user_proper_num") String user_proper_num,
+													@RequestParam("accept_act_yn") String accept_act_yn){
+		FclttVO vo = new FclttVO();
+		vo.setUser_proper_num(user_proper_num);
+		vo.setAccept_act_yn(accept_act_yn);
+		
+		System.out.println(vo.toString());
+		int result = accept_act_yn.equals("Y")  ?  fclttService.setPauseY(vo) : fclttService.setPauseN(vo) ;
+		System.out.println("결과: " + result);
+		return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+
+	
 
 
 

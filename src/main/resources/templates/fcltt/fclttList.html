@@ -24,18 +24,14 @@
 							<li style="display: bolck !important;"><a href="/fcltt/fclttList">조력자 등재명단</a></li>
 							<li style="display: bolck !important;"><a href="/fcltt/pause">조력자 활동신청관리</a></li>
 							</li>
-
-
 						</ul>
 					</div>
-
 				</div>
 			</div>
 			<!-- 메뉴바 여기까지-->
 			<!--   본문 contents 내용 시작 -->
 
 			<div id="contents">
-
 				<style>
 					@media screen and (max-width: 1024px) {
 						.table-responsive>table>tbody>tr td[data-cell-header]:before {
@@ -44,7 +40,6 @@
 							vertical-align: unset;
 						}
 					}
-
 					.table-responsive>table>tbody>tr:hover {
 						background-color: #e6f8ff;
 					}
@@ -56,8 +51,6 @@
 					}
 				</style>
 
-
-
 				<article id="detail-content">
 					<form id="listForm" name="fcltt_listForm" action="fclttList" method="get">
 						<div class="heading-wrap container">
@@ -65,43 +58,39 @@
 								<span>재판조력자 등재 명단</span>
 							</h3>
 						</div>
-
 						<!-- 본문컨텐츠 영역 -->
 						<div class="container">
-
 							<hr />
-
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
 									<select name="searchCourt" id="fcltt_searchC" class="fclttSearch fclttSearch1">
 										<option value="">지역</option>
-										<option value="">전체</option>
-										<option value="서울">서울</option>
-										<option value="대전">대전</option>
-										<option value="대구">대구</option>
-										<option value="부산">부산</option>
-										<option value="광주">광주</option>
-										<option value="수원">수원</option>
+										<option value="" th:selected="${FclttPageVO.cri.searchCourt == '서울'}">전체</option>
+										<option value="서울"  th:selected="${FclttPageVO.cri.searchCourt == '서울'}">서울</option>
+										<option value="대전" th:selected="${FclttPageVO.cri.searchCourt == '대전'}">대전</option>
+										<option value="대구" th:selected="${FclttPageVO.cri.searchCourt == '대구'}">대구</option>
+										<option value="부산" th:selected="${FclttPageVO.cri.searchCourt == '부산'}">부산</option>
+										<option value="광주" th:selected="${FclttPageVO.cri.searchCourt == '광주'}">광주</option>
+										<option value="수원" th:selected="${FclttPageVO.cri.searchCourt == '수원'}">수원</option>
 									</select>
 									<input type="text" class="fclttSearch fclttSearch2" name="searchContent" />
 									<label class="fclttCheck">
 										<select name="searchAct" id="fcltt_searchC" class="fclttSearch fclttSearch1"
 											style="width: 120px; margin-bottom: 10px;">
-											<option value="">활동여부</option>
-											<option value="Y">활동중</option>
-											<option value="N">중지중</option>
+											<option value="" th:selected="${FclttPageVO.cri.searchAct == 'none'}">활동여부</option>
+											<option value="Y" th:selected="${FclttPageVO.cri.searchAct == 'Y'}">활동중</option>
+											<option value="N" th:selected="${FclttPageVO.cri.searchAct == 'N'}">중지중</option>
 										</select>
 									</label>
 									<a href="#" id="fclttSearch_btn" class="fclttSerch_Btn">조회</a>
 									<select name="" id="" class="fclttSearch fclttSearch3">
-										<option value="10">10개씩 보기</option>
-										<option value="20">20개씩 보기</option>
-										<option value="30">30개씩 보기</option>
+										<option value="10" th:selected="${FclttPageVO.amount==10}">10개씩 보기</option>
+										<option value="20" th:selected="${FclttPageVO.amount==20}">20개씩 보기</option>
+										<option value="30" th:selected="${FclttPageVO.amount==30}">30개씩 보기</option>
 									</select>
 								</div>
 							</div>
 							<hr />
-
 					</form>
 					<!-- 게시판 시작 부분 -->
 					<div class="table table-responsive">
@@ -128,14 +117,13 @@
 									<th scope="col">선발날짜</th>
 									<th scope="col">상세보기</th>
 									<th scope="col">활동여부</th>
-
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="vo, status : ${list}" title="">
 									<td data-cell-header="번호">[[${status.count}]]</td>
-									<td data-cell-header="민원서식명" tabindex="0">
-										[[${vo.trial_fcltt_sbcls_code}]]
+									<td data-cell-header="민원서식명">
+										[[${vo.trial_fcltt_description}]]
 									</td>
 									<td data-cell-header="법원명">[[${vo.court_name}]]</td>
 									<td data-cell-header="이름">[[${vo.user_name}]]</td>
@@ -143,11 +131,10 @@
 										'yyyy-MM-dd')}]]</td>
 									<td class="modal_ajax">
 										<a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a>
-										<input type="hidden" name="accept_proper_num" th:value="${vo.accept_proper_num}" />
+										<input type="hidden" name="accept_proper_num"
+											th:value="${vo.accept_proper_num}" />
 									</td>
-
 									<td>
-
 										<a th:class="${vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2'}">
 											<em th:text="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'}"></em>
 										</a>
@@ -159,64 +146,80 @@
 					</div>
 
 					<!-- pagenation -->
+					<!-- 페이지네이션 부분 -->
 					<div class="pager">
 						<div class="pager-wrap">
-							<a href="#" class="arr first" title="처음으로"
-								onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
-									이동</strong></a><a href="#" class="arr prev" title="이전으로"
-								onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
-									이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-								onclick="">1</a><a href="#" class=""
-								onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
-								onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
-								onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
-								onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
-								onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
-								onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
-								onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
-								onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
-								onclick="fn_egov_link_page(10); return false;">10</a><a href="#" class="arr next"
-								title="다음으로" onclick="fn_egov_link_page(11); return false;"><strong
-									class="sr-only">다음페이지로
-									이동</strong></a><a href="#" class="arr last" title="마지막으로"
-								onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
-									목록으로 이동</strong></a>
-
-							<input id="pageIndex" name="pageIndex" type="hidden" value="1" />
-							<input id="pageSize" name="pageSize" type="hidden" value="10" />
-							<input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-							<input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
-							<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
-							<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden" value="" />
-							<input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
-							<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
+							<!-- 처음 페이지로 이동 -->
+							<a th:if="${FclttPageVO.pageList.size() > 1}" th:href="@{fclttList(page=1,
+                                amount=${FclttPageVO.amount}, 
+                                searchCourt=${FclttPageVO.cri.searchCourt}, 
+                                searchCourtName=${FclttPageVO.cri.searchCourtName},
+                                searchAct=${FclttPageVO.cri.searchAct}, 
+                                searchDate=${FclttPageVO.cri.searchDate}, 
+                                searchContent=${FclttPageVO.cri.searchContent})}">
+								<strong class="sr-only">맨 처음 목록으로 이동</strong>
+							</a>
+							<!-- 이전 페이지로 이동 -->
+							<th:block th:if="${FclttPageVO.pageList.size() > 1 and FclttPageVO.prev}">
+								<a th:href="@{fclttList(page=${FclttPageVO.start-1}, 
+                                    amount=${FclttPageVO.amount}, 
+                                    searchCourt=${FclttPageVO.cri.searchCourt}, 
+                                    searchCourtName=${FclttPageVO.cri.searchCourtName}, 
+                                    searchAct=${FclttPageVO.cri.searchAct}, 
+                                    searchDate=${FclttPageVO.cri.searchDate}, 
+                                    searchContent=${FclttPageVO.cri.searchContent})}">
+									<strong class="sr-only">이전페이지로 이동</strong>
+								</a>
+							</th:block>
+							<!-- 페이지 번호를 반복적으로 생성하는 부분 -->
+							<th:block th:each="page : ${FclttPageVO.pageList}">
+								<a th:href="@{fclttList(page=${page}, 
+                                    amount=${FclttPageVO.amount}, 
+                                    searchCourt=${FclttPageVO.cri.searchCourt}, 
+                                    searchCourtName=${FclttPageVO.cri.searchCourtName}, 
+                                    searchAct=${FclttPageVO.cri.searchAct}, 
+                                    searchDate=${FclttPageVO.cri.searchDate}, 
+                                    searchContent=${FclttPageVO.cri.searchContent})}"
+									th:class="${page == FclttPageVO.page ? 'active' : ''}">
+									[[${page}]]
+								</a>
+							</th:block>
+							<!-- 다음 페이지로 이동 -->
+							<th:block th:if="${FclttPageVO.pageList.size() > 1 and FclttPageVO.next}">
+								<a th:href="@{fclttList(page=${FclttPageVO.end + 1}, 
+                                    amount=${FclttPageVO.amount}, 
+                                    searchCourt=${FclttPageVO.cri.searchCourt}, 
+                                    searchCourtName=${FclttPageVO.cri.searchCourtName}, 
+                                    searchAct=${FclttPageVO.cri.searchAct}, 
+                                    searchDate=${FclttPageVO.cri.searchDate}, 
+                                    searchContent=${FclttPageVO.cri.searchContent})}">
+									<strong class="sr-only">다음페이지로 이동</strong>
+								</a>
+							</th:block>
+							<!-- 맨 마지막 페이지로 이동 -->
+							<a th:if="${FclttPageVO.pageList.size() > 1}" th:href="@{fclttList(page=${FclttPageVO.realEnd}, 
+                                amount=${FclttPageVO.amount}, 
+                                searchCourt=${FclttPageVO.cri.searchCourt}, 
+                                searchCourtName=${FclttPageVO.cri.searchCourtName}, 
+                                searchAct=${FclttPageVO.cri.searchAct}, 
+                                searchDate=${FclttPageVO.cri.searchDate}, 
+                                searchContent=${FclttPageVO.cri.searchContent})}">
+								<strong class="sr-only">맨 마지막목록으로 이동</strong>
+							</a>
 						</div>
 					</div>
-
-
 				</article>
 			</div>
-								<!--모달창 작업-->
-					<div id="popup_layer2">
-						<div class="popup_box2">
-							<!--팝업 컨텐츠 영역-->
-
-
-						</div>
-					</div>
-
+			<!--모달창 작업-->
+			<div id="popup_layer2">
+				<div class="popup_box2">
+					<!--모달 컨텐츠 영역-->
+				</div>
+			</div>
 		</div>
 		<!-- //본문컨텐츠 영역 -->
-
-
-
-
 	</div>
 	<!-- //main_con  -->
-
-
-
-
 
 
 
@@ -224,92 +227,86 @@
 </th:block>
 
 
-
-
 <script th:inline="javascript">
 	document.addEventListener("DOMContentLoaded", function () {
-    var modalAjaxElements = document.querySelectorAll(".fcltt_content");
-    modalAjaxElements.forEach(function (element) {
-        element.addEventListener("click", function () {
-            var closestTr = this.closest("tr");
-            var accept_proper_num = closestTr.querySelector("input[name='accept_proper_num']").value;
-            console.log(accept_proper_num);
+		var modalAjaxElements = document.querySelectorAll(".fcltt_content");
+		modalAjaxElements.forEach(function (element) {
+			element.addEventListener("click", function () {
+				var closestTr = this.closest("tr");
+				var accept_proper_num = closestTr.querySelector("input[name='accept_proper_num']").value;
+				console.log(accept_proper_num);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "getfclttModal", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", "getfclttModal", true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var fclttData = JSON.parse(xhr.responseText);
-                    console.log(fclttData.trial_fcltt_sbcls_code);
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						var fclttData = JSON.parse(xhr.responseText);
 
-                    var modal = document.getElementById("popup_layer2");
-                    modal.style.display = "block";
+						var modal = document.getElementById("popup_layer2");
+						modal.style.display = "block";
 
-                    var str ="";
-					str = '<div class="popup_cont2">' ;
-					str+= '<div class="popup_cont2_title">'; 
-					str+= '<p>조력자 상세정보</p></div>';
-					str+= '<div class="popup_contText">' ;
-					str+= '<h3 id="fcltt_h3"> 재판조력자</h3>' ;
-					str+= '<h2 id="fcltt_h2">' + fclttData.user_name + '</h2>' ;
-					str+= '<p id="fcltt_p_right">등재번호: ' + fclttData.accept_proper_num + '</p></div>' ;
-					str+= '<div class="fcltt_wrap"><div class="fcltt_wrap_top">' ;
-					str+= '<table><colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>' ;
-					str+= '<tbody>' ;
-					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">재판조력자분류</span>' ;
-					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">'; 
-					str+= '<span class="fclttSpan txt-left">' + fclttData.trial_fcltt_clasifi_code +' > '+ fclttData.trial_fcltt_sbcls_code + '</span></td></tr>'; 
-					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">신청법원</span>' 
-					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">' ;
-					str+= '<span class="fclttSpan txt-left">' + fclttData.court_region + ' > '+ fclttData.court_name + '</span></td></tr>' ;
-					str+= '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">소송사건 유무내역</span>' ;
-					str+= '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">' ;
-					str+= '<span class="fclttSpan txt-left"> </span></td></tr>' ;
-					str+= '</tbody ></table ></div >' ;
-					str+= '<div class="fcltt_popup_wrap">'; 
-					str+= '<table class="fcltt_popup_content">' ;
-					str+= '<colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>' ;
-					str+= '<tbody id="fcltt_detail_bottom"><tr><th scope="row" class="txt-left">'; 
-					str+= '<span class="fclttSpan_title txt-left" title="">학력 상세 정보</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left">' ;
-					str+= '<span class="fclttSpan2 txt-left"></span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학교이름</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left">' ;
-					str+= '<span class="fclttSpan2 txt-left">' + fclttData.edctn_school_name + '</span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학과전공</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.edctn_major + '</span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학위</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.edctn_degree + '</span></td></tr></tbody>' ;
-					str+= '<!-- 경력 상세 --><tbody id="fcltt_detail_bottom" style="margin-top: 20px;">' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 경력 상세 정보</span></th>'; 
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.company_name + '</span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">경력구분</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' +fclttData.career_type + '</span></td></tr></tbody>' ;
-					str+= '<tbody id="fcltt_detail_bottom">' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 자격증 상세 정보</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>' ;
-					str+= '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명2</span></th>' ;
-					str+= '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>' ;
-					str+= '</tbody></table></div></div></div>' ;
-					str+= '<div class="popup_btn2"><a href="javascript:closePop2();">닫기</a></div></div>';
+						var str = "";
+						str = '<div class="popup_cont2">';
+						str += '<div class="popup_cont2_title">';
+						str += '<p>조력자 상세정보</p></div>';
+						str += '<div class="popup_contText">';
+						str += '<h3 id="fcltt_h3"> 재판조력자</h3>';
+						str += '<h2 id="fcltt_h2">' + fclttData.user_name + '</h2>';
+						str += '<p id="fcltt_p_right">등재번호: ' + fclttData.accept_proper_num + '</p></div>';
+						str += '<div class="fcltt_wrap"><div class="fcltt_wrap_top">';
+						str += '<table><colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>';
+						str += '<tbody>';
+						str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">재판조력자분류</span>';
+						str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
+						str += '<span class="fclttSpan txt-left">' + fclttData.trial_fcltt_clasifi_code + ' > ' + fclttData.trial_fcltt_description + '</span></td></tr>';
+						str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">신청법원</span>'
+						str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
+						str += '<span class="fclttSpan txt-left">' + fclttData.court_region + ' > ' + fclttData.court_name + '</span></td></tr>';
+						str += '<tr><th scope="row" class="fclttSpan_wrap txt-left"><span class="fclttSpan txt-left" title="">소송사건 유무내역</span>';
+						str += '</th><td data-cell-header="성" class="fclttSpan_wrap txt-left">';
+						str += '<span class="fclttSpan txt-left"> </span></td></tr>';
+						str += '</tbody ></table ></div >';
+						str += '<div class="fcltt_popup_wrap">';
+						str += '<table class="fcltt_popup_content">';
+						str += '<colgroup><col style="width: 30%"><col style="width: 70%"></colgroup>';
+						str += '<tbody id="fcltt_detail_bottom"><tr><th scope="row" class="txt-left">';
+						str += '<span class="fclttSpan_title txt-left" title="">학력 상세 정보</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left">';
+						str += '<span class="fclttSpan2 txt-left"></span></td></tr>';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학교이름</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left">';
+						str += '<span class="fclttSpan2 txt-left">' + fclttData.edctn_school_name + '</span></td></tr>';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학과전공</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.edctn_major + '</span></td></tr>';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">학위</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.edctn_degree + '</span></td></tr></tbody>';
+						str += '<!-- 경력 상세 --><tbody id="fcltt_detail_bottom" style="margin-top: 20px;">';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 경력 상세 정보</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">회사명/활동기관명</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.company_name + '</span></td></tr>';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">경력구분</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.carer_type + '</span></td></tr></tbody>';
+						str += '<tbody id="fcltt_detail_bottom">';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan_title txt-left" title=""> 자격증 상세 정보</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left"></span></td></tr>';
+						str += '<tr><th scope="row" class="txt-left"><span class="fclttSpan1 txt-left" title="txt-left">자격증명1</span></th>';
+						str += '<td data-cell-header="성명" class="txt-left"><span class="fclttSpan2 txt-left">' + fclttData.crtfc_type + '</span></td></tr>';
+						str += '</tbody></table></div></div></div>';
+						str += '<div class="popup_btn2"><a href="javascript:closePop2();">닫기</a></div></div>';
 
-                    console.log(str);
+						var popupBox = document.querySelector('.popup_box2');
+						popupBox.innerHTML = str;
+						     window.scrollTo(0, 0);
+					}
+				};
 
-                    var popupBox = document.querySelector('.popup_box2');
-                    popupBox.innerHTML = str;
-                }
-            };
-
-            xhr.send("accept_proper_num=" + accept_proper_num);
-        });
-    });
-});
+				xhr.send("accept_proper_num=" + accept_proper_num);
+			});
+		});
+	});
 </script>
 
 
