@@ -39,8 +39,10 @@ public class UserVO {
 	private String user_pw;
 	@Pattern(regexp = "^[가-힣]*$", message = "한글만 입력 가능합니다.")
 	private String user_name;
-	private String user_age;
-	private String user_email;
+	private String user_rrn_f;
+	private String user_rrn_b;
+	private String user_email_f;
+	private String user_email_b;
 	@Pattern(regexp = "/^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$/", message = "'-' 을 제외한 숫자 11자리로 작성바랍니다.")
 	private String user_phone;
 	private String user_job;

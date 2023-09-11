@@ -22,6 +22,11 @@ public class MypageServiceImpl implements MypageService {
 		return mypageMapper.deleteUpdate(vo);
 	}
 
+	@Override
+	public int modifyUpdate(UserVO vo) {
+		return mypageMapper.modifyUpdate(vo);
+	}
+
 
 
 }
