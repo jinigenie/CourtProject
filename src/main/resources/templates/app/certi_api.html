@@ -22,28 +22,57 @@
 <script>
     let apiData = [];
 
+    // function dataApi(){
+    //     $.ajax({
+    //         url:"http://api.odcloud.kr/api/15082998/v1/uddi:950a6280-b56a-417e-b97c-de941adbfc9f?page=1&perPage=600&serviceKey=wVFM1V%2FCXCg4fUs1i3%2FxM8%2BC6l9ymKY%2BXAUoe9PbRw68Jah1QmTPEIPKtYx4jF0HUKVUI4YPZqW%2F0EH%2FWDwIjg%3D%3D",
+    //         type:"GET",
+    //         success:function(data){
+    //             apiData = data.data;
+    //             console.log(apiData);
+    //
+    //             // var data2 = data.data;
+    //             // console.log(data2);
+    //             // $.ajax({
+    //             //     url:"../api/setData",
+    //             //     type:"POST",
+    //             //     contentType: "application/json; charset=UTF-8",
+    //             //     dataType: "json",
+    //             //     data:JSON.stringify({"list":data2}),
+    //             //     success:function(data2){
+    //             //         console.log(data2);
+    //             //     },error:function(status,err){
+    //             //         console.log(status);
+    //             //     }
+    //             // })
+    //
+    //         },error:function(status,err){
+    //             console.log(err)
+    //         }
+    //
+    //     })
+    // }
+
+    // $('#btn').click(()=>{
+    //     var search = $('#searchInput').val();
+    //     console.log(search);
+    //     console.log(1)
+    //     const filteredData = apiData.filter(item => item.종목명.includes(search));
+    //     console.log(filteredData);
+    //     console.log(Array.isArray(filteredData))
+    //     for (const f of filteredData){
+    //         console.log(f.종목명);
+    //     }
+    //     $('#result').html(filteredData);
+    // })
+
     function dataApi(){
         $.ajax({
-            url:"http://api.odcloud.kr/api/15082998/v1/uddi:950a6280-b56a-417e-b97c-de941adbfc9f?page=1&perPage=600&serviceKey=wVFM1V%2FCXCg4fUs1i3%2FxM8%2BC6l9ymKY%2BXAUoe9PbRw68Jah1QmTPEIPKtYx4jF0HUKVUI4YPZqW%2F0EH%2FWDwIjg%3D%3D",
+            url:"https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=0a0d73e5c24d9109a976b4fd0793c531&svcType=api&svcCode=SCHOOL&contentType=json&gubun=high_list&perPage=2370",
             type:"GET",
             success:function(data){
-                apiData = data.data;
+                apiData = data.dataSearch.content;
                 console.log(apiData);
 
-                // var data2 = data.data;
-                // console.log(data2);
-                // $.ajax({
-                //     url:"../api/setData",
-                //     type:"POST",
-                //     contentType: "application/json; charset=UTF-8",
-                //     dataType: "json",
-                //     data:JSON.stringify({"list":data2}),
-                //     success:function(data2){
-                //         console.log(data2);
-                //     },error:function(status,err){
-                //         console.log(status);
-                //     }
-                // })
 
             },error:function(status,err){
                 console.log(err)
@@ -55,16 +84,14 @@
     $('#btn').click(()=>{
         var search = $('#searchInput').val();
         console.log(search);
-        console.log(1)
-        const filteredData = apiData.filter(item => item.종목명.includes(search));
-        console.log(filteredData);
-        console.log(Array.isArray(filteredData))
+        const filteredData = apiData.filter(item => item.schoolName.includes(search));
         for (const f of filteredData){
-            console.log(f.종목명);
+            console.log(f.schoolName);
         }
         $('#result').html(filteredData);
     })
 
+    // https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=0a0d73e5c24d9109a976b4fd0793c531&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list&perPage=443
 
 </script>
 

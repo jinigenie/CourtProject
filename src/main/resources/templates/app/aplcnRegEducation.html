@@ -74,10 +74,14 @@
                                 <th scope="col">졸업일</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="highTable">
                             <tr style="cursor: pointer">
                                 <td data-cell-header="학교명"><input type="text" class="input-wrap"
-                                                                  style="margin-left: 40px"></td>
+                                                                  style="margin-left: 40px; width: 250px">
+                                    <input type="button" class="highSearch"
+                                           style="background: url(../../img/app/search.png); border: none; width: 30px;
+                                        height: 30px; background-size: cover; position: absolute;
+                                        margin-left: -38px; margin-top: 5px; cursor: pointer"></td>
                                 <td data-cell-header="졸업구분">
                                     <div class="select-box">
 
@@ -121,11 +125,11 @@
                             추가
                         </button>
                     </div>
-                    <div class="table table-responsive">
-                        <table>
+                    <div class="table eduTable" style="overflow: auto">
+                        <table style="white-space: nowrap">
                             <thead>
                             <tr>
-                                <th scope="col">학교명</th>
+                                <th scope="col" style="padding-left: 50px">학교명</th>
                                 <th scope="col">학과</th>
                                 <th scope="col">학위</th>
                                 <th scope="col">졸업구분</th>
@@ -136,9 +140,12 @@
                             </thead>
                             <tbody id="eduTable">
                             <tr style="cursor: pointer">
-                                <td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 140px">
-                                </td>
-                                <td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 120px">
+                                <td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 200px; margin-left: 50px">
+                                    <input type="button" class="UnivSearch"
+                                           style="background: url(../../img/app/search.png); border: none; width: 30px;
+                                        height: 30px; background-size: cover; position: absolute;
+                                        margin-left: -38px; margin-top: 5px; cursor: pointer"></td>
+                                <td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 150px">
                                 </td>
                                 <td data-cell-header="학위">
                                     <div class="select-box2" style="width: 90px">
@@ -309,6 +316,63 @@
                     </div>
                 </div>
 
+                <!-- 고등학교 검색 모달창 -->
+                <div class="modal3">
+                    <div class="modal__background">
+                        <div class="modal_body" style="height: 350px">
+                            <div class="modalOff">X</div>
+                            <form action="searchHigh" method="get">
+                                <div class="modal_con">
+                                    <p style="font-size: 18px; font-weight: 600; margin: 15px; color: #1c449c;">고등학교
+                                        검색</p>
+                                    <div class="search-btn-wrap">
+                                        <div class="input-wrap">
+                                            <input id="highschool" class="cm_inptxt" name="searchkeyword"
+                                                   type="text"/>
+                                        </div>
+                                        <input type="button" id="searchHigh_btn" th:value="검색">
+                                    </div>
+
+                                    <div class="table table-responsive searchResultList">
+                                        <ul id="searchResult2">
+                                            <li class="defaultLi2">정보 없음</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 대학교 검색 모달창 -->
+                <div class="modal4">
+                    <div class="modal__background">
+                        <div class="modal_body" style="height: 350px">
+                            <div class="modalOff">X</div>
+                            <form action="searchUniv" method="get">
+                                <div class="modal_con">
+                                    <p style="font-size: 18px; font-weight: 600; margin: 15px; color: #1c449c;">대학교
+                                        검색</p>
+                                    <div class="search-btn-wrap">
+                                        <div class="input-wrap">
+                                            <input id="univercity" class="cm_inptxt" name="searchkeyword"
+                                                   type="text"/>
+                                        </div>
+                                        <input type="button" id="searchUniv_btn" th:value="검색">
+                                    </div>
+
+                                    <div class="table table-responsive searchResultList">
+                                        <ul id="searchResult3">
+                                            <li class="defaultLi3">정보 없음</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="dark" style="color-scheme: dark;">
+
+
+<th:block th:fragment="setContent(content)">
+
+  <head>
+    <title>재판조력자 공고</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+
+    <!-- common css -->
+    <link rel="stylesheet" type="text/css" href="../../css/korean/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/korean/layout.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/nav/common.css" />
+    <!-- sub css 지우면 안됨  -->
+    <link rel="stylesheet" type="text/css" href="../../css/korean/sub2.css" />
+
+    <!-- common lib js -->
+    <script type="text/javascript" src="../../js/lib/jquery-2.2.4.min.js"></script>
+
+    <!-- 분류버튼 효과 -->
+    <script type="text/javascript" src="../../js/lib/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- public common js -->
+    <script type="text/javascript" src="../../js/korean/common.js"></script>
+    <script type="text/javascript" src="../../js/nav/custom.js"></script>
+    <!-- sub js -->
+    <script type="text/javascript" src="../../js/korean/sub.js"></script>
+    
+	<!-- 달력 20230830 이태주 추가--> 
+    <link rel="stylesheet" type="text/css" href="../../css/korean/jquery-ui.min.css">
+    <script type="text/javascript" src="../../js/korean/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../js/korean/style.js"></script>
+    
+  </head>
+
+  <body>
+
+  <!-- header -->
+  <!-- //header -->
+
+  <!-- main_con  -->
+  <main th:replace="${content}"></main>
+  <!-- //main_con  -->
+
+
+  <!-- </div> -->
+  </body>
+
+</th:block>
+</html>

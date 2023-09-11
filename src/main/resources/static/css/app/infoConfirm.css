@@ -10,12 +10,13 @@
 }
 
 .contentsin > .ogi214 {
-    width: 200px;
+    width: 220px;
     height: 28px;
+    margin-left: 28px;
 }
 
 .contentsin > h3 {
-    background: url(../../img/app/h3_ogi214.gif) no-repeat;
+    background: url(../../img/app/h3_ogi214.png) no-repeat;
     background-size: cover;
 }
 

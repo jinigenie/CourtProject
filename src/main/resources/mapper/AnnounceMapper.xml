@@ -4,51 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.court.proj.announce.AnnounceMapper">
-  	
-    <!-- TB_002 테이블에 데이터 삽입 -->
-<insert id="announceRegist" parameterType="AnnounceVO">
-    INSERT INTO TB_002 (
-        announce_proper_num,
-        trial_fcltt_proper_num,
-        announce_title,
-        announce_content,
-        announce_start_date,
-        announce_end_date,
-        announce_first_date,
-        announce_last_date
-    )
-    VALUES (
-        #{announce_proper_num},
-        #{trial_fcltt_proper_num},
-        #{announce_title},
-        #{announce_content},
-        #{announce_start_date},
-        #{announce_end_date},
-        #{announce_first_date},
-        #{announce_last_date}
-    )
-</insert>
 
-<!-- TB_002 테이블 조회 -->
-<select id="getList" resultType="com.court.proj.announce.AnnounceVO">
-    select
+<!-- TB_002, TB_010, TB_015 테이블 조인 조회 -->
+<select id="getannounceList" resultType="com.court.proj.announce.AnnounceVO">
+       select
         a.announce_proper_num,
         a.admin_proper_num,
+        b.admin_id,
+        b.admin_pw,
+        b.admin_auth,
+        b.admin_name,
         a.trial_fcltt_proper_num,
+        c.trial_fcltt_main_code,
+        c.trial_fcltt_clasifi_code,
+        c.trial_fcltt_sbcls_code,
+        c.trial_fcltt_description,
         a.announce_title,
         a.announce_content,
         a.announce_start_date,
         a.announce_end_date,
         a.announce_first_date,
-        a.announce_last_date,
-        b.admin_id,
-        b.admin_pw,
-        b.admin_auth
+        a.announce_last_date
     from tb_002 a
     inner join tb_015 b on a.admin_proper_num = b.admin_proper_num
-    where a.announce_proper_num = #{announce_proper_num}
+    inner join tb_010 c on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 </select>
 
+<select id="getSubCategoriesForMainCategory" parameterType="string" resultType="string">
+    SELECT DISTINCT TRIAL_FCLTT_CLASIFI_CODE
+    FROM TB_010
+    WHERE TRIAL_FCLTT_MAIN_CODE = #{mainCategory}
+</select>
 
   	
 </mapper>

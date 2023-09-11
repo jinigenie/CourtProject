@@ -17,5 +17,14 @@ public interface FclttMapper {
 	
 
 	//명단에서 상세보기 ajax
-	public ArrayList<FclttVO> getFclttContent(int accept_proper_num);
+	public FclttVO getFclttContent(String accept_proper_num);
+	
+	//중지/ 활동 신청 리스트 
+	public ArrayList<PauseVO> getPauseList(@Param("cri")FclttCriteria cri);
+	public int getPauseTotal(FclttCriteria cri);
+	
+	//중지/활동신청 승인
+	public int setPauseY(FclttVO vo);
+	public int setPauseN(FclttVO vo);
+	
 }

@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script th:src="@{../js/fcltt/fcltt.js}"></script>
 </head>
 
@@ -50,22 +51,9 @@
 						}
 					}
 				</style>
-				<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-      <![endif]-->
-
 
 				<article id="detail-content">
-					<form id="listForm" name="listForm"
-						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-						method="post">
-						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
-						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
-						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
-						<input type="hidden" id="cate_name" name="cate_name" value="" />
-						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
+					<form id="listForm" action="pause" name="listForm" method="get">
 						<div class="heading-wrap container">
 							<h3 class="heading1">
 								<span>재판조력자 중지 / 활동 신청목록</span>
@@ -79,27 +67,21 @@
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
 									<select name="" id="" class="fclttSearch fclttSearch1">
-										<option value="">이름</option>
-										<option value="">법원명</option>
-										<option value="">분류번호</option>
 										<option value="">모두</option>
+										<option value="">이름</option>
 									</select>
-									<input type="text" class="fclttSearch fclttSearch2" value="검색어를 입력해주세요" />
+									<input type="text" class="fclttSearch fclttSearch2" name="searchUser_name" />
 
-									<a href="#" class="fclttSerch_Btn">검색</a>
-									<select name="" id="" class="fclttSearch fclttSearch3">
+									<a href="#" class="fclttSerch_Btn" id="pauseSearch_btn">검색</a>
+									<select name="searchAccept_act_yn" id="" class="fclttSearch fclttSearch3">
 										<option value="">신청사항</option>
-										<option value="">중지신청</option>
-										<option value="">활동신청</option>
+										<option value="Y">중지신청</option>
+										<option value="N">활동신청</option>
 									</select>
 
 								</div>
 							</div>
 							<hr />
-							<!--
-							<div class="tab-wrap">
-								<ul class="tab tab2"></ul>
-							</div>-->
 
 							<!-- 게시판 시작 부분 -->
 							<div class="table table-responsive">
@@ -124,168 +106,204 @@
 											<th scope="col">처리</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="yourTableId">
 
-										<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" style="cursor: pointer">
-											<td data-cell-header="신청자이름">2023/08/11</td>
-											<td data-cell-header="신청자이름" tabindex="0">김혜민</td>
-											<td data-cell-header="중지기간">2022/08/12~ 2023/08/10</td>
-											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus1"><em>활동중</em></a>
-											</td>
-											<td data-cell-header="처리">
-												<a href="#" class="pauseResult1"><em>중지승인</em></a>
-											</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
-
-											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
-
-										</tr>
-
-										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
-											<td data-cell-header="신청자이름">2023/01/16</td>
-
-											<td data-cell-header="신청자이름" tabindex="0">김현진</td>
-											<td data-cell-header="중지기간">2023/01/05~ 2023/01/17</td>
-
-											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus2"><em>중지중</em></a>
-											</td>
-											<td data-cell-header="처리">
-												<a href="#" class="pauseResult2"><em>활동승인</em></a>
-											</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
-
-											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
-
-										</tr>
-										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
-											<td data-cell-header="신청자이름">2023/02/16</td>
-
-											<td data-cell-header="신청자이름" tabindex="0">석이서</td>
-											<td data-cell-header="중지기간">20223/03/12~ 2023/04/10</td>
-
-											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus2"><em>중지중</em></a>
-											</td>
-											<td data-cell-header="처리">
-												<a href="#" class="pauseResult2"><em>활동승인</em></a>
-											</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
-
-											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
-											<td data-cell-header="신청자이름">2023/04/29</td>
-
-											<td data-cell-header="신청자이름" tabindex="0">신명근</td>
-											<td data-cell-header="중지기간">2023/04/23~ 2023/05/13</td>
-
-											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus1"><em>활동중</em></a>
-											</td>
-											<td data-cell-header="처리">
-												<a href="#" class="pauseResult1"><em>중지승인</em></a>
-											</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
-
-											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
-
-										</tr>
-										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
-											<td data-cell-header="신청자이름">2023/05/11</td>
-
-											<td data-cell-header="신청자이름" tabindex="0">김민철</td>
-											<td data-cell-header="중지기간">2023/07/11~ 2023/08/10</td>
-
-											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus1"><em>활동중</em></a>
-											</td>
-											<td data-cell-header="처리">
-												<a href="#" class="pauseResult1"><em>중지승인</em></a>
-											</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
-
-											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
-
-										</tr>
-										<tr id="pause_text" class="pause_text1 toggle-row" style="cursor: pointer">
-											<td data-cell-header="신청자이름">2023/08/14</td>
-
-											<td data-cell-header="신청자이름" tabindex="0">이태주</td>
-											<td data-cell-header="중지기간">2023/08/01~ 2023/08/02</td>
-
-											<td data-cell-header="현재활동상태">
-												<a class="fclttStatus2"><em>중지중</em></a>
-											</td>
-											<td data-cell-header="처리">
-												<a href="#" class="pauseResult2"><em>활동승인</em></a>
-											</td>
-										</tr>
-										<tr id="pause_text" class="pause_text1 hidden-row" style="display: none;">
-
-											<td colspan="5" tabindex="0"><p>중지사유 : </p> 배가고파서 집에가야합니다</td>
-
-										</tr>
 									</tbody>
 								</table>
 							</div>
 							<!-- pagenation -->
 							<div class="pager">
-								<div class="pager-wrap">
-									<a href="#" class="arr first" title="처음으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
-											이동</strong></a><a href="#" class="arr prev" title="이전으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
-											이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-										onclick="">1</a><a href="#" class=""
-										onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
-										onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
-										onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
-										onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
-										onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
-										onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
-										onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
-										onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
-										onclick="fn_egov_link_page(10); return false;">10</a><a href="#"
-										class="arr next" title="다음으로"
-										onclick="fn_egov_link_page(11); return false;"><strong class="sr-only">다음페이지로
-											이동</strong></a><a href="#" class="arr last" title="마지막으로"
-										onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
-											목록으로 이동</strong></a>
 
-									<input id="pageIndex" name="pageIndex" type="hidden" value="1" />
-									<input id="pageSize" name="pageSize" type="hidden" value="10" />
-									<input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-									<input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
-									<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
-									<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
-										value="" />
-									<input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
-									<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
-								</div>
 							</div>
 						</div>
 						<!-- //본문컨텐츠 영역 -->
 					</form>
 				</article>
 			</div>
-		</div>
-		<!-- //main_con  -->
-	</div>
-	<!-- 메뉴바 여기까지-->
-
+		</div><!-- //main_con  -->
 
 	</div>
-
-
-
 
 </th:block>
+<script th:inline="javascript">
+
+	var pauseSearch_btn = document.getElementById("pauseSearch_btn");
+	pauseSearch_btn.onclick = function () {
+		event.preventDefault(); // a 태그 중지버튼
+		document.listForm.submit();
+	}
+
+</script>
+
+<script th:inline="javascript">
+	$(document).ready(function () {
+		// 목록 불러오기 ajax
+		function loadList() {
+			$.ajax({
+				url: "pauseAjax",
+				type: "GET",
+				success: function (data) {
+					var tbody = $("#yourTableId");
+					tbody.empty(); // 테이블 내용 초기화
+
+					for (var i = 0; i < data.length; i++) {
+						var vo = data[i];
+						var str = "";
+
+						str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" onclick="toggleRows()" style="cursor: pointer">';
+						str += '<input type="hidden" name="user_proper_num" value="' + vo.user_proper_num + '"/>';
+						str += '<td data-cell-header="신청일">' + moment(vo.pause_submit_date).format('YYYY-MM-DD') + '</td>';
+						str += '<td data-cell-header="신청자이름">' + vo.user_name + '</td>';
+						str += '<td data-cell-header="중지기간">' + moment(vo.pause_start_date).format('YYYY-MM-DD') + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
+						str += '<td data-cell-header="현재활동상태"><a class="' + (vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2') + '">';
+						str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
+						str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';
+						str += '<em>' + (vo.accept_act_yn == 'Y' ? '중지승인' : '활동승인') + '</em></a></td></tr>';
+						str += '<tr class="hidden-row" style="display: none;">';
+						str += '<td data-cell-header="신청일"></td>';
+						str += '<td data-cell-header="신청자이름">중 지 사 유 : ' + vo.accept_pause_etc + '</td>';
+						str += '<td data-cell-header="중지기간"></td>';
+						str += '<td data-cell-header="현재활동상태"></td>';
+						str += '<td data-cell-header="처리"></td></tr>';
+						// 표에 행 추가
+						tbody.append(str);
+					}
+				}
+			});
+		}
+
+		// 페이지 로드 시 목록을 불러옵니다.
+		loadList();
+
+
+		// 페이징 AJAX
+		function loadPaging() {
+			$.ajax({
+				url: "getTotal",
+				type: "GET",
+				success: function (data) {
+					// data를 JavaScript 변수로 할당
+					var FclttPageVO = data;
+					var pager = $(".pager");
+					var str2 = '<div class="pager-wrap">';
+
+					if (FclttPageVO.pageList.length > 1) {
+						str2 += '<a href="/fcltt/pause?page=1&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">맨 처음 목록으로 이동</strong></a>';
+					}
+					if (FclttPageVO.pageList.length > 1 && FclttPageVO.prev) {
+						str2 += '<a href="/fcltt/pause?page=' + (FclttPageVO.start - 1) +
+							'&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">이전페이지로 이동</strong></a>';
+					}
+					for (var i = 0; i < FclttPageVO.pageList.length; i++) {
+						var page = FclttPageVO.pageList[i];
+						str2 += '<a href="/fcltt/pause?page=' + page +
+							'&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '" ';
+						if (page == FclttPageVO.page) {
+							str2 += 'class="active"';
+						}
+
+						str2 += '>' + page + '</a>';
+					}
+					if (FclttPageVO.pageList.length > 1 && FclttPageVO.next) {
+						str2 += '<a href="/fcltt/pause?page=' + (FclttPageVO.end + 1) +
+							'&amount=' + FclttPageVO.amount +
+							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
+							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">다음페이지로 이동</strong></a>';
+					}
+					if (FclttPageVO.pageList.length > 1) {
+						str2 += '<a href="/fcltt/pause?page=' + FclttPageVO.realEnd +
+							'&amount=' + FclttPageVO.amount +
+							'&searchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
+							'&searchAct=' + FclttPageVO.cri.searchAct +
+							'&searchDate=' + FclttPageVO.cri.searchDate +
+							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">맨 마지막목록으로 이동</strong></a>';
+					}
+
+					str2 += '</div>';
+					// 표에 행 추가
+					pager.empty().append(str2);
+				}
+			});
+		}
+
+		// 페이지 로드 시 페이징을 불러옵니다.
+		loadPaging();
+
+
+		// 승인처리 ajax
+		$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
+			event.preventDefault(); // a 링크의 기본 동작 중지
+			var user_proper_num = $(this).closest("tr").find("input[name='user_proper_num']").val();
+			var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
+
+			console.log(user_proper_num);
+			console.log(accept_act_yn);
+
+			// 여기에 AJAX 요청 코드를 작성합니다.
+			$.ajax({
+				url: "pauseResultSubmit", // 요청을 보낼 URL을 지정합니다.
+				type: "POST", // HTTP 요청 메서드 (GET 또는 POST)
+				data: {
+					"user_proper_num": user_proper_num,
+					"accept_act_yn": accept_act_yn
+				},
+				success: function (response) {
+					// 성공적으로 응답을 받았을 때 실행될 코드를 작성합니다.
+					console.log("AJAX 요청 성공");
+					// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다.
+
+					// 목록을 다시 불러오는 AJAX 요청
+					loadList(); // 목록을 다시 불러오는 함수 호출
+					loadPaging();
+					alert("승인되었습니다.");
+				},
+				error: function (xhr, status, error) {
+					// AJAX 요청 중 오류가 발생했을 때 실행될 코드를 작성합니다.
+					console.error("AJAX 요청 오류: " + error);
+				}
+			});
+		});
+
+
+	});
+</script>
+
+<script>
+
+	function toggleRows() {
+		var hiddenRow = event.currentTarget.nextSibling;
+		if (hiddenRow.style.display === "none") {
+			hiddenRow.style.display = "block";
+		} else {
+			hiddenRow.style.display = "none";
+		}
+	}
+
+
+</script>
+
+
+
+
+
 
 </html>

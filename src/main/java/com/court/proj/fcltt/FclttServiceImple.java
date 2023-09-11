@@ -29,8 +29,30 @@ public class FclttServiceImple implements FclttService {
 	}
 
 	@Override
-	public ArrayList<FclttVO> getFclttContent(int accept_proper_num) {
+	public FclttVO getFclttContent(String accept_proper_num) {
 		return fclttMapper.getFclttContent(accept_proper_num);
 	}
+
+	@Override
+	public ArrayList<PauseVO> getPauseList(FclttCriteria cri) {
+		return fclttMapper.getPauseList(cri);
+	}
+
+	@Override
+	public int getPauseTotal(FclttCriteria cri) {
+		return fclttMapper.getPauseTotal(cri);
+	}
+
+	@Override
+	public int setPauseY(FclttVO vo) {
+		return fclttMapper.setPauseY(vo);
+	}
+
+	@Override
+	public int setPauseN(FclttVO vo) {
+		return fclttMapper.setPauseN(vo);
+	}
+
+
 
 }

@@ -13,9 +13,17 @@ public class FclttCriteria {
 	//검색에 필요한 키워드 선언
 	
 	private String searchCourt; //법원
+	private String searchCourtName; //법원
 	private String searchAct; //활동여부
 	private String searchDate; // 등록날짜
 	private String searchContent; //검색내용
+	
+	
+	// 중지신청목록에 쓰일 검색
+	private String searchAccept_act_yn; // 활동상태 검색
+	private String searchUser_name; // 사용자이름검색
+	
+	
 	
 	
 	// 기본생성자로 만들 시 기본값 : page = 1; amount = 10;
