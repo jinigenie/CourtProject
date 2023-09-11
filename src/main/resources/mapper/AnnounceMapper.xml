@@ -5,7 +5,7 @@
 
 <mapper namespace="com.court.proj.announce.AnnounceMapper">
 
-	<!-- TB_002, TB_010, TB_015 공고 리스트 조회 -->
+	<!-- tb_002, tb_010, tb_015 공고 리스트 조회 -->
 	<select id="getannounceList" resultType="AnnounceVO">
 		select
 		a.announce_proper_num,
@@ -33,7 +33,7 @@
 	</select>
 
 	<select id="getinfo" resultType="AnnounceVO">
-		select * from TB_015 where
+		select * from tb_015 where
 		admin_id = #{admin_id}
 	</select>
 
@@ -60,15 +60,33 @@
 
 	<!-- 재판조력자 분로 start -->
 	<select id="getTrial" resultType="TrialVO">
-		select * from TB_010
+		SELECT * FROM TB_010 WHERE
+		TRIAL_FCLTT_PROPER_NUM = #{trial_pn}
+	</select>
+
+	<select id="getTrialVO" resultType="TrialVO">
+		SELECT * FROM TB_010 WHERE
+		TRIAL_FCLTT_PROPER_NUM = #{trial_pn}
+	</select>
+
+	<select id="getTrialNum1" resultType="int">
+		SELECT * FROM TB_010 WHERE
+		TRIAL_FCLTT_MAIN_CODE = #{st1}
+		AND TRIAL_FCLTT_CLASIFI_CODE = #{st2}
+	</select>
+
+	<select id="getTrialNum2" resultType="int">
+		SELECT * FROM TB_010 WHERE
+		TRIAL_FCLTT_MAIN_CODE = #{st1}
+		AND TRIAL_FCLTT_CLASIFI_CODE = #{st2}
+		AND TRIAL_FCLTT_SBCLS_CODE = #{st3}
 	</select>
 
 	<!-- 공고 등록 start -->
-
 	<insert id="announceRegistTB002" parameterType="AnnounceVO">
 
 		INSERT INTO
-		TB_002
+		tb_002
 		(admin_proper_num,
 		trial_fcltt_proper_num,
 		announce_title,
@@ -88,31 +106,16 @@
 		#{announce_last_date})
 	</insert>
 
-	<insert id="announceRegistTB010" parameterType="AnnounceVO">
-
-		INSERT INTO
-		TB_010
-		(trial_fcltt_main_code,
-		trial_fcltt_clasifi_code,
-		trial_fcltt_sbcls_code,
-		trial_fcltt_description)
-		VALUES
-		(#{trial_fcltt_main_code},
-		#{trial_fcltt_clasifi_code},
-		#{trial_fcltt_sbcls_code},
-		#{trial_fcltt_description})
-	</insert>
-
 	<insert id="adminRegistTB015" parameterType="AnnounceVO">
 
-		INSERT INTO TB_015
+		INSERT INTO tb_015
 		(admin_id,
 		admin_pw,
 		admin_auth)
 		VALUES
 		(#{admin_id},
 		#{admin_pw},
-		#{admin_auth}
+		#{admin_auth})
 	</insert>
 	<!-- 공고 등록 end -->
 
