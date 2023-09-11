@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.court.proj.aplcnReg.TrialVO;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,8 +25,10 @@ public class AnnounceController {
 	@Qualifier("announceService")
 	private AnnounceService announceService;
 
-	// 모집공고 목록 페이지
+	int trial_pn = 0;
+	int admin_num = 0;
 
+	// 모집공고 목록 페이지
 	@GetMapping("announceList")
 	public String announceList(Model model) {
 
@@ -37,25 +41,24 @@ public class AnnounceController {
 
 	@GetMapping("searchAnnounce")
 	public String searchAnnounce(@RequestParam(name = "searchField", defaultValue = "0") int searchField,
-	                             @RequestParam(name = "qString", defaultValue = "") String qString,
-	                             Model model) {
-	    ArrayList<AnnounceVO> list = new ArrayList<>();
+			@RequestParam(name = "qString", defaultValue = "") String qString, Model model) {
+		ArrayList<AnnounceVO> list = new ArrayList<>();
 
-	    if (searchField == 0) {
-	        
-	        list = announceService.searchAnnounceByTitleAndContent(qString);
-	    } else if (searchField == 1) {
-	        
-	        list = announceService.searchAnnounceByTitle(qString);
-	    } else if (searchField == 2) {
-	        
-	        list = announceService.searchAnnounceByContent(qString);
-	    }
+		if (searchField == 0) {
 
-	    model.addAttribute("list", list);
-	    return "announce/announceList";
+			list = announceService.searchAnnounceByTitleAndContent(qString);
+		} else if (searchField == 1) {
+
+			list = announceService.searchAnnounceByTitle(qString);
+		} else if (searchField == 2) {
+
+			list = announceService.searchAnnounceByContent(qString);
+		}
+
+		model.addAttribute("list", list);
+		return "announce/announceList";
 	}
-	
+
 	// 모집공고 상세 페이지
 	@GetMapping("announceDetail")
 	public String announceDetail() {
@@ -75,27 +78,43 @@ public class AnnounceController {
 //		log.info("sdfsdf");
 
 		String id = "admin1";
-		
-		ArrayList<AnnounceVO> alist = announceService.getTrial();
+
+		AnnounceVO avo = announceService.getinfo(id);
+		model.addAttribute("vo", avo);
+		admin_num = avo.getAdmin_proper_num();
+
+		TrialVO tvo = announceService.getTrialVO(trial_pn);
+		model.addAttribute("trial", tvo);
+
+		ArrayList<TrialVO> alist = announceService.getTrial();
 		model.addAttribute("alist", alist);
-		
+
 		return "announce/announceRegist";
 	}
 
 	// 모집공고 등록 폼 요청
 	@PostMapping("/announceRegistForm")
-	public String announceRegistForm(Model model, AnnounceVO vo) {
-		
-		int result = announceService.announceRegist(vo);
+	public String announceRegistForm(@ModelAttribute AnnounceVO vo) {
 
-	    if (result == 1) {
-	        return "redirect:/announce/announceList";
-	    } else {
-	        model.addAttribute("errorMessage", "등록에 실패했습니다.");
-	        return "announce/announceRegist";
-	    }
+		vo.setAdmin_proper_num(admin_num);
+
+		if (vo.getSelectType3() == "") {
+			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2())); // 선택
+																													// 바꾸면
+																													// update
+																													// 해줘야함
+		} else {
+			vo.setTrial_fcltt_proper_num(
+					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3())); // 선택
+																													// 바꾸면
+																													// update
+																													// 해줘야함
+		}
+
+		System.out.println(vo.toString());
+
+		return "redirect:/announce/announceList";
+
 	}
 
-	
-	
 }

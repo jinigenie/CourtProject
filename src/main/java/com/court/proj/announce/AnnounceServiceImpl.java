@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.court.proj.aplcnReg.TrialVO;
+
 @Service("announceService")
 public class AnnounceServiceImpl implements AnnounceService {
 
@@ -17,14 +19,11 @@ public class AnnounceServiceImpl implements AnnounceService {
 		// TB_002 테이블에 공고 정보 삽입
 		int resultTB002 = announceMapper.announceRegistTB002(vo);
 
-		// TB_010 테이블에 재판조력자 정보 삽입
-		int resultTB010 = announceMapper.announceRegistTB010(vo);
-
 		// TB_015 테이블에 관리자 정보 삽입
 		int resultTB015 = announceMapper.adminRegistTB015(vo);
 
 		// 모든 테이블에 성공적으로 데이터가 삽입되었을 때 1을 반환, 그렇지 않으면 0을 반환
-		if (resultTB002 > 0 && resultTB010 > 0 && resultTB015 > 0) {
+		if (resultTB002 > 0 && resultTB015 > 0) {
 			return 1;
 		} else {
 			return 0;
@@ -53,20 +52,10 @@ public class AnnounceServiceImpl implements AnnounceService {
 		return announceMapper.getannounceList();
 	}
 
-	// 재판조력자 조회
-	@Override
-	public ArrayList<AnnounceVO> getTrial() {
-		return announceMapper.getTrial();
-	}
-
+	// 공고 등록 정보
 	@Override
 	public int announceRegistTB002(AnnounceVO vo) {
 		return announceMapper.announceRegistTB002(vo);
-	}
-
-	@Override
-	public int announceRegistTB010(AnnounceVO vo) {
-		return announceMapper.announceRegistTB010(vo);
 	}
 
 	@Override
@@ -77,6 +66,26 @@ public class AnnounceServiceImpl implements AnnounceService {
 	@Override
 	public AnnounceVO getinfo(String admin_id) {
 		return announceMapper.getinfo(admin_id);
+	}
+
+	@Override
+	public int getTrialNum1(String st1, String st2) {
+		return announceMapper.getTrialNum1(st1, st2);
+	}
+
+	@Override
+	public int getTrialNum2(String st1, String st2, String st3) {
+		return announceMapper.getTrialNum2(st1, st2, st3);
+	}
+
+	@Override
+	public ArrayList<TrialVO> getTrial() {
+		return announceMapper.getTrial();
+	}
+
+	@Override
+	public TrialVO getTrialVO(int trial_pn) {
+		return announceMapper.getTrialVO(trial_pn);
 	}
 
 }
