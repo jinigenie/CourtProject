@@ -4,6 +4,7 @@ import com.court.proj.announce.AnnounceVO;
 import com.court.proj.user.UserVO;
 import org.apache.ibatis.annotations.Param;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface AplcnRegService {
@@ -18,6 +19,25 @@ public interface AplcnRegService {
     public ArrayList<AnnounceVO> getAnnounce(String date);
     // 선택된 재판조력자 데이터 불러오기
     public TrialVO getTrialVO(int trial_pn);
+    // 선택한 재판조력자 pk 불러오기
+    public int getTrialNum1(String st1, String st2);
+    public int getTrialNum2(String st1, String st2, String st3);
+    // 상세정보 테이블에 유저 정보가 있는지 확인하기
+    public int getDetailInfo(int user_num);
+    // 상세정보 테이블에 데이터 넣기
+    public void setDetailInfo(InfoVO ivo);
+    // 상세정보 테이블 업데이트하기
+    public void updateDetailInfo(InfoVO ivo);
+    // 상세정보 테이블값 불러오기
+    public InfoVO getAllDetailInfo(int user_num);
+    // 기본정보 업데이트하기
+    public void updateInfo(UserVO uvo);
+    // 경력사항 불러오기
+    public ArrayList<AddInfoVO> getCareer(int reg_num);
+    // 활동기록 불러오기
+    public AddInfoVO getSpecial(int reg_num);
+    // 경력 테이블에 유저 정보가 있는지 확인하기
+    public int getCareerInfo(int reg_num);
 
 
 //    void setCerti(CertiVO vo);

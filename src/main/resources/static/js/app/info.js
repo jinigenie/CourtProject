@@ -1,4 +1,4 @@
-<!-- 학력 선택에 따라 테이블 보이기 -->
+// <!-- 학력 선택에 따라 테이블 보이기 -->
 $("#selectEdu").change(function () {
     let state = $("#selectEdu option:selected").val();
     if (state == "" || state == null) {
@@ -13,7 +13,7 @@ $("#selectEdu").change(function () {
     }
 });
 
-<!-- 자격증 추가하기 -->
+// <!-- 자격증 추가하기 -->
 $('#certAddBtn').click(function () {
     var addtr = '<tr style="cursor: pointer">';
     addtr += '<td data-cell-header="종목"><input type="text" class="input-wrap" style="width: 200px; margin-left: 30px">';
@@ -50,7 +50,7 @@ function deleteLine(obj) {
 }
 
 
-<!-- 학력 추가하기 -->
+// <!-- 학력 추가하기 -->
 const uniId = Date.now();
 $('#eduAddBtn').click(function () {
     var addtr2 = '<tr style="cursor: pointer">';
@@ -112,7 +112,7 @@ function deleteLine(obj) {
 }
 
 
-<!-- 모달창 : 저장-->
+// <!-- 모달창 : 저장-->
 const modal = document.querySelector('.modal');
 let x = 0;
 
@@ -126,12 +126,11 @@ $(".next_btn").click(function () {
 })
 
 $(".save").click(function () {
-    if (x == 1) {
-        $(location).attr("href", "../app/career");
-    } else {
-        $(location).attr("href", "../app/file");
-    }
+    var form = document.forms["actionForm"];
+    form.submit();
+
     x = 0;
+    $("#xField").val(x);
 })
 
 $(".cancel").click(function () {

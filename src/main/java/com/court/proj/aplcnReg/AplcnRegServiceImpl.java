@@ -38,6 +38,56 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         return aplcnRegMapper.getTrialVO(trial_pn);
     }
 
+    @Override   // 선택한 재판조력자 pk 불러오기
+    public int getTrialNum1(String st1, String st2) {
+        return aplcnRegMapper.getTrialNum1(st1, st2);
+    };
+
+    @Override   // 선택한 재판조력자 pk 불러오기
+    public int getTrialNum2(String st1, String st2, String st3) {
+        return aplcnRegMapper.getTrialNum2(st1, st2, st3);
+    };
+
+    @Override   // 상세정보 테이블에 유저 정보가 있는지 확인하기
+    public int getDetailInfo(int user_num) {
+        return aplcnRegMapper.getDetailInfo(user_num);
+    }
+
+    @Override
+    public void setDetailInfo(InfoVO ivo) {
+        aplcnRegMapper.setDetailInfo(ivo);
+    }
+
+    @Override
+    public void updateDetailInfo(InfoVO ivo) {
+        aplcnRegMapper.updateDetailInfo(ivo);
+    }
+
+    @Override
+    public InfoVO getAllDetailInfo(int user_num) {
+        return aplcnRegMapper.getAllDetailInfo(user_num);
+    }
+
+    @Override
+    public void updateInfo(UserVO uvo) {
+        aplcnRegMapper.updateInfo(uvo);
+    }
+
+    @Override
+    public ArrayList<AddInfoVO> getCareer(int reg_num) {
+        return aplcnRegMapper.getCareer(reg_num);
+    }
+
+    @Override
+    public AddInfoVO getSpecial(int reg_num) {
+        return aplcnRegMapper.getSpecial(reg_num);
+    }
+
+    @Override
+    public int getCareerInfo(int reg_num) {
+        return aplcnRegMapper.getCareerInfo(reg_num);
+    }
+
 //    @Override
 //    public void setCerti(CertiVO vo) {
 //        aplcnRegMapper.setCerti(vo);

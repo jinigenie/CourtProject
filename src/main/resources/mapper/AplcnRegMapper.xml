@@ -34,4 +34,90 @@
         WHERE ANNOUNCE_END_DATE >= #{date}
     </select>
 
+    <select id="getTrialNum1" resultType="int">
+        SELECT * FROM TB_010 WHERE TRIAL_FCLTT_MAIN_CODE = #{st1}
+                               AND TRIAL_FCLTT_CLASIFI_CODE = #{st2}
+    </select>
+
+    <select id="getTrialNum2" resultType="int">
+        SELECT * FROM TB_010 WHERE TRIAL_FCLTT_MAIN_CODE = #{st1}
+                               AND TRIAL_FCLTT_CLASIFI_CODE = #{st2}
+                               AND TRIAL_FCLTT_SBCLS_CODE = #{st3}
+    </select>
+
+    <select id="getDetailInfo" resultType="int">
+        SELECT COUNT(*) FROM TB_005 WHERE USER_PROPER_NUM = #{user_num}
+    </select>
+
+    <select id="getAllDetailInfo" resultType="InfoVO">
+        SELECT * FROM TB_005 WHERE USER_PROPER_NUM = #{user_num}
+    </select>
+
+    <insert id="setDetailInfo" parameterType="InfoVO">
+        INSERT INTO TB_005(
+            USER_PROPER_NUM, TRIAL_FCLTT_PROPER_NUM,
+            COURT_PROPER1, COURT_PROPER2,
+            LIGTN_CASE_CARER_YN, LIGTN_CASE_CARER_ETC,
+            INSRN_INDST_CARER_YN, INSRN_INDST_CARER_ETC,
+            CRIMINAL_PENALTY_CARER_YN, CRIMINAL_PENALTY_CARER_ETC
+        )
+        VALUES (
+            #{user_proper_num}, #{trial_fcltt_proper_num},
+            #{court_proper1}, #{court_proper2},
+            #{ligtn_case_carer_yn}, #{ligtn_case_carer_etc},
+            #{insrn_indst_carer_yn}, #{insrn_indst_carer_etc},
+            #{criminal_penalty_carer_yn}, #{criminal_penalty_carer_etc}
+        )
+    </insert>
+
+    <update id="updateDetailInfo" parameterType="InfoVO">
+        UPDATE TB_005 SET
+            TRIAL_FCLTT_PROPER_NUM = #{trial_fcltt_proper_num},
+            COURT_PROPER1 = #{court_proper1},
+            COURT_PROPER2 = #{court_proper2},
+            LIGTN_CASE_CARER_YN = #{ligtn_case_carer_yn},
+            LIGTN_CASE_CARER_ETC = #{ligtn_case_carer_etc},
+            INSRN_INDST_CARER_YN = #{insrn_indst_carer_yn},
+            INSRN_INDST_CARER_ETC = #{insrn_indst_carer_etc},
+            CRIMINAL_PENALTY_CARER_YN = #{criminal_penalty_carer_yn},
+            CRIMINAL_PENALTY_CARER_ETC = #{criminal_penalty_carer_etc}
+        WHERE USER_PROPER_NUM = #{user_proper_num}
+    </update>
+
+    <update id="updateInfo" parameterType="UserVO">
+        UPDATE TB_001 SET
+            USER_EMAIL_F = #{user_email_f},
+            USER_EMAIL_B = #{user_email_b},
+            USER_PHONE = #{user_phone},
+            USER_JOB = #{user_job},
+            USER_AR = #{user_ar},
+            USER_AR_ZONECODE = #{user_ar_zonecode},
+            USER_AR_DETAIL = #{user_ar_detail},
+            USER_BANK = #{user_bank},
+            USER_BANK_ACCOUNT = #{user_bank_account},
+            USER_BANK_HOLDER = #{user_bank_holder}
+        WHERE USER_PROPER_NUM = #{user_proper_num}
+    </update>
+
+    <select id="getCareer" resultType="AddInfoVO">
+        SELECT * FROM TB_007
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+    </select>
+
+    <select id="getSpecial" resultType="AddInfoVO">
+        SELECT * FROM TB_007_2
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+    </select>
+
+    <select id="getCareerInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM (SELECT APLCN_DTLS_PROPER_NUM
+              FROM TB_007
+              WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+              UNION ALL
+              SELECT APLCN_DTLS_PROPER_NUM
+              FROM TB_007_2
+              WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}) AS combined
+    </select>
+
 </mapper>

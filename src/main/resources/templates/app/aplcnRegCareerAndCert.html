@@ -40,101 +40,117 @@
                     </ul>
                 </div>
 
+                <form name="actionForm" action="saveCareerForm" method="post">
+                    <input type="hidden" name="x" id="xField" value="">
 
-                <div style="overflow: hidden">
-                    <div style="margin-top: 40px; float: left">
-                        <span class="sub_title">경력상세</span>
+                    <div style="overflow: hidden">
+                        <div style="margin-top: 40px; float: left">
+                            <span class="sub_title">경력상세</span>
+                        </div>
+                        <button type="button" class="add" id="caAddBtn" style="float: right; padding: 43px 27px 0 0">경력
+                            추가
+                        </button>
                     </div>
-                    <button type="button" class="add" id="caAddBtn" style="float: right; padding: 43px 27px 0 0">경력 추가
-                    </button>
-                </div>
-                <div class="table careerTable" style="overflow: auto">
-                    <table style="white-space: nowrap">
-                        <thead>
-                        <tr>
-                            <th scope="col">회사/활동기관명</th>
-                            <th scope="col">경력구분</th>
-                            <th scope="col">부서</th>
-                            <th scope="col">직책</th>
-                            <th scope="col">수행업무</th>
-                            <th scope="col">근무시작일자</th>
-                            <th scope="col">근무종료일자</th>
-                        </tr>
-                        </thead>
-                        <tbody id="careerTable">
-                        <tr style="cursor: pointer">
-                            <td data-cell-header="회사"><input type="text" class="input-wrap"></td>
-                            <td data-cell-header="경력구분" style="text-align: left">
-                                <div class="radio1">
-                                    <input type="radio" name="ct" id="radio-1" value="CA">
-                                    <label class="custom-control-label" for="radio-1">법정감정인 경력</label>
-                                </div>
-                                <div class="radio2" style="margin-top: 3px">
-                                    <input type="radio" name="ct" id="radio-2" value="OT" checked>
-                                    <label class="custom-control-label" for="radio-2">기타 경력</label>
-                                </div>
-                            </td>
-                            <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px"></td>
-                            <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 120px"></td>
-                            <td data-cell-header="수행업무"><input type="text" class="input-wrap" style="width: 180px"></td>
-                            <td data-cell-header="근무시작일">
-                                <div class="calander-box" style="padding: 0">
-                                    <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                           name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0;
-                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
-                                </div>
-                            </td>
-                            <td data-cell-header="근무종료일">
-                                <div class="calander-box" style="padding: 0">
-                                    <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                           name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0;
-                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="table careerTable" style="overflow: auto">
+                        <table style="white-space: nowrap">
+                            <thead>
+                            <tr>
+                                <th scope="col">회사/활동기관명</th>
+                                <th scope="col">경력구분</th>
+                                <th scope="col">부서</th>
+                                <th scope="col">직책</th>
+                                <th scope="col">수행업무</th>
+                                <th scope="col">근무시작일자</th>
+                                <th scope="col">근무종료일자</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody id="careerTable">
+                            <tr th:each="cavo, status : ${caList}" style="cursor: pointer">
+                                <td data-cell-header="회사"><input type="text" class="input-wrap"
+                                th:value="${cavo.company_name}"></td>
+                                <td data-cell-header="경력구분" style="text-align: left">
+                                    <div class="radio1">
+                                        <input type="radio" th:name="'ct'+${status.index}" id="'radio1'+${status.count}" value="CA" th:checked="${cavo.carer_type == 'CA'}">
+                                        <label class="custom-control-label" th:for="'radio1'+${status.count}" >법정감정인 경력</label>
+                                    </div>
+                                    <div class="radio2" style="margin-top: 3px">
+                                        <input type="radio" th:name="'ct'+${status.index}" id="'radio2'+${status.count}" value="OT" th:checked="${cavo.carer_type == 'OT'}">
+                                        <label class="custom-control-label" th:for="'radio2'+${status.count}">기타 경력</label>
+                                    </div>
+                                </td>
+                                <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px" th:value="${cavo.work_department}" name="work_department">
+                                </td>
+                                <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 120px" th:value="${cavo.work_position}" name="work_position">
+                                </td>
+                                <td data-cell-header="수행업무"><input type="text" class="input-wrap" style="width: 180px" th:value="${cavo.work_description}" name="work_description">
+                                </td>
+                                <td data-cell-header="근무시작일">
+                                    <div class="calander-box" style="padding: 0">
+                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                               name="work_start_date" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;" th:value="${cavo.work_start_date}"/>
+                                    </div>
+                                </td>
+                                <td data-cell-header="근무종료일">
+                                    <div class="calander-box" style="padding: 0">
+                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                               name="work_end_date" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;" th:value="${cavo.work_end_date}"/>
+                                    </div>
+                                </td>
+                                <td style="padding: 0.5rem 0">
+                                    <button class="case case1 deleteInfo" onclick="deleteLine(this)">지우기</button>
+                                </td>
 
-                <div style="overflow: hidden">
-                    <div style="margin-top: 40px; float: left">
-                        <span class="sub_title">활동경력</span>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr style="padding-top: 20px; height: 75px">
-                            <th scope="row" class="txt-left" style="width: 20% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">활동경력</span>
-                            </th>
-                            <td data-cell-header="활동경력" class="txt-left lawtd" style="width: 80%">
-                                <textarea name="lawsuit" placeholder="경력 내용 기입" class="txtInfo2"></textarea>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
 
-                <div style="overflow: hidden">
-                    <div style="margin-top: 40px; float: left">
-                        <span class="sub_title">특기사항</span>
+                    <div style="overflow: hidden">
+                        <div style="margin-top: 40px; float: left">
+                            <span class="sub_title">활동경력</span>
+                        </div>
                     </div>
-                </div>
-                <div class="table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr style="padding-top: 20px; height: 75px">
-                            <th scope="row" class="txt-left" style="width: 20% !important;">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 60px;">특기사항</span>
-                            </th>
-                            <td data-cell-header="특기사항" class="txt-left lawtd" style="width: 80%">
-                                <textarea name="lawsuit" placeholder="경력 내용 기입" class="txtInfo2"></textarea>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <tbody>
+                            <tr style="padding-top: 20px; height: 75px">
+                                <th scope="row" class="txt-left" style="width: 20% !important;">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 60px;">활동경력</span>
+                                </th>
+                                <td data-cell-header="활동경력" class="txt-left" style="width: 80%">
+                                <textarea name="carer_description" placeholder="경력 내용 기입" class="txtInfo2"
+                                          th:text="${spvo != null? spvo.carer_description : ''}"></textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="overflow: hidden">
+                        <div style="margin-top: 40px; float: left">
+                            <span class="sub_title">특기사항</span>
+                        </div>
+                    </div>
+                    <div class="table table-responsive">
+                        <table>
+                            <tbody>
+                            <tr style="padding-top: 20px; height: 75px">
+                                <th scope="row" class="txt-left" style="width: 20% !important;">
+                                    <span class="essential-txt" title="필수항목" style="margin-left: 60px;">특기사항</span>
+                                </th>
+                                <td data-cell-header="특기사항" class="txt-left" style="width: 80%">
+                                <textarea name="special_note_description" placeholder="경력 내용 기입" class="txtInfo2"
+                                          th:text="${spvo != null? spvo.special_note_description : ''}"></textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </form>
 
                 <div class="btn-holder">
                     <button class="btn btn-2 hover-opacity prev_btn">
