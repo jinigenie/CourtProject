@@ -89,32 +89,30 @@ public class AnnounceController {
 		ArrayList<TrialVO> alist = announceService.getTrial();
 		model.addAttribute("alist", alist);
 
+		System.out.println(alist.toString());
+
 		return "announce/announceRegist";
 	}
 
 	// 모집공고 등록 폼 요청
 	@PostMapping("/announceRegistForm")
-	public String announceRegistForm(@ModelAttribute AnnounceVO vo) {
+	public String announceRegistForm(@ModelAttribute AnnounceVO vo, Model model) {
 
 		vo.setAdmin_proper_num(admin_num);
 
-		if (vo.getSelectType3() == "") {
-			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2())); // 선택
-																													// 바꾸면
-																													// update
-																													// 해줘야함
+
+		if (vo.getSelectType3() == null || vo.getSelectType3().isEmpty()) {
+			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
 		} else {
 			vo.setTrial_fcltt_proper_num(
-					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3())); // 선택
-																													// 바꾸면
-																													// update
-																													// 해줘야함
+					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3()));
 		}
+
+		model.addAttribute("vo", vo);
 
 		System.out.println(vo.toString());
 
 		return "redirect:/announce/announceList";
-
 	}
 
 }

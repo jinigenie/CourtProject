@@ -25,68 +25,68 @@
 		a.announce_end_date,
 		a.announce_first_date,
 		a.announce_last_date
-		from tb_002 a
+		from TB_002 a
 		inner join
-		tb_015 b on a.admin_proper_num = b.admin_proper_num
+		TB_015 b on a.admin_proper_num = b.admin_proper_num
 		inner join tb_010 c
 		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 	</select>
 
 	<select id="getinfo" resultType="AnnounceVO">
-		select * from tb_015 where
+		select * from TB_015 where
 		admin_id = #{admin_id}
 	</select>
 
 	<!-- 검색기능 start -->
-	<select id="searchAnnounceByTitleAndContent"
+	<select id="searchAnnounceByTitleandContent"
 		resultType="AnnounceVO">
-		SELECT * FROM tb_002
-		WHERE announce_title LIKE '%' ||
+		select * from TB_002
+		where announce_title LIKE '%' ||
 		#{keyword} || '%' OR announce_content LIKE
 		'%' || #{keyword} || '%'
 	</select>
 
 	<select id="searchAnnounceByTitle" resultType="AnnounceVO">
-		SELECT * FROM
-		tb_002
-		WHERE announce_title LIKE '%' || #{keyword} || '%'
+		select * from
+		TB_002
+		where announce_title LIKE '%' || #{keyword} || '%'
 	</select>
 
 	<select id="searchAnnounceByContent" resultType="AnnounceVO">
-		SELECT * FROM
-		tb_002
-		WHERE announce_content LIKE '%' || #{keyword} || '%'
+		select * from
+		TB_002
+		where announce_content LIKE '%' || #{keyword} || '%'
 	</select>
 
 	<!-- 재판조력자 분로 start -->
 	<select id="getTrial" resultType="TrialVO">
-		SELECT * FROM TB_010 WHERE
-		TRIAL_FCLTT_PROPER_NUM = #{trial_pn}
+		select * from TB_010 where
+		trial_fcltt_proper_num = #{trial_pn}
 	</select>
 
 	<select id="getTrialVO" resultType="TrialVO">
-		SELECT * FROM TB_010 WHERE
-		TRIAL_FCLTT_PROPER_NUM = #{trial_pn}
+		select * from TB_010 where
+		trial_fcltt_proper_num = #{trial_pn}
 	</select>
 
 	<select id="getTrialNum1" resultType="int">
-		SELECT * FROM TB_010 WHERE
-		TRIAL_FCLTT_MAIN_CODE = #{st1}
-		AND TRIAL_FCLTT_CLASIFI_CODE = #{st2}
+		select * from TB_010 where
+		trial_fcltt_main_code = #{trial_fcltt_main_code}
+		and trial_fcltt_clasifi_code = #{trial_fcltt_clasifi_code}
 	</select>
 
 	<select id="getTrialNum2" resultType="int">
-		SELECT * FROM TB_010 WHERE
-		TRIAL_FCLTT_MAIN_CODE = #{st1}
-		AND TRIAL_FCLTT_CLASIFI_CODE = #{st2}
-		AND TRIAL_FCLTT_SBCLS_CODE = #{st3}
+		select * from TB_010 where
+		trial_fcltt_main_code = #{trial_fcltt_main_code}
+		and trial_fcltt_clasifi_code = #{trial_fcltt_clasifi_code}
+		and trial_fcltt_sbcls_code = #{trial_fcltt_sbcls_code}
 	</select>
 
 	<!-- 공고 등록 start -->
 	<insert id="announceRegistTB002" parameterType="AnnounceVO">
 
-		INSERT INTO
-		tb_002
+		insert into
+		TB_002
 		(admin_proper_num,
 		trial_fcltt_proper_num,
 		announce_title,
@@ -95,7 +95,7 @@
 		announce_end_date,
 		announce_first_date,
 		announce_last_date)
-		VALUES
+		values
 		(#{admin_proper_num},
 		#{trial_fcltt_proper_num},
 		#{announce_title},
@@ -108,16 +108,15 @@
 
 	<insert id="adminRegistTB015" parameterType="AnnounceVO">
 
-		INSERT INTO tb_015
+		insert into TB_015
 		(admin_id,
 		admin_pw,
 		admin_auth)
-		VALUES
+		values
 		(#{admin_id},
 		#{admin_pw},
 		#{admin_auth})
 	</insert>
 	<!-- 공고 등록 end -->
 
-	<!-- 공고 등록 end -->
 </mapper>
