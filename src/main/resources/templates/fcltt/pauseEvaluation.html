@@ -152,9 +152,9 @@
 
 						str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" onclick="toggleRows()" style="cursor: pointer">';
 						str += '<input type="hidden" name="user_proper_num" value="' + vo.user_proper_num + '"/>';
-						str += '<td data-cell-header="신청일">' + moment(vo.pause_submit_date).format('YYYY-MM-DD') + '</td>';
+						str += '<td data-cell-header="신청일">' + vo.pause_submit_date + '</td>';
 						str += '<td data-cell-header="신청자이름">' + vo.user_name + '</td>';
-						str += '<td data-cell-header="중지기간">' + moment(vo.pause_start_date).format('YYYY-MM-DD') + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
+						str += '<td data-cell-header="중지기간">' + vo.pause_start_date + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
 						str += '<td data-cell-header="현재활동상태"><a class="' + (vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2') + '">';
 						str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
 						str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';

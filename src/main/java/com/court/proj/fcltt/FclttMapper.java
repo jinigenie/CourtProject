@@ -15,9 +15,25 @@ public interface FclttMapper {
 
 	public int getTotal(@Param("cri") FclttCriteria cri);
 	
-
-	//명단에서 상세보기 ajax
-	public FclttVO getFclttContent(String accept_proper_num);
+	//------------------------------------------------------------------
+	//명단에서 상세보기 ajax 1. 기본정보
+	public FclttVO  getFclttContent1(String accept_proper_num);
+	
+	//명단에서 상세보기 ajax 2. 학력정보
+	public ArrayList<FclttVO> getFclttContent2(String user_proper_num);
+	
+	//명단에서 상세보기 ajax 3. 재판이력
+	public ArrayList<FclttVO> getFclttContent3(String user_proper_num);
+	
+	//명단에서 상세보기 ajax 4. 자격증 
+	public ArrayList<FclttVO> getFclttContent4(String user_proper_num);
+	
+	//명단에서 상세보기 ajax 5. 경력
+	public ArrayList<FclttVO> getFclttContent5(String user_proper_num);
+	
+	
+	
+	//------------------------------------------------------------------
 	
 	//중지/ 활동 신청 리스트 
 	public ArrayList<PauseVO> getPauseList(@Param("cri")FclttCriteria cri);

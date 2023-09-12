@@ -170,10 +170,11 @@
 						str += '<td data-cell-header="민원서식명">' + vo.trial_fcltt_description + '</td>';
 						str += '<td data-cell-header="법원명">' + vo.court_name + '</td>';
 						str += '<td data-cell-header="이름">' + vo.user_name + '</td>';
-						str += '<td data-cell-header="날짜">' + moment(vo.accept_date).format('YYYY-MM-DD') + '</td>';
-						str += '<td onclick="modalCont()" class="modal_ajax"><a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a>';
-						str += '<input type="hidden" name="accept_proper_num" value="'+ vo.accept_proper_num +'" />';
-						str += '<input type="hidden" name="user_proper_num" value="'+ vo.user_proper_num + '" /></td>';
+						str += '<td data-cell-header="날짜">' + vo.accept_date + '</td>';
+						str += '<td onclick="modalCont()" class="modal_ajax">';
+						str += '<input type="hidden" class="find1" name="accept_proper_num" value="' + vo.accept_proper_num + '" />';
+						str += '<input type="hidden" class="find2" name="user_proper_num" value="' + vo.user_proper_num + '" />';
+						str += '<a class="fcltt_content" style="cursor: pointer"><em>상세보기</em></a></td>';
 						str += '<td><a class="' + (vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2') + '">';
 						str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
 						str += '</tr>';
@@ -276,13 +277,19 @@
 
 	//모달창 ajax
 
+
 	function modalCont() {
 
-		var closestTr = $(".modal_ajax");
-		var accept_proper_num = closestTr.find("input[name='accept_proper_num']").val();
-		var user_proper_num = closestTr.find("input[name='user_proper_num']").val();
-		console.log(accept_proper_num);
-		console.log(user_proper_num);
+
+		var closestTr = event.target.closest(".modal_ajax");
+		var accept_proper_num = $(closestTr).find("input[name='accept_proper_num']").val();
+		var user_proper_num = $(closestTr).find("input[name='user_proper_num']").val();
+
+		// 이제 acceptProperNum 및 userProperNum 변수에 input 요소의 값을 가지고 있습니다.
+		console.log("accept_proper_num: " + accept_proper_num);
+		console.log("user_proper_num: " + user_proper_num);
+
+
 		$.ajax({
 			type: "POST",
 			url: "getfclttModal",
@@ -290,10 +297,15 @@
 				"accept_proper_num": accept_proper_num,
 				"user_proper_num": user_proper_num
 			},
-			dataType: "json",
 			success: function (fclttData) {
 				var modal = $("#popup_layer2");
 				modal.css("display", "block");
+
+				var content1 = fclttData.content1;
+				var content2 = fclttData.content2;
+				var content3 = fclttData.content3;
+				var content4 = fclttData.content4;
+				var content5 = fclttData.content5;
 
 				var str = '<div class="popup_cont2" style="overflow: hidden;">';
 				str += '<div class="popup_cont2_title">';
@@ -301,9 +313,9 @@
 				str += '</div>';
 				str += '<div class="popup_contText">';
 				str += '<h3 id="fcltt_h3">재판조력자</h3>';
-				str += '<h2 id="fcltt_h2">김혜민</h2>';
-				str += '<h3 id="fcltt_h3">현재 : 활동중</h3>';
-				str += '<p id="fcltt_p_right">등재번호: 3</p>';
+				str += '<h2 id="fcltt_h2">' + content1.user_name + '</h2>';
+				str += '<h3 id="fcltt_h3">현재 : ' + (content1.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</h3>';
+				str += '<p id="fcltt_p_right">등재번호: ' + content1.accept_proper_num + '</p>';
 				str += '</div>';
 				str += '<div class="fcltt_cont_top" style="width: 50%; float:left;">';
 				str += '<table>';
@@ -314,11 +326,11 @@
 				str += '<tbody>';
 				str += '<tr>';
 				str += '<th>조력자분류</th>';
-				str += '<td>통역 > 통번역가</td>';
+				str += '<td>' + content1.trial_fcltt_clasifi_code + '>' + content1.trial_fcltt_description + '</td>';
 				str += '</tr>';
 				str += '<tr>';
 				str += '<th>법원</th>';
-				str += '<td>서울 > 대법원</td>';
+				str += '<td>' + content1.court_region + '>' + content1.court_name + '</td>';
 				str += '</tr>';
 				str += '</tbody>';
 				str += '</table>';
@@ -333,11 +345,11 @@
 				str += '<tbody>';
 				str += '<tr>';
 				str += '<th>휴대전화</th>';
-				str += '<td>010-6777-0486</td>';
+				str += '<td>' + content1.user_phone + '</td>';
 				str += '</tr>';
 				str += '<tr>';
 				str += '<th>이메일</th>';
-				str += '<td>hyem08111@gmail.com</td>';
+				str += '<td>' + content1.user_email_f + '@' + content1.user_email_b + '</td>';
 				str += '</tr>';
 				str += '</tbody>';
 				str += '</table>';
@@ -358,11 +370,20 @@
 				str += '</tr>';
 				str += '</thead>';
 				str += '<tbody>';
-				str += '<tr>';
-				str += '<td data-cell-header="번호">OOO 학교</td>';
-				str += '<td data-cell-header="민원서식명">OOO 전공</td>';
-				str += '<td data-cell-header="법원명">박사</td>';
-				str += '</tr>';
+
+				//학력정보 반복문으로 적기
+				var str2 = "";
+				for (var i = 0; i < fclttData.content2.length; i++) {
+					var vo = fclttData.content2[i]; // 각 학력 정보 객체
+
+					str2 += '<tr>';
+					str2 += '<td data-cell-header="번호">' + vo.edctn_school_name + '</td>';
+					str2 += '<td data-cell-header="민원서식명">' + vo.edctn_major + '</td>';
+					str2 += '<td data-cell-header="법원명">' + vo.edctn_degree + '</td>';
+					str2 += '</tr>';
+				}
+
+				str += str2;
 				str += '</tbody>';
 				str += '</table>';
 				str += '</div>';
@@ -382,11 +403,18 @@
 				str += '</tr>';
 				str += '</thead>';
 				str += '<tbody>';
-				str += '<tr>';
-				str += '<td data-cell-header="번호">1234</td>';
-				str += '<td data-cell-header="민원서식명">2003.09.10</td>';
-				str += '<td data-cell-header="법원명">완료</td>';
-				str += '</tr>';
+				//재판이력 반복문으로 적기
+				var str2 = "";
+				for (var i = 0; i < fclttData.content3.length; i++) {
+					var vo = fclttData.content3[i];
+
+					str2 += '<tr>';
+					str2 += '<td data-cell-header="번호">' + vo.trial_num + '</td>';
+					str2 += '<td data-cell-header="민원서식명">' + (vo.attendance_date === null ? '미정 또는 미참석' : vo.attendance_date) + '</td>';
+					str2 += '<td data-cell-header="법원명">' + (vo.act_complete_yn == 'Y' ? '완료' : '진행중') + '</td>';
+					str2 += '</tr>';
+				}
+				str += str2;
 				str += '</tbody>';
 				str += '</table>';
 				str += '</div>';
@@ -398,10 +426,16 @@
 				str += '<col style="width: 70%" />';
 				str += '</colgroup>';
 				str += '<tbody>';
-				str += '<tr>';
-				str += '<th>자격증명</th>';
-				str += '<td>정보처리기사</td>';
-				str += '</tr>';
+				//자격증명 반복문으로 적기
+				var str2 = "";
+				for (var i = 0; i < fclttData.content4.length; i++) {
+					var vo = fclttData.content4[i];
+					str += '<tr>';
+					str += '<th>자격증명</th>';
+					str += '<td>' + vo.crtfc_type + '</td>';
+					str += '</tr>';
+				}
+				str += str2;
 				str += '</tbody>';
 				str += '</table>';
 				str += '</div>';
@@ -421,11 +455,19 @@
 				str += '</tr>';
 				str += '</thead>';
 				str += '<tbody>';
-				str += '<tr>';
-				str += '<td data-cell-header="번호">현대</td>';
-				str += '<td data-cell-header="민원서식명">CA</td>';
-				str += '<td data-cell-header="법원명">경영</td>';
-				str += '</tr>';
+
+				//경력내역 반복문으로 적기
+				var str2 = "";
+				for (var i = 0; i < fclttData.content5.length; i++) {
+					var vo = fclttData.content5[i];
+					str += '<tr>';
+					str += '<td data-cell-header="번호">' + vo.company_name + '</td>';
+					str += '<td data-cell-header="민원서식명">' + vo.carer_type + '</td>';
+					str += '<td data-cell-header="법원명">' + vo.work_department + '</td>';
+					str += '</tr>';
+				}
+				str += str2;
+
 				str += '</tbody>';
 				str += '</table>';
 				str += '</div>';
@@ -439,8 +481,10 @@
 				window.scrollTo(0, 0);
 			}
 		});
-	}
-	/*});*/
+
+	};
+
+
 
 
 
