@@ -111,13 +111,53 @@
 
     <select id="getCareerInfo" resultType="int">
         SELECT COUNT(*)
-        FROM (SELECT APLCN_DTLS_PROPER_NUM
-              FROM TB_007
+        FROM TB_007
               WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
-              UNION ALL
-              SELECT APLCN_DTLS_PROPER_NUM
-              FROM TB_007_2
-              WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}) AS combined
     </select>
+
+    <select id="getSpecialInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_007_2
+            WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+    </select>
+
+    <update id="updateCareer007" parameterType="AddInfoVO">
+        UPDATE TB_007 SET
+            COMPANY_NAME = #{company_name},
+            CARER_TYPE = #{carer_type},
+            WORK_START_DATE = #{work_start_date},
+            WORK_END_DATE = #{work_end_date},
+            WORK_DESCRIPTION = #{work_description},
+            WORK_DEPARTMENT = #{work_department},
+            WORK_POSITION = #{work_position}
+        WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
+    </update>
+
+    <update id="updateCareer007_2" parameterType="AddInfoVO">
+        UPDATE TB_007_2 SET
+            CARER_DESCRIPTION = #{carer_description},
+            SPECIAL_NOTE_DESCRIPTION = #{special_note_description},
+            WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
+    </update>
+
+    <insert id="setCareer007" parameterType="AddInfoVO">
+        INSERT INTO TB_007 (
+            COMPANY_NAME, CARER_TYPE, WORK_START_DATE, WORK_END_DATE,
+            WORK_DESCRIPTION, WORK_DEPARTMENT, WORK_POSITION
+        )
+        VALUES (
+            #{company_name}, #{carer_type}, #{work_start_date}, #{work_end_date},
+            #{work_description}, #{work_department}, #{work_position}
+        )
+    </insert>
+
+    <insert id="setCareer007_2" parameterType="AddInfoVO">
+        INSERT INTO TB_007_2 (
+            CARER_DESCRIPTION, SPECIAL_NOTE_DESCRIPTION
+        )
+        VALUES (
+            #{carer_description}, #{special_note_description}
+        )
+    </insert>
 
 </mapper>

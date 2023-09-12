@@ -38,6 +38,16 @@ public interface AplcnRegService {
     public AddInfoVO getSpecial(int reg_num);
     // 경력 테이블에 유저 정보가 있는지 확인하기
     public int getCareerInfo(int reg_num);
+    // 특기사항 테이블에 유저 정보가 있는지 확인하기
+    public int getSpecialInfo(int reg_num);
+    // 경력정보 업데이트하기
+    public void updateCareer007(AddInfoVO aivo);
+    // 경력정보 저장하기
+    public void setCareer007(AddInfoVO aivo);
+    // 특기사항 업데이트하기
+    public void updateCareer007_2(AddInfoVO aivo);
+    // 특기사항 저장하기
+    public void setCareer007_2(AddInfoVO aivo);
 
 
 //    void setCerti(CertiVO vo);
