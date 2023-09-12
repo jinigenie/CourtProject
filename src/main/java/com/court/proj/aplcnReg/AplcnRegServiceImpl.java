@@ -88,6 +88,31 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         return aplcnRegMapper.getCareerInfo(reg_num);
     }
 
+    @Override
+    public int getSpecialInfo(int reg_num) {
+        return aplcnRegMapper.getSpecialInfo(reg_num);
+    }
+
+    @Override
+    public void updateCareer007(AddInfoVO aivo) {
+        aplcnRegMapper.updateCareer007(aivo);
+    }
+
+    @Override
+    public void setCareer007(AddInfoVO aivo) {
+        aplcnRegMapper.setCareerTB007(aivo);
+    }
+
+    @Override
+    public void updateCareer007_2(AddInfoVO aivo) {
+        aplcnRegMapper.updateCareer007_2(aivo);
+    }
+
+    @Override
+    public void setCareer007_2(AddInfoVO aivo) {
+        aplcnRegMapper.setCareerTB007_2(aivo);
+    }
+
 //    @Override
 //    public void setCerti(CertiVO vo) {
 //        aplcnRegMapper.setCerti(vo);

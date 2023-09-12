@@ -13,6 +13,7 @@ import java.util.Date;
 @Builder
 public class AddInfoVO {
 
+    //회사경력
     private int aplcn_carer_proper_num;
     private int aplcn_dtls_proper_num;
     private String company_name;
@@ -23,16 +24,18 @@ public class AddInfoVO {
     private String work_department;
     private String work_position;
 
+    //활동내용, 특기사항
     private String carer_description;
     private String special_note_description;
 
+    //학력
     private String edctn_school_name;
     private String edctn_major;
     private String edctn_degree;
     private String edctn_admsn_date;
     private String edctn_grdtn_date;
 
-
+    //자격증
     private String crtfc_type;
     private String issue_agency;
     private String crtfc_number;

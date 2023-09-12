@@ -67,35 +67,35 @@
                             </thead>
                             <tbody id="careerTable">
                             <tr th:each="cavo, status : ${caList}" style="cursor: pointer">
-                                <td data-cell-header="회사"><input type="text" class="input-wrap"
-                                th:value="${cavo.company_name}"></td>
+                                <td data-cell-header="회사"><input type="text" class="input-wrap" th:value="${cavo.company_name}" name="company_name[]">
+                                </td>
                                 <td data-cell-header="경력구분" style="text-align: left">
                                     <div class="radio1">
-                                        <input type="radio" th:name="'ct'+${status.index}" id="'radio1'+${status.count}" value="CA" th:checked="${cavo.carer_type == 'CA'}">
+                                        <input type="radio" th:name="'carer_type'+ ${status.index}" id="'radio1'+${status.count}" value="CA" th:checked="${cavo.carer_type == 'CA'}">
                                         <label class="custom-control-label" th:for="'radio1'+${status.count}" >법정감정인 경력</label>
                                     </div>
                                     <div class="radio2" style="margin-top: 3px">
-                                        <input type="radio" th:name="'ct'+${status.index}" id="'radio2'+${status.count}" value="OT" th:checked="${cavo.carer_type == 'OT'}">
+                                        <input type="radio" th:name="'carer_type'+${status.index}" id="'radio2'+${status.count}" value="OT" th:checked="${cavo.carer_type == 'OT'}">
                                         <label class="custom-control-label" th:for="'radio2'+${status.count}">기타 경력</label>
                                     </div>
                                 </td>
-                                <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px" th:value="${cavo.work_department}" name="work_department">
+                                <td data-cell-header="부서"><input type="text" class="input-wrap" style="width: 120px" th:value="${cavo.work_department}" name="work_department[]">
                                 </td>
-                                <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 120px" th:value="${cavo.work_position}" name="work_position">
+                                <td data-cell-header="직책"><input type="text" class="input-wrap" style="width: 120px" th:value="${cavo.work_position}" name="work_position[]">
                                 </td>
-                                <td data-cell-header="수행업무"><input type="text" class="input-wrap" style="width: 180px" th:value="${cavo.work_description}" name="work_description">
+                                <td data-cell-header="수행업무"><input type="text" class="input-wrap" style="width: 180px" th:value="${cavo.work_description}" name="work_description[]">
                                 </td>
                                 <td data-cell-header="근무시작일">
                                     <div class="calander-box" style="padding: 0">
                                         <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                               name="work_start_date" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                               name="work_start_date[]" value="" style="width: 150px; height: 40px; border-radius: 0;
                                            background-position-x: 123px; background-position-y: 10px; cursor: pointer;" th:value="${cavo.work_start_date}"/>
                                     </div>
                                 </td>
                                 <td data-cell-header="근무종료일">
                                     <div class="calander-box" style="padding: 0">
                                         <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                               name="work_end_date" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                               name="work_end_date[]" value="" style="width: 150px; height: 40px; border-radius: 0;
                                            background-position-x: 123px; background-position-y: 10px; cursor: pointer;" th:value="${cavo.work_end_date}"/>
                                     </div>
                                 </td>

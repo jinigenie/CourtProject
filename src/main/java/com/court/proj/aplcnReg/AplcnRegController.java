@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/app")
@@ -96,15 +97,11 @@ public class AplcnRegController {
         AddInfoVO spvo = aplcnRegService.getSpecial(reg_num);
 
         if (caList.size() != 0) { // 경력내용 있으면 화면에 찍어주기
-            for (AddInfoVO cavo : caList) {
-                System.out.println(cavo.toString());
-            }
             model.addAttribute("caList", caList);
         }
 
         if (spvo != null) {
             model.addAttribute("spvo", spvo);
-            System.out.println(spvo.toString());
         }
 
         return "app/aplcnRegCareerAndCert";
@@ -180,19 +177,66 @@ public class AplcnRegController {
         }
     }
 
+//    @PostMapping("/saveCareerForm")
+//    public String saveCareer(@ModelAttribute AddInfoVO[] aivoList,
+//                             @RequestParam("x") int x) {
+//
+//        System.out.println(aivoList.length);
+//
+//        if (x == 1) {
+//            return "redirect:/app/info";  //requestParam 때문에 error
+//        } else {
+//            return "redirect:/app/edu";
+//        }
+//    }
 
     //regCareer 정보 저장하기
     @PostMapping("/saveCareerForm")
-    public String saveCareer(@ModelAttribute InfoVO ivo,
+    public String saveCareer(@RequestParam("company_name[]") ArrayList<String> cn,
+                             @RequestParam("work_start_date[]") ArrayList<String> wsd,
+                             @RequestParam("work_end_date[]") ArrayList<String> wed,
+                             @RequestParam("work_description[]") ArrayList<String> wdc,
+                             @RequestParam("work_department[]") ArrayList<String> wdp,
+                             @RequestParam("work_position[]") ArrayList<String> wp,
+                             @ModelAttribute AddInfoVO aivo,
                              @RequestParam("x") int x) {
 
-        int cnt = aplcnRegService.getCareerInfo(reg_num);
-        // 경력 테이블에 임시저장한게 없으면 insert, 있으면 update
-        if(cnt == 0) {
-
-        } else {
-
+        //경력테이블에 넣을 데이터 정리
+        List<AddInfoVO> aivoList = new ArrayList<>();
+        for(int i = 0; i < cn.size(); i++) {
+            AddInfoVO addInfoVO = new AddInfoVO();
+            addInfoVO.setAplcn_dtls_proper_num(reg_num);
+            addInfoVO.setCompany_name(cn.get(i));
+            addInfoVO.setWork_start_date(wsd.get(i));
+            addInfoVO.setWork_end_date(wed.get(i));
+            addInfoVO.setWork_description(wdc.get(i));
+            addInfoVO.setWork_department(wdp.get(i));
+            addInfoVO.setWork_position(wp.get(i));
+            aivoList.add(addInfoVO);
+            System.out.println(addInfoVO);
         }
+
+
+        aivo.setAplcn_dtls_proper_num(reg_num);
+
+        int cntCareer = aplcnRegService.getCareerInfo(reg_num);
+        int cntSpecial = aplcnRegService.getSpecialInfo(reg_num);
+
+        System.out.println("aivo: >>>>>" + aivo.toString());
+
+        // 경력 테이블에 임시저장한게 없으면 insert, 있으면 update
+//        if(cntCareer == 0) {
+//            aplcnRegService.setCareer007(aivo);
+//        } else {
+//            aplcnRegService.updateCareer007(aivo);
+//        }
+
+        // 특기사항 테이블에 임시저장한게 없으면 insert, 있으면 update
+//        if(cntSpecial == 0) {
+//            aplcnRegService.setCareer007_2(aivo);
+//        } else {
+//            aplcnRegService.updateCareer007_2(aivo);
+//        }
 
         if (x == 1) {
             return "redirect:/app/info";  //requestParam 때문에 error
