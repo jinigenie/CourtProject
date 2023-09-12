@@ -31,7 +31,10 @@ public class FclttVO {
 	private String company_name;// 회사명 7tb
 	private String carer_type;// 회사명 7tb
 	private String work_department;// 회사부서 7tb
+	private String work_start_date;// 근무기간1 7tb
+	private String work_end_date;// 근무기간2 7tb
 	private String crtfc_type;// 자격증 8tb
+	private String issue_agency;// 자격증 발급기관 8tb
 	private Integer trial_fcltt_proper_num;
 	private String trial_num; // 재판번호
 	private String attendance_date; // 재판출석일

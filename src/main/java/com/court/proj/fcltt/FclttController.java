@@ -24,19 +24,27 @@ public class FclttController {
 
 	// 등재명단페이지 진입 
 	@GetMapping("/fclttList")
-	public String fclttList() {
+	public String fclttList(FclttCriteria cri) {
 		return "fcltt/fclttList";
 	}
 	
 	// 등재명단 ajax목록 
+//	@GetMapping("/fclttListAjax")
+//	@ResponseBody
+//	public ResponseEntity<ArrayList<FclttVO> > fclttListAjax( FclttCriteria cri) {
+//		ArrayList<FclttVO>list= fclttService.getList(cri);
+//		System.out.println(list.toString());
+//		return new ResponseEntity<>(list, HttpStatus.OK);
+//	}
 	@GetMapping("/fclttListAjax")
 	@ResponseBody
-	public ResponseEntity<ArrayList<FclttVO> > fclttListAjax( FclttCriteria cri) {
-		ArrayList<FclttVO>list= fclttService.getList(cri);
-		System.out.println(list.toString());
-		return new ResponseEntity<>(list, HttpStatus.OK);
+	public ResponseEntity<ArrayList<FclttVO>> fclttListAjax(FclttCriteria cri,
+	        @RequestParam(name = "searchAccept_act_yn", required = false) String searchAccept_act_yn) {
+	    cri.setSearchAccept_act_yn(searchAccept_act_yn);
+	    ArrayList<FclttVO> list = fclttService.getList(cri);
+	    System.out.println(cri.getSearchAccept_act_yn());
+	    return new ResponseEntity<>(list, HttpStatus.OK);
 	}
-
 	// 페이징 ajax 
 	@GetMapping("/fclttTotal")
 	@ResponseBody

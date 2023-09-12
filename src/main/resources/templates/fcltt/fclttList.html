@@ -84,7 +84,8 @@
 									</select>
 									<input type="text" class="fclttSearch fclttSearch2" name="searchContent" />
 									<a href="#" id="fclttSearch_btn" class="fclttSerch_Btn">조회</a>
-									<select name="" id="" class="fclttSearch fclttSearch3">
+									<select name="searchAccept_act_yn" id="fclttChange" class="fclttSearch fclttSearch3"
+										onchange="change()">
 										<option value="">활동여부</option>
 										<option value="Y">활동중</option>
 										<option value="N">중지중</option>
@@ -164,7 +165,6 @@
 					for (var i = 0; i < data.length; i++) {
 						var vo = data[i];
 						var str = "";
-
 						str += '<tr>';
 						str += '<td data-cell-header="번호">' + (i + 1) + '</td>';
 						str += '<td data-cell-header="민원서식명">' + vo.trial_fcltt_description + '</td>';
@@ -202,36 +202,36 @@
 					var str2 = '<div class="pager-wrap">';
 
 					if (FclttPageVO.pageList.length > 1) {
-						str2 += '<a href="/fcltt/pause?page=1&amount=' + FclttPageVO.amount +
+						str2 += '<a href="/fcltt/fclttList?page=1&amount=' + FclttPageVO.amount +
 							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
 							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
 							'&searchAct=' + FclttPageVO.cri.searchAct +
 							'&searchDate=' + FclttPageVO.cri.searchDate +
-							'&searchDate=' + FclttPageVO.cri.earchCourt +
-							'&searchDate=' + FclttPageVO.cri.searchCourtName +
+							'&searchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
 							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">맨 처음 목록으로 이동</strong></a>';
 					}
 					if (FclttPageVO.pageList.length > 1 && FclttPageVO.prev) {
-						str2 += '<a href="/fcltt/pause?page=' + (FclttPageVO.start - 1) +
+						str2 += '<a href="/fcltt/fclttList?page=' + (FclttPageVO.start - 1) +
 							'&amount=' + FclttPageVO.amount +
 							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
 							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
 							'&searchAct=' + FclttPageVO.cri.searchAct +
 							'&searchDate=' + FclttPageVO.cri.searchDate +
-							'&searchDate=' + FclttPageVO.cri.earchCourt +
-							'&searchDate=' + FclttPageVO.cri.searchCourtName +
+							'&earchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
 							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">이전페이지로 이동</strong></a>';
 					}
 					for (var i = 0; i < FclttPageVO.pageList.length; i++) {
 						var page = FclttPageVO.pageList[i];
-						str2 += '<a href="/fcltt/pause?page=' + page +
+						str2 += '<a href="/fcltt/fclttList?page=' + page +
 							'&amount=' + FclttPageVO.amount +
 							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
 							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
 							'&searchAct=' + FclttPageVO.cri.searchAct +
 							'&searchDate=' + FclttPageVO.cri.searchDate +
-							'&searchDate=' + FclttPageVO.cri.earchCourt +
-							'&searchDate=' + FclttPageVO.cri.searchCourtName +
+							'&searchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
 							'&searchContent=' + FclttPageVO.cri.searchContent + '" ';
 						if (page == FclttPageVO.page) {
 							str2 += 'class="active"';
@@ -240,28 +240,27 @@
 						str2 += '>' + page + '</a>';
 					}
 					if (FclttPageVO.pageList.length > 1 && FclttPageVO.next) {
-						str2 += '<a href="/fcltt/pause?page=' + (FclttPageVO.end + 1) +
+						str2 += '<a href="/fcltt/fclttList?page=' + (FclttPageVO.end + 1) +
 							'&amount=' + FclttPageVO.amount +
 							'&searchAccept_act_yn=' + FclttPageVO.cri.searchAccept_act_yn +
 							'&searchUser_name=' + FclttPageVO.cri.searchUser_name +
 							'&searchAct=' + FclttPageVO.cri.searchAct +
 							'&searchDate=' + FclttPageVO.cri.searchDate +
-							'&searchDate=' + FclttPageVO.cri.earchCourt +
-							'&searchDate=' + FclttPageVO.cri.searchCourtName +
+							'&searchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
 							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">다음페이지로 이동</strong></a>';
 					}
 					if (FclttPageVO.pageList.length > 1) {
-						str2 += '<a href="/fcltt/pause?page=' + FclttPageVO.realEnd +
+						str2 += '<a href="/fcltt/fclttList?page=' + FclttPageVO.realEnd +
 							'&amount=' + FclttPageVO.amount +
 							'&searchCourt=' + FclttPageVO.cri.searchCourt +
 							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
 							'&searchAct=' + FclttPageVO.cri.searchAct +
 							'&searchDate=' + FclttPageVO.cri.searchDate +
-							'&searchDate=' + FclttPageVO.cri.earchCourt +
-							'&searchDate=' + FclttPageVO.cri.searchCourtName +
+							'&searchCourt=' + FclttPageVO.cri.searchCourt +
+							'&searchCourtName=' + FclttPageVO.cri.searchCourtName +
 							'&searchContent=' + FclttPageVO.cri.searchContent + '"><strong class="sr-only">맨 마지막목록으로 이동</strong></a>';
 					}
-
 					str2 += '</div>';
 					// 표에 행 추가
 					pager.empty().append(str2);
@@ -276,19 +275,10 @@
 
 
 	//모달창 ajax
-
-
 	function modalCont() {
-
-
 		var closestTr = event.target.closest(".modal_ajax");
 		var accept_proper_num = $(closestTr).find("input[name='accept_proper_num']").val();
 		var user_proper_num = $(closestTr).find("input[name='user_proper_num']").val();
-
-		// 이제 acceptProperNum 및 userProperNum 변수에 input 요소의 값을 가지고 있습니다.
-		console.log("accept_proper_num: " + accept_proper_num);
-		console.log("user_proper_num: " + user_proper_num);
-
 
 		$.ajax({
 			type: "POST",
@@ -314,7 +304,7 @@
 				str += '<div class="popup_contText">';
 				str += '<h3 id="fcltt_h3">재판조력자</h3>';
 				str += '<h2 id="fcltt_h2">' + content1.user_name + '</h2>';
-				str += '<h3 id="fcltt_h3">현재 : ' + (content1.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</h3>';
+				str += '<h3 id="fcltt_h3">현재활동상태 : ' + (content1.accept_act_yn == "Y" ? '활동중' : '중지중') + '</h3>';
 				str += '<p id="fcltt_p_right">등재번호: ' + content1.accept_proper_num + '</p>';
 				str += '</div>';
 				str += '<div class="fcltt_cont_top" style="width: 50%; float:left;">';
@@ -391,8 +381,8 @@
 				str += '<h3>참여재판이력</h3>';
 				str += '<table>';
 				str += '<colgroup>';
-				str += '<col style="width: 40%" />';
-				str += '<col style="width: 40%" />';
+				str += '<col style="width: 20%" />';
+				str += '<col style="width: 60%" />';
 				str += '<col style="width: 20%" />';
 				str += '</colgroup>';
 				str += '<thead>';
@@ -422,17 +412,23 @@
 				str += '<h3>자격증정보</h3>';
 				str += '<table>';
 				str += '<colgroup>';
-				str += '<col style="width: 30%" />';
-				str += '<col style="width: 70%" />';
+				str += '<col style="width: 50%" />';
+				str += '<col style="width: 50%" />';
 				str += '</colgroup>';
+				str += '<thead>';
+				str += '<tr style="border-bottom: 1px solid #777;">';
+				str += '<th scope="col">자격증명</th>';
+				str += '<th scope="col">발급기관</th>';
+				str += '</tr>';
+				str += '</thead>';
 				str += '<tbody>';
 				//자격증명 반복문으로 적기
 				var str2 = "";
 				for (var i = 0; i < fclttData.content4.length; i++) {
 					var vo = fclttData.content4[i];
 					str += '<tr>';
-					str += '<th>자격증명</th>';
 					str += '<td>' + vo.crtfc_type + '</td>';
+					str += '<td>' + vo.issue_agency + '</td>';
 					str += '</tr>';
 				}
 				str += str2;
@@ -443,14 +439,16 @@
 				str += '<h3>경력정보</h3>';
 				str += '<table>';
 				str += '<colgroup>';
-				str += '<col style="width: 40%" />';
+				str += '<col style="width: 30%" />';
+				str += '<col style="width: 10%" />';
 				str += '<col style="width: 40%" />';
 				str += '<col style="width: 20%" />';
 				str += '</colgroup>';
 				str += '<thead>';
 				str += '<tr style="border-bottom: 1px solid #777;">';
 				str += '<th scope="col">회사명/활동기관</th>';
-				str += '<th scope="col">경력구분</th>';
+				str += '<th scope="col">구분</th>';
+				str += '<th scope="col">근무기간</th>';
 				str += '<th scope="col">부서</th>';
 				str += '</tr>';
 				str += '</thead>';
@@ -463,6 +461,7 @@
 					str += '<tr>';
 					str += '<td data-cell-header="번호">' + vo.company_name + '</td>';
 					str += '<td data-cell-header="민원서식명">' + vo.carer_type + '</td>';
+					str += '<td data-cell-header="민원서식명">' + vo.work_start_date + ' ~ ' + vo.work_end_date + '</td>';
 					str += '<td data-cell-header="법원명">' + vo.work_department + '</td>';
 					str += '</tr>';
 				}
@@ -485,6 +484,33 @@
 	};
 
 
+	// 검색버튼
+
+	//var fclttSearch_btn = document.getElementById("fclttSearch_btn");
+	//fclttSearch_btn.onclick = function () {
+	//event.preventDefault(); // a 태그 중지버튼
+	//document.fcltt_listForm.submit();
+	//}
+
+	// 활동여부 onchange fclttChange
+
+	$("#fclttChange").change(function () {
+		var selectedValue = $(this).val();
+		console.log(selectedValue);
+
+		// AJAX 요청 보내기
+		$.ajax({
+			type: "GET",
+			url: "fclttListAjax",
+			data: {
+				"searchAccept_act_yn": selectedValue // 검색 조건을 파라미터로 보내기
+			},
+			success: function (fclttData) {
+			}
+		});
+
+		loadPaging();
+	});
 
 
 
@@ -492,7 +518,7 @@
 </script>
 
 
-<script th:inline="javascript">
+<!--<script th:inline="javascript">
 
 	var fclttSearch_btn = document.getElementById("fclttSearch_btn");
 	fclttSearch_btn.onclick = function () {
@@ -505,7 +531,7 @@
 </script>
 
 
-
+-->
 
 
 
