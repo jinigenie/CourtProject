@@ -66,13 +66,13 @@
 							<hr />
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
-									<select name="" id="" class="fclttSearch fclttSearch1">
+									<!--<select name="" id="" class="fclttSearch fclttSearch1">
 										<option value="">모두</option>
 										<option value="">이름</option>
 									</select>
 									<input type="text" class="fclttSearch fclttSearch2" name="searchUser_name" />
 
-									<a href="#" class="fclttSerch_Btn" id="pauseSearch_btn">검색</a>
+									<a href="#" class="fclttSerch_Btn" id="pauseSearch_btn">검색</a>-->
 									<select name="searchAccept_act_yn" id="" class="fclttSearch fclttSearch3">
 										<option value="">신청사항</option>
 										<option value="Y">중지신청</option>
@@ -113,7 +113,7 @@
 							</div>
 							<!-- pagenation -->
 							<div class="pager">
-
+								<!-- 페이지네이션 부분 -->
 							</div>
 						</div>
 						<!-- //본문컨텐츠 영역 -->
@@ -179,7 +179,7 @@
 		// 페이징 AJAX
 		function loadPaging() {
 			$.ajax({
-				url: "getTotal",
+				url: "getPauseTotal",
 				type: "GET",
 				success: function (data) {
 					// data를 JavaScript 변수로 할당

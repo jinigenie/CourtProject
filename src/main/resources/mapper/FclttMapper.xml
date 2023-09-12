@@ -27,6 +27,7 @@
 		       tb11.court_name,
 		       tb10.trial_fcltt_description,
 		       tb1.user_name,
+		       tb1.user_proper_num,
 		       tb14.accept_proper_num
 		FROM TB_014 tb14
 		JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
