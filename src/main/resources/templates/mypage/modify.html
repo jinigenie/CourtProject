@@ -73,7 +73,11 @@
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
                             </th>
                             <td data-cell-header="아이디" class="txt-left">
-                                <span id="cvl_id" th:text="${userVO.user_id}"></span>
+                                <div class="input-wrap" style="width: 200px">
+                                 <input name="user_id" id="cvl_nm"
+                                               th:value="${userVO.user_id}" class="cm_inptxt"
+                                               readonly/>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -111,7 +115,11 @@
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">성명</span>
                             </th>
                             <td data-cell-header="성명" class="txt-left">
-                                <span id="cvl_id" th:text="${userVO.user_name}"></span>
+								<div class="input-wrap" style="width: 200px">
+	                                <input name="user_name" id="cvl_nm"
+	                                               th:value="${userVO.user_name}" class="cm_inptxt"
+	                                               readonly/>
+								</div>                   
                             </td>
                         </tr>
 						<tr>
@@ -186,7 +194,7 @@
                                 <div class="address-wrap write-wrap-m">
                                     <div class="address-btn-wrap">
                                         <div class="input-wrap">
-                                            <input id="postcode" name="postAddr user_ar_zonecode"
+                                            <input id="postcode" name="user_ar_zonecode"
                                                    class="cm_inptxt" th:value="${userVO.user_ar_zonecode}" title="우편번호 앞자리" type="text"
                                                    readonly="readonly"/>
                                         </div>
@@ -196,12 +204,12 @@
                                         </button>
                                     </div>
                                     <div class="input-wrap" style="width: 478px">
-                                        <input name="addr1 user_ar" id="addr1" maxlength="100"
+                                        <input name="user_ar" id="addr1" maxlength="100"
                                                class="cm_inptxt" title="시군구주소 입력" type="text"
                                                th:value="${userVO.user_ar}" readonly="readonly"/>
                                     </div>
                                     <div class="input-wrap" style="width: 478px">
-                                        <input name="addr2 user_ar_detail" id="addr2" maxlength="50"
+                                        <input name="user_ar_detail" id="addr2" maxlength="50"
                                                class="cm_inptxt" title="상세주소 입력"
                                                type="text" value="" placeholder="상세주소"
                                                th:value="${userVO.user_ar_detail}"/>
@@ -356,10 +364,11 @@
 	
 	change.onclick = function(e) {
 		e.preventDefault();
-		console.log(1);
 		info.submit();
 	}
 	
 </script>
+
+
 
 </html>

@@ -62,38 +62,28 @@
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
 
-            <div class="table-t-wrap">
-              <div class="total-num">총 신청내역 <em>248</em>건</div>
-
-            </div>
             <!-- 게시판 시작 부분 -->
             <div class="table table-responsive">
               <table>
                 <caption>
                   신청일, 신청내용, 신청상태, 제출서류내역
                 </caption>
-                <colgroup>
-                  <col style="width: 20%" />
-                  <col style="width: 40%" />
-                  <col style="width: 20%" />
-                  <col style="width: 20%" />
-                </colgroup>
+         
                 <thead>
                   <tr>
+                    <th scope="col">번호</th>
                     <th scope="col">신청일</th>
                     <th scope="col">신청내용</th>
                     <th scope="col">신청상태</th>
                     <th scope="col">서류제출여부</th>
+                    <th scope="col">관리</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="cursor: pointer" >
+                    <td data-cell-header="번호">2</td>
                     <td data-cell-header="신청일">23.07.15</td>
-                    <td
-                      data-cell-header="신청내용"
-                    >
-                      통번역 재판조력자
-                    </td>
+                    <td data-cell-header="신청내용">통번역 재판조력자</td>
                     <td data-cell-header="신청상태">심사중</td>
                     <td>
                       <a href="#"
@@ -101,49 +91,20 @@
                       ><em style="width: 80px;">확인하기</em></a
                       >
                     </td>
+                    <td>
+                      <a href="#"
+                         class="case case1" id="btn-modal"
+                      ><em style="width: 50px;">수정</em></a
+                      >
+                      <a href="#"
+                         class="case case1" id="btn-modal"
+                      ><em style="width: 50px;">삭제</em></a
+                      >
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <!-- pagenation -->
-            <div class="pager">
-              <div class="pager-wrap">
-                <a
-                  href="#"
-                  class="arr first"
-                  title="처음으로"
-                  onclick="fn_egov_link_page(1); return false;"
-                  ><strong class="sr-only">맨 처음 목록으로 이동</strong></a
-                ><a
-                  href="#"
-                  class="arr prev"
-                  title="이전으로"
-                  onclick="fn_egov_link_page(1); return false;"
-                  ><strong class="sr-only">이전페이지로 이동</strong></a
-                ><a
-                  href="#"
-                  class="active"
-                  title="현재 선택된 페이지는 1 페이지 입니다."
-                  onclick=""
-                  >1</a
-                ><a
-                  href="#"
-                  class="arr next"
-                  title="다음으로"
-                  onclick="fn_egov_link_page(11); return false;"
-                  ><strong class="sr-only">다음페이지로 이동</strong></a
-                ><a
-                  href="#"
-                  class="arr last"
-                  title="마지막으로"
-                  onclick="fn_egov_link_page(25); return false;"
-                  ><strong class="sr-only">맨 마지막 목록으로 이동</strong></a
-                >
-              </div>
-            </div>
-         
-          
-          
           
           </div>
           <!-- //본문컨텐츠 영역 -->

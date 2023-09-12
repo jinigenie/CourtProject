@@ -11,6 +11,21 @@
 		where user_proper_num = #{user_proper_num}
 	</select>
 	
+	<select id="getHistory" resultType="ActiveVO">
+		SELECT t.TRIAL_NUM, 
+			   t.CHOSEN_DATE, 
+			   t.ATTENDANCE_DATE, 
+			   t.ACT_COMPLETE_YN,
+			   o.USER_PROPER_NUM
+		FROM tb_012 AS t
+		LEFT JOIN tb_014 AS f
+		   ON t.ACCEPT_PROPER_NUM = f.ACCEPT_PROPER_NUM
+		LEFT JOIN tb_001 AS o
+		    ON f.USER_PROPER_NUM =o.USER_PROPER_NUM
+		where o.USER_PROPER_NUM =#{user_proper_num}
+		order by chosen_date desc
+	</select>
+	
 	<update id="deleteUpdate">
 		update tb_001 
 		set user_delete_yn = 'Y' 
@@ -19,7 +34,7 @@
 	
 	<update id="modifyUpdate">
 		update tb_001 
-		set user_pw = #{user_job},
+		set user_pw = #{user_pw},
 			user_job = #{user_job},
 		    user_phone = #{user_phone},
 		    user_email_f = #{user_email_f},
