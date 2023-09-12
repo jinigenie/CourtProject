@@ -38,8 +38,10 @@
 		<where>
 		
 			<if test="cri.searchCourt !='' and cri.searchCourt != null"> 
-			<!-- 	court_region like concat('%',#{cri.searchCourt},'%') -->
 				and court_region like concat('%',#{cri.searchCourt},'%')
+			</if>
+			<if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null"> 
+				and accept_act_yn = #{cri.searchAccept_act_yn}
 			</if>
 			<if test="cri.searchCourtName !='' and cri.searchCourtName != null"> 
 				and court_name like concat('%',#{cri.searchCourtName},'%')
@@ -48,14 +50,15 @@
 				and court_region like concat('%',#{cri.searchContent},'%')
 				or court_name like concat('%',#{cri.searchContent},'%')
 				or user_name like  concat('%',#{cri.searchUser_name},'%') 
+				or accept_act_yn = #{cri.searchAct}
 			</if>
 			<if test="cri.searchAct !='' and cri.searchAct != null"> 
-				and  accept_act_yn = #{cri.searchAct}
+				and accept_act_yn = #{cri.searchAct}
 			</if>
 
 		</where>
 		
-		
+		limit #{cri.pageStart},#{cri.amount}
 		
     </select>
     
@@ -81,6 +84,9 @@
 	            and accept_act_yn = #{cri.searchAct}
 	        </if>
 	    </where>
+	    
+	    
+	    
 	</select>
 	    
     
@@ -133,10 +139,11 @@
 	<!-- 4, 자격증정보  -->
 	<select id="getFclttContent4" resultType="FclttVO">
         
-         select tb8.crtfc_type
+         select tb8.crtfc_type,
+				tb8.issue_agency
          from TB_008 tb8
          join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb8.aplcn_dtls_proper_num
-         where tb5.user_proper_num = #{user_proper_num}
+         where tb5.user_proper_num =#{user_proper_num}
          
          
 	</select>
@@ -146,7 +153,9 @@
 		
          select tb7.company_name,
 				tb7.carer_type,
-                tb7.work_department
+                tb7.work_department,
+                tb7.work_start_date,
+                tb7.work_end_date
          from TB_007 tb7
          join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb7.aplcn_dtls_proper_num
          where tb5.user_proper_num = #{user_proper_num}
