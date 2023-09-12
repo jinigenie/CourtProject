@@ -84,46 +84,26 @@
           />
           <div class="heading-wrap container">
             <h3 class="heading1">
-              <span>나의 재판조력자 활동 내역</span>
+              <span style="margin-bottom: 20px;">나의 재판조력자 활동 내역</span>
             </h3>
           </div>
 
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
-
-            <div class="tab-wrap">
-              <ul class="tab tab2"></ul>
+			<div style="overflow: hidden;">
+            <div class="table-t-wrap" style="float: left;">
+              <div class="total-num">총 활동내역 <em>2</em>건</div>
             </div>
-
-            <div class="searchform searchform2">
-              <div class="searchform-wrap">
-                <div class="select-box">
-                  <label for="selectTit"></label>
-                  <select
-                    class="info-select"
-                    id="selectTit"
-                    name="search_field"
-                    title="검색조건을 선택해주세요."
-                  >
-                    <option value="0">전체</option>
-                    <option value="1">개인</option>
-                    <option value="2">기업</option>
-                  </select>
-                </div>
-
-                <div class="search-input-wrap">
-                  <div class="input-wrap">
-                    <input
-                      type="text"
-                      name="q_string"
-                      value=""
-                      onkeypress="if(window.event.keyCode == 13) srchMinwonDoc();"
-                      class="form-control"
-                      placeholder="검색어를 입력해주세요"
-                      title="검색어를 입력해주세요"
-                      id="q_string"
-                    />
-                  </div>
+            
+            
+            <div class="searchform searchform2" style="float: right; padding: 0; margin: 0;">
+              <div style="display: inline-block;">
+                  <div class="select-box calander-box" style="border: none;">
+									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="startDate"
+										value="" /> -
+									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate"
+										value="" />
+								</div>
                   <button
                     type="button"
                     class="search-btn"
@@ -132,7 +112,6 @@
                     <i class="xi-search"></i>
                     <span class="sr-only">검색</span>
                   </button>
-                </div>
 
                 <div class="select-box" id="select-box-margin-left-10">
                   <label for="selectTit"></label>
@@ -141,36 +120,27 @@
                     id="view_cnt"
                     class="info-select"
                     title="게시판 목록보기 갯수선택"
-                    style="min-width: 170px"
                   >
                     <!-- onchange="chgViewCount(this.value);" -->
-                    <option value="10" selected=" selected">10개씩 보기</option>
-                    <option value="20">20개씩 보기</option>
-                    <option value="50">50개씩 보기</option>
-                    <option value="100">100개씩 보기</option>
+                    <option value="Y" selected=" selected">완료</option>
+                    <option value="N">미완료</option>
+
                   </select>
                 </div>
               </div>
             </div>
-
-            <div class="table-t-wrap">
-              <div class="total-num">총 활동내역 <em>2</em>건</div>
-
-            </div>
+            
+</div>    
+            
             <!-- 게시판 시작 부분 -->
             <div class="table table-responsive">
               <table>
                 <caption>
                   선정일, 재판번호, 출석일자, 완료여부
                 </caption>
-                <colgroup>
-                  <col style="width: 20%" />
-                  <col style="width: 40%" />
-                  <col style="width: 20%" />
-                  <col style="width: 20%" />
-                </colgroup>
                 <thead>
                   <tr>
+                    <th scope="col">번호</th>
                     <th scope="col">선정일</th>
                     <th scope="col">재판번호</th>
                     <th scope="col">출석일자</th>
@@ -178,19 +148,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor: pointer" >
-                    <td data-cell-header="활동내역고유번호">23.04.28</td>
-                    <td
-                      data-cell-header="선정일"
-                    >
-                      25465412HFDL
-                    </td>
-                    <td data-cell-header="출석일자">23.08.07</td>
-                    <td data-cell-header="완료여부">완료</td>
+                  <tr style="cursor: pointer" th:each="vo, status : ${list}">
+                    <td data-cell-header="번호">[[${status.count}]]</td>
+                    <td data-cell-header="선정일">[[${vo.chosen_date}]]</td>
+                    <td data-cell-header="재판번호">[[${vo.trial_num}]]</td>
+                    <td data-cell-header="출석일자">[[${vo.attendance_date}]]</td>
+                    <td data-cell-header="완료여부">[[${vo.act_complete_yn == 'Y' ? '완료' : '미완료'}]]</td>
                     
                   </tr>
-
-
 
                 </tbody>
               </table>

@@ -27,6 +27,15 @@ public class MypageServiceImpl implements MypageService {
 		return mypageMapper.modifyUpdate(vo);
 	}
 
+	@Override
+	public ArrayList<ActiveVO> getHistory(int user_proper_num) {
+		return mypageMapper.getHistory(user_proper_num);
+	}
+
+	
+
+
+
 
 
 }

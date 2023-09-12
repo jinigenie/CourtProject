@@ -1,6 +1,7 @@
 package com.court.proj.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,13 @@ public class MypageController {
 	}
 	
 	@GetMapping("/history")
-	public String history() {
+	public String history(Model model) {
+
+		int user_proper_num = 1;
+
+		ArrayList<ActiveVO> list = mypageService.getHistory(user_proper_num);
+		model.addAttribute("list", list);
+		
 		return "mypage/history";
 	}
 	
@@ -50,7 +57,8 @@ public class MypageController {
 	}
 	
 	@GetMapping("/status")
-	public String status() {
+	public String status(Model model) {
+
 		return "mypage/status";
 	}
 
@@ -74,7 +82,7 @@ public class MypageController {
 		int result = mypageService.modifyUpdate(vo);
 		String msg = result == 1? "회원정보가 변경되었습니다." : "변경실패. 관리자에게 문의하세요";
 		rra.addFlashAttribute("msg", msg);
-		
-		return "mypage/main";
+		System.out.println(result);
+		return "redirect:/mypage/main";
 	}
 }

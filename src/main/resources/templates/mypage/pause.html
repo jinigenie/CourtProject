@@ -111,7 +111,7 @@
 										<span class="essential-txt" style="margin-left: 80px;">현재 상태</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
-										<input name="cvl_nm" id="cvl_nm" value="활동중" class="cm_inptxt" type="text" readonly="readonly">
+										<span>활동중</span>
 									</td>
 								</tr>
 
@@ -132,15 +132,12 @@
 										<span class="essential-txt" style="margin-left: 80px;">신청기간</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
-		                                <div class="calander-box" style="padding: 0">
-		                                    <input type="text" class="datepicker" readonly placeholder="시작일"
-		                                           name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0;
-		                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
-		                                    <span>~</span>
-		                                    <input type="text" class="datepicker" readonly placeholder="종료일"
-		                                           name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0;
-		                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
-		                                </div>
+		                               <div class="calander-box">
+											<input type="text" class="datepicker" readonly placeholder="날짜선택" name="startDate"
+												value="" /> -
+											<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate"
+												value="" />
+										</div>
 									</td>
 								</tr>
 								<tr>
