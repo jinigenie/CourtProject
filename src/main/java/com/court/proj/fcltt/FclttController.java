@@ -1,12 +1,13 @@
 package com.court.proj.fcltt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,14 +49,19 @@ public class FclttController {
 
 	// 등재명단 상세보기 ajax 
 	@PostMapping("/getfclttModal")
-	public @ResponseBody ResponseEntity<FclttVO>getfclttModal(@RequestParam("accept_proper_num") String accept_proper_num,
-															  @RequestParam("user_proper_num") String user_proper_num){
-		System.out.println(accept_proper_num);
-		System.out.println(user_proper_num);
-		FclttVO list = fclttService.getFclttContent(accept_proper_num);
-		System.out.println(list.toString());
-
-		return new ResponseEntity<>(list,HttpStatus.OK);
+	public @ResponseBody ResponseEntity<Map<String, Object>>getfclttModal(@RequestParam("accept_proper_num") String accept_proper_num,
+																		  @RequestParam("user_proper_num") String user_proper_num){
+		
+		 Map<String, Object> map = new HashMap<>();
+		 map.put("content1", fclttService.getFclttContent1(accept_proper_num));
+		 map.put("content2", fclttService.getFclttContent2(user_proper_num));
+		 map.put("content3", fclttService.getFclttContent3(user_proper_num));
+		 map.put("content4", fclttService.getFclttContent4(user_proper_num));
+		 map.put("content5", fclttService.getFclttContent5(user_proper_num));
+		 
+		 System.out.println(map.get("content1"));
+		 
+		return new ResponseEntity<>(map,HttpStatus.OK);
 	}
 
 	

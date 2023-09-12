@@ -85,33 +85,80 @@
 	    
     
     
-	<!-- List에서 상세모기 모달창 ajax -->
-	<select id="getFclttContent" resultType="FclttVO">
+	<!-- //////////////// List에서 상세모기 모달창 ajax //////////////// -->
+	<!-- 1, 기본정보  -->
+	<select id="getFclttContent1" resultType="FclttVO">
 		select tb1.user_proper_num,
+			   tb1.user_phone,
 			   tb1.user_name,
+               tb1.user_email_f,
+               tb1.user_email_b,
 			   tb14.accept_proper_num,
 		       tb10.trial_fcltt_clasifi_code,
 		       tb10.trial_fcltt_description,
-		       tb6.edctn_school_name,
-		       tb6.edctn_major,
-		       tb6.edctn_degree,
-		       tb7.company_name,
-		       tb7.carer_type,
-		       tb8.crtfc_type,
                tb11.court_region,
-               tb11.court_name     
+               tb11.court_name
 		from TB_014 tb14 
 		join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb14.trial_fcltt_proper_num
 		join TB_001 tb1 on tb1.user_proper_num = tb14.user_proper_num
 		join TB_005 tb5 on tb5.user_proper_num = tb14.user_proper_num
-		join TB_006 tb6 on tb6.aplcn_dtls_proper_num = tb5.aplcn_dtls_proper_num
-		join TB_007 tb7 on tb7.aplcn_dtls_proper_num = tb6.aplcn_dtls_proper_num
-		join TB_008 tb8 on tb8.aplcn_dtls_proper_num = tb7.aplcn_dtls_proper_num
         join TB_011 tb11 on tb11.court_proper_num = tb14.court_proper_num
-		where accept_proper_num = #{accept_proper_num}
+		where tb14.accept_proper_num = #{accept_proper_num}
+		
+	</select>
+	
+	<!-- 2, 학력정보  -->
+	<select id="getFclttContent2" resultType="FclttVO">
+	
+		select tb6.edctn_school_name,
+				tb6.edctn_major,
+				tb6.edctn_degree
+         from TB_006 tb6
+         join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb6.aplcn_dtls_proper_num
+         where tb5.user_proper_num = #{user_proper_num}
+         
+	</select>
+	
+	<!-- 3, 재판이력  -->
+	<select id="getFclttContent3" resultType="FclttVO">
+         
+        select tb12.trial_num,
+			   tb12.attendance_date,
+               tb12.act_complete_yn
+         from TB_012 tb12
+         join TB_014 tb14 on tb14.accept_proper_num = tb12.accept_proper_num
+         where tb14.user_proper_num = #{user_proper_num}
+	</select>
+	
+	<!-- 4, 자격증정보  -->
+	<select id="getFclttContent4" resultType="FclttVO">
+        
+         select tb8.crtfc_type
+         from TB_008 tb8
+         join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb8.aplcn_dtls_proper_num
+         where tb5.user_proper_num = #{user_proper_num}
+         
+         
+	</select>
+	
+	<!-- 5, 경력정보  -->
+	<select id="getFclttContent5" resultType="FclttVO">
+		
+         select tb7.company_name,
+				tb7.carer_type,
+                tb7.work_department
+         from TB_007 tb7
+         join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb7.aplcn_dtls_proper_num
+         where tb5.user_proper_num = #{user_proper_num}
+         
 	</select>
 
-	
+
+
+
+
+
+	<!-- //////////////////////////////////////////////////////////////////////////////////-->
 		<!-- 중지 or 활동신청 리스트  -->
 	<select id="getPauseList" resultType="PauseVO">
 	    SELECT tb14_2.accept_pause,
@@ -135,6 +182,12 @@
 	        AND user_name = #{cri.searchUser_name}
 	    </if>
 	</select>
+
+	
+
+
+
+
 
 
 
