@@ -21,30 +21,45 @@ public class FclttController {
 	@Autowired
 	private FclttService fclttService;
 
-	// 등재명단
+	// 등재명단페이지 진입 
 	@GetMapping("/fclttList")
-	public String fclttList(Model model, FclttCriteria cri) {
-		
+	public String fclttList() {
+		return "fcltt/fclttList";
+	}
+	
+	// 등재명단 ajax목록 
+	@GetMapping("/fclttListAjax")
+	@ResponseBody
+	public ResponseEntity<ArrayList<FclttVO> > fclttListAjax( FclttCriteria cri) {
 		ArrayList<FclttVO>list= fclttService.getList(cri);
+		System.out.println(list.toString());
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+
+	// 페이징 ajax 
+	@GetMapping("/fclttTotal")
+	@ResponseBody
+	public ResponseEntity<FclttPageVO> fclttTotal(FclttCriteria cri) {
+		
 		int total = fclttService.getTotal(cri);
 		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
-		
-		model.addAttribute("list",list);
-		model.addAttribute("FclttPageVO",FclttPageVO);
-		return "fcltt/fclttList";
-
+	    return new ResponseEntity<>(FclttPageVO, HttpStatus.OK);
 	}
 
 	// 등재명단 상세보기 ajax 
 	@PostMapping("/getfclttModal")
-	public @ResponseBody ResponseEntity<FclttVO>getfclttModal(@RequestParam("accept_proper_num") String accept_proper_num){
+	public @ResponseBody ResponseEntity<FclttVO>getfclttModal(@RequestParam("accept_proper_num") String accept_proper_num,
+															  @RequestParam("user_proper_num") String user_proper_num){
 		System.out.println(accept_proper_num);
+		System.out.println(user_proper_num);
 		FclttVO list = fclttService.getFclttContent(accept_proper_num);
 		System.out.println(list.toString());
 
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 
+	
+	
 	//안쓰는 페이지 (연습용)
 	@GetMapping("/fclttDetail")
 	public String fclttDetail() {
@@ -72,7 +87,7 @@ public class FclttController {
 		return "redirect:/fcltt/fclttList";
 	}
 	
-	
+
 	
 	// Pause -------------------------------------------------------------------------------------------
 	// 중지신청 목록진입
@@ -91,11 +106,11 @@ public class FclttController {
 	
 	
 	// 페이징 ajax 
-	@GetMapping("/getTotal")
+	@GetMapping("/getPauseTotal")
 	@ResponseBody
-	public ResponseEntity<FclttPageVO> getTotal(FclttCriteria cri) {
+	public ResponseEntity<FclttPageVO> getPauseTotal(FclttCriteria cri) {
 		
-		int total = fclttService.getTotal(cri);
+		int total = fclttService.getPauseTotal(cri);
 		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
 	    return new ResponseEntity<>(FclttPageVO, HttpStatus.OK);
 	}
@@ -114,10 +129,6 @@ public class FclttController {
 		System.out.println("결과: " + result);
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
-
-	
-
-
 
 
 
