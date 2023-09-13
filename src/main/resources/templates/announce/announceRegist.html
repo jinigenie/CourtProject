@@ -158,6 +158,7 @@
 													<div class="select-box" style="width: 180px">
 														<label for="selectType1"></label>
 														<select class="info-select" id="selectType1" name="selectType1">
+															<option value="선택">선택</option>
 															<option value="조력자"
 																th:selected="${vo.trial_fcltt_main_code == '조력자'}">
 																조력자
@@ -183,9 +184,10 @@
 													<div class="select-box" style="width: 180px">
 														<label for="selectType2"></label>
 														<select class="info-select" id="selectType2" name="selectType2">
-															<option th:each="vo : ${alist}"
+															<option value="선택">선택</option>
+															<option th:each="vo : ${tlist}"
 																th:class="${vo.trial_fcltt_main_code}"
-																th:selected="${vo.getTrial_fcltt_clasifi_code == vo.getTrial_fcltt_clasifi_code()}">
+																th:select="${vo.getTrial_fcltt_clasifi_code == vo.getTrial_fcltt_clasifi_code()}">
 																[[${vo.trial_fcltt_clasifi_code}]]
 															</option>
 														</select>
@@ -193,9 +195,10 @@
 													<div class="select-box selectBox3" style="width: 180px">
 														<label for="selectType3"></label>
 														<select class="info-select" id="selectType3" name="selectType3">
-															<option th:each="vo : ${alist}"
+															<option value="선택">선택</option>
+															<option th:each="vo : ${tlist}"
 																th:class="${vo.trial_fcltt_clasifi_code}"
-																th:selected="${vo.getTrial_fcltt_sbcls_code == vo.getTrial_fcltt_sbcls_code()}">
+																th:select="${vo.getTrial_fcltt_sbcls_code == vo.getTrial_fcltt_sbcls_code()}">
 																[[${vo.trial_fcltt_sbcls_code}]]
 															</option>
 														</select>
@@ -283,7 +286,7 @@
 <!-- 조력자 분류 start -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script th:src="@{../../js/announce/announceTrial.js}"></script>
-<!--
+
 <script>
 	function cancelRegistration() {
 		if (confirm("등록을 취소하시겠습니까?")) {
@@ -312,6 +315,6 @@
 		}
 	});
 
-</script>-->
+</script>
 
 </html>
