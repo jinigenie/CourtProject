@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/app")
@@ -27,9 +25,13 @@ public class AplcnRegController {
     @Qualifier("aplcnRegService")
     private AplcnRegService aplcnRegService;
 
+    String id = "";
     int trial_pn = 0;   //선택된 재판조력자 코드 넘기기위해
     int user_num = 0;   //현재 user_proper_num을 기억하기 위해
     int reg_num = 0; //aplcn_dtls_proper_num을 기억하기 위해
+    ArrayList<Integer> careerPk = new ArrayList<Integer>(); //경력 PK 기억 : 업데이트용
+    ArrayList<Integer> univPk = new ArrayList<Integer>();   //대학교 PK 기억 : 업데이트용
+    ArrayList<Integer> certiPk = new ArrayList<Integer>();  //자격증 PK 기억 : 업데이트용
 
     //신청안내페이지
     @GetMapping("/start")
@@ -56,7 +58,7 @@ public class AplcnRegController {
     @GetMapping("/info")
     public String getInfo(Model model) {
 
-        String id = "genie91";
+        id = "user7";
 
         // 기본정보 불러와서 보내기
         UserVO uvo = aplcnRegService.getInfo(id);
@@ -91,16 +93,17 @@ public class AplcnRegController {
     @GetMapping("/career")
     public String getCareer(Model model) {
 
-        reg_num = 1;
+        reg_num = aplcnRegService.getRegnum(user_num);
 
         ArrayList<AddInfoVO> caList = aplcnRegService.getCareer(reg_num);
         AddInfoVO spvo = aplcnRegService.getSpecial(reg_num);
 
-        if (caList.size() != 0) { // 경력내용 있으면 화면에 찍어주기
-            model.addAttribute("caList", caList);
+        model.addAttribute("caList", caList);
+        for(AddInfoVO cvo : caList) {   //pk 따로 저장해두기
+            careerPk.add(cvo.getAplcn_carer_proper_num());
         }
 
-        if (spvo != null) {
+        if (spvo != null) { //특기사항 있으면 화면에 찍어주기
             model.addAttribute("spvo", spvo);
         }
 
@@ -109,7 +112,34 @@ public class AplcnRegController {
 
     //학력사항 입력페이지
     @GetMapping("/edu")
-    public String getEdu() {
+    public String getEdu(Model model) {
+
+        reg_num = aplcnRegService.getRegnum(user_num);
+
+        UserVO uvo = aplcnRegService.getInfo(id);
+        model.addAttribute("vo", uvo);
+
+        ArrayList<AddInfoVO> scList = aplcnRegService.getSchoolInfo(reg_num);
+        AddInfoVO highInfo = null;
+        ArrayList<AddInfoVO> univInfo = new ArrayList<>();
+        if(scList.size() > 0){
+            highInfo = scList.get(0);
+            univInfo = new ArrayList<>();
+            if(scList.size() > 1) {
+                for(int i = 1; i < scList.size(); i++) {
+                    univInfo.add(scList.get(i));
+                }
+            }
+        }
+        model.addAttribute("highInfo", highInfo);
+        model.addAttribute("univInfo", univInfo);
+        for(AddInfoVO unvo : univInfo) {   //pk 따로 저장해두기
+            univPk.add(unvo.getEdctn_dtls_proper_num());
+        }
+
+        ArrayList<AddInfoVO> ctList = aplcnRegService.getCertiInfo(reg_num);
+        model.addAttribute("ctList", ctList);
+
         return "app/aplcnRegEducation";
     }
 
@@ -177,19 +207,6 @@ public class AplcnRegController {
         }
     }
 
-//    @PostMapping("/saveCareerForm")
-//    public String saveCareer(@ModelAttribute AddInfoVO[] aivoList,
-//                             @RequestParam("x") int x) {
-//
-//        System.out.println(aivoList.length);
-//
-//        if (x == 1) {
-//            return "redirect:/app/info";  //requestParam 때문에 error
-//        } else {
-//            return "redirect:/app/edu";
-//        }
-//    }
-
     //regCareer 정보 저장하기
     @PostMapping("/saveCareerForm")
     public String saveCareer(@RequestParam("company_name[]") ArrayList<String> cn,
@@ -201,12 +218,19 @@ public class AplcnRegController {
                              @ModelAttribute AddInfoVO aivo,
                              @RequestParam("x") int x) {
 
-        //경력테이블에 넣을 데이터 정리
+        if(cn.size()>careerPk.size()){
+            for(int i = careerPk.size(); i < cn.size(); i++) {
+                careerPk.add(0);
+            }
+        }
+        //경력테이블에 넣을 데이터 정리 : AddInfoVO 객체 리스트 생성
         List<AddInfoVO> aivoList = new ArrayList<>();
         for(int i = 0; i < cn.size(); i++) {
             AddInfoVO addInfoVO = new AddInfoVO();
+            addInfoVO.setAplcn_carer_proper_num(careerPk.get(i));
             addInfoVO.setAplcn_dtls_proper_num(reg_num);
             addInfoVO.setCompany_name(cn.get(i));
+            addInfoVO.setCarer_type(aivo.getCarer_typeList()[i]);
             addInfoVO.setWork_start_date(wsd.get(i));
             addInfoVO.setWork_end_date(wed.get(i));
             addInfoVO.setWork_description(wdc.get(i));
@@ -216,27 +240,27 @@ public class AplcnRegController {
             System.out.println(addInfoVO);
         }
 
+        int cntCareer = 0;
+
+        // 경력 테이블에 있으면 업데이트, 없으면 insert
+        for (AddInfoVO avo : aivoList) {
+            cntCareer = aplcnRegService.getCareerInfo(avo.getAplcn_carer_proper_num());
+            if(cntCareer == 1){
+                aplcnRegService.updateCareer007(avo);
+            }
+            else {
+                aplcnRegService.setCareer007(avo);
+            }
+        }
 
         aivo.setAplcn_dtls_proper_num(reg_num);
-
-        int cntCareer = aplcnRegService.getCareerInfo(reg_num);
-        int cntSpecial = aplcnRegService.getSpecialInfo(reg_num);
-
-        System.out.println("aivo: >>>>>" + aivo.toString());
-
-        // 경력 테이블에 임시저장한게 없으면 insert, 있으면 update
-//        if(cntCareer == 0) {
-//            aplcnRegService.setCareer007(aivo);
-//        } else {
-//            aplcnRegService.updateCareer007(aivo);
-//        }
-
         // 특기사항 테이블에 임시저장한게 없으면 insert, 있으면 update
-//        if(cntSpecial == 0) {
-//            aplcnRegService.setCareer007_2(aivo);
-//        } else {
-//            aplcnRegService.updateCareer007_2(aivo);
-//        }
+        int cntSpecial = aplcnRegService.getSpecialInfo(aivo.getAplcn_dtls_proper_num());
+        if(cntSpecial == 0) {
+            aplcnRegService.setCareer007_2(aivo);
+        } else {
+            aplcnRegService.updateCareer007_2(aivo);
+        }
 
         if (x == 1) {
             return "redirect:/app/info";  //requestParam 때문에 error
@@ -247,9 +271,48 @@ public class AplcnRegController {
 
     //regEducation 정보 저장하기
     @PostMapping("/saveEduForm")
-    public String saveEdu(@ModelAttribute InfoVO ivo,
+    public String saveEdu(@ModelAttribute AddInfoVO aivo,
                           @ModelAttribute UserVO uvo,
+                          @RequestParam("edctn_school_name[]") ArrayList<String> esn,
+                          @RequestParam("edctn_major[]") ArrayList<String> em,
+                          @RequestParam("edctn_degree[]") ArrayList<String> ed,
+                          @RequestParam("edctn_final[]") ArrayList<String> ef,
+                          @RequestParam("edctn_admsn_date[]") ArrayList<String> adate,
+                          @RequestParam("edctn_grdtn_date[]") ArrayList<String> gdate,
                           @RequestParam("x") int x) {
+
+        System.out.println(aivo.toString());
+        System.out.println(uvo.toString());
+
+        aivo.setAplcn_dtls_proper_num(reg_num);
+        //고등학교 정보 업뎃 or insert
+        if(aplcnRegService.getHighCnt(reg_num) == 0) {
+            aplcnRegService.setHighSchool(aivo);
+        } else {
+            aplcnRegService.updateHighSchool(aivo);
+        }
+
+        if(esn.size()>univPk.size()){       //새로 추가한 데이터는 대학pk 없어서 임의값 0으로 추가
+            for(int i = univPk.size(); i < esn.size(); i++) {
+                univPk.add(0);
+            }
+        }
+
+        //학력테이블(대학만 포함)에 넣을 데이터 정리 : AddInfoVO 객체 리스트 생성
+        List<AddInfoVO> aivoList = new ArrayList<>();
+        for(int i = 0; i < esn.size(); i++) {
+            AddInfoVO addInfoVO = new AddInfoVO();
+            addInfoVO.setEdctn_dtls_proper_num(univPk.get(i));
+            addInfoVO.setAplcn_dtls_proper_num(reg_num);
+            addInfoVO.setEdctn_school_name(esn.get(i));
+            addInfoVO.setEdctn_major(em.get(i));
+            addInfoVO.setEdctn_degree(ed.get(i));
+            addInfoVO.setEdctn_final(ef.get(i));
+            addInfoVO.setEdctn_admsn_date(adate.get(i));
+            addInfoVO.setEdctn_grdtn_date(gdate.get(i));
+            aivoList.add(addInfoVO);
+            System.out.println(addInfoVO);
+        }
 
         if(x == 1) {
             return "redirect:/app/career";

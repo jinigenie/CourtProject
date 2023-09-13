@@ -49,13 +49,13 @@
                         </div>
                         <div class="select-box" style="margin: 30px 0 0 15px; float:left;">
                             <label for="selectEdu"></label>
-                            <select class="info-select" id="selectEdu">
+                            <select class="info-select" id="selectEdu" name="user_edctn_final">
                                 <option value="">선택</option>
-                                <option value="학사">학사</option>
-                                <option value="석사">석사</option>
-                                <option value="박사">박사</option>
-                                <option value="전문">전문학사</option>
-                                <option value="고졸">고졸</option>
+                                <option value="학사" th:selected="${vo.user_edctn_final == '학사'}">학사</option>
+                                <option value="석사" th:selected="${vo.user_edctn_final == '석사'}">석사</option>
+                                <option value="박사" th:selected="${vo.user_edctn_final == '박사'}">박사</option>
+                                <option value="전문" th:selected="${vo.user_edctn_final == '전문'}">전문학사</option>
+                                <option value="고졸" th:selected="${vo.user_edctn_final == '고졸'}">고졸</option>
                             </select>
                         </div>
                     </div>
@@ -79,8 +79,8 @@
                                 </thead>
                                 <tbody id="highTable">
                                 <tr style="cursor: pointer">
-                                    <td data-cell-header="학교명"><input type="text" class="input-wrap"
-                                                                      style="margin-left: 40px; width: 250px">
+                                    <td data-cell-header="학교명"><input type="text" class="input-wrap highSchoolName" name="edctn_school_name"
+                                                                      style="margin-left: 40px; width: 250px" th:value="${highInfo != null? highInfo.edctn_school_name : ''}">
                                         <input type="button" class="highSearch"
                                                style="background: url(../../img/app/search.png); border: none; width: 30px;
                                         height: 30px; background-size: cover; position: absolute;
@@ -89,24 +89,24 @@
                                         <div class="select-box">
 
                                             <label>선택</label><select class="info-select" id="selectState"
-                                                                     name="search_field">
+                                                                     name="edctn_final">
                                             <option value="">선택</option>
-                                            <option value="">졸업</option>
-                                            <option value="">중퇴</option>
+                                            <option value="졸업" th:selected="${highInfo != null && highInfo.edctn_final == '졸업'}">졸업</option>
+                                            <option value="중퇴" th:selected="${highInfo != null && highInfo.edctn_final == '중퇴'}">중퇴</option>
                                         </select>
                                         </div>
                                     </td>
                                     <td data-cell-header="입학일">
                                         <div class="calander-box" style="padding: 0">
                                             <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                                   name="startDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                                   name="edctn_admsn_date" th:value="${highInfo != null? highInfo.edctn_admsn_date : ''}" style="width: 150px; height: 40px; border-radius: 0;
                                            background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
                                         </div>
                                     </td>
                                     <td data-cell-header="졸업일">
                                         <div class="calander-box" style="padding: 0; margin-right: 40px">
                                             <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                                   name="endDate" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                                   name="edctn_grdtn_date" th:value="${highInfo != null? highInfo.edctn_grdtn_date : ''}" style="width: 150px; height: 40px; border-radius: 0;
                                            background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
                                         </div>
                                     </td>
@@ -123,8 +123,7 @@
                                 <span class="sub_title">대학/대학원 정보</span>
                             </div>
                             <button type="button" class="add" id="eduAddBtn"
-                                    style="float: right; padding: 43px 27px 0 0">학력
-                                추가
+                                    style="float: right; padding: 43px 27px 0 0">학력 추가
                             </button>
                         </div>
                         <div class="table eduTable" style="overflow: auto">
@@ -141,62 +140,63 @@
                                 </tr>
                                 </thead>
                                 <tbody id="eduTable">
-                                <tr style="cursor: pointer">
-                                    <td data-cell-header="학교명"><input type="text" class="input-wrap"
-                                                                      style="width: 200px; margin-left: 50px">
+                                <th:block th:if="${univInfo != null}">
+                                <tr th:each="uvo : ${univInfo}" style="cursor: pointer">
+                                    <td data-cell-header="학교명"><input type="text" class="input-wrap universityName" name="edctn_school_name[]"
+                                                                      style="width: 200px; margin-left: 50px" th:value="${uvo.edctn_school_name}">
                                         <input type="button" class="UnivSearch"
                                                style="background: url(../../img/app/search.png); border: none; width: 30px;
                                         height: 30px; background-size: cover; position: absolute;
                                         margin-left: -38px; margin-top: 5px; cursor: pointer"></td>
-                                    <td data-cell-header="학과"><input type="text" class="input-wrap"
-                                                                     style="width: 150px">
+                                    <td data-cell-header="학과"><input type="text" class="input-wrap" name="edctn_major[]"
+                                                                     style="width: 150px" th:value="${uvo.edctn_major}">
                                     </td>
                                     <td data-cell-header="학위">
-                                        <div class="select-box2" style="width: 90px">
+                                        <div class="select-box2" style="width: 140px">
                                             <label for="selectEdu2"></label>
-                                            <select class="info-select" id="selectEdu2" name="search_field">
+                                            <select class="info-select" id="selectEdu2" name="edctn_degree[]">
                                                 <option value="">선택</option>
-                                                <option value="">학사</option>
-                                                <option value="">석사</option>
-                                                <option value="">박사</option>
-                                                <option value="">전문학사</option>
-
+                                                <option value="학사" th:selected="${uvo.edctn_degree == '학사'}">학사</option>
+                                                <option value="석사" th:selected="${uvo.edctn_degree == '석사'}">석사</option>
+                                                <option value="박사" th:selected="${uvo.edctn_degree == '박사'}">박사</option>
+                                                <option value="전문학사" th:selected="${uvo.edctn_degree == '전문학사'}">전문학사</option>
                                             </select>
                                         </div>
                                     </td>
 
                                     <td data-cell-header="졸업구분">
-                                        <div class="select-box2" style="width: 90px">
+                                        <div class="select-box2" style="width: 140px">
                                             <label for="selectState2"></label>
                                             <select class="info-select" id="selectState2"
-                                                    name="search_field" title="검색조건을 선택해주세요.">
-                                                <option value="" selected="selected">선택</option>
-                                                <option value="">졸업</option>
-                                                <option value="">졸업예정</option>
-                                                <option value="">수료</option>
-                                                <option value="">중퇴</option>
+                                                    name="edctn_final[]" title="검색조건을 선택해주세요.">
+                                                <option value="">선택</option>
+                                                <option value="졸업" th:selected="${uvo.edctn_final == '졸업'}">졸업</option>
+                                                <option value="졸업예정" th:selected="${uvo.edctn_final == '졸업예정'}">졸업예정</option>
+                                                <option value="수료" th:selected="${uvo.edctn_final == '수료'}">수료</option>
+                                                <option value="중퇴" th:selected="${uvo.edctn_final == '중퇴'}">중퇴</option>
                                             </select>
                                         </div>
                                     </td>
                                     <td data-cell-header="입학일">
                                         <div class="calander-box" style="padding: 0">
                                             <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                                   name="startDate" value="" style="width: 130px; height: 40px; border-radius: 0;
+                                                   name="edctn_admsn_date[]" th:value="${uvo.edctn_admsn_date}" style="width: 130px; height: 40px; border-radius: 0;
                                            background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>
                                         </div>
                                     </td>
                                     <td data-cell-header="졸업일">
                                         <div class="calander-box" style="padding: 0">
                                             <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                                   name="endDate" value="" style="width: 130px; height: 40px; border-radius: 0;
+                                                   name="edctn_grdtn_date[]" th:value="${uvo.edctn_grdtn_date}" style="width: 130px; height: 40px; border-radius: 0;
                                            background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>
                                         </div>
                                     </td>
                                     <td style="padding: 0.5rem 0">
-                                        <button class="case case1 deleteInfo" style="visibility: hidden">지우기</button>
+                                        <button class="case case1 deleteInfo">지우기</button>
                                     </td>
                                 </tr>
 
+                                </th:block>
                                 </tbody>
                             </table>
                         </div>
@@ -224,31 +224,35 @@
                             </tr>
                             </thead>
                             <tbody id="certiTable">
-                            <tr style="cursor: pointer">
-                                <td data-cell-header="종목"><input type="text" class="input-wrap"
-                                                                 style="width: 200px; margin-left: 30px">
-                                    <input type="button" class="certiSearch"
-                                           style="background: url(../../img/app/search.png); border: none; width: 30px;
+                            </tr>
+                            <th:block th:if="${ctList != null}">
+                                <tr th:each="cvo : ${ctList}" style="cursor: pointer">
+                                    <td data-cell-header="종목"><input type="text" class="input-wrap certificationName"
+                                                                     style="width: 200px; margin-left: 30px" name="crtfc_type" th:value="${cvo.crtfc_type}">
+                                        <input type="button" class="certiSearch"
+                                               style="background: url(../../img/app/search.png); border: none; width: 30px;
                                         height: 30px; background-size: cover; position: absolute;
                                         margin-left: -38px; margin-top: 5px; cursor: pointer"></td>
-                                <td data-cell-header="기관"><input type="text" class="input-wrap" style="width: 150px">
-                                </td>
-                                <td data-cell-header="면허번호"><input type="text" class="input-wrap" style="width: 150px">
-                                </td>
-                                <td data-cell-header="발급일">
-                                    <div class="calander-box" style="padding: 0">
-                                        <input type="text" class="datepicker" readonly placeholder="날짜선택"
-                                               name="issueDate" value="" style="width: 150px; height: 40px; border-radius: 0;
-                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="case case1 deleteInfo"
-                                            style="margin-right: 30px; visibility: hidden">
-                                        지우기
-                                    </button>
-                                </td>
-                            </tr>
+                                    <td data-cell-header="기관">
+                                        <input type="text" class="input-wrap" style="width: 150px" name="issue_agency" th:value="${cvo.issue_agency}">
+                                    </td>
+                                    <td data-cell-header="면허번호">
+                                        <input type="text" class="input-wrap" style="width: 150px" name="crtfc_number" th:value="${cvo.crtfc_number}">
+                                    </td>
+                                    <td data-cell-header="발급일">
+                                        <div class="calander-box" style="padding: 0">
+                                            <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                                   name="issue_date" value="" style="width: 150px; height: 40px; border-radius: 0;
+                                           background-position-x: 123px; background-position-y: 10px; cursor: pointer;" th:value="${cvo.issue_date}"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="case case1 deleteInfo"
+                                                style="margin-right: 30px">
+                                            지우기
+                                        </button>
+                                    </td>
+                            </th:block>
                             </tbody>
                         </table>
                     </div>

@@ -104,6 +104,11 @@
         WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
     </select>
 
+    <select id="getRegnum" resultType="int">
+        SELECT APLCN_DTLS_PROPER_NUM FROM TB_005
+        WHERE USER_PROPER_NUM = #{user_num};
+    </select>
+
     <select id="getSpecial" resultType="AddInfoVO">
         SELECT * FROM TB_007_2
         WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
@@ -112,7 +117,7 @@
     <select id="getCareerInfo" resultType="int">
         SELECT COUNT(*)
         FROM TB_007
-              WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+              WHERE APLCN_CARER_PROPER_NUM = #{reg_num}
     </select>
 
     <select id="getSpecialInfo" resultType="int">
@@ -130,34 +135,67 @@
             WORK_DESCRIPTION = #{work_description},
             WORK_DEPARTMENT = #{work_department},
             WORK_POSITION = #{work_position}
-        WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
+        WHERE APLCN_CARER_PROPER_NUM = #{aplcn_carer_proper_num}
     </update>
 
     <update id="updateCareer007_2" parameterType="AddInfoVO">
         UPDATE TB_007_2 SET
             CARER_DESCRIPTION = #{carer_description},
-            SPECIAL_NOTE_DESCRIPTION = #{special_note_description},
+            SPECIAL_NOTE_DESCRIPTION = #{special_note_description}
             WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
     </update>
 
     <insert id="setCareer007" parameterType="AddInfoVO">
         INSERT INTO TB_007 (
-            COMPANY_NAME, CARER_TYPE, WORK_START_DATE, WORK_END_DATE,
+            APLCN_DTLS_PROPER_NUM, COMPANY_NAME, CARER_TYPE, WORK_START_DATE, WORK_END_DATE,
             WORK_DESCRIPTION, WORK_DEPARTMENT, WORK_POSITION
         )
         VALUES (
-            #{company_name}, #{carer_type}, #{work_start_date}, #{work_end_date},
+            #{aplcn_dtls_proper_num}, #{company_name}, #{carer_type}, #{work_start_date}, #{work_end_date},
             #{work_description}, #{work_department}, #{work_position}
         )
     </insert>
 
     <insert id="setCareer007_2" parameterType="AddInfoVO">
         INSERT INTO TB_007_2 (
-            CARER_DESCRIPTION, SPECIAL_NOTE_DESCRIPTION
+            APLCN_DTLS_PROPER_NUM, CARER_DESCRIPTION, SPECIAL_NOTE_DESCRIPTION
         )
         VALUES (
-            #{carer_description}, #{special_note_description}
+            #{aplcn_dtls_proper_num}, #{carer_description}, #{special_note_description}
         )
     </insert>
+
+    <select id="getSchoolInfo" resultType="AddInfoVO">
+        SELECT * FROM TB_006
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+    </select>
+
+    <select id="getCertiInfo" resultType="AddInfoVO">
+        SELECT * FROM TB_008
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+    </select>
+
+    <select id="getHighCnt" resultType="int">
+        SELECT * FROM TB_006
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num} AND EDCTN_SCHOOL_NAME LIKE '%고등학교%';
+    </select>
+
+    <insert id="setHighSchool" parameterType="AddInfoVO">
+        INSERT INTO TB_006 (
+            APLCN_DTLS_PROPER_NUM, EDCTN_SCHOOL_NAME, EDCTN_ADMSN_DATE, EDCTN_GRDTN_DATE, EDCTN_FINAL
+        )
+        VALUES (
+            #{aplcn_dtls_proper_num}, #{edctn_school_name}, #{edctn_admsn_date}, #{edctn_grdtn_date}, #{edctn_final}
+               )
+    </insert>
+
+    <update id="updateHighSchool" parameterType="AddInfoVO">
+        UPDATE TB_006 SET
+                          EDCTN_SCHOOL_NAME = #{edctn_school_name},
+                          EDCTN_ADMSN_DATE = #{edctn_admsn_date},
+                          EDCTN_GRDTN_DATE = #{edctn_grdtn_date},
+                          EDCTN_FINAL = #{edctn_final}
+        WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
+    </update>
 
 </mapper>
