@@ -45,7 +45,50 @@
 		    user_bank = #{user_bank}, 
 		    user_bank_account = #{user_bank_account},
 		    user_bank_holder = #{user_bank_holder}
-		where user_proper_num =  #{user_proper_num};
+		where user_proper_num =  #{user_proper_num}
 	</update>
+	
+	<select id="getStatus" resultType="MypageStatusVO">
+		 select b.*,
+				e.ANNOUNCE_TITLE
+				from (
+						select a.*
+						from (
+								select 
+									o.USER_PROPER_NUM,
+									f.TRIAL_FCLTT_PROPER_NUM,
+									f.APLICN_DTLS_DATE,
+									f.APLICN_DTLS_STS,
+                                    f.APLCN_DTLS_PROPER_NUM
+								from tb_001 as o
+								left join tb_005 as f
+								on o.USER_PROPER_NUM = f.USER_PROPER_NUM) a
+						left join tb_010 as t
+						on a.TRIAL_FCLTT_PROPER_NUM = t.TRIAL_FCLTT_PROPER_NUM) b
+		 left join tb_002 e
+		 on b.TRIAL_FCLTT_PROPER_NUM = e.TRIAL_FCLTT_PROPER_NUM
+		 where b.USER_PROPER_NUM = #{user_proper_num}
+	
+	</select>
+	
+	
+	<select id="getDocu" resultType="MypageStatusVO">
+		select * from tb_009 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+	</select>
+	
+	
+	<insert id="regPause">
+		INSERT 
+		INTO tb_014_2 (ACCEPT_STATUS, 
+					   PAUSE_START_DATE, 
+					   PAUSE_END_DATE, 
+					   ACCEPT_PAUSE_ETC)
+		VALUES(#{accept_status},
+		       #{pause_start_date}, 
+		       #{pause_end_date}, 
+		       #{accept_pause_etc})
+			
+	</insert>
+
 
 </mapper>       

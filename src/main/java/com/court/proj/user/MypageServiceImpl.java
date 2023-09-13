@@ -32,6 +32,21 @@ public class MypageServiceImpl implements MypageService {
 		return mypageMapper.getHistory(user_proper_num);
 	}
 
+	@Override
+	public ArrayList<MypageStatusVO> getStatus(int user_proper_num) {
+		return mypageMapper.getStatus(user_proper_num);
+	}
+
+	@Override
+	public ArrayList<MypageStatusVO> getDocu(int aplcn_dtls_proper_num) {
+		return mypageMapper.getDocu(aplcn_dtls_proper_num);
+	}
+
+	@Override
+	public int regPause(PauseDataVO vo) {
+		return mypageMapper.regPause(vo);
+	}
+
 	
 
 

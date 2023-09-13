@@ -80,11 +80,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor: pointer" >
-                    <td data-cell-header="번호">2</td>
-                    <td data-cell-header="신청일">23.07.15</td>
-                    <td data-cell-header="신청내용">통번역 재판조력자</td>
-                    <td data-cell-header="신청상태">심사중</td>
+                  <tr style="cursor: pointer" th:each="vo, status : ${list}" id="tr">
+                    <td data-cell-header="번호">[[${status.count}]]</td>
+                    <td data-cell-header="신청일">[[${vo.APLICN_DTLS_DATE}]]</td>
+                    <td data-cell-header="신청내용">[[${vo.ANNOUNCE_TITLE}]]</td>
+                    <td data-cell-header="신청상태">[[${vo.APLICN_DTLS_STS}]]</td>
                     <td>
                       <a href="#"
                          class="case case1" id="btn-modal"
@@ -93,14 +93,15 @@
                     </td>
                     <td>
                       <a href="#"
-                         class="case case1" id="btn-modal"
+                         class="case case1 modify"
                       ><em style="width: 50px;">수정</em></a
                       >
                       <a href="#"
-                         class="case case1" id="btn-modal"
+                         class="case case1 delete"
                       ><em style="width: 50px;">삭제</em></a
                       >
                     </td>
+                    
                   </tr>
                 </tbody>
               </table>
@@ -115,86 +116,87 @@
 
     </div>
       <!-- 모달 영역-->
-      <div id="modal" class="modal modal-overlay">
-        <div class="modal-window">
-          <div class="title">
-            <h3>서류 제출여부</h3>
-          </div>
-          <div class="close-area">X</div>
-          <div class="content">
-            <div class="table table-responsive" style="margin-bottom: 1.5em;">
-              <table>
-                <colgroup>
-                  <col style="width: 50%">
-                  <col style="width: 50%">
-                </colgroup>
-                <thead>
-                <tr>
-                  <th scope="col">공통서류</th>
-                  <th scope="col">제출여부</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr style="cursor: pointer">
-                  <td data-cell-header="서류명">사업자등록증</td>
-                  <td data-cell-header="제출여부">
-                    o
-                  </td>
-                </tr>
-                <tr style="cursor: pointer">
-                  <td data-cell-header="서류명">업무관련등록신고현황</td>
-                  <td data-cell-header="제출여부">
-                    o
-                  </td>
-                </tr>
-                <tr style="cursor: pointer">
-                  <td data-cell-header="서류명">납세증명확인서</td>
-                  <td data-cell-header="제출여부">
-                    o
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="table table-responsive" style="margin-bottom: 1.5em;">
-              <table>
-                <colgroup>
-                  <col style="width: 50%">
-                  <col style="width: 50%">
-                </colgroup>
-                <thead>
-                <tr>
-                  <th scope="col">개인서류</th>
-                  <th scope="col">제출여부</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr style="cursor: pointer">
-                  <td data-cell-header="서류명">경력증빙서류</td>
-                  <td data-cell-header="제출여부">
-                    o
-                  </td>
-                </tr>
-                <tr style="cursor: pointer">
-                  <td data-cell-header="서류명">학력증빙서류</td>
-                  <td data-cell-header="제출여부">
-                    o
-                  </td>
-                </tr>
-                <tr style="cursor: pointer">
-                  <td data-cell-header="서류명">자격증증빙서류</td>
-                  <td data-cell-header="제출여부">
-                    o
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <a href="#" class="case case1"><em style="width: 110px;">추가제출하기</em></a>
-          </div>
-        </div>
-      </div>
-
+      <div th:each="vo, status : ${list}">
+	      <div id="modal" class="modal modal-overlay">
+	        <div class="modal-window">
+	          <div class="title">
+	            <h3>서류 제출여부</h3>
+	          </div>
+	          <div class="close-area">X</div>
+	          <div class="content">
+	            <div class="table table-responsive" style="margin-bottom: 1.5em;">
+	              <table>
+	                <colgroup>
+	                  <col style="width: 50%">
+	                  <col style="width: 50%">
+	                </colgroup>
+	                <thead>
+	                <tr>
+	                  <th scope="col">공통서류</th>
+	                  <th scope="col">제출여부</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <tr style="cursor: pointer">
+	                  <td data-cell-header="서류명">사업자등록증</td>
+	                  <td data-cell-header="제출여부">
+	                    o
+	                  </td>
+	                </tr>
+	                <tr style="cursor: pointer">
+	                  <td data-cell-header="서류명">업무관련등록신고현황</td>
+	                  <td data-cell-header="제출여부">
+	                    o
+	                  </td>
+	                </tr>
+	                <tr style="cursor: pointer">
+	                  <td data-cell-header="서류명">납세증명확인서</td>
+	                  <td data-cell-header="제출여부">
+	                    o
+	                  </td>
+	                </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	            <div class="table table-responsive" style="margin-bottom: 1.5em;">
+	              <table>
+	                <colgroup>
+	                  <col style="width: 50%">
+	                  <col style="width: 50%">
+	                </colgroup>
+	                <thead>
+	                <tr>
+	                  <th scope="col">개인서류</th>
+	                  <th scope="col">제출여부</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <tr style="cursor: pointer">
+	                  <td data-cell-header="서류명">경력증빙서류</td>
+	                  <td data-cell-header="제출여부">
+	                    o
+	                  </td>
+	                </tr>
+	                <tr style="cursor: pointer">
+	                  <td data-cell-header="서류명">학력증빙서류</td>
+	                  <td data-cell-header="제출여부">
+	                    o
+	                  </td>
+	                </tr>
+	                <tr style="cursor: pointer">
+	                  <td data-cell-header="서류명">자격증증빙서류</td>
+	                  <td data-cell-header="제출여부">
+	                    o
+	                  </td>
+	                </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	            <a href="#" class="case case1"><em style="width: 110px;">추가제출하기</em></a>
+	          </div>
+	        </div>
+	      </div>
+	  </div>
       <!-- 모달 영역 끝-->
     </div>
 
@@ -236,4 +238,39 @@
     }
   })
 </script>
+
+
+<!-- 수정 버튼 -->
+<script>
+	const mod = document.querySelectorAll(".modify");
+	mod.forEach((e) => {
+		e.addEventListener('click', () => {
+			console.log(9)
+		})	
+	})
+	
+</script>
+
+
+<!-- 삭제 버튼 -->
+<script>
+	
+	const del = document.querySelectorAll(".delete");
+	del.forEach((e) => {
+		e.addEventListener('click', () => {
+			var tr = e.closest("tr");
+			if( confirm("삭제하시겠습니까?") ){
+				tr.remove();
+			}
+		})	
+	})
+</script>
+
+
+
+
+
+
+
+
 </html>
