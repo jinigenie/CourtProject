@@ -79,7 +79,7 @@
     gap: 5px;
 }
 
-.fclttSerch_Btn {
+.fclttSearch_Btn {
     width: 70px;
     border-radius: 5px;
     text-align: center;
@@ -368,7 +368,8 @@
 	padding: 0 10px;
 	float: left;
 	display: block;
-	color: rgb(0, 0, 0);
+	color: #13548a;
+
 }
 
 #fcltt_p_right{
