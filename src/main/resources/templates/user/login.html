@@ -197,7 +197,7 @@
 	</div>
 </th:block>
 
-<script>
+<script th:inline="javascript">
 	// 팝업 창 열기 함수
 	function openPopup() {
 		// 팝업 창을 가운데 정렬하려면 화면의 가로 및 세로 중앙 위치 계산
@@ -226,6 +226,13 @@
 		
 		$("#loginForm").submit();
 	}
+	
+	
+	var error = '[[${msg}]]';
+	if(error != 'null' ){
+		alert(error)		
+	}
+	
 </script>
 
 </html>

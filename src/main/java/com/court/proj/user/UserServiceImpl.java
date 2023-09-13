@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.searchId(phone);
 	}
 
+	@Override
+	public int updatePw(String phone, String newPw) {
+		return userMapper.updatePw(phone, newPw);
+	}
+
 }

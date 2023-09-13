@@ -29,6 +29,7 @@ public class CourtUserDetailsService implements UserDetailsService{
 		if(username.startsWith("admin")) {
 			System.out.println("admin으로 시작함");
 			AdminVO vo = adminMapper.login(username);
+			
 			if(vo != null) {
 				return new CourtAdminDetails(vo);
 			}

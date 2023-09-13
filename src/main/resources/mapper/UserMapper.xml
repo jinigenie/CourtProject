@@ -31,4 +31,8 @@
 		update TB_001 set user_pw = #{user_pw} where user_proper_num = #{user_proper_num}
 	</update>
 	
+	<update id="updatePw">
+		update TB_001 set user_pw = #{newPw} where user_phone = #{phone}
+	</update>
+	
 </mapper>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,18 +22,17 @@ public class CourtAdminDetails implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<>();
-		list.add(new GrantedAuthority() {
-			
-			@Override
-			public String getAuthority() {
-				return "ROLE_"+adminVO.getAdmin_auth();
-			}
-		});
+		list.add(new SimpleGrantedAuthority(adminVO.getAdmin_auth()));
+		
 		
 		return list;
 	}
 
-
+	public String getAdmin_auth() {
+		return adminVO.getAdmin_auth();
+	}
+	
+	
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
