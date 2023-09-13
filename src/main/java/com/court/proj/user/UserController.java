@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,84 +22,88 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
-import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+	@Autowired
+	private MessageSource messageSource;
+
 	final DefaultMessageService messageService;
 
-    public UserController() {
-        // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-        this.messageService = NurigoApp.INSTANCE.initialize("NCS8CNSYI4LRU2ZH", "UCM6DEWY8LADKH6A3WQVBTOJMWQIH77J", "https://api.coolsms.co.kr");
-    }
-	
+	public UserController() {
+		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
+		this.messageService = NurigoApp.INSTANCE.initialize("NCS8CNSYI4LRU2ZH", "UCM6DEWY8LADKH6A3WQVBTOJMWQIH77J",
+				"https://api.coolsms.co.kr");
+	}
+
 	@GetMapping("/join")
 	public String join() {
 		return "user/userjoin";
 	}
-	
+
 	@GetMapping("/login")
-	public String login(@RequestParam(value = "err", required = false) String err, Model model) {
-		
-		if(err != null) {
-			model.addAttribute("msg","아이디 혹은 비밀번호를 확인해주세요.");
+	public String login(@RequestParam(value = "error", required = false) String err, Model model) {
+
+		if (err != null) {
+			model.addAttribute("msg", err);
 		}
 		return "user/login";
 	}
-	
-	
-	//로그인할거
+
+	// 로그인할거
 //	@PostMapping("/loginForm")
 //	public String loginForm() {
 //		System.out.println("ㅇ");
 //		return "redirect:../main/";
 //	}
-	
+
 	@GetMapping("/test")
 	public String test() {
 		return "user/test";
 	}
-	
+
+	@GetMapping("/test2")
+	public String test2() {
+		return "user/test2";
+	}
+
 	@GetMapping("/error")
 	public String error() {
 		return "user/403error";
 	}
-	
-	
+
 	@GetMapping("/agree")
 	public String agree() {
 		return "user/agree";
 	}
-	
+
 	@GetMapping("/idSearch")
 	public String idSearch() {
 		return "user/idSearch";
 	}
-	
+
 	@GetMapping("/pwSearch")
 	public String pwSearch() {
 		return "user/pwSearch";
 	}
-	
-	//회원가입
+
+	// 회원가입
 	@PostMapping("/joinForm")
 	public String joinForm(@Valid @ModelAttribute("vo") UserVO vo, Errors errors, Model model) {
-		
-		if(errors.hasErrors()) {
+
+		if (errors.hasErrors()) {
 			List<FieldError> list = errors.getFieldErrors();
-			for(FieldError err : list) {
-				model.addAttribute("valid_"+err.getField(),err.getDefaultMessage());
+			for (FieldError err : list) {
+				model.addAttribute("valid_" + err.getField(), err.getDefaultMessage());
 				System.out.println(err.getDefaultMessage());
 			}
 			return "user/userjoin";
@@ -110,67 +114,58 @@ public class UserController {
 		userService.joinUser(vo);
 		return "redirect:/login";
 	}
-	
-	//아이디 중복확인
+
+	// 아이디 중복확인
 	@PostMapping("/checkDuplicateUsername")
-	public @ResponseBody ResponseEntity<Boolean> checkDuplicate(@RequestParam("userid") String userid){
-		
+	public @ResponseBody ResponseEntity<Boolean> checkDuplicate(@RequestParam("userid") String userid) {
+
 		boolean bool = false;
 		int re = userService.checkId(userid);
-		if(re == 0) {
+		if (re == 0) {
 			bool = true;
 		}
-		
-		return new ResponseEntity<Boolean>(bool, HttpStatus.OK);  
+
+		return new ResponseEntity<Boolean>(bool, HttpStatus.OK);
 	}
-	
-	//휴대폰 인증번호
+
+	// 휴대폰 인증번호
 	@PostMapping("/send-one")
 	public @ResponseBody ResponseEntity<Integer> sendOne(@RequestParam("phone") String phone) {
-        //Message message = new Message();
-        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-        //message.setFrom(phone);
-        //message.setTo(phone);
-        
-        Random random = new Random();
-        
-        int randomNumber = random.nextInt(900000)+ 100000;
-        
-        //message.setText("인증번호 : "+ randomNumber);
+		// Message message = new Message();
+		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+		// message.setFrom(phone);
+		// message.setTo(phone);
 
-        //SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        //System.out.println(response);
+		Random random = new Random();
 
-        return new ResponseEntity<Integer>(randomNumber, HttpStatus.OK);
-    }
-	
-	//ID 찾기
-	@PostMapping("/searchId")
-	public @ResponseBody ResponseEntity<String> searchId(@RequestParam("phone") String phone){
-		
-		//어차피 성공했을 때 이 요청을 실행할거니까 괜찮음
-		//실행되면 전달받은 휴대폰으로 아이디 찾아서 전달하기
-		
-		
-		return new ResponseEntity<>(userService.searchId(phone),HttpStatus.OK);
+		int randomNumber = random.nextInt(900000) + 100000;
+
+		// message.setText("인증번호 : "+ randomNumber);
+
+		// SingleMessageSentResponse response = this.messageService.sendOne(new
+		// SingleMessageSendingRequest(message));
+		// System.out.println(response);
+
+		return new ResponseEntity<Integer>(randomNumber, HttpStatus.OK);
 	}
-	
+
+	// ID 찾기
+	@PostMapping("/searchId")
+	public @ResponseBody ResponseEntity<String> searchId(@RequestParam("phone") String phone) {
+
+		// 어차피 성공했을 때 이 요청을 실행할거니까 괜찮음
+		// 실행되면 전달받은 휴대폰으로 아이디 찾아서 전달하기
+
+		return new ResponseEntity<>(userService.searchId(phone), HttpStatus.OK);
+	}
+
+	// PW 찾기
+	@PostMapping("/updatePw")
+	public @ResponseBody ResponseEntity<Integer> searchPw(@RequestParam("phone") String phone,
+			@RequestParam("newPw") String newPw) {
+		String newPassword = bCryptPasswordEncoder.encode(newPw);
+
+		return new ResponseEntity<>(userService.updatePw(phone, newPassword), HttpStatus.OK);
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

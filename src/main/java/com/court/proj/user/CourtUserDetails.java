@@ -127,8 +127,9 @@ public class CourtUserDetails implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
+		 // Y와 일치하면false (탈퇴한 사용자)
+		// Y와 불일치하면 true (탈퇴하지 않은 사용자)
+		return !"Y".equalsIgnoreCase(userVO.getUser_delete_yn());
 	}
 
 }

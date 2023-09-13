@@ -178,10 +178,10 @@
 		<form id="findIdForm">
 			<div class="input-group">
 				<label for="name" style="padding-left: 26px;">새 비밀번호 :</label>
-				<input type="text" id="name" name="name" placeholder="새 비밀번호를 입력해주세요">
+				<input type="password" id="newPw" name="newPw" placeholder="새 비밀번호를 입력해주세요">
 			</div>
 			<div class="btn_div">
-				<button type="button" id="findIdButton2">비밀번호변경</button>
+				<button type="button" id="updatePw">비밀번호변경</button>
 			</div>
 		</form>
 		</h2>
@@ -253,6 +253,24 @@
 			}
 		})
 
+
+		$('#updatePw').click(() => {
+			
+				$.ajax({
+					url : "updatePw",
+					method : "POST",
+					data : {
+						"newPw" : $('#newPw').val(),
+						"phone" : $('#phone').val()
+					},
+					success : (data)=>{
+						console.log("변경")
+					},
+					error : (status,error)=>{
+						console.log(status, error);
+					}
+				})
+		})
 	</script>
 </body>
 
