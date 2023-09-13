@@ -74,8 +74,9 @@ public class AnnounceServiceImpl implements AnnounceService {
 	}
 
 	@Override
-	public int getTrialNum2(String st1, String st2, String st3) {
-		return announceMapper.getTrialNum2(st1, st2, st3);
+	public Integer  getTrialNum2(String st1, String st2, String st3) {
+		 Integer result = announceMapper.getTrialNum2(st1, st2, st3);
+		    return (result != null) ? result : 0;
 	}
 
 	@Override

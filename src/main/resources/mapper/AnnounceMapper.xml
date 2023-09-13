@@ -60,8 +60,7 @@
 
 	<!-- 재판조력자 분로 start -->
 	<select id="getTrial" resultType="TrialVO">
-		select * from TB_010 where
-		trial_fcltt_proper_num = #{trial_pn}
+		select * from TB_010
 	</select>
 
 	<select id="getTrialVO" resultType="TrialVO">
@@ -71,15 +70,15 @@
 
 	<select id="getTrialNum1" resultType="int">
 		select * from TB_010 where
-		trial_fcltt_main_code = #{trial_fcltt_main_code}
-		and trial_fcltt_clasifi_code = #{trial_fcltt_clasifi_code}
+		trial_fcltt_main_code = #{arg0}
+		and trial_fcltt_clasifi_code = #{arg1}
 	</select>
 
 	<select id="getTrialNum2" resultType="int">
 		select * from TB_010 where
-		trial_fcltt_main_code = #{trial_fcltt_main_code}
-		and trial_fcltt_clasifi_code = #{trial_fcltt_clasifi_code}
-		and trial_fcltt_sbcls_code = #{trial_fcltt_sbcls_code}
+		trial_fcltt_main_code = #{arg0}
+		and trial_fcltt_clasifi_code = #{arg1}
+		and trial_fcltt_sbcls_code = #{arg2}
 	</select>
 
 	<!-- 공고 등록 start -->
@@ -111,11 +110,13 @@
 		insert into TB_015
 		(admin_id,
 		admin_pw,
-		admin_auth)
+		admin_auth,
+		admin_name)
 		values
 		(#{admin_id},
 		#{admin_pw},
-		#{admin_auth})
+		#{admin_auth},
+		#{admin_name})
 	</insert>
 	<!-- 공고 등록 end -->
 

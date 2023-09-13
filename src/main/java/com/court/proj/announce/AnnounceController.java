@@ -27,6 +27,10 @@ public class AnnounceController {
 
 	int trial_pn = 0;
 	int admin_num = 0;
+	String admin_id = "";
+	String admin_pw = "";
+	String admin_auth = "";
+	String admin_name = "";
 
 	// 모집공고 목록 페이지
 	@GetMapping("announceList")
@@ -36,6 +40,7 @@ public class AnnounceController {
 
 		model.addAttribute("list", list);
 
+		
 		return "announce/announceList";
 	}
 
@@ -77,20 +82,17 @@ public class AnnounceController {
 
 //		log.info("sdfsdf");
 
-		String id = "admin1";
+		admin_id = "admin1";
 
-		AnnounceVO avo = announceService.getinfo(id);
+		AnnounceVO avo = announceService.getinfo(admin_id);
 		model.addAttribute("vo", avo);
 		admin_num = avo.getAdmin_proper_num();
 
-		TrialVO tvo = announceService.getTrialVO(trial_pn);
-		model.addAttribute("trial", tvo);
+		ArrayList<TrialVO> tlist = announceService.getTrial();
+		model.addAttribute("tlist", tlist);
 
-		ArrayList<TrialVO> alist = announceService.getTrial();
-		model.addAttribute("alist", alist);
-
-		System.out.println(alist.toString());
-
+		System.out.println(tlist.toString());
+		
 		return "announce/announceRegist";
 	}
 
@@ -99,18 +101,23 @@ public class AnnounceController {
 	public String announceRegistForm(@ModelAttribute AnnounceVO vo, Model model) {
 
 		vo.setAdmin_proper_num(admin_num);
+		vo.setAdmin_id(admin_id);
+		vo.setAdmin_pw(admin_pw);
+		vo.setAdmin_auth(admin_auth);
+		vo.setAdmin_name(admin_name);
 
-
-		if (vo.getSelectType3() == null || vo.getSelectType3().isEmpty()) {
+		if (vo.getSelectType3() == "") {
 			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
 		} else {
 			vo.setTrial_fcltt_proper_num(
 					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3()));
 		}
 
-		model.addAttribute("vo", vo);
-
 		System.out.println(vo.toString());
+		
+		announceService.adminRegistTB015(vo);
+		announceService.announceRegistTB002(vo);
+		
 
 		return "redirect:/announce/announceList";
 	}
