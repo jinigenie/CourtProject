@@ -79,6 +79,11 @@ public class AplcnRegServiceImpl implements AplcnRegService{
     }
 
     @Override
+    public int getRegnum(int user_num) {
+        return aplcnRegMapper.getRegnum(user_num);
+    }
+
+    @Override
     public AddInfoVO getSpecial(int reg_num) {
         return aplcnRegMapper.getSpecial(reg_num);
     }
@@ -100,7 +105,7 @@ public class AplcnRegServiceImpl implements AplcnRegService{
 
     @Override
     public void setCareer007(AddInfoVO aivo) {
-        aplcnRegMapper.setCareerTB007(aivo);
+        aplcnRegMapper.setCareer007(aivo);
     }
 
     @Override
@@ -110,7 +115,32 @@ public class AplcnRegServiceImpl implements AplcnRegService{
 
     @Override
     public void setCareer007_2(AddInfoVO aivo) {
-        aplcnRegMapper.setCareerTB007_2(aivo);
+        aplcnRegMapper.setCareer007_2(aivo);
+    }
+
+    @Override
+    public ArrayList<AddInfoVO> getSchoolInfo(int reg_num) {
+        return aplcnRegMapper.getSchoolInfo(reg_num);
+    }
+
+    @Override
+    public ArrayList<AddInfoVO> getCertiInfo(int reg_num) {
+        return aplcnRegMapper.getCertiInfo(reg_num);
+    }
+
+    @Override
+    public int getHighCnt(int reg_num) {
+        return aplcnRegMapper.getHighCnt(reg_num);
+    }
+
+    @Override
+    public void setHighSchool(AddInfoVO aivo) {
+        aplcnRegMapper.setHighSchool(aivo);
+    }
+
+    @Override
+    public void updateHighSchool(AddInfoVO aivo) {
+        aplcnRegMapper.updateHighSchool(aivo);
     }
 
 //    @Override

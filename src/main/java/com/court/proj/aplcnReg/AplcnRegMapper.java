@@ -47,6 +47,9 @@ public interface AplcnRegMapper {
     // 경력사항 불러오기
     public ArrayList<AddInfoVO> getCareer(int reg_num);
 
+    // reg_num(aplcn_dtls_proper_num) 불러오기
+    public int getRegnum(int user_num);
+
     // 활동기록 불러오기
     public AddInfoVO getSpecial(int reg_num);
 
@@ -61,9 +64,23 @@ public interface AplcnRegMapper {
     public void updateCareer007_2(AddInfoVO aivo);
 
     // 경력정보 저장하기
-    public void setCareerTB007(AddInfoVO aivo);
-    public void setCareerTB007_2(AddInfoVO aivo);
+    public void setCareer007(AddInfoVO aivo);
+    public void setCareer007_2(AddInfoVO aivo);
 
+    // 학력정보 불러오기
+    public ArrayList<AddInfoVO> getSchoolInfo(int reg_num);
+
+    // 자격증 불러오기
+    public ArrayList<AddInfoVO> getCertiInfo(int reg_num);
+
+    // 고등학교 정보 있는지 확인하기
+    public int getHighCnt(int reg_num);
+
+    // 고등학교 정보 저장하기
+    public void setHighSchool(AddInfoVO aivo);
+
+    // 고등학교 정보 업데이트하기
+    public void updateHighSchool(AddInfoVO aivo);
 
 
 //    void setCerti(CertiVO vo);

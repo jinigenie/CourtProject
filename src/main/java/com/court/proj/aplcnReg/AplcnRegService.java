@@ -17,6 +17,7 @@ public interface AplcnRegService {
     public ArrayList<TrialVO> getTrial();
     // 모집중 공고 불러오기
     public ArrayList<AnnounceVO> getAnnounce(String date);
+
     // 선택된 재판조력자 데이터 불러오기
     public TrialVO getTrialVO(int trial_pn);
     // 선택한 재판조력자 pk 불러오기
@@ -32,8 +33,11 @@ public interface AplcnRegService {
     public InfoVO getAllDetailInfo(int user_num);
     // 기본정보 업데이트하기
     public void updateInfo(UserVO uvo);
+
     // 경력사항 불러오기
     public ArrayList<AddInfoVO> getCareer(int reg_num);
+    // reg_num(aplcn_dtls_proper_num) 불러오기
+    public int getRegnum(int user_num);
     // 활동기록 불러오기
     public AddInfoVO getSpecial(int reg_num);
     // 경력 테이블에 유저 정보가 있는지 확인하기
@@ -49,6 +53,16 @@ public interface AplcnRegService {
     // 특기사항 저장하기
     public void setCareer007_2(AddInfoVO aivo);
 
+    // 학력정보 불러오기
+    public ArrayList<AddInfoVO> getSchoolInfo(int reg_num);
+    // 자격증 불러오기
+    public ArrayList<AddInfoVO> getCertiInfo(int reg_num);
+    // 고등학교 정보 있는지 확인하기
+    public int getHighCnt(int reg_num);
+    // 고등학교 정보 저장하기
+    public void setHighSchool(AddInfoVO aivo);
+    // 고등학교 정보 업데이트하기
+    public void updateHighSchool(AddInfoVO aivo);
 
 //    void setCerti(CertiVO vo);
 //    public ArrayList<CertiVO> getCerti(@Param("vo") CertiVO vo);

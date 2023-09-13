@@ -119,10 +119,12 @@ let x = 0;
 $(".prev_btn").click(function () {
     modal.style.display = 'block';
     x = 1;
+    $("#xField").val(x);
 })
 $(".next_btn").click(function () {
     modal.style.display = 'block';
     x = 2;
+    $("#xField").val(x);
 })
 
 $(".save").click(function () {
@@ -172,6 +174,7 @@ $("#highTable").on("click", ".highSearch", function () {
 })
 
 //모달창4 : 대학교 검색창
+var inputTxt;
 const modal4 = document.querySelector('.modal4');
 $("#eduTable").on("click", ".UnivSearch", function () {
 
@@ -208,6 +211,7 @@ function dataApi(){
 }
 
 $('#searchCerti-btn').click(()=>{
+
     var search = $('#certification').val();
     var addLi='';
     const filteredData = apiData.filter(item => item.종목명.includes(search));
@@ -223,6 +227,11 @@ $('#searchCerti-btn').click(()=>{
     $('#searchResult').append(addLi);
 
 })
+
+$(document).on('click', '.addLi', function () {
+    $('.certificationName').val($(this).text());
+    modal2.style.display = 'none';
+});
 
 // 고등학교 검색
 let highData = [];
@@ -259,6 +268,12 @@ $('#searchHigh_btn').click(()=>{
 
 })
 
+$(document).on('click', '.addLi2', function () {
+
+    $('.highSchoolName').val($(this).text())
+    modal3.style.display = 'none';
+});
+
 // 대학교 검색
 let UnivData = [];
 
@@ -292,3 +307,8 @@ $('#searchUniv_btn').click(()=>{
     $('#searchResult3').append(addLi3);
 
 })
+
+$(document).on('click', '.addLi3', function () {
+    $('.universityName').val($(this).text())
+    modal4.style.display = 'none';
+});
