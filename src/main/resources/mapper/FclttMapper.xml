@@ -37,25 +37,35 @@
 
 		<where>
 		
-			<if test="cri.searchCourt !='' and cri.searchCourt != null"> 
+			<if test="cri.searchCourt !='' and cri.searchCourt != null and cri.searchCourt != 'null'"> 
 				and court_region like concat('%',#{cri.searchCourt},'%')
 			</if>
-			<if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null"> 
+			<if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
 				and accept_act_yn = #{cri.searchAccept_act_yn}
 			</if>
-			<if test="cri.searchCourtName !='' and cri.searchCourtName != null"> 
+			<if test="cri.searchCourtName !='' and cri.searchCourtName != null and cri.searchCourtName != 'null'"> 
 				and court_name like concat('%',#{cri.searchCourtName},'%')
 			</if>
-			<if test="cri.searchContent !='' and cri.searchContent != null"> 
-				and court_region like concat('%',#{cri.searchContent},'%')
-				or court_name like concat('%',#{cri.searchContent},'%')
-				or user_name like  concat('%',#{cri.searchUser_name},'%') 
-				or accept_act_yn = #{cri.searchAct}
-			</if>
-			<if test="cri.searchAct !='' and cri.searchAct != null"> 
+
+			<if test="cri.searchAct !='' and cri.searchAct != null and cri.searchAct != 'null'"> 
 				and accept_act_yn = #{cri.searchAct}
 			</if>
-
+			
+			<if test="cri.searchContent != null and cri.searchContent != ''and cri.searchContent != 'null'and cri.searchContent != 'undefined'and cri.searchContent != undefined">
+			    <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
+    <where>
+        <if test="cri.searchContent == 'Y' or cri.searchContent == 'N'">
+            <!-- 검색 조건이 숫자인 경우 -->
+            and accept_act_yn = #{cri.searchContent}
+        </if>
+       
+            and (
+                court_region like concat('%', #{cri.searchContent}, '%')
+                or court_name like concat('%', #{cri.searchContent}, '%')
+                or accept_act_yn = #{cri.searchContent}
+            )
+    </where>
+			</if>
 		</where>
 		
 		limit #{cri.pageStart},#{cri.amount}
@@ -69,20 +79,36 @@
 	    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
 	    <where>
 	        <!-- 검색 조건을 여기에 추가할 수 있습니다. -->
-	        <if test="cri.searchCourt !='' and cri.searchCourt != null"> 
-	            and court_region like concat('%',#{cri.searchCourt},'%')
-	        </if>
-	        <if test="cri.searchCourtName !='' and cri.searchCourtName != null"> 
-	            and court_name like concat('%',#{cri.searchCourtName},'%')
-	        </if>
-	        <if test="cri.searchContent !='' and cri.searchContent != null"> 
-	            and (court_region like concat('%',#{cri.searchContent},'%')
-	            or court_name like concat('%',#{cri.searchContent},'%')
-	            or user_name like concat('%',#{cri.searchUser_name},'%'))
-	        </if>
-	        <if test="cri.searchAct !='' and cri.searchAct != null"> 
-	            and accept_act_yn = #{cri.searchAct}
-	        </if>
+	     	<if test="cri.searchCourt !='' and cri.searchCourt != null and cri.searchCourt != 'null'"> 
+				and court_region like concat('%',#{cri.searchCourt},'%')
+			</if>
+			<if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
+				and accept_act_yn = #{cri.searchAccept_act_yn}
+			</if>
+			<if test="cri.searchCourtName !='' and cri.searchCourtName != null and cri.searchCourtName != 'null'"> 
+				and court_name like concat('%',#{cri.searchCourtName},'%')
+			</if>
+
+			<if test="cri.searchAct !='' and cri.searchAct != null and cri.searchAct != 'null'"> 
+				and accept_act_yn = #{cri.searchAct}
+			</if>
+			<if test="cri.searchContent != null and cri.searchContent != ''and cri.searchContent != 'null'and cri.searchContent != 'undefined'and cri.searchContent != undefined">
+			    <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
+    <where>
+        <if test="cri.searchContent.matches('^\\d+$')">
+            <!-- 검색 조건이 숫자인 경우 -->
+            and accept_act_yn = #{cri.searchContent}
+        </if>
+        <if test="!cri.searchContent.matches('^\\d+$')">
+            <!-- 검색 조건이 숫자가 아닌 경우 -->
+            and (
+                court_region like concat('%', #{cri.searchContent}, '%')
+                or court_name like concat('%', #{cri.searchContent}, '%')
+                or accept_act_yn = #{cri.searchContent}
+            )
+        </if>
+    </where>
+			</if>
 	    </where>
 	    
 	    
@@ -103,7 +129,8 @@
 		       tb10.trial_fcltt_clasifi_code,
 		       tb10.trial_fcltt_description,
                tb11.court_region,
-               tb11.court_name
+               tb11.court_name,
+               tb14.accept_act_yn
 		from TB_014 tb14 
 		join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb14.trial_fcltt_proper_num
 		join TB_001 tb1 on tb1.user_proper_num = tb14.user_proper_num
@@ -216,8 +243,8 @@
 	</select>
 
 	<update id="setPauseY" parameterType="FclttVO">
-		UPDATE tb_014 AS tb14
-		JOIN tb_014_2 AS tb14_2 ON tb14.user_proper_num = tb14_2.user_proper_num
+		UPDATE TB_014 AS tb14
+		JOIN TB_014_2 AS tb14_2 ON tb14.user_proper_num = tb14_2.user_proper_num
 		SET tb14.accept_act_yn = 'N',
 		    tb14_2.accept_pause = 'N',
 		    tb14_2.pause_status = 'N'
@@ -226,8 +253,8 @@
 	
 	
 	<update id="setPauseN" parameterType="FclttVO">
-		UPDATE tb_014 AS tb14
-		JOIN tb_014_2 AS tb14_2 ON tb14.user_proper_num = tb14_2.user_proper_num
+		UPDATE TB_014 AS tb14
+		JOIN TB_014_2 AS tb14_2 ON tb14.user_proper_num = tb14_2.user_proper_num
 		SET tb14.accept_act_yn = 'Y',
 		    tb14_2.accept_pause = 'N',
 		    tb14_2.pause_status = 'N'

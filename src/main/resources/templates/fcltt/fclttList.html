@@ -5,7 +5,7 @@
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+	<script defer th:src="@{./../js/fcltt/fcltt.js}"></script>
 </head>
 
 
@@ -75,7 +75,7 @@
 										</option>
 										
 									</select>
-									<input type="text" class="fclttSearch fclttSearch2" name="searchContent" />
+									<input type="text"  id="searchCont"class="fclttSearch fclttSearch2" name="searchContent" />
 									<a href="#" id="fclttSearch_btnID" class="fclttSearch_Btn">조회</a>
 									<select name="searchAccept_act_yn" id="fclttChange" 
 										class="fclttSearch fclttSearch3">
@@ -140,7 +140,11 @@
 
 </th:block>
 
+<script>
+	
 
+
+</script>
 
 
 </html>

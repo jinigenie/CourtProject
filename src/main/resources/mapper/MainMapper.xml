@@ -16,8 +16,8 @@
 		        a.announce_end_date,
 		        a.announce_first_date,
 		        a.announce_last_date
-	    from tb_002 a
-	    join tb_010 c on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+	    from TB_002 a
+	    join TB_010 c on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 	    ORDER BY ANNOUNCE_START_DATE DESC  
 	    LIMIT 8;
     </select>
