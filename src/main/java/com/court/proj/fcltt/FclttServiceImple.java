@@ -25,6 +25,8 @@ public class FclttServiceImple implements FclttService {
 	// 조력자명단조회 페이징
 	@Override
 	public int getTotal(FclttCriteria cri) {
+		System.out.println("서비스에 들어온 값 확인 ! : " + cri.toString()+cri.getSearchAccept_act_yn());
+
 		return fclttMapper.getTotal(cri);
 	}
 

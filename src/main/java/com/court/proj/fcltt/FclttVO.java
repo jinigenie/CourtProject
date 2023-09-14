@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FclttVO {
 	
+	private FclttPageVO fclttPageVO;
 	private String user_proper_num; // 사용자 고유번호 1tb
 	private String user_name; //유저정보 1tb
 	private String user_phone; //유저 전화번호 1tb
