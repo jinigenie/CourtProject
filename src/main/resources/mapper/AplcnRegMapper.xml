@@ -176,8 +176,8 @@
     </select>
 
     <select id="getHighCnt" resultType="int">
-        SELECT * FROM TB_006
-        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num} AND EDCTN_SCHOOL_NAME LIKE '%고등학교%';
+        SELECT COUNT(*) FROM TB_006
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num} AND EDCTN_SCHOOL_NAME LIKE '%고등학교%'
     </select>
 
     <insert id="setHighSchool" parameterType="AddInfoVO">
@@ -195,7 +195,59 @@
                           EDCTN_ADMSN_DATE = #{edctn_admsn_date},
                           EDCTN_GRDTN_DATE = #{edctn_grdtn_date},
                           EDCTN_FINAL = #{edctn_final}
-        WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
+        WHERE APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num} AND EDCTN_SCHOOL_NAME LIKE '%고등학교%'
     </update>
+
+    <select id="getUnivInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_006
+        WHERE EDCTN_DTLS_PROPER_NUM = #{edpn}
+    </select>
+
+    <insert id="setUniv" parameterType="AddInfoVO">
+        INSERT INTO TB_006 (
+            APLCN_DTLS_PROPER_NUM, EDCTN_SCHOOL_NAME, EDCTN_MAJOR, EDCTN_DEGREE, EDCTN_ADMSN_DATE, EDCTN_GRDTN_DATE, EDCTN_FINAL
+        )
+        VALUES (
+            #{aplcn_dtls_proper_num}, #{edctn_school_name}, #{edctn_major}, #{edctn_degree}, #{edctn_admsn_date}, #{edctn_grdtn_date}, #{edctn_final}
+               )
+    </insert>
+
+    <update id="updateUniv" parameterType="AddInfoVO">
+        UPDATE TB_006 SET
+                          EDCTN_SCHOOL_NAME = #{edctn_school_name},
+                          EDCTN_MAJOR = #{edctn_major},
+                          EDCTN_DEGREE = #{edctn_degree},
+                          EDCTN_ADMSN_DATE = #{edctn_admsn_date},
+                          EDCTN_GRDTN_DATE = #{edctn_grdtn_date},
+                          EDCTN_FINAL = #{edctn_final}
+        WHERE EDCTN_DTLS_PROPER_NUM = #{edctn_dtls_proper_num}
+    </update>
+
+    <select id="getCerti" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_008
+        WHERE APLCN_CRTFC_PROPER_NUM = #{cpn}
+    </select>
+
+    <insert id="setCerti" parameterType="AddInfoVO">
+        INSERT INTO TB_008 (
+            APLCN_DTLS_PROPER_NUM, CRTFC_TYPE, ISSUE_AGENCY, CRTFC_NUMBER, ISSUE_DATE
+        )
+        VALUES (
+                   #{aplcn_dtls_proper_num}, #{crtfc_type}, #{issue_agency}, #{crtfc_number}, #{issue_date}
+               )
+    </insert>
+
+    <update id="updateCerti" parameterType="AddInfoVO">
+        UPDATE TB_008 SET
+                          CRTFC_TYPE = #{crtfc_type},
+                          ISSUE_AGENCY = #{issue_agency},
+                          CRTFC_NUMBER = #{crtfc_number},
+                          ISSUE_DATE = #{issue_date}
+        WHERE APLCN_CRTFC_PROPER_NUM = #{aplcn_crtfc_proper_num}
+    </update>
+
+
 
 </mapper>

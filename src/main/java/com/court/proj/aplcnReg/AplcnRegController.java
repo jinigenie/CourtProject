@@ -58,7 +58,7 @@ public class AplcnRegController {
     @GetMapping("/info")
     public String getInfo(Model model) {
 
-        id = "user7";
+        id = "genie91";
 
         // 기본정보 불러와서 보내기
         UserVO uvo = aplcnRegService.getInfo(id);
@@ -139,6 +139,9 @@ public class AplcnRegController {
 
         ArrayList<AddInfoVO> ctList = aplcnRegService.getCertiInfo(reg_num);
         model.addAttribute("ctList", ctList);
+        for(AddInfoVO ctvo : ctList) {
+            certiPk.add(ctvo.getAplcn_crtfc_proper_num());
+        }
 
         return "app/aplcnRegEducation";
     }
@@ -282,7 +285,6 @@ public class AplcnRegController {
                           @RequestParam("x") int x) {
 
         System.out.println(aivo.toString());
-        System.out.println(uvo.toString());
 
         aivo.setAplcn_dtls_proper_num(reg_num);
         //고등학교 정보 업뎃 or insert
@@ -311,7 +313,61 @@ public class AplcnRegController {
             addInfoVO.setEdctn_admsn_date(adate.get(i));
             addInfoVO.setEdctn_grdtn_date(gdate.get(i));
             aivoList.add(addInfoVO);
+        }
+
+        int cntUniv = 0;
+        // 학력 테이블에 대학정보 있으면 업데이트, 없으면 insert
+        for (AddInfoVO avo : aivoList) {
+            cntUniv = aplcnRegService.getUnivInfo(avo.getEdctn_dtls_proper_num());
+            if(cntUniv == 1){
+                aplcnRegService.updateUniv(avo);
+            }
+            else {
+                aplcnRegService.setUniv(avo);
+            }
+        }
+
+        System.out.println("학력까지 완료");
+
+        // form에서 넘어온 자격증 정보 각각 나누어 배열에 담기
+        String[] cType = aivo.getCrtfc_type().split(",");
+        String[] agency = aivo.getIssue_agency().split(",");
+        String[] cNum = aivo.getCrtfc_number().split(",");
+        String[] issue = aivo.getIssue_date().split(",");
+
+        System.out.println(Arrays.toString(cType));
+
+        // 새로 추가한 자격증 정보에 임의 pk값 넣기
+        if(cType.length > certiPk.size()){
+            for(int i = certiPk.size(); i < cType.length; i++) {
+                certiPk.add(0);
+            }
+        }
+
+        //자격증테이블에 넣을 데이터 정리 : AddInfoVO 객체 리스트 생성
+        List<AddInfoVO> certiList = new ArrayList<>();
+        for(int i = 0; i < cType.length; i++) {
+            AddInfoVO addInfoVO = new AddInfoVO();
+            addInfoVO.setAplcn_crtfc_proper_num(certiPk.get(i));
+            addInfoVO.setAplcn_dtls_proper_num(reg_num);
+            addInfoVO.setCrtfc_type(cType[i]);
+            addInfoVO.setIssue_agency(agency[i]);
+            addInfoVO.setCrtfc_number(cNum[i]);
+            addInfoVO.setIssue_date(issue[i]);
+            certiList.add(addInfoVO);
             System.out.println(addInfoVO);
+        }
+
+        int cntCerti = 0;
+        // 자격증 테이블에 자격증정보 있으면 업데이트, 없으면 insert
+        for (AddInfoVO avo : certiList) {
+            cntCerti = aplcnRegService.getCerti(avo.getAplcn_crtfc_proper_num());
+            if(cntCerti == 1){
+                aplcnRegService.updateCerti(avo);
+            }
+            else {
+                aplcnRegService.setCerti(avo);
+            }
         }
 
         if(x == 1) {

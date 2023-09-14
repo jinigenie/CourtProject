@@ -63,6 +63,19 @@ public interface AplcnRegService {
     public void setHighSchool(AddInfoVO aivo);
     // 고등학교 정보 업데이트하기
     public void updateHighSchool(AddInfoVO aivo);
+    // 학력 테이블에 대학정보가 있는지 확인하기
+    public int getUnivInfo(int edpn);
+    // 대학 정보 업데이트하기
+    public void updateUniv(AddInfoVO aivo);
+    // 대학 정보 저장하기
+    public void setUniv(AddInfoVO aivo);
+
+    // 자격증 테이블에 자격증 정보가 있는지 확인하기
+    public int getCerti(int cpn);
+    // 자격증 정보 업데이트하기
+    public void updateCerti(AddInfoVO aivo);
+    // 자격증 정보 저장하기
+    public void setCerti(AddInfoVO aivo);
 
 //    void setCerti(CertiVO vo);
 //    public ArrayList<CertiVO> getCerti(@Param("vo") CertiVO vo);

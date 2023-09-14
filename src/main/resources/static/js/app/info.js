@@ -16,21 +16,21 @@ $("#selectEdu").change(function () {
 // <!-- 자격증 추가하기 -->
 $('#certAddBtn').click(function () {
     var addtr = '<tr style="cursor: pointer">';
-    addtr += '<td data-cell-header="종목"><input type="text" class="input-wrap" style="width: 200px; margin-left: 30px">';
+    addtr += '<td data-cell-header="종목"><input type="text" class="input-wrap certificationName" name="crtfc_type" style="width: 200px; margin-left: 30px">';
     addtr += '<input type="button" class="certiSearch"';
     addtr += 'style="background: url(../../img/app/search.png); border: none; width: 30px; height: 30px; background-size: cover; position: absolute;';
     addtr += 'margin-left: -38px; margin-top: 5px; cursor: pointer"></td>';
-    addtr += '<td data-cell-header="기관"><input type="text" class="input-wrap" style="width: 150px"></td>';
-    addtr += '<td data-cell-header="면허번호"><input type="text" class="input-wrap" style="width: 150px"></td>';
+    addtr += '<td data-cell-header="기관"><input type="text" class="input-wrap" name="issue_agency" style="width: 150px"></td>';
+    addtr += '<td data-cell-header="면허번호"><input type="text" class="input-wrap" name="crtfc_number" style="width: 150px"></td>';
     addtr += '<td data-cell-header="발급일">';
     addtr += '<div class="calander-box" style="padding: 0">';
     addtr += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
-    addtr += 'name="issueDate" value="" style="width: 150px; height: 40px; border-radius: 0;';
+    addtr += 'name="issue_date" value="" style="width: 150px; height: 40px; border-radius: 0;';
     addtr += 'background-position-x: 123px; background-position-y: 10px; cursor: pointer;"/>';
     addtr += '</div>';
     addtr += '</td>';
     addtr += '<td>';
-    addtr += '<button class="case case1" onclick="deleteLine(this);" style="margin-right: 30px">지우기</button>';
+    addtr += '<button class="case case1 deleteInfo" onclick="deleteLine(this)" style="margin-right: 30px">지우기</button>';
     addtr += '</td></tr>';
     addtr += '</tr>';
 
@@ -54,41 +54,43 @@ function deleteLine(obj) {
 const uniId = Date.now();
 $('#eduAddBtn').click(function () {
     var addtr2 = '<tr style="cursor: pointer">';
-    addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap" style="width: 200px; margin-left: 50px">';
+    addtr2 += '<td data-cell-header="학교명"><input type="text" class="input-wrap universityName" name="edctn_school_name[]" style="width: 200px; margin-left: 50px">';
     addtr2 += '<input type="button" class="UnivSearch"'
     addtr2 += 'style="background: url(../../img/app/search.png); border: none; width: 30px;' ;
     addtr2 += 'height: 30px; background-size: cover; position: absolute;' ;
     addtr2 += 'margin-left: -38px; margin-top: 5px; cursor: pointer"></td>';
-    addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap" style="width: 150px">';
+    addtr2 += '<td data-cell-header="학과"><input type="text" class="input-wrap"  name="edctn_major[]" style="width: 150px">';
     addtr2 += '</td>';
     addtr2 += '<td data-cell-header="학위">';
-    addtr2 += '<div class="select-box2" style="width: 90px">';
-    addtr2 += '<label for="xx">선택</label>';
-    addtr2 += '<select class="info-select" id="edu"' + uniId + ' name="search_field">';
-    addtr2 += '<option value="">학사</option>';
-    addtr2 += '<option value="">석사</option>';
-    addtr2 += '<option value="">박사</option>';
-    addtr2 += '<option value="">전문학사</option>';
+    addtr2 += '<div class="select-box2" style="width: 140px">';
+    addtr2 += '<label for="edu"' + uniId + ' >선택</label>';
+    addtr2 += '<select class="info-select" id="edu"' + uniId + ' name="edctn_degree[]">';
+    addtr2 += '<option value="선택">선택</option>';
+    addtr2 += '<option value="학사">학사</option>';
+    addtr2 += '<option value="석사">석사</option>';
+    addtr2 += '<option value="박사">박사</option>';
+    addtr2 += '<option value="전문학사">전문학사</option>';
     addtr2 += '</select>';
     addtr2 += '</div>';
     addtr2 += '</td>';
     addtr2 += '<td data-cell-header="졸업구분">';
-    addtr2 += '<div class="select-box2" style="width: 90px">';
-    addtr2 += '<label for="yy">선택</label>';
-    addtr2 += '<select class="info-select" name="search_field" title="검색조건을 선택해주세요." id="st"' + uniId + '>';
-    addtr2 += '<option value="">졸업</option>';
-    addtr2 += '<option value="">졸업예정</option>';
-    addtr2 += '<option value="">수료</option>';
-    addtr2 += '<option value="">중퇴</option>';
+    addtr2 += '<div class="select-box2" style="width: 140px">';
+    addtr2 += '<label for="st"' + uniId + ' >선택</label>';
+    addtr2 += '<select class="info-select" name="edctn_final[]" title="검색조건을 선택해주세요." id="st"' + uniId + '>';
+    addtr2 += '<option value="">선택</option>';
+    addtr2 += '<option value="졸업">졸업</option>';
+    addtr2 += '<option value="졸업예정">졸업예정</option>';
+    addtr2 += '<option value="수료">수료</option>';
+    addtr2 += '<option value="중퇴">중퇴</option>';
     addtr2 += '</select></div></td>';
     addtr2 += '<td data-cell-header="입학일">';
     addtr2 += '<div class="calander-box" style="padding: 0">';
-    addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택"';
-    addtr2 += 'name="startDate" value="" style="width: 130px; height: 40px; border-radius: 0; background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
+    addtr2 += '<input type="text" class="datepicker" placeholder="날짜선택"';
+    addtr2 += 'name="edctn_admsn_date[]" value="" style="width: 130px; height: 40px; border-radius: 0; background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
     addtr2 += '</div></td>';
     addtr2 += '<td data-cell-header="졸업일">';
     addtr2 += '<div class="calander-box" style="padding: 0">';
-    addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate" value=""';
+    addtr2 += '<input type="text" class="datepicker" readonly placeholder="날짜선택" name="edctn_grdtn_date[]" value=""';
     addtr2 += 'style="width: 130px; height: 40px; border-radius: 0;background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>';
     addtr2 += '</div></td>';
     addtr2 += '<td style="padding: 0.5rem 0">';
@@ -148,19 +150,6 @@ $(".dmui_dialog_btn").click(function () {
     modal.style.display = 'none';
 })
 
-
-//모달창2 : 자격증 검색창
-const modal2 = document.querySelector('.modal2');
-$("#certiTable").on("click", ".certiSearch", function () {
-
-    $("#certification").val('');
-    $(".addLi").remove();
-    $(".defaultLi").show();
-
-    modal2.style.display = 'block';
-    dataApi();
-})
-
 //모달창3 : 고등학교 검색창
 const modal3 = document.querySelector('.modal3');
 $("#highTable").on("click", ".highSearch", function () {
@@ -173,25 +162,26 @@ $("#highTable").on("click", ".highSearch", function () {
     dataApi2();
 })
 
-//모달창4 : 대학교 검색창
-var inputTxt;
-const modal4 = document.querySelector('.modal4');
-$("#eduTable").on("click", ".UnivSearch", function () {
-
-    $("#univercity").val('');
-    $(".addLi3").remove();
-    $(".defaultLi3").show();
-
-    modal4.style.display = 'block';
-    dataApi3();
-})
-
 $(".modalOff").click(function () {
     modal2.style.display = 'none';
     modal3.style.display = 'none';
     modal4.style.display = 'none';
 })
 
+//모달창2 : 자격증 검색창
+var certiTd;
+const modal2 = document.querySelector('.modal2');
+$("#certiTable").on("click", ".certiSearch", function () {
+
+    $("#certification").val('');
+    $(".addLi").remove();
+    $(".defaultLi").show();
+
+    certiTd = $(this).closest("td");
+
+    modal2.style.display = 'block';
+    dataApi();
+})
 
 // 자격증 검색
 let apiData = [];
@@ -229,9 +219,10 @@ $('#searchCerti-btn').click(()=>{
 })
 
 $(document).on('click', '.addLi', function () {
-    $('.certificationName').val($(this).text());
+    certiTd.find('.certificationName').val($(this).text());
     modal2.style.display = 'none';
 });
+
 
 // 고등학교 검색
 let highData = [];
@@ -269,14 +260,13 @@ $('#searchHigh_btn').click(()=>{
 })
 
 $(document).on('click', '.addLi2', function () {
-
     $('.highSchoolName').val($(this).text())
     modal3.style.display = 'none';
 });
 
+
 // 대학교 검색
 let UnivData = [];
-
 function dataApi3(){
     $.ajax({
         url:"https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=0a0d73e5c24d9109a976b4fd0793c531&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list&perPage=443",
@@ -291,6 +281,20 @@ function dataApi3(){
     })
 }
 
+//모달창4 : 대학교 검색창
+var parentTd;
+const modal4 = document.querySelector('.modal4');
+$("#eduTable").on("click", ".UnivSearch", function (event) {
+
+    $("#univercity").val('');
+    $(".addLi3").remove();
+    $(".defaultLi3").show();
+    parentTd = $(this).closest("td");
+
+    modal4.style.display = 'block';
+    dataApi3();
+})
+
 $('#searchUniv_btn').click(()=>{
     var search3 = $('#univercity').val();
     var addLi3='';
@@ -303,12 +307,11 @@ $('#searchUniv_btn').click(()=>{
 
         }
     }
-
     $('#searchResult3').append(addLi3);
-
 })
 
 $(document).on('click', '.addLi3', function () {
-    $('.universityName').val($(this).text())
+    parentTd.find('.universityName').val($(this).text());
+    //parentTd.find('input.universityName').val($(this).text());
     modal4.style.display = 'none';
 });
