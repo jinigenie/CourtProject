@@ -65,11 +65,11 @@
 
 
 				<article id="detail-content">
-					<form id="evaluateForm" name="evaluateForm" action="/aplcnAppraisal" method="post">
-						
+					<form id="evaluateForm" name="evaluateForm" action="aplcnAppraisal" method="post">
+
 						<div class="heading-wrap container">
 							<h3 class="heading1">
-								<span>[[${vo.user_name}]] 신청자님 평가</span>
+								<span> 신청자님 평가</span>
 							</h3>
 						</div>
 
@@ -98,45 +98,51 @@
 										</tr>
 									</thead>
 									<tbody>
-										<input type="hidden" name="aplcn_dtls_proper_num" th:value="${vo.aplcn_dtls_proper_num}">
+										
 										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">통산경력</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('14921000459')">
-												<input type="text" id="input1" class="transparent-input" name="all_carer_score">
+												<input type="text" id="input1" class="transparent-input"
+													name="all_carer_score">
 
 											</td>
 											<td data-cell-header="점수">관내경력</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('14921000459')">
-												<input type="text" id="input2" class="transparent-input" name="jrsdc_carer_score">
+												<input type="text" id="input2" class="transparent-input"
+													name="jrsdc_carer_score">
 											</td>
 										</tr>
 
 										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">사무소 소재지</td>
 											<td data-cell-header="민원서식명" tabindex="0">
-												<input type="text" id="input3" class="transparent-input" name="office_score">
+												<input type="text" id="input3" class="transparent-input"
+													name="office_score">
 											</td>
 											<td data-cell-header="담당법원">인성평가</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('14921000459')">
-												<input type="text" id="input4" class="transparent-input" name="personality_score">
+												<input type="text" id="input4" class="transparent-input"
+													name="personality_score">
 										</tr>
 
 										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">면접</td>
 											<td data-cell-header="민원서식명" tabindex="0">
-												<input type="text" id="input5" class="transparent-input" name="interview_score">
+												<input type="text" id="input5" class="transparent-input"
+													name="interview_score">
 											</td>
 											<td data-cell-header="담당법원">자격증</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('14921000459')">
-												<input type="text" id="input6" class="transparent-input" name="certificate_score">
+												<input type="text" id="input6" class="transparent-input"
+													name="certificate_score">
 											</td>
 										</tr>
 
@@ -145,12 +151,14 @@
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('14921000459')">
-												<input type="text" id="input7" class="transparent-input" name="evaluate_score">
+												<input type="text" id="input7" class="transparent-input"
+													name="evaluate_score">
 											<td data-cell-header="담당법원">심사위원 추천</td>
 											<td data-cell-header="민원서식명" tabindex="0"
 												onkeypress="if(event.keyCode ==13){$(this).click()}"
 												onclick="jsSamuDetail('14921000459')">
-												<input type="text" id="input8" class="transparent-input" name="judge_recom_score">
+												<input type="text" id="input8" class="transparent-input"
+													name="judge_recom_score">
 											</td>
 										</tr>
 									</tbody>
@@ -159,9 +167,9 @@
 								<div class="table">
 									<table>
 										<tr title="etc" style="cursor: pointer">
-											<td class="shifted-td" style="left: 0.5cm";>검토 의견</td>
-											<td><textarea rows="4" cols="50"
-													style="width: 650px; height: 150px;" name="review_etc"></textarea></td>
+											<td class="shifted-td" style="left: 0.5cm" ;>검토 의견</td>
+											<td><textarea rows="4" cols="50" style="width: 650px; height: 150px;"
+													name="review_etc"></textarea></td>
 										</tr>
 									</table>
 								</div>
@@ -209,10 +217,10 @@
 								// 평균값을 부모 창으로 전달합니다.
 								window.opener.handleChildResult(average);
 
-								if(confirm("평가를 저장하시겠습니까?")){
+								if (confirm("평가를 저장하시겠습니까?")) {
 									evaluateForm.submit();
 								}
-								
+
 
 								// 팝업 창 닫기
 								//window.close();

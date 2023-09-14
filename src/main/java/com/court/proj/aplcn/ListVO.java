@@ -15,6 +15,8 @@ public class ListVO {
 	private Integer aplcn_dtls_proper_num;
 	private String trial_fcltt_clasifi_code;
 	private String aplicn_dtls_sts;
+	private String court_proper1;
+	private String court_proper2;
 	private String court_name;
 	
 	private String user_name;
@@ -30,7 +32,7 @@ public class ListVO {
 	private String edctn_admsn_date;
 	private String edctn_grdtn_date;
 	private String edctn_degree;
-	private String edctn_final_yn;
+	private String edctn_final;
 	private String company_name;
 	private String carer_type;
 	private String work_start_date;

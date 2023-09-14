@@ -188,7 +188,7 @@
 
 										<label>전체</label><select class="info-select" id="selectTit" name="searchField"
 											title="검색조건을 선택해주세요." style="min-width: 200px">
-											<option value="none" th:selected="${pageVO.cri.searchName == 'none' }">이름
+											<!--<option value="none" th:selected="${pageVO.cri.searchName == 'none' }">이름
 											</option>
 											<option value="ascFcltt"
 												th:selected="${pageVO.cri.searchFcltt == 'ascFcltt' }">재판조력자분류</option>
@@ -196,7 +196,12 @@
 												th:selected="${pageVO.cri.searchCourt == 'ascCourt' }">법원 분류</option>
 											<option value="unsuccess"
 												th:selected="${pageVO.cri.searchStatus == 'unsuccess' }">신청 상태여부
-											</option>
+											</option>-->
+
+											<option value="">이름</option>
+											<option value="A">재판조력자분류</option>
+											<option value="B">법원 분류</option>
+											<option value="C">신청 상태여부</option>
 										</select>
 									</div>
 
@@ -272,8 +277,7 @@
 											</td>
 											<td data-cell-header="조력자 분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
 											<td data-cell-header="담당법원">[[${vo.court_name}]]</td>
-											<td data-cell-header="서식파일"
-												onclick="javascript: eval($(this).children().attr('onclick'));">
+											<td data-cell-header="서식파일">
 												<a style="cursor: pointer" tabindex="0"
 													onkeypress="if(event.keyCode ==13){event.stopPropagation(); $(this).click();}"
 													onclick="javascript:openDownloadPost('B2931E943723D4446C0C18BB6512EB12BFC2D32DA34707853A2EFDD52F1DAD0D','54066F49F05070E7B71473D009652F4678A1A8D955D7E09642B455977AD50CD3BD7C3F5BF0298C4D245C6146456E6408C454C2349C1E83EB0DA3E998C1300FF8',event);"><img
