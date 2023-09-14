@@ -179,20 +179,20 @@
                                     </td>
                                     <td data-cell-header="입학일">
                                         <div class="calander-box" style="padding: 0">
-                                            <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                            <input type="text" class="datepicker" placeholder="날짜선택"
                                                    name="edctn_admsn_date[]" th:value="${uvo.edctn_admsn_date}" style="width: 130px; height: 40px; border-radius: 0;
                                            background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>
                                         </div>
                                     </td>
                                     <td data-cell-header="졸업일">
                                         <div class="calander-box" style="padding: 0">
-                                            <input type="text" class="datepicker" readonly placeholder="날짜선택"
+                                            <input type="text" class="datepicker" placeholder="날짜선택"
                                                    name="edctn_grdtn_date[]" th:value="${uvo.edctn_grdtn_date}" style="width: 130px; height: 40px; border-radius: 0;
                                            background-position-x: 100px; background-position-y: 10px; cursor: pointer;"/>
                                         </div>
                                     </td>
                                     <td style="padding: 0.5rem 0">
-                                        <button class="case case1 deleteInfo">지우기</button>
+                                        <button class="case case1 deleteInfo" onclick="deleteLine(this)">지우기</button>
                                     </td>
                                 </tr>
 
@@ -247,7 +247,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="case case1 deleteInfo"
+                                        <button class="case case1 deleteInfo" onclick="deleteLine(this)"
                                                 style="margin-right: 30px">
                                             지우기
                                         </button>

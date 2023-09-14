@@ -26,8 +26,8 @@ public interface AplcnRegMapper {
     public TrialVO getTrialVO(int trial_pn);
 
     // 선택한 재판조력자 pk 불러오기
-    public int getTrialNum1(String st1, String st2);
-    public int getTrialNum2(String st1, String st2, String st3);
+    public int getTrialNum1(@Param("st1") String st1, @Param("st2") String st2);
+    public int getTrialNum2(@Param("st1") String st1, @Param("st2") String st2, @Param("st3") String st3);
 
     // 상세정보 테이블에 유저 정보가 있는지 확인하기
     public int getDetailInfo(int user_num);
@@ -81,6 +81,24 @@ public interface AplcnRegMapper {
 
     // 고등학교 정보 업데이트하기
     public void updateHighSchool(AddInfoVO aivo);
+
+    // 학력 테이블에 대학정보가 있는지 확인하기
+    public int getUnivInfo(int edpn);
+
+    // 대학 정보 업데이트하기
+    public void updateUniv(AddInfoVO aivo);
+
+    // 대학 정보 저장하기
+    public void setUniv(AddInfoVO aivo);
+
+    // 자격증 테이블에 자격증 정보가 있는지 확인하기
+    public int getCerti(int cpn);
+
+    // 자격증 정보 업데이트하기
+    public void updateCerti(AddInfoVO aivo);
+
+    // 자격증 정보 저장하기
+    public void setCerti(AddInfoVO aivo);
 
 
 //    void setCerti(CertiVO vo);

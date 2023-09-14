@@ -143,6 +143,36 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         aplcnRegMapper.updateHighSchool(aivo);
     }
 
+    @Override
+    public int getUnivInfo(int edpn) {
+        return aplcnRegMapper.getUnivInfo(edpn);
+    }
+
+    @Override
+    public void updateUniv(AddInfoVO aivo) {
+        aplcnRegMapper.updateUniv(aivo);
+    }
+
+    @Override
+    public void setUniv(AddInfoVO aivo) {
+        aplcnRegMapper.setUniv(aivo);
+    }
+
+    @Override
+    public int getCerti(int cpn) {
+        return aplcnRegMapper.getCerti(cpn);
+    }
+
+    @Override
+    public void updateCerti(AddInfoVO aivo) {
+        aplcnRegMapper.updateCerti(aivo);
+    }
+
+    @Override
+    public void setCerti(AddInfoVO aivo) {
+        aplcnRegMapper.setCerti(aivo);
+    }
+
 //    @Override
 //    public void setCerti(CertiVO vo) {
 //        aplcnRegMapper.setCerti(vo);
