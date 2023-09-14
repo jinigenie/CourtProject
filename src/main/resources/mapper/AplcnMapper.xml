@@ -10,47 +10,38 @@
 
 	<select id="getList">
 		SELECT
-		t1.user_proper_num AS user_proper_num,
-		t1.user_name AS
-		user_name,
-		t3.court_name AS
-		court_name,
-		t4.trial_fcltt_clasifi_code
-		AS
-		trial_fcltt_clasifi_code,
-		t2.aplicn_dtls_sts AS aplicn_dtls_sts,
-		t2.aplcn_dtls_proper_num AS
-		aplcn_dtls_proper_num
-		FROM tb_001 t1
+		T1.user_proper_num AS user_proper_num,
+		T1.user_name AS user_name,
+		T3.court_name AS court_name,
+		T4.trial_fcltt_clasifi_code AS trial_fcltt_clasifi_code,
+		T2.aplicn_dtls_sts AS aplicn_dtls_sts,
+		T2.aplcn_dtls_proper_num AS aplcn_dtls_proper_num
+		FROM
+		TB_001 T1
 		INNER
-		JOIN tb_005 t2 ON
-		t1.user_proper_num = t2.user_proper_num
+		JOIN
+		TB_005 T2 ON T1.user_proper_num = T2.user_proper_num
 		INNER JOIN
-		tb_011 t3
-		ON
-		t2.court_proper_num = t3.court_proper_num
+		TB_011 T3 ON T2.court_proper1 = T3.court_name
 		INNER JOIN
-		tb_010
-		t4
-		ON
-		t2.trial_fcltt_proper_num = t4.trial_fcltt_proper_num
-
+		TB_010 T4 ON
+		T2.trial_fcltt_proper_num = T4.trial_fcltt_proper_num
 
 		<where>
 			<if test="cri.searchFcltt != '' and cri.searchFcltt != null ">
-				and t4.trial_fcltt_clasifi_code like concat('%',
+				and T4.trial_fcltt_clasifi_code like concat('%',
 				#{cri.searchFcltt}, '%')
 			</if>
 
 
 			<if test="cri.searchFcltt == 'asc' ">
-				t4.trial_fcltt_clasifi_code ascFcltt,
+				T4.trial_fcltt_clasifi_code ascFcltt,
 			</if>
 			<if test="cri.searchCourt == 'asc' ">
-				t3.court_name ascCourt,
+				T3.court_name ascCourt,
 			</if>
 			<if test="cri.searchStatus == 'desc' ">
-				t2.aplicn_dtls_sts unsuccess,
+				T2.aplicn_dtls_sts unsuccess,
 			</if>
 		</where>
 		limit #{cri.pageStart}, #{cri.amount}
@@ -59,8 +50,8 @@
 
 	<select id="getTotal" resultType="int">
 		select count(*) as total
-		from tb_001 t1
-		where t1.user_proper_num =
+		from TB_001 T1
+		where T1.user_proper_num =
 		#{user_proper_num}
 
 		<if test="cri.searchContent != '' and cri.searchContent != null ">
@@ -69,82 +60,126 @@
 
 	</select>
 
-	<select id="getDetails">
 
+	<select id="getDetails" parameterType="int">
 		SELECT
-		t1.user_name AS user_name,
-		t1.user_id AS
-		user_id,
-		t2.aplcn_dtls_proper_num AS aplcn_dtls_proper_num,
-		t5.ligtn_case_carer_yn AS
-		ligtn_case_carer_yn,
-		t5.ligtn_case_carer_etc AS ligtn_case_carer_etc,
-		t5.insrn_indst_carer_yn AS insrn_indst_carer_yn,
-		t5.insrn_indst_carer_etc AS insrn_indst_carer_etc,
-		t5.criminal_penalty_carer_yn AS criminal_penalty_carer_yn,
-		t5.criminal_penalty_carer_etc AS criminal_penalty_carer_etc,
-		t2.aplicn_dtls_sts AS aplicn_dtls_sts,
-		t6.edctn_school_name AS
-		edctn_school_name,
-		t6.edctn_major AS edctn_major,
-		t6.edctn_admsn_date AS
-		edctn_admsn_date,
-		t6.edctn_grdtn_date AS edctn_grdtn_date,
-		t6.edctn_degree AS edctn_degree,
-		t6.edctn_final_yn AS edctn_final_yn,
-		t7.company_name AS company_name,
-		t7.carer_type AS carer_type,
-		t7.work_start_date AS work_start_date,
-		t7.work_end_date AS
-		work_end_date,
-		t7.work_department AS work_department,
-		t7.work_position
-		AS work_position,
-		t7.work_description AS work_description,
-		t7.carer_description AS carer_description,
-		t7.special_note_description
-		AS special_note_description,
-		t8.crtfc_type AS crtfc_type,
-		t8.issue_agency AS issue_agency,
-		t8.crtfc_number AS crtfc_number,
-		t8.issue_date AS issue_date,
-		t10.trial_fcltt_clasifi_code AS
-		trial_fcltt_clasifi_code,
-		t10.trial_fcltt_sbcls_code AS
-		trial_fcltt_sbcls_code,
-		t11.court_region AS court_region,
-		t11.court_name AS court_name
-		FROM tb_001 t1
-		INNER JOIN tb_005 t2 ON
-		t1.user_proper_num = t2.user_proper_num
-		INNER JOIN tb_011 t3 ON
-		t2.court_proper_num = t3.court_proper_num
-		INNER JOIN tb_010 t4 ON
-		t2.trial_fcltt_proper_num =
-		t4.trial_fcltt_proper_num
-		INNER JOIN tb_005
-		t5 ON t1.user_proper_num = t5.user_proper_num
-		INNER JOIN tb_006 t6 ON
-		t2.aplcn_dtls_proper_num = t6.aplcn_dtls_proper_num
-		INNER JOIN tb_007
-		t7 ON t2.aplcn_dtls_proper_num =
-		t7.aplcn_dtls_proper_num
-		INNER JOIN
-		tb_008 t8 ON t2.aplcn_dtls_proper_num = t8.aplcn_dtls_proper_num
-		INNER
-		JOIN tb_010 t10 ON t2.trial_fcltt_proper_num =
-		t10.trial_fcltt_proper_num
-		INNER JOIN tb_011 t11 ON t2.court_proper_num
-		= t11.court_proper_num
-		WHERE t2.aplcn_dtls_proper_num =
-		#{aplcn_dtls_proper_num}
-
+		T1.user_name AS user_name,
+		T1.user_id AS user_id,
+		T2.aplcn_dtls_proper_num AS aplcn_dtls_proper_num,
+		T5.ligtn_case_carer_yn AS ligtn_case_carer_yn,
+		T5.ligtn_case_carer_etc AS ligtn_case_carer_etc,
+		T5.insrn_indst_carer_yn AS insrn_indst_carer_yn,
+		T5.insrn_indst_carer_etc AS insrn_indst_carer_etc,
+		T5.criminal_penalty_carer_yn AS criminal_penalty_carer_yn,
+		T5.criminal_penalty_carer_etc AS criminal_penalty_carer_etc,
+		T2.aplicn_dtls_sts AS aplicn_dtls_sts,
+		T6.edctn_school_name AS edctn_school_name,
+		T6.edctn_major AS edctn_major,
+		T6.edctn_admsn_date AS edctn_admsn_date,
+		T6.edctn_grdtn_date AS edctn_grdtn_date,
+		T6.edctn_degree AS edctn_degree,
+		T6.edctn_final AS edctn_final,
+		T7.company_name AS company_name,
+		T7.carer_type AS carer_type,
+		T7.work_start_date AS work_start_date,
+		T7.work_end_date AS work_end_date,
+		T7.work_department AS work_department,
+		T7.work_position AS work_position,
+		T7.work_description AS work_description,
+		T7_2.carer_description AS carer_description,
+		T7_2.special_note_description AS special_note_description,
+		T8.crtfc_type AS crtfc_type,
+		T8.issue_agency AS issue_agency,
+		T8.crtfc_number AS crtfc_number,
+		T8.issue_date AS issue_date,
+		T10.trial_fcltt_clasifi_code AS trial_fcltt_clasifi_code,
+		T10.trial_fcltt_sbcls_code AS trial_fcltt_sbcls_code,
+		T11.court_region AS court_region,
+		T11.court_name AS court_name
+		FROM
+		TB_001 T1
+		LEFT JOIN
+		TB_005 T2 ON T1.user_proper_num = T2.user_proper_num
+		LEFT JOIN
+		TB_011 T3 ON T2.court_proper1 = T3.court_name
+		LEFT JOIN
+		TB_010 T4 ON T2.trial_fcltt_proper_num = T4.trial_fcltt_proper_num
+		LEFT JOIN
+		TB_005 T5 ON T1.user_proper_num = T5.user_proper_num
+		LEFT JOIN
+		TB_006 T6 ON T2.aplcn_dtls_proper_num = T6.aplcn_dtls_proper_num
+		LEFT JOIN
+		TB_007 T7 ON T2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
+		LEFT JOIN
+		TB_008 T8 ON T2.aplcn_dtls_proper_num = T8.aplcn_dtls_proper_num
+		LEFT JOIN
+		TB_010 t10 ON T2.trial_fcltt_proper_num = T10.trial_fcltt_proper_num
+		LEFT JOIN
+		TB_011 t11 ON T2.court_proper1 = T11.court_proper_num
+		LEFT JOIN
+		TB_007_2 T7_2 ON T7_2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
+		WHERE
+		T2.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
 	</select>
 
+	<select id="getDetail" parameterType="int">
+		SELECT
+		T1.user_name AS user_name,
+		T1.user_id AS user_id,
+		T2.aplcn_dtls_proper_num AS aplcn_dtls_proper_num,
+		T5.ligtn_case_carer_yn AS ligtn_case_carer_yn,
+		T5.ligtn_case_carer_etc AS ligtn_case_carer_etc,
+		T5.insrn_indst_carer_yn AS insrn_indst_carer_yn,
+		T5.insrn_indst_carer_etc AS insrn_indst_carer_etc,
+		T5.criminal_penalty_carer_yn AS criminal_penalty_carer_yn,
+		T5.criminal_penalty_carer_etc AS criminal_penalty_carer_etc,
+		T2.aplicn_dtls_sts AS aplicn_dtls_sts,
+		T6.edctn_school_name AS edctn_school_name,
+		T6.edctn_major AS edctn_major,
+		T6.edctn_admsn_date AS edctn_admsn_date,
+		T6.edctn_grdtn_date AS edctn_grdtn_date,
+		T6.edctn_degree AS edctn_degree,
+		T6.edctn_final AS edctn_final,
+		T7.company_name AS company_name,
+		T7.carer_type AS carer_type,
+		T7.work_start_date AS work_start_date,
+		T7.work_end_date AS work_end_date,
+		T7.work_department AS work_department,
+		T7.work_position AS work_position,
+		T7.work_description AS work_description,
+		T7_2.carer_description AS carer_description,
+		T7_2.special_note_description AS special_note_description,
+		T10.trial_fcltt_clasifi_code AS trial_fcltt_clasifi_code,
+		T10.trial_fcltt_sbcls_code AS trial_fcltt_sbcls_code,
+		T11.court_region AS court_region,
+		T11.court_name AS court_name
+		FROM
+		TB_001 T1
+		LEFT JOIN
+		TB_005 T2 ON T1.user_proper_num = T2.user_proper_num
+		LEFT JOIN
+		TB_011 T3 ON T2.court_proper1 = T3.court_name
+		LEFT JOIN
+		TB_010 T4 ON T2.trial_fcltt_proper_num = T4.trial_fcltt_proper_num
+		LEFT JOIN
+		TB_005 T5 ON T1.user_proper_num = T5.user_proper_num
+		LEFT JOIN
+		TB_006 T6 ON T2.aplcn_dtls_proper_num = T6.aplcn_dtls_proper_num
+		LEFT JOIN
+		TB_007 T7 ON T2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
+		LEFT JOIN
+		TB_010 T10 ON T2.trial_fcltt_proper_num = T10.trial_fcltt_proper_num
+		LEFT JOIN
+		TB_011 T11 ON T2.court_proper1 = T11.court_proper_num
+		LEFT JOIN
+		TB_007_2 T7_2 ON T7_2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
+		WHERE
+		T2.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+	</select>
 
 	<insert id="getEvaluate" parameterType="ListVO">
 		insert into
-		tb_013(all_carer_score,
+		TB_013(all_carer_score,
 		jrsdc_carer_score,
 		office_score,
 		personality_score,

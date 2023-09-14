@@ -28,10 +28,15 @@ public class AplcnServiceImpl implements AplcnService {
 	}
 	
 	@Override
-	public ListVO getDetails(int aplcn_dtls_proper_num) {
+	public ArrayList<ListVO> getDetails(int aplcn_dtls_proper_num) {
 		return aplcnMapper.getDetails(aplcn_dtls_proper_num);
 	}
 
+	@Override
+	public ListVO getDetail(int aplcn_dtls_proper_num) {
+		return aplcnMapper.getDetail(aplcn_dtls_proper_num);
+		
+	}
 	@Override
 	public int getEvaluate(ListVO vo) {
 		
@@ -39,6 +44,8 @@ public class AplcnServiceImpl implements AplcnService {
 		
 		return result;
 	}
+
+
 
 
 	
