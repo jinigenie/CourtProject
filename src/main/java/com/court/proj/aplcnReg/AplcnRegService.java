@@ -69,6 +69,9 @@ public interface AplcnRegService {
     public void updateUniv(AddInfoVO aivo);
     // 대학 정보 저장하기
     public void setUniv(AddInfoVO aivo);
+    // 최종학력 업데이트하기
+    public void updateEdcFinal(UserVO uvo);
+
 
     // 자격증 테이블에 자격증 정보가 있는지 확인하기
     public int getCerti(int cpn);

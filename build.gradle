@@ -51,6 +51,9 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	//시큐리티 테스트
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// aws
+	implementation 'software.amazon.awssdk:aws-sdk-java:2.20.43'
 }
 
 tasks.named('test') {

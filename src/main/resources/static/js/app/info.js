@@ -192,7 +192,7 @@ function dataApi(){
         type:"GET",
         success:function(data){
             apiData = data.data;
-
+            console.log(apiData);
         },error:function(status,err){
             console.log(err)
         }

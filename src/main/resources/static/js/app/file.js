@@ -8,7 +8,7 @@ $('.input-file').change(function () {
 });
 
 $('.fileBtn2').click(function () {
-    $(this).closest('td').find('.input-file').click();
+    $(this).closest('td').find('.input-file2').click();
 });
 
 $('.input-file2').change(function () {

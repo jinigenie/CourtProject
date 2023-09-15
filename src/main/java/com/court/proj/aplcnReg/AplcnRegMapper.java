@@ -100,6 +100,9 @@ public interface AplcnRegMapper {
     // 자격증 정보 저장하기
     public void setCerti(AddInfoVO aivo);
 
+    // 최종학력 업데이트하기
+    public void updateEdcFinal(UserVO uvo);
+
 
 //    void setCerti(CertiVO vo);
 //    public ArrayList<CertiVO> getCerti(@Param("vo") CertiVO vo);
