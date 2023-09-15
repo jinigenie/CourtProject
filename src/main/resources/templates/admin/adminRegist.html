@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<script src="https://code.jquery.com/jquery-3.7.1.js"
 		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -63,10 +64,10 @@
 										<div class="address-wrap write-wrap-m">
 											<div class="address-btn-wrap">
 												<div class="input-wrap">
-													<input id="userid" name="" class="cm_inptxt" value="" title=""
-														type="text" />
+													<input id="adminid" name="admin_id" class="cm_inptxt" value=""
+														title="" type="text" />
 												</div>
-												<button type="button" class="address-btn"> 아이디 중복확인
+												<button type="button" class="address-btn" id="checkDuple"> 아이디 중복확인
 												</button>
 											</div>
 										</div>
@@ -80,7 +81,7 @@
 										<div class="input-wrap-three write-wrap-m"
 											style="width: 162px; display: inline-block">
 											<div class="input-wrap" style="width: 200px">
-												<input name="username" id="password" value="" class="cm_inptxt"
+												<input name="admin_pw" id="password" value="" class="cm_inptxt"
 													type="password" />
 											</div>
 										</div>
@@ -94,12 +95,12 @@
 										<div class="input-wrap-three write-wrap-m"
 											style="width: 162px; display: inline-block">
 											<div class="input-wrap" style="width: 200px">
-												<input name="username" id="password-confirm" value="" class="cm_inptxt"
+												<input id="password-confirm" value="" class="cm_inptxt"
 													type="password" />
 											</div>
 											<span style="color: crimson;" id="password-confirm-message"></span>
 										</div>
-										
+
 									</td>
 								</tr>
 								<tr>
@@ -110,7 +111,7 @@
 										<div class="input-wrap-three write-wrap-m"
 											style="width: 162px; display: inline-block">
 											<div class="input-wrap" style="width: 200px">
-												<input name="username" id="cvl_nm" value="" class="cm_inptxt"
+												<input name="admin_name" id="cvl_nm" value="" class="cm_inptxt"
 													type="text" />
 											</div>
 										</div>
@@ -127,21 +128,21 @@
 											margin-left: 1rem;
 										}
 									</style>
-									<td data-cell-header="휴대폰번호" class="txt-left">
+									<td class="txt-left">
 										<ul class="checkbox-radio-custom write-wrap-m">
 											<li>
-												<input id="yn_receipt_yes" class="cm_inpchkrd" name="yn_receipt"
-													type="radio" value="Y" />
+												<input id="yn_receipt_yes" class="cm_inpchkrd" name="admin_auth"
+													type="radio" value="JURIS" />
 												<label for="yn_receipt_yes">사법 담당자</label>
 											</li>
 											<li>
-												<input id="yn_receipt_no" class="cm_inpchkrd" name="yn_receipt"
-													type="radio" value="N" />
+												<input id="" class="cm_inpchkrd" name="admin_auth" type="radio"
+													value="COURT" />
 												<label for="yn_receipt_no">각급 법원 담당자</label>
 											</li>
 											<li>
-												<input id="yn_receipt_no" class="cm_inpchkrd" name="yn_receipt"
-													type="radio" value="N" />
+												<input id="" class="cm_inpchkrd" name="admin_auth" type="radio"
+													value="COURT" />
 												<label for="yn_receipt_no">서비스 관리자</label>
 											</li>
 										</ul>
@@ -209,16 +210,47 @@
 	</div>
 </th:block>
 <script>
-	
-		$('#password-confirm').on('keyup', function () {
-			var password = $('#password').val();
-			var passwordConfirm = $(this).val();
-			if (password === passwordConfirm) {
-				$('#password-confirm-message').removeClass('password-mismatch').text('');
-			} else {
-				$('#password-confirm-message').addClass('password-mismatch').text('비밀번호가 일치하지 않습니다.');
+
+	$('#password-confirm').on('keyup', function () {
+		var password = $('#password').val();
+		var passwordConfirm = $(this).val();
+		if (password === passwordConfirm) {
+			$('#password-confirm-message').removeClass('password-mismatch').text('');
+		} else {
+			$('#password-confirm-message').addClass('password-mismatch').text('비밀번호가 일치하지 않습니다.');
+		}
+	});
+	//아이디 중복확인
+	$("#checkDuple").click(function () {
+		const adminid = $("#adminid").val();
+		$("#resultMessage").text("");
+		$("#validMessage").text("");
+
+		if (adminid == "" || adminid == 'null') {
+			alert("아이디를 입력해주세요")
+			return;
+		} 
+
+
+		$.ajax({
+			url: "checkDuplicateUsername",
+			method: "POST",
+			data: {userid: userid},
+			success: function (response) {
+				console.log(response)
+				if (response) {
+					$("#resultMessage").text("사용 가능한 아이디입니다.");
+					checkId = true;
+				} else {
+					$("#resultMessage").text("이미 사용 중인 아이디입니다.");
+					checkId = false;
+				}
+			},
+			error: function (error) {
+				console.error("중복 확인 요청 실패:", error);
 			}
 		});
+	});
 </script>
 
 </html>

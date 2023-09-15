@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Controller
@@ -35,15 +37,7 @@ public class UserController {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	private MessageSource messageSource;
-
-	final DefaultMessageService messageService;
-
-	public UserController() {
-		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-		this.messageService = NurigoApp.INSTANCE.initialize("NCS8CNSYI4LRU2ZH", "UCM6DEWY8LADKH6A3WQVBTOJMWQIH77J",
-				"https://api.coolsms.co.kr");
-	}
+	private DefaultMessageService messageService;
 
 	@GetMapping("/join")
 	public String join() {
@@ -58,13 +52,6 @@ public class UserController {
 		}
 		return "user/login";
 	}
-
-	// 로그인할거
-//	@PostMapping("/loginForm")
-//	public String loginForm() {
-//		System.out.println("ㅇ");
-//		return "redirect:../main/";
-//	}
 
 	@GetMapping("/test")
 	public String test() {
@@ -131,20 +118,19 @@ public class UserController {
 	// 휴대폰 인증번호
 	@PostMapping("/send-one")
 	public @ResponseBody ResponseEntity<Integer> sendOne(@RequestParam("phone") String phone) {
-		// Message message = new Message();
+		//Message message = new Message();
 		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-		// message.setFrom(phone);
-		// message.setTo(phone);
+		//message.setFrom("01073251252");
+		//message.setTo(phone);
 
 		Random random = new Random();
 
 		int randomNumber = random.nextInt(900000) + 100000;
 
-		// message.setText("인증번호 : "+ randomNumber);
+		//message.setText("인증번호 : " + randomNumber);
 
-		// SingleMessageSentResponse response = this.messageService.sendOne(new
-		// SingleMessageSendingRequest(message));
-		// System.out.println(response);
+		//SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+		//System.out.println(response);
 
 		return new ResponseEntity<Integer>(randomNumber, HttpStatus.OK);
 	}
