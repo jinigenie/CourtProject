@@ -159,6 +159,11 @@ public class AplcnRegServiceImpl implements AplcnRegService{
     }
 
     @Override
+    public void updateEdcFinal(UserVO uvo) {
+        aplcnRegMapper.updateEdcFinal(uvo);
+    }
+
+    @Override
     public int getCerti(int cpn) {
         return aplcnRegMapper.getCerti(cpn);
     }

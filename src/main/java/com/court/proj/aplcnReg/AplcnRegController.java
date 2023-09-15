@@ -98,6 +98,7 @@ public class AplcnRegController {
         ArrayList<AddInfoVO> caList = aplcnRegService.getCareer(reg_num);
         AddInfoVO spvo = aplcnRegService.getSpecial(reg_num);
 
+        careerPk.clear();
         model.addAttribute("caList", caList);
         for(AddInfoVO cvo : caList) {   //pk 따로 저장해두기
             careerPk.add(cvo.getAplcn_carer_proper_num());
@@ -133,15 +134,18 @@ public class AplcnRegController {
         }
         model.addAttribute("highInfo", highInfo);
         model.addAttribute("univInfo", univInfo);
+        univPk.clear();
         for(AddInfoVO unvo : univInfo) {   //pk 따로 저장해두기
             univPk.add(unvo.getEdctn_dtls_proper_num());
         }
 
+        certiPk.clear();
         ArrayList<AddInfoVO> ctList = aplcnRegService.getCertiInfo(reg_num);
         model.addAttribute("ctList", ctList);
         for(AddInfoVO ctvo : ctList) {
             certiPk.add(ctvo.getAplcn_crtfc_proper_num());
         }
+        System.out.println(certiPk);
 
         return "app/aplcnRegEducation";
     }
@@ -284,7 +288,9 @@ public class AplcnRegController {
                           @RequestParam("edctn_grdtn_date[]") ArrayList<String> gdate,
                           @RequestParam("x") int x) {
 
-        System.out.println(aivo.toString());
+        uvo.setUser_proper_num(user_num);
+        System.out.println(uvo);
+        aplcnRegService.updateEdcFinal(uvo);
 
         aivo.setAplcn_dtls_proper_num(reg_num);
         //고등학교 정보 업뎃 or insert
@@ -327,15 +333,11 @@ public class AplcnRegController {
             }
         }
 
-        System.out.println("학력까지 완료");
-
         // form에서 넘어온 자격증 정보 각각 나누어 배열에 담기
         String[] cType = aivo.getCrtfc_type().split(",");
         String[] agency = aivo.getIssue_agency().split(",");
         String[] cNum = aivo.getCrtfc_number().split(",");
         String[] issue = aivo.getIssue_date().split(",");
-
-        System.out.println(Arrays.toString(cType));
 
         // 새로 추가한 자격증 정보에 임의 pk값 넣기
         if(cType.length > certiPk.size()){

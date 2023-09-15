@@ -248,6 +248,12 @@
         WHERE APLCN_CRTFC_PROPER_NUM = #{aplcn_crtfc_proper_num}
     </update>
 
+    <update id="updateEdcFinal" parameterType="UserVO">
+        UPDATE TB_001 SET
+                          USER_EDCTN_FINAL = #{user_edctn_final}
+        WHERE USER_PROPER_NUM = #{user_proper_num}
+    </update>
+
 
 
 </mapper>
