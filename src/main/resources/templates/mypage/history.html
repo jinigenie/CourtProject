@@ -50,12 +50,7 @@
 
 
       <article id="detail-content">
-        <form
-          id="listForm"
-          name="listForm"
-          action=""
-          method="post"
-        >
+        <form name="history" action="historyForm" method="post">
 
           <div class="heading-wrap container">
             <h3 class="heading1">
@@ -71,41 +66,38 @@
             </div>
             
             
-            <div class="searchform searchform2" style="float: right; padding: 0; margin: 0;">
+            <div class="searchform searchform2" style="float: right; padding: 0; margin: 0; background: none;">
               <div style="display: inline-block;">
-                  <div class="select-box calander-box" style="border: none;">
-									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="startDate"
-										value="" /> -
-									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate"
-										value="" />
-								</div>
-                  <button
-                    type="button"
-                    class="search-btn"
-                    onclick="srchMinwonDoc()"
-                  >
+                  <div class="select-box calander-box" style="border: none; ">
+									<input type="text" class="datepicker" readonly placeholder="출석날짜선택" name="startDate"
+										value="" style="height: 40px;"/> -
+									<input type="text" class="datepicker" readonly placeholder="출석날짜선택" name="endDate"
+										value="" style="height: 40px;"/>
+				  </div>
+                  <button type="button" class="search-btn" onclick="searchDate()" style="border-radius: 5px; height: 39px; line-height: 39px;">
                     <i class="xi-search"></i>
                     <span class="sr-only">검색</span>
                   </button>
 
-                <div class="select-box" id="select-box-margin-left-10">
+                <div class="select-box" id="select-box-margin-left-10" style="border-radius: 5px;">
                   <label for="selectTit"></label>
                   <select
                     name="view_cnt"
-                    id="view_cnt"
+                    id="filter_select"
                     class="info-select"
                     title="게시판 목록보기 갯수선택"
+                    onchange="filterTableByStatus(this.value);"
                   >
-                    <!-- onchange="chgViewCount(this.value);" -->
-                    <option value="Y" selected=" selected">완료</option>
-                    <option value="N">미완료</option>
+                    <option value="all" selected="selected">전체</option> <!-- 전체 옵션 추가 -->
+			        <option value="Y">완료</option>
+			        <option value="N">미완료</option>
 
                   </select>
                 </div>
               </div>
             </div>
             
-</div>    
+			</div>    
             
             <!-- 게시판 시작 부분 -->
             <div class="table table-responsive">
@@ -245,4 +237,24 @@
   </div>
 
 </th:block>
+
+<!-- 완료 미완료 선택 기능 -->
+<script>
+function filterTableByStatus(selectedValue) {
+    var tableRows = document.querySelectorAll('.table tbody tr');
+    
+    tableRows.forEach(function (row) {
+        var statusCell = row.querySelector('[data-cell-header="완료여부"]');
+        var status = statusCell.textContent.trim();
+        
+        if (selectedValue === 'all' || status === (selectedValue === 'Y' ? '완료' : '미완료')) {
+            row.style.display = 'table-row';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+</script>
+
+
 </html>
