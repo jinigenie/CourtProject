@@ -28,8 +28,13 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public ArrayList<ActiveVO> getHistory(int user_proper_num) {
-		return mypageMapper.getHistory(user_proper_num);
+	public ArrayList<ActiveVO> getHistory(int user_proper_num, HistoryCriteria cri) {
+		return mypageMapper.getHistory(user_proper_num, cri);
+	}
+
+	@Override
+	public int historyTotal(int user_proper_num, HistoryCriteria cri) {
+		return mypageMapper.historyTotal(user_proper_num, cri);
 	}
 
 	@Override
@@ -46,6 +51,14 @@ public class MypageServiceImpl implements MypageService {
 	public int regPause(PauseDataVO vo) {
 		return mypageMapper.regPause(vo);
 	}
+
+	@Override
+	public PauseDataVO getPause(int user_proper_num) {
+		return mypageMapper.getPause(user_proper_num);
+	}
+
+
+
 
 	
 

@@ -18,4 +18,6 @@ public class PauseDataVO {
     private String pause_end_date;
     private String pause_submit_date;
     private String accept_pause_etc;
+    private String accept_act_yn;
+    
 }

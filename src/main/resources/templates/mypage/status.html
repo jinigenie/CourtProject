@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{../../css/mypage/modal.css}"/>
+<link rel="stylesheet" th:href="@{./../../css/mypage/modal.css}"/>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -65,17 +65,12 @@
             <!-- 게시판 시작 부분 -->
             <div class="table table-responsive">
               <table>
-                <caption>
-                  신청일, 신청내용, 신청상태, 제출서류내역
-                </caption>
-         
                 <thead>
                   <tr>
                     <th scope="col">번호</th>
                     <th scope="col">신청일</th>
                     <th scope="col">신청내용</th>
                     <th scope="col">신청상태</th>
-                    <th scope="col">서류제출여부</th>
                     <th scope="col">관리</th>
                   </tr>
                 </thead>
@@ -85,12 +80,6 @@
                     <td data-cell-header="신청일">[[${vo.APLICN_DTLS_DATE}]]</td>
                     <td data-cell-header="신청내용">[[${vo.ANNOUNCE_TITLE}]]</td>
                     <td data-cell-header="신청상태">[[${vo.APLICN_DTLS_STS}]]</td>
-                    <td>
-                      <a href="#"
-                         class="case case1" id="btn-modal"
-                      ><em style="width: 80px;">확인하기</em></a
-                      >
-                    </td>
                     <td>
                       <a href="#"
                          class="case case1 modify"
@@ -115,90 +104,7 @@
 
 
     </div>
-      <!-- 모달 영역-->
-      <div th:each="vo, status : ${list}">
-	      <div id="modal" class="modal modal-overlay">
-	        <div class="modal-window">
-	          <div class="title">
-	            <h3>서류 제출여부</h3>
-	          </div>
-	          <div class="close-area">X</div>
-	          <div class="content">
-	            <div class="table table-responsive" style="margin-bottom: 1.5em;">
-	              <table>
-	                <colgroup>
-	                  <col style="width: 50%">
-	                  <col style="width: 50%">
-	                </colgroup>
-	                <thead>
-	                <tr>
-	                  <th scope="col">공통서류</th>
-	                  <th scope="col">제출여부</th>
-	                </tr>
-	                </thead>
-	                <tbody>
-	                <tr style="cursor: pointer">
-	                  <td data-cell-header="서류명">사업자등록증</td>
-	                  <td data-cell-header="제출여부">
-	                    o
-	                  </td>
-	                </tr>
-	                <tr style="cursor: pointer">
-	                  <td data-cell-header="서류명">업무관련등록신고현황</td>
-	                  <td data-cell-header="제출여부">
-	                    o
-	                  </td>
-	                </tr>
-	                <tr style="cursor: pointer">
-	                  <td data-cell-header="서류명">납세증명확인서</td>
-	                  <td data-cell-header="제출여부">
-	                    o
-	                  </td>
-	                </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	            <div class="table table-responsive" style="margin-bottom: 1.5em;">
-	              <table>
-	                <colgroup>
-	                  <col style="width: 50%">
-	                  <col style="width: 50%">
-	                </colgroup>
-	                <thead>
-	                <tr>
-	                  <th scope="col">개인서류</th>
-	                  <th scope="col">제출여부</th>
-	                </tr>
-	                </thead>
-	                <tbody>
-	                <tr style="cursor: pointer">
-	                  <td data-cell-header="서류명">경력증빙서류</td>
-	                  <td data-cell-header="제출여부">
-	                    o
-	                  </td>
-	                </tr>
-	                <tr style="cursor: pointer">
-	                  <td data-cell-header="서류명">학력증빙서류</td>
-	                  <td data-cell-header="제출여부">
-	                    o
-	                  </td>
-	                </tr>
-	                <tr style="cursor: pointer">
-	                  <td data-cell-header="서류명">자격증증빙서류</td>
-	                  <td data-cell-header="제출여부">
-	                    o
-	                  </td>
-	                </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	            <a href="#" class="case case1"><em style="width: 110px;">추가제출하기</em></a>
-	          </div>
-	        </div>
-	      </div>
-	  </div>
-      <!-- 모달 영역 끝-->
-    </div>
+
 
     <!-- //main_con  -->
   </div>
@@ -207,38 +113,6 @@
 
 
 </th:block>
-<script>
-  console.log('a');
-  const modal = document.querySelector('.modal');
-
-  console.log(modal);
-  function isModalOn() {
-    return modal.style.display = "flex";
-  }
-  function modalOff() {
-    modal.style.display = "none";
-  }
-  const btnModal = document.getElementById("btn-modal");
-  btnModal.addEventListener("click", () => {
-    modal.style.display = "block";
-  })
-  const closeBtn = modal.querySelector(".close-area");
-  closeBtn.addEventListener("click", e => {
-    modalOff();
-  })
-  modal.addEventListener("click", e => {
-    const evTarget = e.target;
-    if(evTarget.classList.contains("modal-overlay")) {
-      modalOff();
-    }
-  })
-  window.addEventListener("keyup", e => {
-    if(isModalOn() && e.key === "Escape") {
-      modalOff();
-    }
-  })
-</script>
-
 
 <!-- 수정 버튼 -->
 <script>

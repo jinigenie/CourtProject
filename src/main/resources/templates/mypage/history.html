@@ -50,7 +50,10 @@
 
 
       <article id="detail-content">
-        <form name="history" action="historyForm" method="post">
+        <form name="history" action="history">
+			<input type="hidden" name="page" value="1"/>
+			<input type="hidden" name="amount" th:value="${pageVO.amount}"/>
+						
 
           <div class="heading-wrap container">
             <h3 class="heading1">
@@ -62,19 +65,19 @@
           <div class="container">
 			<div style="overflow: hidden;">
             <div class="table-t-wrap" style="float: left;">
-              <div class="total-num">총 활동내역 <em>2</em>건</div>
+              <div class="total-num">총 활동내역 <em>[[${pageVO.total}]]</em>건</div>
             </div>
             
             
             <div class="searchform searchform2" style="float: right; padding: 0; margin: 0; background: none;">
               <div style="display: inline-block;">
                   <div class="select-box calander-box" style="border: none; ">
-									<input type="text" class="datepicker" readonly placeholder="출석날짜선택" name="startDate"
-										value="" style="height: 40px;"/> -
-									<input type="text" class="datepicker" readonly placeholder="출석날짜선택" name="endDate"
-										value="" style="height: 40px;"/>
+									<input type="text" class="datepicker" readonly placeholder="출석날짜 선택" name="startDate"
+										th:value="${pageVO.cri.startDate}" style="height: 40px;"/> -
+									<input type="text" class="datepicker" readonly placeholder="출석날짜 선택" name="endDate"
+										th:value="${pageVO.cri.endDate}" style="height: 40px;"/>
 				  </div>
-                  <button type="button" class="search-btn" onclick="searchDate()" style="border-radius: 5px; height: 39px; line-height: 39px;">
+                  <button type="button" id="searchBtn" class="search-btn" onclick="searchDate()" style="border-radius: 5px; height: 39px; line-height: 39px;">
                     <i class="xi-search"></i>
                     <span class="sr-only">검색</span>
                   </button>
@@ -82,7 +85,6 @@
                 <div class="select-box" id="select-box-margin-left-10" style="border-radius: 5px;">
                   <label for="selectTit"></label>
                   <select
-                    name="view_cnt"
                     id="filter_select"
                     class="info-select"
                     title="게시판 목록보기 갯수선택"
@@ -115,7 +117,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor: pointer" th:each="vo, status : ${list}">
+                  <tr th:each="vo, status : ${list}">
                     <td data-cell-header="번호">[[${status.count}]]</td>
                     <td data-cell-header="선정일">[[${vo.chosen_date}]]</td>
                     <td data-cell-header="재판번호">[[${vo.trial_num}]]</td>
@@ -131,101 +133,57 @@
             <div class="pager">
               <div class="pager-wrap">
                 <a
-                  href="#"
+                  th:href="@{history(page=1, amount=${pageVO.amount},
+							startDate=${pageVO.cri.startDate},
+							endDate=${pageVO.cri.endDate})}"
                   class="arr first"
-                  title="처음으로"
-                  onclick="fn_egov_link_page(1); return false;"
-                  ><strong class="sr-only">맨 처음 목록으로 이동</strong></a
-                ><a
-                  href="#"
+                  ><strong class="sr-only">맨 처음 목록으로 이동</strong></a>
+                
+                <th:block th:if="${pageVO.prev}">
+                <a
+                  th:href="@{history(page=${pageVO.start - 1}, 
+							 amount=${pageVO.amount},
+							 startDate=${pageVO.cri.startDate},
+							 endDate=${pageVO.cri.endDate}
+							 )}"
                   class="arr prev"
-                  title="이전으로"
-                  onclick="fn_egov_link_page(1); return false;"
-                  ><strong class="sr-only">이전페이지로 이동</strong></a
-                ><a
-                  href="#"
+                  ><strong class="sr-only">이전페이지로 이동</strong></a>
+                </th:block>
+                
+                <th:block th:each="page : ${pageVO.pageList }">
+                <a
+                  th:href="@{history(page=${page},
+				 			amount=${pageVO.amount},
+							startDate=${pageVO.cri.startDate},
+						        endDate=${pageVO.cri.endDate} )}"
                   class="active"
-                  title="현재 선택된 페이지는 1 페이지 입니다."
-                  onclick=""
-                  >1</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(2); return false;"
-                  >2</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(3); return false;"
-                  >3</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(4); return false;"
-                  >4</a
-                ><a
-                  href="#"
-                  class=""
-                  onclick="fn_egov_link_page(5); return false;"
-                  >5</a
-                ><a
-                  href="#"
+                >[[${page}]]</a>
+                </th:block>
+                
+                <th:block th:if="${pageVO.next}">	
+                <a
+                  th:href="@{history(page=${pageVO.end + 1},
+								amount=${pageVO.amount},
+								startDate=${pageVO.cri.startDate},
+								endDate=${pageVO.cri.endDate}
+								)}"
                   class="arr next"
-                  title="다음으로"
-                  onclick="fn_egov_link_page(11); return false;"
-                  ><strong class="sr-only">다음페이지로 이동</strong></a
-                ><a
-                  href="#"
+                  ><strong class="sr-only">다음페이지로 이동</strong></a>
+                </th:block>
+                
+                <a
+                  th:href="@{history(page=${pageVO.realEnd}, 
+							amount=${pageVO.amount},
+							startDate=${pageVO.cri.startDate},
+							endDate=${pageVO.cri.endDate}
+							)}"
                   class="arr last"
-                  title="마지막으로"
-                  onclick="fn_egov_link_page(25); return false;"
-                  ><strong class="sr-only">맨 마지막 목록으로 이동</strong></a
-                >
+                  ><strong class="sr-only">맨 마지막 목록으로 이동</strong></a>
 
-                <input
-                  id="pageIndex"
-                  name="pageIndex"
-                  type="hidden"
-                  value="1"
-                />
-                <input id="pageSize" name="pageSize" type="hidden" value="10" />
-                <input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-                <input
-                  id="large_category_idx"
-                  name="large_category_idx"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="middle_category_idx"
-                  name="middle_category_idx"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="tot_middle_category_idx"
-                  name="tot_middle_category_idx"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="large_category_cd"
-                  name="large_category_cd"
-                  type="hidden"
-                  value=""
-                />
-                <input
-                  id="middle_category_cd"
-                  name="middle_category_cd"
-                  type="hidden"
-                  value=""
-                />
+               
               </div>
             </div>
          
-          
-          
-          
           </div>
           <!-- //본문컨텐츠 영역 -->
 
@@ -240,21 +198,29 @@
 
 <!-- 완료 미완료 선택 기능 -->
 <script>
-function filterTableByStatus(selectedValue) {
-    var tableRows = document.querySelectorAll('.table tbody tr');
-    
-    tableRows.forEach(function (row) {
-        var statusCell = row.querySelector('[data-cell-header="완료여부"]');
-        var status = statusCell.textContent.trim();
-        
-        if (selectedValue === 'all' || status === (selectedValue === 'Y' ? '완료' : '미완료')) {
-            row.style.display = 'table-row';
-        } else {
-            row.style.display = 'none';
-        }
-    });
-}
+	function filterTableByStatus(selectedValue) {
+	    var tableRows = document.querySelectorAll('.table tbody tr');
+	    
+	    tableRows.forEach(function (row) {
+	        var statusCell = row.querySelector('[data-cell-header="완료여부"]');
+	        var status = statusCell.textContent.trim();
+	        
+	        if (selectedValue === 'all' || status === (selectedValue === 'Y' ? '완료' : '미완료')) {
+	            row.style.display = 'table-row';
+	        } else {
+	            row.style.display = 'none';
+	        }
+	    });
+	}
 </script>
 
+<script>
+	var searchBtn = document.getElementById("searchBtn");
+	searchBtn.onclick = function() {
+		event.preventDefault();
+		document.history.submit();
+	}
+
+</script>
 
 </html>

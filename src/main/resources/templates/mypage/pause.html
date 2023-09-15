@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{../../css/mypage/mypage.css}"/>
+<link rel="stylesheet" th:href="@{./../../css/mypage/mypage.css}"/>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -81,7 +81,7 @@
 										<span class="essential-txt" style="margin-left: 80px;">현재 상태</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
-										<input type="text" name="" readonly value="활동중" />
+										<input type="text" name="" readonly th:value="vo.accept_act_yn == 'N' ? '활동중' : '중지중' " />
 									</td>
 								</tr>
 
@@ -90,7 +90,7 @@
 										<span class="essential-txt" style="margin-left: 80px;">신청 분류</span>
 									</th>
 									<td class="txt-left">
-										<select name="accept_status" id="" class="cm_inptxt fclttCategory">
+										<select name="accept_status" style="width: 65px;" >
 											<option value="">중지</option>
 											<option value="">해제</option>
 										</select>
