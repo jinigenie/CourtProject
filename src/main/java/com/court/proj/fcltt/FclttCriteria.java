@@ -15,6 +15,8 @@ public class FclttCriteria {
 	private String searchAct; //활동여부
 	private String searchDate; // 등록날짜
 	private String searchContent; //검색내용
+	private String searchContent2; //검색내용
+	private String searchNameCode; //조력자 소분류코드
 	
 	// 중지신청목록에 쓰일 검색
 	private String searchAccept_act_yn; // 활동상태 검색

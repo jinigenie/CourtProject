@@ -1,7 +1,5 @@
 package com.court.proj.fcltt;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PauseVO {
 	
-	
+	private FclttPageVO fclttPageVO;
 	private String accept_pause;  // tb14_2  중지상태 
 	private Integer user_proper_num;  // tb14_2 사용자번호
 	private String pause_status;  // tb14_2 중지처리현황

@@ -25,8 +25,6 @@ public class FclttServiceImple implements FclttService {
 	// 조력자명단조회 페이징
 	@Override
 	public int getTotal(FclttCriteria cri) {
-		System.out.println("서비스에 들어온 값 확인 ! : " + cri.toString()+cri.getSearchAccept_act_yn());
-
 		return fclttMapper.getTotal(cri);
 	}
 
@@ -34,12 +32,14 @@ public class FclttServiceImple implements FclttService {
 	// 중지신청 목록
 	@Override
 	public ArrayList<PauseVO> getPauseList(FclttCriteria cri) {
+		System.out.println("목록 서비스에 들어온 값 확인 ! : " + cri.toString());
 		return fclttMapper.getPauseList(cri);
 	}
 
 	//중지신청 total
 	@Override
 	public int getPauseTotal(FclttCriteria cri) {
+		System.out.println("total 서비스에 들어온 값 확인 ! : " + cri.toString());
 		return fclttMapper.getPauseTotal(cri);
 	}
 	

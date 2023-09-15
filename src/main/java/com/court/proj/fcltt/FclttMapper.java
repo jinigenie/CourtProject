@@ -37,7 +37,7 @@ public interface FclttMapper {
 	
 	//중지/ 활동 신청 리스트 
 	public ArrayList<PauseVO> getPauseList(@Param("cri")FclttCriteria cri);
-	public int getPauseTotal(FclttCriteria cri);
+	public int getPauseTotal(@Param("cri") FclttCriteria cri);
 	
 	//중지/활동신청 승인
 	public int setPauseY(FclttVO vo);

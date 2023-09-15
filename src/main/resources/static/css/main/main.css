@@ -114,11 +114,11 @@
 }
 
 .visual .boxL p {
-	font-weight: 300;
+	font-weight: 1000;
 	font-size: 26px;
 	margin-top: 5px;
 	letter-spacing: -1px;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.55);
+	text-shadow: 1px 1px 2px rgb(0 0 0);
 	word-break: keep-all;
 }
 
@@ -203,7 +203,8 @@
 	color: rgb(255, 255, 255);
 	display: block;
 	font-size: 16px;
-	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+	/*text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);*/
+	text-shadow:3px 3px 11px rgb(0, 0, 0, 0.3);
 }
 
 .visual .boxR p {
@@ -220,11 +221,11 @@
 
 .visual .boxR .main_search {
 
-	background-color: rgba(200, 200, 200, 0.5);
+	background-color:  rgb(120 120 120 / 55%);
 	position: relative;
 	height: 90px;
 	margin-top: 16px;
-	border: solid 1px rgba(255, 255, 255, 0.55);
+	
 }
 
 .visual .boxR .main_search a {
