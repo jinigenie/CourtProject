@@ -24,6 +24,7 @@ public class AplcnController {
 	@Qualifier("aplcnService")
 	private AplcnService aplcnService;
 	
+	//신청자 리스트
     @GetMapping("/aplcnList")
     public String list(Model model, Criteria cri) {
     	int user_proper_num = 1;
@@ -41,52 +42,45 @@ public class AplcnController {
         return "aplcn/aplcnList";
     }
     
-    
+    //신청자 상세정보
     @GetMapping("/aplcnDetails")
     public String Details(@RequestParam("aplcn_dtls_proper_num") Integer aplcn_dtls_proper_num, Model model) {
-
     	
-    	ListVO vo1 = aplcnService.getDetail(aplcn_dtls_proper_num); //ResultMAP으로 ORM 처리 or 
-    	
+    	ListVO vo1 = aplcnService.getDetail(aplcn_dtls_proper_num);  
     	System.out.println("sdfedrgsdrfghsdfghfg:" + aplcn_dtls_proper_num);
-    	
     	ArrayList<ListVO> vo = aplcnService.getDetails(aplcn_dtls_proper_num);
-    	
-    	
-    	//재정렬 1대N G/S 모델 2개 (복수는 리스트에 다시 담는다, 1 데이터는 vo에 나가고)
-    	
-    	
-    	
+  
     	model.addAttribute("vo1", vo1);
     	model.addAttribute("vo", vo);
     	
     	System.out.println(vo1.toString());
     	System.out.println(vo.toString());
         return "aplcn/aplcnDetails";
+        
+    	//ResultMAP으로 ORM 처리 or
+    	//재정렬 1대N G/S 모델 2개 (복수는 리스트에 다시 담는다, 1 데이터는 vo에 나가고)
+    	
     }
     
 	@GetMapping("/aplcnEvaluate")
 	public String aplcnEvaluate(@RequestParam("aplcn_dtls_proper_num") Integer aplcn_dtls_proper_num, Model model) {
-		
-		
-		
-		ArrayList<ListVO> vo = aplcnService.getDetails(aplcn_dtls_proper_num);
-		
+
+		ListVO vo = aplcnService.getDetail(aplcn_dtls_proper_num);		
 		model.addAttribute("vo", vo);
-		
 		return "aplcn/aplcnEvaluate";
 	}
     
-    @PostMapping("/aplcnAppraisal")
-    public String aplcnAppraisal(@ModelAttribute ListVO vo, RedirectAttributes ra) {
-    	System.out.println(vo.toString());
-    	int result = aplcnService.getEvaluate(vo);
+    @PostMapping("/evaluateForm")
+    public String evaluateForm(ListVO vo, RedirectAttributes ra, Model model) {
+    	int result = aplcnService.aplcnEvaluate(vo);
     	
+    	ListVO vo1 = aplcnService.getDetail(vo.getAplcn_dtls_proper_num());		
+		model.addAttribute("vo", vo1);
     	String msg = result == 1 ? "평가가 완료되었습니다." : "평가를 완료하세요! ";
-    	
+    	model.addAttribute("result", result);
     	ra.addFlashAttribute("msg", msg);
     	
-        return "aplcn/aplcnDetails";
+        return "/aplcn/aplcnEvaluate";
     }
     
     
