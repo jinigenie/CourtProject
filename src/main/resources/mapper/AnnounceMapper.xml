@@ -30,6 +30,7 @@
 		TB_015 b on a.admin_proper_num = b.admin_proper_num
 		inner join tb_010 c
 		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		order by
 	</select>
 
 	<select id="getinfo" resultType="AnnounceVO">
@@ -65,7 +66,7 @@
 
 	<select id="getTrialVO" resultType="TrialVO">
 		select * from TB_010 where
-		trial_fcltt_proper_num = #{trial_pn}
+		trial_fcltt_proper_num = #{trial_fcltt_proper_num}
 	</select>
 
 	<select id="getTrialNum1" resultType="int">
@@ -105,7 +106,7 @@
 		#{announce_last_date})
 	</insert>
 
-	<insert id="adminRegistTB015" parameterType="AnnounceVO">
+<!-- 	<insert id="adminRegistTB015" parameterType="AnnounceVO">
 
 		insert into TB_015
 		(admin_id,
@@ -117,7 +118,7 @@
 		#{admin_pw},
 		#{admin_auth},
 		#{admin_name})
-	</insert>
+	</insert> -->
 	<!-- 공고 등록 end -->
 
 </mapper>

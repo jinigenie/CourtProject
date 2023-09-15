@@ -21,3 +21,16 @@ VALUES
     ('전문심리위원', '상임전문심리위원', null, '상임전문심리위원'),
     ('상담위원', '상담위원 ',null, '상담위원'),
     ('상담위원', '후견상담위원 ',null, '후견상담위원');
+    
+    INSERT INTO TB_015 (ADMIN_ID, ADMIN_PW, ADMIN_AUTH, ADMIN_NAME)
+VALUES
+    ('admin1', 'admin1', 'seoul', '이순신1234'),
+    ('admin2', 'admin2', 'busan', '홍길동5678'),
+    ('admin3', 'admin3', 'jeju', '신사임당9012');
+    
+    INSERT INTO TB_002 (ADMIN_PROPER_NUM, TRIAL_FCLTT_PROPER_NUM, ANNOUNCE_TITLE, ANNOUNCE_CONTENT, ANNOUNCE_START_DATE, ANNOUNCE_END_DATE)
+VALUES
+    (1, 1, '제목 1', '내용 1', '2023-09-01', '2023-09-06'),
+    (2, 2, '제목 2', '내용 2', '2023-09-02', '2023-09-07'),
+    (3, 3, '제목 3', '내용 3', '2023-09-03', '2023-09-08');
+    

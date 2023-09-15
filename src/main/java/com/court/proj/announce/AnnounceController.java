@@ -25,12 +25,12 @@ public class AnnounceController {
 	@Qualifier("announceService")
 	private AnnounceService announceService;
 
-	int trial_pn = 0;
-	int admin_num = 0;
-	String admin_id = "";
-	String admin_pw = "";
-	String admin_auth = "";
-	String admin_name = "";
+	int trial_fcltt_proper_num = 0;
+	int admin_num = 1;
+	String admin_id = "admin1";
+	String admin_pw = "admin1";
+	String admin_auth = "seoul";
+	String admin_name = "이순신1234";
 
 	// 모집공고 목록 페이지
 	@GetMapping("announceList")
@@ -82,8 +82,6 @@ public class AnnounceController {
 
 //		log.info("sdfsdf");
 
-		admin_id = "admin1";
-
 		AnnounceVO avo = announceService.getinfo(admin_id);
 		model.addAttribute("vo", avo);
 		admin_num = avo.getAdmin_proper_num();
@@ -105,8 +103,9 @@ public class AnnounceController {
 		vo.setAdmin_pw(admin_pw);
 		vo.setAdmin_auth(admin_auth);
 		vo.setAdmin_name(admin_name);
+//		vo.setTrial_fcltt_proper_num(trial_fcltt_proper_num);
 
-		if (vo.getSelectType3() == "") {
+		if (vo.getSelectType3().equals("선택")) {
 			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
 		} else {
 			vo.setTrial_fcltt_proper_num(
@@ -115,7 +114,7 @@ public class AnnounceController {
 
 		System.out.println(vo.toString());
 		
-		announceService.adminRegistTB015(vo);
+//		announceService.adminRegistTB015(vo);
 		announceService.announceRegistTB002(vo);
 		
 

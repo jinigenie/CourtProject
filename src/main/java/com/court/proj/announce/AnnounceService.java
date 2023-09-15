@@ -25,7 +25,7 @@ public interface AnnounceService {
 	public ArrayList<TrialVO> getTrial();
 
 	// 선택된 재판조력자 데이터 불러오기
-	public TrialVO getTrialVO(int trial_pn);
+	public TrialVO getTrialVO(int trial_fcltt_proper_num);
 
 	// 선택한 재판조력자 pk 불러오기
 	public int getTrialNum1(String st1, String st2);
@@ -36,6 +36,6 @@ public interface AnnounceService {
 	public int announceRegistTB002(AnnounceVO vo);
 
 	// 공고 등록 TB_015
-	public int adminRegistTB015(AnnounceVO vo);
+//	public int adminRegistTB015(AnnounceVO vo);
 
 }

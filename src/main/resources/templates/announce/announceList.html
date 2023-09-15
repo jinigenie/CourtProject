@@ -96,25 +96,31 @@
 									</li>
 
 									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '010000', 1, 1, '통번역인');">
+										<a href="#" onclick="srchMinwonDoc('lCate', '010000', 1, 1, '조력자');">
+											<span>조력자</span>
+										</a>
+									</li>
+
+									<li class="">
+										<a href="#" onclick="srchMinwonDoc('lCate', '020000', 2, 1, '통번역인');">
 											<span>통번역인</span>
 										</a>
 									</li>
 
 									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '020000', 2, 10, '조정위원');">
+										<a href="#" onclick="srchMinwonDoc('lCate', '030000', 3, 10, '조정위원');">
 											<span>조정위원</span>
 										</a>
 									</li>
 
 									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '030000', 3, 13, '전문심리위원');">
+										<a href="#" onclick="srchMinwonDoc('lCate', '040000', 4, 13, '전문심리위원');">
 											<span>전문심리위원</span>
 										</a>
 									</li>
 
 									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '040000', 4, 18, '상담위원');">
+										<a href="#" onclick="srchMinwonDoc('lCate', '050000', 5, 18, '상담위원');">
 											<span>상담위원</span>
 										</a>
 									</li>
@@ -127,7 +133,7 @@
 								<ul class="tab tab2"></ul>
 							</div>
 
-							<!-- searchform searchform2 start -->
+							<!-- 검색 start -->
 							<div class="searchform searchform2">
 								<div class="searchform-wrap">
 									<div class="select-box">
@@ -152,6 +158,7 @@
 											<span class="sr-only">검색</span>
 										</button>
 									</div>
+									<!-- 검색 end -->
 
 									<div class="select-box" id="select-box-margin-left-10">
 										<label for="selectTit"></label>
@@ -280,5 +287,24 @@
 	</div>
 	<!-- wrap end -->
 </th:block>
+
+<!-- 검색 start -->
+<script th:inline="javascript">
+	function searchAnnounce() {
+		var searchField = document.getElementById("selectTit").value;
+		var qString = document.getElementById("qString").value;
+
+
+		var url = "/announce/searchAnnounce?searchField=" + searchField + "&qString=" + qString;
+
+
+		fetch(url)
+			.then(response => response.text())
+			.then(data => {
+				document.querySelector(".table-responsive table tbody").innerHTML = data;
+			});
+	}
+</script>
+<!-- 검색 end -->
 
 </html>
