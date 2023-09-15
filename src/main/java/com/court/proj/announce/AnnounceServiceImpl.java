@@ -16,7 +16,10 @@ public class AnnounceServiceImpl implements AnnounceService {
 	// 등록
 	@Override
 	public int announceRegist(AnnounceVO vo) {
-		// TB_002 테이블에 공고 정보 삽입
+
+		return announceMapper.announceRegistTB002(vo);
+	}
+		/*// TB_002 테이블에 공고 정보 삽입
 		int resultTB002 = announceMapper.announceRegistTB002(vo);
 
 		// TB_015 테이블에 관리자 정보 삽입
@@ -28,7 +31,7 @@ public class AnnounceServiceImpl implements AnnounceService {
 		} else {
 			return 0;
 		}
-	}
+	}*/
 
 	// 검색기능
 	@Override
@@ -58,10 +61,10 @@ public class AnnounceServiceImpl implements AnnounceService {
 		return announceMapper.announceRegistTB002(vo);
 	}
 
-	@Override
-	public int adminRegistTB015(AnnounceVO vo) {
-		return announceMapper.adminRegistTB015(vo);
-	}
+//	@Override
+//	public int adminRegistTB015(AnnounceVO vo) {
+//		return announceMapper.adminRegistTB015(vo);
+//	}
 
 	@Override
 	public AnnounceVO getinfo(String admin_id) {
@@ -85,8 +88,8 @@ public class AnnounceServiceImpl implements AnnounceService {
 	}
 
 	@Override
-	public TrialVO getTrialVO(int trial_pn) {
-		return announceMapper.getTrialVO(trial_pn);
+	public TrialVO getTrialVO(int trial_fcltt_proper_num) {
+		return announceMapper.getTrialVO(trial_fcltt_proper_num);
 	}
 
 }
