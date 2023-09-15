@@ -20,6 +20,7 @@
 			border-radius: 5px;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			align-items: center;
+			display: none;
 		}
 
 		h2 {
@@ -172,19 +173,24 @@
 			</div>
 		</form>
 	</div>
-	<div class="container result" style="display: none;">
-		<h2 id="result">
-			<h2>비밀번호 찾기</h2>
-		<form id="findIdForm">
+	<div class="container result" style="display: block; ">
+				<h2 style="padding-left: 15px;">새 비밀번호설정</h2><br/>
+				
+		<form id="findIdForm" style="padding-left: 30px;">
 			<div class="input-group">
-				<label for="name" style="padding-left: 26px;">새 비밀번호 :</label>
-				<input type="password" id="newPw" name="newPw" placeholder="새 비밀번호를 입력해주세요">
+				<label for="name" style="padding-left: 26px;">비밀번호 :</label>
+				<input type="text" id="name" name="name" placeholder="비밀번호를 입력하세요">
 			</div>
+
+			<div class="input-group">
+				<label for="phone">비밀번호 확인:</label>
+				<input type="text" id="phone" name="phone" placeholder="다시한번 입력해주세요">
+			</div>
+			<br/>
 			<div class="btn_div">
-				<button type="button" id="updatePw">비밀번호변경</button>
+				<button type="button" id="findIdButton2">비밀번호변경</button>
 			</div>
 		</form>
-		</h2>
 	</div>
 
 	<script>
@@ -241,8 +247,8 @@
 						"phone" : $('#phone').val()
 					},
 					success : (data)=>{
-						$('.container').hide();
-						$('.result').show();
+						//$('.container').hide();
+						//$('.result').show();
 					},
 					error : (status,error)=>{
 						console.log(status, error);
