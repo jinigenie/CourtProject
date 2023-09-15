@@ -7,7 +7,7 @@
 	
 	<select id="getUser" resultType="UserVO">
 		select * 
-		from tb_001 
+		from TB_001 
 		where user_proper_num = #{user_proper_num}
 	</select>
 	
@@ -17,23 +17,58 @@
 			   t.ATTENDANCE_DATE, 
 			   t.ACT_COMPLETE_YN,
 			   o.USER_PROPER_NUM
-		FROM tb_012 AS t
-		LEFT JOIN tb_014 AS f
+		FROM TB_012 AS t
+		LEFT JOIN TB_014 AS f
 		   ON t.ACCEPT_PROPER_NUM = f.ACCEPT_PROPER_NUM
-		LEFT JOIN tb_001 AS o
+		LEFT JOIN TB_001 AS o
 		    ON f.USER_PROPER_NUM =o.USER_PROPER_NUM
 		where o.USER_PROPER_NUM =#{user_proper_num}
+		
+		<if test="cri.startDate != '' and cri.startDate != null ">
+		<![CDATA[and ATTENDANCE_DATE >= #{cri.startDate}]]>
+		</if>
+		<if test="cri.endDate != '' and cri.endDate != null ">
+    	<![CDATA[and ATTENDANCE_DATE <= #{cri.endDate}]]>
+		</if>
+		
 		order by chosen_date desc
 	</select>
 	
+	<select id="historyTotal">
+		select count(*) 
+		FROM 
+			(SELECT
+			 t.TRIAL_NUM, 
+			 t.CHOSEN_DATE, 
+			 t.ATTENDANCE_DATE, 
+			 t.ACT_COMPLETE_YN,
+			 o.USER_PROPER_NUM
+			FROM tb_012 AS t
+			LEFT JOIN TB_014 AS f
+			   ON t.ACCEPT_PROPER_NUM = f.ACCEPT_PROPER_NUM
+			LEFT JOIN TB_001 AS o
+				ON f.USER_PROPER_NUM =o.USER_PROPER_NUM
+			where o.USER_PROPER_NUM = #{user_proper_num}
+			
+			<if test="cri.startDate != '' and cri.startDate != null ">
+			<![CDATA[and ATTENDANCE_DATE >= #{cri.startDate}]]>
+			</if>
+			<if test="cri.endDate != '' and cri.endDate != null ">
+	    	<![CDATA[and ATTENDANCE_DATE <= #{cri.endDate}]]>
+			</if>
+			
+			order by chosen_date desc) A
+
+	</select>
+	
 	<update id="deleteUpdate">
-		update tb_001 
+		update TB_001 
 		set user_delete_yn = 'Y' 
 		where user_proper_num = #{user_proper_num}
 	</update>
 	
 	<update id="modifyUpdate">
-		update tb_001 
+		update TB_001 
 		set user_pw = #{user_pw},
 			user_job = #{user_job},
 		    user_phone = #{user_phone},
@@ -60,12 +95,12 @@
 									f.APLICN_DTLS_DATE,
 									f.APLICN_DTLS_STS,
                                     f.APLCN_DTLS_PROPER_NUM
-								from tb_001 as o
-								left join tb_005 as f
+								from TB_001 as o
+								left join TB_005 as f
 								on o.USER_PROPER_NUM = f.USER_PROPER_NUM) a
-						left join tb_010 as t
+						left join TB_010 as t
 						on a.TRIAL_FCLTT_PROPER_NUM = t.TRIAL_FCLTT_PROPER_NUM) b
-		 left join tb_002 e
+		 left join TB_002 e
 		 on b.TRIAL_FCLTT_PROPER_NUM = e.TRIAL_FCLTT_PROPER_NUM
 		 where b.USER_PROPER_NUM = #{user_proper_num}
 	
@@ -73,13 +108,13 @@
 	
 	
 	<select id="getDocu" resultType="MypageStatusVO">
-		select * from tb_009 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+		select * from TB_009 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
 	</select>
 	
 	
 	<insert id="regPause">
 		INSERT 
-		INTO tb_014_2 (ACCEPT_STATUS, 
+		INTO TB_014_2 (ACCEPT_STATUS, 
 					   PAUSE_START_DATE, 
 					   PAUSE_END_DATE, 
 					   ACCEPT_PAUSE_ETC)
@@ -90,5 +125,12 @@
 			
 	</insert>
 
+	<select id="getPause" resultType="PauseDataVO">
+		SELECT f.ACCEPT_ACT_YN
+		FROM tb_001 AS o
+		LEFT JOIN tb_014 AS f
+		     ON f.USER_PROPER_NUM =o.USER_PROPER_NUM
+		where o.USER_PROPER_NUM = #{user_proper_num}
+	</select>
 
 </mapper>       

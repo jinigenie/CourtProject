@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.court.proj.aplcn.util.Criteria;
+
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
@@ -41,18 +43,28 @@ public class MypageController {
 	}
 	
 	@GetMapping("/history")
-	public String history(Model model) {
+	public String history(Model model, HistoryCriteria cri) {
 
 		int user_proper_num = 1;
 
-		ArrayList<ActiveVO> list = mypageService.getHistory(user_proper_num);
+		ArrayList<ActiveVO> list = mypageService.getHistory(user_proper_num, cri);
+		
+		int total = mypageService.historyTotal(user_proper_num, cri);
+		HistoryPageVO pageVO = new HistoryPageVO(cri, total);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("pageVO", pageVO);
 		
 		return "mypage/history";
 	}
 	
 	@GetMapping("/pause")
-	public String pause() {
+	public String pause(Model model) {
+		
+		int user_proper_num = 1;
+		PauseDataVO vo = mypageService.getPause(user_proper_num);
+		model.addAttribute("vo", vo);
+		
 		return "mypage/pause";
 	}
 	
@@ -61,7 +73,6 @@ public class MypageController {
 		
 		int user_proper_num = 1;
 		ArrayList<MypageStatusVO> list = mypageService.getStatus(user_proper_num);
-		System.out.println(list.toString());
 		model.addAttribute("list", list);
 		
 		int aplcn_dtls_proper_num = 12; 
@@ -77,7 +88,6 @@ public class MypageController {
 	public String del(UserVO vo) {
 		
 		int result = mypageService.deleteUpdate(vo);
-		System.out.println(result);
 		
 		return "redirect:../main/";
 	}
@@ -88,7 +98,6 @@ public class MypageController {
 		int result = mypageService.modifyUpdate(vo);
 		String msg = result == 1? "회원정보가 변경되었습니다." : "변경실패. 관리자에게 문의하세요";
 		rra.addFlashAttribute("msg", msg);
-		System.out.println(result);
 		return "redirect:/mypage/main";
 	}
 

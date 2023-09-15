@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
 public class HistoryPageVO {
 	
 	private int start; //시작 페이지네이션
