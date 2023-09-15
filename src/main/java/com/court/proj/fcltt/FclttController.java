@@ -10,28 +10,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/fcltt")	
+@RequestMapping("/fcltt")
 public class FclttController {
 
 	@Autowired
 	private FclttService fclttService;
 
-	// 등재명단페이지 진입 
+	// 등재명단페이지 진입
 	@GetMapping("/fclttList")
 	public String fclttList(FclttCriteria cri) {
 
 		return "fcltt/fclttList";
 	}
-	
-	
-	// 등재명단 ajax목록 
+
+	// 등재명단 ajax목록
 //	@GetMapping("/fclttListAjax")
 //	@ResponseBody
 //	public ResponseEntity<ArrayList<FclttVO> > fclttListAjax( FclttCriteria cri) {
@@ -41,24 +39,20 @@ public class FclttController {
 //	}
 	@GetMapping("/fclttListAjax")
 	@ResponseBody
-	public ResponseEntity<ArrayList<FclttVO>> fclttListAjax( FclttCriteria cri) {
-		System.out.println(cri.getSearchAct());
-		System.out.println(cri.getSearchContent());
-	    
-		
+	public ResponseEntity<ArrayList<FclttVO>> fclttListAjax(FclttCriteria cri) {
+
 		ArrayList<FclttVO> list = fclttService.getList(cri);
-	    
-	    int total = fclttService.getTotal(cri);
-	    FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
-	    
-		
-		for (FclttVO fclttVO : list) { fclttVO.setFclttPageVO(FclttPageVO); }
-		 
-	    FclttPageVO.setPage(cri.getPage());
-	    FclttPageVO.setAmount(cri.getAmount());
-	    
-	   
-	    return new ResponseEntity<>(list, HttpStatus.OK);
+
+		int total = fclttService.getTotal(cri);
+		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
+		for (FclttVO fclttVO : list) {
+			fclttVO.setFclttPageVO(FclttPageVO);
+		}
+		/*
+		 * FclttPageVO.setPage(cri.getPage()); FclttPageVO.setAmount(cri.getAmount());
+		 */
+
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	/*
@@ -74,28 +68,27 @@ public class FclttController {
 	 * FclttPageVO(cri, total); return new ResponseEntity<>(FclttPageVO,
 	 * HttpStatus.OK);
 	 */
-	//}
+	// }
 
-	// 등재명단 상세보기 ajax 
+	// 등재명단 상세보기 ajax
 	@PostMapping("/getfclttModal")
-	public @ResponseBody ResponseEntity<Map<String, Object>>getfclttModal(@RequestParam("accept_proper_num") String accept_proper_num,
-																		  @RequestParam("user_proper_num") String user_proper_num){
-		
-		 Map<String, Object> map = new HashMap<>();
-		 map.put("content1", fclttService.getFclttContent1(accept_proper_num));
-		 map.put("content2", fclttService.getFclttContent2(user_proper_num));
-		 map.put("content3", fclttService.getFclttContent3(user_proper_num));
-		 map.put("content4", fclttService.getFclttContent4(user_proper_num));
-		 map.put("content5", fclttService.getFclttContent5(user_proper_num));
-		 
-		 System.out.println(map.get("content1"));
-		 
-		return new ResponseEntity<>(map,HttpStatus.OK);
+	public @ResponseBody ResponseEntity<Map<String, Object>> getfclttModal(
+			@RequestParam("accept_proper_num") String accept_proper_num,
+			@RequestParam("user_proper_num") String user_proper_num) {
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("content1", fclttService.getFclttContent1(accept_proper_num));
+		map.put("content2", fclttService.getFclttContent2(user_proper_num));
+		map.put("content3", fclttService.getFclttContent3(user_proper_num));
+		map.put("content4", fclttService.getFclttContent4(user_proper_num));
+		map.put("content5", fclttService.getFclttContent5(user_proper_num));
+
+		System.out.println(map.get("content1"));
+
+		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 
-	
-	
-	//안쓰는 페이지 (연습용)
+	// 안쓰는 페이지 (연습용)
 	@GetMapping("/fclttDetail")
 	public String fclttDetail() {
 
@@ -109,7 +102,7 @@ public class FclttController {
 		return "fcltt/fclttRegist";
 	}
 
-	// 명단 등록하기 
+	// 명단 등록하기
 	@PostMapping("/fclttRegistForm")
 	public String fclttRegistFom(FclttVO vo, RedirectAttributes ra) {
 
@@ -121,52 +114,70 @@ public class FclttController {
 
 		return "redirect:/fcltt/fclttList";
 	}
-	
 
-	
-	// Pause -------------------------------------------------------------------------------------------
+	// Pause
+	// -------------------------------------------------------------------------------------------
 	// 중지신청 목록진입
-	
-	 @GetMapping("/pause") public String pause() {
-	 return "fcltt/pauseEvaluation"; }
-	 
 
-	 // 중지, 활동신청 목록 불러오기 ajax
+	@GetMapping("/pause")
+	public String pause() {
+		return "fcltt/pauseEvaluation";
+	}
+
+	/*
+	 * // 중지, 활동신청 목록 불러오기 ajax
+	 * 
+	 * @GetMapping("/pauseAjax")
+	 * 
+	 * @ResponseBody public ResponseEntity<ArrayList<PauseVO>>
+	 * pauseList(FclttCriteria cri) { ArrayList<PauseVO> list =
+	 * fclttService.getPauseList(cri); return new ResponseEntity<>(list,
+	 * HttpStatus.OK); }
+	 * 
+	 * 
+	 * // 페이징 ajax
+	 * 
+	 * @GetMapping("/getPauseTotal")
+	 * 
+	 * @ResponseBody public ResponseEntity<FclttPageVO> getPauseTotal(FclttCriteria
+	 * cri) {
+	 * 
+	 * int total = fclttService.getPauseTotal(cri); FclttPageVO FclttPageVO = new
+	 * FclttPageVO(cri, total); return new ResponseEntity<>(FclttPageVO,
+	 * HttpStatus.OK); }
+	 */
+
+	// 중지, 활동신청 목록 불러오기 ajax
 	@GetMapping("/pauseAjax")
 	@ResponseBody
 	public ResponseEntity<ArrayList<PauseVO>> pauseList(FclttCriteria cri) {
-	    ArrayList<PauseVO> list = fclttService.getPauseList(cri);
-	    return new ResponseEntity<>(list, HttpStatus.OK);
-	}
-	
-	
-	// 페이징 ajax 
-	@GetMapping("/getPauseTotal")
-	@ResponseBody
-	public ResponseEntity<FclttPageVO> getPauseTotal(FclttCriteria cri) {
-		
+		ArrayList<PauseVO> list = fclttService.getPauseList(cri);
+
 		int total = fclttService.getPauseTotal(cri);
 		FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
-	    return new ResponseEntity<>(FclttPageVO, HttpStatus.OK);
-	}
 	
 
+		for (PauseVO PauseVO : list) {
+			PauseVO.setFclttPageVO(FclttPageVO);
+			System.out.println(PauseVO.toString());
+		}
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+
+	
+	
 	// 승인처리 ajax 컨트롤러
 	@PostMapping("/pauseResultSubmit")
-	public ResponseEntity<Integer>pauseResultSubmit(@RequestParam("user_proper_num") String user_proper_num,
-													@RequestParam("accept_act_yn") String accept_act_yn){
+	public ResponseEntity<Integer> pauseResultSubmit(@RequestParam("user_proper_num") String user_proper_num,
+			@RequestParam("accept_act_yn") String accept_act_yn) {
 		FclttVO vo = new FclttVO();
 		vo.setUser_proper_num(user_proper_num);
 		vo.setAccept_act_yn(accept_act_yn);
-		
+
 		System.out.println(vo.toString());
-		int result = accept_act_yn.equals("Y")  ?  fclttService.setPauseY(vo) : fclttService.setPauseN(vo) ;
+		int result = accept_act_yn.equals("Y") ? fclttService.setPauseY(vo) : fclttService.setPauseN(vo);
 		System.out.println("결과: " + result);
-		return new ResponseEntity<>(result,HttpStatus.OK);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-
-
-
-
 
 }

@@ -20,100 +20,101 @@
 	
     </insert>
     
-    <select id="getList" resultType="FclttVO">
-	    SELECT tb14.accept_date,
-		       tb14.accept_act_yn,
-		       tb14.accept_etc,
-		       tb11.court_name,
-		       tb10.trial_fcltt_description,
-		       tb1.user_name,
-		       tb1.user_proper_num,
-		       tb14.accept_proper_num
-		FROM TB_014 tb14
-		JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
-		JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
-		JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
-		
+   <select id="getList" resultType="FclttVO">
+    SELECT tb14.accept_date,
+           tb14.accept_act_yn,
+           tb14.accept_etc,
+           tb11.court_name,
+           tb10.trial_fcltt_description,
+           tb1.user_name,
+           tb1.user_proper_num,
+           tb14.accept_proper_num
+    FROM TB_014 tb14
+    JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
+    JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
+    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
 
-		<where>
-		
-			<if test="cri.searchCourt !='' and cri.searchCourt != null and cri.searchCourt != 'null'"> 
-				and court_region like concat('%',#{cri.searchCourt},'%')
-			</if>
-			<if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
-				and accept_act_yn = #{cri.searchAccept_act_yn}
-			</if>
-			<if test="cri.searchCourtName !='' and cri.searchCourtName != null and cri.searchCourtName != 'null'"> 
-				and court_name like concat('%',#{cri.searchCourtName},'%')
-			</if>
-
-			<if test="cri.searchAct !='' and cri.searchAct != null and cri.searchAct != 'null'"> 
-				and accept_act_yn = #{cri.searchAct}
-			</if>
-			
-			<if test="cri.searchContent != null and cri.searchContent != ''and cri.searchContent != 'null'and cri.searchContent != 'undefined'and cri.searchContent != undefined">
-			    <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
     <where>
-        <if test="cri.searchContent == 'Y' or cri.searchContent == 'N'">
-            <!-- 검색 조건이 숫자인 경우 -->
-            and accept_act_yn = #{cri.searchContent}
+        <if test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
+            <choose>
+                <when test="cri.searchContent2 =='searchNameCode'">
+                    AND (trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+                </when>
+                <when test="cri.searchContent2 =='searchCourt'">
+                    AND (court_region like concat('%', #{cri.searchContent}, '%')
+                    OR court_name like concat('%', #{cri.searchContent}, '%'))
+                </when>
+                <when test="cri.searchContent2 =='searchUser_name'">
+                    AND user_name like concat('%', #{cri.searchContent}, '%')
+                </when>
+            </choose>
         </if>
-       
-            and (
-                court_region like concat('%', #{cri.searchContent}, '%')
-                or court_name like concat('%', #{cri.searchContent}, '%')
-                or accept_act_yn = #{cri.searchContent}
-            )
-    </where>
-			</if>
-		</where>
-		
-		limit #{cri.pageStart},#{cri.amount}
-		
-    </select>
-    
-	<select id="getTotal" resultType="int">
-	    SELECT COUNT(*) FROM TB_014 tb14
-	    JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
-	    JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
-	    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
-	    <where>
-	        <!-- 검색 조건을 여기에 추가할 수 있습니다. -->
-	     	<if test="cri.searchCourt !='' and cri.searchCourt != null and cri.searchCourt != 'null'"> 
-				and court_region like concat('%',#{cri.searchCourt},'%')
-			</if>
-			<if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
-				and accept_act_yn = #{cri.searchAccept_act_yn}
-			</if>
-			<if test="cri.searchCourtName !='' and cri.searchCourtName != null and cri.searchCourtName != 'null'"> 
-				and court_name like concat('%',#{cri.searchCourtName},'%')
-			</if>
 
-			<if test="cri.searchAct !='' and cri.searchAct != null and cri.searchAct != 'null'"> 
-				and accept_act_yn = #{cri.searchAct}
-			</if>
-			<if test="cri.searchContent != null and cri.searchContent != ''and cri.searchContent != 'null'and cri.searchContent != 'undefined'and cri.searchContent != undefined">
-			    <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
-    <where>
-        <if test="cri.searchContent.matches('^\\d+$')">
-            <!-- 검색 조건이 숫자인 경우 -->
-            and accept_act_yn = #{cri.searchContent}
+        <if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
+            AND accept_act_yn = #{cri.searchAccept_act_yn}
         </if>
-        <if test="!cri.searchContent.matches('^\\d+$')">
-            <!-- 검색 조건이 숫자가 아닌 경우 -->
-            and (
-                court_region like concat('%', #{cri.searchContent}, '%')
-                or court_name like concat('%', #{cri.searchContent}, '%')
-                or accept_act_yn = #{cri.searchContent}
-            )
+
+        <if test="cri.searchContent != null and cri.searchContent != '' and cri.searchContent != 'null'">
+            <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
+            <choose>
+                <when test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
+                    AND (court_region like concat('%', #{cri.searchContent}, '%')
+                    OR court_name like concat('%', #{cri.searchContent}, '%')
+                    OR user_name like concat('%', #{cri.searchContent}, '%')
+                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+                </when>
+                <otherwise>
+                    <!-- 다른 조건이 없는 경우 기본적으로 아무 작업도 수행하지 않습니다. -->
+                </otherwise>
+            </choose>
         </if>
     </where>
-			</if>
-	    </where>
-	    
-	    
-	    
-	</select>
+
+    LIMIT #{cri.pageStart}, #{cri.amount}
+</select>
+   <select id="getTotal" resultType="int">
+    SELECT COUNT(*) FROM TB_014 tb14
+    JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
+    JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
+    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
+    <where>
+        <if test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
+            <choose>
+                <when test="cri.searchContent2 =='searchNameCode'">
+                    AND (trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+                </when>
+                <when test="cri.searchContent2 =='searchCourt'">
+                    AND (court_region like concat('%', #{cri.searchContent}, '%')
+                    OR court_name like concat('%', #{cri.searchContent}, '%'))
+                </when>
+                <when test="cri.searchContent2 =='searchUser_name'">
+                    AND user_name like concat('%', #{cri.searchContent}, '%')
+                </when>
+            </choose>
+        </if>
+
+        <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
+            AND accept_act_yn = #{cri.searchAccept_act_yn}
+        </if>
+
+        <if test="cri.searchContent != null and cri.searchContent != '' and cri.searchContent != 'null'">
+            <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
+            <choose>
+                <when test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
+                    AND (court_region like concat('%', #{cri.searchContent}, '%')
+                    OR court_name like concat('%', #{cri.searchContent}, '%')
+                    OR user_name like concat('%', #{cri.searchContent}, '%')
+                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+                </when>
+                <otherwise>
+                    <!-- 다른 조건이 없는 경우 기본적으로 아무 작업도 수행하지 않습니다. -->
+                </otherwise>
+            </choose>
+        </if>
+    </where>
+</select>
 	    
     
     
@@ -197,43 +198,35 @@
 	<!-- //////////////////////////////////////////////////////////////////////////////////-->
 		<!-- 중지 or 활동신청 리스트  -->
 	<select id="getPauseList" resultType="PauseVO">
-	    SELECT tb14_2.accept_pause,
-	           tb14_2.user_proper_num,
-	           tb14_2.pause_status,
-	           tb14_2.accept_proper_num,
-	           tb14_2.pause_start_date,
-	           tb14_2.pause_end_date,
-	           tb14_2.pause_submit_date,
-	           tb14_2.accept_pause_etc,
-	           tb1.user_name,
-	           tb14.accept_act_yn
-	    FROM TB_014_2 tb14_2
-	    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14_2.user_proper_num
-	    JOIN TB_014 tb14 ON tb14.user_proper_num = tb1.user_proper_num
-	    WHERE pause_status = 'Y'
+			SELECT tb14_2.accept_status,
+		           tb14_2.accept_proper_num,
+		           tb14_2.pause_start_date,
+		           tb14_2.pause_end_date,
+		           tb14_2.pause_submit_date,
+		           tb14_2.accept_pause_etc,
+		           tb1.user_name,
+		           tb14.accept_act_yn
+		    FROM TB_014 tb14
+		    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14.user_proper_num
+		    JOIN TB_014_2 tb14_2 ON tb14_2.accept_proper_num = tb14.accept_proper_num
+		    WHERE accept_status != 'N'
 	    <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
 	        AND accept_act_yn = #{cri.searchAccept_act_yn}
 	    </if>
 	    <if test="cri.searchUser_name != '' and cri.searchUser_name != null">
 	        AND user_name = #{cri.searchUser_name}
 	    </if>
+	       LIMIT #{cri.pageStart}, #{cri.amount}
 	</select>
 
 	
-
-
-
-
-
-
-
 	<!-- 중지 or 활동신청 데이터의 총 개수를 얻는 SQL 쿼리 -->
 	<select id="getPauseTotal" resultType="int">
-	    SELECT COUNT(*) 
+		SELECT COUNT(*) 
 	    FROM TB_014_2 tb14_2
-	    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14_2.user_proper_num
-	    JOIN TB_014 tb14 ON tb14.user_proper_num = tb1.user_proper_num
-	    WHERE pause_status = 'Y'
+        JOIN TB_014 tb14 ON tb14.accept_proper_num = tb14_2.accept_proper_num
+	    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14.user_proper_num
+	    WHERE accept_status != 'N'
 	    <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
 	        AND accept_act_yn = #{cri.searchAccept_act_yn}
 	    </if>

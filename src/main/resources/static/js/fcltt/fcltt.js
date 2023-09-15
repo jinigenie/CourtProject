@@ -1,12 +1,16 @@
 
 
-
+////////////////////////////  fclttList.html 조력자 등재명단 page ////////////////////////////////////////////////
 
 //모달창 ajax
 function modalCont() {
-	var closestTr = event.target.closest(".modal_ajax");
+	var closestTr = event.currentTarget.closest(".modal_ajax");
+	console.log(event.currentTarget)
 	var accept_proper_num = $(closestTr).find("input[name='accept_proper_num']").val();
 	var user_proper_num = $(closestTr).find("input[name='user_proper_num']").val();
+	console.log(accept_proper_num);
+	console.log(user_proper_num);
+
 
 	$.ajax({
 		type: "POST",
@@ -121,7 +125,9 @@ function modalCont() {
 			str += '<th scope="col">완료여부</th>';
 			str += '</tr>';
 			str += '</thead>';
-			str += '<tbody>';
+			str += '<tbody>'
+
+				;
 			//재판이력 반복문으로 적기
 			var str2 = "";
 			for (var i = 0; i < fclttData.content3.length; i++) {
@@ -217,10 +223,11 @@ function modalCont() {
 
 $("#fclttChange").change(function() {
 	var selectedValue = $(this).val();
-	var searchCont = $(".searchCont").val();
-	var fcltt_searchC = $("#fcltt_searchC").val();
+	var searchCont = $("#searchCont").val();
+	var searchContent2 = $("#fcltt_searchC").val();
+	console.log("change함수 실행");
 
-	loadList(selectedValue, fcltt_searchC, searchCont, 1, 10); // pageNumber와 pageSize를 직접 지정
+	loadList(selectedValue, $("#fcltt_searchC").val(),  $("#searchCont").val(), 1, 10); // pageNumber와 pageSize를 직접 지정
 });
 
 
@@ -229,48 +236,38 @@ function closePop2() {
 	document.getElementById("popup_layer2").style.display = "none";
 }
 
-// 조회버튼 /////////////////////////////////////////////////////////////
-/*function fclttSearch(){
-	console.log($("#fclttSearch_btnID"));
-	var selectedValue = $("#fclttChange").val();
-	var searchCont = $("#searchCont").val();
-	var fcltt_searchC = $("#fcltt_searchC").val();
-	
-	loadList(selectedValue, fcltt_searchC, searchCont,  pageNumber = 1, pageSize = 10);	
-}
-
-*/
+// 검색기능 함수
 
 $(".fclttSearch_content").on('click', 'a', function(e) {
 	e.preventDefault();
-	console.log($("#fclttSearch_btnID"));
+
 	var selectedValue = $("#fclttChange").val();
 	var searchCont = $("#searchCont").val();
-	var fcltt_searchC = $("#fcltt_searchC").val();
+	var searchContent2 = $("#fcltt_searchC").val();
+	console.log("click함수 실행");
+	console.log(selectedValue);
+	console.log(searchContent2);
+	console.log(searchCont);
 
-	loadList(selectedValue, fcltt_searchC, searchCont, 1, 10);
+	loadList(selectedValue, searchContent2, searchCont, 1, 10);
 });
 
-
-function loadList(selectedValue, fcltt_searchC, searchCont, pageNumber = 1, pageSize = 10) {
-
+// 등재명단 리스트 테이블생성 함수
+function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSize) {
+	console.log("list함수 작동: 시작 "+"selectedValue: "+selectedValue+", searchContent2: "+searchContent2+",searchCont: " + searchCont+"      ...." + pageNumber+pageSize);
+	console.log("fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&searchContent2=" + searchContent2 + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue);
 
 	var formData = new FormData();
-
 	formData
 
 	$.ajax({
-		url: "fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&fcltt_searchC=" + fcltt_searchC + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue,
-		type: "GET",
-		/*		
-		data: {
-			"searchAccept_act_yn": selectedValue, // 검색 조건을 파라미터로 보내기
-			"pageNumber": pageNumber,
-			"pageSize" : pageSize
+		url: "fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&searchContent2=" + searchContent2 + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue,
 
-		},
+		/*		data: {
+					"searchCont": searchCont, // 검색 조건을 파라미터로 보내기
+				},
+				
 		*/
-
 		success: function(data) {
 			var tbody = $("#fclttListId");
 			tbody.empty(); // 테이블 내용 초기화
@@ -303,11 +300,11 @@ function loadList(selectedValue, fcltt_searchC, searchCont, pageNumber = 1, page
 
 				if (FclttVO.fclttPageVO.pageList.length > 1) {
 					// 처음 페이지로 이동하는 링크 생성
-					str2 += '<a href="#" data-page-action="+' + FclttVO.fclttPageVO.start + '">' + '<<' + '</a>';
+					str2 += '<a href="#" data-page-action=1 class="arr first" ></a>';
 				}
 				// 이전 페이지로 이동하는 링크 생성
 				if (FclttVO.fclttPageVO.pageList.length > 1 && FclttVO.fclttPageVO.prev) {
-					str2 += '<a href="#" data-page-action="' + FclttVO.fclttPageVO.prev + '">' + "<" + '</a>';
+					str2 += '<a href="#" data-page-action="prev" class="arr prev"></a>';
 				}
 
 				// 페이지 번호를 생성
@@ -322,12 +319,12 @@ function loadList(selectedValue, fcltt_searchC, searchCont, pageNumber = 1, page
 
 				// 다음 페이지로 이동하는 링크 생성
 				if (FclttVO.fclttPageVO.pageList.length > 1 && FclttVO.fclttPageVO.next) {
-					str2 += '<a href="#" data-page-action="' + (FclttVO.fclttPageVO.end + 1) + '">' + ">" + '</a>';
+					str2 += '<a href="#" data-page-action="next" class="arr next" ></a>';
 				}
 
 				// 맨 마지막 페이지로 이동하는 링크 생성
 				if (FclttVO.fclttPageVO.pageList.length > 1) {
-					str2 += '<a href="#" data-page-action="' + FclttVO.fclttPageVO.realEnd + '">' + '>>' + '</a>';
+					str2 += '<a href="#" data-page-action="last"  class="arr last" ></a>';
 				}
 
 				str2 += '</div>';
@@ -346,36 +343,39 @@ $(".pager").on('click', 'a', function(e) {
 	var pageAction = $(this).data('page-action');
 	var fclttChange = $("#fclttChange").val();
 	var searchCont = $("#searchCont").val();
-	var fcltt_searchC = $("#fcltt_searchC").val();
-	console.log("fclttChange: " + fclttChange + ", searchCont: " + searchCont + ", fcltt_searchC: " + fcltt_searchC);
-	
+	var searchContent2 = $("#fcltt_searchC").val();
+	/*	console.log("fclttChange: " + fclttChange + ", searchCont: " + searchCont + ", fcltt_searchC: " + fcltt_searchC);
+		console.log("====================================");
+		console.log("pageAction : " + pageAction);
+		console.log("====================================");*/
+
 	var currentPage = ($(".pager a.active").text());
 	console.log(currentPage);
-	if (pageAction === 'first') {
+	if (pageAction === 1) {
 		// 맨 처음 페이지로 이동하는 동작 수행
-		loadList(fclttChange, fcltt_searchC, searchCont, 1, 10);
-	} else if (pageAction === 'previous') {
+		loadList(fclttChange, searchContent2, searchCont, 1, 10);
+	} else if (pageAction === 'prev') {
 		// 이전 페이지로 이동하는 동작 수행
 		var currentPage = ($(".pager a.active").text());
 		if (currentPage > 1) {
-			loadList(fclttChange, fcltt_searchC, searchCont, currentPage - 1, 10);
+			loadList(fclttChange, searchContent2, searchCont, currentPage - 1, 10);
 		}
 	} else if (pageAction === 'next') {
 		// 다음 페이지로 이동하는 동작 수행
 		var currentPage = ($(".pager a.active").text());
 		var totalPages = ($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
 		if (currentPage < totalPages) {
-			loadList(fclttChange, fcltt_searchC, searchCont, currentPage + 1, 10);
+			loadList(fclttChange, searchContent2, searchCont, currentPage + 1, 10);
 		}
 	} else if (pageAction === 'last') {
 		// 맨 마지막 페이지로 이동하는 동작 수행
 		var totalPages = ($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
-		loadList(fclttChange, fcltt_searchC, searchCont, totalPages, 10);
+		loadList(fclttChange, searchContent2, searchCont, totalPages, 10);
 	} else {
 		// 페이지 번호를 클릭한 경우
 		var pageNumber = $(this).text();
 		// 페이지 번호를 사용하여 데이터를 불러오는 동작 수행
-		loadList(fclttChange, fcltt_searchC, searchCont, pageNumber, 10);
+		loadList(fclttChange, searchContent2, searchCont, pageNumber, 10);
 	}
 });
 
@@ -387,3 +387,6 @@ $(document).ready(function() {
 	// 활동여부 onchange 이벤트 핸들러
 
 });
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
