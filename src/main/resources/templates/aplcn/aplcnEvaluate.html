@@ -65,11 +65,19 @@
 
 
 				<article id="detail-content">
-					<form id="evaluateForm" name="evaluateForm" action="aplcnAppraisal" method="post">
+					<form name="evaluateForm" action="evaluateForm" method="post">
+						<!--<input type="hidden" th:value="${vo.aplcn_dtls_proper_num}">
+						<input type="hidden" th:value="${vo.evaluate_proper_num}">
+						<input type="hidden" th:value="${vo.admin_proper_num}">-->
+
+						<!--<input type="hidden" name="edctn_dtls_proper_num" value="edctn_dtls_proper_num">-->
+						<input type="hidden" name="vo.aplcn_dtls_proper_num" value="vo.aplcn_dtls_proper_num">
+						<input type="hidden" name="vo.evaluate_proper_num" value="vo.evaluate_proper_num">
+						<input type="hidden" name="admin_proper_num" value="vo.admin_proper_num">
 
 						<div class="heading-wrap container">
 							<h3 class="heading1">
-								<span> 신청자님 평가</span>
+								<span>[[${vo.user_name}]] 신청자 평가목록</span>
 							</h3>
 						</div>
 
@@ -98,20 +106,16 @@
 										</tr>
 									</thead>
 									<tbody>
-										
+
 										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">통산경력</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+											<td data-cell-header="민원서식명" tabindex="0">
 												<input type="text" id="input1" class="transparent-input"
 													name="all_carer_score">
 
 											</td>
 											<td data-cell-header="점수">관내경력</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+											<td data-cell-header="민원서식명" tabindex="0">
 												<input type="text" id="input2" class="transparent-input"
 													name="jrsdc_carer_score">
 											</td>
@@ -124,9 +128,7 @@
 													name="office_score">
 											</td>
 											<td data-cell-header="담당법원">인성평가</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+											<td data-cell-header="민원서식명" tabindex="0">
 												<input type="text" id="input4" class="transparent-input"
 													name="personality_score">
 										</tr>
@@ -138,9 +140,7 @@
 													name="interview_score">
 											</td>
 											<td data-cell-header="담당법원">자격증</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+											<td data-cell-header="민원서식명" tabindex="0">
 												<input type="text" id="input6" class="transparent-input"
 													name="certificate_score">
 											</td>
@@ -148,15 +148,11 @@
 
 										<tr title="etc" style="cursor: pointer">
 											<td data-cell-header="번호">감정인 평가</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+											<td data-cell-header="민원서식명" tabindex="0">
 												<input type="text" id="input7" class="transparent-input"
 													name="evaluate_score">
 											<td data-cell-header="담당법원">심사위원 추천</td>
-											<td data-cell-header="민원서식명" tabindex="0"
-												onkeypress="if(event.keyCode ==13){$(this).click()}"
-												onclick="jsSamuDetail('14921000459')">
+											<td data-cell-header="민원서식명" tabindex="0">
 												<input type="text" id="input8" class="transparent-input"
 													name="judge_recom_score">
 											</td>
@@ -187,14 +183,25 @@
 								</script>
 								<!-- pagenation -->
 								<div class="fclttRegist_btn">
-									<button type="button" class="fcltt_btn1"><a onclick="calculateAverage()">평가
-											수정하기</a></button>
-									<button type="button" class="fcltt_btn2"><a
+									<!--<button type="button" class="fcltt_btn1"><a onclick="calculateAverage()">평가
+											수정하기</a></button>-->
+									<button type="submit" class="fcltt_btn2"><a
 											onclick="calculateAverageAndSendToParent()">평가완료</button>
 
 								</div>
 							</div>
 					</form>
+
+
+					<script th:inline="javascript">
+						if ('[[${result}]]' == 1) {
+							alert('평가를 완료하였습니다.');
+							opener.location.href = '/aplcn/aplcnList';
+							self.close();
+						} else if ('[[${result}]]' == 0) {
+							alert('평가를 완료해주세요')
+						}
+					</script>
 
 					<script type="text/javascript">
 						var evaluateForm = document.getElementById("evaluateForm");
@@ -215,17 +222,21 @@
 								var average = (input1 + input2 + input3 + input4 + input5 + input6 + input7 + input8) / 8;
 
 								// 평균값을 부모 창으로 전달합니다.
-								window.opener.handleChildResult(average);
+								if (window.opener && typeof window.opener.handleChildResult === "function") {
+									window.opener.handleChildResult(average);
 
-								if (confirm("평가를 저장하시겠습니까?")) {
-									evaluateForm.submit();
+									if (confirm("평가를 저장하시겠습니까?")) {
+										evaluateForm.submit();
+									}
+
+								} else {
+									alert("유효한 숫자를 입력하세요.");
 								}
+								// 1번부터 8번까지의 입력 필드 중 하나라도 값이 없으면 알림 창을 표시합니다.
+								if (!input1 || !input2 || !input3 || !input4 || !input5 || !input6 || !input7 || !input8) {
+									alert("1번부터 8번까지의 입력 필드에 값을 모두 입력하세요.");
 
-
-								// 팝업 창 닫기
-								//window.close();
-							} else {
-								alert("유효한 숫자를 입력하세요.");
+								}
 							}
 						}
 					</script>
