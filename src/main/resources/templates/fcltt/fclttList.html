@@ -65,7 +65,7 @@
 							<div class="fclttSearch_wrap">
 								<div class="fclttSearch_content">
 									<select name="searchContent2" id="fcltt_searchC" class="fclttSearch fclttSearch1">
-										<option value="">전체
+										<option value="searchAll">전체
 										</option>
 										<option value="searchCourt">법원명
 										</option>
@@ -140,9 +140,90 @@
 
 </th:block>
 
-<script>
+<script th:inline="javascript">
 	
+$("#fclttChange").change(function() {
+	var selectedValue = $(this).val();
+	var searchCont = $("#searchCont").val();
+	var searchContent2 = $("#fcltt_searchC").val();
 
+	loadList(selectedValue, $("#fcltt_searchC").val(),  $("#searchCont").val(), 1, 10); // pageNumber와 pageSize를 직접 지정
+});
+
+// 검색기능 함수
+$(".fclttSearch_content").on('click', 'a', function(e) {
+	e.preventDefault();
+
+	var selectedValue = $("#fclttChange").val();
+	var searchCont = $("#searchCont").val();
+	var searchContent2 = $("#fcltt_searchC").val();
+
+
+	loadList(selectedValue, searchContent2, searchCont, 1, 10);
+});
+
+// enter키로 조회 버튼 
+$("#searchCont").on("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // 폼의 기본 동작을 막음
+        var selectedValue = $("#fclttChange").val();
+        var searchCont = $("#searchCont").val();
+        var searchContent2 = $("#fcltt_searchC").val();
+        loadList(selectedValue, searchContent2, searchCont, 1, 10);
+    }
+});
+
+
+
+
+
+
+// 활동여부 onchange fclttChange
+$(document).ready(function() {
+	// 페이지 로드 시 목록을 불러오기
+	loadList($("#fclttChange").val(), $("#fcltt_searchC").val(), $("#fclttSearch_btnID").val(), 1, 10);
+	// 활동여부 onchange 이벤트 핸들러
+
+});
+$(".pager").on('click', 'a', function(e) {
+	e.preventDefault();
+	var pageAction = $(this).data('page-action');
+	var fclttChange = $("#fclttChange").val();
+	var searchCont = $("#searchCont").val();
+	var searchContent2 = $("#fcltt_searchC").val();
+	/*	console.log("fclttChange: " + fclttChange + ", searchCont: " + searchCont + ", fcltt_searchC: " + fcltt_searchC);
+		console.log("====================================");
+		console.log("pageAction : " + pageAction);
+		console.log("====================================");*/
+
+	var currentPage = ($(".pager a.active").text());
+	if (pageAction === 1) {
+		// 맨 처음 페이지로 이동하는 동작 수행
+		loadList(fclttChange, searchContent2, searchCont, 1, 10);
+	} else if (pageAction === 'prev') {
+		// 이전 페이지로 이동하는 동작 수행
+		var currentPage = ($(".pager a.active").text());
+		if (currentPage > 1) {
+			loadList(fclttChange, searchContent2, searchCont, currentPage - 1, 10);
+		}
+	} else if (pageAction === 'next') {
+		// 다음 페이지로 이동하는 동작 수행
+		var currentPage = ($(".pager a.active").text());
+		var totalPages = ($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
+		if (currentPage < totalPages) {
+			loadList(fclttChange, searchContent2, searchCont, currentPage + 1, 10);
+		}
+	} else if (pageAction === 'last') {
+		// 맨 마지막 페이지로 이동하는 동작 수행
+		var totalPages = ($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
+		loadList(fclttChange, searchContent2, searchCont, totalPages, 10);
+	} else {
+		// 페이지 번호를 클릭한 경우
+		var pageNumber = $(this).text();
+		// 페이지 번호를 사용하여 데이터를 불러오는 동작 수행
+		loadList(fclttChange, searchContent2, searchCont, pageNumber, 10);
+	}
+});
 
 </script>
 

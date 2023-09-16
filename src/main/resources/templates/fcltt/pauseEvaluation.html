@@ -65,14 +65,7 @@
 
 							<hr />
 							<div class="fclttSearch_wrap">
-								<div class="fclttSearch_content">
-									<!--<select name="" id="" class="fclttSearch fclttSearch1">
-										<option value="">모두</option>
-										<option value="">이름</option>
-									</select>
-									<input type="text" class="fclttSearch fclttSearch2" name="searchUser_name" />
-
-									<a href="#" class="fclttSerch_Btn" id="pauseSearch_btn">검색</a>-->
+								<div class="fclttSearch_content2">
 									<select name="searchAccept_act_yn" id="selectedValue"
 										class="fclttSearch fclttSearch3">
 										<option value="">신청사항</option>
@@ -126,15 +119,7 @@
 	</div>
 
 </th:block>
-<script th:inline="javascript">
 
-	var pauseSearch_btn = document.getElementById("pauseSearch_btn");
-	pauseSearch_btn.onclick = function () {
-		event.preventDefault(); // a 태그 중지버튼
-		document.listForm.submit();
-	}
-
-</script>
 
 <script th:inline="javascript">
 
@@ -152,17 +137,16 @@
 
 			success: function (data) {
 				var tbody = $("#yourTableId");
-				tbody.empty(); // 테이블 내용 초기화
-
+				tbody.empty(); // 테이블 내용 초기
 				for (var i = 0; i < data.length; i++) {
 					var vo = data[i];
 					var str = "";
 
 					str += '<tr id="pause_text" class="pause_text1 cm_inptxt toggle-row" onclick="toggleRows()" style="cursor: pointer">';
-					str += '<input type="hidden" name="user_proper_num" value="' + vo.user_proper_num + '"/>';
+					str += '<input type="hidden" name="accept_proper_num" value="' + vo.accept_proper_num + '"/>';
 					str += '<td data-cell-header="신청일">' + vo.pause_submit_date + '</td>';
 					str += '<td data-cell-header="신청자이름">' + vo.user_name + '</td>';
-					str += '<td data-cell-header="중지기간">' + vo.pause_start_date + ' ~ ' + moment(vo.pause_end_date).format('YYYY-MM-DD') + '</td>';
+					str += '<td data-cell-header="중지기간">' + vo.pause_start_date + ' ~ ' + vo.pause_end_date + '</td>';
 					str += '<td data-cell-header="현재활동상태"><a class="' + (vo.accept_act_yn == 'Y' ? 'fclttStatus1' : 'fclttStatus2') + '">';
 					str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
 					str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';
@@ -236,7 +220,6 @@
 		var selectedValue = $("#selectedValue").val();
 
 		var currentPage = ($(".pager a.active").text());
-		console.log(currentPage);
 		if (pageAction === 1) {
 			// 맨 처음 페이지로 이동하는 동작 수행
 			pauseList(fclttChange, 1, 10);
@@ -269,18 +252,16 @@
 	// 승인처리 ajax
 	$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
 		event.preventDefault(); // a 링크의 기본 동작 중지
-		var user_proper_num = $(this).closest("tr").find("input[name='user_proper_num']").val();
+		var accept_proper_num = $(this).closest("tr").find("input[name='accept_proper_num']").val();
 		var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
-
-		console.log(user_proper_num);
-		console.log(accept_act_yn);
+		var selectedValue = $("#selectedValue").val();
 
 		// 여기에 AJAX 요청 코드를 작성합니다.
 		$.ajax({
 			url: "pauseResultSubmit", // 요청을 보낼 URL을 지정합니다.
 			type: "POST", // HTTP 요청 메서드 (GET 또는 POST)
 			data: {
-				"user_proper_num": user_proper_num,
+				"accept_proper_num": accept_proper_num,
 				"accept_act_yn": accept_act_yn
 			},
 			success: function (response) {
@@ -289,8 +270,8 @@
 				// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다.
 
 				// 목록을 다시 불러오는 AJAX 요청
-				loadList(); // 목록을 다시 불러오는 함수 호출
-				loadPaging();
+				// 목록을 다시 불러오는 함수 호출
+				pauseList(selectedValue, 1, 10);
 				alert("승인되었습니다.");
 			},
 			error: function (xhr, status, error) {
@@ -298,6 +279,7 @@
 				console.error("AJAX 요청 오류: " + error);
 			}
 		});
+
 	});
 
 	$(document).ready(function () {
@@ -310,7 +292,6 @@
 	// 활동준비/ 승인준비 select change 값 별로 정렬
 	$("#selectedValue").change(function () {
 		var selectedValue = $(this).val();
-		console.log("change함수 실행");
 
 		pauseList(selectedValue, 1, 10); // pageNumber와 pageSize를 직접 지정
 	});

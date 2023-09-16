@@ -14,6 +14,7 @@ public class FclttCriteria {
 	private String searchCourtName; //법원
 	private String searchAct; //활동여부
 	private String searchDate; // 등록날짜
+	private String searchAll; // 검색내용
 	private String searchContent; //검색내용
 	private String searchContent2; //검색내용
 	private String searchNameCode; //조력자 소분류코드
