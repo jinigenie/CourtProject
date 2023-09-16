@@ -5,6 +5,14 @@ import java.util.ArrayList;
 
 public interface FclttService {
 
+	// 조력자 등재페이지 진입시 조회 1
+	public FclttVO getDetail(String user_proper_num);
+	// 조력자 등재페이지 진입시 조회 2(희망법원2에 대한 법원분류번호)
+	public String getDetail1(String court_proper1);
+	// 조력자 등재페이지 진입시 조회 3(희망법원3에 대한 법원분류번호)
+	public String getDetail2(String court_proper2);
+	
+	
 	// 조력자 등재
 	public int fclttRegist(FclttVO vo);
 	
@@ -27,8 +35,6 @@ public interface FclttService {
 	
 	//명단에서 상세보기 ajax 5. 경력
 	public ArrayList<FclttVO> getFclttContent5(String user_proper_num);
-	
-	
 	
 	//------------------------------------------------------------------
 	

@@ -11,6 +11,26 @@ public class FclttServiceImple implements FclttService {
 	@Autowired
 	private FclttMapper fclttMapper;
 	
+	
+	// 조력자 등재페이지 진입시 조회
+	@Override
+	public FclttVO getDetail(String user_proper_num) {
+		return fclttMapper.getDetail(user_proper_num);
+	}
+	// 조력자 등재페이지 진입시 조회 2(희망법원2에 대한 법원분류번호)
+	@Override
+	public String getDetail1(String court_proper1) {
+		return fclttMapper.getDetail1(court_proper1);
+	}
+	// 조력자 등재페이지 진입시 조회 3(희망법원3에 대한 법원분류번호)
+	@Override
+	public String getDetail2(String court_proper2) {
+		return fclttMapper.getDetail2(court_proper2);
+	}
+
+	
+	
+	
 	//조력자 등재
 	@Override
 	public int fclttRegist(FclttVO vo) {
@@ -27,19 +47,16 @@ public class FclttServiceImple implements FclttService {
 	public int getTotal(FclttCriteria cri) {
 		return fclttMapper.getTotal(cri);
 	}
-
 	
 	// 중지신청 목록
 	@Override
 	public ArrayList<PauseVO> getPauseList(FclttCriteria cri) {
-		System.out.println("목록 서비스에 들어온 값 확인 ! : " + cri.toString());
 		return fclttMapper.getPauseList(cri);
 	}
 
 	//중지신청 total
 	@Override
 	public int getPauseTotal(FclttCriteria cri) {
-		System.out.println("total 서비스에 들어온 값 확인 ! : " + cri.toString());
 		return fclttMapper.getPauseTotal(cri);
 	}
 	
@@ -85,6 +102,7 @@ public class FclttServiceImple implements FclttService {
 		return fclttMapper.getFclttContent5(user_proper_num);
 	}
 	//------------------------------------------------------------------
+
 
 
 }

@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script th:src="@{../js/fcltt/fcltt.js}"></script>
 
 
@@ -23,27 +24,19 @@
 							<li style="display: bolck !important;"><a href="/fcltt/fclttList">조력자 등재명단</a></li>
 							<li style="display: bolck !important;"><a href="/fcltt/pause">조력자 활동신청관리</a></li>
 							</li>
-
-
 						</ul>
 					</div>
 
 				</div>
 			</div>
 			<div id="contents">
-				<div class="heading-wrap container">
-					<h3 class="heading1">
-						<span style="margin-bottom: 20px;">재판조력자 등재</span>
-					</h3>
-					<!--                    <div class="fclttRegist_wrap">
-						<form action="fclttRegForm"  name="fclttRegForm">
-							<input type="text" value="" name="" />
-							
-							
-							
-						</form>
-					</div>-->
-					<form name="fclttRegistForm" action="fclttRegistForm" method="post">
+				<form name="fclttRegistForm" action="fclttRegistForm" method="post">
+					<input type="hidden" name="trial_fcltt_proper_num" th:value="${vo.trial_fcltt_proper_num}">
+					<div class="heading-wrap container">
+						<h3 class="heading1">
+							<span style="margin-bottom: 20px;">재판조력자 등재</span>
+						</h3>
+
 						<div class="table table-responsive">
 							<table>
 								<caption>
@@ -55,14 +48,13 @@
 									<col style="width: 70%">
 								</colgroup>
 								<tbody>
-
 									<tr>
 										<th scope="row">
 											<span class="txt-left">사용자고유번호</span>
 										</th>
 										<td data-cell-header="사용자고유번호" class="txt-left">
-											<input name="USER_PROPER_NUM" th:value="1234" class="cm_inptxt" type="text"
-												readonly style="border: none;">
+											<input name="user_proper_num" th:value="${vo.user_proper_num}"
+												class="cm_inptxt" type="text" readonly style="border: none;">
 										</td>
 									</tr>
 									<tr>
@@ -70,8 +62,8 @@
 											<span class="txt-left">이름</span>
 										</th>
 										<td data-cell-header="성명" class="txt-left">
-											<input name="user_name" value="김혜민" class="cm_inptxt" type="text" readonly
-												style="border: none;">
+											<input name="user_name" th:value="${vo.user_name}" class="cm_inptxt"
+												type="text" readonly style="border: none;">
 										</td>
 									</tr>
 									<tr>
@@ -82,13 +74,10 @@
 											<div class="user_phone" style="display: inline-block">
 												<div class="user_phone">
 													<input name="user_phone" maxlength="4" id="cvl_cel1"
-														value="01067770486" class="cm_inptxt" title="휴대폰번호 앞자리" readonly
-														style="border: none;" type="text"
-														onkeydown="return num_only(event)" />
+														th:value="${vo.user_phone}" class="cm_inptxt" title="휴대폰번호 앞자리"
+														readonly style="border: none;" type="text" />
 												</div>
 											</div>
-
-
 										</td>
 									</tr>
 									<tr>
@@ -96,96 +85,61 @@
 											<span class="essential-txt" title="조력자분류">조력자 분류</span>
 										</th>
 										<td data-cell-header="조력자분류" class="txt-left">
-											<!--<select name="trial_fcltt_proper_num" id="trial_fcltt_proper_num" class="cm_inptxt fclttCategory">
-												<option value="">대분류</option>
-												<option value="">대분류1</option>
-												<option value="">대분류2</option>
-												<option value="">대분류3</option>
-												<option value="">대분류5</option>
-											</select>
-											<select name="trial_fcltt_proper_num" id="trial_fcltt_proper_num" class="cm_inptxt fclttCategory">
-												<option value="">중분류</option>
-												<option value="">중분류1</option>
-												<option value="">중분류2</option>
-												<option value="">중분류3</option>
-												<option value="">중분류5</option>
-											</select>
-											<select name="trial_fcltt_proper_num" id="trial_fcltt_proper_num" class="cm_inptxt fclttCategory">
-												<option value="">소분류</option>
-												<option value="">소분류1</option>
-												<option value="">소분류2</option>
-												<option value="">소분류3</option>
-												<option value="">소분류5</option>
-											</select>-->
-											<input name="trial_fcltt_proper_num" value="번역가" class="cm_inptxt"
-												type="text" readonly style="border: none;">
+											<input name="trial_fcltt_main_code"
+												th:value="${vo.trial_fcltt_main_code + ' > ' + vo.trial_fcltt_description}"
+												class="cm_inptxt" type="text" readonly style="border: none;">
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">
-											<span>법원 분류</span>
+											<span>법원지정</span>
 										</th>
 										<td data-cell-header="법원" class="txt-left">
-											<!--<select name="court_proper_num" id="court_proper_num" class="cm_inptxt">
-												<option value="">지역</option>
-												<option value="">지역1</option>
-												<option value="">지역2</option>
-												<option value="">지역3</option>
-												<option value="">지역5</option>
-											</select>
-											<select name="court_proper_num" id="court_proper_num" class="cm_inptxt">
-												<option value="">법원명</option>
-												<option value="">법원명1</option>
-												<option value="">법원명2</option>
-												<option value="">법원명3</option>
-												<option value="">법원명5</option>
-											</select>-->
-											<input name="court_proper_num" value="대법원" class="cm_inptxt" type="text"
-												readonly style="border: none;">
-
+											<input type="radio" name="court_proper_num" id="court1"
+												th:value="${court_proper_num1}">
+											<label for="court1"
+												onclick="selectRadio('court1')">[[${vo.court_proper1}]] </label>
+											<input type="radio" name="court_proper_num" id="court2"
+												th:value="${court_proper_num2}">
+											<label for="court2"
+												onclick="selectRadio('court2')"> [[${vo.court_proper2}]]</label>
 										</td>
 									</tr>
-
 									<tr>
 										<th scope="row">
 											<span>기타 내용</span>
 										</th>
 										<td data-cell-header="accept_etc" class="txt-left">
-											<textarea rows="4" cols="50" class="accept_etc" id="accept_etc"
+											<textarea rows="4" cols="50" class="accept_etc" id="accept_etc2"    
 												name="accept_etc" style="width: 550px; height: 150px;"></textarea>
 										</td>
 									</tr>
-
-
 								</tbody>
 							</table>
-
 						</div>
 						<div class="fclttRegist_btn">
 							<button type="button" id="fcltt_btn_submit" class="fcltt_btn1">등록</button>
 							<button type="button" id="fcltt_btn_no" onclick="btn_no()" class="fcltt_btn2">취소</button>
 						</div>
-
-
-				</div>
+					</div>
 				</form>
-
-
 			</div>
-
 		</div>
 
 	</div>
 </th:block>
 
 <script>
+	function selectRadio(id) {
+		document.getElementById(id).checked = true;
+	}
 	const fcltt_btn1 = document.getElementById("fcltt_btn_submit");
 	fcltt_btn1.onclick = () => {
 		document.fclttRegistForm.submit();
 	}
 
 	const btn_no = () => {
-		window.location.href = "/fcltt/fclttList";
+		window.location.href = "/fcltt/fclttRegist";
 	}
 
 

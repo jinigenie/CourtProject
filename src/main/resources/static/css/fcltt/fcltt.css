@@ -45,7 +45,12 @@
 
 /* ------------------조력자 등재명단 목록 fclttList --------------------*/
 
-.fclttSearch_content {
+.fclttSearch_wrap{
+	padding-left:230px;
+	padding-right: 50px;
+}
+
+.fclttSearch_content, .fclttSearch_content2 {
     overflow: hidden;
     box-sizing: border-box;
     display: flex;
