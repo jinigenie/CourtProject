@@ -4,7 +4,7 @@
 <head>
 	<link rel="stylesheet" th:href="@{./../css/fcltt/fcltt.css}" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	<script th:src="@{./../js/fcltt/fcltt.js}"></script>
+	<script defer th:src="@{../js/fcltt/fcltt.js}"></script>
 </head>
 
 
@@ -132,7 +132,7 @@
 		formData
 
 		$.ajax({
-			url: "pauseAjax?page=" + page + "&amount=" + amount + "&searchAccept_act_yn=" + selectedValue,
+			url: "../pauseAjax?page=" + page + "&amount=" + amount + "&searchAccept_act_yn=" + selectedValue,
 			type: "GET",
 
 			success: function (data) {
@@ -213,7 +213,7 @@
 	// 페이지 로드 시 목록을 불러옵니다.
 
 
-	// 페이징 AJAX
+	// 페이징
 	$(".pager").on('click', 'a', function (e) {
 		e.preventDefault();
 		var pageAction = $(this).data('page-action');

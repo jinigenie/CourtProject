@@ -24,6 +24,16 @@ public class FclttCriteria {
 	private String searchUser_name; // 사용자이름검색
 	
 	
+	////////////////////// faq에  사용할 검색 값 
+	
+	//검색에 필요한 키워드 선언
+	private String searchFaq_proper_num;  // faq 번호
+	private String searchAdmin_proper_num; // 작성 관리자 번호
+	private String searchFaq_ask_content; //질문 
+	private String searchFaq_ask_comment; //답변 
+	private String searchFaq_ask_date; //작성일
+	
+	
 	// 기본생성자로 만들 시 기본값 : page = 1; amount = 10;
 	public FclttCriteria() {
 		this.page=1;

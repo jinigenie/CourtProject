@@ -7,8 +7,66 @@
 <mapper namespace="com.court.proj.faq.FaqMapper">
 
     <select id="getList" resultType="FaqVO">
-    	select * from TB_004
+	    select * from TB_004
+	 	 <where>
+	        <if test="searchContent != null and searchContent != '' and searchContent != 'null'">
+	            <choose>
+	                <when test="searchContent =='searchFaq_ask_content'">
+	                    AND faq_ask_content like concat('%', #{searchContent2}, '%')
+	                </when>
+	                <when test="searchContent =='searchFaq_ask_comment'">
+	                    AND faq_ask_comment like concat('%', #{searchContent2}, '%')
+	                </when>
+	                <when test="searchContent =='searchAll'">
+	                    AND (faq_ask_content like concat('%', #{searchContent2}, '%')
+	                    OR faq_ask_comment like concat('%', #{searchContent2}, '%'))
+	                </when>
+	            </choose>
+	        </if>
+	
+	        <if test="searchContent2 != null and searchContent2 != '' and searchContent2 != 'null'">
+	            <choose>
+	                <when test="searchContent2 != null and searchContent2 != '' and searchContent2 != 'null'">
+	                    AND (faq_ask_content like concat('%', #{searchContent2}, '%')
+	                    OR faq_ask_comment like concat('%', #{searchContent2}, '%'))
+	                </when>
+	                <otherwise>
+	                </otherwise>
+	            </choose>
+	        </if>
+	    </where>
+	 	LIMIT #{pageStart}, #{amount}
     </select>
 
+    <select id="getTotal" resultType="int">
+    	select count(*) from TB_004
+    		 	 <where>
+	        <if test="searchContent != null and searchContent != '' and searchContent != 'null'">
+	            <choose>
+	                <when test="searchContent =='searchFaq_ask_content'">
+	                    AND faq_ask_content like concat('%', #{searchContent2}, '%')
+	                </when>
+	                <when test="searchContent =='searchFaq_ask_comment'">
+	                    AND faq_ask_comment like concat('%', #{searchContent2}, '%')
+	                </when>
+	                <when test="searchContent =='searchAll'">
+	                    AND (faq_ask_content like concat('%', #{searchContent2}, '%')
+	                    OR faq_ask_comment like concat('%', #{searchContent2}, '%'))
+	                </when>
+	            </choose>
+	        </if>
+	
+	        <if test="searchContent2 != null and searchContent2 != '' and searchContent2 != 'null'">
+	            <choose>
+	                <when test="searchContent2 != null and searchContent2 != '' and searchContent2 != 'null'">
+	                    AND (faq_ask_content like concat('%', #{searchContent2}, '%')
+	                    OR faq_ask_comment like concat('%', #{searchContent2}, '%'))
+	                </when>
+	                <otherwise>
+	                </otherwise>
+	            </choose>
+	        </if>
+	    </where>
+    </select>
 
 </mapper>

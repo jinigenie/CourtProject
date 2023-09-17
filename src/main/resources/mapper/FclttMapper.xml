@@ -90,7 +90,6 @@
 	        </if>
 	
 	        <if test="cri.searchContent != null and cri.searchContent != '' and cri.searchContent != 'null'">
-	            <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
 	            <choose>
 	                <when test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
 	                    AND (court_region like concat('%', #{cri.searchContent}, '%')
@@ -99,7 +98,6 @@
 	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
 	                </when>
 	                <otherwise>
-	                    <!-- 다른 조건이 없는 경우 기본적으로 아무 작업도 수행하지 않습니다. -->
 	                </otherwise>
 	            </choose>
 	        </if>
@@ -143,7 +141,6 @@
 	        </if>
 	
 	        <if test="cri.searchContent != null and cri.searchContent != '' and cri.searchContent != 'null'">
-	            <!-- 검색 조건이 비어있지 않은 경우에만 아래의 조건을 적용합니다. -->
 	            <choose>
 	                <when test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
 	                    AND (court_region like concat('%', #{cri.searchContent}, '%')
@@ -152,7 +149,6 @@
 	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
 	                </when>
 	                <otherwise>
-	                    <!-- 다른 조건이 없는 경우 기본적으로 아무 작업도 수행하지 않습니다. -->
 	                </otherwise>
 	            </choose>
 	        </if>
