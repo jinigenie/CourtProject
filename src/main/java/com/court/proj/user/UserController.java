@@ -95,7 +95,6 @@ public class UserController {
 			}
 			return "user/userjoin";
 		}
-		System.out.println(vo.toString());
 		String pw = bCryptPasswordEncoder.encode(vo.getUser_pw());
 		vo.setUser_pw(pw);
 		userService.joinUser(vo);
@@ -124,7 +123,7 @@ public class UserController {
 		//message.setTo(phone);
 
 		Random random = new Random();
-
+		System.out.println(phone);
 		int randomNumber = random.nextInt(900000) + 100000;
 
 		//message.setText("인증번호 : " + randomNumber);

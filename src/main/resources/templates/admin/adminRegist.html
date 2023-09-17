@@ -27,130 +27,136 @@
 					<h3 class="heading1">
 						<span style="margin-bottom: 20px;">관리자 등록</span>
 					</h3>
-					<div class="table table-responsive">
-						<table>
-							<caption>
-								관리자 등록
-							</caption>
-							<colgroup>
-								<col style="width: 30%">
-								<col style="width: 70%">
-							</colgroup>
-							<style>
-								.btn-style.btn-style11 {
-									background: #2065c6;
-									height: 40px;
-									line-height: 38px;
-									border-color: #2065c6;
-									font-size: 0.7rem;
-									color: white;
-								}
+					<form action="registForm" name="registForm" id="registForm" method="post">
+						<div class="table table-responsive">
+							<table>
+								<caption>
+									관리자 등록
+								</caption>
+								<colgroup>
+									<col style="width: 30%">
+									<col style="width: 70%">
+								</colgroup>
+								<style>
+									.btn-style.btn-style11 {
+										background: #2065c6;
+										height: 40px;
+										line-height: 38px;
+										border-color: #2065c6;
+										font-size: 0.7rem;
+										color: white;
+									}
 
-								.btn-style.btn-style12 {
-									background: #2065c6;
-									height: 30px;
-									line-height: 30px;
-									border-color: #2065c6;
-									font-size: 0.7rem;
-									color: white;
-								}
-							</style>
-							<tbody>
-								<tr style="padding-top: 20px">
-									<th scope="row" class="txt-left">
-										<span class="essential-txt" title="필수항목" style="margin-left: 80px">아이디</span>
-									</th>
-									<td class="txt-left">
-										<div class="address-wrap write-wrap-m">
-											<div class="address-btn-wrap">
-												<div class="input-wrap">
-													<input id="adminid" name="admin_id" class="cm_inptxt" value=""
-														title="" type="text" />
+									.btn-style.btn-style12 {
+										background: #2065c6;
+										height: 30px;
+										line-height: 30px;
+										border-color: #2065c6;
+										font-size: 0.7rem;
+										color: white;
+									}
+								</style>
+								<tbody>
+									<tr style="padding-top: 20px">
+										<th scope="row" class="txt-left">
+											<span class="essential-txt" title="필수항목"
+												style="margin-left: 80px">아이디</span>
+										</th>
+										<td class="txt-left">
+											<div class="address-wrap write-wrap-m">
+												<div class="address-btn-wrap">
+													<div class="input-wrap">
+														<input id="adminid" name="admin_id" class="cm_inptxt" value=""
+															title="" type="text" />
+													</div>
+													<button type="button" class="address-btn" id="checkDuple"> 아이디 중복확인
+													</button>
 												</div>
-												<button type="button" class="address-btn" id="checkDuple"> 아이디 중복확인
-												</button>
+												<em id="resultMessage"></em>
 											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row" class="txt-left">
-										<span class="essential-txt" title="" style="margin-left: 80px">비밀번호</span>
-									</th>
-									<td class="txt-left">
-										<div class="input-wrap-three write-wrap-m"
-											style="width: 162px; display: inline-block">
-											<div class="input-wrap" style="width: 200px">
-												<input name="admin_pw" id="password" value="" class="cm_inptxt"
-													type="password" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row" class="txt-left">
+											<span class="essential-txt" title="" style="margin-left: 80px">비밀번호</span>
+										</th>
+										<td class="txt-left">
+											<div class="input-wrap-three write-wrap-m"
+												style="width: 162px; display: inline-block">
+												<div class="input-wrap" style="width: 200px">
+													<input name="admin_pw" id="password" value="" class="cm_inptxt"
+														type="password" />
+												</div>
+											<input type="checkbox" name="showPw" id="showPw" style="display: inline-block;">
+												<label for="showPw">비밀번호 보이기</label>
 											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row" class="txt-left">
-										<span class="essential-txt" title="" style="margin-left: 80px">비밀번호확인</span>
-									</th>
-									<td class="txt-left">
-										<div class="input-wrap-three write-wrap-m"
-											style="width: 162px; display: inline-block">
-											<div class="input-wrap" style="width: 200px">
-												<input id="password-confirm" value="" class="cm_inptxt"
-													type="password" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row" class="txt-left">
+											<span class="essential-txt" title="" style="margin-left: 80px">비밀번호확인</span>
+										</th>
+										<td class="txt-left">
+											<div class="input-wrap-three write-wrap-m"
+												style="width: 162px; display: inline-block">
+												<div class="input-wrap" style="width: 200px">
+													<input id="password-confirm" value="" class="cm_inptxt"
+														type="password" />
+												</div>
+												<span style="color: crimson;" id="password-confirm-message"></span>
 											</div>
-											<span style="color: crimson;" id="password-confirm-message"></span>
-										</div>
 
-									</td>
-								</tr>
-								<tr>
-									<th scope="row" class="txt-left">
-										<span class="essential-txt" title="" style="margin-left: 80px">관리자 식별</span>
-									</th>
-									<td class="txt-left">
-										<div class="input-wrap-three write-wrap-m"
-											style="width: 162px; display: inline-block">
-											<div class="input-wrap" style="width: 200px">
-												<input name="admin_name" id="cvl_nm" value="" class="cm_inptxt"
-													type="text" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row" class="txt-left">
+											<span class="essential-txt" title="" style="margin-left: 80px">관리자 식별</span>
+										</th>
+										<td class="txt-left">
+											<div class="input-wrap-three write-wrap-m"
+												style="width: 162px; display: inline-block">
+												<div class="input-wrap" style="width: 200px">
+													<input name="admin_name" id="cvl_nm" value="" class="cm_inptxt"
+														type="text" />
+												</div>
 											</div>
-										</div>
-									</td>
-								</tr>
+										</td>
+									</tr>
 
-								<tr>
-									<th scope="row" class="txt-left">
-										<span style="margin-left: 80px">관리자 권한</span>
-									</th>
-									<style>
-										.checkbox-radio-custom>li {
-											float: left;
-											margin-left: 1rem;
-										}
-									</style>
-									<td class="txt-left">
-										<ul class="checkbox-radio-custom write-wrap-m">
-											<li>
-												<input id="yn_receipt_yes" class="cm_inpchkrd" name="admin_auth"
-													type="radio" value="JURIS" />
-												<label for="yn_receipt_yes">사법 담당자</label>
-											</li>
-											<li>
-												<input id="" class="cm_inpchkrd" name="admin_auth" type="radio"
-													value="COURT" />
-												<label for="yn_receipt_no">각급 법원 담당자</label>
-											</li>
-											<li>
-												<input id="" class="cm_inpchkrd" name="admin_auth" type="radio"
-													value="COURT" />
-												<label for="yn_receipt_no">서비스 관리자</label>
-											</li>
-										</ul>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+									<tr>
+										<th scope="row" class="txt-left">
+											<span style="margin-left: 80px">관리자 권한</span>
+										</th>
+										<style>
+											.checkbox-radio-custom>li {
+												float: left;
+												margin-left: 1rem;
+											}
+										</style>
+										<td class="txt-left">
+											<ul class="checkbox-radio-custom write-wrap-m">
+												<li>
+													<input id="yn_receipt_yes" class="cm_inpchkrd" name="admin_auth"
+														type="radio" value="JURIS" />
+													<label for="yn_receipt_yes">사법 담당자</label>
+												</li>
+												<li>
+													<input id="" class="cm_inpchkrd" name="admin_auth" type="radio"
+														value="COURT" />
+													<label for="yn_receipt_no">각급 법원 담당자</label>
+												</li>
+												<li>
+													<input id="" class="cm_inpchkrd" name="admin_auth" type="radio"
+														value="COURT" />
+													<label for="yn_receipt_no">서비스 관리자</label>
+												</li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
 					<style>
 						.btn-holder {
 							display: flex;
@@ -197,10 +203,10 @@
 						}
 					</style>
 					<div class="btn-holder">
-						<button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
+						<button class="btn btn-2 hover-opacity" id="registBtn">
 							<span>등록</span>
 						</button>
-						<button class="btn btn-2 hover-opacity next_btn">
+						<button class="btn btn-2 hover-opacity">
 							<span>취소</span>
 						</button>
 					</div>
@@ -221,6 +227,9 @@
 		}
 	});
 	//아이디 중복확인
+
+	let checkId = false;
+
 	$("#checkDuple").click(function () {
 		const adminid = $("#adminid").val();
 		$("#resultMessage").text("");
@@ -229,13 +238,13 @@
 		if (adminid == "" || adminid == 'null') {
 			alert("아이디를 입력해주세요")
 			return;
-		} 
+		}
 
 
 		$.ajax({
 			url: "checkDuplicateUsername",
 			method: "POST",
-			data: {userid: userid},
+			data: {adminid: adminid},
 			success: function (response) {
 				console.log(response)
 				if (response) {
@@ -251,6 +260,24 @@
 			}
 		});
 	});
+
+	$('#registBtn').click(function (event) {
+		// 폼을 제출
+		$('#registForm').submit();
+	});
+	
+	$('#showPw').change(()=>{
+		togglePasswordVisibility()
+	})
+	
+	function togglePasswordVisibility() {
+		var passwordField = document.getElementById("password");
+		if (passwordField.type === "password") {
+			passwordField.type = "text";
+		} else {
+			passwordField.type = "password";
+		}
+	}
 </script>
 
 </html>

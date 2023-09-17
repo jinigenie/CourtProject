@@ -15,4 +15,14 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.login(admin_id);
 	}
 
+	@Override
+	public int checkId(String admin_id) {
+		return adminMapper.checkId(admin_id);
+	}
+
+	@Override
+	public int registAdmin(AdminVO vo) {
+		return adminMapper.registAdmin(vo);
+	}
+
 }
