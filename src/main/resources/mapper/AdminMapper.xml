@@ -11,6 +11,12 @@
 		select * from TB_015 where admin_id = #{admin_id}
 	</select>
 	
+	<select id="checkId">
+		select count(*) as count from TB_015 where admin_id = #{admin_id}
+	</select>
 	
-	
+	<insert id="registAdmin">
+		insert into TB_015 (ADMIN_ID, ADMIN_PW, ADMIN_AUTH, ADMIN_NAME) 
+			values (#{admin_id},#{admin_pw},#{admin_auth},#{admin_name})  
+	</insert>
 </mapper>

@@ -1,5 +1,7 @@
 package com.court.proj.admin;
 
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +24,6 @@ public class AdminVO {
 	private String admin_id;
 	private String admin_pw;
 	private String admin_auth;
+	@Pattern(regexp = "^[a-z]{4}\\d{4}$", message = "영소문자4자리 + 사번(숫자4자리)")
 	private String admin_name;
 }

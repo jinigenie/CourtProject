@@ -32,8 +32,8 @@
 												<div class="address-btn-wrap">
 													<div class="input-wrap">
 														<input id="userid" name="user_id" class="cm_inptxt"
-															th:value="${vo !=null? vo.user_id : ''}" title="" placeholder="7~16자의 영소문자 + 숫자 조합"
-															type="text" />
+															th:value="${vo !=null? vo.user_id : ''}" title=""
+															placeholder="7~16자의 영소문자 + 숫자 조합" type="text" />
 
 													</div>
 													<button type="button" class="address-btn" id="checkDuple" title="">
@@ -54,7 +54,8 @@
 											<div class="input-wrap-three write-wrap-m"
 												style="width: 162px; display: inline-block">
 												<div class="input-wrap" style="width: 200px;">
-													<input name="user_name" id="cvl_nm" th:value="${vo!= null ? vo.user_name : ''}" class="cm_inptxt"
+													<input name="user_name" id="cvl_nm"
+														th:value="${vo!= null ? vo.user_name : ''}" class="cm_inptxt"
 														type="text" />
 
 												</div>
@@ -72,11 +73,15 @@
 											<div class="input-wrap-three write-wrap-m"
 												style="width: 162px; display: inline-block">
 												<div class="input-wrap" style="width: 200px">
-													<input name="user_pw" id="password" class="cm_inptxt" placeholder="8~16자 영문+숫자 조합"
-														type="password" />
+													<input name="user_pw" id="password" class="cm_inptxt"
+														placeholder="8~16자 영문+숫자 조합" type="password" />
 												</div>
 											</div>
 											<em style="padding-left: 70px;">[[${valid_user_pw}]]</em>
+											<br>
+											<input type="checkbox" name="showPw" id="showPw"
+												style="display: inline-block;">
+											<label for="showPw">비밀번호 보이기</label>
 										</td>
 									</tr>
 									<tr>
@@ -92,6 +97,7 @@
 													<input id="password-confirm" value="" class="cm_inptxt"
 														type="password" />
 												</div>
+
 												<span style="color: crimson;" id="password-confirm-message"></span>
 											</div>
 										</td>
@@ -103,7 +109,8 @@
 										</th>
 										<td class="txt-left">
 											<div class="input-wrap" style="width: 200px; display: inline-block">
-												<input name="user_rrn_f" id="cvl_nm" th:value="${vo!= null ? vo.user_rrn_f : ''}" class="cm_inptxt"
+												<input name="user_rrn_f" id="cvl_nm"
+													th:value="${vo!= null ? vo.user_rrn_f : ''}" class="cm_inptxt"
 													maxlength="6" type="text">
 											</div>
 											<span>-</span>
@@ -119,7 +126,8 @@
 										</th>
 										<td class="txt-left">
 											<div class="input-wrap" style="width: 200px; display: inline-block">
-												<input name="user_job" id="cvl_job" th:value="${vo!= null ? vo.user_job : ''}" class="cm_inptxt"
+												<input name="user_job" id="cvl_job"
+													th:value="${vo!= null ? vo.user_job : ''}" class="cm_inptxt"
 													type="text" />
 											</div>
 										</td>
@@ -134,8 +142,10 @@
 											<div class="address-wrap write-wrap-m" style="width: 600px;">
 												<div class="address-btn-wrap">
 													<div class="input-wrap">
-														<input id="phone" name="user_phone" class="cm_inptxt" th:value="${vo!= null ? vo.user_phone : ''}"
-															maxlength="11" title="" type="text" placeholder="'-'을 제외하고 입력" />
+														<input id="phoneNumber" name="user_phone2" class="cm_inptxt"
+															th:value="${vo!= null ? vo.user_phone : ''}" maxlength="13"
+															title="" type="text" placeholder="'-'을 제외하고 입력" />
+														<input type="hidden" name="user_phone" value="" id="userphone">
 													</div>
 													<button type="button" class="address-btn" id="phoneBtn">인증번호 받기
 													</button>
@@ -152,7 +162,8 @@
 													</button>
 												</div>
 											</div>
-											<em style="padding-left: 10px; padding-top: 5px;">[[${valid_user_phone}]]</em>
+											<em
+												style="padding-left: 10px; padding-top: 5px;">[[${valid_user_phone}]]</em>
 										</td>
 									</tr>
 									<tr>
@@ -162,13 +173,14 @@
 										</th>
 										<td class="txt-left">
 											<div class="input-wrap" style="width: 200px; display: inline-block">
-												<input name="user_email_f" id="cvl_mail" th:value="${vo!= null ? vo.user_email_f : ''}" class="cm_inptxt"
+												<input name="user_email_f" id="cvl_mail"
+													th:value="${vo!= null ? vo.user_email_f : ''}" class="cm_inptxt"
 													type="text">
 											</div>
 											<span style="margin: 7px">@</span>
 											<div class="input-wrap" style="width: 200px; display: inline-block">
-												<input name="user_email_b" id="cvl_mail2" value="직접입력" class="cm_inptxt" th:value="${vo!= null ? vo.user_email_b : ''}"
-													type="text">
+												<input name="user_email_b" id="cvl_mail2" value="직접입력" class="cm_inptxt"
+													th:value="${vo!= null ? vo.user_email_b : ''}" type="text">
 											</div>
 											<div class="select-box" style="padding: 9px;">
 												<select name="" id="mailAddr" class="info-select">
@@ -238,13 +250,16 @@
 											</div>
 											<div class="input-wrap-three write-wrap-m">
 												<div class="input-wrap" style="width: 320px; display: inline-block">
-													<input name="user_bank_account" id="cvl_account1" th:value="${vo!= null ? vo.user_bank_account : ''}"
+													<input name="user_bank_account" id="cvl_account1"
+														th:value="${vo!= null ? vo.user_bank_account : ''}"
 														class="cm_inptxt" title="계좌번호" type="text" maxlength="14"
-														onkeydown="return num_only(event)" placeholder=" '-' 을 제외한 계좌번호" />
+														onkeydown="return num_only(event)"
+														placeholder=" '-' 을 제외한 계좌번호" />
 												</div>
 												<div class="input-wrap"
 													style="width: 150px; display: inline-block; margin-left: 5px">
-													<input name="user_bank_holder" id="cvl_account2" th:value="${vo!= null ? vo.user_bank_holder : ''}"
+													<input name="user_bank_holder" id="cvl_account2"
+														th:value="${vo!= null ? vo.user_bank_holder : ''}"
 														class="cm_inptxt" title="예금주" type="text"
 														onkeydown="return num_only(event)" placeholder="예금주" />
 												</div>
@@ -295,7 +310,7 @@
 			}
 		}).open();
 	}
-	
+
 </script>
 
 

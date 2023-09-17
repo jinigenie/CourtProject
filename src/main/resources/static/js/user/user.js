@@ -39,7 +39,7 @@ let phonePattern = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 //폰 인증받기
 let certification = 0;
 $("#phoneBtn").click(() => {
-	const phone = $('#phone').val();
+	const phone = $('#userphone').val();
 	if (phone == '' || phone == 'null') {
 		alert("휴대폰 번호를 입력해주세요.")
 		return;
@@ -138,3 +138,37 @@ $("#checkDuple").click(function() {
 $('#mailAddr').change(() => {
 	$('#cvl_mail2').val($('#mailAddr').val())
 })
+
+//비밀번호 가리기 보이기
+$('#showPw').change(() => {
+	togglePasswordVisibility()
+})
+
+function togglePasswordVisibility() {
+	var passwordField = document.getElementById("password");
+	if (passwordField.type === "password") {
+		passwordField.type = "text";
+	} else {
+		passwordField.type = "password";
+	}
+}
+/////폰 번호 입력형식 010-0000-1111 로 변경하기
+$('#phoneNumber').keyup(() => {
+	var phoneNumberField = document.getElementById("phoneNumber");
+	var formattedValue = phoneNumberField.value.replace(/\D/g, ''); // 숫자만 남기고 나머지 문자 제거
+
+	// 전화번호 포맷 적용 (예: 01012341234 -> 010-1234-1234)
+	if (formattedValue.length >= 3) {
+		formattedValue = formattedValue.replace(/(\d{3})(?=\d)/, "$1-");
+	}
+	if (formattedValue.length >= 8) {
+		formattedValue = formattedValue.replace(/(\d{4})(?=\d)/, "$1-");
+	}
+
+	phoneNumberField.value = formattedValue; // 포맷팅된 값으로 입력 필드 업데이트
+	
+	$('#userphone').val(formattedValue.replace(/-/g, '')); 
+	
+})
+
+
