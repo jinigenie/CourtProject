@@ -11,7 +11,7 @@ function modalCont() {
 
 	$.ajax({
 		type: "POST",
-		url: "getfclttModal",
+		url: "../getfclttModal",
 		data: {
 			"accept_proper_num": accept_proper_num,
 			"user_proper_num": user_proper_num
@@ -234,7 +234,7 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 	formData
 
 	$.ajax({
-		url: "fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&searchContent2=" + searchContent2 + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue,
+		url: "../fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&searchContent2=" + searchContent2 + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue,
 
 		/*		data: {
 					"searchCont": searchCont, // 검색 조건을 파라미터로 보내기
@@ -276,7 +276,7 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 					str2 += '<a href="#" data-page-action=1 class="arr first" ></a>';
 				}
 				// 이전 페이지로 이동하는 링크 생성
-				if (FclttVO.fclttPageVO.pageList.length > 1 && FclttVO.fclttPageVO.prev) {
+				if (FclttVO.fclttPageVO.pageList.length > 1&&FclttVO.fclttPageVO.prev) {
 					str2 += '<a href="#" data-page-action="prev" class="arr prev"></a>';
 				}
 
@@ -291,13 +291,13 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 				}
 
 				// 다음 페이지로 이동하는 링크 생성
-				if (FclttVO.fclttPageVO.pageList.length > 1 && FclttVO.fclttPageVO.next) {
+				if (FclttVO.fclttPageVO.pageList.length > 1 &&FclttVO.fclttPageVO.next) {
 					str2 += '<a href="#" data-page-action="next" class="arr next" ></a>';
 				}
 
 				// 맨 마지막 페이지로 이동하는 링크 생성
 				if (FclttVO.fclttPageVO.pageList.length > 1) {
-					str2 += '<a href="#" data-page-action="last"  class="arr last" ></a>';
+				    str2 += '<a href="#" data-page-action="last"  class="arr last" data-total="' + FclttVO.fclttPageVO.total + '"></a>';
 				}
 
 				str2 += '</div>';
