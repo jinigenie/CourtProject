@@ -17,7 +17,7 @@
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
 									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<li><a href="../announce/announceDetail">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
@@ -61,7 +61,7 @@
 				</style>
 				<article id="detail-content">
 					<form id="listForm" name="listForm"
-						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
+						action="#"
 						method="post">
 						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
 						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
@@ -179,13 +179,17 @@
 
 							<!-- table-t-wrap start -->
 							<div class="table-t-wrap">
-								<div class="total-num">총 게시글 <em>#</em>건</div>
+								<div class="total-num"><strong>총 게시글 <em th:text="${total}"></em>건</strong></div>
 								<!-- 달력 start -->
 								<div class="calander-box">
-									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="startDate"
+									<input type="text" class="datepicker" readonly placeholder="게시시작일자" name="startDate"
 										value="" /> -
-									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate"
+									<input type="text" class="datepicker" readonly placeholder="게시종료일자" name="endDate"
 										value="" />
+									<button type="button" class="search-btn" onclick="filterAnnouncements()">
+										<i class="xi-search"></i>
+										<span class="sr-only">검색</span>
+									</button>
 								</div>
 								<!-- 달력 end -->
 							</div>
@@ -195,7 +199,7 @@
 							<div class="table table-responsive">
 								<table>
 									<caption>
-										번호, 대분류, 중분류, 소분류, 작성일자, 진행상황, 신청의 대한
+										번호, 대분류, 중분류, 소분류, 모집기간, 진행상황, 신청의 대한
 										정보 제공
 									</caption>
 									<colgroup>
@@ -211,7 +215,7 @@
 											<th scope="col">번호</th>
 											<th scope="col">조력자 분류</th>
 											<th scope="col">제목</th>
-											<th scope="col">작성일자</th>
+											<th scope="col">모집기간</th>
 											<th scope="col">진행상황</th>
 											<th scope="col">신청</th>
 										</tr>
@@ -227,9 +231,10 @@
 											<td data-cell-header="중분류"><a class="trialList"
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
 													th:text="${vo.announce_title}"></a></td>
-											<td data-cell-header="작성일자"><a
+											<td data-cell-header="모집기간"><a
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
-													th:text="${vo.announce_start_date}"></a></td>
+													th:text="${vo.announce_start_date}"></a> ~ <a
+													th:text="${vo.announce_end_date}"></a></td>
 											<td data-cell-header="진행여부"><a
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}">
 													<p>진행중</p>

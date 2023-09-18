@@ -34,6 +34,10 @@
 		a.announce_proper_num;
 	</select>
 
+	<select id="getTotal" resultType="int">
+		select count(*) from TB_002
+	</select>
+
 	<select id="getinfo" resultType="AnnounceVO">
 		select * from TB_015 where
 		admin_id = #{admin_id}
@@ -93,18 +97,14 @@
 		announce_title,
 		announce_content,
 		announce_start_date,
-		announce_end_date,
-		announce_first_date,
-		announce_last_date)
+		announce_end_date)
 		values
 		(#{admin_proper_num},
 		#{trial_fcltt_proper_num},
 		#{announce_title},
 		#{announce_content},
 		#{announce_start_date},
-		#{announce_end_date},
-		#{announce_first_date},
-		#{announce_last_date})
+		#{announce_end_date})
 	</insert>
 
 	<!-- 공고 상세보기 -->
@@ -136,9 +136,9 @@
 		where
 		a.announce_proper_num = #{announce_proper_num};
 	</select>
-	
-<!-- 	공고 수정
-		<select id="getAnnounceModify" parameterType="int"
+
+	<!-- 공고 수정 -->
+	<select id="getAnnounceModify" parameterType="int"
 		resultType="AnnounceVO">
 		select
 		a.announce_proper_num,
@@ -165,5 +165,18 @@
 		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 		where
 		a.announce_proper_num = #{announce_proper_num};
-	</select> -->
+	</select>
+
+	<!-- 공고 수정 -->
+	<update id="updateAnnounce" parameterType="AnnounceVO">
+		update TB_002
+		set
+		announce_title = #{announce_title},
+		trial_fcltt_proper_num = #{trial_fcltt_proper_num},
+		announce_start_date = #{announce_start_date},
+		announce_end_date = #{announce_end_date},
+		announce_content = #{announce_content}
+		where
+		announce_proper_num = #{announce_proper_num}
+	</update>
 </mapper>

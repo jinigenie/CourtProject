@@ -18,8 +18,8 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
@@ -70,9 +70,7 @@
 				<!-- detail-content -->
 				<article id="detail-content">
 					<!-- form start -->
-					<form id="listForm" name="listForm"
-						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-						method="post">
+					<form id="listForm" name="listForm" action="announceModifyForm" method="post">
 						<div class="heading-wrap container">
 							<h3 class="heading1">
 								<span>재판 조력자 모집공고 수정</span>
@@ -85,28 +83,13 @@
 							<!-- box box1 start -->
 							<div class="top-box">
 								<table>
-									<!-- 첨부파일 start -->
-									<tr class="top-box-tr-one">
-										<td class="top-box-one">
-											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : 관리자</span>
-										</td>
-										<td class="top-box-two">
-											<div id="fileControl" style="display: none"></div>
-											<span>최초 입력일 시 : 2023.08.30</span>
-											<span> / </span>
-											<span>최종 변경일 시 : 2023.08.30</span>
-										</td>
-									</tr>
 									<tr class="top-box-tr-two">
-
 									</tr>
 								</table>
 							</div>
 							<!-- //box box1 end -->
 						</div>
 						<!-- //본문컨텐츠 영역 end -->
-
 						<!-- 공고 내용 start -->
 						<div class="searchform searchform2">
 
@@ -115,8 +98,6 @@
 
 								<!-- 등록 양식 start -->
 								<div class="table table-responsive">
-
-
 									<table>
 
 										<colgroup>
@@ -124,34 +105,50 @@
 											<col style="width: 70%">
 										</colgroup>
 										<tbody>
+											<tr>
+												<th scope="row" class="txt-left">
+													<span class="txt-left" title="작성자">작성자</span>
+												</th>
+												<td data-cell-header="작성자" class="txt-left">
+													<input name="admin_id" id="title" class="cm_inptxt"
+														th:value="${alist.admin_id}" readonly>
+												</td>
+											</tr>
 
 											<tr>
 												<th scope="row" class="txt-left">
-													<span class="txt-left" title="�ʼ��׸�">공고 제목</span>
+													<span class="txt-left" title="제목">제목</span>
 												</th>
-												<td data-cell-header="성명" class="txt-left">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
+												<td data-cell-header="제목" class="txt-left">
+													<input name="announce_title" id="title"
+														th:value="${alist.announce_title}" class="cm_inptxt"
 														type="text">
 												</td>
 											</tr>
+
+											<!-- 달력 start -->
 											<tr>
 												<th scope="row" class="txt-left">
 													<span class="search_th">게시 시작일</span>
 												</th>
 												<td data-cell-header="게시 시작일" class="txt-left">
 													<div class="fcltt_phone" style="display: inline-block">
-														<!-- 달력 start -->
+
 														<div class="calander-box">
-
 															<input type="text" class="datepicker" readonly
-																placeholder="날짜선택" name="startDate" value="" /> -
+																placeholder="날짜선택" name="announce_start_date"
+																th:value="${alist.announce_start_date}" /> -
 															<input type="text" class="datepicker" readonly
-																placeholder="날짜선택" name="endDate" value="" />
+																placeholder="날짜선택" name="announce_end_date"
+																th:value="${alist.announce_end_date}" />
 														</div>
-														<!-- 달력 end -->
-													</div>
 
-													<!-- 재판 조력자 start -->
+													</div>
+												</td>
+											</tr>
+											<!-- //달력 end -->
+
+											<!-- 재판 조력자 start -->
 											<tr>
 												<th scope="row" class="txt-left">
 													<span>재판조력자 구분</span>
@@ -162,23 +159,23 @@
 														<select class="info-select" id="selectType1" name="selectType1">
 															<option value="선택">선택</option>
 															<option value="조력자"
-																th:selected="${vo.trial_fcltt_main_code == '조력자'}">
+																th:selected="${alist.trial_fcltt_main_code == '조력자'}">
 																조력자
 															</option>
 															<option value="통번역인"
-																th:selected="${vo.trial_fcltt_main_code == '통번역인'}">
+																th:selected="${alist.trial_fcltt_main_code == '통번역인'}">
 																통번역인
 															</option>
 															<option value="조정위원"
-																th:selected="${vo.trial_fcltt_main_code == '조정위원'}">
+																th:selected="${alist.trial_fcltt_main_code == '조정위원'}">
 																조정위원
 															</option>
 															<option value="전문심리위원"
-																th:selected="${vo.trial_fcltt_main_code == '전문심리위원'}">
+																th:selected="${alist.trial_fcltt_main_code == '전문심리위원'}">
 																전문심리위원
 															</option>
 															<option value="상담위원"
-																th:selected="${vo.trial_fcltt_main_code == '상담위원'}">
+																th:selected="${alist.trial_fcltt_main_code == '상담위원'}">
 																상담위원
 															</option>
 														</select>
@@ -187,10 +184,10 @@
 														<label for="selectType2"></label>
 														<select class="info-select" id="selectType2" name="selectType2">
 															<option value="선택">선택</option>
-															<option th:each="vo : ${tlist}"
-																th:class="${vo.trial_fcltt_main_code}"
-																th:select="${vo.getTrial_fcltt_clasifi_code == vo.getTrial_fcltt_clasifi_code()}">
-																[[${vo.trial_fcltt_clasifi_code}]]
+															<option th:each="alist : ${tlist}"
+																th:class="${alist.trial_fcltt_main_code}"
+																th:select="${alist.getTrial_fcltt_clasifi_code == alist.getTrial_fcltt_clasifi_code()}">
+																[[${alist.trial_fcltt_clasifi_code}]]
 															</option>
 														</select>
 													</div>
@@ -198,10 +195,10 @@
 														<label for="selectType3"></label>
 														<select class="info-select" id="selectType3" name="selectType3">
 															<option value="선택">선택</option>
-															<option th:each="vo : ${tlist}"
-																th:class="${vo.trial_fcltt_clasifi_code}"
-																th:select="${vo.getTrial_fcltt_sbcls_code == vo.getTrial_fcltt_sbcls_code()}">
-																[[${vo.trial_fcltt_sbcls_code}]]
+															<option th:each="alist : ${tlist}"
+																th:class="${alist.trial_fcltt_clasifi_code}"
+																th:select="${alist.getTrial_fcltt_sbcls_code == alist.getTrial_fcltt_sbcls_code()}">
+																[[${alist.trial_fcltt_sbcls_code}]]
 															</option>
 														</select>
 													</div>
@@ -218,12 +215,11 @@
 
 
 													<textarea id="editor" name="announce_content">
+														[[${alist.announce_content}]]
 													</textarea>
 													<!-- //ckEditor end -->
 												</td>
 											</tr>
-
-
 										</tbody>
 									</table>
 								</div>
@@ -232,6 +228,13 @@
 							<!-- //searchform-wrap end -->
 						</div>
 						<!-- //공고 내용 end -->
+
+						<!-- 페이지 이동 버튼 -->
+						<div class="fclttRegist_btn">
+							<button type="submit" class="fcltt_btn1">수정완료</button>
+							<button type="button" class="fcltt_btn2" onclick="cancelClick()">취소</button>
+						</div>
+						<!-- //페이지 이동 버튼 end -->
 					</form>
 					<!-- //form end -->
 
@@ -241,13 +244,6 @@
 			<!-- //contents end -->
 		</div>
 		<!-- //contents end -->
-
-		<!-- 페이지 이동 버튼 -->
-		<div class="fclttRegist_btn">
-			<button type="button" class="fcltt_btn1">수정완료</button>
-			<button type="button" class="fcltt_btn2">취소</button>
-		</div>
-		<!-- //페이지 이동 버튼 end -->
 	</div>
 	<!-- //main_con end -->
 	</div>
@@ -259,9 +255,22 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <script>
 	ClassicEditor.create(document.querySelector('#editor'), {
-		language: "ko"
-	});
+		language: "ko",
+		simpleUpload:
+		{
+			uploadUrl: "/upload/image",
+			withCredentials: true,
+		}
+	})
+		.then(newEditor => {
+			editor = newEditor;
+		})
+		.catch(error => {
+			console.error(error);
+		});
 </script>
+
+
 <style>
 	.ck-editor__editable {
 		height: 400px;
@@ -271,5 +280,42 @@
 		font-size: 12px;
 	}
 </style>
+<!-- //ckEditor end -->
+
+<!-- 조력자 분류 start -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:src="@{../../js/announce/announceTrial.js}"></script>
+<script th:src="@{../../js/announce/UploadAdpater.js}"></script>
+
+<script>
+	function cancelClick() {
+		if (confirm("등록을 취소하시겠습니까?")) {
+			history.back();
+		}
+	}
+
+	document.getElementById("announceForm").addEventListener("submit", function (event) {
+		var title = document.getElementById("title").value;
+		var startDate = document.getElementsByName("announce_start_date")[0].value;
+		var endDate = document.getElementsByName("announce_end_date")[0].value;
+		var selectType1 = document.getElementById("selectType1").value;
+		var selectType2 = document.getElementById("selectType2").value;
+		var selectType3 = document.getElementById("selectType3").value;
+		var mydata = editor.getData();
+
+		if (title === "" || startDate === "" || endDate === "" || selectType1 === "" || selectType2 === "" || selectType3 === "" || mydata === "") {
+			alert("입력하지 않은 정보가 있습니다. 다시 확인해주세요.");
+			event.preventDefault();
+		} else {
+
+			if (confirm("등록하시겠습니까?")) {
+
+			} else {
+				event.preventDefault();
+			}
+		}
+	});
+
+</script>
 
 </html>

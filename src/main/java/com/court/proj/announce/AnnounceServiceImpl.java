@@ -79,10 +79,19 @@ public class AnnounceServiceImpl implements AnnounceService {
 		return announceMapper.getAnnounceDetail(announce_proper_num);
 	}
 
-//	@Override
-//	public AnnounceVO getAnnounceModify(int announce_proper_num) {
-//		return announceMapper.getAnnounceModify(announce_proper_num);	
-//	}
-	
-	
+	@Override
+	public AnnounceVO getAnnounceModify(AnnounceVO vo) {
+		return announceMapper.getAnnounceModify(vo);
+	}
+
+	@Override
+	public int getTotal() {
+		return announceMapper.getTotal();
+	}
+
+	@Override
+	public int updateAnnounce(AnnounceVO vo) {
+		return announceMapper.updateAnnounce(vo);
+	}
+
 }

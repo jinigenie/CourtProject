@@ -18,8 +18,9 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<!-- 관리자만 이동하게 변경해야 됨 -->
+									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
@@ -88,14 +89,25 @@
 								</ul>
 							</div>
 							<div class="announce-date">
-								<ul>
-									<li data-cell-header="최초입력일시" class="first-date">
-										<strong>최초변경일시</strong><h4 th:text="${alist.announce_end_date}"></h4>
-										
+								<ul class="post-date">
+									<li data-cell-header="게시종료일자" class="end-date">
+										<strong>게시종료일자</strong>
+										<h4 th:text="${alist.announce_end_date}"></h4>
 									</li>
-									<li data-cell-header="최종변경일시" class="second-date">
-										<strong>최종입력일시</strong>
+									<li data-cell-header="게시시작일자" class="start-date">
+										<strong>게시시작일자</strong>
 										<h4 th:text="${alist.announce_start_date}"></h4>
+									</li>
+								</ul>
+								<ul class="change-date">
+									<li data-cell-header="최초변경일시" class="last-date">
+										<strong>최초변경일시</strong>
+										<h4 th:text="${alist.announce_last_date}"></h4>
+
+									</li>
+									<li data-cell-header="최종입력일시" class="first-date">
+										<strong>최종입력일시</strong>
+										<h4 th:text="${alist.announce_first_date}"></h4>
 									</li>
 								</ul>
 							</div>
@@ -137,7 +149,6 @@
 						<div class="searchform searchform2">
 							<div class="searchform-wrap">
 								<tr th:each="vo, status : ${alist}">
-									<!--<td data-cell-header="조력자분류"><h2 th:texs="${alist.announce_title}"></h2></td>-->
 									<td data-cell-header="내용">
 										<p th:text="${alist.announce_content}"></p>
 									</td>
@@ -149,8 +160,10 @@
 
 						<!-- 페이지 이동 버튼 -->
 						<div class="fclttRegist_btn">
-							<button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a href="../announce/announceModify">수정하기</a></button>
-							<button type="button" class="fcltt_btn2"><a href="../announce/announceList">뒤로가기</a></button>
+							<button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a
+									th:href="'/announce/announceModify?id=' + ${alist.announce_proper_num}">수정하기</a></button>
+							<button type="button" class="fcltt_btn2"><a
+									href="../announce/announceList">뒤로가기</a></button>
 						</div>
 						<!-- //페이지 이동 버튼 end -->
 					</form>
@@ -166,4 +179,5 @@
 
 </th:block>
 <script th:src="@{../../js/announce/announceTrial.js}"></script>
+
 </html>
