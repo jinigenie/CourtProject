@@ -255,6 +255,7 @@
 		var accept_proper_num = $(this).closest("tr").find("input[name='accept_proper_num']").val();
 		var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
 		var selectedValue = $("#selectedValue").val();
+		console.log(accept_act_yn);
 
 		// 여기에 AJAX 요청 코드를 작성합니다.
 		$.ajax({

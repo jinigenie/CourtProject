@@ -105,7 +105,7 @@
 													<span class="txt-left" title="�ʼ��׸�">질문 제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
+													<input name="cvl_nm" id="cvl_nm"  th:value="${vo.faq_ask_content}" class="cm_inptxt"
 														type="text" style="width: 640px; height: 40px;">
 												</td>
 											</tr>
@@ -116,6 +116,7 @@
 												<td data-cell-header="이메일" class="txt-left">
 													<!-- ckEditor start -->
 													<div id="editor">
+														[[${vo.faq_ask_comment}]]
 													</div>
 													<!-- //ckEditor end -->
 												</td>

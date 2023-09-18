@@ -35,7 +35,9 @@
 	            </choose>
 	        </if>
 	    </where>
+	    ORDER BY FAQ_ASK_DATE DESC
 	 	LIMIT #{pageStart}, #{amount}
+	 	
     </select>
 
     <select id="getTotal" resultType="int">
@@ -68,5 +70,25 @@
 	        </if>
 	    </where>
     </select>
+
+
+	<select id="getDetail" resultType="FaqVO">
+	
+		select * from TB_004
+		where faq_proper_num = #{faq_proper_num}
+			
+	</select>
+
+	<delete id="faqDel">
+		delete from TB_004 where faq_proper_num = #{faq_proper_num}
+	</delete>
+
+
+
+
+
+
+
+
 
 </mapper>

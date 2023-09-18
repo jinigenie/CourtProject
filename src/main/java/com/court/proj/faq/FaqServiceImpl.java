@@ -22,5 +22,14 @@ public class FaqServiceImpl implements FaqService{
 	public int getTotal(FclttCriteria cri) {
 		return faqMapper.getTotal(cri);
 	}
+	@Override
+	public FaqVO getDetail(String faq_proper_num) {
+		return faqMapper.getDetail(faq_proper_num);
+	}
+	@Override
+	public int faqDel(String faq_proper_num) {
+		return faqMapper.faqDel(faq_proper_num);
+	}
+
 
 }

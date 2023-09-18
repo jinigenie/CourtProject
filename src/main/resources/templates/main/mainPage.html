@@ -113,14 +113,13 @@
 							<li th:each=" vo2, status : ${list2}" class="notice_left">
 								<a href="#">
 									<h4>[공지]</h4>[[${vo2.notice_title}]] <span
-										style="text-align: right; float: right;">[[${
-										#temporals.format(vo2.notice_date,'yyyy-MM-dd')}]] </span>
+										style="text-align: right; float: right;">[[${vo2.notice_date}]] </span>
 								</a>
 							</li>
 
 							<!-- 탭 한 상태에 따라 FAQ -->
 							<li th:each="vo3, status : ${list3}" class="faq_left faq_none">
-								<a href="#">
+								<a th:href="'/faq/faqList?faq_proper_num='+${vo3.faq_proper_num}" onclick="faqToggle(this)">
 									<h3>Q</h3>[[${vo3.faq_ask_content}]]<br />
 								</a>
 							</li>
