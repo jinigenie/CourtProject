@@ -23,7 +23,7 @@ public class FclttCriteria {
 	// 중지신청목록에 쓰일 검색
 	private String searchAccept_act_yn; // 활동상태 검색
 	private String searchUser_name; // 사용자이름검색
-	
+	private String divVal;
 	
 	////////////////////// faq에  사용할 검색 값 
 	
