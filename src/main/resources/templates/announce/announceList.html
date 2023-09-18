@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<!-- wrap start -->
@@ -13,7 +16,7 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
+									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
 									<li><a href="#">모집공고 목록</a></li>
 								</ul>
 							</li>
@@ -90,37 +93,37 @@
 							<div class="tab-wrap">
 								<ul class="tab tab1 outlineIE">
 									<li id="liFirst1">
-										<a href="#" onclick="srchMinwonDoc('lCate', '', 1, 1, '전체');">
+										<a href="#" id="clickWhole">
 											<span>전체</span>
 										</a>
 									</li>
 
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '010000', 1, 1, '조력자');">
+									<li class="trial">
+										<a href="#" id="clickTrial">
 											<span>조력자</span>
 										</a>
 									</li>
 
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '020000', 2, 1, '통번역인');">
+									<li class="translator">
+										<a href="#" id="clickTranslator">
 											<span>통번역인</span>
 										</a>
 									</li>
 
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '030000', 3, 10, '조정위원');">
+									<li class="mediator">
+										<a href="#" id="clickMediator">
 											<span>조정위원</span>
 										</a>
 									</li>
 
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '040000', 4, 13, '전문심리위원');">
+									<li class="psychologist">
+										<a href="#" id="clickPsychologist">
 											<span>전문심리위원</span>
 										</a>
 									</li>
 
-									<li class="">
-										<a href="#" onclick="srchMinwonDoc('lCate', '050000', 5, 18, '상담위원');">
+									<li class="counselor">
+										<a href="#" id="clickCounselor">
 											<span>상담위원</span>
 										</a>
 									</li>
@@ -221,7 +224,7 @@
 											<td data-cell-header="대분류"><a
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
 													th:text="${vo.trial_fcltt_main_code}"></a></td>
-											<td data-cell-header="중분류"><a
+											<td data-cell-header="중분류"><a class="trialList"
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
 													th:text="${vo.announce_title}"></a></td>
 											<td data-cell-header="작성일자"><a
@@ -287,24 +290,6 @@
 	</div>
 	<!-- wrap end -->
 </th:block>
-
-<!-- 검색 start -->
-<script th:inline="javascript">
-	function searchAnnounce() {
-		var searchField = document.getElementById("selectTit").value;
-		var qString = document.getElementById("qString").value;
-
-
-		var url = "/announce/searchAnnounce?searchField=" + searchField + "&qString=" + qString;
-
-
-		fetch(url)
-			.then(response => response.text())
-			.then(data => {
-				document.querySelector(".table-responsive table tbody").innerHTML = data;
-			});
-	}
-</script>
-<!-- 검색 end -->
+<script th:src="@{../../js/announce/announceTrial.js}"></script>
 
 </html>

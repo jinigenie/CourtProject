@@ -82,20 +82,20 @@
 						<div class="announce-top">
 							<div class="announce-title">
 								<ul>
-									<li>
-										<strong>공고 제목</strong>
+									<li data-cell-header="제목">
+										<h2 th:text="${alist.announce_title}"></h2>
 									</li>
 								</ul>
 							</div>
 							<div class="announce-date">
 								<ul>
-									<li class="first-date">
-										<strong>최종변경일시 : </strong>
-										2023-08-18
+									<li data-cell-header="최초입력일시" class="first-date">
+										<strong>최초변경일시</strong><h4 th:text="${alist.announce_end_date}"></h4>
+										
 									</li>
-									<li class="second-date">
-										<strong>최초입력일시 : </strong>
-										2023-08-30
+									<li data-cell-header="최종변경일시" class="second-date">
+										<strong>최종입력일시</strong>
+										<h4 th:text="${alist.announce_start_date}"></h4>
 									</li>
 								</ul>
 							</div>
@@ -110,21 +110,6 @@
 									<th scope="row">첨부</th>
 									<td>
 										<div id="fileControl" style="display: none"></div>
-										<!--
-					파일 확장자에 따른 아이콘입니다.
-					<a href="#" class="btnAttach v1">.pdf</a>
-					<a href="#" class="btnAttach v2">.hwp</a>
-					<a href="#" class="btnAttach v3">.xls</a>
-					<a href="#" class="btnAttach v4">.ppt</a>
-					<a href="#" class="btnAttach v5">.doc</a>
-					<a href="#" class="btnAttach v6">.txt</a>
-					<a href="#" class="btnAttach v7">.png</a>
-					<a href="#" class="btnAttach v8">.mp4</a>
-					<a href="#" class="btnAttach v9">.mp3</a>
-					<a href="#" class="btnAttach v10">.zip</a>
-					<a href="#" class="btnAttach v11">.etc</a>
-					-->
-
 										<a href="#" class="btnAttach v1" onclick="existFile('0'); return false;">
 											[공고문] 2023년 2차 장기미임대 매입임대주택 입주자모집(23_08_18).pdf
 										</a>
@@ -138,21 +123,6 @@
 									<th scope="row">첨부</th>
 									<td>
 										<div id="fileControl" style="display: none"></div>
-										<!--
-					파일 확장자에 따른 아이콘입니다.
-					<a href="#" class="btnAttach v1">.pdf</a>
-					<a href="#" class="btnAttach v2">.hwp</a>
-					<a href="#" class="btnAttach v3">.xls</a>
-					<a href="#" class="btnAttach v4">.ppt</a>
-					<a href="#" class="btnAttach v5">.doc</a>
-					<a href="#" class="btnAttach v6">.txt</a>
-					<a href="#" class="btnAttach v7">.png</a>
-					<a href="#" class="btnAttach v8">.mp4</a>
-					<a href="#" class="btnAttach v9">.mp3</a>
-					<a href="#" class="btnAttach v10">.zip</a>
-					<a href="#" class="btnAttach v11">.etc</a>
-					-->
-
 										<a href="#" class="btnAttach v1" onclick="existFile('1'); return false;">
 											[주택목록] 2023년 2차 장기미임대 매입임대주택 공급대상 주택목록(600호).pdf
 										</a>
@@ -166,20 +136,21 @@
 						<!-- 공고 내용 start -->
 						<div class="searchform searchform2">
 							<div class="searchform-wrap">
-								<tr>
-									<td colspan="2" class="cont">
-										<p style="text-align: center;"><span style="font-size: 12pt;"><strong>등록 한 공고 내용 출력</strong></span></p>
-										
-
-
+								<tr th:each="vo, status : ${alist}">
+									<!--<td data-cell-header="조력자분류"><h2 th:texs="${alist.announce_title}"></h2></td>-->
+									<td data-cell-header="내용">
+										<p th:text="${alist.announce_content}"></p>
+									</td>
+								</tr>
 							</div>
 						</div>
 						<!-- //공고 내용 end -->
 						<!-- //본문컨텐츠 영역 end -->
+
 						<!-- 페이지 이동 버튼 -->
 						<div class="fclttRegist_btn">
-							<button type="button" class="fcltt_btn1">수정하기</button>
-							<button type="button" class="fcltt_btn2">뒤로가기</button>
+							<button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a href="../announce/announceModify">수정하기</a></button>
+							<button type="button" class="fcltt_btn2"><a href="../announce/announceList">뒤로가기</a></button>
 						</div>
 						<!-- //페이지 이동 버튼 end -->
 					</form>
@@ -194,5 +165,5 @@
 	<!-- //wrap end -->
 
 </th:block>
-
+<script th:src="@{../../js/announce/announceTrial.js}"></script>
 </html>

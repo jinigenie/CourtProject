@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AnnounceVO {
-	
+
 	private int announce_proper_num;
 	private int admin_proper_num;
 	private int trial_fcltt_proper_num;
@@ -26,12 +26,12 @@ public class AnnounceVO {
 	private String admin_name;
 	private String trial_fcltt_main_code;
 	private String trial_fcltt_clasifi_code;
-	private String trial_fcltt_sbcls_code ;
-	private String trial_fcltt_description ;
-	
-	  // 선택한 재판조력자 유형
-    private String selectType1;
-    private String selectType2;
-    private String selectType3;
-	
+	private String trial_fcltt_sbcls_code;
+	private String trial_fcltt_description;
+
+	// 선택한 재판조력자 유형
+	private String selectType1;
+	private String selectType2;
+	private String selectType3;
+
 }

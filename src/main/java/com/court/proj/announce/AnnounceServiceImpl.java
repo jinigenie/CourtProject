@@ -19,19 +19,6 @@ public class AnnounceServiceImpl implements AnnounceService {
 
 		return announceMapper.announceRegistTB002(vo);
 	}
-		/*// TB_002 테이블에 공고 정보 삽입
-		int resultTB002 = announceMapper.announceRegistTB002(vo);
-
-		// TB_015 테이블에 관리자 정보 삽입
-		int resultTB015 = announceMapper.adminRegistTB015(vo);
-
-		// 모든 테이블에 성공적으로 데이터가 삽입되었을 때 1을 반환, 그렇지 않으면 0을 반환
-		if (resultTB002 > 0 && resultTB015 > 0) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}*/
 
 	// 검색기능
 	@Override
@@ -61,11 +48,6 @@ public class AnnounceServiceImpl implements AnnounceService {
 		return announceMapper.announceRegistTB002(vo);
 	}
 
-//	@Override
-//	public int adminRegistTB015(AnnounceVO vo) {
-//		return announceMapper.adminRegistTB015(vo);
-//	}
-
 	@Override
 	public AnnounceVO getinfo(String admin_id) {
 		return announceMapper.getinfo(admin_id);
@@ -77,9 +59,9 @@ public class AnnounceServiceImpl implements AnnounceService {
 	}
 
 	@Override
-	public Integer  getTrialNum2(String st1, String st2, String st3) {
-		 Integer result = announceMapper.getTrialNum2(st1, st2, st3);
-		    return (result != null) ? result : 0;
+	public Integer getTrialNum2(String st1, String st2, String st3) {
+		Integer result = announceMapper.getTrialNum2(st1, st2, st3);
+		return (result != null) ? result : 0;
 	}
 
 	@Override
@@ -92,4 +74,15 @@ public class AnnounceServiceImpl implements AnnounceService {
 		return announceMapper.getTrialVO(trial_fcltt_proper_num);
 	}
 
+	@Override
+	public AnnounceVO getAnnounceDetail(int announce_proper_num) {
+		return announceMapper.getAnnounceDetail(announce_proper_num);
+	}
+
+//	@Override
+//	public AnnounceVO getAnnounceModify(int announce_proper_num) {
+//		return announceMapper.getAnnounceModify(announce_proper_num);	
+//	}
+	
+	
 }
