@@ -24,12 +24,14 @@
     
     <select id="getFaqList" resultType="com.court.proj.faq.FaqVO">
        select * from TB_004
-       ORDER BY FAQ_ASK_DATE DESC;
+       ORDER BY FAQ_ASK_DATE DESC
+        LIMIT 5;
     </select>
 
 	<select id="getNoticeList" resultType="com.court.proj.notice.NoticeVO">
        select * from TB_003
-       ORDER BY NOTICE_DATE DESC;
+       ORDER BY NOTICE_DATE DESC
+ 		LIMIT 5;
 		
     </select>
 	
