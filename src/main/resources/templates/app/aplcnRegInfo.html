@@ -40,7 +40,7 @@
 
                 <form name="actionForm" action="saveInfoForm" method="post">
                     <input type="hidden" name="x" id="xField" value="">
-<!--                    <input type="hidden" name="trial_fcltt_proper_num" id="trialpn" th:value="${ivo.trial_fcltt_proper_num}">-->
+                    <!--                    <input type="hidden" name="trial_fcltt_proper_num" id="trialpn" th:value="${ivo.trial_fcltt_proper_num}">-->
                     <input type="hidden" name="user_proper_num" id="userpn" th:value="${vo.user_proper_num}">
 
                     <div style="margin-top: 40px">
@@ -244,7 +244,7 @@
                                     </div>
                                     <span style="margin: 7px">@</span>
                                     <div class="input-wrap" style="width: 200px; display: inline-block">
-                                        <input name="user_email_b" id="cvl_mail2" value="" class="cm_inptxt" type="text">
+                                        <input name="user_email_b" id="cvl_mail2" class="cm_inptxt" type="text">
                                     </div>
                                     <div class="select-box" style="padding: 9px;">
                                         <select name="" id="mailAddr" class="info-select">
@@ -395,48 +395,48 @@
                         </table>
                     </div>
                 </form>
-                    <!-- prev, next 버튼 -->
-                    <div class="btn-holder">
-                        <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
-                            <span>◀ 이전 단계</span>
-                        </button>
+                <!-- prev, next 버튼 -->
+                <div class="btn-holder">
+                    <button class="btn btn-2 hover-opacity prev_btn"> <!-- onclick="location.href='/app/start'" -->
+                        <span>◀ 이전 단계</span>
+                    </button>
 
-                        <em style="padding-top: 15px"> 1 / 4</em>
+                    <em style="padding-top: 15px"> 1 / 4</em>
 
-                        <button class="btn btn-2 hover-opacity next_btn">
-                            <span>다음 단계 ▶</span>
-                        </button>
-                    </div>
+                    <button class="btn btn-2 hover-opacity next_btn">
+                        <span>다음 단계 ▶</span>
+                    </button>
+                </div>
 
-                    <!-- 임시 저장 확인창 -->
-                    <div class="modal">
-                        <div class="modal__background">
-                            <div class="modal_body2">
-                                <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
-                                    <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
-                                         style="outline: none;" tabindex="-1">
-                                        <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1>
-                                        </div>
-                                        <div class="dmui_dialog_body" tabindex="0">
-                                            <div class="saveIcon">
-                                                <img src="../img/app/saveicon.png">
-                                            </div>
-                                            <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
-                                                <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
-                                                    <br>변경된 내용은 반영되지 않습니다.</strong></p>
-                                            </div>
-                                            <p><strong>저장하시겠습니까?</strong></p>
-                                        </div>
+                <!-- 임시 저장 확인창 -->
+                <div class="modal">
+                    <div class="modal__background">
+                        <div class="modal_body2">
+                            <div class="dmui_dialog" style="left: 161.5px; top: 429.5px;">
+                                <div class="dmui_dialog_content LsimplePopup applicationchangeConfirm width280"
+                                     style="outline: none;" tabindex="-1">
+                                    <div class="dmui_dialog_header"><h1 class="dmui_dialog_title">신청서 저장 안내</h1>
                                     </div>
-                                    <div class="dmui_dialog_footer">
-                                        <span><button class="dmui_dialog_footer_btn save">저장</button></span>
-                                        <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                    <div class="dmui_dialog_body" tabindex="0">
+                                        <div class="saveIcon">
+                                            <img src="../img/app/saveicon.png">
+                                        </div>
+                                        <div class="LblockPopupMain applicationchangeConfirm" style="height:80px;">
+                                            <p class="LtextCenter"><strong><br> 저장하지 않고 이동하실 경우,
+                                                <br>변경된 내용은 반영되지 않습니다.</strong></p>
+                                        </div>
+                                        <p><strong>저장하시겠습니까?</strong></p>
                                     </div>
-                                    <div class="dmui_dialog_btn"></div>
                                 </div>
+                                <div class="dmui_dialog_footer">
+                                    <span><button class="dmui_dialog_footer_btn save">저장</button></span>
+                                    <span><button class="dmui_dialog_footer_btn cancel">저장 안함</button></span>
+                                </div>
+                                <div class="dmui_dialog_btn"></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
 
@@ -449,5 +449,18 @@
 </th:block>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script th:src="@{../../js/app/regInfo.js}"></script>
+<script>
+    // 메일주소 선택입력-->
+    $("#mailAddr").change(function () {
+        let text = `[[${vo.user_email_b}]]`;
+        console.log(text);
+        let selmail = $("#mailAddr option:selected").html();
+        if(selmail == '직접입력') {
+            $("#cvl_mail2").attr("value", text);
+        } else {
+            $("#cvl_mail2").attr("value", selmail);
+        }
+    });
+</script>
 
 </html>

@@ -64,41 +64,6 @@
                     </table>
                 </div>
 
-                <div class="pager" style="margin-bottom: 60px">
-                    <div class="pager-wrap">
-                        <a href="#" class="arr first" title="처음으로"
-                           onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
-                            이동</strong></a><a href="#" class="arr prev" title="이전으로"
-                                              onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
-                        이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-                                          onclick="">1</a><a href="#" class=""
-                                                             onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
-                                                                                                                   onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
-                                                                                                                                                                         onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
-                                                                                                                                                                                                                               onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
-                                                                                                                                                                                                                                                                                     onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
-                                                                                                                                                                                                                                                                                                                                           onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
-                                                                                                                                                                                                                                                                                                                                                                                                 onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
-                                                                                                                                                                                                                                                                                                                                                                                                                                                       onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             onclick="fn_egov_link_page(10); return false;">10</a><a href="#"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     class="arr next" title="다음으로"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     onclick="fn_egov_link_page(11); return false;"><strong class="sr-only">다음페이지로
-                        이동</strong></a><a href="#" class="arr last" title="마지막으로"
-                                          onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
-                        목록으로 이동</strong></a>
-
-                        <input id="pageIndex" name="pageIndex" type="hidden" value="1" />
-                        <input id="pageSize" name="pageSize" type="hidden" value="10" />
-                        <input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-                        <input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
-                        <input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
-                        <input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
-                               value="" />
-                        <input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
-                        <input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -106,4 +71,14 @@
     </div>
 
 </th:block>
+
+<script th:inline="javascript">
+    var msg = `[[${msg}]]`;
+    if (msg !== 'null') {
+        alert(msg);
+    }
+
+</script>
+
+
 </html>

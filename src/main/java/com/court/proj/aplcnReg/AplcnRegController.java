@@ -49,16 +49,16 @@ public class AplcnRegController {
 
     //결격사유 확인 페이지
     @GetMapping("/confirm")
-    public String confirm(@RequestParam("tfpn") int tfpn) {
+    public String confirm(@RequestParam("tfpn") int tfpn,
+                          RedirectAttributes ra) {
         trial_pn = tfpn;
         return "app/aplcnRegConfirm";
     }
 
     //기본정보 입력페이지
     @GetMapping("/info")
-    public String getInfo(Model model) {
-
-        id = "genie91";
+    public String getInfo(Model model, RedirectAttributes ra) {
+        id = "user4";
 
         // 기본정보 불러와서 보내기
         UserVO uvo = aplcnRegService.getInfo(id);
@@ -71,8 +71,14 @@ public class AplcnRegController {
             InfoVO ivo = aplcnRegService.getAllDetailInfo(user_num);
             model.addAttribute("ivo", ivo);
             trial_pn = ivo.getTrial_fcltt_proper_num();
-        }
+        } else if (trial_pn != 0) {
 
+        }
+        else {
+            ra.addFlashAttribute("msg", "잘못된 접근입니다");
+            return "redirect:/app/start";
+
+        }
         // 공고에서 선택한 조력자 불러와서 보내기
         TrialVO tvo = aplcnRegService.getTrialVO(trial_pn);
         model.addAttribute("trial", tvo);
@@ -91,7 +97,17 @@ public class AplcnRegController {
 
     //경력사항 입력페이지
     @GetMapping("/career")
-    public String getCareer(Model model) {
+    public String getCareer(Model model,
+                            RedirectAttributes ra) {
+
+        id = "user4";
+        UserVO uvo = aplcnRegService.getInfo(id);
+
+        int cnt = aplcnRegService.getDetailInfo(uvo.getUser_proper_num());
+        if (cnt == 0) {
+            ra.addFlashAttribute("msg", "잘못된 접근입니다");
+            return "redirect:/app/start";
+        }
 
         reg_num = aplcnRegService.getRegnum(user_num);
 
@@ -113,11 +129,19 @@ public class AplcnRegController {
 
     //학력사항 입력페이지
     @GetMapping("/edu")
-    public String getEdu(Model model) {
+    public String getEdu(Model model,
+                         RedirectAttributes ra) {
+
+        id = "user4";
+        UserVO uvo = aplcnRegService.getInfo(id);
+
+        int cnt = aplcnRegService.getDetailInfo(uvo.getUser_proper_num());
+        if (cnt == 0) {
+            ra.addFlashAttribute("msg", "잘못된 접근입니다");
+            return "redirect:/app/start";
+        }
 
         reg_num = aplcnRegService.getRegnum(user_num);
-
-        UserVO uvo = aplcnRegService.getInfo(id);
         model.addAttribute("vo", uvo);
 
         ArrayList<AddInfoVO> scList = aplcnRegService.getSchoolInfo(reg_num);
@@ -152,7 +176,16 @@ public class AplcnRegController {
 
     //서류제출 페이지
     @GetMapping("/file")
-    public String uploadFile() {
+    public String uploadFile(RedirectAttributes ra) {
+
+        id = "user4";
+        UserVO uvo = aplcnRegService.getInfo(id);
+
+        int cnt = aplcnRegService.getDetailInfo(uvo.getUser_proper_num());
+        if (cnt == 0) {
+            ra.addFlashAttribute("msg", "잘못된 접근입니다");
+            return "redirect:/app/start";
+        }
         return "app/aplcnFileUpload";
     }
 
