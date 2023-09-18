@@ -49,4 +49,6 @@ public interface FclttMapper {
 	public int setPauseY(FclttVO vo);
 	public int setPauseN(FclttVO vo);
 	
+
+	
 }

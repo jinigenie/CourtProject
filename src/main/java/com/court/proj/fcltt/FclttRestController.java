@@ -62,6 +62,7 @@ public class FclttRestController {
     @PostMapping("/pauseResultSubmit")
     public ResponseEntity<Integer> pauseResultSubmit(@RequestParam("accept_proper_num") String accept_proper_num,
             @RequestParam("accept_act_yn") String accept_act_yn) {
+    	System.out.println("컨트롤러 진입");
         FclttVO vo = new FclttVO();
         vo.setAccept_proper_num(accept_proper_num);
         vo.setAccept_act_yn(accept_act_yn);

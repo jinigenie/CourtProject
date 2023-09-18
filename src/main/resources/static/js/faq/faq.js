@@ -36,8 +36,8 @@ function faqList(page, amount, content1, content2) {
 				str += '<abbr title="Question">Q.</abbr>';
 				str += '<span id="faq_question" style="font-size: 20px;font-weight: 500;">'+  vo.faq_ask_content +'</span>';
 				str += '	<!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->';
-				str += '	<button type="button" onclick="faqRegist()"class="faq_modify_btn1">수정</button>';
-				str += '	<button type="button" class="faq_modify_btn2">삭제</button>';
+				str += '	<button type="button" onclick="faqRegist('+vo.faq_proper_num +')" class="faq_modify_btn1">수정</button>';
+				str += '	<button type="button" onclick="faqDel('+vo.faq_proper_num +')" class="faq_modify_btn2">삭제</button>';
 				str += '	<!--   \=============================================== \--></h5>';
 				str += ' <div id="pane11" class="accopanel" aria-labelledby="header1">';
 				str += '<abbr title="Answer">A.</abbr><p></p>';
@@ -107,9 +107,19 @@ function faqToggle(clickedItem) {
 }
 
 
-function faqRegist(){
+function faqRegist(faq_proper_num){
+	 window.location.href = '/faq/regist?faq_proper_num=' + faq_proper_num;
 	
-	
+}
+function faqDel(faq_proper_num){
+	var result = confirm("삭제 하시겠습니까");
+
+    if (result) {
+		window.location.href = '/faq/faqDel?faq_proper_num=' + faq_proper_num;
+        alert("삭제되었습니다.");
+    } else {
+        alert("취소되었습니다.");
+    }
 	
 }
 

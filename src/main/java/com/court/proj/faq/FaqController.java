@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.court.proj.fcltt.FclttCriteria;
@@ -51,21 +52,27 @@ public class FaqController {
 			FaqVO.setFclttPageVO(FclttPageVO);
 		}
 		
-		System.out.println("컨트롤러 실행:" + FclttPageVO.toString());
-		
-
 		
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	// FAQ 작성/수정
 	@GetMapping("/regist")
-	public String detail() {
-		
+	public String detail(@RequestParam("faq_proper_num") String faq_proper_num, Model model) {
+		FaqVO vo = faqService.getDetail(faq_proper_num);
+		model.addAttribute("vo", vo);
 		return "/faq/faqRegist";
 	}
 	
-
+	@GetMapping("/faqDel")
+	public String faqDel(@RequestParam("faq_proper_num") String faq_proper_num) {
+		System.out.println("================================");
+		System.out.println("faq_proper_num ? : " + faq_proper_num);
+		int result = faqService.faqDel(faq_proper_num);
+		
+		return "redirect:/faq/faqList";
+	}
+	
 	
 	
 }
