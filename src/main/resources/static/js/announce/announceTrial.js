@@ -88,4 +88,75 @@ $(document).ready(function() {
 	});
 });
 
+function filterAnnouncements() {
+    var startDateInput = document.querySelector('input[name="startDate"]');
+    var endDateInput = document.querySelector('input[name="endDate"]');
+
+    if (!startDateInput || !endDateInput) {
+        // 요소를 찾을 수 없을 때 처리
+        console.error('Input elements not found.');
+        return;
+    }
+
+    var startDate = startDateInput.value;
+    var endDate = endDateInput.value;
+
+    // startDate와 endDate가 유효한 날짜 형식인지 확인
+    if (!isValidDate(startDate) || !isValidDate(endDate)) {
+        console.error('Invalid date format.');
+        return;
+    }
+
+    // 모집기간에 해당하는 공고문만 출력
+    var announcements = document.querySelectorAll('.table-responsive table tbody tr');
+    announcements.forEach(function(announcement) {
+        var startDateElement = announcement.querySelector('td[data-cell-header="모집기간"] a:first-child');
+        var endDateElement = announcement.querySelector('td[data-cell-header="모집기간"] a:last-child');
+
+        if (!startDateElement || !endDateElement) {
+            // 요소를 찾을 수 없을 때 처리
+            console.error('Announcement date elements not found.');
+            return;
+        }
+
+        var announcementStartDate = startDateElement.textContent.trim();
+        var announcementEndDate = endDateElement.textContent.trim();
+
+        // startDate와 endDate 사이에 있는 공고문만 표시
+        if (isDateInRange(startDate, endDate, announcementStartDate, announcementEndDate)) {
+            announcement.style.display = '';
+        } else {
+            announcement.style.display = 'none';
+        }
+    });
+}
+
+// 유효한 날짜 형식인지 확인하는 함수
+function isValidDate(dateString) {
+    var pattern = /^\d{4}-\d{2}-\d{2}$/;
+    return pattern.test(dateString);
+}
+
+// 날짜 범위를 비교하는 함수 (모집기간에 해당하는 공고만 표시)
+function isDateInRange(startDate, endDate, announcementStartDate, announcementEndDate) {
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+    announcementStartDate = new Date(announcementStartDate);
+    announcementEndDate = new Date(announcementEndDate);
+
+    // 공고의 시작일과 종료일이 모집기간에 포함되어야 함
+    return (
+        announcementStartDate >= startDate &&
+        announcementEndDate <= endDate
+    );
+}
+
+
+
+
+
+
+
+
+
 

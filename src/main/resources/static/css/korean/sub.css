@@ -163,11 +163,38 @@ body.start #detail-content {
 	display: table;
 	clear: both;
 }
-
-.announce-top>.announce-date>ul>li {
-	margin-right: 10px;
+.announce-date {
+	margin-top: 30px;
 }
 
+/* Post-date를 왼쪽으로 이동 */
+ul.post-date {
+    float: left;
+}
+
+/* Change-date를 오른쪽으로 이동 */
+ul.change-date {
+    float: right;
+}
+
+/* 각 날짜 요소의 스타일 조정 */
+ul.post-date li,
+ul.change-date li {
+    margin-right: 10px;
+}
+
+/* Clearfix 추가 */
+.announce-top::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/*.announce-top>.announce-date>ul>li {
+	margin-right: 10px;
+}
+*/
 
 
 /* *********************************************************************************
@@ -494,6 +521,15 @@ body.start #detail-content {
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	background-color: #fff;
+}
+/* 검색 버튼을 달력 오른쪽에 위치시키는 스타일 */
+.calander-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-btn {
+    margin-left: 10px; /* 검색 버튼을 달력에서 오른쪽으로 이동 */
 }
 
 .calander-box>input {

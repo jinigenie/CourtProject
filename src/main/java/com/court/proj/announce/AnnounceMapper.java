@@ -17,6 +17,9 @@ public interface AnnounceMapper {
 	// 공고 리스트 조회
 	public ArrayList<AnnounceVO> getannounceList();
 
+	// 공고 토탈
+	public int getTotal();
+
 	// 검색기능
 	public ArrayList<AnnounceVO> searchAnnounceByTitleAndContent(String keyword);
 
@@ -41,7 +44,10 @@ public interface AnnounceMapper {
 	// 공고 상세보기
 	public AnnounceVO getAnnounceDetail(int announce_proper_num);
 
-//	// 공고 수정
-//	public AnnounceVO getAnnounceModify(int announce_proper_num);
+	// 공고 수정하기 불러오기
+	public AnnounceVO getAnnounceModify(AnnounceVO vo);
+
+	// 공고 수정
+	public int updateAnnounce(AnnounceVO vo);
 
 }

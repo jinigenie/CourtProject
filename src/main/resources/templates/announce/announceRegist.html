@@ -18,7 +18,7 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
+									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
 									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
@@ -83,13 +83,7 @@
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : <span
-													th:text="${admin_id}"></span></span>
-										</td>
-										<td class="top-box-two">
-											<div id="fileControl" style="display: none"></div>
-											<span>최초 입력일 시 : <span th:text="${announce_first_date}"></span></span>
-											<span>최종 변경일 시 : <span th:text="${announce_last_date}"></span></span>
+
 										</td>
 									</tr>
 									<tr class="top-box-tr-two">
@@ -110,7 +104,8 @@
 								<!-- 등록 양식 start -->
 								<div class="table table-responsive">
 
-
+									<!--<span class="top-box-one-span-one">작성자 : <span
+											th:text="${vo.admin_id}"></span></span>-->
 									<table>
 
 										<colgroup>
@@ -118,6 +113,16 @@
 											<col style="width: 70%">
 										</colgroup>
 										<tbody>
+											<tr>
+												<th scope="row" class="txt-left">
+													<span class="txt-left" title="작성자">작성자</span>
+												</th>
+												<td data-cell-header="작성자" class="txt-left">
+													<input type="text" name="admin_id" id="title" class="cm_inptxt"
+														th:value="${vo.admin_id}" readonly>
+												</td>
+											</tr>
+
 											<tr>
 												<th scope="row" class="txt-left">
 													<span class="txt-left" title="제목">제목</span>
@@ -232,7 +237,7 @@
 						<!-- 페이지 이동 버튼 -->
 						<div class="fclttRegist_btn">
 							<button type="submit" class="fcltt_btn1">등록</button>
-							<button type="button" class="fcltt_btn2">취소</button>
+							<button type="button" class="fcltt_btn2" onclick="cancelClick()">취소</button>
 						</div>
 						<!-- //페이지 이동 버튼 end -->
 					</form>
@@ -289,8 +294,9 @@
 <script th:src="@{../../js/announce/UploadAdpater.js}"></script>
 
 <script>
-	function cancelRegistration() {
+	function cancelClick() {
 		if (confirm("등록을 취소하시겠습니까?")) {
+			history.back();
 		}
 	}
 

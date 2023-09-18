@@ -31,15 +31,18 @@ public class AnnounceController {
 	String admin_pw = "admin1";
 	String admin_auth = "seoul";
 	String admin_name = "이순신1234";
-
+	
 	// 모집공고 목록 페이지
 	@GetMapping("announceList")
 	public String announceList(Model model) {
-
+		
 		// 공고 리스트
 		ArrayList<AnnounceVO> list = announceService.getannounceList();
 		model.addAttribute("list", list);
-
+		
+		int total = announceService.getTotal();
+		model.addAttribute("total", total);
+		
 		return "announce/announceList";
 	}
 
@@ -60,7 +63,7 @@ public class AnnounceController {
 			list = announceService.searchAnnounceByContent(qString);
 		}
 		model.addAttribute("list", list);
-		
+
 		return "announce/announceList";
 	}
 
@@ -69,25 +72,29 @@ public class AnnounceController {
 	public String announceDetail(@RequestParam(name = "id") int announce_proper_num, Model model) {
 		AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
 		model.addAttribute("alist", alist);
-		System.out.println("공고 상세 정보 : " + alist.toString());
-		
+//		System.out.println("공고 상세 정보 : " + alist.toString());
+
 		return "announce/announceDetail";
 	}
 
-	/*
-	 * // 모집공고 수정 페이지
-	 * 
-	 * @GetMapping("announceModify") public String announceModify(@RequestParam(name
-	 * = "id") int announce_proper_num, Model model) {
-	 * 
-	 * AnnounceVO alist = announceService.getAnnounceModify(announce_proper_num);
-	 * model.addAttribute("alist", alist);
-	 * 
-	 * ArrayList<TrialVO> tlist = announceService.getTrial();
-	 * model.addAttribute("tlist", tlist);
-	 * 
-	 * return "announce/announceModify"; }
-	 */
+	// 모집공고 수정 페이지
+
+	@GetMapping("announceModify")
+	public String announceModify(@RequestParam(name = "id", required = true) int announce_proper_num, Model model) {
+
+	    AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
+	    model.addAttribute("alist", alist);
+		
+		AnnounceVO avo = announceService.getinfo(admin_id);
+		model.addAttribute("vo", avo);
+		admin_num = avo.getAdmin_proper_num();
+
+		ArrayList<TrialVO> tlist = announceService.getTrial();
+		model.addAttribute("tlist", tlist);
+
+
+		return "announce/announceModify";
+	}
 
 	@PostMapping("/announceModifyForm")
 	public String announceModifyForm(@ModelAttribute AnnounceVO vo, Model model) {
@@ -108,10 +115,11 @@ public class AnnounceController {
 		System.out.println(vo.toString());
 
 		announceService.announceRegistTB002(vo);
+		announceService.updateAnnounce(vo);
 
 		return "redirect:/announce/announceList";
 	}
-	
+
 	// 모집공고 등록 페이지
 	@GetMapping("announceRegist")
 	public String announceRegist(Model model) {

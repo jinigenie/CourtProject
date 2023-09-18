@@ -28,6 +28,7 @@ public class AnnounceVO {
 	private String trial_fcltt_clasifi_code;
 	private String trial_fcltt_sbcls_code;
 	private String trial_fcltt_description;
+	private int total;
 
 	// 선택한 재판조력자 유형
 	private String selectType1;
