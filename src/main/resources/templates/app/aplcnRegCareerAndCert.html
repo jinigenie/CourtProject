@@ -226,10 +226,10 @@
 
 <script th:inline="javascript">
 
+    var ctId = `[[${caList.size()}]]`;
     // <!--경력추가-->
-    $('#caAddBtn').click(function () {
 
-        var ctId = `[[${caList.size()}]]`;
+    $('#caAddBtn').click(function () {
         console.log(ctId);
 
         var career = '<tr style="cursor: pointer">'
@@ -258,6 +258,7 @@
         career += '</tr>';
 
         $('#careerTable').append(career);
+        ctId++;
 
         $(".datepicker").datepicker({
             dateFormat: 'yy-mm-dd',

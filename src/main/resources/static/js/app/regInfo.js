@@ -96,13 +96,6 @@ $("#selectBank").change(function () {
 });
 
 
-// 메일주소 선택입력-->
-$("#mailAddr").change(function () {
-    let selmail = $("#mailAddr option:selected").html();
-    $("#cvl_mail2").attr("value", selmail);
-
-});
-
 $(".addCourt").click(function () {
     console.log("추가");
 })
@@ -204,6 +197,8 @@ $('#selectType2').change(function () {
         $("#selectType3 option").filter(function () {
             return selType3 === $(this).attr("class");
         }).show();
+    } else {
+        $("#selectType3").val('');
     }
 })
 
