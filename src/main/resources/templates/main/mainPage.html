@@ -106,8 +106,8 @@
 								<h3 onclick="main_faq_view()" class="main_faq"
 									style="border-bottom: 3px solid rgb(240, 240, 240); width: 100px; float: left; margin-left: 10px; text-align: center;cursor: pointer;">
 									FAQ</h3>
-								<a class="main_noticeLink" href="/faq/list"><img src="../../img/main/faq_btn.png"></a>
-								<a class="main_faqList" href="/faq/list"><img src="../../img/main/faq_btn.png"></a>
+								<a class="main_noticeLink" href="/notice/noticeList"><img src="../../img/main/faq_btn.png"></a>
+								<a class="main_faqList" href="/faq/faqList"><img src="../../img/main/faq_btn.png"></a>
 							</li>
 							<!-- 탭 한 상태에 따라 공지-->
 							<li th:each=" vo2, status : ${list2}" class="notice_left">
@@ -119,7 +119,7 @@
 
 							<!-- 탭 한 상태에 따라 FAQ -->
 							<li th:each="vo3, status : ${list3}" class="faq_left faq_none">
-								<a th:href="'/faq/faqList?faq_proper_num='+${vo3.faq_proper_num}" onclick="faqToggle(this)">
+								<a th:href="'/faq/faqList?divVal='+ ${vo3.faq_proper_num}" >
 									<h3>Q</h3>[[${vo3.faq_ask_content}]]<br />
 								</a>
 							</li>

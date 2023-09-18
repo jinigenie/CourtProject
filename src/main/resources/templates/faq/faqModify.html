@@ -66,10 +66,10 @@
 				<!-- detail-content -->
 				<article id="detail-content">
 					<!-- form start -->
-					<form id="listForm" name="registForm" action="registForm" method="post">
+					<form class="listForm2" id="listForm" name="faqModifyForm" action="faqModifyForm" method="post">
 						<div class="heading-wrap container">
 							<h3 class="heading1">
-								<span>FAQ 등록</span>
+								<span>FAQ 수정</span>
 							</h3>
 						</div>
 
@@ -82,8 +82,7 @@
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : <span name="admin_proper_num"
-													text="1"></span></span>
+											<span class="top-box-one-span-one">작성자 : <span text=""></span></span>
 											<!--													th:text="${admin_id}"></span></span>-->
 										</td>
 										<td class="top-box-two">
@@ -118,8 +117,10 @@
 													<span class="txt-left" title="�ʼ��׸�">질문 제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
-													<input name="faq_ask_content" id="cvl_nm" class="cm_inptxt"
-														type="text" style="width: 640px; height: 40px;">
+													<input name="faq_ask_content" id="cvl_nm" th:value="${vo.faq_ask_content}"
+														class="cm_inptxt" type="text"
+														style="width: 640px; height: 40px;">
+													<input type="hidden" name="faq_proper_num" th:value="${vo.faq_proper_num}"/>
 												</td>
 											</tr>
 											<tr>
@@ -129,7 +130,9 @@
 												<td data-cell-header="이메일" class="txt-left">
 													<!-- ckEditor start -->
 													<textarea id="editor" name="faq_ask_comment">
+														[[${vo.faq_ask_comment}]]
 													</textarea>
+
 													<!-- //ckEditor end -->
 												</td>
 											</tr>
@@ -147,7 +150,7 @@
 				<!-- //detail-content end -->
 				<!-- 페이지 이동 버튼 -->
 				<div class="faq_btn" style="padding-left: 100px;">
-					<button type="button" onclick="faqRegSubmit()" class="faq_btn1">등록</button>
+					<button type="button" onclick="faqModifySubmit()" class="faq_btn1">수정</button>
 					<button type="button" class="faq_btn2">취소</button>
 					<br /><br /><br />
 				</div>
@@ -169,12 +172,15 @@
 	ClassicEditor.create(document.querySelector('#editor'), {
 		language: "ko"
 	});
-	function faqRegSubmit(){
-		
-	var form = document.getElementById("listForm");
-    form.submit();
-		
+
+	function faqModifySubmit() {
+		var form = document.querySelector(".listForm2");
+		form.submit();
+
 	}
+
+
+
 </script>
 <style>
 	.ck-editor__editable {

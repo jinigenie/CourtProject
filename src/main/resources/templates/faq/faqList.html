@@ -97,7 +97,6 @@
 										<div class="box only_pc">
 											<select id="pageUnit" name="pageUnit" title="목록에 노출되는 개수 선택"
 												style="height: 40px;">
-												<option value="5" selected="">5개씩 보기</option>
 												<option value="10">10개씩 보기</option>
 												<option value="15">15개씩 보기</option>
 												<option value="20">20개씩 보기</option>
@@ -131,9 +130,13 @@
 </th:block>
 
 <script th:inline="javascript">
-
+	var zz = '[[${div}]]';
+		console.log(zz+'[[${div}]]');
+		
 	$(document).ready(function () {
-		faqList(1, 5, $("#srchTycd").val(), $("#srchKwrd").val());
+		faqList(1, 10, $("#srchTycd").val(), $("#srchKwrd").val());
+
+		
 	});
 
 
@@ -142,9 +145,9 @@
 	$(".pager").on('click', 'a', function (e) {
 		e.preventDefault();
 		var pageAction = $(this).data('page-action');
-		var pageUnit = $("#pageUnit").val()
+		var pageUnit = $("#pageUnit").val();
 		var srchTycd = $("#srchTycd").val();
-		var srchKwrd = $("#srchKwrd").val()
+		var srchKwrd = $("#srchKwrd").val();
 
 
 		var currentPage = ($(".pager a.active").text());
@@ -165,7 +168,6 @@
 			}
 		} else if (pageAction === 'last') {
 			var totalPages = parseInt($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
-			console.log(totalPages);
 			faqList(totalPages, pageUnit, srchTycd, srchKwrd);
 		} else {
 			// 페이지 번호를 클릭한 경우

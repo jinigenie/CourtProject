@@ -220,7 +220,7 @@ function modalCont() {
 
 
 
-//그냥 닫기버튼 스크립트
+// 모달창 닫기버튼 스크립트
 function closePop2() {
 	document.getElementById("popup_layer2").style.display = "none";
 }

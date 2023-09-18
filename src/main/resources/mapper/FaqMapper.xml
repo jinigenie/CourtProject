@@ -6,6 +6,7 @@
 
 <mapper namespace="com.court.proj.faq.FaqMapper">
 
+	<!--  list 불러오기  -->
     <select id="getList" resultType="FaqVO">
 	    select * from TB_004
 	 	 <where>
@@ -40,6 +41,7 @@
 	 	
     </select>
 
+<!-- total 구하기 -->
     <select id="getTotal" resultType="int">
     	select count(*) from TB_004
     		 	 <where>
@@ -71,21 +73,44 @@
 	    </where>
     </select>
 
-
+<!-- 해당 질문 수정하기위한 정보 불러오기-->
 	<select id="getDetail" resultType="FaqVO">
 	
 		select * from TB_004
 		where faq_proper_num = #{faq_proper_num}
 			
 	</select>
-
+	
+<!-- faq 수정하기  -->
+	
+	<update id="faqModify">
+	  update TB_004 set faq_ask_content = #{faq_ask_content}, 
+                        faq_ask_comment = #{faq_ask_comment}
+      where faq_proper_num = #{faq_proper_num}
+	</update>	
+	
+	
+	
+	
+<!-- 해당질문 삭제  -->
 	<delete id="faqDel">
 		delete from TB_004 where faq_proper_num = #{faq_proper_num}
 	</delete>
 
 
+<!-- FAQ 등록하기 -->
 
-
+	<insert id="faqRag" >
+        INSERT INTO TB_004 (admin_proper_num, 
+							faq_ask_content, 
+                            faq_ask_comment
+                            )
+		VALUES
+				(#{admin_proper_num}, 
+                #{faq_ask_content}, 
+                #{faq_ask_comment})
+	</insert>
+	
 
 
 
