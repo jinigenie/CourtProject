@@ -31,6 +31,7 @@
 		inner join tb_010 c
 		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 		order by
+		a.announce_proper_num;
 	</select>
 
 	<select id="getinfo" resultType="AnnounceVO">
@@ -106,19 +107,63 @@
 		#{announce_last_date})
 	</insert>
 
-<!-- 	<insert id="adminRegistTB015" parameterType="AnnounceVO">
-
-		insert into TB_015
-		(admin_id,
-		admin_pw,
-		admin_auth,
-		admin_name)
-		values
-		(#{admin_id},
-		#{admin_pw},
-		#{admin_auth},
-		#{admin_name})
-	</insert> -->
-	<!-- 공고 등록 end -->
-
+	<!-- 공고 상세보기 -->
+	<select id="getAnnounceDetail" parameterType="int"
+		resultType="AnnounceVO">
+		select
+		a.announce_proper_num,
+		a.admin_proper_num,
+		b.admin_id,
+		b.admin_pw,
+		b.admin_auth,
+		b.admin_name,
+		a.trial_fcltt_proper_num,
+		c.trial_fcltt_main_code,
+		c.trial_fcltt_clasifi_code,
+		c.trial_fcltt_sbcls_code,
+		c.trial_fcltt_description,
+		a.announce_title,
+		a.announce_content,
+		a.announce_start_date,
+		a.announce_end_date,
+		a.announce_first_date,
+		a.announce_last_date
+		from TB_002 a
+		inner join
+		TB_015 b on a.admin_proper_num = b.admin_proper_num
+		inner join tb_010 c
+		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		where
+		a.announce_proper_num = #{announce_proper_num};
+	</select>
+	
+<!-- 	공고 수정
+		<select id="getAnnounceModify" parameterType="int"
+		resultType="AnnounceVO">
+		select
+		a.announce_proper_num,
+		a.admin_proper_num,
+		b.admin_id,
+		b.admin_pw,
+		b.admin_auth,
+		b.admin_name,
+		a.trial_fcltt_proper_num,
+		c.trial_fcltt_main_code,
+		c.trial_fcltt_clasifi_code,
+		c.trial_fcltt_sbcls_code,
+		c.trial_fcltt_description,
+		a.announce_title,
+		a.announce_content,
+		a.announce_start_date,
+		a.announce_end_date,
+		a.announce_first_date,
+		a.announce_last_date
+		from TB_002 a
+		inner join
+		TB_015 b on a.admin_proper_num = b.admin_proper_num
+		inner join tb_010 c
+		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		where
+		a.announce_proper_num = #{announce_proper_num};
+	</select> -->
 </mapper>
