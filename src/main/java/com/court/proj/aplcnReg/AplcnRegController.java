@@ -4,11 +4,11 @@ import com.court.proj.announce.AnnounceService;
 import com.court.proj.announce.AnnounceVO;
 import com.court.proj.user.CourtUserDetails;
 import com.court.proj.user.UserVO;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.Banner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +27,8 @@ public class AplcnRegController {
     @Qualifier("aplcnRegService")
     private AplcnRegService aplcnRegService;
 
+    int status = 0;
+    int cnt = 0;
     String id = "";
     int trial_pn = 0;   //선택된 재판조력자 코드 넘기기위해
     int user_num = 0;   //현재 user_proper_num을 기억하기 위해
@@ -37,24 +39,40 @@ public class AplcnRegController {
 
     //신청안내페이지
     @GetMapping("/start")
-    public String getRegStart(@RequestParam("listNum") int num, Model model) {
+    public String getRegStart(@RequestParam("listNum") int listNum, Model model) {
 
-//        AnnounceVO anvo = aplcnRegService.getAnnounce()
-
+        AnnounceVO anvo = aplcnRegService.getSelectedAnnounce(listNum);
+        model.addAttribute("avo", anvo);
+        trial_pn = anvo.getTrial_fcltt_proper_num();
+        status = 1;
 
         // 모집중인 공고 불러오기
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar now = Calendar.getInstance();
-        System.out.println(sdf.format(now.getTime()));
-        ArrayList<AnnounceVO> alist = aplcnRegService.getAnnounce(sdf.format(now.getTime()));
-        model.addAttribute("alist", alist);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Calendar now = Calendar.getInstance();
+//        System.out.println(sdf.format(now.getTime()));
+//        ArrayList<AnnounceVO> alist = aplcnRegService.getAnnounce(sdf.format(now.getTime()));
+//        model.addAttribute("alist", alist);
 
         return "app/aplcnRegStart";
     }
 
     //결격사유 확인 페이지
     @GetMapping("/confirm")
-    public String confirm() {
+    public String confirm(RedirectAttributes ra, Authentication auth) {
+
+        CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
+        id = user.getUser_id();
+        UserVO uvo = aplcnRegService.getInfo(id);
+        user_num = uvo.getUser_proper_num();
+        int cnt = aplcnRegService.getDetailInfo(user_num);
+
+        if(status == 0) {
+            ra.addFlashAttribute("msg", "공고 신청을 확인해 주세요");
+            return "redirect:/announce/announceList";
+        } else if(cnt == 1) {
+            ra.addFlashAttribute("msg", "이전에 작성 중인 신청서로 넘어갑니다");
+            return "redirect:/app/info";
+        }
 
         return "app/aplcnRegConfirm";
     }
@@ -63,8 +81,8 @@ public class AplcnRegController {
     @GetMapping("/info")
     public String getInfo(Model model, RedirectAttributes ra, Authentication auth) {
 
-//        CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
-        id = "user4";
+        CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
+        id = user.getUser_id();
 
         // 기본정보 불러와서 보내기
         UserVO uvo = aplcnRegService.getInfo(id);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
@@ -72,19 +90,16 @@ public class AplcnRegController {
         user_num = uvo.getUser_proper_num();
 
         // 임시저장한것이 있으면 상세정보 불러와서 보내기
-        int cnt = aplcnRegService.getDetailInfo(user_num);
+        cnt = aplcnRegService.getDetailInfo(user_num);
         if (cnt == 1) {
             InfoVO ivo = aplcnRegService.getAllDetailInfo(user_num);
             model.addAttribute("ivo", ivo);
             trial_pn = ivo.getTrial_fcltt_proper_num();
-        } else if (trial_pn != 0) {
-
+        } else if(status == 0 && cnt == 0) {
+            ra.addFlashAttribute("msg", "공고 신청을 확인해 주세요");
+            return "redirect:/announce/announceList";
         }
-        else {
-            ra.addFlashAttribute("msg", "잘못된 접근입니다");
-            return "redirect:/app/start";
 
-        }
         // 공고에서 선택한 조력자 불러와서 보내기
         TrialVO tvo = aplcnRegService.getTrialVO(trial_pn);
         model.addAttribute("trial", tvo);
@@ -97,6 +112,7 @@ public class AplcnRegController {
         ArrayList<TrialVO> tlist = aplcnRegService.getTrial();
         model.addAttribute("tlist", tlist);
 
+        status = 2;
 
         return "app/aplcnRegInfo";
     }
@@ -106,13 +122,12 @@ public class AplcnRegController {
     public String getCareer(Model model,
                             RedirectAttributes ra) {
 
-        id = "user4";
-        UserVO uvo = aplcnRegService.getInfo(id);
-
-        int cnt = aplcnRegService.getDetailInfo(uvo.getUser_proper_num());
-        if (cnt == 0) {
-            ra.addFlashAttribute("msg", "잘못된 접근입니다");
-            return "redirect:/app/start";
+        if (status == 0 && cnt == 0) {
+            ra.addFlashAttribute("msg", "저장된 신청 정보가 없습니다");
+            return "redirect:/announce/announceList";
+        } else if(status != 2) {
+            ra.addFlashAttribute("msg", "기본 정보를 확인 후, 신청서를 저장하세요");
+            return "redirect:/app/info";
         }
 
         reg_num = aplcnRegService.getRegnum(user_num);
@@ -138,13 +153,14 @@ public class AplcnRegController {
     public String getEdu(Model model,
                          RedirectAttributes ra) {
 
-        id = "user4";
         UserVO uvo = aplcnRegService.getInfo(id);
 
-        int cnt = aplcnRegService.getDetailInfo(uvo.getUser_proper_num());
-        if (cnt == 0) {
-            ra.addFlashAttribute("msg", "잘못된 접근입니다");
-            return "redirect:/app/start";
+        if (status == 0 || cnt == 0) {
+            ra.addFlashAttribute("msg", "저장된 신청 정보가 없습니다");
+            return "redirect:/announce/announceList";
+        } else if(status != 2) {
+            ra.addFlashAttribute("msg", "기본 정보를 확인 후, 신청서를 저장하세요");
+            return "redirect:/app/info";
         }
 
         reg_num = aplcnRegService.getRegnum(user_num);
@@ -184,14 +200,14 @@ public class AplcnRegController {
     @GetMapping("/file")
     public String uploadFile(RedirectAttributes ra) {
 
-        id = "user4";
-        UserVO uvo = aplcnRegService.getInfo(id);
-
-        int cnt = aplcnRegService.getDetailInfo(uvo.getUser_proper_num());
-        if (cnt == 0) {
-            ra.addFlashAttribute("msg", "잘못된 접근입니다");
-            return "redirect:/app/start";
+        if (status == 0 && cnt == 0) {
+            ra.addFlashAttribute("msg", "저장된 신청 정보가 없습니다");
+            return "redirect:/announce/announceList";
+        } else if(status != 2) {
+            ra.addFlashAttribute("msg", "기본 정보를 확인 후, 신청서를 저장하세요");
+            return "redirect:/app/info";
         }
+
         return "app/aplcnFileUpload";
     }
 

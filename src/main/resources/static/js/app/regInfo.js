@@ -236,3 +236,22 @@ $('input[name="criminal_penalty_carer_yn"]').change(function () {
         $(".detectiveTxt").val('');
     }
 });
+
+
+$('#phoneNumber').keyup(() => {
+    var phoneNumberField = document.getElementById("phoneNumber");
+    var formattedValue = phoneNumberField.value.replace(/\D/g, ''); // 숫자만 남기고 나머지 문자 제거
+
+    // 전화번호 포맷 적용 (예: 01012341234 -> 010-1234-1234)
+    if (formattedValue.length >= 3) {
+        formattedValue = formattedValue.replace(/(\d{3})(?=\d)/, "$1-");
+    }
+    if (formattedValue.length >= 8) {
+        formattedValue = formattedValue.replace(/(\d{4})(?=\d)/, "$1-");
+    }
+
+    phoneNumberField.value = formattedValue; // 포맷팅된 값으로 입력 필드 업데이트
+
+    $('#userphone').val(formattedValue.replace(/-/g, ''));
+
+})

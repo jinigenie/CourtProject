@@ -33,6 +33,11 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         return aplcnRegMapper.getAnnounce(date);
     }
 
+    @Override   // 선택된 공고 불러오기
+    public AnnounceVO getSelectedAnnounce(int listNum) {
+        return aplcnRegMapper.getSelectedAnnounce(listNum);
+    }
+
     @Override   // 선택된 재판조력자 데이터 불러오기
     public TrialVO getTrialVO(int trial_pn) {
         return aplcnRegMapper.getTrialVO(trial_pn);
