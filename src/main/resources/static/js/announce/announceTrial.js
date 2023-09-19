@@ -1,4 +1,4 @@
-/* 재판조력자 선택 */
+//////////////////////////////////////// 재판조력자 ////////////////////////////////////////
 $('#selectType1').change(function() {
 
 	$(".selectBox3").hide();
@@ -25,7 +25,7 @@ $('#selectType2').change(function() {
 	}
 })
 
-/*이미지 클릭 시 해당 공고 불러오기*/
+//////////////////////////////////////// 이미지 클릭 시 해당 공고 불러오기 ////////////////////////////////////////
 $(document).ready(function() {
 	// 전체 카테고리 클릭 시
 	$("#clickWhole").click(function() {
@@ -88,75 +88,129 @@ $(document).ready(function() {
 	});
 });
 
-function filterAnnouncements() {
-    var startDateInput = document.querySelector('input[name="startDate"]');
-    var endDateInput = document.querySelector('input[name="endDate"]');
+//////////////////////////////////////// 검색 ////////////////////////////////////////
+function srchMinwonDoc() {
+    var queryString = document.getElementById("search_query").value.toLowerCase(); // 입력된 검색어를 소문자로 변환
 
-    if (!startDateInput || !endDateInput) {
-        // 요소를 찾을 수 없을 때 처리
-        console.error('Input elements not found.');
-        return;
-    }
+    // 테이블 내의 공고문 제목 검색
+    var table = document.querySelector(".table-responsive table");
+    var rows = table.getElementsByTagName("tr");
 
-    var startDate = startDateInput.value;
-    var endDate = endDateInput.value;
+    for (var i = 1; i < rows.length; i++) { // 첫 번째 행은 테이블 헤더이므로 제외
+        var titleCell = rows[i].getElementsByTagName("td")[2]; // 제목이 있는 열(세 번째 열) 선택
+        var title = titleCell.textContent.toLowerCase(); // 공고문 제목을 소문자로 변환
 
-    // startDate와 endDate가 유효한 날짜 형식인지 확인
-    if (!isValidDate(startDate) || !isValidDate(endDate)) {
-        console.error('Invalid date format.');
-        return;
-    }
-
-    // 모집기간에 해당하는 공고문만 출력
-    var announcements = document.querySelectorAll('.table-responsive table tbody tr');
-    announcements.forEach(function(announcement) {
-        var startDateElement = announcement.querySelector('td[data-cell-header="모집기간"] a:first-child');
-        var endDateElement = announcement.querySelector('td[data-cell-header="모집기간"] a:last-child');
-
-        if (!startDateElement || !endDateElement) {
-            // 요소를 찾을 수 없을 때 처리
-            console.error('Announcement date elements not found.');
-            return;
-        }
-
-        var announcementStartDate = startDateElement.textContent.trim();
-        var announcementEndDate = endDateElement.textContent.trim();
-
-        // startDate와 endDate 사이에 있는 공고문만 표시
-        if (isDateInRange(startDate, endDate, announcementStartDate, announcementEndDate)) {
-            announcement.style.display = '';
+        // 검색어가 포함된 공고문만 표시
+        if (title.includes(queryString)) {
+            rows[i].style.display = ""; // 검색어가 포함된 공고문은 보이도록 설정
         } else {
-            announcement.style.display = 'none';
+            rows[i].style.display = "none"; // 검색어가 포함되지 않은 공고문은 숨김
+        }
+    }
+}
+
+// 검색 필드에서 엔터 키 누를 때 검색 수행
+document.getElementById("search_query").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        srchMinwonDoc();
+    }
+});
+
+// 검색 조건 변경 시 이벤트 처리
+document.getElementById("search_field").addEventListener("change", function() {
+    var searchField = document.getElementById("search_field").value;
+
+    // 검색 조건에 따라 placeholder 변경
+    if (searchField === "0") {
+        document.getElementById("search_query").placeholder = "검색어를 입력해주세요";
+    } else if (searchField === "1") {
+        document.getElementById("search_query").placeholder = "제목을 입력해주세요";
+    } else if (searchField === "2") {
+        document.getElementById("search_query").placeholder = "내용을 입력해주세요";
+    }
+});
+
+//////////////////////////////////////// 게시글 보기 수 ////////////////////////////////////////
+    $(document).ready(function () {
+        $('#view_cnt').change(function () {
+            var selectedValue = $(this).val();
+            var currentUrl = window.location.href;
+            var newUrl = updateQueryStringParameter(currentUrl, 'view_cnt', selectedValue);
+            window.location.href = newUrl;
+        });
+
+        function updateQueryStringParameter(uri, key, value) {
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            }
+            else {
+                return uri + separator + key + "=" + value;
+            }
         }
     });
+
+//////////////////////////////////////// 모집기간 ////////////////////////////////////////
+function filterAnnouncements() {
+	var startDateInput = document.querySelector('input[name="startDate"]');
+	var endDateInput = document.querySelector('input[name="endDate"]');
+
+	if (!startDateInput || !endDateInput) {
+		// 요소를 찾을 수 없을 때 처리
+		console.error('Input elements not found.');
+		return;
+	}
+
+	var startDate = startDateInput.value;
+	var endDate = endDateInput.value;
+
+	// startDate와 endDate가 유효한 날짜 형식인지 확인
+	if (!isValidDate(startDate) || !isValidDate(endDate)) {
+		console.error('Invalid date format.');
+		return;
+	}
+
+	// 모집기간에 해당하는 공고문만 출력
+	var announcements = document.querySelectorAll('.table-responsive table tbody tr');
+	announcements.forEach(function(announcement) {
+		var startDateElement = announcement.querySelector('td[data-cell-header="모집기간"] a:first-child');
+		var endDateElement = announcement.querySelector('td[data-cell-header="모집기간"] a:last-child');
+
+		if (!startDateElement || !endDateElement) {
+			// 요소를 찾을 수 없을 때 처리
+			console.error('찾을 수 없음');
+			return;
+		}
+
+		var announcementStartDate = startDateElement.textContent.trim();
+		var announcementEndDate = endDateElement.textContent.trim();
+
+		// startDate와 endDate 사이에 있는 공고문만 표시
+		if (isDateInRange(startDate, endDate, announcementStartDate, announcementEndDate)) {
+			announcement.style.display = '';
+		} else {
+			announcement.style.display = 'none';
+		}
+	});
 }
 
 // 유효한 날짜 형식인지 확인하는 함수
 function isValidDate(dateString) {
-    var pattern = /^\d{4}-\d{2}-\d{2}$/;
-    return pattern.test(dateString);
+	var pattern = /^\d{4}-\d{2}-\d{2}$/;
+	return pattern.test(dateString);
 }
 
 // 날짜 범위를 비교하는 함수 (모집기간에 해당하는 공고만 표시)
 function isDateInRange(startDate, endDate, announcementStartDate, announcementEndDate) {
-    startDate = new Date(startDate);
-    endDate = new Date(endDate);
-    announcementStartDate = new Date(announcementStartDate);
-    announcementEndDate = new Date(announcementEndDate);
+	startDate = new Date(startDate);
+	endDate = new Date(endDate);
+	announcementStartDate = new Date(announcementStartDate);
+	announcementEndDate = new Date(announcementEndDate);
 
-    // 공고의 시작일과 종료일이 모집기간에 포함되어야 함
-    return (
-        announcementStartDate >= startDate &&
-        announcementEndDate <= endDate
-    );
+	// 공고의 시작일과 종료일이 모집기간에 포함되어야 함
+	return (
+		announcementStartDate >= startDate &&
+		announcementEndDate <= endDate
+	);
 }
-
-
-
-
-
-
-
-
-
-

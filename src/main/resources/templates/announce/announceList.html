@@ -17,7 +17,7 @@
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
 									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
-									<li><a href="../announce/announceDetail">모집공고 목록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
@@ -60,9 +60,7 @@
 					}
 				</style>
 				<article id="detail-content">
-					<form id="listForm" name="listForm"
-						action="#"
-						method="post">
+					<form id="listForm" name="listForm" action="#" method="post">
 						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
 						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
 						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
@@ -141,7 +139,7 @@
 								<div class="searchform-wrap">
 									<div class="select-box">
 										<label for="selectTit"></label>
-										<select class="info-select" id="selectTit" name="search_field"
+										<select class="info-select" id="search_field" name="searchField"
 											title="검색조건을 선택해주세요.">
 											<option value="0">전체</option>
 											<option value="1">제목</option>
@@ -151,10 +149,8 @@
 
 									<div class="search-input-wrap">
 										<div class="input-wrap">
-											<input type="text" name="q_string" value=""
-												onkeypress="if(window.event.keyCode == 13) srchMinwonDoc();"
-												class="form-control" placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요"
-												id="q_string" />
+											<input type="text" name="search_query" value="" class="form-control"
+												placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요" id="search_query" />
 										</div>
 										<button type="button" class="search-btn" onclick="srchMinwonDoc()">
 											<i class="xi-search"></i>
@@ -162,7 +158,8 @@
 										</button>
 									</div>
 									<!-- 검색 end -->
-
+									
+									<!-- 게시글 보기 수 -->
 									<div class="select-box" id="select-box-margin-left-10">
 										<label for="selectTit"></label>
 										<select name="view_cnt" id="view_cnt" class="info-select" title="게시판 목록보기 갯수선택"
@@ -188,7 +185,7 @@
 										value="" />
 									<button type="button" class="search-btn" onclick="filterAnnouncements()">
 										<i class="xi-search"></i>
-										<span class="sr-only">검색</span>
+										<span class="sr-only">찾기</span>
 									</button>
 								</div>
 								<!-- 달력 end -->
@@ -227,8 +224,10 @@
 													th:text="${vo.announce_proper_num}"></a></td>
 											<td data-cell-header="대분류"><a
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}">
-												[[${vo.trial_fcltt_main_code} + ' > ' + ${vo.trial_fcltt_clasifi_code} + (${vo.trial_fcltt_sbcls_code} == null? '' :  ' > ' + ${vo.trial_fcltt_sbcls_code}) ]]
-											</a></td>
+													[[${vo.trial_fcltt_main_code} + ' > ' +
+													${vo.trial_fcltt_clasifi_code} + (${vo.trial_fcltt_sbcls_code} ==
+													null? '' : ' > ' + ${vo.trial_fcltt_sbcls_code}) ]]
+												</a></td>
 											<td data-cell-header="제목"><a class="trialList"
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
 													th:text="${vo.announce_title}"></a></td>

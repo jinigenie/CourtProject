@@ -8,7 +8,7 @@ public interface AnnounceService {
 
 	public AnnounceVO getinfo(String admin_id);
 
-	// 등록
+	// 공고 등록
 	public int announceRegist(AnnounceVO vo);
 
 	// 공고 리스트 조회
@@ -17,12 +17,10 @@ public interface AnnounceService {
 	// 공고 토탈
 	public int getTotal();
 
-	// 검색기능
-	public ArrayList<AnnounceVO> searchAnnounceByTitleAndContent(String keyword);
-
-	public ArrayList<AnnounceVO> searchAnnounceByTitle(String keyword);
-
-	public ArrayList<AnnounceVO> searchAnnounceByContent(String keyword);
+	// 공고 검색
+	public ArrayList<AnnounceVO> searchAnnounceTitleAndContent(String keyword);
+	public ArrayList<AnnounceVO> searchAnnounceTitle(String keyword);
+	public ArrayList<AnnounceVO> searchAnnounceContent(String keyword);
 
 	// 재판조력자 유형 조회하기
 	public ArrayList<TrialVO> getTrial();
@@ -32,7 +30,6 @@ public interface AnnounceService {
 
 	// 선택한 재판조력자 pk 불러오기
 	public int getTrialNum1(String st1, String st2);
-
 	public Integer getTrialNum2(String st1, String st2, String st3);
 
 	// 공고 등록 TB_002
@@ -41,7 +38,7 @@ public interface AnnounceService {
 	// 공고 상세보기
 	public AnnounceVO getAnnounceDetail(int announce_proper_num);
 
-	// 공고 수정하기 불러오기
+	// 공고 수정 블러오기
 	public AnnounceVO getAnnounceModify(AnnounceVO vo);
 
 	// 공고 수정
