@@ -37,7 +37,7 @@ $(document).ready(function() {
 		$(".table tbody tr").hide();
 		// 통번역인에 해당하는 필터링 코드 추가
 		$(".table tbody tr").each(function() {
-			if ($(this).find("td[data-cell-header='대분류']").text() === "조력자") {
+			if ($(this).find("td[data-cell-header='대분류']").text().includes("조력자")) {
 				$(this).show();
 			}
 		});
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		$(".table tbody tr").hide();
 		// 통번역인에 해당하는 필터링 코드 추가
 		$(".table tbody tr").each(function() {
-			if ($(this).find("td[data-cell-header='대분류']").text() === "통번역인") {
+			if ($(this).find("td[data-cell-header='대분류']").text().includes("통번역인")) {
 				$(this).show();
 			}
 		});
@@ -59,7 +59,7 @@ $(document).ready(function() {
 		$(".table tbody tr").hide();
 		// 조정위원에 해당하는 필터링 코드 추가
 		$(".table tbody tr").each(function() {
-			if ($(this).find("td[data-cell-header='대분류']").text() === "조정위원") {
+			if ($(this).find("td[data-cell-header='대분류']").text().includes("조정위원")) {
 				$(this).show();
 			}
 		});
@@ -70,7 +70,7 @@ $(document).ready(function() {
 		$(".table tbody tr").hide();
 		// 전문심리위원에 해당하는 필터링 코드 추가
 		$(".table tbody tr").each(function() {
-			if ($(this).find("td[data-cell-header='대분류']").text() === "전문심리위원") {
+			if ($(this).find("td[data-cell-header='대분류']").text().includes("전문심리위원")) {
 				$(this).show();
 			}
 		});
@@ -81,7 +81,7 @@ $(document).ready(function() {
 		$(".table tbody tr").hide();
 		// 상담위원에 해당하는 필터링 코드 추가
 		$(".table tbody tr").each(function() {
-			if ($(this).find("td[data-cell-header='대분류']").text() === "상담위원") {
+			if ($(this).find("td[data-cell-header='대분류']").text().includes("상담위원")) {
 				$(this).show();
 			}
 		});

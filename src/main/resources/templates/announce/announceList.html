@@ -204,8 +204,8 @@
 									</caption>
 									<colgroup>
 										<col style="width: 10%" />
-										<col style="width: 15%" />
-										<col style="width: 40%" />
+										<col style="width: 28%" />
+										<col style="width: 27%" />
 										<col style="width: 11.666%" />
 										<col style="width: 11.666%" />
 										<col style="width: 11.666%" />
@@ -213,7 +213,7 @@
 									<thead>
 										<tr>
 											<th scope="col">번호</th>
-											<th scope="col">조력자 분류</th>
+											<th scope="col">모집유형</th>
 											<th scope="col">제목</th>
 											<th scope="col">모집기간</th>
 											<th scope="col">진행상황</th>
@@ -226,9 +226,10 @@
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
 													th:text="${vo.announce_proper_num}"></a></td>
 											<td data-cell-header="대분류"><a
-													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
-													th:text="${vo.trial_fcltt_main_code}"></a></td>
-											<td data-cell-header="중분류"><a class="trialList"
+													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}">
+												[[${vo.trial_fcltt_main_code} + ' > ' + ${vo.trial_fcltt_clasifi_code} + (${vo.trial_fcltt_sbcls_code} == null? '' :  ' > ' + ${vo.trial_fcltt_sbcls_code}) ]]
+											</a></td>
+											<td data-cell-header="제목"><a class="trialList"
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}"
 													th:text="${vo.announce_title}"></a></td>
 											<td data-cell-header="모집기간"><a
@@ -239,7 +240,7 @@
 													th:href="'/announce/announceDetail?id=' + ${vo.announce_proper_num}">
 													<p>진행중</p>
 												</a></td>
-											<td onclick="event.stopPropagation();"><a href="#"
+											<td><a th:href="@{/app/start(listNum = ${vo.announce_proper_num})}"
 													class="case case1"><em>신청</em></a></td>
 										</tr>
 
