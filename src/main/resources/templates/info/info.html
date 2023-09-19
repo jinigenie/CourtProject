@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script defer th:src="@{../js/fcltt/fcltt.js}"></script>
+</head>
+
+
+<th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			font-size: 24px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		p {
+			font-size: 16px;
+			line-height: 1.5;
+		}
+
+		ul {
+			list-style-type: disc;
+			margin-left: 20px;
+		}
+
+		.alert {
+			background-color: #ffc107;
+			color: #333;
+			padding: 10px;
+			margin: 20px 0;
+			border-radius: 5px;
+		}
+	</style>
+	<div class="wrap">
+
+		<div id="main_con">
+			<!--메뉴바-->
+			<div id="nav_menu">
+				<div id="lnb">
+					<h2 class="title">조력자제도 안내</h2>
+					<div class="menu">
+						<ul>
+							<li class="has-sub">
+							<li style="display: bolck;"><a href="/fcltt/fclttList">조력자제도란?</a></li>
+							<li style="display: bolck;"><a href="/fcltt/pause">조력자신청절차</a></li>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- 메뉴바 여기까지-->
+			<!--   본문 contents 내용 시작 -->
+
+			<div id="contents">
+				<style>
+					@media screen and (max-width: 1024px) {
+						.table-responsive>table>tbody>tr td[data-cell-header]:before {
+							width: 30%;
+							margin: 0 0 0 0;
+							vertical-align: unset;
+						}
+					}
+
+					.table-responsive>table>tbody>tr:hover {
+						background-color: #e6f8ff;
+					}
+
+					@media screen and (min-width: 1100px) {
+						#select-box-margin-left-10 {
+							margin-left: 6px;
+						}
+					}
+				</style>
+			</div>
+
+			<style>
+				.body {}
+
+				.info_container {
+					margin: 0 auto;
+					padding: 0 30px 30px 30px;
+					width: 1000px;
+					height: 1000px;
+					display: block;
+					margin: 0 500px 60px 500px;
+				}
+
+				.cont1,
+				.cont2 {
+					width: 100%;
+					margin: 20px;
+					padding: 10px;
+				}
+				
+				li{
+					line-height: 2; 
+				}
+				
+				li > img, h2>img , h3>img {
+					margin-right: 10px;
+				}
+				
+				h2, h3{
+					margin-bottom: 10px;
+				}
+			</style>
+
+
+			<div class="info_container">
+				<div class="cont1">
+					<h2> <img src="../img/main/blue.gif">재판조력자 신청 안내</h2>
+					<p>재판조력자로 참여하고자 하는 경우, 아래의 감정인 종류와 신청 방법을 확인하실 수 있습니다.</p>
+										<ul>
+						<li><img src="../img/main/blue3.png">신체/진료기록 감정인</li>
+						<li><img src="../img/main/blue3.png">공사비 및 시가 감정인</li>
+						<li><img src="../img/main/blue3.png">측량감정인 및 문서 감정인</li>
+						<li><img src="../img/main/blue3.png">경매 감정인</li>
+					</ul>
+				</div>
+
+				<div class="cont1">
+					<h3><img src="../img/main/blue2.gif">감정인 세부구분 및 감정인 명단 등재 기준</h3>
+					<ul>
+						<li><img src="../img/main/blue3.png">모든 감정인은 공정하고 객관적인 감정 업무를 수행하기 위한 자격을 갖추어야 합니다.</li>
+						<li><img src="../img/main/blue3.png">특정 범죄 또는 징계처분 등의 전력이 있는 자 또는 감정 업무와 관련하여 형사처벌 또는 징계처분을 받은 자는 등재되지 않습니다.</li>
+					</ul>
+				</div>
+				<div class="cont1">
+					<h3><img src="../img/main/blue2.gif">감정인 신청 방법 및 절차</h3>
+					<ol>
+						<li><img src="../img/main/blue3.png">신청 검토: 원하는 감정인 분야와 요건을 확인하고, 자격을 충족하는지 확인합니다.</li>
+						<li><img src="../img/main/blue3.png">신청서 작성: 해당 분야의 신청서를 작성하고 필요한 정보를 기재합니다.</li>
+						<li><img src="../img/main/blue3.png">서류 제출: 작성한 신청서와 관련 서류를 제출합니다.</li>
+						<li><img src="../img/main/blue3.png">면접 및 평가: 승인된 신청자는 면접과 평가를 거칩니다.</li>
+						<li><img src="../img/main/blue3.png">교육 및 훈련: 승인된 감정인은 필요한 교육과 훈련을 받습니다.</li>
+						<li><img src="../img/main/blue3.png">감정 수행: 등재된 감정인은 감정 업무를 수행하고 재판에 기여합니다.</li>
+					</ol>
+				</div>
+				<div class="alert">
+					추가 정보나 문의 사항이 있으신 경우, 관련 기관 또는 당사자에게 문의하시기 바랍니다.
+				</div>
+			</div>
+		</div>
+	</div>
+
+</html>

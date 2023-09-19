@@ -43,6 +43,7 @@
 
 					.table-responsive>table>tbody>tr:hover {
 						background-color: #e6f8ff;
+					
 					}
 
 					@media screen and (min-width: 1100px) {
@@ -151,10 +152,10 @@
 					str += '<em>' + (vo.accept_act_yn == 'Y' ? '활동중' : '중지중') + '</em></a></td>';
 					str += '<td data-cell-header="처리"><a href="#" class="' + (vo.accept_act_yn == 'Y' ? 'pauseResult1' : 'pauseResult2') + '">';
 					str += '<em>' + (vo.accept_act_yn == 'Y' ? '중지승인' : '활동승인') + '</em></a></td></tr>';
-					str += '<tr class="hidden-row" style="display: none;">';
+					str += '<tr class="hidden-row" style="display: none; ">';
 					str += '<td data-cell-header="신청일"></td>';
 					str += '<td data-cell-header="신청자이름"></td>';
-					str += '<td data-cell-header="중지기간">중지 사유 : ' + vo.accept_pause_etc + '</td>';
+					str += '<td data-cell-header="중지기간" style="text-align: left; padding : 0;">중지 사유 : ' + vo.accept_pause_etc + '</td>';
 					str += '<td data-cell-header="현재활동상태"></td>';
 					str += '<td data-cell-header="처리"></td></tr>';
 					// 표에 행 추가
