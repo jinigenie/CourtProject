@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.court.proj.admin.CourtAdminDetails;
 
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
@@ -54,7 +57,11 @@ public class UserController {
 	}
 
 	@GetMapping("/test")
-	public String test() {
+	public String test(Authentication auth) {
+		
+		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
+		System.out.println(user.getUser_id());
+		System.out.println(user.getUsername());
 		return "user/test";
 	}
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" class="dark" style="color-scheme: dark;">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity" lang="en" class="dark" style="color-scheme: dark;">
 
 
 <th:block th:fragment="setContent(content)">
@@ -15,28 +15,28 @@
     />
 
     <!-- common css -->
-    <link rel="stylesheet" type="text/css" href="../../css/korean/common.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/korean/layout.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/nav/common.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/layout.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{./../../css/nav/common.css}" />
     <!-- sub css 지우면 안됨  -->
-    <link rel="stylesheet" type="text/css" href="../../css/korean/sub.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/sub.css}" />
 
     <!-- common lib js -->
-    <script type="text/javascript" src="../../js/lib/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" th:src="@{./../../js/lib/jquery-2.2.4.min.js}"></script>
 
     <!-- 분류버튼 효과 -->
-    <script type="text/javascript" src="../../js/lib/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" th:src="@{./../../js/lib/jquery.mCustomScrollbar.concat.min.js}"></script>
 
     <!-- public common js -->
-    <script type="text/javascript" src="../../js/korean/common.js"></script>
-    <script type="text/javascript" src="../../js/nav/custom.js"></script>
+    <script type="text/javascript" th:src="@{./../../js/korean/common.js}"></script>
+    <script type="text/javascript" th:src="@{./../../js/nav/custom.js}"></script>
     <!-- sub js -->
-    <script type="text/javascript" src="../../js/korean/sub.js"></script>
+    <script type="text/javascript" th:src="@{./../../js/korean/sub.js}"></script>
     
 	<!-- 달력 20230830 이태주 추가--> 
-    <link rel="stylesheet" type="text/css" href="../../css/korean/jquery-ui.min.css">
-    <script type="text/javascript" src="../../js/korean/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../../js/korean/style.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/jquery-ui.min.css}">
+    <script type="text/javascript" th:src="@{./../../js/korean/jquery-ui.min.js}"></script>
+    <script type="text/javascript" th:src="@{./../../js/korean/style.js}"></script>
     
   </head>
 
@@ -48,12 +48,12 @@
       <div class="container">
         <ul class="t-side-right">
           <li>
-            <a href="https://minwon.moel.go.kr/minwon2008/join/login_sso.do"
+            <a th:href="@{./../user/login}"
             >로그인</a
             >
           </li>
           <li>
-            <a href="https://minwon.moel.go.kr/minwon2008/join/join_first.do"
+            <a th:href="@{./../user/agree}"
             >회원가입</a
             >
           </li>
@@ -64,9 +64,9 @@
     <div class="header-wrap">
       <h1 class="logo">
         <a
-                href="https://minwon.moel.go.kr/minwon2008/index_new.do"
+                th:href="@{./../main/main}"
                 class="logo-wrapper"
-        ><span class="sr-only">여기어디가바뀜</span></a
+        ><span class="sr-only"></span></a
         >
       </h1>
       <div class="nav-wrap">
@@ -75,24 +75,17 @@
             <div class="th1" style="float: left; width: 180px">
               <a href="#"><span>조력자등재신청</span></a>
               <ul class="depth2">
-                <li class="th2">
+                <li class="th2" sec:authorize="hasRole('ROLE_SUPERADMIN')">
                   <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/info/part_list.do', num:'10100', num1:'10000', num2:'10100', num3:'', name:'분야별민원', name1:'민원정보', name2:'분야별민원', name3:''})"
-                  ><span>조력자메뉴1</span></a
+                          href="#"
+                  ><span>조력자 등재신청</span></a
                   >
                 </li>
 
                 <li class="th2">
                   <a
                           href="javascript:goNaviMenuUrl({url:'/minwon2008/lc_minwon/lc_form_apply_TM.do', num:'10200', num1:'10000', num2:'10200', num3:'', name:'대상자별민원', name1:'민원정보', name2:'대상자별민원', name3:''})"
-                  ><span>조력자메뉴2</span></a
-                  >
-                </li>
-
-                <li class="th2">
-                  <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/company/company_minwon_02.do', num:'10300', num1:'10000', num2:'10300', num3:'', name:'기업보고서식', name1:'민원정보', name2:'기업보고서식', name3:''})"
-                  ><span>조력자메뉴3</span></a
+                  ><span>조력자 등재명단</span></a
                   >
                 </li>
               </ul>
@@ -134,15 +127,21 @@
               <ul class="depth2">
                 <li class="th2">
                   <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/my/my_minwon_list.do', num:'30100', num1:'30000', num2:'30100', num3:'30101', name:'나의 민원', name1:'민원확인', name2:'나의 민원', name3:'서식민원조회'})"
-                  ><span>Mypage메뉴1</span></a
+                          th:href="@{./../announce/announceList}"
+                  ><span>모집 공고</span></a
                   >
                 </li>
 
                 <li class="th2">
                   <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/my/lc_print_guide.do', num:'30200', num1:'30000', num2:'30200', num3:'', name:'인터넷발급확인', name1:'민원확인', name2:'인터넷발급확인', name3:''})"
-                  ><span>Mypage메뉴2</span></a
+                          href="#"
+                  ><span>공지사항</span></a
+                  >
+                </li>
+                <li class="th2">
+                  <a
+                          th:href="@{./../faq/list}"
+                  ><span>FAQ</span></a
                   >
                 </li>
               </ul>
@@ -152,22 +151,28 @@
               <ul class="depth2">
                 <li class="th2">
                   <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/info/use_info_A.do', num:'40100', num1:'40000', num2:'40100', num3:'', name:'민원신청방법', name1:'이용안내', name2:'민원신청방법', name3:''})"
-                  ><span>공지사항메뉴1</span></a
+                          th:href="@{./../mypage/main}"
+                  ><span>나의 정보관리</span></a
                   >
                 </li>
 
                 <li class="th2">
                   <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/info/use_info_B.do', num:'40200', num1:'40000', num2:'40200', num3:'40201', name:'민원마당따라하기', name1:'이용안내', name2:'민원마당따라하기', name3:'민원신청'})"
-                  ><span>공지사항메뉴2</span></a
+                          th:href="@{./../mypage/status}"
+                  ><span>나의 신청현황</span></a
                   >
                 </li>
 
                 <li class="th2">
                   <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/info/use_info_D.do', num:'40400', num1:'40000', num2:'40400', num3:'', name:'보안프로그램설치안내', name1:'이용안내', name2:'보안프로그램설치안내', name3:''})"
-                  ><span>공지사항메뉴3</span></a
+                          th:href="@{./../mypage/history}"
+                  ><span>나의 활동내역</span></a
+                  >
+                </li>
+                 <li class="th2">
+                  <a
+                          th:href="@{./../mypage/pause}"
+                  ><span>중지 및 해제신청</span></a
                   >
                 </li>
               </ul>

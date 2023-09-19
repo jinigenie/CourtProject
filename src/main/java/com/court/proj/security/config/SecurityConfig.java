@@ -26,34 +26,35 @@ public class SecurityConfig {
 
 		http.csrf().disable();
 		
-//		http.authorizeRequests( (authorize) -> authorize
-//				.antMatchers("/user/login").permitAll() // 로그인 페이지는 모든 사용자에게 허용
-//                .antMatchers("/user/loginForm").permitAll()
-//                .antMatchers("/main/**").permitAll()
-//                .antMatchers("app/**").authenticated()
-//                .antMatchers("/fcltt/**").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/announce/announceModify").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/announce/announceRegist").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/announce/announceRegistForm").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/aplcn/**").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/faq/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/notice/noticeModify").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/notice/noticeRegist").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                .antMatchers("/admin/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
-//                )
-//				.exceptionHandling()
-//		        //.accessDeniedPage("/user/error")
-//				.accessDeniedHandler(customAccessDeniedHandler());
-//				
-//				
-//				
-//		
-//		http.formLogin().loginPage("/user/login")
-//		.usernameParameter("username")
-//		.passwordParameter("user_pw")
-//		.loginProcessingUrl("/user/loginForm")
-//		.failureHandler(customLoginFailureHandler())
-//		.defaultSuccessUrl("/main/main");
+		http.authorizeRequests( (authorize) -> authorize
+				.antMatchers("/user/login").permitAll() // 로그인 페이지는 모든 사용자에게 허용
+                .antMatchers("/user/loginForm").permitAll()
+                .antMatchers("/main/**").permitAll()
+                .antMatchers("/app/**").authenticated()
+                .antMatchers("/mypage/**").authenticated()
+                .antMatchers("/fcltt/**").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/announce/announceModify").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/announce/announceRegist").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/announce/announceRegistForm").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/aplcn/**").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/faq/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/notice/noticeModify").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/notice/noticeRegist").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/admin/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                )
+				.exceptionHandling()
+		        //.accessDeniedPage("/user/error")
+				.accessDeniedHandler(customAccessDeniedHandler());
+				
+				
+				
+		
+		http.formLogin().loginPage("/user/login")
+		.usernameParameter("username")
+		.passwordParameter("user_pw")
+		.loginProcessingUrl("/user/loginForm")
+		.failureHandler(customLoginFailureHandler())
+		.defaultSuccessUrl("/main/main");
 		
 		/*
 		 * 인증이 필요한 경로
