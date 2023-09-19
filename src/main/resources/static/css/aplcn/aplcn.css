@@ -1,0 +1,55 @@
+/*-----신청자 등단 리스트 aplcnList-----*/
+
+/* 작성중 */
+
+.aplcnStatus1{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background: #d8b8ff;
+  color: #333;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.aplcnStatus2{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background: rgb(128, 128, 128);
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.aplcnStatus3{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background:#2065c6;
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.aplcnStatus4{
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+  height: 35px;
+  line-height: 35px;
+  background: #b8ffd8; /* 연한 청록색 배경색 */
+  color: #333; 
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5px;
+}

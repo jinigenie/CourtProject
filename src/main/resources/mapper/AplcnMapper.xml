@@ -5,17 +5,38 @@
 
 <mapper namespace="com.court.proj.aplcn.AplcnMapper">
 
-	<!-- 신청자 평가 (수정중) -->
+
+	<!-- 등재하기 -->
+	<insert id="aplcnAccept">
+		insert into TB_014(accept_date,
+		accept_etc,
+		accept_act_yn,
+		user_proper_num,
+		trial_fcltt_proper_num,
+		court_proper_num)
+		values
+		(#{accept_date},
+		#{accept_etc},
+		#{accept_act_yn},
+		#{user_proper_num},
+		#{trial_fcltt_proper_num},
+		#{court_proper_num})
+	</insert>
+
+
+	<!-- 신청자 평가 -->
 	<insert id="aplcnEvaluate">
-		insert into TB_013(all_carer_score, 
-		jrsdc_carer_score, 
-		office_score, 
-		personality_score, 
+		insert into TB_013(all_carer_score,
+		jrsdc_carer_score,
+		office_score,
+		personality_score,
 		interview_score,
 		certificate_score,
-		evaluate_score, 
-		judge_recom_score, 
-		review_etc)
+		evaluate_score,
+		judge_recom_score,
+		review_etc,
+		aplcn_dtls_proper_num,
+		admin_proper_num)
 		values(#{all_carer_score},
 		#{jrsdc_carer_score},
 		#{office_score},
@@ -24,7 +45,8 @@
 		#{certificate_score},
 		#{evaluate_score},
 		#{judge_recom_score},
-		#{review_etc})
+		#{review_etc},
+		#{aplcn_dtls_proper_num},1)
 	</insert>
 
 	<!-- 신청자 리스트 -->
@@ -36,37 +58,48 @@
 		T4.trial_fcltt_clasifi_code AS
 		trial_fcltt_clasifi_code,
 		T2.aplicn_dtls_sts AS aplicn_dtls_sts,
-		T2.aplcn_dtls_proper_num AS aplcn_dtls_proper_num
+		T2.aplcn_dtls_proper_num AS
+		aplcn_dtls_proper_num,
+		T2.aplicn_dtls_date
+		AS aplicn_dtls_date
 		FROM
 		TB_001 T1
-		INNER
-		JOIN
-		TB_005 T2 ON T1.user_proper_num = T2.user_proper_num
 		INNER JOIN
-		TB_011 T3 ON T2.court_proper1 = T3.court_name
+		TB_005 T2 ON
+		T1.user_proper_num =
+		T2.user_proper_num
+		INNER JOIN
+		TB_011 T3 ON
+		T2.court_proper1 =
+		T3.court_name
 		INNER JOIN
 		TB_010 T4 ON
-		T2.trial_fcltt_proper_num = T4.trial_fcltt_proper_num
+		T2.trial_fcltt_proper_num =
+		T4.trial_fcltt_proper_num
 
-		<!-- where절 수정중 -->
-		<where>
-			<if test="cri.searchFcltt != '' and cri.searchFcltt != null ">
-				and T4.trial_fcltt_clasifi_code like concat('%',
-				#{cri.searchFcltt}, '%')
-			</if>
+		limit
+		#{cri.pageStart}, #{cri.amount}
 
 
-			<if test="cri.searchFcltt == 'asc' ">
-				T4.trial_fcltt_clasifi_code ascFcltt,
-			</if>
-			<if test="cri.searchCourt == 'asc' ">
-				T3.court_name ascCourt,
-			</if>
-			<if test="cri.searchStatus == 'desc' ">
-				T2.aplicn_dtls_sts unsuccess,
-			</if>
-		</where>
-		limit #{cri.pageStart}, #{cri.amount}
+		<if test="cri.searchUserName != '' and cri.searchUserName != null">
+			and user_name like concat('%', #{cri.searchUserName}, '%')
+		</if>
+		<if test="cri.searchNameCode != '' and cri.searchNameCode != null">
+			and trial_fcltt_clasifi_code like concat('%',
+			#{cri.searchNameCode}, '%')
+		</if>
+		<if test="cri.searchCourt != '' and cri.searchCourt != null">
+			and court_name like concat('%', #{searchCourt}, '%')
+		</if>
+		<if
+			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null">
+			and aplicn_dtls_sts like concat('%', #{aplicn_dtls_sts}, '%')
+		</if>
+		<!-- <if test="cri.aplicn_dtls_startdate != '' and cri.aplicn_dtls_startdate 
+			!= null"> <![CDATA[and aplicn_dtls_date >= #{cri.aplicn_dtls_startdate}]]> 
+			</if> <if test="cri.aplicn_dtls_enddate != '' and cri.aplicn_dtls_enddate 
+			!= null"> <![CDATA[and aplicn_dtls_date <= #{cri.aplicn_dtls_enddate}]]> 
+			</if> -->
 
 	</select>
 
@@ -164,6 +197,7 @@
 	<!-- 신청자 상세정보 (단수값) -->
 	<select id="getDetail" parameterType="int">
 		SELECT
+		T1.user_proper_num AS user_proper_num,
 		T1.user_name AS
 		user_name,
 		T1.user_id AS user_id,
@@ -230,31 +264,6 @@
 		T2.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
 	</select>
 
-	<!-- 신청자 평가 (수정중) -->
-	<insert id="getEvaluate" parameterType="ListVO">
-		insert into
-		TB_013(all_carer_score,
-		jrsdc_carer_score,
-		office_score,
-		personality_score,
-		interview_score,
-		certificate_score,
-		evaluate_score,
-		judge_recom_score,
-		review_etc
-		)
-		values(#{all_carer_score},
-		#{jrsdc_carer_score},
-		#{office_score},
-		#{personality_score},
-		#{interview_score},
-		#{certificate_score},
-		#{evaluate_score},
-		#{judge_recom_score},
-		#{review_etc}
-		)
-	</insert>
-
 	<!-- 파일 다운로드 -->
 	<select id="aplcnFiles">
 		SELECT
@@ -267,7 +276,8 @@
 		FROM
 		TB_009
 		WHERE
-		APLCN_ATCH_FILE_PROPER_NUM = #{aplcnAtchFileProperNum}
+		APLCN_ATCH_FILE_PROPER_NUM =
+		#{aplcnAtchFileProperNum}
 
 	</select>
 
