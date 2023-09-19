@@ -2,7 +2,9 @@ package com.court.proj.aplcnReg;
 
 import com.court.proj.announce.AnnounceService;
 import com.court.proj.announce.AnnounceVO;
+import com.court.proj.user.CourtUserDetails;
 import com.court.proj.user.UserVO;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.Banner;
@@ -57,11 +59,13 @@ public class AplcnRegController {
 
     //기본정보 입력페이지
     @GetMapping("/info")
-    public String getInfo(Model model, RedirectAttributes ra) {
+    public String getInfo(Model model, RedirectAttributes ra, Authentication auth) {
+
+//        CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
         id = "user4";
 
         // 기본정보 불러와서 보내기
-        UserVO uvo = aplcnRegService.getInfo(id);
+        UserVO uvo = aplcnRegService.getInfo(id);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
         model.addAttribute("vo", uvo);
         user_num = uvo.getUser_proper_num();
 
