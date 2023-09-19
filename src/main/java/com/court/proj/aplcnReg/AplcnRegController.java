@@ -37,23 +37,25 @@ public class AplcnRegController {
 
     //신청안내페이지
     @GetMapping("/start")
-    public String getRegStart(Model model) {
+    public String getRegStart(@RequestParam("listNum") int num, Model model) {
+
+//        AnnounceVO anvo = aplcnRegService.getAnnounce()
+
 
         // 모집중인 공고 불러오기
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar now = Calendar.getInstance();
         System.out.println(sdf.format(now.getTime()));
         ArrayList<AnnounceVO> alist = aplcnRegService.getAnnounce(sdf.format(now.getTime()));
-
         model.addAttribute("alist", alist);
+
         return "app/aplcnRegStart";
     }
 
     //결격사유 확인 페이지
     @GetMapping("/confirm")
-    public String confirm(@RequestParam("tfpn") int tfpn,
-                          RedirectAttributes ra) {
-        trial_pn = tfpn;
+    public String confirm() {
+
         return "app/aplcnRegConfirm";
     }
 
