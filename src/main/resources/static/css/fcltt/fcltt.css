@@ -188,7 +188,9 @@
 	background-color: rgb(235, 235, 235);
 	text-align: center;
 }
-
+.hidden-row > td {
+	 height: 70px;
+}
 .fcltt_content{
  display: inline-block;
   vertical-align: middle;
