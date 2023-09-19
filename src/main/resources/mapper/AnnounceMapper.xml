@@ -44,7 +44,7 @@
 	</select>
 
 	<!-- 검색기능 start -->
-	<select id="searchAnnounceByTitleandContent"
+	<select id="searchAnnounceTitleAndContent"
 		resultType="AnnounceVO">
 		select * from TB_002
 		where announce_title LIKE '%' ||
@@ -52,13 +52,13 @@
 		'%' || #{keyword} || '%'
 	</select>
 
-	<select id="searchAnnounceByTitle" resultType="AnnounceVO">
+	<select id="searchAnnounceTitle" resultType="AnnounceVO">
 		select * from
 		TB_002
 		where announce_title LIKE '%' || #{keyword} || '%'
 	</select>
 
-	<select id="searchAnnounceByContent" resultType="AnnounceVO">
+	<select id="searchAnnounceContent" resultType="AnnounceVO">
 		select * from
 		TB_002
 		where announce_content LIKE '%' || #{keyword} || '%'

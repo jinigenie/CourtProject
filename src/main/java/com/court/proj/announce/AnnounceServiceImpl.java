@@ -22,18 +22,18 @@ public class AnnounceServiceImpl implements AnnounceService {
 
 	// 검색기능
 	@Override
-	public ArrayList<AnnounceVO> searchAnnounceByTitleAndContent(String keyword) {
-		return announceMapper.searchAnnounceByTitleAndContent(keyword);
+	public ArrayList<AnnounceVO> searchAnnounceTitleAndContent(String keyword) {
+		return announceMapper.searchAnnounceTitleAndContent(keyword);
 	}
 
 	@Override
-	public ArrayList<AnnounceVO> searchAnnounceByTitle(String keyword) {
-		return announceMapper.searchAnnounceByTitle(keyword);
+	public ArrayList<AnnounceVO> searchAnnounceTitle(String keyword) {
+		return announceMapper.searchAnnounceTitle(keyword);
 	}
 
 	@Override
-	public ArrayList<AnnounceVO> searchAnnounceByContent(String keyword) {
-		return announceMapper.searchAnnounceByContent(keyword);
+	public ArrayList<AnnounceVO> searchAnnounceContent(String keyword) {
+		return announceMapper.searchAnnounceContent(keyword);
 	}
 
 	// 공고 리스트 조회
@@ -93,5 +93,4 @@ public class AnnounceServiceImpl implements AnnounceService {
 	public int updateAnnounce(AnnounceVO vo) {
 		return announceMapper.updateAnnounce(vo);
 	}
-
 }
