@@ -28,6 +28,7 @@ public class AplcnController {
     @GetMapping("/aplcnList")
     public String list(Model model, Criteria cri) {
     	int user_proper_num = 1;
+    	System.out.println(cri.getAplicn_dtls_sts() + "========================");
     	ArrayList<ListVO> list = aplcnService.getList(user_proper_num, cri);
     	
     	int total = aplcnService.getTotal(user_proper_num, cri);
@@ -46,7 +47,10 @@ public class AplcnController {
     @GetMapping("/aplcnDetails")
     public String Details(@RequestParam("aplcn_dtls_proper_num") Integer aplcn_dtls_proper_num, Model model) {
     	
-    	ListVO vo1 = aplcnService.getDetail(aplcn_dtls_proper_num);  
+    	
+    	ListVO vo1 = aplcnService.getDetail(aplcn_dtls_proper_num); 
+    	System.out.println("aaaaaaaa" + vo1.getUser_proper_num());
+    	
     	System.out.println("sdfedrgsdrfghsdfghfg:" + aplcn_dtls_proper_num);
     	ArrayList<ListVO> vo = aplcnService.getDetails(aplcn_dtls_proper_num);
   
@@ -62,25 +66,28 @@ public class AplcnController {
     	
     }
     
+    //신청자 평가하기
 	@GetMapping("/aplcnEvaluate")
 	public String aplcnEvaluate(@RequestParam("aplcn_dtls_proper_num") Integer aplcn_dtls_proper_num, Model model) {
-
-		ListVO vo = aplcnService.getDetail(aplcn_dtls_proper_num);		
+		System.out.println("sdfedrgsdrfghsdfghfg:" + aplcn_dtls_proper_num);
+		
+		ListVO vo = aplcnService.getDetail(aplcn_dtls_proper_num);	
 		model.addAttribute("vo", vo);
 		return "aplcn/aplcnEvaluate";
 	}
     
+	//신청자 평가 후 (상세정보로 이동)
     @PostMapping("/evaluateForm")
     public String evaluateForm(ListVO vo, RedirectAttributes ra, Model model) {
+    	System.out.println("sdfedrgsdrfghsdfghfg:" + vo.getAplcn_dtls_proper_num());
     	int result = aplcnService.aplcnEvaluate(vo);
-    	
     	ListVO vo1 = aplcnService.getDetail(vo.getAplcn_dtls_proper_num());		
 		model.addAttribute("vo", vo1);
-    	String msg = result == 1 ? "평가가 완료되었습니다." : "평가를 완료하세요! ";
-    	model.addAttribute("result", result);
+    	String msg = result == 1 ? "등재가 완료되었습니다." : "등재를 완료하세요! ";
+    	ra.addFlashAttribute("result", result);
     	ra.addFlashAttribute("msg", msg);
     	
-        return "/aplcn/aplcnEvaluate";
+        return "redirect:/aplcn/aplcnDetails?aplcn_dtls_proper_num=" + vo.getAplcn_dtls_proper_num();
     }
     
     

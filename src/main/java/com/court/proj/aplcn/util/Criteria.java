@@ -12,9 +12,13 @@ public class Criteria {
 	private String searchField;
 	private String searchName;
 	private String searchFcltt;
-	private String searchCourt;
 	private String searchStatus;
 	private String searchContent;
+	
+	private String searchUserName;
+	private String searchNameCode;
+	private String searchCourt;
+	private String aplicn_dtls_sts;
 
 	// 기본생성자로 만들어지면 1, 10 기본값이다.
 	public Criteria() {

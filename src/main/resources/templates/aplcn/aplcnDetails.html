@@ -174,6 +174,11 @@
 											th:value="${vo1.user_name}">
 										<input type="hidden" name="user_proper_num" id="user_proper_num"
 											th:value="${vo1.user_proper_num}">
+										<input type="hidden" name="trial_fcltt_proper_num" id="trial_fcltt_proper_num"
+											th:value="${vo1.trial_fcltt_proper_num}">
+										<input type="hidden" name="court_proper_num" id="court_proper_num"
+											th:value="${vo1.court_proper_num}">
+
 										<!--<input type="hidden" name="trial_fcltt_proper_num"
 											th:value="${vo1.trial_fcltt_proper_num}">
 										<input type="hidden" name="court_proper_num" th:value="${vo1.court_proper_num}">
@@ -404,7 +409,7 @@
 
 										// URL에 aplcn_dtls_proper_num 값을 포함하여 팝업 창 열기
 										var popupUrl = "http://localhost:8585/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=" + aplcnDtlsProperNum;
-										popupWindow = window.open(popupUrl, "popup", "width=1000, height=800");
+										popupWindow = window.open(popupUrl, "popup", "width=1920px, height=1080px");
 									}
 
 								</script>
@@ -426,16 +431,26 @@
 
 							<div class="fclttRegist_btn">
 								<a href="http://localhost:8585/aplcn/aplcnList" class="fcltt_btn1">목록으로</a>
-								<a href="javascript:void(0);" class="fcltt_btn2"
-									onclick="openPopup(); return false;">평가하기</a>
-								<a href="http://localhost:8585/aplcn/aplcnList" class="fcltt_btn3"
-									onclick="openPopup1(); return false;">등재하기</a>
+								<a th:href="@{/aplcn/aplcnEvaluate (aplcn_dtls_proper_num=${vo1.aplcn_dtls_proper_num}, user_proper_num=${vo1.user_proper_num})}"
+									class="fcltt_btn2">평가하기</a>
+								<a th:href="@{/fcltt/fclttRegist (user_proper_num=${vo1.user_proper_num})}"
+									class="fcltt_btn3" onclick="openPopup1()">등재하기</a>
 							</div>
-							<script>
+							<script th:inline="javascript">
 								function openPopup1() {
 									// 등재 완료 메시지를 alert 창으로 표시
 									alert("등재가 완료되었습니다.");
-									window.location.href = "http://localhost:8585/aplcn/aplcnList";
+
+									// user_proper_num 값을 가져와서 URL에 추가하고 /fcltt/fclttRegist 로 이동
+									var user_proper_num = '[[${vo1.user_proper_num}]]';
+									window.location.href = "/fcltt/fclttRegist?user_proper_num=" + user_proper_num;
+								}
+
+								if ('[[${msg}]]' == 1) {
+									alert('등재를 완료하였습니다.');
+									opener.location.href = '/aplcn/aplcnList';
+								} else if ('[[${msg}]]' == 0) {
+									alert('등재를 완료해주세요.')
 								}
 							</script>
 							</br>
