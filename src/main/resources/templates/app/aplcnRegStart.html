@@ -45,16 +45,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="avo : ${alist}" style="cursor: pointer">
+                        <tr style="cursor: pointer">
                             <td data-cell-header="모집유형">
                                 [[${avo.trial_fcltt_main_code} + ' > ' + ${avo.trial_fcltt_clasifi_code} + (${avo.trial_fcltt_sbcls_code} == null? '' :  ' > ' + ${avo.trial_fcltt_sbcls_code}) ]]
                             </td>
-                            <td data-cell-header="마감일자">[[${avo.announce_title}]]</td>
-                            <td>
+                            <td data-cell-header="제목">[[${avo.announce_title}]]</td>
+                            <td data-cell-header="마감일자">
                                 <p>[[${avo.announce_end_date}]]</p>
                             </td>
-                            <td onclick="event.stopPropagation();">
-                                <a th:href="@{confirm(tfpn = ${avo.trial_fcltt_proper_num})}" class="case case1"><em>신청</em></a>
+                            <td>
+                                <a th:href="@{../app/confirm}" class="case case1"><em>신청</em></a>
                             </td>
                         </tr>
 

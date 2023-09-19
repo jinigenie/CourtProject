@@ -17,6 +17,8 @@ public interface AplcnRegService {
     public ArrayList<TrialVO> getTrial();
     // 모집중 공고 불러오기
     public ArrayList<AnnounceVO> getAnnounce(String date);
+    // 선택된 공고 불러오기
+    public AnnounceVO getSelectedAnnounce(int listNum);
 
     // 선택된 재판조력자 데이터 불러오기
     public TrialVO getTrialVO(int trial_pn);

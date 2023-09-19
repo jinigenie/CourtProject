@@ -228,8 +228,8 @@
                                 </th>
                                 <td data-cell-header="직업" class="txt-left">
                                     <div class="input-wrap" style="width: 200px; display: inline-block">
-                                        <input name="user_phone" id="cvl_phone" th:value="${vo.user_phone}"
-                                               class="cm_inptxt" type="text" maxlength="11"/>
+                                        <input name="user_phone" id="phoneNumber" th:value="${vo.user_phone}"
+                                               class="cm_inptxt" type="text" maxlength="13"/>
                                     </div>
                                     <em class="fcltt_comment">&nbsp; '-' 을 제외한 숫자만 기입</em>
                                 </td>
@@ -461,6 +461,14 @@
             $("#cvl_mail2").attr("value", selmail);
         }
     });
+</script>
+
+<script th:inline="javascript">
+    var msg = `[[${msg}]]`;
+    if (msg !== 'null') {
+        alert(msg);
+    }
+
 </script>
 
 </html>
