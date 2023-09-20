@@ -1,12 +1,9 @@
 
-
-
-
 .section>.main_wrap {
 	overflow: hidden;
 }
 
-/* 아티클영역 */
+/* Ã¬â€¢â€žÃ­â€¹Â°Ã­ÂÂ´Ã¬ËœÂÃ¬â€”Â­ */
 #main_article {
 	position: relative;
 	height: 80%;
@@ -36,7 +33,7 @@
 }
 
 
-/*-----------상단바영역------------------*/
+/*-----------Ã¬Æ’ÂÃ«â€¹Â¨Ã«Â°â€Ã¬ËœÂÃ¬â€”Â­------------------*/
 .section {
 	position: relative;
 	overflow: hidden;
@@ -45,7 +42,7 @@
 }
 
 .visual {
-	height: 540px;
+	height: 400px;
 	box-sizing: border-box;
 	margin: 0;
 
@@ -83,10 +80,9 @@
 
 .visual .boxL {
 	line-height: 5;
-
 	color: #fff;
 	display: inline-block;
-	margin-left: 1000px;
+	margin-left: 800px;
 	margin-top: 100px;
 	flex: -1%;
 }
@@ -96,7 +92,7 @@
 .visual .boxL h1 {
 	font-family: 'GmarketSans';
 	font-weight: 500;
-	font-size: 63px;
+	font-size: 32px;
 	line-height: 1.15;
 	text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.42);
 }
@@ -110,12 +106,12 @@
 }
 
 .visual .boxL h1 .t2 {
-	font-size: 75px;
+	font-size: 67px;
 }
 
 .visual .boxL p {
 	font-weight: 1000;
-	font-size: 26px;
+	font-size: 18px;
 	margin-top: 5px;
 	letter-spacing: -1px;
 	text-shadow: 1px 1px 2px rgb(0 0 0);
@@ -188,16 +184,7 @@
 
 
 
-.visual .boxR {
-
-	width: 375px;
-	margin-top: 58px;
-	position: absolute;
-	top: 180px;
-	left: 500px;
-
-
-}
+.visual .boxR {width: 314px;margin-top: 46px;position: absolute;top: 146px;left: 390px;}
 
 .visual .boxR a {
 	color: rgb(255, 255, 255);
@@ -219,14 +206,7 @@
 
 
 
-.visual .boxR .main_search {
-
-	background-color:  rgb(120 120 120 / 55%);
-	position: relative;
-	height: 90px;
-	margin-top: 16px;
-	
-}
+.visual .boxR .main_search {background-color:  rgb(120 120 120 / 55%);position: relative;height: 84px;margin-top: 16px;}
 
 .visual .boxR .main_search a {
 	position: relative;
@@ -473,7 +453,7 @@ a:hover {
 
 
 
-/* 공고 */
+/* ÃªÂ³ÂµÃªÂ³Â  */
 
 
 
@@ -497,31 +477,15 @@ a:hover {
 
 .mySwiper {
 	float: left;
-	width: 1500px !important;
+	width: 76%;
 	padding: 0 50px;
-
 }
 
-swiper-slide {
-
-
-	margin: 0 !important;
-	height: 450px !important;
-	width: 350px !important;
-	text-align: center;
-	font-size: 18px;
-	background: #fff;
-
-	justify-content: center;
-	align-items: center;
-	/*border: 1px solid rgb(240, 240, 240);*/
-
-
-}
+swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;font-size: 18px;background: #fff;justify-content: center;align-items: center;/*border: 1px solid rgb(240, 240, 240);*/}
 
 
 .main_slid_notice {
-	min-height: 400px;
+	min-height: 300px;
 }
 
 .main_slid_notice .notice {
@@ -590,7 +554,7 @@ swiper-slide {
 }
 
 .main_slid_notice .notice_lists li a {
-	margin-left: 20px;
+	margin-left: 0;
 }
 
 .main_slid_notice .notice_lists li:first-child {
@@ -600,7 +564,8 @@ swiper-slide {
 .main_slid_notice .notice_lists li a {
 	display: block;
 	position: relative;
-	min-height: 320px;
+	min-height: 211px;
+	width: 180px;
 	padding: 40px;
 	border: 1px solid #ccc;
 	background-color: #fff;
@@ -635,7 +600,7 @@ swiper-slide {
 .main_slid_notice .notice_lists li a dl dt {
 	overflow: hidden;
 	height: 62px;
-	font-size: 1.25rem;
+	font-size: 20px;
 	font-weight: 700;
 	color: #111;
 	text-align: center;
@@ -691,8 +656,7 @@ swiper-slide {
 
 .box2 {
 	margin: 50px;
-
-
+	margin-top: 20px;
 }
 
 .faq_list .div {
@@ -703,7 +667,7 @@ swiper-slide {
 
 
 /*
- Left arrow 
+ Left arrow
 .swiper-button-prev::before {
 	content: "";
 	position: absolute;
@@ -714,11 +678,11 @@ swiper-slide {
 	width: 15px;
 	height: 15px;
 	background-color: #ccc;
-	 Adjust color as needed 
+	 Adjust color as needed
 	clip-path: polygon(100% 0, 0 50%, 100% 100%);
 }
 
- Right arrow 
+ Right arrow
 .box2::after {
 	content: "";
 	position: absolute;
@@ -729,7 +693,7 @@ swiper-slide {
 	width: 15px;
 	height: 15px;
 	background-color: #ccc;
-	 Adjust color as needed 
+	 Adjust color as needed
 	clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 */
@@ -739,12 +703,12 @@ swiper-slide {
 	overflow: hidden;
 	margin: 0 auto;
 	margin-bottom: 200px;
-	margin-left: 202px;
+	margin-left: 192px;
 }
 .faqList .faqList_left .faq_left1 .main_noticeLink, .main_faqList{
 	float: right;
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
 }
 .faqList .faqList_left .faq_left1 .main_noticeLink:hover{
 	color: #666;
@@ -753,30 +717,19 @@ swiper-slide {
 	color: #666;
 }
 .main_faqList{
-	
+
 	display: none;
 }
 
 
 
-.faqList_left{
-	
-	float: left;
-	background: #fff;
-	border: 1px solid #CAD0DC;
-	padding: 50px;
-	transition: all .3s;
-	max-height: 430px;
-	height: 430px;
-	width: 970px;
-	border-radius: 10px;
-}
+.faqList_left{float: left;background: #fff;border: 1px solid #CAD0DC;padding: 27px 47px;transition: all .3s;max-height: 350px;height: 350px;width: 700px;border-radius: 10px;}
 
 
 .faqList_left:hover{
-	
-    border: 1px solid rgb(128, 128, 128);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+
+	border: 1px solid rgb(128, 128, 128);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 .faqList_right {
@@ -784,32 +737,30 @@ swiper-slide {
 	float: left;
 	background: #fff;
 	transition: all .3s;
-	max-height: 430px;
-	height: 431px;
-	width: 428px;
+	max-height: 350px;
+	height: 350px;
+	width: 400px;
 	background-color: #ababab;
 	/*background-color: rgb(255, 255, 255);*/
-
-	
 }
 .faqList_right:hover{
-	    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 .faq_right{
-	
-	
+
+
 	height: 33.3333%;
 	width: 33.3333%;
 	float: left;
 	text-align: center;
 	border: 1px solid  rgb(246, 246, 246);
 	position: relative;
-	
-	
+
+
 }
 /*.faqList_right:hover{
-	
+
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 0 4px 12px rgba(0,0,0,0.25)
 }*/
@@ -817,15 +768,15 @@ swiper-slide {
 .faq_right:hover{
 	border: 1px solid rgb(128, 128, 128);
 	/*background-color: #CAD0DC;*/
-	  /*  box-shadow : 0 4px 12px rgba(0,0,0,0.25);*/
-	    
-	   
+	/*  box-shadow : 0 4px 12px rgba(0,0,0,0.25);*/
+
+
 }
 
 .faqList_right .faq_right >a > p {
 	font-size: 18px;
 	font-weight: 700px;
-	padding-top:110px;
+	padding-top: 99px;
 	color: white;
 }
 /*.faqList_right .faq_right >a > p > img{
@@ -841,10 +792,9 @@ swiper-slide {
 	position: absolute;
 	top:0%;
 	left: 5px;
-	height: 100px;
+	height: 103px;
+	padding-bottom: 100px;
 	width: 133px;
-	
-
 }
 .notice_left{
 	display: block;
@@ -854,13 +804,13 @@ swiper-slide {
 }
 
 .faq_left, .notice_left{
-	color: #898989;
-	height: 42px;
-	padding:26px 5px;
-	font-size:20px;
+	color: #ccc;
+	height: 41px;
+	padding: 20px 3px;
+	font-size: 17px;
 	overflow: hidden;
 	width: 100%;
-	
+	border-bottom: 1px solid #ccc;
 }
 
 
@@ -870,15 +820,15 @@ swiper-slide {
 .faq_left, .notice_left > a > h4{
 	float: left;
 	margin-right: 10px;
-	
+
 }
 .faq_left, .faq_left > a > h3{
 	float: left;
 	margin-right: 10px;
-	
+
 }
 
- .notice_left >a:hover{
+.notice_left >a:hover{
 	color:  #4b63c3;
 	text-decoration: underline;
 }
@@ -888,7 +838,7 @@ swiper-slide {
 }
 
 
-/*       ------------ 모달창 -------------------------------*/
+/*       ------------ Ã«ÂªÂ¨Ã«â€¹Â¬Ã¬Â°Â½ -------------------------------*/
 #popup_layer {
 	position: fixed;
 	top: 0;
@@ -899,7 +849,7 @@ swiper-slide {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-/*팝업 박스*/
+/*Ã­Å’ÂÃ¬â€”â€¦ Ã«Â°â€¢Ã¬Å Â¤*/
 .popup_box {
 	position: relative;
 	top: 50%;
@@ -914,7 +864,7 @@ swiper-slide {
 	-moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
-/*컨텐츠 영역*/
+/*Ã¬Â»Â¨Ã­â€¦ÂÃ¬Â¸Â  Ã¬ËœÂÃ¬â€”Â­*/
 .popup_box .popup_cont {
 	min-height: 400px;
 	padding: 70px;
@@ -935,7 +885,7 @@ swiper-slide {
 	padding-top: 30px;
 }
 
-/*버튼영역*/
+/*Ã«Â²â€žÃ­Å Â¼Ã¬ËœÂÃ¬â€”Â­*/
 .popup_box .popup_btn {
 	display: table;
 	table-layout: fixed;
@@ -999,7 +949,7 @@ swiper-slide {
 	display: none;
 }
 
-/*오버레이 뒷배경*/
+/*Ã¬ËœÂ¤Ã«Â²â€žÃ«Â Ë†Ã¬ÂÂ´ Ã«â€™Â·Ã«Â°Â°ÃªÂ²Â½*/
 .popup_overlay {
 	position: fixed;
 	top: 0px;
@@ -1007,13 +957,13 @@ swiper-slide {
 	left: 0;
 	bottom: 0;
 	z-index: 1001;
-	;
+;
 	background: rgba(0, 0, 0, 0.5);
 }
 
 
 
-/*위로 가기 버튼*/
+/*Ã¬Å“â€žÃ«Â¡Å“ ÃªÂ°â‚¬ÃªÂ¸Â° Ã«Â²â€žÃ­Å Â¼*/
 
 #topButton {
 	height: 60px;
@@ -1037,7 +987,7 @@ swiper-slide {
 	width: 30px;
 	z-index: 1202;
 	border-radius: 50%;
-	
+
 	cursor: pointer;
 
 
