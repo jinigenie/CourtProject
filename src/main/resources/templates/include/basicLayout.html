@@ -76,17 +76,10 @@
               <a href="#"><span>조력자등재신청</span></a>
               <ul class="depth2">
                 <li class="th2" sec:authorize="hasRole('ROLE_SUPERADMIN')">
-                  <a
-                          href="#"
-                  ><span>조력자 등재신청</span></a
-                  >
+                  <a href="#" ><span>조력자 등재신청</span></a>
                 </li>
-
                 <li class="th2">
-                  <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/lc_minwon/lc_form_apply_TM.do', num:'10200', num1:'10000', num2:'10200', num3:'', name:'대상자별민원', name1:'민원정보', name2:'대상자별민원', name3:''})"
-                  ><span>조력자 등재명단</span></a
-                  >
+                  <a href="#"><span>조력자 등재명단</span></a>
                 </li>
               </ul>
             </div>
@@ -94,31 +87,11 @@
               <a href="#"><span>조력자신청안내</span></a>
               <ul class="depth2">
                 <li class="th2 active">
-                  <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/lc_minwon/lc_form_apply.do', num:'20100', num1:'20000', num2:'20100', num3:'', name:'서식민원', name1:'민원신청', name2:'서식민원', name3:''})"
-                  ><span>신청안내메뉴1</span></a
-                  >
+                  <a th:href="@{./../info/info}"><span>조력자제도란?</span></a >
                 </li>
 
                 <li class="th2">
-                  <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/lc_minwon/lc_qna_apply_apply.do', num:'20200', num1:'20000', num2:'20200', num3:'', name:'질의민원', name1:'민원신청', name2:'질의민원', name3:''})"
-                  ><span>신청안내메뉴2</span></a
-                  >
-                </li>
-
-                <li class="th2">
-                  <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/petition/petition_list.do', num:'20300', num1:'20000', num2:'20300', num3:'20301', name:'신고센터', name1:'민원신청', name2:'신고센터', name3:'고용노동부 직원 불친절신고'})"
-                  ><span>신청안내메뉴3</span></a
-                  >
-                </li>
-
-                <li class="th2">
-                  <a
-                          href="javascript:goNaviMenuUrl({url:'/minwon2008/lc_minwon/lc_quick_internet_list.do', num:'20400', num1:'20000', num2:'20400', num3:'', name:'빠른인터넷상담', name1:'민원신청', name2:'빠른인터넷상담', name3:''})"
-                  ><span>신청안내메뉴4</span></a
-                  >
+                  <a th:href="@{./../info/info}"><span>조력자신청안내</span></a>
                 </li>
               </ul>
             </div>
@@ -134,13 +107,13 @@
 
                 <li class="th2">
                   <a
-                          href="#"
+                          th:href="@{./../notice/noticeList}"
                   ><span>공지사항</span></a
                   >
                 </li>
                 <li class="th2">
                   <a
-                          th:href="@{./../faq/list}"
+                          th:href="@{./../faq/faqList}"
                   ><span>FAQ</span></a
                   >
                 </li>
@@ -186,7 +159,7 @@
       <div class="gnb-bg-deco">
         <div class="txt">
           <strong>조력자등재신청</strong>
-          <span>조력자신청 안내글 들어갈 곳.</span>
+          <span>조력자 등재 신청하러 가기</span>
         </div>
       </div>
     </div>
@@ -194,7 +167,7 @@
       <div class="gnb-bg-deco">
         <div class="txt">
           <strong>조력자신청안내</strong>
-          <span>조력자신청 안내 글 들어갈 곳.</span>
+          <span>조력자 제도 및 조력자 신청 절차에 대해 안내해 드립니다.</span>
         </div>
       </div>
     </div>
@@ -202,7 +175,7 @@
       <div class="gnb-bg-deco">
         <div class="txt">
           <strong>MyPage</strong>
-          <span>나의 정보를 수정 어쩌고 저쩌고.</span>
+          <span>나만의 정보.</span>
         </div>
       </div>
     </div>
@@ -210,13 +183,13 @@
       <div class="gnb-bg-deco">
         <div class="txt">
           <strong>공지사항</strong>
-          <span>공지,FAQ, 기타 설명 입력할 곳.</span>
+          <span>공지, 모집공고,  FAQ </span>
         </div>
       </div>
     </div>
   </header>
   <!-- //header -->
-
+<button onclick="scrollToTop()" id="topButton" title="Go to top"><img th:src="@{./../../img/main/top_btn.png}"></button>
   <!-- main_con  -->
   <main th:replace="${content}"></main>
   <!-- //main_con  -->
