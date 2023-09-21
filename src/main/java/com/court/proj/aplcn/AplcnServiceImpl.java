@@ -14,14 +14,14 @@ public class AplcnServiceImpl implements AplcnService {
 	
 	//신청자 리스트
 	@Override
-	public ArrayList<ListVO> getList(int user_proper_num, Criteria cri) {
-		return aplcnMapper.getList(user_proper_num, cri);
+	public ArrayList<ListVO> getList(Criteria cri) {
+		return aplcnMapper.getList(cri);
 	}
 
 	//신청자 리스트 (페이징)
 	@Override
-	public int getTotal(int user_proper_num, Criteria cri) {
-		return aplcnMapper.getTotal(user_proper_num, cri);
+	public int getTotal(Criteria cri) {
+		return aplcnMapper.getTotal(cri);
 	}
 	
 	//신청자 상세정보 (복수값)
@@ -34,15 +34,25 @@ public class AplcnServiceImpl implements AplcnService {
 	@Override
 	public ListVO getDetail(int aplcn_dtls_proper_num) {
 		return aplcnMapper.getDetail(aplcn_dtls_proper_num);
-		
 	}
 	
+	//신청자 상태변환1 (서류반려)
+	@Override
+	public int aplcnReject(ListVO vo) {
+		return aplcnMapper.aplcnReject(vo);
+	}
+	
+	//신청자 상태변환2 (평가완료)
+	@Override
+	public int aplcnCompleted(ListVO vo) {
+		return aplcnMapper.aplcnCompleted(vo);
+	}
+		
 	//신청자 평가 (수정중)
 	@Override
 	public int aplcnEvaluate(ListVO vo) {
 		int result = aplcnMapper.aplcnEvaluate(vo);
 		return result;
-		//return aplcnMapper.getEvaluate(vo);
 	}
 
 	//파일 다운로드
@@ -50,5 +60,6 @@ public class AplcnServiceImpl implements AplcnService {
 	public ListVO aplcnFiles(int aplcn_dtls_proper_num) {
 		return aplcnMapper.aplcnFiles(aplcn_dtls_proper_num);
 	}
+
 	
 }

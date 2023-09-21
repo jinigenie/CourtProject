@@ -11,7 +11,6 @@ public class Criteria {
 	// 검색에 필요한 키워드를 선언
 	private String searchField;
 	private String searchName;
-	private String searchFcltt;
 	private String searchStatus;
 	private String searchContent;
 	

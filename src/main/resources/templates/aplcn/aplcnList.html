@@ -252,6 +252,7 @@
 
 						<input type="hidden" name="page" value="1">
 						<input type="hidden" name="amount" th:value="${pageVO.amount}">
+						<input type="hidden" name="aplicn_dtls_sts" th:value="${pageVO.cri.aplicn_dtls_sts}">
 
 						<div class="heading-wrap container">
 							<h3 class="heading1">
@@ -267,38 +268,29 @@
 							<div class="searchform searchform2">
 								<div class="searchform-wrap">
 									<div class="select-box">
-
 										<label>이름</label>
 										<select class="info-select" id="selectTit" name="searchField"
 											title="검색조건을 선택해주세요." style="min-width: 200px">
-											<!--<option value="none" th:selected="${pageVO.cri.searchName == 'none' }">이름
+											<option value="searchContent" th:selected="${pageVO.cri.searchContent}">전체
 											</option>
-											<option value="ascFcltt"
-												th:selected="${pageVO.cri.searchFcltt == 'ascFcltt' }">재판조력자분류</option>
-											<option value="ascCourt"
-												th:selected="${pageVO.cri.searchCourt == 'ascCourt' }">법원 분류</option>
-											<option value="unsuccess"
-												th:selected="${pageVO.cri.searchStatus == 'unsuccess' }">신청 상태여부
-											</option>-->
+											<option value="searchUserName" th:selected="${pageVO.cri.searchUserName}">이름
+											</option>
+											<option value="searchNameCode" th:selected="${pageVO.cri.searchNameCode}">
+												재판조력자분류</option>
+											<option value="searchCourt" th:selected="${pageVO.cri.searchCourt}">법원 분류
+											</option>
 
-											<option value="searchContent">전체</option>
-											<option value="searchUserName">이름</option>
-											<option value="searchNameCode">재판조력자분류</option>
-											<option value="searchCourt">법원 분류</option>
-											<!--<option value="C">신청 상태여부</option>-->
 										</select>
 									</div>
 									<script>
-										// class가 info-select인 태그가 change(addeventlistener) 될 때, 그것의 값이 클래스가 form-control인 태그의 name값이 되도록 하는 js 코드
-										// HTML에서 select 요소와 input 요소를 가져옵니다.
+
 										const selectElement = document.querySelector('.info-select');
-										const inputElement = document.querySelector('#q_string'); // ID로 input 요소 가져오기
+										const inputElement = document.querySelector('input[name="searchAll"]');
 
 										// select 요소의 값이 변경될 때 실행되는 함수
 										function updateInputName() {
 											const selectedValue = selectElement.value;
 
-											// 선택한 값에 따라 input 요소의 name 속성을 변경합니다.
 											switch (selectedValue) {
 												case 'searchContent':
 													inputElement.name = 'searchContent';
@@ -313,7 +305,7 @@
 													inputElement.name = 'SearchCourt';
 													break;
 												default:
-													// 선택한 값이 어떤 경우에도 해당하지 않을 때의 처리를 추가할 수 있습니다.
+
 													break;
 											}
 										}
@@ -321,57 +313,52 @@
 										// select 요소의 change 이벤트에 이벤트 리스너를 추가합니다.
 										selectElement.addEventListener('change', updateInputName);
 
-										// 페이지 로드 시 초기화
-										updateInputName();
 									</script>
+
 									<div class="search-input-wrap">
-										<div class="input-wrap">
+										<div class="input-wrap" style="float: left;">
 											<input type="text" name="searchContent" value="" class="form-control"
-												placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요" id="q_string">
+												placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요" id="searchAll"
+												style="width: 340px;">
 										</div>
-										<button id="aplcnSearch_btnID" class="aplcnSearch_Btn" type="submit">조회</button>
+										<button class="aplcnSearch_Btn" id="aplcnSearch_btn" type="submit"
+											style="float: left; margin: 0;">조회</button>
+
 									</div>
 
 									<div class="select-box" id="select-box-margin-left-10">
-										<label></label><select name="searchAccept" id="aplcnChange"
-											class="aplcnSearch aplcnStatus" style="min-width: 150px">
+										<label></label>
+										<select id="aplcnChange" class="info-select" style="min-width: 150px">
 
-											<!--<option value="A" th:selected= "${pageVO.cri.aplicn_dtls_sts == 'A' }" >심사중</option>
-										<option value="">활동여부</option>
-										<option value="B" th:selected= "${pageVO.cri.aplicn_dtls_sts == 'B' }" >서류반려</option>
-										<option value="C" th:selected= "${pageVO.cri.aplicn_dtls_sts == 'C' }" >평가완료</option>
-										<option value="D" th:selected= "${pageVO.cri.aplicn_dtls_sts == 'D' }" >등재완료</option>-->
+											<option value="선택" th:selected="${pageVO.cri.aplicn_dtls_sts == '선택'}">선택
+											</option>
+											<option value="심사중" th:selected="${pageVO.cri.aplicn_dtls_sts == '심사중'}">심사중
+											</option>
+											<option value="서류반려" th:selected="${pageVO.cri.aplicn_dtls_sts == '서류반려'}">
+												서류반려</option>
+											<option value="평가완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '평가완료'}">
+												평가완료</option>
+											<option value="등재완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '등재완료'}">
+												등재완료</option>
 
-											<option value="">전체</option>
-											<option value="A" name="aplicn_dtls_sts" class="aplcnStatus1">심사중</option>
-											<option value="B" name="aplicn_dtls_sts" class="aplcnStatus2">서류반려</option>
-											<option value="C" name="aplicn_dtls_sts" class="aplcnStatus3">평가완료</option>
-											<option value="D" name="aplicn_dtls_sts" class="aplcnStatus4">등재완료</option>
 										</select>
 									</div>
 
-
 									<div class="select-box" id="select-box-margin-left-10">
-
-										<label></label><select name="view_cnt" id="view_cnt" class="info-select"
-											title="게시판 목록보기 갯수선택" style="min-width: 170px" onchage="handleChange()">
-											<!-- onchange="chgViewCount(this.value);" -->
-											<!--<option value="10" th:selected="${pageVO.amount == 10}">10개씩 보기</option>
-											<option value="20" th:selected="${pageVO.amount == 20}">20개씩 보기</option>
+										<select name="view_cnt" id="view_cnt" class="info-select" title="게시판 목록보기 갯수선택"
+											style="min-width: 170px">
+											<option value="5" th:selected="${pageVO.amount == 5}">5개씩 보기</option>
+											<option value="10" th:selected="${pageVO.amount == 10}">10개씩 보기</option>
 											<option value="50" th:selected="${pageVO.amount == 50}">50개씩 보기</option>
-											<option value="100" th:selected="${pageVO.amount == 100}">100개씩 보기</option>-->
+											<option value="100" th:selected="${pageVO.amount == 100}">100개씩 보기</option>
 
-											<option value="10">10개씩 보기</option>
-											<option value="20">20개씩 보기</option>
-											<option value="50">50개씩 보기</option>
-											<option value="100">100개씩 보기</option>
 										</select>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="table-t-wrap">
-							<div class="total-num">총 게시글 <em>3</em>건</div>
+							<div class="total-num">총 게시글 <em>[[${total}]]</em>건</div>
 						</div>
 						<!-- 게시판 시작 부분 -->
 						<div class="table">
@@ -401,7 +388,7 @@
 									</tr>
 								</thead>
 								<tbody id="aplcnListId">
-									
+
 									<tr title="etc" style="cursor: pointer" th:each="vo:${vo}">
 										<td data-cell-header="신청자 상세정보 고유번호">[[${vo.user_proper_num}]]</td>
 										<td data-cell-header="신청자 이름" tabindex="0"
@@ -414,77 +401,64 @@
 										<td data-cell-header="신청날짜">[[${vo.aplicn_dtls_date}]]
 											<a style> </a>
 										<td onclick="event.stopPropagation();">
-											<a th:href="@{/aplcn/aplcnDetails(aplcn_dtls_proper_num=${vo.aplcn_dtls_proper_num}, user_proper_num=${vo.user_proper_num})}"
+											<a th:href="@{/aplcn/aplcnDetails(aplcn_dtls_proper_num=${vo.aplcn_dtls_proper_num}, user_proper_num=${vo.user_proper_num}, aplicn_dtls_sts=${vo.aplicn_dtls_sts})}"
 												class="case case1">
 												<em>상세보기</em>
 											</a>
 										</td>
-										<th:block th:if="${aplicn_dtls_sts == 'A'}">
-											<td class="aplcnStatus1"></td>
-										</th:block>
-										<th:block th:if="${aplicn_dtls_sts == 'B'}">
-											<td class="aplcnStatus2"></td>
-										</th:block>
-										<th:block th:if="${aplicn_dtls_sts == 'C'}">
-											<td class="aplcnStatus3"></td>
-										</th:block>
-										<th:block th:if="${aplicn_dtls_sts == 'D'}">
-											<td class="aplcnStatus4"></td>
-										</th:block>
+
 										<td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
 										</td>
 
 									</tr>
 
-
-
 								</tbody>
 							</table>
 						</div>
+
 						<!-- pageNation -->
 						<div class="pager">
 							<div class="pager-wrap">
-								<a href="#" class="arr first" title="처음으로" onclick=""><strong class="sr-only">맨 처음 목록으로
-										이동</strong></a><a href="#" class="arr prev" title="이전으로" onclick=""><strong
-										class="sr-only">이전페이지로
-										이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-									onclick="">1</a><a href="#" class="" onclick="">2</a><a href="#" class=""
-									onclick="">3</a><a href="#" class="" onclick="">4</a><a href="#" class=""
-									onclick="">5</a><a href="#" class="" onclick="">6</a><a href="#" class=""
-									onclick="">7</a><a href="#" class="" onclick="">8</a><a href="#" class=""
-									onclick="">9</a><a href="#" class="" onclick="">10</a><a href="#" class="arr next"
-									title="다음으로" onclick=""><strong class="sr-only">다음페이지로
-										이동</strong></a><a href="#" class="arr last" title="마지막으로" onclick=""><strong
-										class="sr-only">맨 마지막
-										목록으로 이동</strong></a>
+								<a th:href="@{page(page=1, amount=${total})}" class="arr first"><strong class="sr-only">맨 처음 목록으로 이동</strong></a>
 
-								<input id="pageIndex" name="pageIndex" type="hidden" value="1">
-								<input id="pageSize" name="pageSize" type="hidden" value="10">
-								<input id="pageUnit" name="pageUnit" type="hidden" value="10">
-								<input id="large_category_idx" name="large_category_idx" type="hidden" value="">
-								<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="">
-								<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
-									value="">
-								<input id="large_category_cd" name="large_category_cd" type="hidden" value="">
-								<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="">
+								<th:block th:if="${pageVO.prev}">
+									<a th:href="@{aplcnList(page=${pageVO.start - 1}, 
+							 amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
+							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="arr prev"><strong class="sr-only">이전페이지로 이동</strong></a>
+								</th:block>
+
+								<th:block th:each="page : ${pageVO.pageList}">
+									<a th:href="@{aplcnList(page=${page},
+				 			amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
+							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="active">[[${page}]]</a>
+								</th:block>
+
+								<th:block th:if="${pageVO.next}">
+									<a th:href="@{aplcnList(page=${pageVO.end + 1},
+								amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
+							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="arr next"><strong class="sr-only">다음페이지로 이동</strong></a>
+								</th:block>
+
+								<a th:href="@{aplcnList(page=${pageVO.realEnd}, 
+							amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
+							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="arr last"><strong class="sr-only">맨 마지막 목록으로 이동</strong></a>
+
+
 							</div>
+
 						</div>
 
+					</form>
+				</article>
 			</div>
-
-			</form>
-			</article>
 		</div>
-	</div>
-	<!-- //main_con  -->
+		<!-- //main_con  -->
 	</div>
 </th:block>
-
-</script>
-
-<!--<th:block th:replace="~{./include/page :: pageNation( ${pageVO} )}">
-</th:block>
-
 
 <script th:inline="javascript">
 
@@ -495,21 +469,32 @@
 	}
 
 	//데이터핸들링
-	function handleChange() {
-		//console.log(event.target);
-		//location.href='productList?page=1&amount=' + event.target.value;
-		document.searchForm.amount.value = event.target.value;
-		document.searchForm.submit(); //폼태그 서브밋
-	}
+	document.getElementById("view_cnt").addEventListener('change', function () {
+
+		document.listForm.amount.value = event.target.value;
+		document.listForm.submit();
+	})
+	//평가여부
+
+	document.getElementById("aplcnChange").addEventListener('change', function () {
+
+		document.listForm.aplicn_dtls_sts.value = event.target.value;
+		document.listForm.submit();
+	})
+
 
 	//검색버튼
+	/*
 	var aplcnSearch_Btn = document.getElementById("aplcnSearch_Btn");
 	aplcnSearch_Btn.onclick = function () {
 
 		event.preventDefault(); //a중지
 		document.searchForm.submit(); //폼태그 서브밋
-	}
+	}*/
 
-</script>-->
+
+
+
+</script>
 
 </html>
