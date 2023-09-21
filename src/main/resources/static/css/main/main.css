@@ -3,7 +3,7 @@
 	overflow: hidden;
 }
 
-/* Ã¬â€¢â€žÃ­â€¹Â°Ã­ÂÂ´Ã¬ËœÂÃ¬â€”Â­ */
+/* ÃƒÂ¬Ã¢â‚¬Â¢Ã¢â‚¬Å¾ÃƒÂ­Ã¢â‚¬Â¹Ã‚Â°ÃƒÂ­Ã‚ÂÃ‚Â´ÃƒÂ¬Ã‹Å“Ã‚ÂÃƒÂ¬Ã¢â‚¬â€Ã‚Â­ */
 #main_article {
 	position: relative;
 	height: 80%;
@@ -33,7 +33,7 @@
 }
 
 
-/*-----------Ã¬Æ’ÂÃ«â€¹Â¨Ã«Â°â€Ã¬ËœÂÃ¬â€”Â­------------------*/
+/*-----------ÃƒÂ¬Ã†â€™Ã‚ÂÃƒÂ«Ã¢â‚¬Â¹Ã‚Â¨ÃƒÂ«Ã‚Â°Ã¢â‚¬ÂÃƒÂ¬Ã‹Å“Ã‚ÂÃƒÂ¬Ã¢â‚¬â€Ã‚Â­------------------*/
 .section {
 	position: relative;
 	overflow: hidden;
@@ -453,7 +453,7 @@ a:hover {
 
 
 
-/* ÃªÂ³ÂµÃªÂ³Â  */
+/* ÃƒÂªÃ‚Â³Ã‚ÂµÃƒÂªÃ‚Â³Ã‚Â  */
 
 
 
@@ -558,7 +558,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 }
 
 .main_slid_notice .notice_lists li:first-child {
-	margin-left: 0;
+	margin-left: 17px;
 }
 
 .main_slid_notice .notice_lists li a {
@@ -604,7 +604,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	font-weight: 700;
 	color: #111;
 	text-align: center;
-	line-height: 30px;
+	line-height: 21px;
 }
 
 .main_slid_notice .notice_lists li a dl dd {
@@ -615,9 +615,10 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 
 .main_slid_notice .notice_lists li a dl dd.oh {
 	overflow: hidden;
-	height: 77px;
-	margin-top: 5px;
-	line-height: 25px;
+	/* height: 81px; */
+	margin-top: -44px;
+	line-height: 19px;
+	font-size: 14px;
 }
 
 .main_slid_notice .notice_lists li a .date {
@@ -703,7 +704,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	overflow: hidden;
 	margin: 0 auto;
 	margin-bottom: 200px;
-	margin-left: 192px;
+	margin-left: 212px;
 }
 .faqList .faqList_left .faq_left1 .main_noticeLink, .main_faqList{
 	float: right;
@@ -723,7 +724,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 
 
 
-.faqList_left{float: left;background: #fff;border: 1px solid #CAD0DC;padding: 27px 47px;transition: all .3s;max-height: 350px;height: 350px;width: 700px;border-radius: 10px;}
+.faqList_left{float: left;background: #fff;border: 1px solid #CAD0DC;padding: 27px 47px;transition: all .3s;max-height: 350px;height: 350px;width: 740px;border-radius: 10px;}
 
 
 .faqList_left:hover{
@@ -739,7 +740,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	transition: all .3s;
 	max-height: 350px;
 	height: 350px;
-	width: 400px;
+	width: 354px;
 	background-color: #ababab;
 	/*background-color: rgb(255, 255, 255);*/
 }
@@ -749,15 +750,17 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 
 .faq_right{
 
+height: 33.3333%;
 
-	height: 33.3333%;
-	width: 33.3333%;
-	float: left;
-	text-align: center;
-	border: 1px solid  rgb(246, 246, 246);
-	position: relative;
+width: 33.3333%;
 
+float: left;
 
+text-align: center;
+
+border: 1px solid  rgb(246, 246, 246);
+
+position: relative;
 }
 /*.faqList_right:hover{
 
@@ -766,18 +769,16 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 }*/
 
 .faq_right:hover{
-	border: 1px solid rgb(128, 128, 128);
-	/*background-color: #CAD0DC;*/
-	/*  box-shadow : 0 4px 12px rgba(0,0,0,0.25);*/
-
-
+	/* border: 1px solid rgb(128, 128, 128); */
+	/* background-color: #CAD0DC; */
+	/* box-shadow : 0 4px 12px rgba(0,0,0,0.25); */
 }
 
 .faqList_right .faq_right >a > p {
-	font-size: 18px;
-	font-weight: 700px;
-	padding-top: 99px;
+	font-size: 14px;
+	padding-top: 86px;
 	color: white;
+	padding-left: 5px;
 }
 /*.faqList_right .faq_right >a > p > img{
 	height: 70px;
@@ -795,6 +796,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	height: 103px;
 	padding-bottom: 100px;
 	width: 133px;
+	background-size: 113px 106px;
 }
 .notice_left{
 	display: block;
@@ -804,10 +806,10 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 }
 
 .faq_left, .notice_left{
-	color: #ccc;
+	color: #e5dcdc;
 	height: 41px;
 	padding: 20px 3px;
-	font-size: 17px;
+	font-size: 15px;
 	overflow: hidden;
 	width: 100%;
 	border-bottom: 1px solid #ccc;
@@ -838,7 +840,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 }
 
 
-/*       ------------ Ã«ÂªÂ¨Ã«â€¹Â¬Ã¬Â°Â½ -------------------------------*/
+/*       ------------ ÃƒÂ«Ã‚ÂªÃ‚Â¨ÃƒÂ«Ã¢â‚¬Â¹Ã‚Â¬ÃƒÂ¬Ã‚Â°Ã‚Â½ -------------------------------*/
 #popup_layer {
 	position: fixed;
 	top: 0;
@@ -849,7 +851,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-/*Ã­Å’ÂÃ¬â€”â€¦ Ã«Â°â€¢Ã¬Å Â¤*/
+/*ÃƒÂ­Ã…â€™Ã‚ÂÃƒÂ¬Ã¢â‚¬â€Ã¢â‚¬Â¦ ÃƒÂ«Ã‚Â°Ã¢â‚¬Â¢ÃƒÂ¬Ã…Â Ã‚Â¤*/
 .popup_box {
 	position: relative;
 	top: 50%;
@@ -864,7 +866,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	-moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
-/*Ã¬Â»Â¨Ã­â€¦ÂÃ¬Â¸Â  Ã¬ËœÂÃ¬â€”Â­*/
+/*ÃƒÂ¬Ã‚Â»Ã‚Â¨ÃƒÂ­Ã¢â‚¬Â¦Ã‚ÂÃƒÂ¬Ã‚Â¸Ã‚Â  ÃƒÂ¬Ã‹Å“Ã‚ÂÃƒÂ¬Ã¢â‚¬â€Ã‚Â­*/
 .popup_box .popup_cont {
 	min-height: 400px;
 	padding: 70px;
@@ -885,7 +887,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	padding-top: 30px;
 }
 
-/*Ã«Â²â€žÃ­Å Â¼Ã¬ËœÂÃ¬â€”Â­*/
+/*ÃƒÂ«Ã‚Â²Ã¢â‚¬Å¾ÃƒÂ­Ã…Â Ã‚Â¼ÃƒÂ¬Ã‹Å“Ã‚ÂÃƒÂ¬Ã¢â‚¬â€Ã‚Â­*/
 .popup_box .popup_btn {
 	display: table;
 	table-layout: fixed;
@@ -949,7 +951,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	display: none;
 }
 
-/*Ã¬ËœÂ¤Ã«Â²â€žÃ«Â Ë†Ã¬ÂÂ´ Ã«â€™Â·Ã«Â°Â°ÃªÂ²Â½*/
+/*ÃƒÂ¬Ã‹Å“Ã‚Â¤ÃƒÂ«Ã‚Â²Ã¢â‚¬Å¾ÃƒÂ«Ã‚Â Ã‹â€ ÃƒÂ¬Ã‚ÂÃ‚Â´ ÃƒÂ«Ã¢â‚¬â„¢Ã‚Â·ÃƒÂ«Ã‚Â°Ã‚Â°ÃƒÂªÃ‚Â²Ã‚Â½*/
 .popup_overlay {
 	position: fixed;
 	top: 0px;
@@ -963,7 +965,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 
 
 
-/*Ã¬Å“â€žÃ«Â¡Å“ ÃªÂ°â‚¬ÃªÂ¸Â° Ã«Â²â€žÃ­Å Â¼*/
+/*ÃƒÂ¬Ã…â€œÃ¢â‚¬Å¾ÃƒÂ«Ã‚Â¡Ã…â€œ ÃƒÂªÃ‚Â°Ã¢â€šÂ¬ÃƒÂªÃ‚Â¸Ã‚Â° ÃƒÂ«Ã‚Â²Ã¢â‚¬Å¾ÃƒÂ­Ã…Â Ã‚Â¼*/
 
 #topButton {
 	height: 60px;

@@ -43,7 +43,7 @@
 
 					.table-responsive>table>tbody>tr:hover {
 						background-color: #e6f8ff;
-					
+
 					}
 
 					@media screen and (min-width: 1100px) {
@@ -251,7 +251,7 @@
 
 
 	// 승인처리 ajax
-	$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
+	/*$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
 		event.preventDefault(); // a 링크의 기본 동작 중지
 		var accept_proper_num = $(this).closest("tr").find("input[name='accept_proper_num']").val();
 		var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
@@ -275,6 +275,7 @@
 				// 목록을 다시 불러오는 함수 호출
 				pauseList(selectedValue, 1, 10);
 				alert("승인되었습니다.");
+				
 			},
 			error: function (xhr, status, error) {
 				// AJAX 요청 중 오류가 발생했을 때 실행될 코드를 작성합니다.
@@ -282,6 +283,62 @@
 			}
 		});
 
+	});
+	*/
+
+
+	// 승인처리 ajax
+	$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
+		event.preventDefault(); // a 링크의 기본 동작 중지
+		var accept_proper_num = $(this).closest("tr").find("input[name='accept_proper_num']").val();
+		var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
+		var selectedValue = $("#selectedValue").val();
+		console.log(accept_act_yn);
+		var emailContent = `
+    <html>
+    <body>
+        <h1>김혜민님 축하드립니다</h1>
+        <p>지원하신 재판조력자 공고에 합격되어 등재 되셨습니다.</p>
+        <p>자세한 내용은 사이트(<a href="http://localhost:8585/main/main">http://localhost:8585/main/main</a>)에 마이페이지에서 확인하실 수 있습니다.</p>
+        <p>감사합니다</p>
+    </body>
+    </html>
+`;
+		// 여기에 AJAX 요청 코드를 작성합니다.
+		$.ajax({
+			url: "../pauseResultSubmit", // 요청을 보낼 URL을 지정합니다.
+			type: "POST", // HTTP 요청 메서드 (GET 또는 POST)
+			data: {
+				"accept_proper_num": accept_proper_num,
+				"accept_act_yn": accept_act_yn
+			},
+			success: function (response) {
+				// 성공적으로 응답을 받았을 때 실행될 코드를 작성합니다.
+				console.log("AJAX 요청 성공");
+				// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다.
+
+				// 이메일 전송 코드 추가
+				fetch('/email/send', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: `to=hyem08111@gmail.com&subject=재판조력자로 등재되었습니다.&text=${encodeURIComponent(emailContent)}`,
+				})
+					.then(response => response.text())
+					.then(data => console.log(data))
+					.catch(e => console.log('이메일 전송 실패: ' + e));
+
+				// 목록을 다시 불러오는 AJAX 요청
+				// 목록을 다시 불러오는 함수 호출
+				pauseList(selectedValue, 1, 10);
+				alert("승인되었습니다.");
+			},
+			error: function (xhr, status, error) {
+				// AJAX 요청 중 오류가 발생했을 때 실행될 코드를 작성합니다.
+				console.error("AJAX 요청 오류: " + error);
+			}
+		});
 	});
 
 	$(document).ready(function () {

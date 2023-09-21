@@ -43,7 +43,7 @@ function faqList(page, amount, content1, content2) {
 				str += '<li onclick="faqToggle(this)"  class="faqList list-item" value="' + vo.faq_proper_num + '">';
 				str += '<h5 ><button type="button" id="header1" aria-controls="pane11" style=" border: none; outline: none;" title="축소됨" class="">';
 				str += '<abbr title="Question">Q.</abbr>';
-				str += '<span id="faq_question" style="font-size: 20px;font-weight: 500;">' + vo.faq_ask_content + '</span>';
+				str += '<span id="faq_question" style="font-size: 17px;font-weight: 800; color:#808080;">' + vo.faq_ask_content + '</span>';
 				str += '	<!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->';
 				str += '	<button type="button" onclick="faqRegist(' + vo.faq_proper_num + ')" class="faq_modify_btn1">수정</button>';
 				str += '	<button type="button" onclick="faqDel(' + vo.faq_proper_num + ')" class="faq_modify_btn2">삭제</button>';

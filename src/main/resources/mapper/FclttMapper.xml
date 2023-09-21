@@ -73,7 +73,9 @@
 	            <choose>
 	                <when test="cri.searchContent2 =='searchNameCode'">
 	                    AND (trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
 	                </when>
 	                <when test="cri.searchContent2 =='searchCourt'">
 	                    AND (court_region like concat('%', #{cri.searchContent}, '%')
@@ -82,10 +84,19 @@
 	                <when test="cri.searchContent2 =='searchUser_name'">
 	                    AND user_name like concat('%', #{cri.searchContent}, '%')
 	                </when>
+	                <when test="cri.searchContent2 =='searchAll'">
+	                    AND (court_region like concat('%', #{cri.searchContent}, '%')
+	                    OR court_name like concat('%', #{cri.searchContent}, '%')
+	                    OR user_name like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
+	                </when>
 	            </choose>
 	        </if>
 	
-	        <if test="cri.searchAccept_act_yn !='' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
+	        <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
 	            AND accept_act_yn = #{cri.searchAccept_act_yn}
 	        </if>
 	
@@ -118,7 +129,9 @@
 	            <choose>
 	                <when test="cri.searchContent2 =='searchNameCode'">
 	                    AND (trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
 	                </when>
 	                <when test="cri.searchContent2 =='searchCourt'">
 	                    AND (court_region like concat('%', #{cri.searchContent}, '%')
@@ -131,7 +144,10 @@
 	                    AND (court_region like concat('%', #{cri.searchContent}, '%')
 	                    OR court_name like concat('%', #{cri.searchContent}, '%')
 	                    OR user_name like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
+	                    OR trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
 	                </when>
 	            </choose>
 	        </if>

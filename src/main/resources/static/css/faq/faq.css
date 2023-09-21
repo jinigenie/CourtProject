@@ -27,6 +27,7 @@ body.none_scroll {
 
 #wrap .mt10 {
 	margin-top: 0.625rem;
+	margin: 10px 3px;
 }
 
 /* 색상 */
@@ -49,7 +50,7 @@ body.none_scroll {
 }
 
 .flex .box {
-	margin-left: auto;
+	/* margin-left: auto; */
 }
 
 .flex .box .btn,
@@ -153,13 +154,14 @@ body.none_scroll {
 
 #wrap .btn_small {
 	display: inline-block;
-	height: 40px;
-	padding: 0 15px;
-	font-size: 0.875rem;
+	height: 38px;
+	padding: -1px 15px;
+	font-size: 15px;
 	text-align: center;
-	line-height: 38px;
+	/* line-height: 38px; */
 	vertical-align: middle;
 	border-radius: 0.625rem;
+
 }
 
 .bg_blue:hover {
@@ -214,7 +216,7 @@ body.none_scroll {
 	min-height: 100px;
 	margin-bottom: 10px;
 	padding-top: 26px;
-	font-size: 1.889rem;
+	font-size: 27px;
 	font-weight: 700;
 	color: #2065c6;
 	justify-content: center;
@@ -227,11 +229,11 @@ body.none_scroll {
 }
 
 h4.twins_dot {
-	margin-top: 20px;
-	font-size: 25px;
+	margin-top: 24px;
+	font-size: 21px;
 	font-weight: 500;
 	color: #111;
-	line-height: 1.875rem;
+	line-height: 1.5rem;
 }
 
 h4.twins_dot span {
@@ -268,11 +270,11 @@ h4.twins_dot span {
 /* 게시판 */
 .controls {
 	position: relative;
-	padding: 25px 30px;
+	padding: 25px 0px;
 	color: #363636;
 	border: 1px solid #ccc;
 	background-color: #eff5ff;
-	border-radius: 0.75rem;
+	border-radius: 5px;
 }
 
 .controls>div {
@@ -340,6 +342,8 @@ h4.twins_dot span {
 	width: 140px;
 	margin-right: 6px;
 	padding-left: 10px;
+	float: left;
+	font-size: 14px;
 }
 
 .controls .box select.w100p {
@@ -355,7 +359,7 @@ h4.twins_dot span {
 	position: absolute;
 	right: 30px;
 	bottom: 25px;
-	width: 80px;
+	width: 200px;
 	height: 40px;
 	color: #fff;
 	background-color: #4b63c3;
@@ -375,12 +379,13 @@ h4.twins_dot span {
 	position: absolute;
 	right: 30px;
 	bottom: 25px;
-	width: inherit;
-	height: inherit;
+	/* width: inherit; */
+	/* height: inherit; */
 	padding: 0;
 	color: inherit;
 	background-color: inherit;
 	border-radius: 0;
+	margin: 0;
 }
 
 .controls.reset_form .box {
@@ -388,6 +393,7 @@ h4.twins_dot span {
 	align-items: center;
 	height: 40px;
 	padding-right: 153px;
+	overflow: hidden;
 }
 
 .controls.reset_form .btn button {
@@ -495,10 +501,9 @@ h4.twins_dot span {
 
 .intro .accordion li h5 {
 	position: relative;
-	/*padding: 1.75rem 0.625rem 1.75rem 3.5rem;*/
-	padding: 30px 40px 30px 70px;
+	padding: 20px 60px;
 	color: #363636;
-	line-height: 1.375rem;
+	line-height: -0.625rem;
 	border-bottom: 1px solid #d1d1d1;
 	cursor: pointer;
 }
@@ -619,3 +624,5 @@ h4.twins_dot span {
 	background-color: #2065c6;
 
 }
+
+#pageUnit{margin-left: 567px;}
