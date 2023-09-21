@@ -2,11 +2,15 @@ package com.court.proj.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 @Configuration // 설정파일이라고 선언
 @EnableWebSecurity // 이 설정파일을 시큐리티 필터에 추가한다는 의미
@@ -26,7 +30,8 @@ public class SecurityConfig {
 
 		http.csrf().disable();
 		
-		http.authorizeRequests( (authorize) -> authorize
+		http //.antMatcher("/user/loginForm").addFilterBefore(new CustomLoginFilter(), UsernamePasswordAuthenticationFilter.class)
+			.authorizeRequests( (authorize) -> authorize
 				.antMatchers("/user/login").permitAll() // 로그인 페이지는 모든 사용자에게 허용
                 .antMatchers("/user/loginForm").permitAll()
                 .antMatchers("/main/**").permitAll()
@@ -38,6 +43,7 @@ public class SecurityConfig {
                 .antMatchers("/announce/announceRegistForm").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 .antMatchers("/aplcn/**").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 .antMatchers("/faq/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/faq/faqList").permitAll()
                 .antMatchers("/notice/noticeModify").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 .antMatchers("/notice/noticeRegist").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 .antMatchers("/admin/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
@@ -46,16 +52,17 @@ public class SecurityConfig {
 		        //.accessDeniedPage("/user/error")
 				.accessDeniedHandler(customAccessDeniedHandler());
 				
-				
-				
+
 		
-		http.formLogin().loginPage("/user/login")
+		http
+		.formLogin()
+		.loginPage("/user/login")
 		.usernameParameter("username")
 		.passwordParameter("user_pw")
 		.loginProcessingUrl("/user/loginForm")
 		.failureHandler(customLoginFailureHandler())
 		.defaultSuccessUrl("/main/main");
-		
+
 		/*
 		 * 인증이 필요한 경로
 		 * app/**
@@ -86,6 +93,7 @@ public class SecurityConfig {
 		return http.build();
 	}
 	
+
 	@Bean
 	CustomAccessDeniedHandler customAccessDeniedHandler() {
 		CustomAccessDeniedHandler myhandler = new CustomAccessDeniedHandler("/user/error");
