@@ -155,7 +155,7 @@ public class AplcnRegController {
 
         UserVO uvo = aplcnRegService.getInfo(id);
 
-        if (status == 0 || cnt == 0) {
+        if (status == 0 && cnt == 0) {
             ra.addFlashAttribute("msg", "저장된 신청 정보가 없습니다");
             return "redirect:/announce/announceList";
         } else if(status != 2) {
@@ -325,7 +325,7 @@ public class AplcnRegController {
         }
 
         if (x == 1) {
-            return "redirect:/app/info";  //requestParam 때문에 error
+            return "redirect:/app/info";
         } else {
             return "redirect:/app/edu";
         }

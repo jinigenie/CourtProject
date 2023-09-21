@@ -159,7 +159,11 @@ body {
     padding: 15px 15px;
     transition: 0.3s;
 }
-.btn-2::before {
+.prev_btn::before {
+    background-color: #5a5a60;
+    transition: 0.3s ease-out;
+}
+.next_btn::before {
     background-color: #4860cc;
     transition: 0.3s ease-out;
 }
