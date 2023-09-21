@@ -7,11 +7,13 @@ function modalCont() {
 	var closestTr = event.currentTarget.closest(".modal_ajax");
 	var accept_proper_num = $(closestTr).find("input[name='accept_proper_num']").val();
 	var user_proper_num = $(closestTr).find("input[name='user_proper_num']").val();
-
+	console.log(closestTr);
+	console.log(accept_proper_num);
+	console.log(user_proper_num);
 
 	$.ajax({
 		type: "POST",
-		url: "../getfclttModal",
+		url: "getfclttModal",
 		data: {
 			"accept_proper_num": accept_proper_num,
 			"user_proper_num": user_proper_num
@@ -82,7 +84,7 @@ function modalCont() {
 			str += '<col style="width: 20%" />';
 			str += '</colgroup>';
 			str += '<thead>';
-			str += '<tr style="border-bottom: 1px solid #777;">';
+			str += '<tr style="border-bottom: 1px solid #777; border-top:1px solid #777; ">';
 			str += '<th scope="col">학교</th>';
 			str += '<th scope="col">전공</th>';
 			str += '<th scope="col">학위</th>';
@@ -116,7 +118,7 @@ function modalCont() {
 			str += '<col style="width: 20%" />';
 			str += '</colgroup>';
 			str += '<thead>';
-			str += '<tr style="border-bottom: 1px solid #777;">';
+			str += '<tr style="border-bottom: 1px solid #777; border-top:1px solid #777; ">';
 			str += '<th scope="col">재판번호</th>';
 			str += '<th scope="col">출석일자</th>';
 			str += '<th scope="col">완료여부</th>';
@@ -148,7 +150,7 @@ function modalCont() {
 			str += '<col style="width: 50%" />';
 			str += '</colgroup>';
 			str += '<thead>';
-			str += '<tr style="border-bottom: 1px solid #777;">';
+			str += '<tr style="border-bottom: 1px solid #777; border-top:1px solid #777; ">';
 			str += '<th scope="col">자격증명</th>';
 			str += '<th scope="col">발급기관</th>';
 			str += '</tr>';
@@ -178,7 +180,7 @@ function modalCont() {
 			str += '<col style="width: 20%" />';
 			str += '</colgroup>';
 			str += '<thead>';
-			str += '<tr style="border-bottom: 1px solid #777;">';
+			str += '<tr style="border-bottom: 1px solid #777; border-top:1px solid #777; ">';
 			str += '<th scope="col">회사명/활동기관</th>';
 			str += '<th scope="col">구분</th>';
 			str += '<th scope="col">근무기간</th>';
@@ -234,7 +236,7 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 	formData
 
 	$.ajax({
-		url: "../fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&searchContent2=" + searchContent2 + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue,
+		url: "fclttListAjax?page=" + pageNumber + "&amount=" + pageSize + "&searchContent2=" + searchContent2 + "&searchContent=" + searchCont + "&searchAccept_act_yn=" + selectedValue,
 
 		/*		data: {
 					"searchCont": searchCont, // 검색 조건을 파라미터로 보내기
@@ -276,7 +278,7 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 					str2 += '<a href="#" data-page-action=1 class="arr first" ></a>';
 				}
 				// 이전 페이지로 이동하는 링크 생성
-				if (FclttVO.fclttPageVO.pageList.length > 1&&FclttVO.fclttPageVO.prev) {
+				if (FclttVO.fclttPageVO.pageList.length > 1 && FclttVO.fclttPageVO.prev) {
 					str2 += '<a href="#" data-page-action="prev" class="arr prev"></a>';
 				}
 
@@ -291,13 +293,13 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 				}
 
 				// 다음 페이지로 이동하는 링크 생성
-				if (FclttVO.fclttPageVO.pageList.length > 1 &&FclttVO.fclttPageVO.next) {
+				if (FclttVO.fclttPageVO.pageList.length > 1 && FclttVO.fclttPageVO.next) {
 					str2 += '<a href="#" data-page-action="next" class="arr next" ></a>';
 				}
 
 				// 맨 마지막 페이지로 이동하는 링크 생성
 				if (FclttVO.fclttPageVO.pageList.length > 1) {
-				    str2 += '<a href="#" data-page-action="last"  class="arr last" data-total="' + FclttVO.fclttPageVO.total + '"></a>';
+					str2 += '<a href="#" data-page-action="last"  class="arr last" data-total="' + FclttVO.fclttPageVO.total + '"></a>';
 				}
 
 				str2 += '</div>';
@@ -311,8 +313,23 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 	});
 }
 
+/*
+// email보내기
+const send = document.querySelector(".send");
 
-
+send.addEventListener('click', function(e){
+    fetch('/email/send', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'to=hyem08111@gmail.com&subject=재판조력자로 등재되었습니다.&text=<html><body><h1>김혜민님 축하드립니다</h1><p>지원하신 재판조력자 공고에 합격되어 등재 되셨습니다.<br/> 자세한 내용은 사이트내에 마이페이지에서 확인하실 수 있습니다. <br/>감사합니다</p></body></html>',
+    })
+    .then(response => response.text())
+    .then(data => console.log(data))
+    .catch(e => console.log('이메일 전송 실패: ' + e));
+});
+*/
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

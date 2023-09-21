@@ -18,31 +18,6 @@ public class FclttRestController {
     @Autowired
     private FclttService fclttService;
 
-    // 등재명단 ajax 목록
-    @GetMapping("/fclttListAjax")
-    public ResponseEntity<ArrayList<FclttVO>> fclttListAjax(FclttCriteria cri) {
-        ArrayList<FclttVO> list = fclttService.getList(cri);
-        int total = fclttService.getTotal(cri);
-        FclttPageVO FclttPageVO = new FclttPageVO(cri, total);
-        for (FclttVO fclttVO : list) {
-            fclttVO.setFclttPageVO(FclttPageVO);
-        }
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
-    // 등재명단 상세보기 ajax
-    @PostMapping("/getfclttModal")
-    public ResponseEntity<Map<String, Object>> getfclttModal(
-            @RequestParam("accept_proper_num") String accept_proper_num,
-            @RequestParam("user_proper_num") String user_proper_num) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("content1", fclttService.getFclttContent1(accept_proper_num));
-        map.put("content2", fclttService.getFclttContent2(user_proper_num));
-        map.put("content3", fclttService.getFclttContent3(user_proper_num));
-        map.put("content4", fclttService.getFclttContent4(user_proper_num));
-        map.put("content5", fclttService.getFclttContent5(user_proper_num));
-        return new ResponseEntity<>(map, HttpStatus.OK);
-    }
 
     // Pause
     // -------------------------------------------------------------------------------------------

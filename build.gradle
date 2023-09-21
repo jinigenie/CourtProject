@@ -54,6 +54,9 @@ dependencies {
 
 	// aws
 	implementation 'software.amazon.awssdk:aws-sdk-java:2.20.43'
+	//email 발송
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.5.1'
+
 }
 
 tasks.named('test') {
