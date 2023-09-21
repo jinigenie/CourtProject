@@ -45,8 +45,8 @@ function faqList(page, amount, content1, content2) {
 				str += '<abbr title="Question">Q.</abbr>';
 				str += '<span id="faq_question" style="font-size: 17px;font-weight: 800; color:#808080;">' + vo.faq_ask_content + '</span>';
 				str += '	<!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->';
-				str += '	<button type="button" onclick="faqRegist(' + vo.faq_proper_num + ')" class="faq_modify_btn1">수정</button>';
-				str += '	<button type="button" onclick="faqDel(' + vo.faq_proper_num + ')" class="faq_modify_btn2">삭제</button>';
+				str += '	<button type="button" onclick="faqRegist(' + vo.faq_proper_num + ')" class="faq_modify_btn1" sec:authorize="!isAuthenticated()">수정</button>';
+				str += '	<button type="button" onclick="faqDel(' + vo.faq_proper_num + ')" class="faq_modify_btn2" sec:authorize="!isAuthenticated()" >삭제</button>';
 				str += '	<!--   \=============================================== \--></h5>';
 				str += ' <div id="pane11" class="accopanel" aria-labelledby="header1" style ="display:' + (vo.faq_proper_num == divVal ? 'block' : 'none') + ';">';
 				str += '<abbr title="Answer">A.</abbr><p></p>';
