@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.court.proj.admin.CourtAdminDetails;
 
@@ -92,7 +93,7 @@ public class UserController {
 
 	// 회원가입
 	@PostMapping("/joinForm")
-	public String joinForm(@Valid @ModelAttribute("vo") UserVO vo, Errors errors, Model model) {
+	public String joinForm(@Valid @ModelAttribute("vo") UserVO vo, Errors errors, Model model, RedirectAttributes re) {
 
 		if (errors.hasErrors()) {
 			List<FieldError> list = errors.getFieldErrors();
@@ -105,7 +106,9 @@ public class UserController {
 		String pw = bCryptPasswordEncoder.encode(vo.getUser_pw());
 		vo.setUser_pw(pw);
 		userService.joinUser(vo);
-		return "redirect:/login";
+		re.addFlashAttribute("msg", "회원가입을 축하드립니다.");
+		
+		return "redirect:/user/login";
 	}
 
 	// 아이디 중복확인

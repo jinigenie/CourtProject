@@ -22,7 +22,7 @@ public class CourtAdminDetails implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<>();
-		list.add(new SimpleGrantedAuthority(adminVO.getAdmin_auth()));
+		list.add(new SimpleGrantedAuthority("ROLE_"+adminVO.getAdmin_auth()));
 		
 		
 		return list;
