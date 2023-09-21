@@ -47,20 +47,34 @@
     <div class="t-side">
       <div class="container">
         <ul class="t-side-right">
-          <li>
+          <li sec:authorize="!isAuthenticated()">
             <a th:href="@{./../user/login}"
             >로그인</a
             >
           </li>
-          <li>
+          <li sec:authorize="!isAuthenticated()">
             <a th:href="@{./../user/agree}"
             >회원가입</a
+            >
+          </li>
+          <li sec:authorize="isAuthenticated()">
+            <a href="#" id="logout"
+            >로그아웃</a
             >
           </li>
         </ul>
       </div>
     </div>
+	<script>
+		document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            if(confirm("로그아웃 하시겠습니까?")){
+				location.href = './../logout';
 
+			}
+        });
+	</script>
     <div class="header-wrap">
       <h1 class="logo">
         <a
@@ -75,7 +89,7 @@
             <div class="th1" style="float: left; width: 180px">
               <a href="#"><span>조력자등재신청</span></a>
               <ul class="depth2">
-                <li class="th2" sec:authorize="hasRole('ROLE_SUPERADMIN')">
+                <li class="th2">
                   <a href="#" ><span>조력자 등재신청</span></a>
                 </li>
                 <li class="th2">

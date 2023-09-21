@@ -43,6 +43,10 @@ public class CourtUserDetails implements UserDetails{
 	    return authorities;
 	}
 
+	public String getUser_role() {
+		return userVO.getUser_role();
+	}
+	
 	public Integer getUser_proper_num() {
 		return userVO.getUser_proper_num();
 	}

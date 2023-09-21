@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler{
@@ -20,8 +22,14 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler{
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		
-        
-        if (exception instanceof BadCredentialsException) {
+		
+		
+		
+        if(exception instanceof UsernameNotFoundException) {
+        	String errorMessage = "존재하지 않는 회원입니다.";
+        	String encodedMessage = URLEncoder.encode(errorMessage, "UTF-8");
+            response.sendRedirect("/user/login?error="+encodedMessage);
+        }else if (exception instanceof BadCredentialsException) {
             // 비밀번호가 틀렸을 경우 처리
         	String errorMessage = "아이디 혹은 비밀번호를 확인해주세요";
         	String encodedMessage = URLEncoder.encode(errorMessage, "UTF-8");
