@@ -18,8 +18,8 @@ public class EmailController {
             @RequestParam String to,
             @RequestParam String subject,
             @RequestParam String text) {
-    	System.out.println("컨트롤러진입");
-        emailService.sendEmail(to, subject, text);
+        System.out.println("컨트롤러진입");
+        emailService.sendEmail( to, subject, text); // from 주소 추가
         return "이메일이 전송되었습니다.";
     }
 }
