@@ -4,7 +4,7 @@
 <head></head>
 <link rel="stylesheet" th:href="@{../css/faq/faq.css}" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script defer th:src="@{../js/faq/faq.js}"></script>
+<script defer th:src="@{./../js/faq/faq.js}"></script>
 
 </head>
 
@@ -107,107 +107,39 @@
 
 							</form>
 							<!-- 검색영역 -->
-
+							<input type="hidden" id="userRole" sec:authorize="isAuthenticated()">
+								[[${#authentication.principal.authorities}]]
+							</input>
 							<ul id="faqAccordion" class="accordion">
 
 							</ul>
-							<!-- 검색결과d -->
+							<!-- 검색결과 -->
 
 							<!-- pagination -->
 							<div class="pager">
 
 							</div><!-- //group -->
+							</di>
+
 						</div>
 
+
 					</div>
-
-
 				</div>
+				<!-- //main_con  -->
 			</div>
-			<!-- //main_con  -->
-		</div>
 
 </th:block>
 
 <script th:inline="javascript">
-	var zz = '[[${div}]]';
-		console.log(zz+'[[${div}]]');
-		
+
+
 	$(document).ready(function () {
+		// 문서가 준비되면 이 코드 블록이 실행됩니다.
+		// Ajax로 생성된 HTML이 추가된 후에 함수를 호출합니다.
 		faqList(1, 10, $("#srchTycd").val(), $("#srchKwrd").val());
-
-		
+		userHasAdminRole();
 	});
-
-
-
-	// 페이징
-	$(".pager").on('click', 'a', function (e) {
-		e.preventDefault();
-		var pageAction = $(this).data('page-action');
-		var pageUnit = $("#pageUnit").val();
-		var srchTycd = $("#srchTycd").val();
-		var srchKwrd = $("#srchKwrd").val();
-
-
-		var currentPage = ($(".pager a.active").text());
-		if (pageAction === 1) {
-			// 맨 처음 페이지로 이동하는 동작 수행
-			faqList(1, pageUnit, srchTycd, srchKwrd);
-		} else if (pageAction === 'prev') {
-			// 이전 페이지로 이동하는 동작 수행
-			var currentPage = ($(".pager a.active").text());
-			if (currentPage > 1) {
-				faqList(currentPage - 1, pageUnit, srchTycd, srchKwrd);
-			}
-		} else if (pageAction === 'next') {
-			// 다음 페이지로 이동하는 동작 수행
-			var currentPage = ($(".pager a.active").text());
-			if (currentPage < totalPages) {
-				faqList(currentPage + 1, pageUnit, srchTycd, srchKwrd);
-			}
-		} else if (pageAction === 'last') {
-			var totalPages = parseInt($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
-			faqList(totalPages, pageUnit, srchTycd, srchKwrd);
-		} else {
-			// 페이지 번호를 클릭한 경우
-			var pageNumber = $(this).text();
-			// 페이지 번호를 사용하여 데이터를 불러오는 동작 수행
-			faqList(pageNumber, pageUnit, srchTycd, srchKwrd);
-		}
-	});
-
-	$("#pageUnit").change(function () {
-		var pageUnit = $(this).val();
-		faqList(1, $("#pageUnit").val(), $("#srchTycd").val(), $("#srchKwrd").val());
-	});
-
-
-	// 검색기능 함수
-	function faqSearchBtn() {
-		var pageUnit = $("#pageUnit").val();
-		var srchTycd = $("#srchTycd").val();
-		var srchKwrd = $("#srchKwrd").val();
-		faqList(1, pageUnit, srchTycd, srchKwrd);
-	}
-	// enter키로 조회 버튼 
-	$("#srchKwrd").on("keydown", function (event) {
-		if (event.key === "Enter") {
-			event.preventDefault(); // 폼의 기본 동작을 막음
-			var pageUnit = $("#pageUnit").val();
-			var srchTycd = $("#srchTycd").val();
-			var srchKwrd = $("#srchKwrd").val();
-			faqList(1, pageUnit, srchTycd, srchKwrd);
-		}
-	});
-
-	//검색된것 초기화 하기
-	function faqSearchBtn2() {
-		var pageUnit = $("#pageUnit").val();
-		var srchTycd = $("#srchTycd").val();
-		var srchKwrd = $("#srchKwrd").val();
-		faqList(1, pageUnit, '', '');
-	}
 
 </script>
 
