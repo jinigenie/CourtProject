@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{./../../css/mypage/mypage.css}"/>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
   <div class="wrap">
@@ -169,17 +171,32 @@
 
 <!-- 회원정보 변경-->
 <script>
-	const user_pw1 = document.getElementById("user_pw").value;	
+	//const user_pw1 = document.getElementById("user_pw").value;	
+	const user_id = document.getElementById("cvl_id").innerHTML;	
 	const modify = document.getElementById("modify");
-
+	//console.log(user_id)
 	modify.onclick = function(e){
 		const pw = document.getElementById("pw").value;
 		e.preventDefault();
-		if(user_pw1 == pw){
-			window.location.href = "../mypage/modify";
-		} else {
-			alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
-		}
+		//if(user_pw1 == pw){
+		//	window.location.href = "../mypage/modify";
+		//} else {
+		//	alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
+		//}
+		$.ajax({
+					url : "checkPw",
+					method : "POST",
+					data : {
+						"checkpw" : pw
+						
+					},
+					success : (data)=>{
+						console.log(data)
+					},
+					error : (status,error)=>{
+						console.log(status, error);
+					}
+				})
 	}
 	
 </script>

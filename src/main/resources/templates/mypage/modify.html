@@ -79,37 +79,35 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호</span>
-                            </th>
-                            <td data-cell-header="비밀번호" class="txt-left">
-                                <div class="input-wrap-three write-wrap-m"
-                                     style="width: 162px; display: inline-block">
-                                    <div class="input-wrap" style="width: 200px">
-                                        <input name="user_pw" id="pw2"
-                                               th:value="${userVO.user_pw}" class="cm_inptxt"
-                                               type="password"/>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="txt-left">
-                                <span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호 확인</span>
-                            </th>
-                            <td data-cell-header="비밀번호 확인" class="txt-left">
-                                <div class="input-wrap-three write-wrap-m"
-                                     style="width: 162px; display: inline-block">
-                                    <div class="input-wrap" style="width: 200px">
-                                        <input name="" id="pw2"
-                                               th:value="${userVO.user_pw}" class="cm_inptxt"
-                                               type="password"/>
-                                    </div>
-                                    <div id="password-error" class="error-message"></div>
-                                </div>
-                            </td>
-                        </tr>
+                         <tr>
+				            <th scope="row" class="txt-left">
+				                <span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호</span>
+				            </th>
+				            <td data-cell-header="비밀번호" class="txt-left">
+				                <div class="input-wrap-three write-wrap-m"
+				                     style="width: 162px; display: inline-block">
+				                    <div class="input-wrap" style="width: 200px">
+				                        <input name="user_pw" id="user_pw" class="cm_inptxt" type="password"
+				                        		th:value="${userVO.user_pw}"/>
+				                    </div>
+				                </div>
+				            </td>
+				        </tr>
+				        <tr>
+				            <th scope="row" class="txt-left">
+				                <span class="essential-txt" title="필수항목" style="margin-left: 80px">비밀번호 확인</span>
+				            </th>
+				            <td data-cell-header="비밀번호 확인" class="txt-left">
+				                <div class="input-wrap-three write-wrap-m"
+				                     style="width: 162px; display: inline-block">
+				                    <div class="input-wrap" style="width: 200px">
+				                        <input name="confirm_password" id="confirm_password" class="cm_inptxt" type="password"
+				                        			 th:value="${userVO.user_pw}"/>
+				                    </div>
+				                    <div id="password-error" class="error-message" style="color: red; font-size: 12px; margin-top: 5px;"></div>
+				                </div>
+				            </td>
+				        </tr>
                         <tr>
                             <th scope="row" class="txt-left">
                                 <span class="essential-txt" title="필수항목" style="margin-left: 80px">성명</span>
@@ -166,7 +164,7 @@
                                 </div>
                                 <span style="margin: 7px">@</span>
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="user_email_b" id="cvl_mail2" th:value="${userVO.user_email_b}" class="cm_inptxt" type="text">
+                                    <input name="user_email_b" id="cvl_mail2" class="cm_inptxt" type="text">
                                 </div>
                                 <div class="select-box" style="padding: 9px;">
                                     <select name="" id="mailAddr" class="info-select" >
@@ -223,13 +221,13 @@
                                         <select class="info-select" id="selectBank"
                                                 name="user_bank" title="검색조건을 선택해주세요.">
                                             <option value="">은행목록</option>
-                                            <option value="kb">국민은행</option>
-                                            <option value="ibk">기업은행</option>
-                                            <option value="nh">농협은행</option>
-                                            <option value="sh">신한은행</option>
-                                            <option value="wr">우리은행</option>
-                                            <option value="hn">하나은행</option>
-                                            <option value="sc">SC제일은행</option>
+                                            <option value="kb" th:selected="${userVO.user_bank == 'kb'}">국민은행</option>
+                                            <option value="ibk" th:selected="${userVO.user_bank == 'ibk'}">기업은행</option>
+                                            <option value="nh" th:selected="${userVO.user_bank == 'nh'}">농협은행</option>
+                                            <option value="sh" th:selected="${userVO.user_bank == 'sh'}">신한은행</option>
+                                            <option value="wr" th:selected="${userVO.user_bank == 'wr'}">우리은행</option>
+                                            <option value="hn" th:selected="${userVO.user_bank == 'hn'}">하나은행</option>
+                                            <option value="sc" th:selected="${userVO.user_bank == 'sc'}">SC제일은행</option>
                                         </select>
                                     </div>
                                     <div class="selectedBank" style="float: left">
@@ -339,16 +337,17 @@
 
 <!--메일주소 선택입력-->
 <script>
-
+    // 메일주소 선택입력-->
     $("#mailAddr").change(function () {
+        let text = `[[${userVO.user_email_b}]]`;
+        console.log(text);
         let selmail = $("#mailAddr option:selected").html();
-        $("#cvl_mail2").attr("value", selmail);
-
+        if(selmail == '직접입력') {
+            $("#cvl_mail2").attr("value", text);
+        } else {
+            $("#cvl_mail2").attr("value", selmail);
+        }
     });
-
-    $(".addCourt").click(function () {
-        console.log("추가");
-    })
 </script>
 
 
@@ -366,37 +365,38 @@
 
 <!--비밀번호 확인-->
 <script>
-	document.addEventListener("DOMContentLoaded", function () {
-	    var passwordInput = document.querySelector("input[name='user_pw']");
-	    var confirmPasswordInput = document.querySelector("input[name='cvl_nm']");
-	    var errorElement = document.getElementById("password-error");
-	    
-	    passwordInput.addEventListener("input", validatePassword);
-	    confirmPasswordInput.addEventListener("input", validatePassword);
-	    
-	    function validatePassword() {
-	        var password = passwordInput.value;
-	        var confirmPassword = confirmPasswordInput.value;
-	        var errorMessage = "";
-	        
-	        // 비밀번호 유효성 검사 규칙을 적용
-	        if (password.length < 8) {
-	            errorMessage = "비밀번호는 최소 8자 이상이어야 합니다.";
-	        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
-	            errorMessage = "비밀번호는 대소문자, 숫자, 특수문자를 혼합하여 사용해야 합니다.";
-	        }
-	        
-	        // 비밀번호 확인 일치 여부 확인
-	        if (password !== confirmPassword) {
-	            errorMessage = "비밀번호가 일치하지 않습니다.";
-	        }
-	        
-	        // 에러 메시지 표시
-	        errorElement.textContent = errorMessage;
-	    }
-});	
+document.addEventListener("DOMContentLoaded", function () {
+    var passwordInput = document.getElementById("user_pw");
+    var confirmPasswordInput = document.getElementById("confirm_password");
+    var errorElement = document.getElementById("password-error");
+    var changeButton = document.getElementById("infoChange");
 
-		
+    passwordInput.addEventListener("input", validatePassword);
+    confirmPasswordInput.addEventListener("input", validatePassword);
+
+    function validatePassword() {
+        var password = passwordInput.value;
+        var confirmPassword = confirmPasswordInput.value;
+        var errorMessage = "";
+
+        // 비밀번호 유효성 검사 규칙을 적용
+        if (password.length < 8 || !/[A-Za-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+            errorMessage = "비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.";
+            changeButton.disabled = true; // 변경 버튼 비활성화
+        } else {
+            // 비밀번호 일치 여부 확인
+            if (password !== confirmPassword) {
+                errorMessage = "비밀번호가 일치하지 않습니다.";
+                changeButton.disabled = true; // 변경 버튼 비활성화
+            } else {
+                changeButton.disabled = false; // 변경 버튼 활성화
+            }
+        }
+
+        // 에러 메시지 표시
+        errorElement.textContent = errorMessage;
+    }
+});
 </script>
 
 </html>

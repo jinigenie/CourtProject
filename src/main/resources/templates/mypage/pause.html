@@ -62,14 +62,9 @@
 
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
-     
 
 					<div class="table table-responsive">
 						<table>
-							<caption>
-								재판조력자등재
-							</caption>
-
 							<colgroup>
 								<col style="width: 30%">
 								<col style="width: 70%">
@@ -81,7 +76,7 @@
 										<span class="essential-txt" style="margin-left: 80px;">현재상태</span>
 									</th>
 									<td data-cell-header="현재상태" class="txt-left">
-										<input type="text" name="" readonly th:value="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'} " />
+										<input type="text" name="" readonly th:value="${vo?.accept_act_yn == 'Y' ? '활동중' : '중지중'} " />
 									</td>
 								</tr>
 								<tr>
@@ -128,8 +123,6 @@
 							<span>신청</span>
 						</a>
 					</div>
-          
-          
           
           </div>
           <!-- //본문컨텐츠 영역 -->
