@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.court.proj.aplcnReg.TrialVO;
+import com.court.proj.user.CourtUserDetails;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -27,25 +29,32 @@ public class AnnounceController {
 
 	int trial_fcltt_proper_num = 0;
 	int admin_num = 1;
-	String admin_id = "admin1";
-	String admin_pw = "admin1";
-	String admin_auth = "seoul";
-	String admin_name = "이순신1234";
+	String admin_id = "";
+	String admin_pw = "";
+	String admin_auth = "";
+	String admin_name = "";
 
 	// 모집공고 목록 페이지
 	@GetMapping("announceList")
-	public String announceList(Model model) {
+	public String announceList(Model model, AnnounceCriteria cri) {
 
-		// 공고 리스트
-		ArrayList<AnnounceVO> list = announceService.getannounceList();
-		model.addAttribute("list", list);
-		System.out.println(list.toString());
 
-		int total = announceService.getTotal();
-		model.addAttribute("total", total);
+		
+	    // 공고 리스트
+	    ArrayList<AnnounceVO> list = announceService.AnnounceList(cri);
+	    model.addAttribute("list", list);
+//	    System.out.println(list.toString());
 
-		return "announce/announceList";
+	    int total = announceService.getTotal();
+	    model.addAttribute("total", total);
+
+	    // 페이징 정보를 생성하여 모델에 추가
+	    AnnouncePageVO announcePageVO = new AnnouncePageVO(cri, total);
+	    model.addAttribute("pageVO", announcePageVO);
+
+	    return "announce/announceList";
 	}
+
 
 	// 모집공고 목록 검색기능
 	@GetMapping("/announce/searchAnnounce")
@@ -85,7 +94,7 @@ public class AnnounceController {
 
 	// 모집공고 수정 페이지
 	@GetMapping("announceModify")
-	public String announceModify(@RequestParam(name = "id", required = true) int announce_proper_num, Model model) {
+	public String announceModify(@RequestParam(name = "id") int announce_proper_num, Model model) {
 
 		AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
 		model.addAttribute("alist", alist);
@@ -102,13 +111,13 @@ public class AnnounceController {
 
 	// 모집공고 수정 폼 요청
 	@PostMapping("/announceModifyForm")
-	public String announceModifyForm(@ModelAttribute AnnounceVO vo, Model model) {
+	public String announceModifyForm(@RequestParam(name = "id", required = true) int announce_proper_num, @ModelAttribute AnnounceVO vo, Model model) {
 
-		vo.setAdmin_proper_num(admin_num);
-		vo.setAdmin_id(admin_id);
-		vo.setAdmin_pw(admin_pw);
-		vo.setAdmin_auth(admin_auth);
-		vo.setAdmin_name(admin_name);
+//		vo.setAdmin_proper_num(admin_num);
+//		vo.setAdmin_id(admin_id);
+//		vo.setAdmin_pw(admin_pw);
+//		vo.setAdmin_auth(admin_auth);
+//		vo.setAdmin_name(admin_name);
 
 		if (vo.getSelectType3().equals("선택")) {
 			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
@@ -118,8 +127,7 @@ public class AnnounceController {
 		}
 
 		System.out.println(vo.toString());
-
-		announceService.announceRegistTB002(vo);
+		
 		announceService.updateAnnounce(vo);
 
 		return "redirect:/announce/announceList";
@@ -127,8 +135,15 @@ public class AnnounceController {
 
 	// 모집공고 등록 페이지
 	@GetMapping("announceRegist")
-	public String announceRegist(Model model) {
+	public String announceRegist(Model model, Authentication auth) {
 
+		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
+		System.out.println(user.getUser_id());
+		System.out.println(user.getUsername());
+		
+//		admin_id = user.getUser_id();		
+		
+		
 //		log.info("sdfsdf");
 		AnnounceVO avo = announceService.getinfo(admin_id);
 		model.addAttribute("vo", avo);
@@ -144,9 +159,9 @@ public class AnnounceController {
 
 	// 모집공고 등록 폼 요청
 	@PostMapping("/announceRegistForm")
-	public String announceRegistForm(@ModelAttribute AnnounceVO vo, Model model) {
-
-		vo.setAdmin_proper_num(admin_num);
+	public String announceRegistForm(@ModelAttribute AnnounceVO vo, Model model,Authentication auth) {
+		
+		
 		vo.setAdmin_id(admin_id);
 		vo.setAdmin_pw(admin_pw);
 		vo.setAdmin_auth(admin_auth);
