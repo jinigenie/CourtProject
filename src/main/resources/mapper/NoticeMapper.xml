@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.court.proj.notice.NoticeMapper">
+
+	<select id="getList" resultType="NoticeVO">
+		select * from TB_003
+		order by notice_Date desc
+		LIMIT #{cri.pageStart}, #{cri.amount}
+	</select>
+
+
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)from TB_003
+		order by notice_Date desc
+
+	</select>
+
+
+
+</mapper>

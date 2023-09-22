@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-	<head>
+
+<head>
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
 	<script th:src="@{../js/fcltt/fcltt.js}"></script>
 </head>
@@ -79,18 +80,12 @@
 						<!-- 본문컨텐츠 영역 start -->
 						<div class="container">
 							<div class="box box1">
-								<p>재판 조력자를 모집하는 공고문 입니다 .<br />검색되지 않거나 오프라인으로만 접수되는 서식들은
+								<p>공지사항 입니다 .<br />
 									<!-- <a href="" class="blank-new"> -->
-									<a class="blank-new"
-										href="https://www.gov.kr/search/applyMw?lrgAstCd=&amp;mdmAstCd=&amp;smallAstCd=&amp;deptIncCD=1492000&amp;procIncGrpCD=&amp;dvsPet=on&amp;dvsDir=on&amp;srhQuery=&amp;realQuery=&amp;reQueryFlag=&amp;moblAppYN=&amp;sort=&amp;DVS_ID="
-										title="정부24 새창열림" target="_blank">
-										정부24
+									<a class="blank-new" href="" title="정부24 새창열림" target="_blank">
 									</a>
-									에서 다운받을 수 있습니다.
 								</p>
 							</div>
-
-
 							<!-- searchform searchform2 start -->
 							<div class="searchform searchform2">
 								<div class="searchform-wrap">
@@ -130,21 +125,13 @@
 								</div>
 							</div>
 							<!-- //searchform searchform2 end -->
-							
+
 							<!-- table-t-wrap start -->
 							<div class="table-t-wrap">
-								<div class="total-num">총 게시글 <em>#</em>건</div>
-								<!-- 달력 start -->
-								<div class="calander-box">
-									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="startDate"
-										value="" /> -
-									<input type="text" class="datepicker" readonly placeholder="날짜선택" name="endDate"
-										value="" />
-								</div>
-								<!-- 달력 end -->
+								<div class="total-num">총 게시글 <em>[[${pageVO.total}]]</em>건</div>
 							</div>
 							<!-- //table-t-wrap end -->
-							
+
 							<!-- 게시판 시작 부분 start -->
 							<div class="table table-responsive">
 								<table>
@@ -152,10 +139,10 @@
 										번호, 제목, 작성자, 등록일
 									</caption>
 									<colgroup>
-										<col style="width: 10%" />
-										<col style="width: 60%" />
+										<col style="width: 20%" />
+										<col style="width: 45%" />
+										<col style="width: 20%" />
 										<col style="width: 15%" />
-										<col style="width: 11.666%" />
 									</colgroup>
 									<thead>
 										<tr>
@@ -166,16 +153,18 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr title="근로기준 &gt; 임금 &gt; 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-											<td data-cell-header="번호">248</td>
-											<td data-cell-header="대분류">
-												통번역인
-											</td>
-											<td data-cell-header="중분류">제목 부분</td>
-											<td data-cell-header="작성일자">작성일자
-
-											</td>
-
+										<tr  th:each="vo, status : ${list}" style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
+											th:if="${vo.notice_title.startsWith('중요')}">
+											<td style=" color: rgb(0, 0, 0); " data-cell-header="번호"></td>
+											<tdonclick="noticeDetail([[${vo.notice_proper_num}]])" style=" color: rgb(0, 0, 0); "data-cell-header="대분류">[[${vo.notice_title}]]</td>
+											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
+											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
+										</tr>
+										<tr th:each=" vo, status : ${list}" style="cursor: pointer">
+											<td data-cell-header="번호">[[${status.count}]]</td>
+											<td data-cell-header="대분류">[[${vo.notice_title}]]</td>
+											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
+											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
 
 									</tbody>
@@ -229,5 +218,19 @@
 	</div>
 	<!-- wrap end -->
 </th:block>
+
+<script>
+
+
+	function nociteDetail()	{
+		location.href = '/notice/noticeDatail?notice_proper_num=' + notice_proper_num;
+	}
+	
+	
+	
+	
+</script>
+
+
 
 </html>

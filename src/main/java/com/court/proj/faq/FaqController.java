@@ -43,7 +43,7 @@ public class FaqController {
 		 * model.addAttribute("PageVO", PageVO); model.addAttribute("list", list);
 		 */
 
-		return "/faq/faqList";
+		return "faq/faqList";
 	}
 
 	// FAQ 리스트
@@ -67,7 +67,7 @@ public class FaqController {
 	public String detail(@RequestParam("faq_proper_num") String faq_proper_num, Model model) {
 		FaqVO vo = faqService.getDetail(faq_proper_num);
 		model.addAttribute("vo", vo);
-		return "/faq/faqModify";
+		return "faq/faqModify";
 	}
 	// FAQ 작성/수정 Form faqModifyForm
 	@PostMapping("/faqModifyForm")
@@ -93,7 +93,7 @@ public class FaqController {
 	// FAQ 등록페이지 진입
 	@GetMapping("/regist")
 	public String regist() {
-		return "/faq/faqRegist";
+		return "faq/faqRegist";
 	}
 	
 	

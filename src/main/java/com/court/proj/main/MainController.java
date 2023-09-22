@@ -48,7 +48,7 @@ public class MainController {
 		model.addAttribute("list3",list3);
 		model.addAttribute("modalContent",modalContent);
 
-		return "/main/mainPage";
+		return "main/mainPage";
 	}
 
 
