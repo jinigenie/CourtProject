@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .antMatchers("/notice/noticeModify").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 .antMatchers("/notice/noticeRegist").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 .antMatchers("/admin/regist").hasAnyRole("SUPERADMIN","JURIS","COURT")
+                .antMatchers("/admin/list").hasAnyRole("SUPERADMIN","JURIS","COURT")
                 )
 				.exceptionHandling()
 		        //.accessDeniedPage("/user/error")

@@ -1,5 +1,7 @@
 package com.court.proj.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int registAdmin(AdminVO vo) {
 		return adminMapper.registAdmin(vo);
+	}
+
+	@Override
+	public List<AdminVO> getList() {
+		return adminMapper.getList();
 	}
 
 }
