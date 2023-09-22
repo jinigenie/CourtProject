@@ -266,6 +266,41 @@
         WHERE USER_PROPER_NUM = #{user_proper_num}
     </update>
 
+    <select id="getAdpnum" resultType="int">
+        SELECT TB_005.APLCN_DTLS_PROPER_NUM
+        FROM TB_001
+                 LEFT OUTER JOIN
+             TB_005 ON TB_001.USER_PROPER_NUM = TB_005.USER_PROPER_NUM
+        WHERE TB_001.USER_ID = #{id};
+    </select>
 
+    <insert id="uploadFileInfo" parameterType="AddInfoVO">
+        INSERT INTO TB_009 (
+            APLCN_DTLS_PROPER_NUM, FILE_CODE, FILE_TYPE, ORIGINAL_FILE_NAME, FILE_PATH
+        )
+        VALUES (
+                   #{aplcn_dtls_proper_num}, #{file_code}, #{file_type}, #{original_file_name}, #{file_path}
+               )
+    </insert>
+
+    <delete id="deleteFileInfo" parameterType="String">
+        DELETE FROM TB_009
+        WHERE FILE_PATH = #{path}
+    </delete>
+
+    <select id="getFilePath" resultType="String">
+        SELECT FILE_PATH FROM TB_009
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num} AND ORIGINAL_FILE_NAME = #{fileName};
+    </select>
+
+    <select id="getFileInfo" resultType="AddInfoVO">
+        SELECT * FROM TB_009
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num}
+    </select>
+
+    <update id="updateSts" parameterType="int">
+        UPDATE TB_005 SET APLICN_DTLS_STS = '신청완료'
+        WHERE APLCN_DTLS_PROPER_NUM = #{reg_num};
+    </update>
 
 </mapper>

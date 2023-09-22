@@ -1,23 +1,18 @@
 package com.court.proj.aplcnReg;
 
-import com.court.proj.announce.AnnounceService;
 import com.court.proj.announce.AnnounceVO;
 import com.court.proj.user.CourtUserDetails;
 import com.court.proj.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.Banner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.Resource;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/app")
@@ -26,6 +21,9 @@ public class AplcnRegController {
     @Autowired
     @Qualifier("aplcnRegService")
     private AplcnRegService aplcnRegService;
+
+    @Autowired
+    private S3Service s3;
 
     int status = 0;
     int cnt = 0;
@@ -198,7 +196,7 @@ public class AplcnRegController {
 
     //서류제출 페이지
     @GetMapping("/file")
-    public String uploadFile(RedirectAttributes ra) {
+    public String uploadFile(RedirectAttributes ra, Model model) {
 
         if (status == 0 && cnt == 0) {
             ra.addFlashAttribute("msg", "저장된 신청 정보가 없습니다");
@@ -208,12 +206,67 @@ public class AplcnRegController {
             return "redirect:/app/info";
         }
 
+        reg_num = aplcnRegService.getAdpnum(id);
+        List<AddInfoVO> alist = aplcnRegService.getFileInfo(reg_num);
+        List<String> caList = new ArrayList<>();
+        List<String> eduList = new ArrayList<>();
+        List<String> certiList = new ArrayList<>();
+        String career = "";
+        String edu = "";
+        String certi = "";
+
+        for (AddInfoVO aivo : alist){
+            if(aivo.getFile_type().equals("BUSINESSLICENSE")){
+                model.addAttribute("bizLi", aivo.getOriginal_file_name());
+            } else if(aivo.getFile_type().equals("BUSINESSREPORT")) {
+                model.addAttribute("bizRe", aivo.getOriginal_file_name());
+            } else if(aivo.getFile_type().equals("TAXCONFIRM")) {
+                model.addAttribute("tax", aivo.getOriginal_file_name());
+            } else if(aivo.getFile_type().equals("RESUME")) {
+                model.addAttribute("resume", aivo.getOriginal_file_name());
+            } else if(aivo.getFile_type().equals("CARRER")) {
+                caList.add(aivo.getOriginal_file_name());
+            } else if(aivo.getFile_type().equals("EDUCATIONLEVEL")) {
+                eduList.add(aivo.getOriginal_file_name());
+            } else if(aivo.getFile_type().equals("CERTIFICATE")) {
+                certiList.add(aivo.getOriginal_file_name());
+            }
+        }
+
+        for(int i = 0; i < caList.size(); i++){
+            if(i == caList.size() - 1) {
+                career += caList.get(i);
+            } else {
+                career += caList.get(i) + ",";
+            }
+        }
+        model.addAttribute("career", career);
+
+        for(int i = 0; i < eduList.size(); i++){
+            if(i == eduList.size() - 1) {
+                edu += eduList.get(i);
+            } else {
+                edu += eduList.get(i) + ",";
+            }
+        }
+        model.addAttribute("edu", edu);
+
+        for(int i = 0; i < certiList.size(); i++){
+            if(i == certiList.size() - 1) {
+                certi += certiList.get(i);
+            } else {
+                certi += certiList.get(i) + ",";
+            }
+        }
+        model.addAttribute("certi", certi);
+
         return "app/aplcnFileUpload";
     }
 
     //신청완료 페이지
     @GetMapping("/submit")
     public String submit() {
+        aplcnRegService.updateSts(reg_num);
         return "app/aplcnSubmission";
     }
 
@@ -440,6 +493,17 @@ public class AplcnRegController {
     @GetMapping("/api")
     public String apiTest() {
         return "app/certi_api";
+    }
+
+    @GetMapping("/s3test")
+    public String s3Test() {
+        return "app/s3Test";
+    }
+
+    @GetMapping("S3Request")
+    public String S3Request(){
+        s3.getBucketList();
+        return "redirect:/app/s3test";
     }
 
 }

@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,5 +42,12 @@ public class AddInfoVO {
     private String issue_agency;
     private String crtfc_number;
     private String issue_date;
+
+    //파일
+    private int aplcn_atch_file_proper_num;
+    private String file_code;
+    private String file_type;
+    private String original_file_name;
+    private String file_path;
 
 }
