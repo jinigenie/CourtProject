@@ -244,6 +244,12 @@
 						text-decoration: none;
 						margin-right: 50px;
 					}
+
+					.pager-wrap .active {
+						background: white;
+						border-color: lightgrey;
+						color: dimgrey;
+					}
 				</style>
 
 				<article id="detail-content">
@@ -267,22 +273,35 @@
 							</div>
 							<div class="searchform searchform2">
 								<div class="searchform-wrap">
-									<div class="select-box">
+									<div class="select-box" style="width: 200px" ;>
 										<label>이름</label>
-										<select class="info-select" id="selectTit" name="searchField"
-											title="검색조건을 선택해주세요." style="min-width: 200px">
-											<option value="searchContent" th:selected="${pageVO.cri.searchContent}">전체
-											</option>
-											<option value="searchUserName" th:selected="${pageVO.cri.searchUserName}">이름
-											</option>
-											<option value="searchNameCode" th:selected="${pageVO.cri.searchNameCode}">
-												재판조력자분류</option>
-											<option value="searchCourt" th:selected="${pageVO.cri.searchCourt}">법원 분류
-											</option>
-
+										<select class="info-select" id="searchTit" name="searchField"
+											title="검색조건을 선택해주세요.">
+											<option value="0">전체</option>
+											<option value="1">이름</option>
+											<option value="2">재판조력자분류</option>
+											<option value="3">법원분류</option>
 										</select>
+
+										<!--<select class="info-select" id="selectTit" name="searchField"
+											title="검색조건을 선택해주세요." style="min-width: 200px">
+											<option value="searchContent"
+												th:selected="${pageVO.cri.searchContent == ''}">전체
+											</option>
+											<option value="searchUserName"
+												th:selected="${pageVO.cri.searchUserName == 'user_name'}">이름
+											</option>
+											<option value="searchNameCode"
+												th:selected="${pageVO.cri.searchNameCode == ''}">
+												재판조력자분류</option>
+											<option value="searchCourt" th:selected="${pageVO.cri.searchCourt == ''}">법원
+												분류
+											</option>
+										</select>-->
+
+
 									</div>
-									<script>
+									<!--<script>
 
 										const selectElement = document.querySelector('.info-select');
 										const inputElement = document.querySelector('input[name="searchAll"]');
@@ -313,6 +332,23 @@
 										// select 요소의 change 이벤트에 이벤트 리스너를 추가합니다.
 										selectElement.addEventListener('change', updateInputName);
 
+									</script>-->
+									
+									<script>
+										document.getElementById("searchTit").addEventListener("change", function () {
+											var searchField = document.getElementById("searchTit").value;
+
+											// 검색 조건에 따라 placeholder 변경
+											if (searchField === "0") {
+												document.getElementById("searchAll").placeholder = "검색어를 입력해주세요";
+											} else if (searchField === "1") {
+												document.getElementById("searchAll").placeholder = "이름을 입력해주세요";
+											} else if (searchField === "2") {
+												document.getElementById("searchAll").placeholder = "재판조력자 분류를 입력하세요";
+											} else if (searchField === "3") {
+												document.getElementById("searchAll").placeholder = "법원명을 입력해주세요";
+											}
+										});
 									</script>
 
 									<div class="search-input-wrap">
@@ -321,8 +357,10 @@
 												placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요" id="searchAll"
 												style="width: 340px;">
 										</div>
-										<button class="aplcnSearch_Btn" id="aplcnSearch_btn" type="submit"
-											style="float: left; margin: 0;">조회</button>
+										<!--<button class="aplcnSearch_Btn" id="aplcnSearch_btn" type="submit"
+											style="float: left; margin: 0;">조회</button>-->
+										<button type="button" class="aplcnSearch_Btn" id="aplcnSearch_btn"
+											style="float: left; margin: 0;" onclick="searchAlls()">조회</button>
 
 									</div>
 
@@ -361,7 +399,7 @@
 							<div class="total-num">총 게시글 <em>[[${total}]]</em>건</div>
 						</div>
 						<!-- 게시판 시작 부분 -->
-						<div class="table">
+						<div class="table table-responsive">
 							<table>
 								<caption>
 									번호, 민원서식명, 민원분류, 처리기간, 서식파일, 신청의 대한
@@ -390,62 +428,57 @@
 								<tbody id="aplcnListId">
 
 									<tr title="etc" style="cursor: pointer" th:each="vo:${vo}">
-										<td data-cell-header="신청자 상세정보 고유번호">[[${vo.user_proper_num}]]</td>
-										<td data-cell-header="신청자 이름" tabindex="0"
-											onkeypress="if(event.keyCode ==13){$(this).click()}"
-											onclick="jsSamuDetail('TMP00000204')">
-											[[${vo.user_name}]]
-										</td>
+										<td data-cell-header="신청자 상세정보 고유번호">[[${vo.aplcn_dtls_proper_num}]]</td>
+										<td data-cell-header="신청자 이름">[[${vo.user_name}]]</td>
 										<td data-cell-header="조력자 분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
 										<td data-cell-header="담당법원">[[${vo.court_name}]]</td>
 										<td data-cell-header="신청날짜">[[${vo.aplicn_dtls_date}]]
-											<a style> </a>
-										<td onclick="event.stopPropagation();">
-											<a th:href="@{/aplcn/aplcnDetails(aplcn_dtls_proper_num=${vo.aplcn_dtls_proper_num}, user_proper_num=${vo.user_proper_num}, aplicn_dtls_sts=${vo.aplicn_dtls_sts})}"
-												class="case case1">
-												<em>상세보기</em>
-											</a>
-										</td>
-
-										<td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
-										</td>
+										<td><a th:href="@{/aplcn/aplcnDetails(aplcn_dtls_proper_num=${vo.aplcn_dtls_proper_num}, user_proper_num=${vo.user_proper_num}, aplicn_dtls_sts=${vo.aplicn_dtls_sts})}"
+												class="case case1"><em>상세보기</em></a></td>
+										<td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td></td>
 
 									</tr>
-
 								</tbody>
 							</table>
+
 						</div>
+
 
 						<!-- pageNation -->
 						<div class="pager">
 							<div class="pager-wrap">
-								<a th:href="@{page(page=1, amount=${total})}" class="arr first"><strong class="sr-only">맨 처음 목록으로 이동</strong></a>
+								<a th:href="@{page(page=1, amount=${total})}" class="arr first"><strong
+										class="sr-only">맨 처음 목록으로 이동</strong></a>
 
 								<th:block th:if="${pageVO.prev}">
 									<a th:href="@{aplcnList(page=${pageVO.start - 1}, 
 							 amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
 							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
-							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="arr prev"><strong class="sr-only">이전페이지로 이동</strong></a>
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}"
+										class="arr prev"><strong class="sr-only">이전페이지로 이동</strong></a>
 								</th:block>
 
 								<th:block th:each="page : ${pageVO.pageList}">
 									<a th:href="@{aplcnList(page=${page},
 				 			amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
 							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
-							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="active">[[${page}]]</a>
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}"
+										class="active">[[${page}]]</a>
 								</th:block>
 
 								<th:block th:if="${pageVO.next}">
 									<a th:href="@{aplcnList(page=${pageVO.end + 1},
 								amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
 							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
-							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="arr next"><strong class="sr-only">다음페이지로 이동</strong></a>
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}"
+										class="arr next"><strong class="sr-only">다음페이지로 이동</strong></a>
 								</th:block>
 
 								<a th:href="@{aplcnList(page=${pageVO.realEnd}, 
 							amount=${pageVO.amount}, searchContent=${pageVO.cri.searchContent}, 
 							 searchUserName=${pageVO.cri.searchUserName}, searchNameCode=${pageVO.cri.searchNameCode},
-							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}" class="arr last"><strong class="sr-only">맨 마지막 목록으로 이동</strong></a>
+							 searchCourt=${pageVO.cri.searchCourt}, aplicn_dtls_sts=${pageVO.cri.aplicn_dtls_sts})}"
+									class="arr last"><strong class="sr-only">맨 마지막 목록으로 이동</strong></a>
 
 
 							</div>
@@ -459,6 +492,35 @@
 		<!-- //main_con  -->
 	</div>
 </th:block>
+<script>
+	function searchAlls() {
+
+		// 테이블 내의 공고문 제목 검색
+		var queryString = document.getElementById("searchAll").value.toLowerCase();
+		var table = document.querySelector(".table-responsive table");
+		var rows = table.getElementsByTagName("tr");
+
+		for (var i = 1; i < rows.length; i++) { // 첫 번째 행은 테이블 헤더이므로 제외
+			var titleCell = rows[i].getElementsByTagName("td")[2]; // 제목이 있는 열(세 번째 열) 선택
+			var title = titleCell.textContent.toLowerCase(); // 공고문 제목을 소문자로 변환
+
+			// 검색어가 포함된 공고문만 표시
+			if (title.includes(queryString)) {
+				rows[i].style.display = ""; // 검색어가 포함된 공고문은 보이도록 설정
+			} else {
+				rows[i].style.display = "none"; // 검색어가 포함되지 않은 공고문은 숨김
+			}
+		}
+	}
+</script>
+
+<script>document.getElementById("searchAll").addEventListener("keyup", function (event) {
+		if (event.key === "Enter") {
+			searchAlls();
+		}
+	});
+</script>
+
 
 <script th:inline="javascript">
 

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ListVO {
 
-	//신청자 리스트
+	// 신청자 리스트
 	private Integer user_proper_num;
 	private Integer aplcn_dtls_proper_num;
 	private String trial_fcltt_clasifi_code;
@@ -20,8 +20,8 @@ public class ListVO {
 	private String court_proper2;
 	private String court_name;
 	private String aplicn_dtls_date;
-	
-	//신청자 상세정보
+
+	// 신청자 상세정보
 	private String user_name;
 	private String user_id;
 	private String ligtn_case_carer_yn;
@@ -54,7 +54,15 @@ public class ListVO {
 	private Integer trial_fcltt_proper_num;
 	private Integer court_proper_num;
 
-	//신청자 평가
+	// 신청자 기본정보
+	private String user_phone;
+	private String user_rrn_f;
+	private String user_email_f;
+	private String user_email_b;
+	private String user_edctn_final;
+	private String user_ar;
+
+	// 신청자 평가
 	private Integer all_carer_score;
 	private Integer jrsdc_carer_score;
 	private Integer office_score;
@@ -64,17 +72,17 @@ public class ListVO {
 	private Integer evaluate_score;
 	private Integer judge_recom_score;
 	private String review_etc;
-	
-	//등재하기
+
+	// 등재하기
 	private String accept_date;
 	private String accept_etc;
 	private String accept_act_yn;
-	
-	//파일 다운로드
-    private Integer aplcn_atch_file_proper_num;
-    private String file_code;
-    private String file_type;
-    private String original_file_name;
-    private String file_path;
-    
+
+	// 파일 다운로드
+	private Integer aplcn_atch_file_proper_num;
+	private String file_code;
+	private String file_type;
+	private String original_file_name;
+	private String file_path;
+
 }

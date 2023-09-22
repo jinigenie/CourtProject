@@ -162,10 +162,10 @@
 
 
 
-						<div class="heading-wrap container">
+						<div class="heading-wrap container" th:if="${vo3 != null}">
 							<h3 class="heading1">
 								<!--<span>상세 정보</span>-->
-								<td>[[${vo1.user_name}]] ([[${vo1.user_id}]])님의 상세정보</td>
+								<td>[[${vo3.user_name}]] ([[${vo3.user_id}]])님의 상세정보</td>
 							</h3>
 						</div>
 
@@ -193,6 +193,44 @@
 											<th scope="col" colspan="5"><strong>중요 상세정보</strong></th>
 										</tr>
 									</thead>
+									<tbody><tr title="재판조력자 메뉴" style="cursor: pointer">
+											<td style="color: #2065c6;" class="tg-0lax">이름</td>
+											<td>[[${vo1.user_name}]] </td>
+										</tr>
+										<tr title="법원 메뉴" style="cursor: pointer">
+											<td style="color: #2065c6;" class="tg-0lax">연락처</td>
+											<td>[[${#strings.substring(vo1.user_phone, 0, 3) + '-' + #strings.substring(vo1.user_phone, 3, 7) + '-' + #strings.substring(vo1.user_phone, 7)}]]</td>
+										</tr>
+										<tr title="신청 상태 메뉴" style="cursor: pointer">
+											<td style="color: #2065c6;" class="tg-0lax">생년월일</td>
+											<td>[[${vo1.user_rrn_f}]]</td>
+										</tr>
+										<tr title="소송사건 메뉴" style="cursor: pointer">
+											<td style="color: #2065c6;" class="tg-0lax">이메일</td>
+											<td>[[${vo1.user_email_f}]]@[[${vo1.user_email_b}]]
+											</td>
+										</tr>
+										<tr>
+											<td style="color: #2065c6;" class="tg-0lax">최종 학력</td>
+											<td>[[${vo1.user_edctn_final}]]</td>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- 중요 상세정보 -->
+							<div class="table" style="border-bottom: none;">
+								<table>
+									<caption></caption>
+									<colgroup>
+										<col style="width: 50%">
+										<col style="width: 50%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" colspan="5"><strong>중요 상세정보</strong></th>
+										</tr>
+									</thead>
 									<tbody>
 										<input type="hidden" name="aplcn_dtls_proper_num" id="aplcn_dtls_proper_num"
 											th:value="${vo1.aplcn_dtls_proper_num}">
@@ -204,106 +242,171 @@
 											th:value="${vo1.trial_fcltt_proper_num}">
 										<input type="hidden" name="court_proper_num" id="court_proper_num"
 											th:value="${vo1.court_proper_num}">
+										<input type="hidden" name="user_ar" id="user_ar"
+											th:value="${vo1.user_ar}">
+											
 
-										<!--<input type="hidden" name="trial_fcltt_proper_num"
-											th:value="${vo1.trial_fcltt_proper_num}">
-										<input type="hidden" name="court_proper_num" th:value="${vo1.court_proper_num}">
-										<input type="hidden" name="aplicn_dtls_sts" th:value="${vo1.aplicn_dtls_sts}">
-										<input type="hidden" name="aplicn_dtls_date" th:value="${vo1.aplicn_dtls_date}">-->
 										<tr title="재판조력자 메뉴" style="cursor: pointer">
-											<td data-cell-header="재판조력자 종류" style="color: #2065c6;" class="tg-0lax">재판조력자 분류</td>
+											<td data-cell-header="재판조력자 종류" style="color: #2065c6;" class="tg-0lax">
+												재판조력자 분류</td>
 											<td data-cell-header="재판조력자 분류">[[${vo1.trial_fcltt_clasifi_code}]]
 												[[${vo1.trial_fcltt_sbcls_code}]] </td>
 										</tr>
 										<tr title="법원 메뉴" style="cursor: pointer">
-											<td data-cell-header="법원 종류" style="color: #2065c6;" class="tg-0lax">신청 법원</td>
+											<td data-cell-header="법원 종류" style="color: #2065c6;" class="tg-0lax">신청 법원
+											</td>
 											<td data-cell-header="선택 법원">[[${vo1.court_proper1}]]
-												[[${vo1.court_name}]] </td>
+												[[${vo1.court_proper2}]] </td>
 										</tr>
 										<tr title="신청 상태 메뉴" style="cursor: pointer">
-											<td data-cell-header="신청 상태" style="color: #2065c6;" class="tg-0lax">신청 상태</td>
+											<td data-cell-header="신청 상태" style="color: #2065c6;" class="tg-0lax">신청 상태
+											</td>
 											<td data-cell-header="서류 상태">[[${vo1.aplicn_dtls_sts}]]
 											</td>
 										</tr>
 										<tr title="소송사건 메뉴" style="cursor: pointer">
-											<td data-cell-header="소송 경력 구분" style="color: #2065c6;" class="tg-0lax">소송사건 당사자 경력</td>
+											<td data-cell-header="소송 경력 구분" style="color: #2065c6;" class="tg-0lax">소송사건
+												당사자 경력</td>
 											<td data-cell-header="소송 경력">[[${vo1.ligtn_case_carer_yn}]]
 											</td>
 										</tr>
 										<tr>
-											<td data-cell-header="소송 경력 내용" style="color: #2065c6;" class="tg-0lax">소송사건 당사자 경력 내용</td>
+											<td data-cell-header="소송 경력 내용" style="color: #2065c6;" class="tg-0lax">소송사건
+												당사자 경력 내용</td>
 											<td data-cell-header="소송 경력">[[${vo1.ligtn_case_carer_etc}]]</td>
 											</td>
 										</tr>
 
 										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
 											style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">보험업계 경력</td>
+											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">보험업계 경력
+											</td>
 											<td data-cell-header="민원서식명">[[${vo1.insrn_indst_carer_yn}]]
 											</td>
 										</tr>
 										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">보험업계 경력 내용</td>
+											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">보험업계 경력
+												내용</td>
 											<td data-cell-header="민원서식명">[[${vo1.insrn_indst_carer_etc}]]</td>
 										</tr>
 
 										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">형사처벌 받은 경력</td>
+											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">형사처벌 받은 경력
+											</td>
 											<td data-cell-header="민원서식명">[[${vo1.criminal_penalty_carer_yn}]]</td>
 											</td>
 										</tr>
 										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">형사처벌 받은 경력 내용</td>
+											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">형사처벌 받은
+												경력 내용</td>
 											<td data-cell-header="민원서식명">[[${vo1.criminal_penalty_carer_etc}]]</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
+							<!-- 학력 상세정보 -->
 							<div class="table" style="border-bottom: none;">
 								<table>
 									<caption></caption>
 									<colgroup>
-										<col style="width: 50%">
-										<col style="width: 50%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 10%">
+										<col style="width: 10%">
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="" colspan="5" class="custom-table"><strong>학력 상세정보</strong></th>
+											<th scope="col" colspan="6"><strong>학력 상세정보</strong></th>
 										</tr>
+										<th data-cell-header="번호">학교 이름</th>
+										<th data-cell-header="번호">학과 전공</th>
+										<th data-cell-header="번호">입학일</th>
+										<th data-cell-header="담당법원">졸업일</th>
+										<th data-cell-header="담당법원">학위</th>
+										<th data-cell-header="담당법원">졸업 구분</th>
 									</thead>
-									<!--<input type="hidden" name="edctn_dtls_proper_num" value="edctn_dtls_proper_num">-->
+									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
+								</table>
+								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+									<colgroup>
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 10%">
+										<col style="width: 10%">
+									</colgroup>
 									<tbody>
-										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">학교 이름</td>
-											<td data-cell-header="민원서식명">[[${vo1.edctn_school_name}]]</td>
-										</tr>
-										<tr>
-											<td data-cell-header="점수" style="color: #2065c6;" class="tg-0lax">학과 전공</td>
-											<td data-cell-header="민원서식명">[[${vo1.edctn_major}]]</td>
-										</tr>
-
-										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">입학일</td>
-											<td data-cell-header="민원서식명">[[${vo1.edctn_admsn_date}]]</td>
-										</tr>
-										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">졸업일</td>
-											<td data-cell-header="민원서식명">[[${vo1.edctn_grdtn_date}]]</td>
-										</tr>
-
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">학위</td>
-											<td data-cell-header="민원서식명">[[${vo1.edctn_degree}]]</td>
-										</tr>
-										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">최종학력 여부</td>
-											<td data-cell-header="민원서식명">[[${vo1.edctn_final}]]</td>
-										</tr>
+										<th:block th:each="obj : ${edcnList}">
+											<tr>
+												<td data-cell-header="민원서식명" class="tg-0lax">
+													[[${obj.edctn_school_name}]]</td>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.edctn_major}]]</td>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.edctn_admsn_date}]]
+												</td>
+												<td data-cell-header="민원서식명">[[${obj.edctn_grdtn_date}]]</td>
+												<td data-cell-header="민원서식명">[[${obj.edctn_degree}]]</td>
+												<td data-cell-header="민원서식명">[[${obj.edctn_final}]]</td>
+											</tr>
+										</th:block>
 									</tbody>
 								</table>
 
 							</div>
+							<!-- 경력 상세정보 -->
+							<div class="table" style="border-bottom: none;">
+								<table>
+									<caption></caption>
+									<colgroup>
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 10%">
+										<col style="width: 10%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col" colspan="6"><strong>경력 상세정보</strong></th>
+										</tr>
+										<th data-cell-header="번호">회사명/활동기관명</th>
+										<th data-cell-header="번호">경력 구분</th>
+										<th data-cell-header="번호">근무 시작 일자</th>
+										<th data-cell-header="담당법원">근무 종료 일자</th>
+										<th data-cell-header="담당법원">부서</th>
+										<th data-cell-header="담당법원">직책</th>
+									</thead>
+									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
+								</table>
+								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+									<colgroup>
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 20%">
+										<col style="width: 10%">
+										<col style="width: 10%">
+									</colgroup>
+									<tbody>
+										<th:block th:each="obj : ${carerList}">
+											<tr>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.company_name}]]
+												</td>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.carer_type}]]</td>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.work_start_date}]]
+												</td>
+												<td data-cell-header="민원서식명">[[${obj.work_end_date}]]</td>
+												<td data-cell-header="민원서식명">[[${obj.work_department}]]</td>
+												<td data-cell-header="민원서식명">[[${obj.work_position}]]</td>
+											</tr>
+										</th:block>
+									</tbody>
+								</table>
+
+							</div>
+							<!-- 자격증 상세정보 -->
 							<div class="table" style="border-bottom: none;">
 								<table>
 									<caption></caption>
@@ -332,11 +435,13 @@
 										<col style="width: 25%;">
 									</colgroup>
 									<tbody>
-										<th:block th:each="obj : ${vo}">
+										<th:block th:each="obj : ${crtfcList}">
 											<tr>
 												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_type}]]</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.issue_agency}]]</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_number}]]</td>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.issue_agency}]]
+												</td>
+												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_number}]]
+												</td>
 												<td data-cell-header="민원서식명">[[${obj.issue_date}]]</td>
 											</tr>
 										</th:block>
@@ -344,107 +449,52 @@
 								</table>
 
 							</div>
+							<!-- 파일 목록 -->
 							<div class="table" style="border-bottom: none;">
 								<table>
 									<caption></caption>
 									<colgroup>
-										<col style="width: 50%">
-										<col style="width: 50%">
+										<col style="width: 25%">
+										<col style="width: 25%">
+										<col style="width: 25%">
+										<col style="width: 25%">
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="col" colspan="5"><strong>경력 상세정보</strong></th>
+											<th scope="col" colspan="5"><strong>파일 다운받자</strong></th>
 										</tr>
+										<th data-cell-header="번호">자격증 종목</th>
+										<th data-cell-header="번호">발급 기관</th>
+										<th data-cell-header="번호">자격증/면허번호</th>
+										<th data-cell-header="담당법원">발급일</th>
 									</thead>
+									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
+								</table>
+								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+									<colgroup>
+										<col style="width: 25%;">
+										<col style="width: 25%;">
+										<col style="width: 25%;">
+										<col style="width: 25%;">
+									</colgroup>
 									<tbody>
-										<tr title="근로기준 > 임금 > 임금체불진정서 / 임금체불 진정서" style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">회사명/활동기관명</td>
-											<td data-cell-header="민원서식명" >[[${vo1.company_name}]]</td>
-										</tr>
-										<tr>
-											<td data-cell-header="점수" style="color: #2065c6;" class="tg-0lax">경력 구분</td>
-											<td data-cell-header="민원서식명">[[${vo1.carer_type}]]년</td>
-										</tr>
-
-										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax"> 근무 시작 일자</td>
-											<td data-cell-header="민원서식명">[[${vo1.work_start_date}]]</td>
-										</tr>
-										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">근무 종료 일자</td>
-											<td data-cell-header="민원서식명">[[${vo1.work_end_date}]]</td>
-										</tr>
-
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">부서</td>
-											<td data-cell-header="민원서식명">[[${vo1.work_department}]]</td>
-										</tr>
-										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">직책</td>
-											<td data-cell-header="민원서식명">[[${vo1.work_position}]]</td>
-										</tr>
+										<th:block th:each="file : ${linkList}">
+											<tr>
+												<td class="tg-0lax"><a th:href="${file}"></a></td>
+												
+											</tr>
+										</th:block>
 									</tbody>
 								</table>
 
-								<div class="table">
-									<colgroup>
-										<col style="width: 30%">
-										<col style="width: 70%">
-									</colgroup>
+							</div>
+							</br>
 
-									<table>
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td colspan="2" data-cell-header="번호" style="text-align: center; width: 250px; color: #2065c6" class="tg-0lax">수행업무</td>
-											<td rows="4" cols="50" style="width: 800px; height: 100px;"
-												class="left-align">[[${vo1.work_description}]]</td>
-										</tr>
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td colspan="2" data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">활동 경력 설명</t>
-											<td rows="4" cols="50" style="width: 800px; height: 100px;">
-												[[${vo1.carer_description}]]</td>
-										</tr>
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td colspan="2" data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">특기사항</td>
-											<td rows="4" cols="50" style="width: 800px; height: 100px;">
-												[[${vo1.special_note_description}]]</td>
-										</tr>
-									</table>
-									<td id="averageTd"><strong></strong></td>
-								</div>
 								<div class="tab-wrap">
 									<strong>
 										<div id="result"></div>
 									</strong>
 								</div>
-
-								<script type="text/javascript">
-									var popupWindow; // 팝업 창 객체를 저장할 변수
-
-									function openPopup() {
-										// 현재 페이지에서 aplcn_dtls_proper_num 값을 가져옵니다.
-										var aplcnDtlsProperNum = document.getElementById("aplcn_dtls_proper_num").value;
-										console.log(aplcn_dtls_proper_num);
-
-
-										// URL에 aplcn_dtls_proper_num 값을 포함하여 팝업 창 열기
-										//var popupUrl = "http://localhost:8585/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=" + aplcnDtlsProperNum;
-										//popupWindow = window.open(popupUrl, "popup", "width=1920px, height=1080px");
-									}
-
-								</script>
-
-								<script type="text/javascript">
-									// 결과를 부모 창의 요소에 표시합니다.
-									var resultElement = window.opener.document.getElementById("result");
-									if (resultElement) {
-										resultElement.innerHTML = "평균 점수: " + average;
-									} else {
-										// 만약 결과를 표시할 요소가 없다면, 콘솔에 오류 메시지를 출력합니다.
-										console.error("결과를 표시할 요소를 찾을 수 없습니다.");
-									}
-
-								</script>
 
 							</div>
 							</br>
@@ -455,12 +505,66 @@
 								<a href="/aplcn/aplcnList" class="fcltt_btn1">목록으로</a>
 
 
-								<a href="#" class="fcltt_btn2" id="rejectBtn">서류반려</a>
+								<a href="#" class="fcltt_btn2" id="rejectBtn"
+									onclick="return aplcnEvaluation();">서류반려</a>
 								<!--<a th:href="@{/aplcn/aplcnReject(aplicn_dtls_sts=${vo1.aplicn_dtls_sts}, aplicn_dtls_sts='B') }" class="fcltt_btn2" id="modifyBtn">서류반려</a>-->
 								<a href="#" class="fcltt_btn3" onclick="openPopup1()">평가하기</a>
 								<a th:href="@{/fcltt/fclttRegist(user_proper_num=${vo1.user_proper_num}, aplicn_dtls_sts='D') }"
-									class="fcltt_btn4" onclick="openPopup2()">등재하기</a>
+									class="fcltt_btn4" id="registerBtn" onclick="return confirmEvaluation();">등재하기</a>
 							</div>
+
+
+
+							<script type="text/javascript">
+								var popupWindow; // 팝업 창 객체를 저장할 변수
+
+								function openPopup() {
+									// 현재 페이지에서 aplcn_dtls_proper_num 값을 가져옵니다.
+									var aplcnDtlsProperNum = document.getElementById("aplcn_dtls_proper_num").value;
+									console.log(aplcn_dtls_proper_num);
+
+
+									// URL에 aplcn_dtls_proper_num 값을 포함하여 팝업 창 열기
+									//var popupUrl = "http://localhost:8585/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=" + aplcnDtlsProperNum;
+									//popupWindow = window.open(popupUrl, "popup", "width=1920px, height=1080px");
+								}
+
+							</script>
+
+							<script type="text/javascript">
+								// 결과를 부모 창의 요소에 표시합니다.
+								var resultElement = window.opener.document.getElementById("result");
+								if (resultElement) {
+									resultElement.innerHTML = "평균 점수: " + average;
+								} else {
+									// 만약 결과를 표시할 요소가 없다면, 콘솔에 오류 메시지를 출력합니다.
+									console.error("결과를 표시할 요소를 찾을 수 없습니다.");
+								}
+
+							</script>
+							
+							<script>
+								function aplcnEvaluation() {
+									if (confirm('서류를 반려하시겠습니까?')) {
+										// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
+										return true;
+									} else {
+										return false;
+									}
+								}
+							</script>
+
+							<!--등재하기-->
+							<script>
+								function confirmEvaluation() {
+									if (confirm('등재하시겠습니까?')) {
+										// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
+										return true;
+									} else {
+										return false;
+									}
+								}
+							</script>
 
 
 							<script th:inline="javascript">
@@ -476,23 +580,10 @@
 
 							</script>
 
-
-
-							<script th:inline="javascript">
-								var msg1 = '[[${msg1}]]';
-
-								if (msg == 1) {
-									alert(' 완료하였습니다.');
-									window.opener.location.href = '/aplcn/aplcnList';
-								} else if (msg == 0) {
-									alert('등재를 완료해주세요.');
-								}
-							</script>
-
 							<script th:inline="javascript">
 								function openPopup1() {
 									// 평가하기 버튼을 눌렀을 때 팝업 창을 열기
-									var url = "/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=[[${vo1.aplcn_dtls_proper_num}]]&user_proper_num=[[${vo1.user_proper_num}]]";
+									var url = "/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=[[${vo1.aplcn_dtls_proper_num}]]";
 									var popup = window.open(url, "평가 팝업", "width=1920, height=1000");
 									if (popup) {
 										popup.focus();
@@ -500,6 +591,7 @@
 										alert("팝업 창이 차단되었습니다. 팝업 창을 허용해주세요.");
 									}
 								}
+
 							</script>
 							<script th:inline="javascript">
 								function openPopup2() {
@@ -518,6 +610,7 @@
 									alert('등재를 완료해주세요.')
 								}
 							</script>
+
 							</br>
 							</br>
 						</div>

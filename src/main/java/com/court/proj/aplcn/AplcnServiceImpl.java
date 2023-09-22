@@ -17,6 +17,28 @@ public class AplcnServiceImpl implements AplcnService {
 	public ArrayList<ListVO> getList(Criteria cri) {
 		return aplcnMapper.getList(cri);
 	}
+	
+	//신청자 리스트 검색
+	@Override
+	public ArrayList<ListVO> searchAll(String keyword){
+		return aplcnMapper.searchAll(keyword);
+	}
+	
+	@Override
+	public ArrayList<ListVO> searchAplcnName(String keyword) {
+		return aplcnMapper.searchAplcnName(keyword);
+	}
+
+	@Override
+	public ArrayList<ListVO> searchAplcnFcltt(String keyword) {
+		return aplcnMapper.searchAplcnFcltt(keyword);
+	}
+
+	@Override
+	public ArrayList<ListVO> searchAplcnCourt(String keyword) {
+		return aplcnMapper.searchAplcnFcltt(keyword);
+	}
+	//검색 여기까지
 
 	//신청자 리스트 (페이징)
 	@Override
@@ -48,7 +70,7 @@ public class AplcnServiceImpl implements AplcnService {
 		return aplcnMapper.aplcnCompleted(vo);
 	}
 		
-	//신청자 평가 (수정중)
+	//신청자 평가
 	@Override
 	public int aplcnEvaluate(ListVO vo) {
 		int result = aplcnMapper.aplcnEvaluate(vo);
@@ -57,9 +79,30 @@ public class AplcnServiceImpl implements AplcnService {
 
 	//파일 다운로드
 	@Override
-	public ListVO aplcnFiles(int aplcn_dtls_proper_num) {
+	public ArrayList<ListVO> aplcnFiles(int aplcn_dtls_proper_num) {
 		return aplcnMapper.aplcnFiles(aplcn_dtls_proper_num);
 	}
+
+	@Override
+	public ArrayList<ListVO> getEdctnList(int aplcn_dtls_proper_num) {
+		return aplcnMapper.getEdctnList(aplcn_dtls_proper_num);
+	}
+
+	@Override
+	public ArrayList<ListVO> getCarerList(int aplcn_dtls_proper_num) {
+		return aplcnMapper.getCarerList(aplcn_dtls_proper_num);
+	}
+
+	@Override
+	public ArrayList<ListVO> getCrtfcList(int aplcn_dtls_proper_num) {
+		return aplcnMapper.getCrtfcList(aplcn_dtls_proper_num);
+	}
+
+	/*@Override
+	public ArrayList<FileVO> getFileList(int aplcn_dtls_proper_num) {
+		return aplcnMapper.getFileList(aplcn_dtls_proper_num);
+	}*/
+
 
 	
 }
