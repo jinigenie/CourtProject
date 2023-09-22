@@ -70,7 +70,7 @@ public class FclttController {
 //	 public String fclttRegist(@RequestParam("user_proper_num") String user_proper_num, Model model) {
 		public String fclttRegist( Model model) {
 		
-		String user_proper_num ="1";
+		String user_proper_num ="2";
 		FclttVO vo = fclttService.getDetail(user_proper_num);
 		
 		String court_proper1 = vo.getCourt_proper1();

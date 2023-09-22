@@ -2,8 +2,6 @@
 <html>
 
 <head>
-	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
-	<script th:src="@{../js/fcltt/fcltt.js}"></script>
 </head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -24,7 +22,7 @@
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">공지사항 등록</a></li>
+									<li ><a href="#">공지사항 등록</a></li>
 									<li><a href="#">공지사항 목록</a></li>
 								</ul>
 							</li>
@@ -156,13 +154,12 @@
 										<tr  th:each="vo, status : ${list}" style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
 											th:if="${vo.notice_title.startsWith('중요')}">
 											<td style=" color: rgb(0, 0, 0); " data-cell-header="번호"></td>
-											<tdonclick="noticeDetail([[${vo.notice_proper_num}]])" style=" color: rgb(0, 0, 0); "data-cell-header="대분류">[[${vo.notice_title}]]</td>
+											<td  style=" color: rgb(0, 0, 0); "data-cell-header="대분류"> <a th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a></td>
 											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
-											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
-										</tr>
+											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td></tr>
 										<tr th:each=" vo, status : ${list}" style="cursor: pointer">
 											<td data-cell-header="번호">[[${status.count}]]</td>
-											<td data-cell-header="대분류">[[${vo.notice_title}]]</td>
+											<td data-cell-header="대분류">  <a th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a></td>
 											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
@@ -222,7 +219,7 @@
 <script>
 
 
-	function nociteDetail()	{
+	function nociteDetail(notice_proper_num)	{
 		location.href = '/notice/noticeDatail?notice_proper_num=' + notice_proper_num;
 	}
 	

@@ -554,10 +554,7 @@ send.addEventListener('click', function(e){
 		});
 	});
 
-	$(document).ready(function () {
-		pauseList($("#selectedValue").val(), 1, 10);
 
-	});
 
 
 
