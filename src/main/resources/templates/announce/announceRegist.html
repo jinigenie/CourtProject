@@ -118,8 +118,9 @@
 													<span class="txt-left" title="작성자">작성자</span>
 												</th>
 												<td data-cell-header="작성자" class="txt-left">
-													<input type="text" name="admin_id" id="title" class="cm_inptxt"
-														th:value="${vo.admin_id}" readonly>
+													<p name="admin_id" id="writer" style="font-size: 17px">
+														[[${vo.admin_id}]]
+													</p>
 												</td>
 											</tr>
 
@@ -217,7 +218,7 @@
 												<th scope="row" class="txt-left">
 													<span>내용</span>
 												</th>
-												<td data-cell-header="이메일" class="txt-left">
+												<td data-cell-header="내용" class="txt-left">
 
 
 													<textarea id="editor" name="announce_content">
@@ -235,7 +236,7 @@
 						<!-- //공고 내용 end -->
 
 						<!-- 페이지 이동 버튼 -->
-						<div class="fclttRegist_btn">
+						<div class="fclttRegist_btn" style="margin-bottom: 50px">
 							<button type="submit" class="fcltt_btn1">등록</button>
 							<button type="button" class="fcltt_btn2" onclick="cancelClick()">취소</button>
 						</div>
