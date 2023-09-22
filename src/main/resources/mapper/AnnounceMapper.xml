@@ -33,7 +33,7 @@
 		a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 		ORDER BY
 		a.announce_proper_num
-		LIMIT #{page}, #{amount}
+		LIMIT #{pageStart}, #{amount}
 	</select>
 
 	<select id="getTotal" resultType="int">

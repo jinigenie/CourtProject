@@ -34,19 +34,18 @@ public class AnnouncePageVO {
 	    this.amount = cri.getAmount();
 	    this.total = total;
 
-	    // end 페이지 계산
-	    this.end = (int) Math.ceil((double) this.page / this.pnCount) * this.pnCount;
-
-	    // start 페이지 계산
-	    this.start = this.end - this.pnCount + 1;
-	    if (this.start < 1) {
-	        this.start = 1;
-	    }
-
 	    // 실제 끝번호의 계산
 	    this.realEnd = (int) Math.ceil((double) this.total / this.amount);
 
 	    // end 페이지 재결정
+	    this.end = (int) Math.ceil((double) this.page / this.pnCount) * this.pnCount;
+	    this.start = this.end - this.pnCount + 1;
+	    
+	    if (this.start < 1) {
+	        this.start = 1;
+	    }
+
+	    // end 페이지가 실제 끝번호보다 크면 수정
 	    if (this.end > this.realEnd) {
 	        this.end = this.realEnd;
 	    }
@@ -59,16 +58,5 @@ public class AnnouncePageVO {
 
 	    // 타임리프 - 리스트에 페이지네이션을 담는다. (람다식)
 	    this.pageList = IntStream.rangeClosed(this.start, this.end).boxed().collect(Collectors.toList());
-
-	    // 페이지 번호를 수정하여 1번부터 10번까지의 페이지가 출력되도록 조정
-	    if (this.end >= 10) {
-	        this.start = 1;
-	        this.end = 10;
-	    }
-	    
-	    // 페이지 안의 공고문 수를 1부터 10까지로 제한
-	    this.amount = 10;
 	}
-
-	
 }

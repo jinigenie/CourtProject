@@ -43,7 +43,7 @@ public class AnnounceController {
 	    // 공고 리스트
 	    ArrayList<AnnounceVO> list = announceService.AnnounceList(cri);
 	    model.addAttribute("list", list);
-//	    System.out.println(list.toString());
+	    
 
 	    int total = announceService.getTotal();
 	    model.addAttribute("total", total);
