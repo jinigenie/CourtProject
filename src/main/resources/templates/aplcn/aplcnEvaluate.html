@@ -172,6 +172,11 @@
 											</td>
 
 											<td class="tg-0lax" rowspan="3">사무소 소재지</td>
+											<td class="tg-0lax"><strong>신청인 사무소 주소지</strong></td>
+											</td>
+											<td class="tg-0lax" style="border-right: none">[[${vo.user_ar}]]</td>
+										</tr>
+										<tr>
 											<td class="tg-0lax"><input type="radio" name="expC" value="5"
 													onclick="updateReadOnly('expC', this.value); calculateTotal();">관내사무소
 											</td>
@@ -180,12 +185,7 @@
 										<tr>
 											<td class="tg-0lax"><input type="radio" name="expC" value="3"
 													onclick="updateReadOnly('expC', this.value); calculateTotal();">관외사무소
-											</td>
 											<td class="tg-0lax" style="border-right: none">3점</td>
-										</tr>
-										<tr>
-											<td class="tg-0lax"><strong>신청인 사무소 주소지</strong></td>
-											<td class="tg-0lax" style="border-right: none">[[${vo.office_score}]]</td>
 										</tr>
 										<tr>
 											<td class="tg-0lax" rowspan="3"><strong>측량감정인</strong></td>
@@ -272,8 +272,9 @@
 										<tr>
 											<td class="tg-0lax" colspan="2" style="color: #2065c6;"><strong>합계</strong>
 											</td>
-											<td class="tg-0lax" id="expTotal" style="color: blue;">
-												<input class="tg-0lax" id="expTotal" value="0" readonly> 점
+											<td class="tg-0lax" style="color: blue;">
+												<input class="tg-0lax" id="expTotal" style="color: blue;" value="0"
+													readonly>
 											</td>
 										</tr>
 										<tr>
@@ -284,7 +285,8 @@
 											<td class="tg-0lax" colspan="2"><strong>감정인 평점표 (종합평점)</strong>
 											</td>
 											<td class="tg-0lax"><input type="text" style="color: blue;"
-													name="evaluate_score" value="0"> 점</td>
+													name="evaluate_score" value="0" id="expG" onchange="updateTotal();" onkeyup="calculateTotal();">
+												점</td>
 											<td class="tg-0lax" colspan="2" style="border-right: none">평점표 기준 (최대7점)
 											</td>
 										</tr>
@@ -296,7 +298,8 @@
 											<td class="tg-0lax"><strong>조정평점</strong></td>
 											<td class="tg-0lax">심사위원회 추천</td>
 											<td class="tg-0lax"><input type="text" style="color: blue;"
-													name="judge_recom_score" value="0"> 점
+													name="judge_recom_score" value="0" id="expH"
+													onchange="updateTotal()" onkeyup="calculateTotal();" > 점
 											</td>
 											<td class="tg-0lax" colspan="2" style="border-right: none">심사위원회에서 결정 (최대
 												7점)</td>
@@ -309,7 +312,7 @@
 											<strong>최종점수</strong>
 										<td class="tg-0lax" colspan="3" style="border-right: none" id="pointTotal">
 											<strong>
-												/ 44</strong>
+												/ 44점</strong>
 										</td>
 										</tr>
 										<tr>
@@ -331,7 +334,7 @@
 									</table>
 								</div>
 
-								<script th:inline="javascript">
+								<!--<script th:inline="javascript">
 									//버튼제어
 									document.getElementById("evaluateBtn").addEventListener('click', function (e) {
 										event.preventDefault();
@@ -342,7 +345,7 @@
 
 									})
 
-								</script>
+								</script>-->
 
 
 								<script>
@@ -351,12 +354,12 @@
 									}
 
 									// 그룹 G의 입력된 값을 합산
-									const expGInput = document.querySelector('input[name="expG"]');
-									expGInput.addEventListener("input", calculateTotal); // 입력 값이 변경될 때마다 calculateTotal 함수 호출
+									//const expGInput = document.querySelector('input[name="expG"]');
+									//expGInput.addEventListener("input", calculateTotal); // 입력 값이 변경될 때마다 calculateTotal 함수 호출
 
 									// 그룹 H의 입력된 값을 합산
-									const expHInput = document.querySelector('input[name="expH"]');
-									expHInput.addEventListener("input", calculateTotal); // 입력 값이 변경될 때마다 calculateTotal 함수 호출
+									//const expHInput = document.querySelector('input[name="expH"]');
+									//expHInput.addEventListener("input", calculateTotal); // 입력 값이 변경될 때마다 calculateTotal 함수 호출
 
 									function calculateTotal() {
 										// 각 그룹의 값을 합산할 변수 초기화
@@ -427,21 +430,21 @@
 										}
 
 										// 그룹 G의 입력된 값을 합산
-										const expGInput = document.querySelector('input[name="expG"]');
+										const expGInput = document.querySelector('input[type="text"][id="expG"]');
 										if (expGInput.value !== "") {
-											totalValueG = parseFloat(expGInput.value);
+											totalValueG += parseFloat(expGInput.value);
 										}
 
 										// 그룹 H의 입력된 값을 합산
-										const expHInput = document.querySelector('input[name="expH"]');
+										const expHInput = document.querySelector('input[type="text"][id="expH"]');
 										if (expHInput.value !== "") {
-											totalValueH = parseFloat(expHInput.value);
+											totalValueH += parseFloat(expHInput.value);
 										}
 
 										// 총점을 화면에 표시
 										const pointTotalElement = document.getElementById("pointTotal");
 										if (pointTotalElement) {
-											pointTotalElement.textContent = (totalValue + totalValueG + totalValueH).toFixed(1) + " / 44";
+											pointTotalElement.textContent = (totalValue + totalValueG + totalValueH).toFixed(1) + " / 44점";
 										}
 									}
 								</script>
@@ -514,16 +517,60 @@
 								<div class="fclttRegist_btn">
 									<!--<button type="button" class="fcltt_btn1"><a onclick="calculateAverage()">평가
 											수정하기</a></button>-->
-									<a href="#" class="fcltt_btn2" id="evaluateBtn">평가완료</a>
-									<!--<button type="submit" class="fcltt_btn2">평가완료</button>-->
+									<!--<a href="#" class="fcltt_btn2" id="evaluateBtn">평가완료</a>-->
+									<!--<button type="submit" class="fcltt_btn2" onclick="window.close();">평가완료</button>-->
 									<!--<a th:href="@{/aplcn/aplcnCompleted (user_proper_num=${vo1.user_proper_num}, aplicn_dtls_sts='C')}"></a>-->
+
+									<button type="submit" class="fcltt_btn2" id="evaluateBtn"
+										onclick="return confirmEvaluation();">평가완료</button>
 
 								</div>
 							</div>
 					</form>
 
-
 					<script th:inline="javascript">
+						//버튼제어
+						document.getElementById("evaluateBtn").addEventListener('click', function (e) {
+							event.preventDefault();
+
+							document.listForm.action = 'aplcnCompleted';
+							document.listForm.aplicn_dtls_sts.value = '평가완료';
+							document.listForm.submit();
+
+						})
+
+					</script>
+
+					<script>
+						function confirmEvaluation() {
+							if (confirm('평가를 완료하시겠습니까?')) {
+								// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
+								window.close();
+								return true;
+							} else {
+								return false;
+							}
+						}
+					</script>
+
+					<!--<script th:inline="javascript">
+						// 평가완료 버튼 클릭 시
+						document.getElementById("evaluateBtn").addEventListener('click', function (e) {
+							event.preventDefault();
+
+							// 팝업 창을 닫습니다.
+							window.close();
+
+							// 평가 결과를 서버로 전송하는 로직을 추가할 수 있습니다.
+							// document.listForm.action = 'aplcnCompleted';
+							// document.listForm.aplicn_dtls_sts.value = '평가완료';
+							// document.listForm.submit();
+						});
+					</script>-->
+
+
+					<!--		<script th:inline="javascript">
+
 						if ('[[${result}]]' == 1) {
 							alert('평가를 완료하였습니다.');
 							opener.location.href = '/aplcn/aplcnEvaluate';
@@ -532,7 +579,7 @@
 							alert('평가를 완료해주세요.')
 						}
 					</script>
-
+-->
 					<!--<script type="text/javascript">
 						var evaluateForm = document.getElementById("evaluateForm");
 						function calculateAverageAndSendToParent() {
