@@ -32,6 +32,7 @@
 		</if>
 		
 		order by chosen_date desc
+		LIMIT 0, 10
 	</select>
 	
 	<select id="historyTotal">
@@ -58,6 +59,7 @@
 			</if>
 			
 			order by chosen_date desc) A
+		
 
 	</select>
 	
@@ -106,12 +108,6 @@
 		 where b.USER_PROPER_NUM = #{user_proper_num}
 	
 	</select>
-	
-	
-	<select id="getDocu" resultType="MypageStatusVO">
-		select * from TB_009 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
-	</select>
-	
 	
 	<insert id="regPause">
 		INSERT 

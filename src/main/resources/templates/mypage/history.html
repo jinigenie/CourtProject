@@ -116,17 +116,21 @@
                     <th scope="col">완료여부</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody th:if="${pageVO.total != 0}">
                   <tr th:each="vo, status : ${list}">
                     <td data-cell-header="번호">[[${status.count}]]</td>
                     <td data-cell-header="선정일">[[${vo.chosen_date}]]</td>
                     <td data-cell-header="재판번호">[[${vo.trial_num}]]</td>
                     <td data-cell-header="출석일자">[[${vo.attendance_date}]]</td>
                     <td data-cell-header="완료여부">[[${vo.act_complete_yn == 'Y' ? '완료' : '미완료'}]]</td>
-                    
                   </tr>
-
                 </tbody>
+                <tbody th:unless="${pageVO.total != 0}">
+				    <tr>
+				        <td colspan="5">활동내역이 없습니다.</td>
+				    </tr>
+				</tbody>
+                
               </table>
             </div>
             <!-- pagenation -->
@@ -203,12 +207,14 @@
 	    
 	    tableRows.forEach(function (row) {
 	        var statusCell = row.querySelector('[data-cell-header="완료여부"]');
-	        var status = statusCell.textContent.trim();
-	        
-	        if (selectedValue === 'all' || status === (selectedValue === 'Y' ? '완료' : '미완료')) {
-	            row.style.display = 'table-row';
-	        } else {
-	            row.style.display = 'none';
+	        if (statusCell) {
+	            var status = statusCell.textContent.trim();
+	            
+	            if (selectedValue === 'all' || status === (selectedValue === 'Y' ? '완료' : '미완료')) {
+	                row.style.display = 'table-row';
+	            } else {
+	                row.style.display = 'none';
+	            }
 	        }
 	    });
 	}
