@@ -19,4 +19,8 @@
 		insert into TB_015 (ADMIN_ID, ADMIN_PW, ADMIN_AUTH, ADMIN_NAME) 
 			values (#{admin_id},#{admin_pw},#{admin_auth},#{admin_name})  
 	</insert>
+	
+	<select id="getList">
+		select * from TB_015
+	</select>
 </mapper>
