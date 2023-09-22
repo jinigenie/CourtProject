@@ -13,13 +13,13 @@
           <h2 class="title">Mypage</h2>
           <div class="menu">
             <ul>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 정보관리</a>
+              <li><a href="/mypage/main">나의 정보관리</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 신청현황</a>
+              <li><a href="/mypage/status">나의 신청현황</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
+              <li><a href="/mypage/history">나의 활동내역</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지 및 해제신청</a>
+              <li><a href="/mypage/pause">중지 및 해제신청</a>
               </li>
             </ul>
           </div>
@@ -74,9 +74,8 @@
                             </th>
                             <td data-cell-header="아이디" class="txt-left">
                                 <div class="input-wrap" style="width: 200px">
-                                 <input name="user_id" id="cvl_nm"
-                                               th:value="${userVO.user_id}" class="cm_inptxt"
-                                               readonly/>
+                                 <input name="user_id" readonly
+                                        th:value="${userVO.user_id}" class="cm_inptxt" />
                                 </div>
                             </td>
                         </tr>
@@ -88,7 +87,7 @@
                                 <div class="input-wrap-three write-wrap-m"
                                      style="width: 162px; display: inline-block">
                                     <div class="input-wrap" style="width: 200px">
-                                        <input name="user_pw" id="cvl_nm"
+                                        <input name="user_pw" id="pw2"
                                                th:value="${userVO.user_pw}" class="cm_inptxt"
                                                type="password"/>
                                     </div>
@@ -103,10 +102,11 @@
                                 <div class="input-wrap-three write-wrap-m"
                                      style="width: 162px; display: inline-block">
                                     <div class="input-wrap" style="width: 200px">
-                                        <input name="cvl_nm" id="cvl_nm"
+                                        <input name="" id="pw2"
                                                th:value="${userVO.user_pw}" class="cm_inptxt"
                                                type="password"/>
                                     </div>
+                                    <div id="password-error" class="error-message"></div>
                                 </div>
                             </td>
                         </tr>
@@ -116,9 +116,8 @@
                             </th>
                             <td data-cell-header="성명" class="txt-left">
 								<div class="input-wrap" style="width: 200px">
-	                                <input name="user_name" id="cvl_nm"
-	                                               th:value="${userVO.user_name}" class="cm_inptxt"
-	                                               readonly/>
+	                                <input name="user_name" readonly
+	                                       th:value="${userVO.user_name}" class="cm_inptxt"/>
 								</div>                   
                             </td>
                         </tr>
@@ -127,9 +126,9 @@
 								<span class="essential-txt" title="" style="margin-left: 80px">주민등록번호</span>
 							</th>
 							<td class="txt-left">
-								<span id="cvl_id" th:text="${userVO.user_rrn_f}"></span>
+								<span th:text="${userVO.user_rrn_f}"></span>
 								<span>-</span>
-								<span id="cvl_id" >*******</span>
+								<span>*******</span>
 							</td>
 						</tr>
                         <tr>
@@ -138,9 +137,8 @@
                             </th>
                             <td data-cell-header="직업" class="txt-left">
                                 <div class="input-wrap" style="width: 200px; display: inline-block">
-                                    <input name="user_job" id="cvl_job"
-                                           th:value="${userVO.user_job}" class="cm_inptxt"
-                                           type="text" maxlength="8"/>
+                                    <input name="user_job" type="text" maxlength="8"
+                                           th:value="${userVO.user_job}" class="cm_inptxt"/>
                                 </div>
                             </td>
                         </tr>
@@ -152,12 +150,9 @@
                                 <div class="input-wrap-three write-wrap-m"
                                      style="display: inline-block">
                                     <div class="input-wrap" style="width: 200px; display: inline-block">
-                                        <input name="user_phone" id="cvl_cel1" th:value="${userVO.user_phone}"
-                                               class="cm_inptxt" title="휴대폰번호"
-                                               type="text"/>
-                                               
+                                        <input name="user_phone" th:value="${userVO.user_phone}"
+                                               class="cm_inptxt" title="휴대폰번호" type="text"/>
                                     </div>
-                                    
                                 </div>
                             </td>
                         </tr>
@@ -369,6 +364,39 @@
 	
 </script>
 
+<!--비밀번호 확인-->
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    var passwordInput = document.querySelector("input[name='user_pw']");
+	    var confirmPasswordInput = document.querySelector("input[name='cvl_nm']");
+	    var errorElement = document.getElementById("password-error");
+	    
+	    passwordInput.addEventListener("input", validatePassword);
+	    confirmPasswordInput.addEventListener("input", validatePassword);
+	    
+	    function validatePassword() {
+	        var password = passwordInput.value;
+	        var confirmPassword = confirmPasswordInput.value;
+	        var errorMessage = "";
+	        
+	        // 비밀번호 유효성 검사 규칙을 적용
+	        if (password.length < 8) {
+	            errorMessage = "비밀번호는 최소 8자 이상이어야 합니다.";
+	        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+	            errorMessage = "비밀번호는 대소문자, 숫자, 특수문자를 혼합하여 사용해야 합니다.";
+	        }
+	        
+	        // 비밀번호 확인 일치 여부 확인
+	        if (password !== confirmPassword) {
+	            errorMessage = "비밀번호가 일치하지 않습니다.";
+	        }
+	        
+	        // 에러 메시지 표시
+	        errorElement.textContent = errorMessage;
+	    }
+});	
 
+		
+</script>
 
 </html>

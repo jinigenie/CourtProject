@@ -43,7 +43,7 @@
 			 t.ATTENDANCE_DATE, 
 			 t.ACT_COMPLETE_YN,
 			 o.USER_PROPER_NUM
-			FROM tb_012 AS t
+			FROM TB_012 AS t
 			LEFT JOIN TB_014 AS f
 			   ON t.ACCEPT_PROPER_NUM = f.ACCEPT_PROPER_NUM
 			LEFT JOIN TB_001 AS o
@@ -80,12 +80,13 @@
 		    user_bank = #{user_bank}, 
 		    user_bank_account = #{user_bank_account},
 		    user_bank_holder = #{user_bank_holder}
-		where user_proper_num =  #{user_proper_num}
+		where user_proper_num = #{user_proper_num}
 	</update>
 	
 	<select id="getStatus" resultType="MypageStatusVO">
 		 select b.*,
-				e.ANNOUNCE_TITLE
+				e.ANNOUNCE_TITLE,
+				e.ANNOUNCE_END_DATE
 				from (
 						select a.*
 						from (
@@ -127,8 +128,8 @@
 
 	<select id="getPause" resultType="PauseDataVO">
 		SELECT f.ACCEPT_ACT_YN
-		FROM tb_001 AS o
-		LEFT JOIN tb_014 AS f
+		FROM TB_001 AS o
+		LEFT JOIN TB_014 AS f
 		     ON f.USER_PROPER_NUM =o.USER_PROPER_NUM
 		where o.USER_PROPER_NUM = #{user_proper_num}
 	</select>
