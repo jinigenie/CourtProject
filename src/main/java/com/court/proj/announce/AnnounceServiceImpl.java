@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.court.proj.aplcn.util.Criteria;
 import com.court.proj.aplcnReg.TrialVO;
 
 @Service("announceService")
@@ -38,8 +39,8 @@ public class AnnounceServiceImpl implements AnnounceService {
 
 	// 공고 리스트 조회
 	@Override
-	public ArrayList<AnnounceVO> getannounceList() {
-		return announceMapper.getannounceList();
+	public ArrayList<AnnounceVO> AnnounceList(AnnounceCriteria cri) {
+		return announceMapper.AnnounceList(cri);
 	}
 
 	// 공고 등록 정보

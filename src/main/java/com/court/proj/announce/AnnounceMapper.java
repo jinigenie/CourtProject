@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.court.proj.aplcn.util.Criteria;
 import com.court.proj.aplcnReg.TrialVO;
 
 @Mapper
@@ -15,14 +16,16 @@ public interface AnnounceMapper {
 	public int announceRegist(AnnounceVO vo);
 
 	// 공고 리스트 조회
-	public ArrayList<AnnounceVO> getannounceList();
+	public ArrayList<AnnounceVO> AnnounceList(AnnounceCriteria cri);
 
 	// 공고 토탈
 	public int getTotal();
 
 	// 공고 검색
 	public ArrayList<AnnounceVO> searchAnnounceTitleAndContent(String keyword);
+
 	public ArrayList<AnnounceVO> searchAnnounceTitle(String keyword);
+
 	public ArrayList<AnnounceVO> searchAnnounceContent(String keyword);
 
 	// 재판조력자 유형 조회하기

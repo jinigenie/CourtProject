@@ -6,8 +6,9 @@
 <mapper namespace="com.court.proj.announce.AnnounceMapper">
 
 	<!-- tb_002, tb_010, tb_015 공고 리스트 조회 -->
-	<select id="getannounceList" resultType="AnnounceVO">
-		select
+	<select id="AnnounceList" resultType="AnnounceVO"
+		parameterType="AnnounceCriteria">
+		SELECT
 		a.announce_proper_num,
 		a.admin_proper_num,
 		b.admin_id,
@@ -25,13 +26,14 @@
 		a.announce_end_date,
 		a.announce_first_date,
 		a.announce_last_date
-		from TB_002 a
-		inner join
-		TB_015 b on a.admin_proper_num = b.admin_proper_num
-		inner join tb_010 c
-		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
-		order by
-		a.announce_proper_num;
+		FROM TB_002 a
+		INNER JOIN TB_015 b ON
+		a.admin_proper_num = b.admin_proper_num
+		INNER JOIN TB_010 c ON
+		a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		ORDER BY
+		a.announce_proper_num
+		LIMIT #{page}, #{amount}
 	</select>
 
 	<select id="getTotal" resultType="int">
@@ -131,7 +133,7 @@
 		from TB_002 a
 		inner join
 		TB_015 b on a.admin_proper_num = b.admin_proper_num
-		inner join tb_010 c
+		inner join TB_010 c
 		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 		where
 		a.announce_proper_num = #{announce_proper_num};
@@ -161,7 +163,7 @@
 		from TB_002 a
 		inner join
 		TB_015 b on a.admin_proper_num = b.admin_proper_num
-		inner join tb_010 c
+		inner join TB_010 c
 		on a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
 		where
 		a.announce_proper_num = #{announce_proper_num};
@@ -172,11 +174,14 @@
 		update TB_002
 		set
 		announce_title = #{announce_title},
-		trial_fcltt_proper_num = #{trial_fcltt_proper_num},
-		announce_start_date = #{announce_start_date},
+		trial_fcltt_proper_num =
+		#{trial_fcltt_proper_num},
+		announce_start_date =
+		#{announce_start_date},
 		announce_end_date = #{announce_end_date},
 		announce_content = #{announce_content}
 		where
-		announce_proper_num = #{announce_proper_num}
+		announce_proper_num =
+		#{announce_proper_num}
 	</update>
 </mapper>

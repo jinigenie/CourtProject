@@ -2,6 +2,7 @@ package com.court.proj.announce;
 
 import java.util.ArrayList;
 
+import com.court.proj.aplcn.util.Criteria;
 import com.court.proj.aplcnReg.TrialVO;
 
 public interface AnnounceService {
@@ -12,7 +13,10 @@ public interface AnnounceService {
 	public int announceRegist(AnnounceVO vo);
 
 	// 공고 리스트 조회
-	public ArrayList<AnnounceVO> getannounceList();
+	public ArrayList<AnnounceVO> AnnounceList(AnnounceCriteria cri);
+	
+	// 공고 페이징
+	
 
 	// 공고 토탈
 	public int getTotal();

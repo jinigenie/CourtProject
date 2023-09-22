@@ -1,3 +1,8 @@
+/*    var msg = `[[${msg}]]`;
+    if (msg !== 'null') {
+        alert(msg);
+    }*/
+
 //////////////////////////////////////// 재판조력자 ////////////////////////////////////////
 $('#selectType1').change(function() {
 
@@ -214,3 +219,47 @@ function isDateInRange(startDate, endDate, announcementStartDate, announcementEn
 		announcementEndDate <= endDate
 	);
 }
+
+//////////////////////////////////////// 수정하기 ////////////////////////////////////////
+// 공고 수정 버튼 클릭 이벤트 처리
+/*function updateAnnouncement() {
+    // 폼 데이터를 가져오기
+    var admin_id = document.getElementById("admin_id").value;
+    var announce_title = document.getElementById("title").value;
+    var announce_start_date = document.getElementsByName("announce_start_date")[0].value;
+    var announce_end_date = document.getElementsByName("announce_end_date")[0].value;
+    var selectType1 = document.getElementById("selectType1").value;
+    var selectType2 = document.getElementById("selectType2").value;
+    var selectType3 = document.getElementById("selectType3").value;
+    var announce_content = editor.getData();
+    var announce_proper_num = document.getElementById("announce_proper_num").value;
+
+    // 필수 필드의 유효성 검사
+    if (
+        admin_id === "" ||
+        announce_title === "" ||
+        announce_start_date === "" ||
+        announce_end_date === "" ||
+        selectType1 === "선택" ||
+        selectType2 === "선택" ||
+        selectType3 === "선택" ||
+        announce_content === ""
+    ) {
+        alert("입력하지 않은 정보가 있습니다. 모든 필드를 채워주세요.");
+        return false; // 폼 제출을 중지합니다.
+    }
+
+    // 수정 확인 대화 상자를 표시하고, 사용자가 확인하면 폼을 제출합니다.
+    if (confirm("수정하시겠습니까?")) {
+        // 폼을 제출합니다.
+        return true;
+    } else {
+        return false; // 폼 제출을 중지합니다.
+    }
+}*/
+
+
+
+
+
+
