@@ -12,13 +12,13 @@
           <h2 class="title">Mypage</h2>
           <div class="menu">
             <ul>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 정보관리</a>
+              <li><a href="/mypage/main">나의 정보관리</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 신청현황</a>
+              <li><a href="/mypage/status">나의 신청현황</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
+              <li><a href="/mypage/history">나의 활동내역</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지 및 해제신청</a>
+              <li><a href="/mypage/pause">중지 및 해제신청</a>
               </li>
             </ul>
           </div>
@@ -74,20 +74,19 @@
 								<col style="width: 30%">
 								<col style="width: 70%">
 							</colgroup>
+							
 							<tbody>
-
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="essential-txt" style="margin-left: 80px;">현재 상태</span>
+										<span class="essential-txt" style="margin-left: 80px;">현재상태</span>
 									</th>
-									<td data-cell-header="성명" class="txt-left">
-										<input type="text" name="" readonly th:value="vo.accept_act_yn == 'N' ? '활동중' : '중지중' " />
+									<td data-cell-header="현재상태" class="txt-left">
+										<input type="text" name="" readonly th:value="${vo.accept_act_yn == 'Y' ? '활동중' : '중지중'} " />
 									</td>
 								</tr>
-
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="essential-txt" style="margin-left: 80px;">신청 분류</span>
+										<span class="essential-txt" style="margin-left: 80px;">신청분류</span>
 									</th>
 									<td class="txt-left">
 										<select name="accept_status" style="width: 65px;" >
@@ -96,36 +95,33 @@
 										</select>
 									</td>
 								</tr>
-
 								<tr>
 									<th scope="row" class="txt-left">
 										<span class="essential-txt" style="margin-left: 80px;">신청기간</span>
 									</th>
 									<td data-cell-header="성명" class="txt-left">
 		                               <div class="calander-box">
-											<input type="text" class="datepicker" readonly placeholder="날짜선택" name="pause_start_date"
+											<input type="text" class="datepicker startdate" readonly placeholder="날짜선택" name="pause_start_date"
 												value="" /> -
-											<input type="text" class="datepicker" readonly placeholder="날짜선택" name="pause_end_date"
+											<input type="text" class="datepicker enddate" readonly placeholder="날짜선택" name="pause_end_date"
 												value="" />
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="txt-left">
-										<span class="essential-txt" style="margin-left: 80px;">신청 사유</span>
+										<span class="essential-txt" style="margin-left: 80px;">신청사유</span>
 									</th>
-									<td data-cell-header="신청사유" class="txt-left">
+									<td data-cell-header="신청사유" class="txt-left reason">
 										<textarea name="accept_pause_etc" rows="4" cols="50" style="width: 550px; height: 200px;"></textarea>
 									</td>
 								</tr>
-
-
 							</tbody>
 						</table>
 
 					</div>
 					<div class="btn-wrap txt-center">
-						<a href="../mypage/main" class="btn-style btn-style39 btn-style-icon-none">
+						<a href="/main/main" class="btn-style btn-style39 btn-style-icon-none">
 							<span>취소</span>
 						</a>
 						<a href="#" class="btn-style btn-style39 btn-style-icon-none" id="pauseBtn">
@@ -148,7 +144,7 @@
 
 
 <!-- 중지 신청 -->
-<script>
+<!--<script>
 	const btn = document.getElementById("pauseBtn");
 	const pauseForm = document.getElementById("pauseForm");
 	
@@ -156,5 +152,24 @@
 		e.preventDefault();
 		pauseForm.submit();
 	}
+</script>-->
+
+<script>
+    document.getElementById('pauseBtn').addEventListener('click', function() {
+        const startDate = document.querySelector('.startdate').value;
+        const endDate = document.querySelector('.enddate').value;
+        const reason = document.querySelector('.reason textarea').value;
+
+        if (!startDate || !endDate) {
+            alert('신청기간을 입력해주세요.');
+        } else if (!reason) {
+            alert('신청 사유를 입력해주세요.');
+        } else {
+            // 모든 필수 항목이 입력되었을 때, 여기에 추가적인 로직을 추가하세요.
+            alert('신청이 완료되었습니다.');
+            window.location.href='/main/main';
+        }
+    });
 </script>
+
 </html>

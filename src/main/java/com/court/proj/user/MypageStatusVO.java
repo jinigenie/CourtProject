@@ -17,5 +17,6 @@ public class MypageStatusVO {
 	private String APLICN_DTLS_STS;
 	private int APLCN_DTLS_PROPER_NUM;
 	private String ANNOUNCE_TITLE;
+	private String ANNOUNCE_END_DATE;
 	
 }

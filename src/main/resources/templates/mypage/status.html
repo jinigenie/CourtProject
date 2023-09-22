@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{./../../css/mypage/modal.css}"/>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -12,13 +11,13 @@
           <h2 class="title">Mypage</h2>
           <div class="menu">
             <ul>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 정보관리</a>
+              <li><a href="/mypage/main">나의 정보관리</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 신청현황</a>
+              <li><a href="/mypage/status">나의 신청현황</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">나의 활동내역</a>
+              <li><a href="/mypage/history">나의 활동내역</a>
               </li>
-              <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">중지 및 해제신청</a>
+              <li><a href="/mypage/pause">중지 및 해제신청</a>
               </li>
             </ul>
           </div>
@@ -80,7 +79,8 @@
                     <td data-cell-header="신청일">[[${vo.APLICN_DTLS_DATE}]]</td>
                     <td data-cell-header="신청내용">[[${vo.ANNOUNCE_TITLE}]]</td>
                     <td data-cell-header="신청상태">[[${vo.APLICN_DTLS_STS}]]</td>
-                    <td>
+                    <td id="expire">
+					  <input class="ANNOUNCE_END_DATE" type="text" hidden th:value=${vo.ANNOUNCE_END_DATE}/>
                       <a href="#"
                          class="case case1 modify"
                       ><em style="width: 50px;">수정</em></a
@@ -88,6 +88,10 @@
                       <a href="#"
                          class="case case1 delete"
                       ><em style="width: 50px;">삭제</em></a
+                      >
+                      <a href="#"
+                         class="case case1 finish"
+                      ><em style="width: 50px; background-color: #bababa ;">종료</em></a
                       >
                     </td>
                     
@@ -119,7 +123,7 @@
 	const mod = document.querySelectorAll(".modify");
 	mod.forEach((e) => {
 		e.addEventListener('click', () => {
-			console.log(9)
+			window.location.href = "/app/info";
 		})	
 	})
 	
@@ -141,9 +145,44 @@
 </script>
 
 
-
-
-
+<!--공고기간 만료시 버튼 숨기기-->
+<script>
+	// "ANNOUNCE_END_DATE" 클래스를 가진 숨겨진 입력 필드들을 가져옵니다.
+	const expireInputs = document.querySelectorAll(".ANNOUNCE_END_DATE");
+	
+	expireInputs.forEach((input) => {
+	    // 입력 필드의 값을 가져와서 Date 객체로 변환합니다.
+	    const endDateValue = input.value;
+	    const endDate = new Date(endDateValue);
+	
+	    // 현재 날짜를 가져옵니다.
+	    const currentDate = new Date();
+	
+	    // 만료 날짜가 현재 날짜보다 이전인 경우 수정과 삭제 버튼을 숨기고 종료 버튼을 나타냅니다.
+	    if (endDate < currentDate) {
+	        const parentTd = input.closest("td"); // 가장 가까운 부모 <td> 요소를 찾습니다.
+	
+	        // <td> 요소가 존재하는 경우
+	        if (parentTd) {
+	            // 수정과 삭제 버튼을 찾아 숨깁니다.
+	            const modifyButton = parentTd.querySelector(".modify");
+	            const deleteButton = parentTd.querySelector(".delete");
+	            if (modifyButton) {
+	                modifyButton.style.display = "none";
+	            }
+	            if (deleteButton) {
+	                deleteButton.style.display = "none";
+	            }
+	
+	            // 종료 버튼을 찾아 표시합니다.
+	            const finishButton = parentTd.querySelector(".finish");
+	            if (finishButton) {
+	                finishButton.style.display = "block";
+	            }
+	        }
+	    }
+	});
+</script>
 
 
 
