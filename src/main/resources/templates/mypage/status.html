@@ -68,30 +68,31 @@
                   <tr>
                     <th scope="col">번호</th>
                     <th scope="col">신청일</th>
-                    <th scope="col">신청내용</th>
+                    <th scope="col">재판조력자 분류</th>
                     <th scope="col">신청상태</th>
-                    <th scope="col">마감일</th>
                     <th scope="col">관리</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody th:if="${size != 0}">
                   <tr style="cursor: pointer" th:each="vo, status : ${list}" id="tr">
-                    <td data-cell-header="번호">[[${status.count}]]</td>
-                    <td data-cell-header="신청일">[[${vo.APLICN_DTLS_DATE}]]</td>
-                    <td data-cell-header="신청내용">[[${vo.ANNOUNCE_TITLE}]]</td>
-                    <td data-cell-header="신청상태">[[${vo.APLICN_DTLS_STS}]]</td>
-                    <td data-cell-header="마감일">[[${vo.ANNOUNCE_END_DATE}]]</td>
+                    <td data-cell-header="번호">[[${status.count}]] </td>
+                    <td data-cell-header="신청일">[[${vo.aplicn_dtls_date}]]</td>
+                    <td data-cell-header="재판조력자분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
+                    <td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
                     <td id="expire">
-				      <input class="ANNOUNCE_END_DATE" type="text" hidden th:value=${vo.ANNOUNCE_END_DATE}/>
 				      <div class="button-group">
 				        <a href="#" class="case case1 modify"><em style="width: 50px; margin-bottom: 5px;">수정</em></a>
 				        <a href="#" class="case case1 delete"><em style="width: 50px;">삭제</em></a>
 				      </div>
 				      <a href="#" class="case case1 finish"><em style="width: 50px; background-color: #bababa ;">종료</em></a>
 				    </td>
-                    
                   </tr>
                 </tbody>
+ 				<tbody th:unless="${size != 0}">
+				    <tr>
+				        <td colspan="5">신청내역이 없습니다.</td>
+				    </tr>
+				</tbody>
               </table>
             </div>
           
@@ -148,7 +149,7 @@
 
 <!--공고기간 만료시 버튼 숨기기-->
 <script>
-	const expireInputs = document.querySelectorAll(".ANNOUNCE_END_DATE");
+/*	const expireInputs = document.querySelectorAll(".announce_end_date");
 	expireInputs.forEach((input) => {
 		const endDateValue = input.value;
 		const endDate = new Date(endDateValue);
@@ -192,6 +193,8 @@
 			}
 		}
 	});
+	
+	*/
 </script>
 
 
