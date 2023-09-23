@@ -16,20 +16,25 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li  sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="#">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a
+											href="../announce/announceRegist">모집공고 등록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
 								<ul class="sub" style="display: none;">
-									<li sec:authorize="hasRole('ROLE_SUPERADMIN')" ><a href="#">공지사항 등록</a></li>
-									<li><a href="#">공지사항 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/notice/noticeRegist">공지사항
+											등록</a></li>
+									<li><a href="/notice/noticeList">공지사항 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
 								<ul class="sub" style="display: none;">
-									<li  sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="#">FAQ 등록</a></li>
-									<li><a href="#">FAQ 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="../faq/regist">FAQ 등록</a>
+										<div id="userRole" style="font-size: 1px; color: #f6f6f6;">
+											[[${#authentication.principal.authorities}]]</div>
+									</li>
+									<li><a href="../faq/faqList">FAQ 목록</a></li>
 								</ul>
 							</li>
 
@@ -151,15 +156,21 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr  th:each="vo, status : ${list}" style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
+										<tr th:each="vo, status : ${list}"
+											style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
 											th:if="${vo.notice_title.startsWith('중요')}">
 											<td style=" color: rgb(0, 0, 0); " data-cell-header="번호"></td>
-											<td  style=" color: rgb(0, 0, 0); "data-cell-header="대분류"> <a th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a></td>
+											<td style=" color: rgb(0, 0, 0); " data-cell-header="대분류"> <a
+													th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a>
+											</td>
 											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
-											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td></tr>
+											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
+										</tr>
 										<tr th:each=" vo, status : ${list}" style="cursor: pointer">
 											<td data-cell-header="번호">[[${status.count}]]</td>
-											<td data-cell-header="대분류">  <a th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a></td>
+											<td data-cell-header="대분류"> <a
+													th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a>
+											</td>
 											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
@@ -219,13 +230,13 @@
 <script>
 
 
-	function nociteDetail(notice_proper_num)	{
+	function nociteDetail(notice_proper_num) {
 		location.href = '/notice/noticeDatail?notice_proper_num=' + notice_proper_num;
 	}
-	
-	
-	
-	
+
+
+
+
 </script>
 
 

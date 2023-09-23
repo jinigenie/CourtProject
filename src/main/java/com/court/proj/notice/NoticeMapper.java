@@ -14,7 +14,8 @@ public interface NoticeMapper {
 	public ArrayList<NoticeVO> getList(@Param("cri")FclttCriteria cri);
 	public int getTotal(@Param("cri")FclttCriteria cri);
 	
-	
+	// 작성하기
+	public int noticeReg(NoticeVO vo);
 	
 	
 	

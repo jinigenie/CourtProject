@@ -10,7 +10,8 @@ public interface NoticeService {
 	public ArrayList<NoticeVO> getList(FclttCriteria cri);
 	public int getTotal(FclttCriteria cri);
 	
-	
+	// 작성하기
+	public int noticeReg(NoticeVO vo);
 	
 	
 	
