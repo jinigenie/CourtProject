@@ -22,9 +22,26 @@ public ArrayList<NoticeVO> getList(FclttCriteria cri) {
 public int getTotal(FclttCriteria cri) {
 	return noticeMapper.getTotal(cri);
 }
+
+// 공지 등록
 @Override
 public int noticeReg(NoticeVO vo) {
 	return noticeMapper.noticeReg(vo);
+}
+
+//공지 상세보기
+@Override
+public NoticeVO getDetail(String notice_proper_num) {
+	return noticeMapper.getDetail(notice_proper_num);
+}
+//공지 수정
+@Override
+public int noticeModify(NoticeVO vo) {
+	return noticeMapper.noticeModify(vo);
+}
+@Override
+public int noticeDel(String notice_proper_num) {
+	return noticeMapper.noticeDel(notice_proper_num);
 }
 	
 

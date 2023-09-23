@@ -158,7 +158,7 @@
 				<!-- 페이지 이동 버튼 -->
 				<div class="faq_btn" style="padding-left: 100px;">
 					<button type="button" onclick="faqModifySubmit()" class="faq_btn1">수정</button>
-					<button type="button" class="faq_btn2">취소</button>
+					<button type="button" onclick="faqfals()"  class="faq_btn2">취소</button>
 					<br /><br /><br />
 				</div>
 				<!-- //페이지 이동 버튼 end -->
@@ -186,6 +186,15 @@
 
 	}
 
+	function faqfals() {
+		var result = confirm("취소 하시겠습니까");
+		if (result) {
+			window.location.href = '/faq/faqList';
+			alert("취소되었습니다.");
+		} else {
+		}
+	}
+</script
 
 
 </script>
