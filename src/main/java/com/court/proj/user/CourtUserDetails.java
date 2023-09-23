@@ -38,7 +38,7 @@ public class CourtUserDetails implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 	    List<GrantedAuthority> authorities = new ArrayList<>();
-	    authorities.add(new SimpleGrantedAuthority(userVO.getUser_role()));
+	    authorities.add(new SimpleGrantedAuthority("ROLE_"+userVO.getUser_role()));
 	    
 	    return authorities;
 	}
