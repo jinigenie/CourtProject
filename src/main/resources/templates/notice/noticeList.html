@@ -64,9 +64,7 @@
 					}
 				</style>
 				<article id="detail-content">
-					<form id="listForm" name="listForm"
-						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-						method="post">
+					<form id="listForm" name="listForm" action="#" method="post">
 						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
 						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
 						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
@@ -158,22 +156,23 @@
 										<tr th:each="vo, status : ${list}"
 											style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
 											th:if="${vo.notice_title.startsWith('중요')}">
-											<td style=" color: rgb(0, 0, 0); " data-cell-header="번호"></td>
-											<td style=" color: rgb(0, 0, 0); " data-cell-header="대분류"> <a
-													th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a>
+											<td style="color: rgb(0, 0, 0);" data-cell-header="번호"></td>
+											<td style="color: rgb(0, 0, 0);" data-cell-header="대분류">
+												<a
+													th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
 											</td>
 											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
 										<tr th:each=" vo, status : ${list}" style="cursor: pointer">
 											<td data-cell-header="번호">[[${status.count}]]</td>
-											<td data-cell-header="대분류"> <a
-													th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a>
+											<td data-cell-header="대분류">
+												<a
+													th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
 											</td>
 											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
-
 									</tbody>
 								</table>
 							</div>
@@ -227,12 +226,6 @@
 </th:block>
 
 <script>
-
-
-	function nociteDetail(notice_proper_num) {
-		location.href = '/notice/noticeDatail?notice_proper_num=' + notice_proper_num;
-	}
-
 
 
 
