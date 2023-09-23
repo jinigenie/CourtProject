@@ -136,65 +136,6 @@ body.start #detail-content {
 	color: #fff;
 }
 
-/* *********************************************************************************
-* announce-top
-* *********************************************************************************/
-.announce-top>.announce-title>ul>li {
-	text-align: center;
-	font-size: 25px;
-	padding-bottom: 20px;
-}
-
-.announce-top>.announce-date>ul {
-	overflow: hidden;
-}
-
-.announce-top>.announce-date>ul>li {
-	float: right;
-}
-
-.announce-top>.announce-date>ul>.second-date {
-	padding-left: 10px;
-}
-
-.announce-top>.announce-date>ul::before,
-.announce-top>.announce-date>ul::after {
-	content: "";
-	display: table;
-	clear: both;
-}
-.announce-date {
-	margin-top: 30px;
-}
-
-/* Post-date를 왼쪽으로 이동 */
-ul.post-date {
-    float: left;
-}
-
-/* Change-date를 오른쪽으로 이동 */
-ul.change-date {
-    float: right;
-}
-
-/* 각 날짜 요소의 스타일 조정 */
-ul.post-date li,
-ul.change-date li {
-    margin-right: 10px;
-}
-
-/* Clearfix 추가 */
-.announce-top::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-
-/*.announce-top>.announce-date>ul>li {
-	margin-right: 10px;
-}
-*/
 
 
 /* *********************************************************************************
