@@ -42,15 +42,14 @@
 							<div class="boxR" data-aos="fade-left" data-aos-delay="300">
 
 								<div class="main_search">
-									<a href="https://www.ndmi.go.kr/home/sub.do?menukey=6072">
+									<a href="/info/info">
 										<strong>재판조력자란?</strong>
 										<p>재판조력자 제도안내</p>
 
 									</a>
 								</div>
 							</div>
-							<button onclick="scrollToTop()" id="topButton" title="Go to top"><img
-									src="../../img/main/top_btn.png"></button>
+
 						</div>
 					</div>
 				</article>
@@ -75,10 +74,11 @@
 														<dt>
 															[<span th:text="${vo1.trial_fcltt_description}"></span>]
 														</dt>
-														<dd class="oh"><br />
-															[[${vo1.announce_start_date}]] ~
-															[[${vo1.announce_end_date}]]
-															[[${vo1.announce_content}]]
+														<dd style="font-size: 15px;">
+															<p>[[${vo1.announce_start_date}]] ~
+															[[${vo1.announce_end_date}]]</p><br /><br /><br /></dd>
+														<dd class="oh" style="white-space: normal; font-size: 18px; overflow:  hidden;text-overflow: ellipsis; height:124px; max-height: 124px;">
+															 [[${vo1.announce_content}]]
 														</dd>
 													</dl>
 												</a>
@@ -97,8 +97,8 @@
 
 					<!-- FAQ 게시물 -->
 					<div class="faqList">
-
 						<ul class="faqList_left">
+
 							<li class="faq_left1" style="overflow: hidden; margin-bottom: 10px;">
 								<h3 onclick="main_notice_view()" class="main_notice"
 									style="border-bottom: 3px solid rgb(128, 128, 128); width: 100px; float: left; text-align: center; cursor: pointer;">
@@ -106,12 +106,13 @@
 								<h3 onclick="main_faq_view()" class="main_faq"
 									style="border-bottom: 3px solid rgb(240, 240, 240); width: 100px; float: left; margin-left: 10px; text-align: center;cursor: pointer;">
 									FAQ</h3>
-								<a class="main_noticeLink" href="/notice/noticeList"><img src="../../img/main/faq_btn.png"></a>
+								<a class="main_noticeLink" href="/notice/noticeList"><img
+										src="../../img/main/faq_btn.png"></a>
 								<a class="main_faqList" href="/faq/faqList"><img src="../../img/main/faq_btn.png"></a>
 							</li>
 							<!-- 탭 한 상태에 따라 공지-->
 							<li th:each=" vo2, status : ${list2}" class="notice_left">
-								<a href="#">
+								<a th:href="@{/notice/noticeDetail(__${vo2.notice_proper_num}__)}">
 									<h4>[공지]</h4>[[${vo2.notice_title}]] <span
 										style="text-align: right; float: right;">[[${vo2.notice_date}]] </span>
 								</a>
@@ -119,12 +120,13 @@
 
 							<!-- 탭 한 상태에 따라 FAQ -->
 							<li th:each="vo3, status : ${list3}" class="faq_left faq_none">
-								<a th:href="'/faq/faqList?divVal='+ ${vo3.faq_proper_num}" >
+								<a th:href="'/faq/faqList?divVal='+ ${vo3.faq_proper_num}">
 									<h3>Q</h3>[[${vo3.faq_ask_content}]]<br />
 								</a>
 							</li>
 
 						</ul>
+
 						<ul class="faqList_right">
 
 							<li class="faq_right">
@@ -201,90 +203,91 @@
 						</ul>
 					</div>
 
+				</div>
 
+			</div>
 
+		</div>
+
+		<script>
+			$(".relatedSystem").each(function () {
+				$(".relatedSystem .rTit .moreBtn").click(function () {
+					$(".relatedSystem ul li.mHide").toggleClass("mShow");
+					$(this).toggleClass("mHideHidden");
+				});
+			});
+		</script>
+
+		<!--//////////////////////////모달창 작업////////////////////////////////////-->
+		<div>
+			<!-- The Modal -->
+			<div id="popup_layer" style="border-radius: 8px;">
+
+				<div class="popup_box" style="border-radius: 8px;">
+
+					<!--팝업 컨텐츠 영역-->
+					<div class="popup_cont" style="text-align: center;">
+
+						<h1>[[${modalContent[0]}]]</h1><br />
+						<div style="text-align: left;   line-height: 2;">
+							<p>
+							<h2>[[${modalContent[1]}]]</h2>
+							<br />
+							<br /><br /><br />
+							</p>
+
+						</div>
+						<img src="../../img/korean/layout/court_main_icon.png"
+							style="height: 30px; width: 130px; margin: 20px 0 ;">
+					</div>
+					<!--팝업 버튼 영역-->
+
+					<div class="popup_btn">
+						<!--하루동안 보지않기-->
+						<a id="chk_today" href="javascript:closeToday();" class="close_day">하루동안 열지 않기</a>
+						<!--7일간 보지않기-->
+						<!-- <a id="chk_today" href="javascript:closeToday();" class="close_day">Do not open for 7 days</a>-->
+						<a href="javascript:closePop();">닫기</a>
+					</div>
 				</div>
 
 			</div>
 
 			<script>
-				$(".relatedSystem").each(function () {
-					$(".relatedSystem .rTit .moreBtn").click(function () {
-						$(".relatedSystem ul li.mHide").toggleClass("mShow");
-						$(this).toggleClass("mHideHidden");
-					});
+				// 쿠키 생성
+				function setCookie(name, value, expiredays) {  // 쿠키저장
+					var todayDate = new Date();  //date객체 생성 후 변수에 저장
+					todayDate.setDate(todayDate.getDate() + expiredays);
+					// 시간지정(현재시간 + 지정시간)
+					document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toUTCString() + ";"
+					//위 정보를 쿠키에 굽는다
+				}
+				$(function () {
+					$(".popup_box").draggable({containment: 'parent', scroll: false}); // 레이어 팝업 창 드래그 가능
+					//{containment:'parent', scroll:false} 화면 영역 밖으로 드래그 안됌.
+
+					if (document.cookie.indexOf("popToday=close") < 0) {      // 쿠키 저장여부 체크
+						document.getElementById("popup_layer").style.display = "block";
+					} else {
+						document.getElementById("popup_layer").style.display = "none";
+					}
 				});
+
+				//오늘하루만보기 닫기버튼 스크립트
+				function closeToday() {
+					setCookie("popToday", "close", 1);
+					$("#popup_layer").css("display", "none");
+					document.getElementById("popup_layer").style.display = "none";
+				}
+				//그냥 닫기버튼 스크립트
+				function closePop() {
+					document.getElementById("popup_layer").style.display = "none";
+				}
 			</script>
 
-			<!--//////////////////////////모달창 작업////////////////////////////////////-->
-			<div>
-				<!-- The Modal -->
-				<div id="popup_layer" style="border-radius: 8px;">
-					
-					<div class="popup_box" style="border-radius: 8px;">
-						
-						<!--팝업 컨텐츠 영역-->
-						<div class="popup_cont" style="text-align: center;">
-
-							<h1>[[${modalContent[0]}]]</h1><br />
-							<div style="text-align: left;   line-height: 2;">
-								<p>
-								<h2>[[${modalContent[1]}]]</h2>
-								<br />
-								<br /><br /><br />
-								</p>
-								
-							</div>
-							<img src="../../img/korean/layout/court_main_icon.png" style="height: 30px; width: 130px; margin: 20px 0 ;">	
-						</div>
-						<!--팝업 버튼 영역-->
-						
-						<div class="popup_btn">
-							<!--하루동안 보지않기-->
-							<a id="chk_today" href="javascript:closeToday();" class="close_day">하루동안 열지 않기</a>
-							<!--7일간 보지않기-->
-							<!-- <a id="chk_today" href="javascript:closeToday();" class="close_day">Do not open for 7 days</a>-->
-							<a href="javascript:closePop();">닫기</a>
-						</div>
-					</div>
-
-				</div>
-
-				<script>
-					// 쿠키 생성
-					function setCookie(name, value, expiredays) {  // 쿠키저장
-						var todayDate = new Date();  //date객체 생성 후 변수에 저장
-						todayDate.setDate(todayDate.getDate() + expiredays);
-						// 시간지정(현재시간 + 지정시간)
-						document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toUTCString() + ";"
-						//위 정보를 쿠키에 굽는다
-					}
-					$(function () {
-						$(".popup_box").draggable({containment: 'parent', scroll: false}); // 레이어 팝업 창 드래그 가능
-						//{containment:'parent', scroll:false} 화면 영역 밖으로 드래그 안됌.
-
-						if (document.cookie.indexOf("popToday=close") < 0) {      // 쿠키 저장여부 체크
-							document.getElementById("popup_layer").style.display = "block";
-						} else {
-							document.getElementById("popup_layer").style.display = "none";
-						}
-					});
-
-					//오늘하루만보기 닫기버튼 스크립트
-					function closeToday() {
-						setCookie("popToday", "close", 1);
-						$("#popup_layer").css("display", "none");
-						document.getElementById("popup_layer").style.display = "none";
-					}
-					//그냥 닫기버튼 스크립트
-					function closePop() {
-						document.getElementById("popup_layer").style.display = "none";
-					}
-				</script>
-
-			</div>
-			<!--모달차 끝-->
 		</div>
+		<!--모달차 끝-->
+	</div>
 
 	</div>
 </th:block>
