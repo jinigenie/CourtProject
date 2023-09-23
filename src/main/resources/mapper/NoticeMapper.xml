@@ -7,7 +7,11 @@
 <mapper namespace="com.court.proj.notice.NoticeMapper">
 
 	<select id="getList" resultType="NoticeVO">
-		select * from TB_003
+	
+		select tb3.*,
+			   tb15.admin_name
+        from TB_003 tb3
+        join TB_015 tb15 on tb15.admin_proper_num = tb3.admin_proper_num
 		order by notice_Date desc
 		LIMIT #{cri.pageStart}, #{cri.amount}
 	</select>
@@ -18,7 +22,15 @@
 		order by notice_Date desc
 
 	</select>
-
+	
+	<insert id="noticeReg">
+		INSERT INTO TB_003 (admin_proper_num, notice_title, notice_content)
+		VALUES (
+				#{admin_proper_num}, 
+				#{notice_title}, 
+				#{notice_content}
+				)
+	</insert>
 
 
 </mapper>

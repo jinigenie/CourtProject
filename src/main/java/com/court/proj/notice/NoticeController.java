@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.court.proj.admin.CourtAdminDetails;
 import com.court.proj.announce.AnnounceVO;
@@ -64,12 +65,14 @@ public class NoticeController {
 		
 		//공지 등록 form
 		@PostMapping("/notelistForm")
-		public String notelistForm(NoticeVO vo, Authentication auth) {
+		public String notelistForm(NoticeVO vo, Authentication auth, RedirectAttributes ra) {
 			CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
 			
 			// admin_proper_num 불러와야함 !
 			vo.setAdmin_proper_num("1");
 			int result = noticeService.noticeReg(vo);
+			String msg = result == 1? "등로 되었습니다" : "등록 실패";
+			ra.addFlashAttribute("msg", msg);
 			
 			return "redirect:/notice/noticeList";
 		}
