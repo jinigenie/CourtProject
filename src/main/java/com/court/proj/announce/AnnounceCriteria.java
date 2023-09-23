@@ -5,9 +5,6 @@ import lombok.Data;
 @Data
 public class AnnounceCriteria {
 
-	
-
-
 		private int page; // 조회하는 페이지
 		private int amount; // 데이터개수
 

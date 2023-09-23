@@ -84,7 +84,7 @@
 							<div class="announce-title">
 								<ul>
 									<li data-cell-header="제목">
-										<h2 th:text="${alist.announce_title}"></h2>
+										<h2 th:utext="${alist.announce_title}"></h2>
 									</li>
 								</ul>
 							</div>
@@ -92,22 +92,22 @@
 								<ul class="post-date">
 									<li data-cell-header="게시종료일자" class="end-date">
 										<strong>게시종료일자</strong>
-										<h4 th:text="${alist.announce_end_date}"></h4>
+										<h4 th:utext="${alist.announce_end_date}"></h4>
 									</li>
 									<li data-cell-header="게시시작일자" class="start-date">
 										<strong>게시시작일자</strong>
-										<h4 th:text="${alist.announce_start_date}"></h4>
+										<h4 th:utext="${alist.announce_start_date}"></h4>
 									</li>
 								</ul>
 								<ul class="change-date">
 									<li data-cell-header="최초변경일시" class="last-date">
 										<strong>최초변경일시</strong>
-										<h4 th:text="${alist.announce_last_date}"></h4>
+										<h4 th:utext="${alist.announce_last_date}"></h4>
 
 									</li>
 									<li data-cell-header="최종입력일시" class="first-date">
 										<strong>최종입력일시</strong>
-										<h4 th:text="${alist.announce_first_date}"></h4>
+										<h4 th:utext="${alist.announce_first_date}"></h4>
 									</li>
 								</ul>
 							</div>
@@ -150,7 +150,7 @@
 							<div class="searchform-wrap">
 								<tr th:each="vo, status : ${alist}">
 									<td data-cell-header="내용">
-										<p th:text="${alist.announce_content}"></p>
+										<p th:utext="${alist.announce_content}"></p>
 									</td>
 								</tr>
 							</div>
