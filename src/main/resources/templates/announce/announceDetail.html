@@ -1,181 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{../../css/announce/announceDetail.css}"/>
+<link rel="stylesheet" th:href="@{../../css/fcltt/fcltt.css}"/>
+<script th:src="@{../js/fcltt/fcltt.js}"></script>
 
-<head>
-	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
-	<script th:src="@{../js/fcltt/fcltt.js}"></script>
-</head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
-	<!-- wrap start -->
-	<div class="wrap">
-		<!-- main_con start -->
-		<div id="main_con">
-			<div id="nav_menu">
-				<div id="lnb">
-					<h2 class="title">모집공고</h2>
-					<div class="menu">
-						<ul>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
-								<ul class="sub" style="display: none;">
-									<!-- 관리자만 이동하게 변경해야 됨 -->
-									<li><a href="../announce/announceRegist">모집공고 등록</a></li>
-									<li><a href="../announce/announceList">모집공고 목록</a></li>
-								</ul>
-							</li>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
-								<ul class="sub" style="display: none;">
-									<li><a href="#">공지사항 등록</a></li>
-									<li><a href="#">공지사항 목록</a></li>
-								</ul>
-							</li>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
-								<ul class="sub" style="display: none;">
-									<li><a href="#">FAQ 등록</a></li>
-									<li><a href="#">FAQ 목록</a></li>
-								</ul>
-							</li>
+    <!-- wrap start -->
+    <div class="wrap">
+        <!-- main_con start -->
+        <div id="main_con">
+            <div id="nav_menu">
+                <div id="lnb">
+                    <h2 class="title">모집공고</h2>
+                    <div class="menu">
+                        <ul>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
+                                <ul class="sub" style="display: none;">
+                                    <!-- 관리자만 이동하게 변경해야 됨 -->
+                                    <li><a href="../announce/announceRegist">모집공고 등록</a></li>
+                                    <li><a href="../announce/announceList">모집공고 목록</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
+                                <ul class="sub" style="display: none;">
+                                    <li><a href="#">공지사항 등록</a></li>
+                                    <li><a href="#">공지사항 목록</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
+                                <ul class="sub" style="display: none;">
+                                    <li><a href="#">FAQ 등록</a></li>
+                                    <li><a href="#">FAQ 목록</a></li>
+                                </ul>
+                            </li>
 
-						</ul>
-					</div>
+                        </ul>
+                    </div>
 
-				</div>
-			</div>
-			<!-- contents start -->
-			<div id="contents">
+                </div>
+            </div>
+            <!-- contents start -->
+            <div id="contents">
 
-				<style>
-					@media screen and (max-width: 1024px) {
-						.table-responsive>table>tbody>tr td[data-cell-header]:before {
-							width: 30%;
-							margin: 0 0 0 0;
-							vertical-align: unset;
-						}
-					}
+                <style>
+                    @media screen and (max-width: 1024px) {
+                        .table-responsive > table > tbody > tr td[data-cell-header]:before {
+                            width: 30%;
+                            margin: 0 0 0 0;
+                            vertical-align: unset;
+                        }
+                    }
 
-					.table-responsive>table>tbody>tr:hover {
-						background-color: #e6f8ff;
-					}
+                    .table-responsive > table > tbody > tr:hover {
+                        background-color: #e6f8ff;
+                    }
 
-					@media screen and (min-width: 1100px) {
-						#select-box-margin-left-10 {
-							margin-left: 6px;
-						}
-					}
-				</style>
-				<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-      <![endif]-->
+                    @media screen and (min-width: 1100px) {
+                        #select-box-margin-left-10 {
+                            margin-left: 6px;
+                        }
+                    }
+                </style>
+                <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+                <![endif]-->
 
-				<!-- detail-content -->
-				<article id="detail-content">
-					<form id="listForm" name="listForm"
-						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-						method="post">
-						<div class="heading-wrap container">
-							<h3 class="heading1">
-								<span>재판 조력자 모집공고 </span>
-							</h3>
-						</div>
+                <!-- detail-content -->
+                <article id="detail-content">
+                    <form id="listForm" name="listForm"
+                          action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
+                          method="post">
+                        <div class="heading-wrap container">
+                            <h3 class="heading1">
+                                <span>재판 조력자 모집공고 </span>
+                            </h3>
+                        </div>
 
-						<!-- 공고 제목 start -->
-						<div class="announce-top">
-							<div class="announce-title">
-								<ul>
-									<li data-cell-header="제목">
-										<h2 th:text="${alist.announce_title}"></h2>
-									</li>
-								</ul>
-							</div>
-							<div class="announce-date">
-								<ul class="post-date">
-									<li data-cell-header="게시종료일자" class="end-date">
-										<strong>게시종료일자</strong>
-										<h4 th:text="${alist.announce_end_date}"></h4>
-									</li>
-									<li data-cell-header="게시시작일자" class="start-date">
-										<strong>게시시작일자</strong>
-										<h4 th:text="${alist.announce_start_date}"></h4>
-									</li>
-								</ul>
-								<ul class="change-date">
-									<li data-cell-header="최초변경일시" class="last-date">
-										<strong>최초변경일시</strong>
-										<h4 th:text="${alist.announce_last_date}"></h4>
+                        <!-- 공고 제목 start -->
+                        <div class="announce-top">
+                            <div class="announce-date">
+                                <ul class="change-date" style="width: 100%">
+                                    <li data-cell-header="최초변경일시" class="first-date">
+                                        최초입력일시 : [[${alist.announce_first_date}]]
+                                    </li>
+                                    <li data-cell-header="최종입력일시" class="last-date">
+                                        최종입력일시 : [[${alist.announce_last_date}]]
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- //공고 제목 end -->
 
-									</li>
-									<li data-cell-header="최종입력일시" class="first-date">
-										<strong>최종입력일시</strong>
-										<h4 th:text="${alist.announce_first_date}"></h4>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<!-- //공고 제목 end -->
+                        <div class="container contentIn">
+                            <table class="tableVer">
+                                <caption>입법예고 상세정보</caption>
+                                <tbody>
+                                <tr>
+                                    <th>제목</th>
+                                    <td colspan="4">[[${alist.announce_title}]]</td>
+                                </tr>
+                                <tr>
+                                    <th>모집유형</th>
+                                    <td> > ></td>
+                                    <th>모집인원</th>
+                                    <td>0명</td>
+                                </tr>
+                                <tr>
+                                    <th>모집시작일자</th>
+                                    <td>[[${alist.announce_start_date}]]</td>
+                                    <th>모집마감일자</th>
+                                    <td>[[${alist.announce_end_date}]]</td>
+                                </tr>
+                                <tr>
+                                    <th>첨부파일</th>
+                                    <td colspan="3" class="attTxt">
 
-						<div class="container">
-							<div class="box box1">
-								<!-- 첨부파일 start -->
-								<h3>첨부파일</h3>
-								<tr>
-									<th scope="row">첨부</th>
-									<td>
-										<div id="fileControl" style="display: none"></div>
-										<a href="#" class="btnAttach v1" onclick="existFile('0'); return false;">
-											[공고문] 2023년 2차 장기미임대 매입임대주택 입주자모집(23_08_18).pdf
-										</a>
-										<a href="https://www.i-sh.co.kr/app/com/util/htmlConverter.do?brd_id=GS0401&amp;seq=264867&amp;data_tp=A&amp;file_seq=4"
-											class="btn btnWhite h32 icoView" target="_blank"
-											title="파일 미리보기"><span>미리보기</span></a>
-									</td>
-								</tr>
-								<br>
-								<tr>
-									<th scope="row">첨부</th>
-									<td>
-										<div id="fileControl" style="display: none"></div>
-										<a href="#" class="btnAttach v1" onclick="existFile('1'); return false;">
-											[주택목록] 2023년 2차 장기미임대 매입임대주택 공급대상 주택목록(600호).pdf
-										</a>
-										<a href="https://www.i-sh.co.kr/app/com/util/htmlConverter.do?brd_id=GS0401&amp;seq=264867&amp;data_tp=A&amp;file_seq=5"
-											class="btn btnWhite h32 icoView" target="_blank"
-											title="파일 미리보기"><span>미리보기</span></a>
-									</td>
-								</tr>
-							</div>
-						</div>
-						<!-- 공고 내용 start -->
-						<div class="searchform searchform2">
-							<div class="searchform-wrap">
-								<tr th:each="vo, status : ${alist}">
-									<td data-cell-header="내용">
-										<p th:text="${alist.announce_content}"></p>
-									</td>
-								</tr>
-							</div>
-						</div>
-						<!-- //공고 내용 end -->
-						<!-- //본문컨텐츠 영역 end -->
+                                    </td>
+                                    <!-- 공고 내용 start -->
+                                <tr th:each="vo, status : ${alist}" style="border-bottom:3px solid #0057a1; border-top: 3px solid #0057a1">
+                                    <td colspan="4" class="contArea" data-cell-header="내용">
+                                        <p th:text="${alist.announce_content}"></p>
+                                    </td>
+                                </tr>
+                                <!-- //공고 내용 end -->
+                                </tbody>
+                            </table>
+                        </div>
 
-						<!-- 페이지 이동 버튼 -->
-						<div class="fclttRegist_btn">
-							<button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a
-									th:href="'/announce/announceModify?id=' + ${alist.announce_proper_num}">수정하기</a></button>
-							<button type="button" class="fcltt_btn2"><a
-									href="../announce/announceList">뒤로가기</a></button>
-						</div>
-						<!-- //페이지 이동 버튼 end -->
-					</form>
-				</article>
-				<!-- //detail-content end -->
+                        <!-- //본문컨텐츠 영역 end -->
 
-			</div>
-			<!-- //contents end -->
-		</div>
-		<!-- //main_con end -->
-	</div>
-	<!-- //wrap end -->
+                        <!-- 페이지 이동 버튼 -->
+                        <div class="fclttRegist_btn">
+                            <button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a
+                                    th:href="'/announce/announceModify?id=' + ${alist.announce_proper_num}">수정하기</a>
+                            </button>
+                            <button type="button" class="fcltt_btn2"><a
+                                    href="../announce/announceList">뒤로가기</a></button>
+                        </div>
+                        <!-- //페이지 이동 버튼 end -->
+                    </form>
+                </article>
+                <!-- //detail-content end -->
+
+            </div>
+            <!-- //contents end -->
+        </div>
+        <!-- //main_con end -->
+    </div>
+    <!-- //wrap end -->
 
 </th:block>
 <script th:src="@{../../js/announce/announceTrial.js}"></script>
