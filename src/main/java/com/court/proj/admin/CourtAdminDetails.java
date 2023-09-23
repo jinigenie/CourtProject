@@ -33,6 +33,10 @@ public class CourtAdminDetails implements UserDetails{
 	}
 	
 	
+	public Integer getAdmin_proper_num() {
+		return adminVO.getAdmin_proper_num();
+	}
+	
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
