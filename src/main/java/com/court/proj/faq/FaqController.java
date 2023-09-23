@@ -64,7 +64,7 @@ public class FaqController {
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 
-	// FAQ 작성/수정
+	// FAQ 수정페이지 진입 
 	@GetMapping("/modify")
 	public String detail(@RequestParam("faq_proper_num") String faq_proper_num, Model model) {
 		FaqVO vo = faqService.getDetail(faq_proper_num);
@@ -75,27 +75,27 @@ public class FaqController {
 	}
 	
 	
-	// FAQ 작성/수정 Form faqModifyForm
+	// FAQ 수정 Form faqModifyForm
 	@PostMapping("/faqModifyForm")
-	public String faqModifyForm(@ModelAttribute("vo")FaqVO vo, Authentication auth) {
+	public String faqModifyForm(@ModelAttribute("vo")FaqVO vo, Authentication auth, RedirectAttributes ra) {
 		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
 		System.out.println("=========getAdmin_auth==========: " + admin.getAdmin_auth());
 		System.out.println("=========hashCode==========: " + admin.hashCode());
 		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
 		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
 		int result = faqService.faqModify(vo);
-		
+		String modifyMSG = result == 1? "수정 되었습니다" : "수정 실패";
+		ra.addFlashAttribute("modifyMSG", modifyMSG);
 		
 		return "redirect:/faq/faqList";
 	}
 
 	
 	@GetMapping("/faqDel")
-	public String faqDel(@RequestParam("faq_proper_num") String faq_proper_num) {
+	public String faqDel(@RequestParam("faq_proper_num") String faq_proper_num, RedirectAttributes ra) {
 		System.out.println("================================");
 		System.out.println("faq_proper_num ? : " + faq_proper_num);
 		int result = faqService.faqDel(faq_proper_num);
-
 		return "redirect:/faq/faqList";
 	}
 	
@@ -112,7 +112,7 @@ public class FaqController {
 	
 	// FAQ 등록 form
 	@PostMapping("/registForm")
-	public String registForm(FaqVO vo, Authentication auth) {
+	public String registForm(FaqVO vo, Authentication auth, RedirectAttributes ra) {
 	
 		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
 		
@@ -124,7 +124,9 @@ public class FaqController {
 		// admin_proper_num 불러와야함 !
 		vo.setAdmin_proper_num("1");
 		int result = faqService.faqRag(vo);
-
+		String regMSG = result == 1? "등로 되었습니다" : "등록 실패";
+		ra.addFlashAttribute("regMSG", regMSG);
+		
 		return "redirect:/faq/faqList";
 	}
 

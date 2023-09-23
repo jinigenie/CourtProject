@@ -37,7 +37,6 @@
 									<li><a href="../faq/faqList">FAQ 목록</a></li>
 								</ul>
 							</li>
-
 						</ul>
 					</div>
 
@@ -163,7 +162,7 @@
 											<td style=" color: rgb(0, 0, 0); " data-cell-header="대분류"> <a
 													th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a>
 											</td>
-											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
+											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
 										<tr th:each=" vo, status : ${list}" style="cursor: pointer">
@@ -171,7 +170,7 @@
 											<td data-cell-header="대분류"> <a
 													th:href="@{/notice/noticeDetail(__${vo.notice_proper_num}__)}">[[${vo.notice_title}]]</a>
 											</td>
-											<td data-cell-header="중분류">관리자번호: [[${vo.admin_proper_num}]]</td>
+											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
 
@@ -239,6 +238,13 @@
 
 </script>
 
+<script th:inline="javascript">
 
+	var msg = '[[${msg}]]';
+	if (msg != 'null') {
+		alert(msg);
+	}
+
+</script>
 
 </html>

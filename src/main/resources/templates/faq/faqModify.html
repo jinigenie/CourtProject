@@ -2,8 +2,8 @@
 <html>
 
 <head>
-	<link rel="stylesheet" th:href="@{../css/faq/faq.css}" />
-	<script defer th:src="@{../js/faq/faq.js}"></script>
+	<link rel="stylesheet" th:href="@{./../css/faq/faq.css}" />
+	<script defer th:src="@{./../js/faq/faq.js}"></script>
 </head>
 
 
@@ -87,13 +87,13 @@
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : <span th:text="${admin_proper_num}"
+											<span class="top-box-one-span-one">작성자 : <span th:text="${vo.admin_name}"
 													name="admin_proper_num"></span></span>
 											<!--													th:text="${admin_id}"></span></span>-->
 										</td>
 										<td class="top-box-two">
 											<div id="fileControl" style="display: none"></div>
-											<span>최초 입력일 시 : <span text=""></span></span>
+											<span>최초 입력일자 : <span th:text="${vo.faq_ask_date}"></span></span>
 											<!--<span>최종 변경일 시 : <span th:text="${announce_last_date}"></span></span>-->
 										</td>
 									</tr>

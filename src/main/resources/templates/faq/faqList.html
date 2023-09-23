@@ -20,20 +20,24 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li sec:authorize="hasRole('ROLE_SUPERADMIN')" ><a href="../announce/announceRegist">모집공고 등록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a
+											href="../announce/announceRegist">모집공고 등록</a></li>
 									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
 								<ul class="sub" style="display: none;">
-									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="../notice/noticeRegist">공지사항 등록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="../notice/noticeRegist">공지사항
+											등록</a></li>
 									<li><a href="../notice/noticeList">공지사항 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
 								<ul class="sub" style="display: none;">
-									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/faq/regist" >FAQ 등록</a>						
-									<div id="userRole" style="font-size: 1px; color: #f6f6f6;">[[${#authentication.principal.authorities}]]</div></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/faq/regist">FAQ 등록</a>
+										<div id="userRole" style="font-size: 1px; color: #f6f6f6;">
+											[[${#authentication.principal.authorities}]]</div>
+									</li>
 									<li><a href="/faq/faqList">FAQ 목록</a></li>
 								</ul>
 							</li>
@@ -108,7 +112,7 @@
 
 							</form>
 							<!-- 검색영역 -->
-	
+
 							<ul id="faqAccordion" class="accordion">
 
 							</ul>
@@ -139,6 +143,19 @@
 		faqList(1, 10, $("#srchTycd").val(), $("#srchKwrd").val());
 		userHasAdminRole();
 	});
+
+</script>
+<script th:inline="javascript">
+
+	var regMSG = '[[${regMSG}]]';
+	if (regMSG != 'null') {
+		alert(regMSG);
+	}
+	var modifyMSG = '[[${modifyMSG}]]';
+	if (modifyMSG != 'null') {
+		alert(modifyMSG);
+	}
+
 
 </script>
 

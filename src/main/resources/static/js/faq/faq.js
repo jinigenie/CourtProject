@@ -37,7 +37,7 @@ function faqList(page, amount, content1, content2) {
         str += '    <!--   \=============================================== \--></div></h5>';
         str += ' <div id="pane11" class="accopanel" aria-labelledby="header1" style ="display:' + (vo.faq_proper_num == divVal ? 'block' : 'none') + ';">';
         str += '<abbr title="Answer">A.</abbr><p></p>';
-        str += '<p>' + vo.faq_ask_comment + '<br></p><p></p></div></li>';
+        str += '<p>' + vo.faq_ask_comment + '<br></p><br><br><p style="text-align:right; font-size:13px;">등록자: '+ vo.admin_name+', 등록일: '+ vo.faq_ask_date +'</p></div><br/></li>';
 
         li.append(str);
     }
