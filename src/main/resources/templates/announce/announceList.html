@@ -250,38 +250,38 @@
 							<!-- 게시판 시작 부분 end -->
 
 							<!-- 페이징 start -->
-<div class="pager">
-    <div class="pager-wrap">
-        <!-- 맨 처음 목록으로 이동 -->
-        <a href="#" class="arr first" title="처음으로"
-            th:href="@{'/announce/announceList?page=1'}">
-            <strong class="sr-only">맨 처음 목록으로 이동</strong>
-        </a>
+							<div class="pager">
+								<div class="pager-wrap">
+									<!-- 맨 처음 목록으로 이동 -->
+									<a href="#" class="arr first" title="처음으로"
+										th:href="@{'/announce/announceList?page=1'}">
+										<strong class="sr-only">맨 처음 목록으로 이동</strong>
+									</a>
 
-        <!-- 이전 페이지로 이동 -->
-        <a href="#" class="arr prev" title="이전으로" th:if="${pageVO.page > 1}"
-           th:href="@{'/announce/announceList?page=' + ${pageVO.page - 1}}">
-            <strong class="sr-only">이전페이지로 이동</strong>
-        </a>
+									<!-- 이전 페이지로 이동 -->
+									<a href="#" class="arr prev" title="이전으로" th:if="${pageVO.page > 1}"
+										th:href="@{'/announce/announceList?page=' + ${pageVO.page - 1}}">
+										<strong class="sr-only">이전페이지로 이동</strong>
+									</a>
 
-        <!-- 페이지 번호 출력 -->
-        <a href="#" th:each="pageNum : ${pageVO.pageList}" th:text="${pageNum}"
-           th:href="@{'/announce/announceList?page=' + ${pageNum}}"
-           th:class="${pageVO.page == pageNum} ? 'active' : ''"></a>
+									<!-- 페이지 번호 출력 -->
+									<a href="#" th:each="pageNum : ${pageVO.pageList}" th:text="${pageNum}"
+										th:href="@{'/announce/announceList?page=' + ${pageNum}}"
+										th:class="${pageVO.page == pageNum} ? 'active' : ''"></a>
 
-        <!-- 다음 페이지로 이동 -->
-        <a href="#" class="arr next" title="다음으로"
-           th:href="@{'/announce/announceList?page=' + ${pageVO.page + 1}}">
-            <strong class="sr-only">다음페이지로 이동</strong>
-        </a>
+									<!-- 다음 페이지로 이동 -->
+									<a href="#" class="arr next" title="다음으로"
+										th:href="@{'/announce/announceList?page=' + ${pageVO.page + 1}}">
+										<strong class="sr-only">다음페이지로 이동</strong>
+									</a>
 
-        <!-- 맨 마지막 목록으로 이동 -->
- <a href="#" class="arr last" title="마지막으로"
-            th:href="@{'/announce/announceList?page=' + ${pageVO.realEnd}}">
-            <strong class="sr-only">맨 마지막 목록으로 이동</strong>
-        </a>
-    </div>
-</div>
+									<!-- 맨 마지막 목록으로 이동 -->
+									<a href="#" class="arr last" title="마지막으로"
+										th:href="@{'/announce/announceList?page=' + ${pageVO.realEnd}}">
+										<strong class="sr-only">맨 마지막 목록으로 이동</strong>
+									</a>
+								</div>
+							</div>
 							<!-- //페이징 end -->
 						</div>
 						<!-- //본문컨텐츠 영역 end -->

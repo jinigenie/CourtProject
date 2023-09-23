@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.court.proj.admin.CourtAdminDetails;
 import com.court.proj.aplcnReg.TrialVO;
-import com.court.proj.user.CourtUserDetails;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -38,49 +38,43 @@ public class AnnounceController {
 	@GetMapping("announceList")
 	public String announceList(Model model, AnnounceCriteria cri) {
 
+		// 공고 리스트
+		ArrayList<AnnounceVO> list = announceService.AnnounceList(cri);
+		model.addAttribute("list", list);
 
-		
-	    // 공고 리스트
-	    ArrayList<AnnounceVO> list = announceService.AnnounceList(cri);
-	    model.addAttribute("list", list);
-	    
+		int total = announceService.getTotal();
+		model.addAttribute("total", total);
 
-	    int total = announceService.getTotal();
-	    model.addAttribute("total", total);
+		// 페이징 정보를 생성하여 모델에 추가
+		AnnouncePageVO announcePageVO = new AnnouncePageVO(cri, total);
+		model.addAttribute("pageVO", announcePageVO);
 
-	    // 페이징 정보를 생성하여 모델에 추가
-	    AnnouncePageVO announcePageVO = new AnnouncePageVO(cri, total);
-	    model.addAttribute("pageVO", announcePageVO);
-
-	    return "announce/announceList";
+		return "announce/announceList";
 	}
-
 
 	// 모집공고 목록 검색기능
 	@GetMapping("/announce/searchAnnounce")
-	public String searchAnnounce(
-	    @RequestParam(name = "searchField", defaultValue = "0") int searchField,
-	    @RequestParam(name = "search_query", defaultValue = "") String searchQuery,
-	    Model model
-	) {
-	    ArrayList<AnnounceVO> list = new ArrayList<>();
+	public String searchAnnounce(@RequestParam(name = "searchField", defaultValue = "0") int searchField,
+			@RequestParam(name = "search_query", defaultValue = "") String searchQuery, Model model) {
+		
+		ArrayList<AnnounceVO> list = new ArrayList<>();		
 
-	    if (searchField == 0) {
-	        // 전체 검색
-	        list = announceService.searchAnnounceTitleAndContent(searchQuery);
-	    } else if (searchField == 1) {
-	        // 제목 검색
-	        list = announceService.searchAnnounceTitle(searchQuery);
-	    } else if (searchField == 2) {
-	        // 내용 검색
-	        list = announceService.searchAnnounceContent(searchQuery);
-	    }
+		if (searchField == 0) {
+			// 전체 검색
+			list = announceService.searchAnnounceTitleAndContent(searchQuery);
+		} else if (searchField == 1) {
+			// 제목 검색
+			list = announceService.searchAnnounceTitle(searchQuery);
+		} else if (searchField == 2) {
+			// 내용 검색
+			list = announceService.searchAnnounceContent(searchQuery);
+		}
 
-	    model.addAttribute("list", list);
-	    int total = announceService.getTotal();
-	    model.addAttribute("total", total);
+		model.addAttribute("list", list);
+		int total = announceService.getTotal();
+		model.addAttribute("total", total);
 
-	    return "announce/announceList";
+		return "announce/announceList";
 	}
 
 	// 모집공고 상세 페이지
@@ -92,58 +86,15 @@ public class AnnounceController {
 		return "announce/announceDetail";
 	}
 
-	// 모집공고 수정 페이지
-	@GetMapping("announceModify")
-	public String announceModify(@RequestParam(name = "id") int announce_proper_num, Model model) {
-
-		AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
-		model.addAttribute("alist", alist);
-
-		AnnounceVO avo = announceService.getinfo(admin_id);
-		model.addAttribute("vo", avo);
-		admin_num = avo.getAdmin_proper_num();
-
-		ArrayList<TrialVO> tlist = announceService.getTrial();
-		model.addAttribute("tlist", tlist);
-
-		return "announce/announceModify";
-	}
-
-	// 모집공고 수정 폼 요청
-	@PostMapping("/announceModifyForm")
-	public String announceModifyForm(@RequestParam(name = "id", required = true) int announce_proper_num, @ModelAttribute AnnounceVO vo, Model model) {
-
-//		vo.setAdmin_proper_num(admin_num);
-//		vo.setAdmin_id(admin_id);
-//		vo.setAdmin_pw(admin_pw);
-//		vo.setAdmin_auth(admin_auth);
-//		vo.setAdmin_name(admin_name);
-
-		if (vo.getSelectType3().equals("선택")) {
-			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
-		} else {
-			vo.setTrial_fcltt_proper_num(
-					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3()));
-		}
-
-		System.out.println(vo.toString());
-		
-		announceService.updateAnnounce(vo);
-
-		return "redirect:/announce/announceList";
-	}
-
 	// 모집공고 등록 페이지
 	@GetMapping("announceRegist")
 	public String announceRegist(Model model, Authentication auth) {
 
-		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
-		System.out.println(user.getUser_id());
+		CourtAdminDetails user = (CourtAdminDetails) auth.getPrincipal();
 		System.out.println(user.getUsername());
-		
-//		admin_id = user.getUser_id();		
-		
-		
+
+		admin_id = user.getUsername();
+
 //		log.info("sdfsdf");
 		AnnounceVO avo = announceService.getinfo(admin_id);
 		model.addAttribute("vo", avo);
@@ -159,9 +110,8 @@ public class AnnounceController {
 
 	// 모집공고 등록 폼 요청
 	@PostMapping("/announceRegistForm")
-	public String announceRegistForm(@ModelAttribute AnnounceVO vo, Model model,Authentication auth) {
-		
-		
+	public String announceRegistForm(@ModelAttribute AnnounceVO vo, Model model, Authentication auth) {
+
 		vo.setAdmin_id(admin_id);
 		vo.setAdmin_pw(admin_pw);
 		vo.setAdmin_auth(admin_auth);
@@ -181,4 +131,56 @@ public class AnnounceController {
 		return "redirect:/announce/announceList";
 	}
 
+	// 모집공고 수정 페이지
+	@GetMapping("announceModify")
+	public String announceModify(@RequestParam(name = "id") int announce_proper_num, Model model, Authentication auth) {
+
+		CourtAdminDetails user = (CourtAdminDetails) auth.getPrincipal();
+		System.out.println(user.getUsername());
+
+		admin_id = user.getUsername();
+		
+		AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
+		model.addAttribute("alist", alist);
+
+		AnnounceVO avo = announceService.getinfo(admin_id);
+		model.addAttribute("vo", avo);
+		admin_num = avo.getAdmin_proper_num();
+
+		ArrayList<TrialVO> tlist = announceService.getTrial();
+		model.addAttribute("tlist", tlist);
+		
+		return "announce/announceModify";
+	}
+
+	// 모집공고 수정 폼 요청
+	@PostMapping("/announceModifyForm")
+	public String announceModifyForm(@RequestParam(name = "id", required = true) int announce_proper_num,
+			@ModelAttribute AnnounceVO vo, Model model, Authentication auth) {
+
+		if(auth != null) {
+			CourtAdminDetails user = (CourtAdminDetails) auth.getPrincipal();
+			System.out.println(user.getUsername());
+			admin_id = user.getUsername();
+		} else {
+			return "redirect:/user/login";
+		}
+
+		vo.setAdmin_id(admin_id);
+		vo.setAdmin_pw(admin_pw);
+		vo.setAdmin_auth(admin_auth);
+		vo.setAdmin_name(admin_name);
+
+		if (vo.getSelectType3().equals("선택")) {
+			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
+		} else {
+			vo.setTrial_fcltt_proper_num(
+					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3()));
+		}
+
+		announceService.updateAnnounce(vo);
+
+		return "redirect:/announce/announceList";
+	}
+	
 }

@@ -14,16 +14,17 @@ public interface AnnounceService {
 
 	// 공고 리스트 조회
 	public ArrayList<AnnounceVO> AnnounceList(AnnounceCriteria cri);
-	
+
 	// 공고 페이징
-	
 
 	// 공고 토탈
 	public int getTotal();
 
 	// 공고 검색
 	public ArrayList<AnnounceVO> searchAnnounceTitleAndContent(String keyword);
+
 	public ArrayList<AnnounceVO> searchAnnounceTitle(String keyword);
+
 	public ArrayList<AnnounceVO> searchAnnounceContent(String keyword);
 
 	// 재판조력자 유형 조회하기
@@ -34,6 +35,7 @@ public interface AnnounceService {
 
 	// 선택한 재판조력자 pk 불러오기
 	public int getTrialNum1(String st1, String st2);
+
 	public Integer getTrialNum2(String st1, String st2, String st3);
 
 	// 공고 등록 TB_002
