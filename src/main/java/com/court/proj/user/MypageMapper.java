@@ -19,6 +19,7 @@ public interface MypageMapper {
 	public ArrayList<MypageStatusVO> getDocu(int aplcn_dtls_proper_num);
 	public int regPause(PauseDataVO vo);
 	public PauseDataVO getPause(int user_proper_num);
+	public boolean pauseAccess(int user_proper_num);
 
 
 }

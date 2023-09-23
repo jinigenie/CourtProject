@@ -135,17 +135,23 @@
 
 </th:block>
 
-
-<!-- 중지 신청 -->
-<!--<script>
-	const btn = document.getElementById("pauseBtn");
-	const pauseForm = document.getElementById("pauseForm");
+<!-- 재판조력자가 아닌 사용자 진입시 -->
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		function showAlert(){
+			var message = "재판조력자가 아닙니다.";
+			var confirmation = confirm(message);
+			
+			if(confirmation){
+				window.location.href = "/main/main";
+			}
+		}
+		
+	});
 	
-	btn.onclick = function(e) {
-		e.preventDefault();
-		pauseForm.submit();
-	}
-</script>-->
+	showAlert();
+	
+</script>
 
 <script>
     document.getElementById('pauseBtn').addEventListener('click', function() {
@@ -164,5 +170,6 @@
         }
     });
 </script>
+
 
 </html>
