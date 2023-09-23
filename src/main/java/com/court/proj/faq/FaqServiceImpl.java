@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.court.proj.announce.AnnounceVO;
 import com.court.proj.fcltt.FclttCriteria;
 
 @Service("faqService")
@@ -44,6 +45,10 @@ public class FaqServiceImpl implements FaqService{
 	@Override
 	public int faqRag(FaqVO vo) {
 		return faqMapper.faqRag(vo);
+	}
+	@Override
+	public String getinfo(String admin_id) {
+		return faqMapper.getinfo(admin_id);
 	}
 	
 

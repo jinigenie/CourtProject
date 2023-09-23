@@ -2,8 +2,7 @@
 <html>
 
 <head>
-	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
-	<script th:src="@{../js/fcltt/fcltt.js}"></script>
+	<link rel="stylesheet" th:href="@{./../css/faq/faq.css}" />
 </head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -15,23 +14,24 @@
 				<div id="lnb">
 					<h2 class="title">공지사항</h2>
 					<div class="menu">
-						<ul>
+					<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')" ><a href="../announce/announceRegist">모집공고 등록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">공지사항 등록</a></li>
-									<li><a href="#">공지사항 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/notice/noticeRegist">공지사항 등록</a></li>
+									<li><a href="/notice/noticeList">공지사항 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">FAQ 등록</a></li>
-									<li><a href="#">FAQ 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="../faq/regist" >FAQ 등록</a>						
+									<div id="userRole" style="font-size: 1px; color: #f6f6f6;">[[${#authentication.principal.authorities}]]</div></li>
+									<li><a href="../faq/faqList">FAQ 목록</a></li>
 								</ul>
 							</li>
 
@@ -62,44 +62,36 @@
 						}
 					}
 				</style>
-				<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-      <![endif]-->
-
-				<!-- detail-content -->
+								<!-- detail-content -->
 				<article id="detail-content">
 					<!-- form start -->
-					<form id="listForm" name="listForm"
-						action="https://minwon.moel.go.kr/minwon2008/lc_minwon/lc_form_apply.do;jsessionid=zVSgTiA2kOkekcq6lILRPQYDHEBkkzAovCEt5qTCJdbe8CZTxX2pWaqJoS8XE3Kn.minwon-was_servlet_minwon2"
-						method="post">
+					<form id="notelistForm" name="notelistForm" action="notelistForm" method="post">
 						<div class="heading-wrap container">
 							<h3 class="heading1">
-								<span>공지사항 등록</span>
+								<span>공지 등록</span>
 							</h3>
 						</div>
 
-						<!-- 본문컨텐츠 영역 start -->
+						<!-- 본문컨텐츠 영역 start!!!! -->
 						<div class="container">
 
 							<!-- box box1 start -->
 							<div class="top-box">
 								<table>
-									<!-- 첨부파일 start -->
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : 관리자</span>
+											<span class="top-box-one-span-one">작성자 : <span name="admin_proper_num"
+													th:text="${admin_proper_num}"></span></span>
+											<!--													th:text="${admin_id}"></span></span>-->
 										</td>
 										<td class="top-box-two">
 											<div id="fileControl" style="display: none"></div>
-											<span>최초 입력일 시 : 2023.08.30</span>
-											<span> / </span>
-											<span>최종 변경일 시 : 2023.08.30</span>
+											<span>최초 입력일 시 : <span text=""></span></span>
+											<!--<span>최종 변경일 시 : <span th:text="${announce_last_date}"></span></span>-->
 										</td>
 									</tr>
 									<tr class="top-box-tr-two">
-
 									</tr>
 								</table>
 							</div>
@@ -107,118 +99,39 @@
 						</div>
 						<!-- //본문컨텐츠 영역 end -->
 
-						<!-- 공고 내용 start -->
-						<div class="searchform searchform2">
+						<!-- faq내용 start -->
+						<div class="searchform searchform2" style="background-color: rgb(247, 247, 247);">
 
 							<!-- searchform-wrap start -->
 							<div class="searchform-wrap">
 
-								<!-- 등록 양식 start -->
 								<div class="table table-responsive">
-
-
 									<table>
-
 										<colgroup>
 											<col style="width: 30%">
 											<col style="width: 70%">
 										</colgroup>
 										<tbody>
-
 											<tr>
 												<th scope="row" class="txt-left">
-													<span class="txt-left" title="�ʼ��׸�">제목</span>
+													<span class="txt-left">제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
-													<input name="cvl_nm" id="cvl_nm" value="" class="cm_inptxt"
-														type="text">
+													<input name="notice_title" id="cvl_nm" class="cm_inptxt"
+														type="text" style="width: 640px; height: 40px;">
 												</td>
 											</tr>
-											<tr>
-												<th scope="row" class="txt-left">
-													<span class="search_th">게시 시작일</span>
-												</th>
-												<td data-cell-header="게시 시작일" class="txt-left">
-													<div class="fcltt_phone" style="display: inline-block">
-														<!-- 달력 start -->
-														<div class="calander-box">
-
-															<input type="text" class="datepicker" readonly
-																placeholder="날짜선택" name="startDate" value="" /> -
-															<input type="text" class="datepicker" readonly
-																placeholder="날짜선택" name="endDate" value="" />
-														</div>
-														<!-- 달력 end -->
-													</div>
-
-
-												</td>
-											</tr>
-											<tr>
-												<th scope="row" class="txt-left">
-													<span class="essential-txt" title="�ʼ��׸�">조력자 분류</span>
-												</th>
-												<td data-cell-header="생년월일" class="txt-left">
-													<select name="" id="" class="cm_inptxt fclttCategory">
-														<option value="">대분류</option>
-														<option value="">대분류1</option>
-														<option value="">대분류2</option>
-														<option value="">대분류3</option>
-														<option value="">대분류5</option>
-													</select>
-													<select name="" id="" class="cm_inptxt fclttCategory">
-														<option value="">중분류</option>
-														<option value="">중분류1</option>
-														<option value="">중분류2</option>
-														<option value="">중분류3</option>
-														<option value="">중분류5</option>
-													</select>
-													<select name="" id="" class="cm_inptxt fclttCategory">
-														<option value="">소분류</option>
-														<option value="">소분류1</option>
-														<option value="">소분류2</option>
-														<option value="">소분류3</option>
-														<option value="">소분류5</option>
-													</select>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row" class="txt-left">
-													<span>법원 분류</span>
-												</th>
-												<td data-cell-header="전화번호" class="txt-left">
-													<select name="" id="" class="cm_inptxt">
-														<option value="">지역</option>
-														<option value="">지역1</option>
-														<option value="">지역2</option>
-														<option value="">지역3</option>
-														<option value="">지역5</option>
-													</select>
-													<select name="" id="" class="cm_inptxt">
-														<option value="">법원명</option>
-														<option value="">법원명1</option>
-														<option value="">법원명2</option>
-														<option value="">법원명3</option>
-														<option value="">법원명5</option>
-													</select>
-
-												</td>
-											</tr>
-
 											<tr>
 												<th scope="row" class="txt-left">
 													<span>내용</span>
 												</th>
 												<td data-cell-header="이메일" class="txt-left">
 													<!-- ckEditor start -->
-
-													<div id="editor">
-													</div>
+													<textarea id="editor" name="notice_content">
+													</textarea>
 													<!-- //ckEditor end -->
 												</td>
 											</tr>
-
-
 										</tbody>
 									</table>
 								</div>
@@ -226,28 +139,26 @@
 							</div>
 							<!-- //searchform-wrap end -->
 						</div>
-						<!-- //공고 내용 end -->
+						<!-- //faq 내용 end -->
 					</form>
 					<!-- //form end -->
-
 				</article>
 				<!-- //detail-content end -->
+				<!-- 페이지 이동 버튼 -->
+				<div class="faq_btn" style="padding-left: 100px;">
+					<button type="button" onclick="noticeRegSubmit()" class="faq_btn1">등록</button>
+					<button type="button" onclick="notfals()" class="faq_btn2">취소</button>
+					<br /><br /><br />
+				</div>
+				<!-- //페이지 이동 버튼 end -->
 			</div>
 			<!-- //contents end -->
 		</div>
 		<!-- //contents end -->
-
-		<!-- 페이지 이동 버튼 -->
-		<div class="fclttRegist_btn">
-			<button type="button" class="fcltt_btn1">등록</button>
-			<button type="button" class="fcltt_btn2">취소</button>
-		</div>
-		<!-- //페이지 이동 버튼 end -->
 	</div>
 	<!-- //main_con end -->
 	</div>
 	<!-- //wrap end -->
-
 </th:block>
 <!-- ckEditor start -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
@@ -256,6 +167,26 @@
 	ClassicEditor.create(document.querySelector('#editor'), {
 		language: "ko"
 	});
+
+
+	//  등록
+	function noticeRegSubmit() {
+
+		var form = document.getElementById("notelistForm");
+		form.submit();
+
+	}
+
+
+	//삭제
+	function notfals() {
+		var result = confirm("취소 하시겠습니까");
+		if (result) {
+			window.location.href = '/notice/noticeList';
+			alert("취소되었습니다.");
+		} else {
+		}
+	}
 </script>
 <style>
 	.ck-editor__editable {

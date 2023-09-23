@@ -19,20 +19,25 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a
+											href="../announce/announceRegist">모집공고 등록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">공지사항 등록</a></li>
-									<li><a href="#">공지사항 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="../notice/noticeRegist">공지사항
+											등록</a></li>
+									<li><a href="../notice/noticeList">공지사항 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">FAQ 등록</a></li>
-									<li><a href="#">FAQ 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/faq/regist">FAQ 등록</a>
+										<div id="userRole" style="font-size: 1px; color: #f6f6f6;">
+											[[${#authentication.principal.authorities}]]</div>
+									</li>
+									<li><a href="/faq/faqList">FAQ 목록</a></li>
 								</ul>
 							</li>
 
@@ -82,7 +87,8 @@
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : <span text=""></span></span>
+											<span class="top-box-one-span-one">작성자 : <span th:text="${admin_proper_num}"
+													name="admin_proper_num"></span></span>
 											<!--													th:text="${admin_id}"></span></span>-->
 										</td>
 										<td class="top-box-two">
@@ -117,10 +123,11 @@
 													<span class="txt-left" title="�ʼ��׸�">질문 제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
-													<input name="faq_ask_content" id="cvl_nm" th:value="${vo.faq_ask_content}"
-														class="cm_inptxt" type="text"
+													<input name="faq_ask_content" id="cvl_nm"
+														th:value="${vo.faq_ask_content}" class="cm_inptxt" type="text"
 														style="width: 640px; height: 40px;">
-													<input type="hidden" name="faq_proper_num" th:value="${vo.faq_proper_num}"/>
+													<input type="hidden" name="faq_proper_num"
+														th:value="${vo.faq_proper_num}" />
 												</td>
 											</tr>
 											<tr>

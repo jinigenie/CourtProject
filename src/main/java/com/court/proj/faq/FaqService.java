@@ -23,4 +23,6 @@ public interface FaqService {
 	//faq 글 등록하기
 	public int faqRag(FaqVO vo); 
 	
+	// 글등록을 위한 admin 조회
+	public String getinfo(String admin_id);
 }

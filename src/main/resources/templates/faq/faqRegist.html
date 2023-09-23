@@ -2,8 +2,8 @@
 <html>
 
 <head>
-	<link rel="stylesheet" th:href="@{../css/faq/faq.css}" />
-	<script defer th:src="@{../js/faq/faq.js}"></script>
+	<link rel="stylesheet" th:href="@{./../css/faq/faq.css}" />
+	<script defer th:src="@{./../js/faq/faq.js}"></script>
 </head>
 
 
@@ -19,20 +19,25 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">모집공고</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">모집공고 등록</a></li>
-									<li><a href="#">모집공고 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a
+											href="../announce/announceRegist">모집공고 등록</a></li>
+									<li><a href="../announce/announceList">모집공고 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">공지사항</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">공지사항 등록</a></li>
-									<li><a href="#">공지사항 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="../notice/noticeRegist">공지사항
+											등록</a></li>
+									<li><a href="../notice/noticeList">공지사항 목록</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">FAQ 등록</a></li>
-									<li><a href="#">FAQ 목록</a></li>
+									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/faq/regist">FAQ 등록</a>
+										<div id="userRole" style="font-size: 1px; color: #f6f6f6;">
+											[[${#authentication.principal.authorities}]]</div>
+									</li>
+									<li><a href="/faq/faqList">FAQ 목록</a></li>
 								</ul>
 							</li>
 
@@ -82,8 +87,8 @@
 									<tr class="top-box-tr-one">
 										<td class="top-box-one">
 											<div id="fileControl" style="display: none"></div>
-											<span class="top-box-one-span-one">작성자 : <span name="admin_proper_num"
-													text="1"></span></span>
+											<span class="top-box-one-span-one">작성자 : <span th:text="${admin_proper_num}"
+													name="admin_proper_num"></span></span>
 											<!--													th:text="${admin_id}"></span></span>-->
 										</td>
 										<td class="top-box-two">
@@ -148,7 +153,7 @@
 				<!-- 페이지 이동 버튼 -->
 				<div class="faq_btn" style="padding-left: 100px;">
 					<button type="button" onclick="faqRegSubmit()" class="faq_btn1">등록</button>
-					<button type="button" class="faq_btn2">취소</button>
+					<button type="button" onclick="faqfals()" class="faq_btn2">취소</button>
 					<br /><br /><br />
 				</div>
 				<!-- //페이지 이동 버튼 end -->
@@ -169,11 +174,20 @@
 	ClassicEditor.create(document.querySelector('#editor'), {
 		language: "ko"
 	});
-	function faqRegSubmit(){
-		
-	var form = document.getElementById("listForm");
-    form.submit();
-		
+	function faqRegSubmit() {
+
+		var form = document.getElementById("listForm");
+		form.submit();
+
+	}
+
+	function faqfals() {
+		var result = confirm("취소 하시겠습니까");
+		if (result) {
+			window.location.href = '/faq/faqList';
+			alert("취소되었습니다.");
+		} else {
+		}
 	}
 </script>
 <style>

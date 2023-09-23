@@ -3,13 +3,19 @@ package com.court.proj.notice;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.court.proj.admin.CourtAdminDetails;
+import com.court.proj.announce.AnnounceVO;
+import com.court.proj.aplcnReg.TrialVO;
 import com.court.proj.fcltt.FclttCriteria;
 import com.court.proj.fcltt.FclttPageVO;
+import com.court.proj.user.CourtUserDetails;
 
 @Controller
 @RequestMapping("/notice")
@@ -48,9 +54,35 @@ public class NoticeController {
 		
 		// 공지 등록 페이지
 		@GetMapping("/noticeRegist")
-		public String noticeRegist() {
+		public String noticeRegist(Model model,Authentication auth) {
+			CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
+			String admin_proper_num = "1";
+			model.addAttribute("admin_proper_num", admin_proper_num);
+			
 			return "notice/noticeRegist";
 		}
+		
+		//공지 등록 form
+		@PostMapping("/notelistForm")
+		public String notelistForm(NoticeVO vo, Authentication auth) {
+			CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
+			
+			// admin_proper_num 불러와야함 !
+			vo.setAdmin_proper_num("1");
+			int result = noticeService.noticeReg(vo);
+			
+			return "redirect:/notice/noticeList";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	
 }
