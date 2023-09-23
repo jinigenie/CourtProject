@@ -2,9 +2,7 @@ package com.court.proj.aplcnReg;
 
 import com.court.proj.announce.AnnounceVO;
 import com.court.proj.user.UserVO;
-import org.apache.ibatis.annotations.Param;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface AplcnRegService {
@@ -81,6 +79,21 @@ public interface AplcnRegService {
     public void updateCerti(AddInfoVO aivo);
     // 자격증 정보 저장하기
     public void setCerti(AddInfoVO aivo);
+
+
+    // aplcn_dtls_proper_num 받아오기
+    public int getAdpnum(String id);
+    // file info 업로드하기
+    public void uploadFileInfo(AddInfoVO aivo);
+    // file info 삭제하기
+    public void deleteFileInfo(String path);
+    // file path 가져오기
+    public String getFilePath(int reg_num, String fileName);
+    // file Info 가져오기
+    public ArrayList<AddInfoVO> getFileInfo(int reg_num);
+
+    // 신청완료 상태 변경하기
+    public void updateSts(int reg_num);
 
 //    void setCerti(CertiVO vo);
 //    public ArrayList<CertiVO> getCerti(@Param("vo") CertiVO vo);

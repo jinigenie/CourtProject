@@ -183,6 +183,36 @@ public class AplcnRegServiceImpl implements AplcnRegService{
         aplcnRegMapper.setCerti(aivo);
     }
 
+    @Override
+    public int getAdpnum(String id) {
+        return aplcnRegMapper.getAdpnum(id);
+    }
+
+    @Override
+    public void uploadFileInfo(AddInfoVO aivo) {
+        aplcnRegMapper.uploadFileInfo(aivo);
+    }
+
+    @Override
+    public void deleteFileInfo(String path) {
+        aplcnRegMapper.deleteFileInfo(path);
+    }
+
+    @Override
+    public String getFilePath(int reg_num, String fileName) {
+        return aplcnRegMapper.getFilePath(reg_num, fileName);
+    }
+
+    @Override
+    public ArrayList<AddInfoVO> getFileInfo(int reg_num) {
+        return aplcnRegMapper.getFileInfo(reg_num);
+    }
+
+    @Override
+    public void updateSts(int reg_num) {
+        aplcnRegMapper.updateSts(reg_num);
+    }
+
 //    @Override
 //    public void setCerti(CertiVO vo) {
 //        aplcnRegMapper.setCerti(vo);

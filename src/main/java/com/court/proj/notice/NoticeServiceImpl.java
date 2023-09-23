@@ -22,6 +22,10 @@ public ArrayList<NoticeVO> getList(FclttCriteria cri) {
 public int getTotal(FclttCriteria cri) {
 	return noticeMapper.getTotal(cri);
 }
+@Override
+public int noticeReg(NoticeVO vo) {
+	return noticeMapper.noticeReg(vo);
+}
 	
 
 

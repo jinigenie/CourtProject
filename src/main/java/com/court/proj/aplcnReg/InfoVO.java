@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,8 +22,8 @@ public class InfoVO {
     private String insrn_indst_carer_etc;
     private String criminal_penalty_carer_yn;
     private String criminal_penalty_carer_etc;
-    private String aplcn_dtls_sts;
-    private String aplcn_dtls_date;
+    private String aplicn_dtls_sts;
+    private String aplicn_dtls_date;
 
     // 선택한 재판조력자 유형
     private String selectType1;

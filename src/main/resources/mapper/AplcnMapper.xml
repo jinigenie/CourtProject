@@ -23,6 +23,50 @@
 		#{court_proper_num})
 	</insert>
 
+	<!-- 신청자 리스트 검색 -->
+
+	<select id="searchAll" resultType="ListVO">
+		SELECT
+		count(*) total from
+		FROM
+		TB_001 T1
+		INNER JOIN
+		TB_005 T2 ON
+		T1.user_proper_num =
+		T2.user_proper_num
+		INNER JOIN
+		TB_011 T3 ON
+		T2.court_proper1 =
+		T3.court_name
+		INNER JOIN
+		TB_010 T4 ON
+		T2.trial_fcltt_proper_num =
+		T4.trial_fcltt_proper_num
+	</select>
+
+	<select id="searchAplcnName" resultType="ListVO">
+		SELECT
+		count(*) total from TB_001
+		where user_name LIKE '%' ||
+		#{keyword} || '%'
+	</select>
+
+	<select id="searchAplcnFcltt" resultType="ListVO">
+		SELECT
+		count(*) total from TB_010
+		where trial_fcltt_clasifi_code
+		LIKE '%' ||
+		#{keyword} || '%'
+	</select>
+
+	<select id="searchAplcnCourt" resultType="ListVO">
+		SELECT
+		count(*) total from TB_010
+		where court_name LIKE '%' ||
+		#{keyword} ||
+		'%' 
+	</select>
+
 
 	<!-- 신청자 평가 -->
 	<insert id="aplcnEvaluate">
@@ -46,7 +90,8 @@
 		#{evaluate_score},
 		#{judge_recom_score},
 		#{review_etc},
-		#{aplcn_dtls_proper_num},1)
+		#{aplcn_dtls_proper_num},
+		#{admin_proper_num})
 	</insert>
 
 	<!-- 신청자 리스트 -->
@@ -74,71 +119,10 @@
 		T3.court_name
 		INNER JOIN
 		TB_010 T4 ON
-		T2.trial_fcltt_proper_num = 
+		T2.trial_fcltt_proper_num =
 		T4.trial_fcltt_proper_num
 
 		where 1=1
-		<if test="cri.searchUserName != '' and cri.searchUserName != null">
-			and user_name like concat('%', #{cri.searchUserName}, '%')
-		</if>
-		<if test="cri.searchNameCode != '' and cri.searchNameCode != null">
-			and trial_fcltt_clasifi_code like concat('%', #{cri.searchNameCode}, '%')
-		</if>
-		<if test="cri.searchCourt != '' and cri.searchCourt != null">
-			and court_name like concat('%', #{cri.searchCourt}, '%')
-		</if>
-		<if	test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' " >
-			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts}, '%')
-		</if>
-		
-		limit
-		#{cri.pageStart}, #{cri.amount}
-		
-		
-		<!-- <if test="cri.aplicn_dtls_startdate != '' and cri.aplicn_dtls_startdate 
-			!= null"> <![CDATA[and aplicn_dtls_date >= #{cri.aplicn_dtls_startdate}]]> 
-			</if> <if test="cri.aplicn_dtls_enddate != '' and cri.aplicn_dtls_enddate 
-			!= null"> <![CDATA[and aplicn_dtls_date <= #{cri.aplicn_dtls_enddate}]]> 
-			</if> -->
-
-	</select>
-
-	<!-- 신청자 상태변환 서류반려 -->
-	<update id="aplcnReject">
-		update tb_005 set 
-			aplicn_dtls_sts = #{aplicn_dtls_sts}
-		where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num} and user_proper_num = #{user_proper_num}
-	</update>
-	
-	<!-- 신청자 상태변환 평가완료 -->
-	<update id="aplcnCompleted">
-		update tb_005 set 
-			aplicn_dtls_sts = #{aplicn_dtls_sts}
-		where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num} and user_proper_num = #{user_proper_num}
-	</update>
-
-	<!-- 신청자 리스트 Count -->
-	<select id="getTotal" resultType="int">
-		SELECT
-		count(*) as total
-		
-		FROM
-		TB_001 T1
-		INNER JOIN
-		TB_005 T2 ON
-		T1.user_proper_num =
-		T2.user_proper_num
-		INNER JOIN
-		TB_011 T3 ON
-		T2.court_proper1 =
-		T3.court_name
-		INNER JOIN
-		TB_010 T4 ON
-		T2.trial_fcltt_proper_num =
-		T4.trial_fcltt_proper_num
-		
-		where 1 = 1
-		
 		<if test="cri.searchUserName != '' and cri.searchUserName != null">
 			and user_name like concat('%', #{cri.searchUserName}, '%')
 		</if>
@@ -150,183 +134,128 @@
 			and court_name like concat('%', #{cri.searchCourt}, '%')
 		</if>
 		<if
-			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null">
-			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts}, '%')
+			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' ">
+			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts},
+			'%')
 		</if>
+
 		limit
 		#{cri.pageStart}, #{cri.amount}
-		
-		
+
+
 		<!-- <if test="cri.aplicn_dtls_startdate != '' and cri.aplicn_dtls_startdate 
 			!= null"> <![CDATA[and aplicn_dtls_date >= #{cri.aplicn_dtls_startdate}]]> 
 			</if> <if test="cri.aplicn_dtls_enddate != '' and cri.aplicn_dtls_enddate 
 			!= null"> <![CDATA[and aplicn_dtls_date <= #{cri.aplicn_dtls_enddate}]]> 
 			</if> -->
-	</select>
 
-	<!-- 신청자 상세정보 (복수값) -->
-	<select id="getDetails" parameterType="int">
-		SELECT
-		T1.user_name AS
-		user_name,
-		T1.user_id AS user_id,
-		T2.aplcn_dtls_proper_num AS
-		aplcn_dtls_proper_num,
-		T5.ligtn_case_carer_yn AS ligtn_case_carer_yn,
-		T5.ligtn_case_carer_etc AS ligtn_case_carer_etc,
-		T5.insrn_indst_carer_yn AS insrn_indst_carer_yn,
-		T5.insrn_indst_carer_etc AS insrn_indst_carer_etc,
-		T5.criminal_penalty_carer_yn AS criminal_penalty_carer_yn,
-		T5.criminal_penalty_carer_etc AS criminal_penalty_carer_etc,
-		T2.aplicn_dtls_sts AS aplicn_dtls_sts,
-		T6.edctn_school_name AS
-		edctn_school_name,
-		T6.edctn_major AS edctn_major,
-		T6.edctn_admsn_date AS
-		edctn_admsn_date,
-		T6.edctn_grdtn_date AS edctn_grdtn_date,
-		T6.edctn_degree AS edctn_degree,
-		T6.edctn_final AS edctn_final,
-		T7.company_name AS company_name,
-		T7.carer_type AS carer_type,
-		T7.work_start_date AS work_start_date,
-		T7.work_end_date AS
-		work_end_date,
-		T7.work_department AS work_department,
-		T7.work_position
-		AS work_position,
-		T7.work_description AS work_description,
-		T7_2.carer_description AS carer_description,
-		T7_2.special_note_description AS special_note_description,
-		T8.crtfc_type AS crtfc_type,
-		T8.issue_agency AS issue_agency,
-		T8.crtfc_number AS crtfc_number,
-		T8.issue_date AS issue_date,
-		T10.trial_fcltt_clasifi_code AS trial_fcltt_clasifi_code,
-		T10.trial_fcltt_sbcls_code AS trial_fcltt_sbcls_code,
-		T11.court_region
-		AS court_region,
-		T11.court_name AS court_name
-		FROM
-		TB_001 T1
-		LEFT JOIN
-		TB_005 T2 ON T1.user_proper_num = T2.user_proper_num
-		LEFT JOIN
-		TB_011 T3
-		ON T2.court_proper1 = T3.court_name
-		LEFT JOIN
-		TB_010 T4 ON
-		T2.trial_fcltt_proper_num = T4.trial_fcltt_proper_num
-		LEFT JOIN
-		TB_005
-		T5 ON T1.user_proper_num = T5.user_proper_num
-		LEFT JOIN
-		TB_006 T6 ON
-		T2.aplcn_dtls_proper_num = T6.aplcn_dtls_proper_num
-		LEFT JOIN
-		TB_007 T7
-		ON T2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
-		LEFT JOIN
-		TB_008
-		T8 ON T2.aplcn_dtls_proper_num = T8.aplcn_dtls_proper_num
-		LEFT JOIN
-		TB_010 t10 ON T2.trial_fcltt_proper_num = T10.trial_fcltt_proper_num
-		LEFT JOIN
-		TB_011 t11 ON T2.court_proper1 = T11.court_proper_num
-		LEFT
-		JOIN
-		TB_007_2 T7_2 ON T7_2.aplcn_dtls_proper_num =
-		T7.aplcn_dtls_proper_num
-		WHERE
-		T2.aplcn_dtls_proper_num =
-		#{aplcn_dtls_proper_num}
 	</select>
-
-	<!-- 신청자 상세정보 (단수값) -->
+	
+	<!-- 신청자 상세정보 (단수값)  -->
 	<select id="getDetail" parameterType="int">
+		select * from TB_005 tb5
+			join TB_001 tb1 on tb5.USER_PROPER_NUM = tb1.USER_PROPER_NUM
+			join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb5.trial_fcltt_proper_num
+			where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num};
+	</select>
+	
+
+	<!-- 신청자 상태변환 서류반려 -->
+	<update id="aplcnReject">
+		update tb_005 set
+		aplicn_dtls_sts = #{aplicn_dtls_sts}
+		where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num} and
+		user_proper_num = #{user_proper_num}
+	</update>
+
+	<!-- 신청자 상태변환 평가완료 -->
+	<update id="aplcnCompleted">
+		update tb_005 set
+		aplicn_dtls_sts = #{aplicn_dtls_sts}
+		where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num} and
+		user_proper_num = #{user_proper_num}
+	</update>
+
+	<!-- 신청자 리스트 Count -->
+	<select id="getTotal" resultType="int">
 		SELECT
-		T1.user_proper_num AS user_proper_num,
-		T1.user_name AS
-		user_name,
-		T1.user_id AS user_id,
-		T2.aplcn_dtls_proper_num AS
-		aplcn_dtls_proper_num,
-		T5.ligtn_case_carer_yn AS ligtn_case_carer_yn,
-		T5.ligtn_case_carer_etc AS ligtn_case_carer_etc,
-		T5.insrn_indst_carer_yn AS insrn_indst_carer_yn,
-		T5.insrn_indst_carer_etc AS insrn_indst_carer_etc,
-		T5.criminal_penalty_carer_yn AS criminal_penalty_carer_yn,
-		T5.criminal_penalty_carer_etc AS criminal_penalty_carer_etc,
-		T2.aplicn_dtls_sts AS aplicn_dtls_sts,
-		T6.edctn_school_name AS
-		edctn_school_name,
-		T6.edctn_major AS edctn_major,
-		T6.edctn_admsn_date AS
-		edctn_admsn_date,
-		T6.edctn_grdtn_date AS edctn_grdtn_date,
-		T6.edctn_degree AS edctn_degree,
-		T6.edctn_final AS edctn_final,
-		T7.company_name AS company_name,
-		T7.carer_type AS carer_type,
-		T7.work_start_date AS work_start_date,
-		T7.work_end_date AS
-		work_end_date,
-		T7.work_department AS work_department,
-		T7.work_position
-		AS work_position,
-		T7.work_description AS work_description,
-		T7_2.carer_description AS carer_description,
-		T7_2.special_note_description AS special_note_description,
-		T10.trial_fcltt_clasifi_code AS trial_fcltt_clasifi_code,
-		T10.trial_fcltt_sbcls_code AS trial_fcltt_sbcls_code,
-		T11.court_region
-		AS court_region,
-		T11.court_name AS court_name
+		count(*) total
+
 		FROM
 		TB_001 T1
-		LEFT JOIN
-		TB_005 T2 ON T1.user_proper_num = T2.user_proper_num
-		LEFT JOIN
-		TB_011 T3
-		ON T2.court_proper1 = T3.court_name
-		LEFT JOIN
-		TB_010 T4 ON
-		T2.trial_fcltt_proper_num = T4.trial_fcltt_proper_num
-		LEFT JOIN
-		TB_005
-		T5 ON T1.user_proper_num = T5.user_proper_num
-		LEFT JOIN
-		TB_006 T6 ON
-		T2.aplcn_dtls_proper_num = T6.aplcn_dtls_proper_num
-		LEFT JOIN
-		TB_007 T7
-		ON T2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
-		LEFT JOIN
+		INNER JOIN
+		TB_005 T2 ON
+		T1.user_proper_num =
+		T2.user_proper_num
+		INNER JOIN
+		TB_011 T3 ON
+		T2.court_proper1 =
+		T3.court_name
+		INNER JOIN
 		TB_010
-		T10 ON T2.trial_fcltt_proper_num = T10.trial_fcltt_proper_num
-		LEFT JOIN
-		TB_011 T11 ON T2.court_proper1 = T11.court_proper_num
-		LEFT JOIN
-		TB_007_2 T7_2 ON T7_2.aplcn_dtls_proper_num = T7.aplcn_dtls_proper_num
-		WHERE
-		T2.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+		T4 ON
+		T2.trial_fcltt_proper_num =
+		T4.trial_fcltt_proper_num
+
+
+		where 1=1
+		<if test="cri.searchUserName != '' and cri.searchUserName != null">
+			and user_name like concat('%', #{cri.searchUserName}, '%')
+		</if>
+		<if test="cri.searchNameCode != '' and cri.searchNameCode != null">
+			and trial_fcltt_clasifi_code like concat('%',
+			#{cri.searchNameCode}, '%')
+		</if>
+		<if test="cri.searchCourt != '' and cri.searchCourt != null">
+			and court_name like concat('%', #{cri.searchCourt}, '%')
+		</if>
+		<if
+			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' ">
+			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts},
+			'%')
+		</if>
+
+
+
+		<!-- <if test="cri.aplicn_dtls_startdate != '' and cri.aplicn_dtls_startdate 
+			!= null"> <![CDATA[and aplicn_dtls_date >= #{cri.aplicn_dtls_startdate}]]> 
+			</if> <if test="cri.aplicn_dtls_enddate != '' and cri.aplicn_dtls_enddate 
+			!= null"> <![CDATA[and aplicn_dtls_date <= #{cri.aplicn_dtls_enddate}]]> 
+			</if> -->
+
 	</select>
 
 	<!-- 파일 다운로드 -->
 	<select id="aplcnFiles">
-		SELECT
-		APLCN_ATCH_FILE_PROPER_NUM,
-		APLCN_DTLS_PROPER_NUM,
-		FILE_CODE,
-		FILE_TYPE,
-		ORIGINAL_FILE_NAME,
-		FILE_PATH
-		FROM
-		TB_009
+		select
+		t9.aplcn_atch_file_proper_num,
+		t9.aplcn_dtls_proper_num,
+		t9.file_code,
+		t9.file_type,
+		t9.original_file_name,
+		t9.file_path
+		FROM tb_009 t9
 		WHERE
-		APLCN_ATCH_FILE_PROPER_NUM =
-		#{aplcnAtchFileProperNum}
-
+		t9.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num};
 	</select>
+	
+	<!-- 신청자 학력 상세 -->
+	<select id="getEdctnList">
+		select * from TB_006 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+	</select>
+	
+	<!-- 신청자 경력 상세 -->
+	<select id="getCarerList">
+		select * from TB_007 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+	</select>
+	
+	<!-- 신청자 자격증 상세 -->
+	<select id="getCrtfcList">
+		select * from TB_008 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+	</select>
+	
+	
 
 </mapper>

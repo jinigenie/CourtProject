@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.court.proj.admin.CourtAdminDetails;
 import com.court.proj.fcltt.FclttCriteria;
 import com.court.proj.fcltt.FclttPageVO;
 
@@ -67,15 +69,23 @@ public class FaqController {
 	public String detail(@RequestParam("faq_proper_num") String faq_proper_num, Model model) {
 		FaqVO vo = faqService.getDetail(faq_proper_num);
 		model.addAttribute("vo", vo);
+		
+		
 		return "faq/faqModify";
 	}
+	
+	
 	// FAQ 작성/수정 Form faqModifyForm
 	@PostMapping("/faqModifyForm")
-	public String faqModifyForm(@ModelAttribute("vo")FaqVO vo) {
-		System.out.println("=========faqModify==========");
-		System.out.println(vo.toString());
+	public String faqModifyForm(@ModelAttribute("vo")FaqVO vo, Authentication auth) {
+		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
+		System.out.println("=========getAdmin_auth==========: " + admin.getAdmin_auth());
+		System.out.println("=========hashCode==========: " + admin.hashCode());
+		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
+		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
 		int result = faqService.faqModify(vo);
-
+		
+		
 		return "redirect:/faq/faqList";
 	}
 
@@ -92,16 +102,27 @@ public class FaqController {
 	
 	// FAQ 등록페이지 진입
 	@GetMapping("/regist")
-	public String regist() {
+	public String regist(Model model,Authentication auth) {
+		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
+		String admin_proper_num = "1";
+		model.addAttribute("admin_proper_num", admin_proper_num);
 		return "faq/faqRegist";
 	}
 	
 	
 	// FAQ 등록 form
 	@PostMapping("/registForm")
-	public String registForm(@ModelAttribute("vo")FaqVO vo) {
-		System.out.println("================================");
-		System.out.println(vo.toString());
+	public String registForm(FaqVO vo, Authentication auth) {
+	
+		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
+		
+		System.out.println("=========getAdmin_auth==========: " + admin.getAdmin_auth());
+		System.out.println("=========hashCode==========: " + admin.hashCode());
+		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
+		System.out.println("=========getAuthorities==========: " + admin.getUsername());
+		System.out.println("=========getAuthorities==========: " + admin.getClass());
+		// admin_proper_num 불러와야함 !
+		vo.setAdmin_proper_num("1");
 		int result = faqService.faqRag(vo);
 
 		return "redirect:/faq/faqList";

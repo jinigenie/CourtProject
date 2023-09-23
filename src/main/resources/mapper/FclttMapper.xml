@@ -43,12 +43,12 @@
 
 	<!-- 명단 등록  -->
     <insert id="fclttRegist" parameterType="FclttVO">
-    	insert into TB_014(USER_PROPER_NUM,
+    	insert into TB_014(user_proper_num,
 							trial_fcltt_proper_num,
 							court_proper_num,
 							accept_etc
 							)
-		values(#{USER_PROPER_NUM},
+		values(#{user_proper_num},
 				#{trial_fcltt_proper_num},
 				#{court_proper_num},
 				#{accept_etc}
