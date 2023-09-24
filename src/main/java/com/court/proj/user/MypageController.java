@@ -138,5 +138,11 @@ public class MypageController {
 		return "redirect:/mypage/main";
 	}
 	
-	
+	@PostMapping("/checkPw")
+	public @ResponseBody ResponseEntity<Boolean> checkpw(@RequestParam("checkpw") String pw, Authentication auth){
+		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
+		String rawpw = user.getPassword();
+		boolean bool = bCryptPasswordEncoder.matches(pw, rawpw);
+		return new ResponseEntity<>(bool, HttpStatus.OK);
+	}
 }
