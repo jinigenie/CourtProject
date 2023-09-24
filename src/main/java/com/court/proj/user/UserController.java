@@ -104,7 +104,9 @@ public class UserController {
 			return "user/userjoin";
 		}
 		String pw = bCryptPasswordEncoder.encode(vo.getUser_pw());
+		String rrn_b = bCryptPasswordEncoder.encode(vo.getUser_rrn_b());
 		vo.setUser_pw(pw);
+		vo.setUser_rrn_b(rrn_b);
 		userService.joinUser(vo);
 		re.addFlashAttribute("msg", "회원가입을 축하드립니다.");
 		

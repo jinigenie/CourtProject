@@ -170,5 +170,30 @@ $('#phoneNumber').keyup(() => {
 	$('#userphone').val(formattedValue.replace(/-/g, '')); 
 	
 })
+//예금주 입력값 검증
+$('#userholder').keyup(()=>{
+  var inputValue = $('#userholder').val();
+  
+  var regex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-=|0-9]/;
+  
+  if (regex.test(inputValue)) {
+    alert("특수 문자나 숫자는 입력할 수 없습니다.");
+    $('#userholder').val('')
+  } 
+})
+//계좌번호 입력값 검증
+$('#useraccount').keyup(()=>{
+  var inputValue = $('#useraccount').val();
+  
+   var regex = /^[0-9]+$/;
+  
+  if (!regex.test(inputValue)) {
+    alert("숫자 외 입력할 수 없습니다.");
+    $('#useraccount').val('')
+  } 
+})
+
+
+
 
 
