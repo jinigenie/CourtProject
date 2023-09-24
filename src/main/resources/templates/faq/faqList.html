@@ -35,7 +35,7 @@
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">FAQ</a>
 								<ul class="sub" style="display: none;">
 									<li sec:authorize="hasRole('ROLE_SUPERADMIN')"><a href="/faq/regist">FAQ 등록</a>
-										<div id="userRole" style="font-size: 1px; color: #f6f6f6;">
+										<div id="userRole" style="font-size: 0px; color: #f6f6f6;">
 											[[${#authentication.principal.authorities}]]</div>
 									</li>
 									<li><a href="/faq/faqList">FAQ 목록</a></li>

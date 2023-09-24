@@ -105,8 +105,8 @@
 									<tr>
 										<!-- 공고 내용 start -->
 									<tr style="border-bottom:3px solid #0057a1; border-top: 3px solid #0057a1">
-										<td colspan="4" class="contArea" data-cell-header="내용">
-											[[${vo.notice_title}]]
+										<td colspan="4" class="contArea" data-cell-header="내용" th:utext="${vo.notice_content}">
+											[[${vo.notice_content}]]
 										</td>
 									</tr>
 									<!-- //공고 내용 end -->
