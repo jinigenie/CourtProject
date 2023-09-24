@@ -5,7 +5,7 @@
 
 <mapper namespace="com.court.proj.announce.AnnounceMapper">
 
-	<!-- tb_002, tb_010, tb_015 공고 리스트 조회 -->
+	<!-- TB_002, TB_010, TB_015 공고 리스트 조회 -->
 	<select id="AnnounceList" resultType="AnnounceVO"
 		parameterType="AnnounceCriteria">
 		SELECT
@@ -152,19 +152,20 @@
 	</select>
 
 	<!-- 공고 수정 -->
-	<update id="updateAnnounce" parameterType="AnnounceVO">
-		update TB_002
+	<update id="updateAnnounce">
+		update TB_002 as a
+		inner join TB_010 as b on a.trial_fcltt_proper_num =
+		b.trial_fcltt_proper_num
 		set
-		announce_title = #{announce_title},
-		trial_fcltt_proper_num =
-		#{trial_fcltt_proper_num},
-		announce_start_date =
-		#{announce_start_date},
-		announce_end_date = #{announce_end_date},
-		announce_content = #{announce_content}
+		a.announce_title = #{announce_title},
+		a.announce_start_date = #{announce_start_date},
+		a.announce_end_date = #{announce_end_date},
+		b.trial_fcltt_main_code = #{selectType1},
+		b.trial_fcltt_clasifi_code = #{selectType2},
+		b.trial_fcltt_sbcls_code = #{selectType3},
+		a.announce_content = #{announce_content}
 		where
-		announce_proper_num =
-		#{announce_proper_num}
+		a.announce_proper_num = #{announce_proper_num};
 	</update>
 
 	<select id="getAnnList" resultType="AnnounceVO">

@@ -13,8 +13,14 @@ public interface NoticeService {
 	// 작성하기
 	public int noticeReg(NoticeVO vo);
 	
+	// 상세보기
+	public NoticeVO getDetail(String notice_proper_num);
 	
+	// 수정하기
+	public int noticeModify(NoticeVO vo);
 	
+	// 삭제하기
+	public int noticeDel(String notice_proper_num);
 	
 	
 	

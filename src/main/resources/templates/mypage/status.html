@@ -68,30 +68,30 @@
                   <tr>
                     <th scope="col">번호</th>
                     <th scope="col">신청일</th>
-                    <th scope="col">신청내용</th>
+                    <th scope="col">재판조력자 분류</th>
                     <th scope="col">신청상태</th>
-                    <th scope="col">마감일</th>
                     <th scope="col">관리</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody th:if="${size != 0}">
                   <tr style="cursor: pointer" th:each="vo, status : ${list}" id="tr">
-                    <td data-cell-header="번호">[[${status.count}]]</td>
-                    <td data-cell-header="신청일">[[${vo.APLICN_DTLS_DATE}]]</td>
-                    <td data-cell-header="신청내용">[[${vo.ANNOUNCE_TITLE}]]</td>
-                    <td data-cell-header="신청상태">[[${vo.APLICN_DTLS_STS}]]</td>
-                    <td data-cell-header="마감일">[[${vo.ANNOUNCE_END_DATE}]]</td>
+                    <td data-cell-header="번호">[[${status.count}]] </td>
+                    <td data-cell-header="신청일">[[${vo.aplicn_dtls_date}]]</td>
+                    <td data-cell-header="재판조력자분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
+                    <td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
                     <td id="expire">
-				      <input class="ANNOUNCE_END_DATE" type="text" hidden th:value=${vo.ANNOUNCE_END_DATE}/>
 				      <div class="button-group">
-				        <a href="#" class="case case1 modify"><em style="width: 50px; margin-bottom: 5px;">수정</em></a>
+				        <a href="#" class="case case1 modify"><em style="width: 50px;">수정</em></a>
 				        <a href="#" class="case case1 delete"><em style="width: 50px;">삭제</em></a>
 				      </div>
-				      <a href="#" class="case case1 finish"><em style="width: 50px; background-color: #bababa ;">종료</em></a>
 				    </td>
-                    
                   </tr>
                 </tbody>
+ 				<tbody th:unless="${size != 0}">
+				    <tr>
+				        <td colspan="5">신청내역이 없습니다.</td>
+				    </tr>
+				</tbody>
               </table>
             </div>
           
@@ -145,55 +145,5 @@
 		})	
 	})
 </script>
-
-<!--공고기간 만료시 버튼 숨기기-->
-<script>
-	const expireInputs = document.querySelectorAll(".ANNOUNCE_END_DATE");
-	expireInputs.forEach((input) => {
-		const endDateValue = input.value;
-		const endDate = new Date(endDateValue);
-		const currentDate = new Date();
-	
-		const parentTd = input.closest("td");
-	
-		if (endDate < currentDate) {
-			// 만료된 경우 수정과 삭제 버튼을 숨기고 종료 버튼을 나타냅니다.
-			const modifyButton = parentTd.querySelector(".modify");
-			const deleteButton = parentTd.querySelector(".delete");
-			const finishButton = parentTd.querySelector(".finish");
-	
-			if (modifyButton) {
-				modifyButton.style.display = "none";
-			}
-	
-			if (deleteButton) {
-				deleteButton.style.display = "none";
-			}
-	
-			if (finishButton) {
-				finishButton.style.display = "block";
-			}
-		} else {
-			// 만료되지 않은 경우 수정과 삭제 버튼을 나타내고 종료 버튼을 숨깁니다.
-			const modifyButton = parentTd.querySelector(".modify");
-			const deleteButton = parentTd.querySelector(".delete");
-			const finishButton = parentTd.querySelector(".finish");
-	
-			if (modifyButton) {
-				modifyButton.style.display = "block";
-			}
-	
-			if (deleteButton) {
-				deleteButton.style.display = "block";
-			}
-	
-			if (finishButton) {
-				finishButton.style.display = "none";
-			}
-		}
-	});
-</script>
-
-
 
 </html>

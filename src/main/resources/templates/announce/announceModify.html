@@ -70,7 +70,7 @@
 				<!-- detail-content -->
 				<article id="detail-content">
 					<!-- form start -->
-					<form id="announceForm" name="announceForm" th:action="@{'/announce/announceModifyForm?id=' + ${alist.announce_proper_num}}" method="post" onsubmit="return updateAnnouncement();">
+					<form id="announceForm" name="announce_proper_num" th:action="@{'/announce/announceModifyForm?id=' + ${alist.announce_proper_num}}" method="post" onsubmit="return updateAnnouncement();">
 						<div class="heading-wrap container">
 							<h3 class="heading1">
 								<span>재판 조력자 모집공고 수정</span>
@@ -105,6 +105,7 @@
 											<col style="width: 70%">
 										</colgroup>
 										<tbody>
+											
 											<tr>
 												<th scope="row" class="txt-left">
 													<span class="txt-left" title="작성자">작성자</span>
@@ -224,6 +225,7 @@
 									</table>
 								</div>
 								<!-- //등록 양식 end -->
+								<input type="hidden" name="announce_proper_num" th:value="${alist.announce_proper_num}" />
 							</div>
 							<!-- //searchform-wrap end -->
 						</div>

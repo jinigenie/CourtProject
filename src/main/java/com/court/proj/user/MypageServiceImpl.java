@@ -57,6 +57,11 @@ public class MypageServiceImpl implements MypageService {
 		return mypageMapper.getPause(user_proper_num);
 	}
 
+	@Override
+	public boolean pauseAccess(int user_proper_num) {
+		return mypageMapper.pauseAccess(user_proper_num);
+	}
+
 
 
 

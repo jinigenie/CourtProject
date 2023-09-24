@@ -1,281 +1,244 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity" lang="en" class="dark" style="color-scheme: dark;">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity" lang="en"
+	class="dark" style="color-scheme: dark;">
 
 
 <th:block th:fragment="setContent(content)">
 
-  <head>
-    <title>재판조력자 공고</title>
+	<head>
+		<title>재판조력자 공고</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
-    />
+		<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
-    <!-- common css -->
-    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/common.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/layout.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{./../../css/nav/common.css}" />
-    <!-- sub css 지우면 안됨  -->
-    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/sub.css}" />
+		<!-- common css -->
+		<link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/common.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/layout.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{./../../css/nav/common.css}" />
+		<!-- sub css 지우면 안됨  -->
+		<link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/sub.css}" />
 
-    <!-- common lib js -->
-    <script type="text/javascript" th:src="@{./../../js/lib/jquery-2.2.4.min.js}"></script>
+		<!-- common lib js -->
+		<script type="text/javascript" th:src="@{./../../js/lib/jquery-2.2.4.min.js}"></script>
 
-    <!-- 분류버튼 효과 -->
-    <script type="text/javascript" th:src="@{./../../js/lib/jquery.mCustomScrollbar.concat.min.js}"></script>
+		<!-- 분류버튼 효과 -->
+		<script type="text/javascript" th:src="@{./../../js/lib/jquery.mCustomScrollbar.concat.min.js}"></script>
 
-    <!-- public common js -->
-    <script type="text/javascript" th:src="@{./../../js/korean/common.js}"></script>
-    <script type="text/javascript" th:src="@{./../../js/nav/custom.js}"></script>
-    <!-- sub js -->
-    <script type="text/javascript" th:src="@{./../../js/korean/sub.js}"></script>
-    
-	<!-- 달력 20230830 이태주 추가--> 
-    <link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/jquery-ui.min.css}">
-    <script type="text/javascript" th:src="@{./../../js/korean/jquery-ui.min.js}"></script>
-    <script type="text/javascript" th:src="@{./../../js/korean/style.js}"></script>
-    
-  </head>
+		<!-- public common js -->
+		<script type="text/javascript" th:src="@{./../../js/korean/common.js}"></script>
+		<script type="text/javascript" th:src="@{./../../js/nav/custom.js}"></script>
+		<!-- sub js -->
+		<script type="text/javascript" th:src="@{./../../js/korean/sub.js}"></script>
 
-  <body>
+		<!-- 달력 20230830 이태주 추가-->
+		<link rel="stylesheet" type="text/css" th:href="@{./../../css/korean/jquery-ui.min.css}">
+		<script type="text/javascript" th:src="@{./../../js/korean/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{./../../js/korean/style.js}"></script>
 
-  <!-- header -->
-  <header id="header">
-    <div class="t-side">
-      <div class="container">
-        <ul class="t-side-right">
-          <li sec:authorize="!isAuthenticated()">
-            <a th:href="@{./../user/login}"
-            >로그인</a
-            >
-          </li>
-          <li sec:authorize="!isAuthenticated()">
-            <a th:href="@{./../user/agree}"
-            >회원가입</a
-            >
-          </li>
-          <li sec:authorize="isAuthenticated()">
-            <a href="#" id="logout"
-            >로그아웃</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-	<script>
-		document.getElementById('logout').addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            if(confirm("로그아웃 하시겠습니까?")){
-				location.href = './../logout';
+	</head>
 
-			}
-        });
-	</script>
-    <div class="header-wrap">
-      <h1 class="logo">
-        <a
-                th:href="@{./../main/main}"
-                class="logo-wrapper"
-        ><span class="sr-only"></span></a
-        >
-      </h1>
-      <div class="nav-wrap">
-        <nav id="nav">
-          <div id="gnb">
-            <div class="th1" style="float: left; width: 180px">
-              <a href="#"><span>조력자등재신청</span></a>
-              <ul class="depth2">
-                <li class="th2">
-                  <a href="#" ><span>조력자 등재신청</span></a>
-                </li>
-                <li class="th2">
-                  <a href="#"><span>조력자 등재명단</span></a>
-                </li>
-              </ul>
-            </div>
-            <div class="th1 active" style="float: left; width: 180px">
-              <a href="#"><span>조력자신청안내</span></a>
-              <ul class="depth2">
-                <li class="th2 active">
-                  <a th:href="@{./../info/info}"><span>조력자제도란?</span></a >
-                </li>
+	<body>
 
-                <li class="th2">
-                  <a th:href="@{./../info/info}"><span>조력자신청안내</span></a>
-                </li>
-              </ul>
-            </div>
-            <div class="th1" style="float: left; width: 180px">
-              <a href="#"><span>모집공고/공지</span></a>
-              <ul class="depth2">
-                <li class="th2">
-                  <a
-                          th:href="@{./../announce/announceList}"
-                  ><span>모집 공고</span></a
-                  >
-                </li>
+		<!-- header -->
+		<header id="header">
+			<div class="t-side">
+				<div class="container">
+					<ul class="t-side-right">
+						<li sec:authorize="!isAuthenticated()">
+							<a th:href="@{./../user/login}">로그인</a>
+						</li>
+						<li sec:authorize="!isAuthenticated()">
+							<a th:href="@{./../user/agree}">회원가입</a>
+						</li>
+						<li sec:authorize="isAuthenticated()">
+							<a href="#" id="logout">로그아웃</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<script>
+				document.getElementById('logout').addEventListener('click', function (event) {
+					event.preventDefault();
 
-                <li class="th2">
-                  <a
-                          th:href="@{./../notice/noticeList}"
-                  ><span>공지사항</span></a
-                  >
-                </li>
-                <li class="th2">
-                  <a
-                          th:href="@{./../faq/faqList}"
-                  ><span>FAQ</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="th1" style="float: left; width: 180px">
-              <a href="#"><span>마이페이지</span></a>
-              <ul class="depth2">
-                <li class="th2">
-                  <a
-                          th:href="@{./../mypage/main}"
-                  ><span>나의 정보관리</span></a
-                  >
-                </li>
+					if (confirm("로그아웃 하시겠습니까?")) {
+						location.href = './../logout';
 
-                <li class="th2">
-                  <a
-                          th:href="@{./../mypage/status}"
-                  ><span>나의 신청현황</span></a
-                  >
-                </li>
+					}
+				});
+			</script>
+			<div class="header-wrap">
+				<h1 class="logo">
+					<a th:href="@{./../main/main}" class="logo-wrapper"><span class="sr-only"></span></a>
+				</h1>
+				<div class="nav-wrap">
+					<nav id="nav">
+						<div id="gnb">
+							<div class="th1" style="float: left; width: 180px">
+								<a href="#"><span>조력자등재신청</span></a>
+								<ul class="depth2">
+									<li class="th2" sec:authorize="!hasRole('ROLE_SUPERADMIN')">
+										<a href="#"><span>조력자 등재신청</span></a>
+									</li>
+									<li class="th2">
+										<a href="#"><span>조력자 등재명단</span></a>
+									</li>
+								</ul>
+							</div>
+							<div class="th1 active" style="float: left; width: 180px">
+								<a href="#"><span>조력자신청안내</span></a>
+								<ul class="depth2">
+									<li class="th2 active">
+										<a th:href="@{./../info/info}"><span>조력자제도란?</span></a>
+									</li>
 
-                <li class="th2">
-                  <a
-                          th:href="@{./../mypage/history}"
-                  ><span>나의 활동내역</span></a
-                  >
-                </li>
-                 <li class="th2">
-                  <a
-                          th:href="@{./../mypage/pause}"
-                  ><span>중지 및 해제신청</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div>
+									<li class="th2">
+										<a th:href="@{./../info/info}"><span>조력자신청안내</span></a>
+									</li>
+								</ul>
+							</div>
+							<div class="th1" style="float: left; width: 180px">
+								<a href="#"><span>모집공고/공지</span></a>
+								<ul class="depth2">
+									<li class="th2">
+										<a th:href="@{./../announce/announceList}"><span>모집 공고</span></a>
+									</li>
 
-    <div class="gnb-bg-wrap gnb-bg-wrap1">
-      <div class="gnb-bg-deco">
-        <div class="txt">
-          <strong>조력자등재신청</strong>
-          <span>조력자 등재 신청하러 가기</span>
-        </div>
-      </div>
-    </div>
-    <div class="gnb-bg-wrap gnb-bg-wrap2">
-      <div class="gnb-bg-deco">
-        <div class="txt">
-          <strong>조력자신청안내</strong>
-          <span>조력자 제도 및 조력자 신청 절차에 대해 안내해 드립니다.</span>
-        </div>
-      </div>
-    </div>
-    <div class="gnb-bg-wrap gnb-bg-wrap3">
-      <div class="gnb-bg-deco">
-        <div class="txt">
-          <strong>MyPage</strong>
-          <span>나만의 정보.</span>
-        </div>
-      </div>
-    </div>
-    <div class="gnb-bg-wrap gnb-bg-wrap4">
-      <div class="gnb-bg-deco">
-        <div class="txt">
-          <strong>공지사항</strong>
-          <span>공지, 모집공고,  FAQ </span>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- //header -->
-<button onclick="scrollToTop()" id="topButton" title="Go to top"><img th:src="@{./../../img/main/top_btn.png}"></button>
-  <!-- main_con  -->
-  <main th:replace="${content}"></main>
-  <!-- //main_con  -->
+									<li class="th2">
+										<a th:href="@{./../notice/noticeList}"><span>공지사항</span></a>
+									</li>
+									<li class="th2">
+										<a th:href="@{./../faq/faqList}"><span>FAQ</span></a>
+									</li>
+								</ul>
+							</div>
+							<div class="th1" style="float: left; width: 180px" sec:authorize="hasRole('ROLE_USER')">
+								<a href="#"><span>마이페이지</span></a>
+								<ul class="depth2">
+									<li class="th2">
+										<a th:href="@{./../mypage/main}"><span>나의 정보관리</span></a>
+									</li>
 
-  <footer id="footer">
-    <div class="footer">
-      <div class="container">
-        <div class="f-logo">
-          <span class="sr-only">재판조력자선발</span>
-        </div>
+									<li class="th2">
+										<a th:href="@{./../mypage/status}"><span>나의 신청현황</span></a>
+									</li>
 
-        <div class="f-txt">
-          <ul class="util-lst">
-            <li>
-              <a
-                      href="https://www.scourt.go.kr/scourt/index.html"
-              >대한민국 법원 홈페이지</a
-              >
-            </li>
+									<li class="th2">
+										<a th:href="@{./../mypage/history}"><span>나의 활동내역</span></a>
+									</li>
+									<li class="th2">
+										<a th:href="@{./../mypage/pause}"><span>중지 및 해제신청</span></a>
+									</li>
+								</ul>
+							</div>
+							<!-- 관리자 영역 -->
+							<div class="th1" style="float: left; width: 180px"
+								sec:authorize="hasAnyRole('ROLE_SUPERADMIN','ROLE_JURIS','ROLE_COURT')">
+								<a href="#"><span>관리목록</span></a>
+								<ul class="depth2">
+									<li class="th2">
+										<a th:href="@{./../admin/regist}"><span>관리자 등록</span></a>
+									</li>
+									<li class="th2">
+										<a th:href="@{./../admin/list}"><span>관리자 목록</span></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
 
-            <li style="color: #fbd898">
-              <a
-                      href="http://www.moel.go.kr/site/protect/protectList.do"
-                      target="_blank"
-                      title="새창"
-              >개인정보처리방침</a
-              >
-            </li>
+			<div class="gnb-bg-wrap gnb-bg-wrap1">
+				<div class="gnb-bg-deco">
+					<div class="txt">
+						<strong>조력자등재신청</strong>
+						<span>조력자 등재 신청하러 가기</span>
+					</div>
+				</div>
+			</div>
+			<div class="gnb-bg-wrap gnb-bg-wrap2">
+				<div class="gnb-bg-deco">
+					<div class="txt">
+						<strong>조력자신청안내</strong>
+						<span>조력자 제도 및 조력자 신청 절차에 대해 안내해 드립니다.</span>
+					</div>
+				</div>
+			</div>
+			<div class="gnb-bg-wrap gnb-bg-wrap3">
+				<div class="gnb-bg-deco">
+					<div class="txt">
+						<strong>MyPage</strong>
+						<span>나만의 정보.</span>
+					</div>
+				</div>
+			</div>
+			<div class="gnb-bg-wrap gnb-bg-wrap4">
+				<div class="gnb-bg-deco">
+					<div class="txt">
+						<strong>공지사항</strong>
+						<span>공지, 모집공고, FAQ </span>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- //header -->
+		<button onclick="scrollToTop()" id="topButton" title="Go to top"><img
+				th:src="@{./../../img/main/top_btn.png}"></button>
+		<!-- main_con  -->
+		<main th:replace="${content}"></main>
+		<!-- //main_con  -->
 
-            <li>
-              <a
-                      href="https://minwon.moel.go.kr/minwon2008/use/join_agreement.do"
-              >이용약관</a
-              >
-            </li>
+		<footer id="footer">
+			<div class="footer">
+				<div class="container">
+					<div class="f-logo">
+						<span class="sr-only">재판조력자선발</span>
+					</div>
 
-            <li>
-              <a
-                      href="http://www.moel.go.kr/site/copyright/copyrightList.do"
-                      target="_blank"
-                      title="새창"
-              >저작권정책</a
-              >
-            </li>
+					<div class="f-txt">
+						<ul class="util-lst">
+							<li>
+								<a href="https://www.scourt.go.kr/scourt/index.html">대한민국 법원 홈페이지</a>
+							</li>
 
-            <li>
-              <a href="#" onclick="emailPop(); return false;" id="layer4Focus"
-              >이메일무단수집거부</a
-              >
-            </li>
-          </ul>
+							<li style="color: #fbd898">
+								<a href="http://www.moel.go.kr/site/protect/protectList.do" target="_blank"
+									title="새창">개인정보처리방침</a>
+							</li>
 
-          <div class="address">
-              <span
-              >서울특별시 강남구 테헤란로 7길 7 재판조력자 서비스센터</span
-              >
+							<li>
+								<a href="https://minwon.moel.go.kr/minwon2008/use/join_agreement.do">이용약관</a>
+							</li>
 
-            <a href="#" onclick="phonePop(); return false;" id="layer3Focus"
-            >문의전화 연락처 안내</a
-            >
-          </div>
+							<li>
+								<a href="http://www.moel.go.kr/site/copyright/copyrightList.do" target="_blank"
+									title="새창">저작권정책</a>
+							</li>
 
-          <div class="copyright">
-            Copyright(c)Ministry of Employment and Labor. All rights reserved.
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+							<li>
+								<a href="#" onclick="emailPop(); return false;" id="layer4Focus">이메일무단수집거부</a>
+							</li>
+						</ul>
 
-  <!-- </div> -->
-  </body>
+						<div class="address">
+							<span>서울특별시 강남구 테헤란로 7길 7 재판조력자 서비스센터</span>
+
+							<a href="#" onclick="phonePop(); return false;" id="layer3Focus">문의전화 연락처 안내</a>
+						</div>
+
+						<div class="copyright">
+							Copyright(c)Ministry of Employment and Labor. All rights reserved.
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- </div> -->
+	</body>
 
 </th:block>
+
 </html>

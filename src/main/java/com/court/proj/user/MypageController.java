@@ -74,11 +74,17 @@ public class MypageController {
 	}
 	
 	@GetMapping("/pause")
-	public String pause(Model model, Authentication auth) {
+	public String pause(Model model, Authentication auth, RedirectAttributes rra) {
 		
 		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
-		
 		int user_proper_num = user.getUser_proper_num();
+		
+		if( !mypageService.pauseAccess(user_proper_num) ) {
+			String msg = "재판조력자가 아닙니다.";
+			rra.addFlashAttribute("msg", msg);
+			return "redirect:/mypage/main";
+		}
+		
 		PauseDataVO vo = mypageService.getPause(user_proper_num);
 		model.addAttribute("vo", vo);
 		
@@ -93,7 +99,9 @@ public class MypageController {
 		int user_proper_num = user.getUser_proper_num();
 		ArrayList<MypageStatusVO> list = mypageService.getStatus(user_proper_num);
 		model.addAttribute("list", list);
-
+		System.out.println(list.size());
+		int size = list.size();
+		model.addAttribute("size",size);
 		return "mypage/status";
 	}
 
@@ -130,5 +138,11 @@ public class MypageController {
 		return "redirect:/mypage/main";
 	}
 	
-	
+	@PostMapping("/checkPw")
+	public @ResponseBody ResponseEntity<Boolean> checkpw(@RequestParam("checkpw") String pw, Authentication auth){
+		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
+		String rawpw = user.getPassword();
+		boolean bool = bCryptPasswordEncoder.matches(pw, rawpw);
+		return new ResponseEntity<>(bool, HttpStatus.OK);
+	}
 }

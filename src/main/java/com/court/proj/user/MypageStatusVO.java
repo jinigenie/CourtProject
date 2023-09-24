@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MypageStatusVO {
 	
-	private int USER_PROPER_NUM;
-	private int TRIAL_FCLTT_PROPER_NUM;
-	private String APLICN_DTLS_DATE;
-	private String APLICN_DTLS_STS;
-	private int APLCN_DTLS_PROPER_NUM;
-	private String ANNOUNCE_TITLE;
-	private String ANNOUNCE_END_DATE;
+	private String user_proper_num;
+	private String trial_fcltt_proper_num;
+	private String aplicn_dtls_date;
+	private String aplicn_dtls_sts;
+	private String aplcn_dtls_proper_num;
+	private String announce_title;
+	private String trial_fcltt_clasifi_code;
 	
 }

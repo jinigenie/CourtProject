@@ -8,7 +8,10 @@
 
 	<!--  list 불러오기  -->
     <select id="getList" resultType="FaqVO">
-	    select * from TB_004
+	    select tb4.*,
+		tb15.admin_name
+        from TB_004 tb4
+        join TB_015 tb15 on tb15.admin_proper_num = tb4.admin_proper_num
 	 	 <where>
 	        <if test="searchContent != null and searchContent != '' and searchContent != 'null'">
 	            <choose>
@@ -76,7 +79,10 @@
 <!-- 해당 질문 수정하기위한 정보 불러오기-->
 	<select id="getDetail" resultType="FaqVO">
 	
-		select * from TB_004
+        select tb4.*,
+		tb15.admin_name
+        from TB_004 tb4
+        join TB_015 tb15 on tb15.admin_proper_num = tb4.admin_proper_num
 		where faq_proper_num = #{faq_proper_num}
 			
 	</select>

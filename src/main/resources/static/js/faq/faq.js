@@ -18,33 +18,33 @@ function faqList(page, amount, content1, content2) {
 		url: "faqListAjax?page=" + page + "&amount=" + amount + "&searchContent=" + content1 + "&searchContent2=" + content2,
 
 		success: function(data) {
-    var li = $("#faqAccordion");
-    li.empty();
-    var strong = $(".color_orange");
-    strong.empty();
+			var li = $("#faqAccordion");
+			li.empty();
+			var strong = $(".color_orange");
+			strong.empty();
 
-    for (var i = 0; i < data.length; i++) {
-        var vo = data[i];
-        var str = "";
+			for (var i = 0; i < data.length; i++) {
+				var vo = data[i];
+				var str = "";
 
-        str += '<li onclick="faqToggle(this)"  class="faqList list-item" value="' + vo.faq_proper_num + '">';
-        str += '<h5 ><button type="button" id="header1" aria-controls="pane11" style=" border: none; outline: none;" title="축소됨" class="">';
-        str += '<abbr title="Question">Q.</abbr>';
-        str += '<span id="faq_question" style="font-size: 17px;font-weight: 800; color:#808080;">' + vo.faq_ask_content + '</span>';
-        str += '    <!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->';
-        str += '    <button type="button"  class="faq_modify_btn1" onclick="faqRegist(' + vo.faq_proper_num + ')">수정</button>';
-        str += '    <button type="button"  class="faq_modify_btn2" onclick="faqDel(' + vo.faq_proper_num + ')">삭제</button>';
-        str += '    <!--   \=============================================== \--></div></h5>';
-        str += ' <div id="pane11" class="accopanel" aria-labelledby="header1" style ="display:' + (vo.faq_proper_num == divVal ? 'block' : 'none') + ';">';
-        str += '<abbr title="Answer">A.</abbr><p></p>';
-        str += '<p>' + vo.faq_ask_comment + '<br></p><p></p></div></li>';
+				str += '<li onclick="faqToggle(this)"  class="faqList list-item" value="' + vo.faq_proper_num + '">';
+				str += '<h5 ><button type="button" id="header1" aria-controls="pane11" style=" border: none; outline: none;" title="축소됨" class="">';
+				str += '<abbr title="Question">Q.</abbr>';
+				str += '<span id="faq_question" style="font-size: 17px;font-weight: 800; color:#808080;">' + vo.faq_ask_content + '</span>';
+				str += '    <!--  ============  관리자로그인 일떄만 보여지는 버튼  ===============  -->';
+				str += '    <button type="button"  class="faq_modify_btn1" onclick="faqRegist(' + vo.faq_proper_num + ')">수정</button>';
+				str += '    <button type="button"  class="faq_modify_btn2" onclick="faqDel(' + vo.faq_proper_num + ')">삭제</button>';
+				str += '    <!--   \=============================================== \--></div></h5>';
+				str += ' <div id="pane11" class="accopanel" aria-labelledby="header1" style ="display:' + (vo.faq_proper_num == divVal ? 'block' : 'none') + ';">';
+				str += '<abbr title="Answer">A.</abbr><p></p>';
+				str += '<p>' + vo.faq_ask_comment + '<br></p><br><br><p style="text-align:right; font-size:13px;">등록자: ' + vo.admin_name + ', 등록일: ' + vo.faq_ask_date + '</p></div><br/></li>';
 
-        li.append(str);
-    }
+				li.append(str);
+			}
 
-    // FAQ 아이템을 모두 생성한 후에 사용자 권한에 따라 버튼을 설정
-    userHasAdminRole();
-			
+			// FAQ 아이템을 모두 생성한 후에 사용자 권한에 따라 버튼을 설정
+			userHasAdminRole();
+
 			// 서버에서 받은 데이터를 반복하여 페이지 링크 생성
 			$.each(data, function(index, FaqVO) {
 				var pager = $(".pager");
@@ -83,10 +83,10 @@ function faqList(page, amount, content1, content2) {
 
 				// 표에 행 추가
 				pager.empty().append(str2);
-	
+
 			});
 		}
-		
+
 	});
 
 }
@@ -124,26 +124,26 @@ function faqDel(faq_proper_num) {
 
 // 권한에 따라 버튼을 숨김 또는 표시
 function userHasAdminRole() {
-    // 사용자 권한 정보를 가져옴
-    var userRole = $("#userRole").text().trim(); // trim()으로 앞뒤 공백 제거
-    console.log(userRole);
+	// 사용자 권한 정보를 가져옴
+	var userRole = $("#userRole").text().trim(); // trim()으로 앞뒤 공백 제거
+	console.log(userRole);
 
-    // 모든 FAQ 아이템에 대해 반복문 수행
-    $(".faqList").each(function(index, element) {
-        var btn1 = element.querySelector(".faq_modify_btn1");
-        var btn2 = element.querySelector(".faq_modify_btn2");
+	// 모든 FAQ 아이템에 대해 반복문 수행
+	$(".faqList").each(function(index, element) {
+		var btn1 = element.querySelector(".faq_modify_btn1");
+		var btn2 = element.querySelector(".faq_modify_btn2");
 
-        // 사용자 권한 정보와 'ROLE_SUPERADMIN'을 비교하여 버튼 표시 여부 결정
-        if (userRole == "[ROLE_SUPERADMIN]") {
-            console.log("if 구문");
-            btn1.style.display = "line-block";
-            btn2.style.display = "line-block";
-        } else {
-            console.log("else 구문");
-            btn1.style.display = "none";
-            btn2.style.display = "none";
-        }
-    });
+		// 사용자 권한 정보와 'ROLE_SUPERADMIN'을 비교하여 버튼 표시 여부 결정
+		if (userRole == "[ROLE_SUPERADMIN]") {
+			console.log("if 구문");
+			btn1.style.display = "line-block";
+			btn2.style.display = "line-block";
+		} else {
+			console.log("else 구문");
+			btn1.style.display = "none";
+			btn2.style.display = "none";
+		}
+	});
 }
 
 

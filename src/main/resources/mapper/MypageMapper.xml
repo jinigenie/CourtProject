@@ -86,27 +86,17 @@
 	</update>
 	
 	<select id="getStatus" resultType="MypageStatusVO">
-		 select b.*,
-				e.ANNOUNCE_TITLE,
-				e.ANNOUNCE_END_DATE
-				from (
-						select a.*
-						from (
-								select 
-									o.USER_PROPER_NUM,
-									f.TRIAL_FCLTT_PROPER_NUM,
-									f.APLICN_DTLS_DATE,
-									f.APLICN_DTLS_STS,
-                                    f.APLCN_DTLS_PROPER_NUM
-								from TB_001 as o
-								left join TB_005 as f
-								on o.USER_PROPER_NUM = f.USER_PROPER_NUM) a
-						left join TB_010 as t
-						on a.TRIAL_FCLTT_PROPER_NUM = t.TRIAL_FCLTT_PROPER_NUM) b
-		 left join TB_002 e
-		 on b.TRIAL_FCLTT_PROPER_NUM = e.TRIAL_FCLTT_PROPER_NUM
-		 where b.USER_PROPER_NUM = #{user_proper_num}
-	
+		select tb5.APLCN_DTLS_PROPER_NUM,
+			   tb5.COURT_PROPER1, 
+               tb5.COURT_PROPER2, 
+               tb5.APLICN_DTLS_DATE, 
+               tb5.APLICN_DTLS_STS,
+               tb10.TRIAL_FCLTT_CLASIFI_CODE
+		from TB_005 tb5
+	    join TB_002 tb2 on tb5.TRIAL_FCLTT_PROPER_NUM = tb2.TRIAL_FCLTT_PROPER_NUM
+        join TB_010 tb10 on tb10.TRIAL_FCLTT_PROPER_NUM = tb5.TRIAL_FCLTT_PROPER_NUM
+	    where tb5.USER_PROPER_NUM = #{user_proper_num}
+	    and tb5.aplicn_dtls_date between tb2.announce_start_date and tb2.ANNOUNCE_END_DATE;
 	</select>
 	
 	<insert id="regPause">
@@ -128,6 +118,17 @@
 		LEFT JOIN TB_014 AS f
 		     ON f.USER_PROPER_NUM =o.USER_PROPER_NUM
 		where o.USER_PROPER_NUM = #{user_proper_num}
+	</select>
+	
+	<select id="pauseAccess" resultType="java.lang.Boolean">
+		select case
+					when tb14.ACCEPT_PROPER_NUM is null then false
+					else true
+			   end as ACCEPT_PROPER_NUM
+		from TB_001 as tb1
+		left join TB_014 as tb14 on tb1.USER_PROPER_NUM = tb14.USER_PROPER_NUM
+		where tb1.USER_PROPER_NUM = #{user_proper_num}
+	
 	</select>
 
 </mapper>       
