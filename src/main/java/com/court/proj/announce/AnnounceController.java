@@ -34,9 +34,7 @@ public class AnnounceController {
 	int trial_fcltt_proper_num = 0;
 	int admin_num = 1;
 	String admin_id = "";
-	String admin_pw = "";
-	String admin_auth = "";
-	String admin_name = "";
+	int total = 0;
 
 	// 모집공고 목록 페이지
 	@GetMapping("announceList")
@@ -60,13 +58,13 @@ public class AnnounceController {
 	@GetMapping("announceListAjax")
 	public ResponseEntity<ArrayList<AnnounceVO>> fclttListAjax(AnnounceCriteria cri) {
 
-		System.out.println(cri);
 		ArrayList<AnnounceVO> list = announceService.getAnnList(cri);
-		int total = announceService.getAnnTotal(cri);
+		total = announceService.getAnnTotal(cri);
 		AnnouncePageVO announcePageVO = new AnnouncePageVO(cri, total);
 
 		for(AnnounceVO avo : list) {
 			avo.setAnnouncePageVO(announcePageVO);
+			avo.setTotal(total);
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
