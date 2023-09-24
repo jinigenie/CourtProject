@@ -174,8 +174,7 @@
 		update tb_005 set
 		aplicn_dtls_sts = #{aplicn_dtls_sts}
 		where aplcn_dtls_proper_num =
-		#{aplcn_dtls_proper_num} and
-		user_proper_num = #{user_proper_num}
+		#{aplcn_dtls_proper_num}
 	</update>
 
 	<!-- 신청자 리스트 Count -->
@@ -251,7 +250,7 @@
 		select * from TB_007 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
 	</select>
 	
-	<!-- 신청자 자격증 상세 -->
+	<!-- 신청자 자격증 상세 -->	
 	<select id="getCrtfcList">
 		select * from TB_008 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
 	</select>

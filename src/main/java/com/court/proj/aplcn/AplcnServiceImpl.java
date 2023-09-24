@@ -67,6 +67,7 @@ public class AplcnServiceImpl implements AplcnService {
 	//신청자 상태변환2 (평가완료)
 	@Override
 	public int aplcnCompleted(ListVO vo) {
+		aplcnMapper.aplcnEvaluate(vo);
 		return aplcnMapper.aplcnCompleted(vo);
 	}
 		
@@ -102,7 +103,5 @@ public class AplcnServiceImpl implements AplcnService {
 	public ArrayList<FileVO> getFileList(int aplcn_dtls_proper_num) {
 		return aplcnMapper.getFileList(aplcn_dtls_proper_num);
 	}*/
-
-
 	
 }
