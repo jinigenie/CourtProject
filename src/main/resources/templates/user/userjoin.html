@@ -256,7 +256,7 @@
 											</div>
 											<div class="input-wrap-three write-wrap-m">
 												<div class="input-wrap" style="width: 320px; display: inline-block">
-													<input name="user_bank_account" id="cvl_account1"
+													<input name="user_bank_account" id="useraccount"
 														th:value="${vo!= null ? vo.user_bank_account : ''}"
 														class="cm_inptxt" title="계좌번호" type="text" maxlength="14"
 														onkeydown="return num_only(event)"
@@ -264,10 +264,10 @@
 												</div>
 												<div class="input-wrap"
 													style="width: 150px; display: inline-block; margin-left: 5px">
-													<input name="user_bank_holder" id="cvl_account2"
+													<input name="user_bank_holder" id="userholder"
 														th:value="${vo!= null ? vo.user_bank_holder : ''}"
 														class="cm_inptxt" title="예금주" type="text"
-														onkeydown="return num_only(event)" placeholder="예금주" />
+														 placeholder="예금주" />
 												</div>
 											</div>
 										</td>
