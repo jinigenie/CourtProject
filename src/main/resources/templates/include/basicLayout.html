@@ -79,10 +79,10 @@
 								<a href="#"><span>조력자등재신청</span></a>
 								<ul class="depth2">
 									<li class="th2" sec:authorize="!hasRole('ROLE_SUPERADMIN')">
-										<a href="#"><span>조력자 등재신청</span></a>
+										<a th:href="@{./../announce/announceList}"><span>조력자 등재신청</span></a>
 									</li>
 									<li class="th2">
-										<a href="#"><span>조력자 등재명단</span></a>
+										<a th:href="@{./../fcltt/fclttList}"><span>조력자 등재명단</span></a>
 									</li>
 								</ul>
 							</div>
@@ -142,6 +142,12 @@
 									</li>
 									<li class="th2">
 										<a th:href="@{./../admin/list}"><span>관리자 목록</span></a>
+									</li>
+									<li class="th2">
+										<a th:href="@{./../aplcn/aplcnList}"><span>조력자 신청자 목록</span></a>
+									</li>
+									<li class="th2">
+										<a th:href="@{./../fcltt/pause}"><span>활동 중지/해제 신청자 목록</span></a>
 									</li>
 								</ul>
 							</div>
