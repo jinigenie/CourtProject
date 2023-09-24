@@ -81,10 +81,9 @@
                     <td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
                     <td id="expire">
 				      <div class="button-group">
-				        <a href="#" class="case case1 modify"><em style="width: 50px; margin-bottom: 5px;">수정</em></a>
+				        <a href="#" class="case case1 modify"><em style="width: 50px;">수정</em></a>
 				        <a href="#" class="case case1 delete"><em style="width: 50px;">삭제</em></a>
 				      </div>
-				      <a href="#" class="case case1 finish"><em style="width: 50px; background-color: #bababa ;">종료</em></a>
 				    </td>
                   </tr>
                 </tbody>
@@ -146,57 +145,5 @@
 		})	
 	})
 </script>
-
-<!--공고기간 만료시 버튼 숨기기-->
-<script>
-/*	const expireInputs = document.querySelectorAll(".announce_end_date");
-	expireInputs.forEach((input) => {
-		const endDateValue = input.value;
-		const endDate = new Date(endDateValue);
-		const currentDate = new Date();
-	
-		const parentTd = input.closest("td");
-	
-		if (endDate < currentDate) {
-			// 만료된 경우 수정과 삭제 버튼을 숨기고 종료 버튼을 나타냅니다.
-			const modifyButton = parentTd.querySelector(".modify");
-			const deleteButton = parentTd.querySelector(".delete");
-			const finishButton = parentTd.querySelector(".finish");
-	
-			if (modifyButton) {
-				modifyButton.style.display = "none";
-			}
-	
-			if (deleteButton) {
-				deleteButton.style.display = "none";
-			}
-	
-			if (finishButton) {
-				finishButton.style.display = "block";
-			}
-		} else {
-			// 만료되지 않은 경우 수정과 삭제 버튼을 나타내고 종료 버튼을 숨깁니다.
-			const modifyButton = parentTd.querySelector(".modify");
-			const deleteButton = parentTd.querySelector(".delete");
-			const finishButton = parentTd.querySelector(".finish");
-	
-			if (modifyButton) {
-				modifyButton.style.display = "block";
-			}
-	
-			if (deleteButton) {
-				deleteButton.style.display = "block";
-			}
-	
-			if (finishButton) {
-				finishButton.style.display = "none";
-			}
-		}
-	});
-	
-	*/
-</script>
-
-
 
 </html>

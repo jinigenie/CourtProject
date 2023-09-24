@@ -191,7 +191,13 @@
 						
 					},
 					success : (data)=>{
-						console.log(data)
+						if(data){
+							//비밀번호 맞았을 경우
+							window.location.href = "../mypage/modify";
+						} else {
+							//틀린 경우
+							alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
+						}
 					},
 					error : (status,error)=>{
 						console.log(status, error);
@@ -211,14 +217,32 @@
 	leave.onclick = function(e){
 		const pw = document.getElementById("pw").value;
 		e.preventDefault();
-		if(user_pw2 == pw){
-			if(confirm("탈퇴하시겠습니까?")){
-				del.submit();
-				alert("탈퇴 되었습니다.");
-			}
-		} else {
-			alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
-		}
+		
+		$.ajax({
+					url : "checkPw",
+					method : "POST",
+					data : {
+						"checkpw" : pw
+						
+					},
+					success : (data)=>{
+						if(data){
+							//비밀번호 맞았을 경우
+							if(confirm("탈퇴하시겠습니까?")){
+								del.submit();
+								alert("탈퇴 되었습니다.");
+								window.location.href="../logout";
+							}
+						} else {
+							//틀린 경우
+							alert("잘못된 비밀번호 입니다. 비밀번호를 확인하세요");
+						}
+					},
+					error : (status,error)=>{
+						console.log(status, error);
+					}
+				})
+		
 	}
 	
 </script>
