@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.court.proj.aplcn.util.Criteria;
 import com.court.proj.aplcnReg.TrialVO;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AnnounceMapper {
@@ -35,9 +36,8 @@ public interface AnnounceMapper {
 	public TrialVO getTrialVO(int trial_fcltt_proper_num);
 
 	// 선택한 재판조력자 pk 불러오기
-	public int getTrialNum1(String st1, String st2);
-
-	public Integer getTrialNum2(String st1, String st2, String st3);
+	public int getTrialNum1(@Param("st1") String st1, @Param("st2") String st2);
+	public int getTrialNum2(@Param("st1") String st1, @Param("st2") String st2, @Param("st3") String st3);
 
 	// 공고 등록 TB_002
 	public int announceRegistTB002(AnnounceVO vo);
@@ -50,5 +50,12 @@ public interface AnnounceMapper {
 
 	// 공고 수정
 	public int updateAnnounce(AnnounceVO vo);
+
+	// 선택된 조력자 유형 공고 불러오기
+	public ArrayList<AnnounceVO> getTrialAnnounce(String trial, AnnounceCriteria cri);
+
+	// 공고 조회
+	public ArrayList<AnnounceVO> getAnnList(@Param("cri") AnnounceCriteria cri);
+	public int getAnnTotal(@Param("cri") AnnounceCriteria cri);
 
 }

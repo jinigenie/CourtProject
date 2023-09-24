@@ -8,7 +8,7 @@ table {
 .contentIn .tableVer th { background:#f3f3f3; border-bottom:1px solid #dbdbdb; padding:13px; vertical-align:middle; width: 20%; }
 .contentIn .tableVer td {  border-bottom:1px solid #dbdbdb; padding:13px 5px; background:#fff; vertical-align:middle; line-height:18px;}
 .contentIn .tableVer td.attTxt a { color:#e84c3d; text-decoration:underline;  }
-.contentIn .tableVer td.contArea { line-height: 24px; }
+.contentIn .tableVer td.contArea { line-height: 24px; height: 300px}
 .contentIn .tableVer tr td.subTitle { background:#f3f3f3; }
 .contentIn .tableVer tr td.tit a:hover, .content .boardView tr td.tit a:active { color:#0057a1; text-decoration:underline; font-weight:bold; }
 .contentIn .tableVer tr td span { padding: 0px 5px; }

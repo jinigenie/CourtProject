@@ -9,35 +9,37 @@
 	<select id="AnnounceList" resultType="AnnounceVO"
 		parameterType="AnnounceCriteria">
 		SELECT
-		a.announce_proper_num,
-		a.admin_proper_num,
-		b.admin_id,
-		b.admin_pw,
-		b.admin_auth,
-		b.admin_name,
-		a.trial_fcltt_proper_num,
-		c.trial_fcltt_main_code,
-		c.trial_fcltt_clasifi_code,
-		c.trial_fcltt_sbcls_code,
-		c.trial_fcltt_description,
-		a.announce_title,
-		a.announce_content,
-		a.announce_start_date,
-		a.announce_end_date,
-		a.announce_first_date,
-		a.announce_last_date
+			a.announce_proper_num,
+			a.admin_proper_num,
+			b.admin_id,
+			b.admin_pw,
+			b.admin_auth,
+			b.admin_name,
+			a.trial_fcltt_proper_num,
+			c.trial_fcltt_main_code,
+			c.trial_fcltt_clasifi_code,
+			c.trial_fcltt_sbcls_code,
+			c.trial_fcltt_description,
+			a.announce_title,
+			a.announce_content,
+			a.announce_start_date,
+			a.announce_end_date,
+			a.announce_first_date,
+			a.announce_last_date
 		FROM TB_002 a
-		INNER JOIN TB_015 b ON
-		a.admin_proper_num = b.admin_proper_num
-		INNER JOIN TB_010 c ON
-		a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+				 INNER JOIN TB_015 b ON
+			a.admin_proper_num = b.admin_proper_num
+				 INNER JOIN TB_010 c ON
+			a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		WHERE a.announce_end_date > sysdate()
 		ORDER BY
-		a.announce_proper_num
-		LIMIT #{pageStart}, #{amount}
+			a.announce_end_date
+			LIMIT #{pageStart}, #{amount}
 	</select>
 
 	<select id="getTotal" resultType="int">
 		select count(*) from TB_002
+		                WHERE announce_end_date > sysdate()
 	</select>
 
 	<select id="getinfo" resultType="AnnounceVO">
@@ -45,26 +47,6 @@
 		admin_id = #{admin_id}
 	</select>
 
-	<!-- 검색기능 start -->
-	<select id="searchAnnounceTitleAndContent"
-		resultType="AnnounceVO">
-		select * from TB_002
-		where announce_title LIKE '%' ||
-		#{keyword} || '%' OR announce_content LIKE
-		'%' || #{keyword} || '%'
-	</select>
-
-	<select id="searchAnnounceTitle" resultType="AnnounceVO">
-		select * from
-		TB_002
-		where announce_title LIKE '%' || #{keyword} || '%'
-	</select>
-
-	<select id="searchAnnounceContent" resultType="AnnounceVO">
-		select * from
-		TB_002
-		where announce_content LIKE '%' || #{keyword} || '%'
-	</select>
 
 	<!-- 재판조력자 분로 start -->
 	<select id="getTrial" resultType="TrialVO">
@@ -78,15 +60,15 @@
 
 	<select id="getTrialNum1" resultType="int">
 		select * from TB_010 where
-		trial_fcltt_main_code = #{arg0}
-		and trial_fcltt_clasifi_code = #{arg1}
+		trial_fcltt_main_code = #{st1}
+		and trial_fcltt_clasifi_code = #{st2}
 	</select>
 
 	<select id="getTrialNum2" resultType="int">
 		select * from TB_010 where
-		trial_fcltt_main_code = #{arg0}
-		and trial_fcltt_clasifi_code = #{arg1}
-		and trial_fcltt_sbcls_code = #{arg2}
+		trial_fcltt_main_code = #{st2}
+		and trial_fcltt_clasifi_code = #{st2}
+		and trial_fcltt_sbcls_code = #{st3}
 	</select>
 
 	<!-- 공고 등록 start -->
@@ -184,4 +166,143 @@
 		announce_proper_num =
 		#{announce_proper_num}
 	</update>
+
+	<select id="getAnnList" resultType="AnnounceVO">
+		SELECT
+			a.announce_proper_num,
+			a.admin_proper_num,
+			b.admin_id,
+			b.admin_pw,
+			b.admin_auth,
+			b.admin_name,
+			a.trial_fcltt_proper_num,
+			c.trial_fcltt_main_code,
+			c.trial_fcltt_clasifi_code,
+			c.trial_fcltt_sbcls_code,
+			c.trial_fcltt_description,
+			a.announce_title,
+			a.announce_content,
+			a.announce_start_date,
+			a.announce_end_date,
+			a.announce_first_date,
+			a.announce_last_date
+		FROM TB_002 a
+				 INNER JOIN TB_015 b ON
+			a.admin_proper_num = b.admin_proper_num
+				 INNER JOIN TB_010 c ON
+			a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		<where>
+			<if test="cri.selectedValue != null and cri.selectedValue != ''">
+				<choose>
+					<when test="cri.selectedValue == '전체'">
+					</when>
+					<otherwise>
+						<if test="cri.selectedValue == '조력자'">
+							OR trial_fcltt_main_code like concat('%', '조력자', '%')
+						</if>
+						<if test="cri.selectedValue == '통번역인'">
+							OR trial_fcltt_main_code like concat('%', '통번역인', '%')
+						</if>
+						<if test="cri.selectedValue == '조정위원'">
+							OR trial_fcltt_main_code like concat('%', '조정위원', '%')
+						</if>
+						<if test="cri.selectedValue == '전문심리위원'">
+							OR trial_fcltt_main_code like concat('%', '전문심리위원', '%')
+						</if>
+						<if test="cri.selectedValue == '상담위원'">
+							OR trial_fcltt_main_code like concat('%', '상담위원', '%')
+						</if>
+					</otherwise>
+				</choose>
+			</if>
+
+			<if test="cri.search_cont != null and cri.search_cont != '' and cri.search_cont != 'null'">
+				<choose>
+					<when test="cri.search_field =='searchTitle'">
+						OR announce_title like concat('%', #{cri.search_cont}, '%')
+					</when>
+					<when test="cri.search_field =='searchCon'">
+						OR announce_content like concat('%', #{cri.search_cont}, '%')
+					</when>
+					<when test="cri.search_field =='searchAll'">
+						OR (trial_fcltt_main_code like concat('%', #{cri.search_cont}, '%')
+						OR trial_fcltt_clasifi_code like concat('%', #{cri.search_cont}, '%')
+						OR trial_fcltt_sbcls_code like concat('%', #{cri.search_cont}, '%')
+						OR announce_title like concat('%', #{cri.search_cont}, '%')
+						OR announce_content like concat('%', #{cri.search_cont}, '%'))
+					</when>
+				</choose>
+			</if>
+			<if test="cri.start_date != null and cri.start_date != '' and cri.end_date != null and cri.end_date != ''">
+				OR (announce_start_date > #{cri.start_date} AND #{cri.end_date} > announce_end_date)
+			</if>
+
+
+			AND announce_end_date > sysdate()
+		</where>
+
+
+		ORDER BY
+			a.announce_end_date
+		LIMIT #{cri.pageStart}, #{cri.amount}
+	</select>
+
+	<select id="getAnnTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_002 a
+		INNER JOIN TB_015 b ON
+		a.admin_proper_num = b.admin_proper_num
+		INNER JOIN TB_010 c ON
+		a.trial_fcltt_proper_num = c.trial_fcltt_proper_num
+		<where>
+			<if test="cri.selectedValue != null and cri.selectedValue != ''">
+				<choose>
+					<when test="cri.selectedValue == '전체'">
+					</when>
+					<otherwise>
+						<if test="cri.selectedValue == '조력자'">
+							OR trial_fcltt_main_code like concat('%', '조력자', '%')
+						</if>
+						<if test="cri.selectedValue == '통번역인'">
+							OR trial_fcltt_main_code like concat('%', '통번역인', '%')
+						</if>
+						<if test="cri.selectedValue == '조정위원'">
+							OR trial_fcltt_main_code like concat('%', '조정위원', '%')
+						</if>
+						<if test="cri.selectedValue == '통번역인'">
+							OR trial_fcltt_main_code like concat('%', '통번역인', '%')
+						</if>
+						<if test="cri.selectedValue == '전문심리위원'">
+							OR trial_fcltt_main_code like concat('%', '전문심리위원', '%')
+						</if>
+						<if test="cri.selectedValue == '상담위원'">
+							OR trial_fcltt_main_code like concat('%', '상담위원', '%')
+						</if>
+					</otherwise>
+				</choose>
+			</if>
+
+			<if test="cri.search_field != null and cri.search_field != '' and cri.search_field != 'null'">
+				<choose>
+					<when test="cri.search_field =='searchTitle'">
+						OR announce_title like concat('%', #{cri.search_cont}, '%')
+					</when>
+					<when test="cri.search_field =='searchCon'">
+						OR announce_content like concat('%', #{cri.search_cont}, '%')
+					</when>
+					<when test="cri.search_field =='searchAll'">
+						OR (trial_fcltt_main_code like concat('%', #{cri.search_cont}, '%')
+						OR trial_fcltt_clasifi_code like concat('%', #{cri.search_cont}, '%')
+						OR trial_fcltt_sbcls_code like concat('%', #{cri.search_cont}, '%')
+						OR announce_title like concat('%', #{cri.search_cont}, '%')
+						OR announce_content like concat('%', #{cri.search_cont}, '%'))
+					</when>
+				</choose>
+			</if>
+			AND announce_end_date > sysdate()
+		</where>
+
+
+	</select>
+
 </mapper>

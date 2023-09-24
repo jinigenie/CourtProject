@@ -429,15 +429,20 @@
 	}
 }
 
-a:link {
+ .notice_left a:link {
 	color: #333;
 	text-decoration: none;
 }
 
-a:visited {
+.faq_left a:link {
 	color: #333;
 	text-decoration: none;
 }
+
+/*a:visited {*/
+/*	color: #333;*/
+/*	text-decoration: none;*/
+/*}*/
 
 a:active {
 	color: #333;
@@ -564,7 +569,7 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 .main_slid_notice .notice_lists li a {
 	display: block;
 	position: relative;
-	min-height: 211px;
+	height: 200px;
 	width: 180px;
 	padding: 40px;
 	border: 1px solid #ccc;
@@ -600,11 +605,12 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 .main_slid_notice .notice_lists li a dl dt {
 	overflow: hidden;
 	height: 28px;
-	font-size: 19px;
+	font-size: 18px;
 	font-weight: 700;
 	color: #111;
 	text-align: center;
 	line-height: 28px;
+	margin-top: 10px;
 }
 
 .main_slid_notice .notice_lists li a dl dd {
@@ -614,7 +620,6 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 }
 
 .main_slid_notice .notice_lists li a dl dd.oh {
-	overflow: hidden;
 	/* height: 81px; */
 	margin-top: -44px;
 	/* line-height: 19px; */
@@ -623,7 +628,8 @@ swiper-slide {margin: 0 !important;height: 321px;width: 100%;text-align: center;
 	max-width: 180px; /* ì›í•˜ëŠ” ìµœëŒ€ ê°€ë¡œ ë„ˆë¹„ë¡œ ì„¤ì •í•˜ì„¸ìš” */
 	/* max-height: 95px; */ /* ì›í•˜ëŠ” ìµœëŒ€ ì„¸ë¡œ ë†’ì´ë¡œ ì„¤ì •í•˜ì„¸ìš” */
 	overflow: hidden;
-	/* text-overflow: ellipsis; */
+	text-overflow: ellipsis;
+	max-height: 4em;
 	white-space: nowrap;
 }
 

@@ -60,9 +60,8 @@ public class AnnounceServiceImpl implements AnnounceService {
 	}
 
 	@Override
-	public Integer getTrialNum2(String st1, String st2, String st3) {
-		Integer result = announceMapper.getTrialNum2(st1, st2, st3);
-		return (result != null) ? result : 0;
+	public int getTrialNum2(String st1, String st2, String st3) {
+		return announceMapper.getTrialNum2(st1, st2, st3);
 	}
 
 	@Override
@@ -93,5 +92,20 @@ public class AnnounceServiceImpl implements AnnounceService {
 	@Override
 	public int updateAnnounce(AnnounceVO vo) {
 		return announceMapper.updateAnnounce(vo);
+	}
+
+	@Override
+	public ArrayList<AnnounceVO> getTrialAnnounce(String trial, AnnounceCriteria cri) {
+		return announceMapper.getTrialAnnounce(trial, cri);
+	}
+
+	@Override
+	public ArrayList<AnnounceVO> getAnnList(AnnounceCriteria cri) {
+		return announceMapper.getAnnList(cri);
+	}
+
+	@Override
+	public int getAnnTotal(AnnounceCriteria cri) {
+		return announceMapper.getAnnTotal(cri);
 	}
 }
