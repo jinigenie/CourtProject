@@ -270,9 +270,6 @@
 						<if test="cri.selectedValue == '조정위원'">
 							OR trial_fcltt_main_code like concat('%', '조정위원', '%')
 						</if>
-						<if test="cri.selectedValue == '통번역인'">
-							OR trial_fcltt_main_code like concat('%', '통번역인', '%')
-						</if>
 						<if test="cri.selectedValue == '전문심리위원'">
 							OR trial_fcltt_main_code like concat('%', '전문심리위원', '%')
 						</if>
@@ -283,7 +280,7 @@
 				</choose>
 			</if>
 
-			<if test="cri.search_field != null and cri.search_field != '' and cri.search_field != 'null'">
+			<if test="cri.search_cont != null and cri.search_cont != '' and cri.search_cont != 'null'">
 				<choose>
 					<when test="cri.search_field =='searchTitle'">
 						OR announce_title like concat('%', #{cri.search_cont}, '%')
@@ -300,6 +297,10 @@
 					</when>
 				</choose>
 			</if>
+			<if test="cri.start_date != null and cri.start_date != '' and cri.end_date != null and cri.end_date != ''">
+				OR (announce_start_date > #{cri.start_date} AND #{cri.end_date} > announce_end_date)
+			</if>
+
 			AND announce_end_date > sysdate()
 		</where>
 

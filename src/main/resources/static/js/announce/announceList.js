@@ -90,6 +90,8 @@ function loadList(selectedValue, search_field, search_cont, start_date, end_date
             var tbody = $("#announceListId");
             tbody.empty(); // 테이블 내용 초기화
 
+            $('#totalElement').text(data[0].total);
+
             for (var i = 0; i < data.length; i++) {
                 var vo = data[i];
                 var str = "";
@@ -182,31 +184,36 @@ $(".pager").on('click', 'a', function(e) {
     var search_cont = $("#search_cont").val();
     var view_cnt = $("#view_cnt").val();
 
+    var start_date = $("#startDate").val();
+    var end_date = $("#endDate").val();
+
     if (pageAction === 1) {
         // 맨 처음 페이지로 이동하는 동작 수행
-        loadList(selectedValue, search_field, search_cont, 1, view_cnt);
+        loadList(selectedValue, search_field, search_cont, start_date, end_date, 1, view_cnt);
+
     } else if (pageAction === 'prev') {
         // 이전 페이지로 이동하는 동작 수행
         var currentPage = ($(".pager a.active").text());
         if (currentPage > 1) {
-            loadList(selectedValue, search_field, search_cont, currentPage - 1, view_cnt);
+            loadList(selectedValue, search_field, search_cont, start_date, end_date, currentPage - 1, view_cnt);
         }
     } else if (pageAction === 'next') {
         // 다음 페이지로 이동하는 동작 수행
         var currentPage = ($(".pager a.active").text());
         var totalPages = ($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
         if (currentPage < totalPages) {
-            loadList(selectedValue, search_field, search_cont, currentPage + 1, view_cnt);
+            loadList(selectedValue, search_field, search_cont, start_date, end_date, currentPage + 1, view_cnt);
         }
     } else if (pageAction === 'last') {
         // 맨 마지막 페이지로 이동하는 동작 수행
         var totalPages = ($(".pager a:last").prev().text()); // 맨 마지막 페이지 번호
-        loadList(selectedValue, search_field, search_cont, totalPages, view_cnt);
+        loadList(selectedValue, search_field, search_cont, start_date, end_date, totalPages, view_cnt);
+
     } else {
         // 페이지 번호를 클릭한 경우
         pageNumber = $(this).text();
         // 페이지 번호를 사용하여 데이터를 불러오는 동작 수행
-        loadList(selectedValue, search_field, search_cont, pageNumber, view_cnt);
+        loadList(selectedValue, search_field, search_cont, start_date, end_date, pageNumber, view_cnt);
     }
 
 });

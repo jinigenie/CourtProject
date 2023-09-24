@@ -439,6 +439,17 @@
 	text-decoration: none;
 }
 
+
+.notice_left a:visited {
+	color: #333;
+	text-decoration: none;
+}
+
+.faq_left a:visited {
+	color: #333;
+	text-decoration: none;
+}
+
 /*a:visited {*/
 /*	color: #333;*/
 /*	text-decoration: none;*/
