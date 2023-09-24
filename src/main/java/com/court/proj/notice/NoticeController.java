@@ -68,7 +68,7 @@ public class NoticeController {
 
 		// admin_proper_num 불러와야함 !
 		vo.setAdmin_proper_num("1");
-		int result = noticeService.noticeReg(vo);
+		int result = noticeService.noticeModify(vo);
 		String msg = result == 1 ? "등로 되었습니다" : "등록 실패";
 		ra.addFlashAttribute("msg", msg);
 		return "redirect:/notice/noticeList";

@@ -126,6 +126,7 @@
 													<span class="txt-left">제목</span>
 												</th>
 												<td data-cell-header="성명" class="txt-left">
+													<input type="hidden" name="notice_proper_num" th:value="${vo.notice_proper_num}">
 													<input name="notice_title" id="cvl_nm" class="cm_inptxt" type="text"
 														style="width: 640px; height: 40px;" th:value="${vo.notice_title}">
 												</td>
@@ -156,7 +157,7 @@
 				<!-- //detail-content end -->
 				<!-- 페이지 이동 버튼 -->
 				<div class="faq_btn" style="padding-left: 100px;">
-					<button type="button" onclick="noticeRegSubmit()" class="faq_btn1">등록</button>
+					<button type="button" onclick="noticeRegSubmit()" class="faq_btn1">수정</button>
 					<button type="button" onclick="notfals()" class="faq_btn2">취소</button>
 					<br /><br /><br />
 				</div>
@@ -203,5 +204,5 @@
 		font-size: 12px;
 	}
 </style>
-noticeModify
+
 </html>
