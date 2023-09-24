@@ -71,45 +71,28 @@ public class AplcnController {
 
 		ListVO vo1 = aplcnService.getDetail(aplcn_dtls_proper_num);
 		System.out.println(vo1);
-		//ArrayList<ListVO> vo = aplcnService.getDetails(aplcn_dtls_proper_num);
+		// ArrayList<ListVO> vo = aplcnService.getDetails(aplcn_dtls_proper_num);
 		model.addAttribute("vo1", vo1);
 		model.addAttribute("edcnList", aplcnService.getEdctnList(aplcn_dtls_proper_num));
 		model.addAttribute("carerList", aplcnService.getCarerList(aplcn_dtls_proper_num));
 		model.addAttribute("crtfcList", aplcnService.getCrtfcList(aplcn_dtls_proper_num));
-		
-		//List<String> linkList = new ArrayList<String>();
-		
-		//List<FileVO> fileList = aplcnService.getFileList(aplcn_dtls_proper_num);
-		/*
-		try {
-            //encoededString이 고정주소/유저아이디/+ 여기에 
 
-            for(FileVO v : fileList) {
-            	String downloadPath = s3downloadPath+"/"+vo1.getUser_id()+"/"+URLEncoder.encode(v.getFile_path(), StandardCharsets.UTF_8.toString()); 
-            	linkList.add(downloadPath);
-            	System.out.println(v.getFile_path());
-            }
-            model.addAttribute("linkList", linkList);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
-		
-		
+		// List<String> linkList = new ArrayList<String>();
+
+		// List<FileVO> fileList = aplcnService.getFileList(aplcn_dtls_proper_num);
+		/*
+		 * try { //encoededString이 고정주소/유저아이디/+ 여기에
+		 * 
+		 * for(FileVO v : fileList) { String downloadPath =
+		 * s3downloadPath+"/"+vo1.getUser_id()+"/"+URLEncoder.encode(v.getFile_path(),
+		 * StandardCharsets.UTF_8.toString()); linkList.add(downloadPath);
+		 * System.out.println(v.getFile_path()); } model.addAttribute("linkList",
+		 * linkList); } catch (UnsupportedEncodingException e) { e.printStackTrace(); }
+		 */
+
 		return "aplcn/aplcnDetails";
 
-		// ResultMAP으로 ORM 처리 or
-		// 재정렬 1대N G/S 모델 2개 (복수는 리스트에 다시 담는다, 1 데이터는 vo에 나가고)
-
 	}
-
-
-	// 신청자 상태변환 (수정중)
-//    @GetMapping("/aplcnDetails2")
-//    public String Details2(@RequestParam("user_proper_num") Integer user_proper_num, @RequestParam("aplicn_dtls_sts") String aplicn_dtls_sts) {
-//    	
-//    	ListVO vo = aplcnService.aplcnReject(user_proper_num);
-//    	return "redirect:/aplcn/aplcnList";
-//    }
 
 	// 신청자 평가하기
 	@GetMapping("/aplcnEvaluate")
@@ -124,6 +107,7 @@ public class AplcnController {
 	// 신청자 평가 후 (상세정보로 이동)
 	@PostMapping("/evaluateForm")
 	public String evaluateForm(ListVO vo, RedirectAttributes ra, Model model) {
+		vo.setAdmin_proper_num("1");
 		int result = aplcnService.aplcnEvaluate(vo);
 		ListVO vo1 = aplcnService.getDetail(vo.getAplcn_dtls_proper_num());
 		model.addAttribute("vo", vo1);
@@ -148,13 +132,15 @@ public class AplcnController {
 
 	// 신청자 상태변환2 (평가완료)
 	@PostMapping("/aplcnCompleted")
-	public String aplcnCompleted(ListVO vo, @RequestParam("user_proper_num") String user_proper_num,
-			@RequestParam("aplicn_dtls_sts") String aplicn_dtls_sts, RedirectAttributes ra) {
+	public String aplcnCompleted(ListVO vo, RedirectAttributes ra) {
+		vo.setAplicn_dtls_sts("평가완료");
+		vo.setAdmin_proper_num("1");
+		// System.out.println(aplicn_dtls_sts);
 		int result = aplcnService.aplcnCompleted(vo);
 		// String msg = result == 1 ? "평가를 완료하였습니다." : "평가 완료 실패! 관리자에게 문의하세요.";
-		// ra.addFlashAttribute("msg", msg);
+		ra.addFlashAttribute("result", result);
 
-		return "redirect:aplcn/aplcnDetails?aplcn_dtls_proper_num=" + vo.getAplcn_dtls_proper_num();
+		return "redirect:/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=" + vo.getAplcn_dtls_proper_num();
 	}
 
 	// 파일 다운로드

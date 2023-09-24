@@ -63,6 +63,7 @@ public class ListVO {
 	private String user_ar;
 
 	// 신청자 평가
+	private String admin_proper_num;
 	private Integer all_carer_score;
 	private Integer jrsdc_carer_score;
 	private Integer office_score;
