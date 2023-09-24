@@ -3,9 +3,12 @@
 
 <head>
 	<link rel="stylesheet" th:href="@{../css/fcltt/fcltt.css}" />
+	<link rel="stylesheet" th:href="@{../css/info/infoProcess.css}" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script defer th:src="@{../js/fcltt/fcltt.js}"></script>
+	<script defer th:src="@{../js/info/infoProcess.js}"></script>
+
 </head>
 
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
@@ -89,8 +92,6 @@
 					}
 				</style>
 				<style>
-					.body {}
-
 					.info_container {
 						margin: 0 auto;
 						padding: 0 30px 30px 0;
@@ -122,14 +123,15 @@
 					h3 {
 						margin-bottom: 10px;
 					}
-					.last{
+
+					.last {
 						padding-left: 20px;
 					}
 				</style>
 
 				<div class="info_container">
 					<div class="cont1">
-						<h1><img src="../img/main/blue.gif"> 재판조력자 신청 안내</h1>
+						<h1><img src="../img/main/blue.gif"> 조력자 신청 절차</h1>
 						</br>
 						<h2 style="font-size: 20px;">재판조력자로 참여하고자 하는 경우, 아래의 감정인 종류와 신청 방법을 확인하실 수 있습니다.</h2>
 						<ul>
@@ -141,50 +143,55 @@
 						</ul>
 					</div>
 
-					<div class="cont1">
-						<h2><img src="../img/main/blue2.gif">감정인 세부구분 및 감정인 명단 등재 기준</h2>
-						</br>
-						<h3>[ 공통사항 ]</h3>
-						<ul>
-							<li><img src="../img/main/blue3.png">다음 각호의 어느 하나에 해당하는 사람은 『감정인 명단』에 등재하지 아니한다.
-								<ul>
-									<li>1. 금치산자 또는 한정치산자</li>
-									<li>2. 파산선고를 받고 복권되지 아니한 사람</li>
-									<li>3. 금고 이상의 형을 받고 그 집행이 종료되거나 집행을 받지 아니하기로 확정된 후 5년을 경과하지 아니한 사람</li>
-									<li>4. 금고 이상의 형을 받고 그 집행유예의 기간이 완료된 날로부터 2년을 경과하지 아니한 사람</li>
-									<li>5. 금고 이상의 형의 선고유예를 받은 경우에 그 선고유예 기간 중에 있는 사람</li>
-									<li>6. 법원의 판결 또는 다른 법률에 의하여 자격이 상실 또는 정지된 사람</li>
-									<li>7. 공무원으로서 파면의 징계처분을 받은 때로부터 5년을 경과하지 아니한 사람</li>
-									<li>8. 공무원으로서 해임의 징계처분을 받은 때로부터 3년을 경과하지 아니한 사람</li>
-									<li>9. 감정업무와 관련하여 형사처벌 또는 징계처분을 받은 전력이 있는 사람</li>
-									<li>10. 『감정인 명단』에서 삭제된 날로부터 2년이 경과되지 아니한 사람</li>
-								</ul>
-							</li>
-							</br>
-							<li><img src="../img/main/blue3.png">특정 범죄 또는 징계처분 등의 전력이 있는 자 또는 감정 업무와 관련하여 형사처벌 또는 징계처분을
-								받은
-								자는 등재되지 않습니다.</li>
-							</br>
-							<li><img src="../img/main/blue3.png">기타 공정하고 객관적인 감정 업무를 수행하기 곤란하다고 판단되는 자는 제외한다.</li>
-						</ul>
-					</div>
+					<div class="tabs">
+						<div class="tab-header">
+							<div class="active">
+								<i class="fa fa-code"></i> 기본정보
+							</div>
+							<div>
+								<i class="fa fa-pencil-square"></i> 경력상세
+							</div>
+							<div>
+								<i class="fa fa-bar-chart"></i> 학력상세
+							</div>
+							<div>
+								<i class="fa fa-envelope"></i> 서류제출
+							</div>
+						</div>
+						<div class="tab-indicator"></div>
+						<div class="tab-content">
 
-					<div class="cont1">
-						<h2><img src="../img/main/blue2.gif">감정인 신청 방법 및 절차</h2>
+							<div class="active">
+								<h2>1단계 - 기본정보</h2>
+								<p>신청하고자 하는 조력자와 희망법원 기본정보를 입력합니다.</p>
+								</br>
+								<img src="../img/infoProcess/infoProcess1.png">
+							</div>
 
-						<ul>
-							<li><img src="../img/main/blue3.png">신청 검토: 원하는 감정인 분야와 요건을 확인하고, 자격을 충족하는지 확인합니다.</li>
-							<li><img src="../img/main/blue3.png">신청서 작성: 해당 분야의 신청서를 작성하고 필요한 정보를 기재합니다.</li>
-							<li><img src="../img/main/blue3.png">서류 제출: 작성한 신청서와 관련 서류를 제출합니다.</li>
-							<li><img src="../img/main/blue3.png">면접 및 평가: 승인된 신청자는 면접과 평가를 거칩니다.</li>
-							<li><img src="../img/main/blue3.png">교육 및 훈련: 승인된 감정인은 필요한 교육과 훈련을 받습니다.</li>
-							<li><img src="../img/main/blue3.png">감정 수행: 등재된 감정인은 감정 업무를 수행하고 재판에 기여합니다.</li>
-						</ul>
+							<div>
+								<h2>2단계 - 경력상세</h2>
+								<p></p>
+								<img src="../img/infoProcess/infoProcess1.png">
+							</div>
+
+							<div>
+								<h2>3단계 - 학력상세</h2>
+								<p></p>
+								<img src="../img/infoProcess/infoProcess1.png">
+							</div>
+
+							<div>
+								<h2>4단계 - 서류제출</h2>
+								<p></p>
+								<img src="../img/infoProcess/infoProcess1.png">
+							</div>
+
+						</div>
 					</div>
 
 
 			</article>
 		</div>
 	</div>
-</th:block>
+
 </html>
