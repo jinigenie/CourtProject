@@ -333,7 +333,7 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 			success: function (response) {
 				// 성공적으로 응답을 받았을 때 실행될 코드를 작성합니다.
 				console.log("AJAX 요청 성공");
-				// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다.
+				// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다
 
 				// 목록을 다시 불러오는 AJAX 요청
 				// 목록을 다시 불러오는 함수 호출
