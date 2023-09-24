@@ -20,7 +20,6 @@
 			border-radius: 5px;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			align-items: center;
-			display: none;
 		}
 
 		h2 {
@@ -44,8 +43,9 @@
 		}
 
 
-		#name,
-		#phone {
+		#newPw,
+		#phone,
+		#userid {
 			display: block;
 			float: left;
 			width: 200px;
@@ -154,16 +154,17 @@
 		<form id="findIdForm">
 			<div class="input-group">
 				<label for="name" style="padding-left: 26px;">아이디 :</label>
-				<input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+				<input type="text" id="userid" name="name" placeholder="아이디를 입력하세요">
 			</div>
 
 			<div class="input-group">
 				<label for="phone">휴대폰 번호:</label>
-				<input type="text" id="phone" name="phone" placeholder="'-'을 제외한 11자리 번호를 입력해주세요">
+				<input type="text" id="phone" maxlength="13" placeholder="휴대폰 번호를 입력해주세요">
+				<input type="hidden" name="phone" value="" id="userphone">
 				<button type="button" id="verifyButton">인증번호전송</button>
 			</div>
 
-			<div class="auth-form">
+			<div class="auth-form showPhone" style="display: none;">
 				<label for="verificationCode" style="padding-left: 17px;">인증번호:</label>
 				<input type="text" id="verificationCode" name="verificationCode">
 				<button type="button" id="findIdButton" style="margin-top: 5px;">인증번호확인</button>
@@ -173,22 +174,22 @@
 			</div>
 		</form>
 	</div>
-	<div class="container result" style="display: block; ">
-				<h2 style="padding-left: 15px;">새 비밀번호설정</h2><br/>
-				
+	<div class="container result" style="display: none; ">
+		<h2 style="padding-left: 15px;">새 비밀번호설정</h2><br />
+
 		<form id="findIdForm" style="padding-left: 30px;">
 			<div class="input-group">
 				<label for="name" style="padding-left: 26px;">비밀번호 :</label>
-				<input type="text" id="name" name="name" placeholder="비밀번호를 입력하세요">
+				<input type="password" id="newPw" placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<div class="input-group">
 				<label for="phone">비밀번호 확인:</label>
-				<input type="text" id="phone" name="phone" placeholder="다시한번 입력해주세요">
+				<input type="password" id="phone" name="phone" placeholder="다시한번 입력해주세요">
 			</div>
-			<br/>
+			<br />
 			<div class="btn_div">
-				<button type="button" id="findIdButton2">비밀번호변경</button>
+				<button type="button" id="updatePw">비밀번호변경</button>
 			</div>
 		</form>
 	</div>
@@ -202,7 +203,8 @@
 		let certification = 0;
 		let check = false;
 		$("#verifyButton").click(() => {
-			const phone = $('#phone').val();
+			const phone = $('#userphone').val();
+			$('.showPhone').show();
 			$.ajax({
 				url: "send-one",
 				method: "POST",
@@ -221,12 +223,12 @@
 				}
 			})
 		})
-
+		//인증 버튼 
 		$("#findIdButton").click(() => {
 
 			let checkNumber = $('#verificationCode').val();
 			console.log(certification, checkNumber);
-			if (checkNumber == certification && checkNumber!=='') {
+			if (checkNumber == certification && checkNumber !== '') {
 				console.log(check);
 				alert("인증되었습니다.")
 				check = true;
@@ -237,45 +239,70 @@
 				check = false;
 			}
 		})
-
+		
+		//비밀번호변경 버튼
 		$('#findIdButton2').click(() => {
 			if (check) {
 				$.ajax({
-					url : "searchId",
-					method : "POST",
-					data : {
-						"phone" : $('#phone').val()
+					url: "searchId",
+					method: "POST",
+					data: {
+						"phone": $('#userphone').val()
 					},
-					success : (data)=>{
-						//$('.container').hide();
-						//$('.result').show();
+					success: (data) => {
+						$('.container').hide();
+						$('.result').show();
+						console.log(data)
 					},
-					error : (status,error)=>{
+					error: (status, error) => {
 						console.log(status, error);
 					}
 				})
-			}else {
+			} else {
 				alert("인증번호 재확인 바랍니다.")
 			}
 		})
 
-
+		//디비 업데이트 할 비밀번호변경 버튼
 		$('#updatePw').click(() => {
-			
-				$.ajax({
-					url : "updatePw",
-					method : "POST",
-					data : {
-						"newPw" : $('#newPw').val(),
-						"phone" : $('#phone').val()
-					},
-					success : (data)=>{
-						console.log("변경")
-					},
-					error : (status,error)=>{
-						console.log(status, error);
+
+			$.ajax({
+				url: "updatePw",
+				method: "POST",
+				data: {
+					"newPw": $('#newPw').val(),
+					"phone": $('#userphone').val()
+				},
+				success: (data) => {
+					console.log("변경")
+					if(data==1){
+						window.close();
+						alert("비밀번호가 변경되었습니다. 새로 로그인을 해주세요")
 					}
-				})
+				},
+				error: (status, error) => {
+					console.log(status, error);
+				}
+			})
+		})
+
+		/////폰 번호 입력형식 010-0000-1111 로 변경하기
+		$('#phone').keyup(() => {
+			var phoneNumberField = document.getElementById("phone");
+			var formattedValue = phoneNumberField.value.replace(/\D/g, ''); // 숫자만 남기고 나머지 문자 제거
+
+			// 전화번호 포맷 적용 (예: 01012341234 -> 010-1234-1234)
+			if (formattedValue.length >= 3) {
+				formattedValue = formattedValue.replace(/(\d{3})(?=\d)/, "$1-");
+			}
+			if (formattedValue.length >= 8) {
+				formattedValue = formattedValue.replace(/(\d{4})(?=\d)/, "$1-");
+			}
+
+			phoneNumberField.value = formattedValue; // 포맷팅된 값으로 입력 필드 업데이트
+
+			$('#userphone').val(formattedValue.replace(/-/g, ''));
+
 		})
 	</script>
 </body>

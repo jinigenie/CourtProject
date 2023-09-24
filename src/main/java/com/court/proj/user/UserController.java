@@ -160,7 +160,9 @@ public class UserController {
 			@RequestParam("newPw") String newPw) {
 		String newPassword = bCryptPasswordEncoder.encode(newPw);
 
-		return new ResponseEntity<>(userService.updatePw(phone, newPassword), HttpStatus.OK);
+		int result = userService.updatePw(phone, newPassword);
+		System.out.println(result);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 }

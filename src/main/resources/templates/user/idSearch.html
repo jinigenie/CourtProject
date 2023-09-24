@@ -158,13 +158,14 @@
 
 			<div class="input-group">
 				<label for="phone">휴대폰 번호:</label>
-				<input type="text" id="phone" name="phone" placeholder="'-'을 제외한 11자리 번호를 입력해주세요">
+				<input type="text" id="phone" maxlength="13" placeholder="'-'을 제외한 11자리 번호를 입력해주세요">
+				<input type="hidden" name="phone" value="" id="userphone">
 				<button type="button" id="verifyButton">인증번호전송</button>
 			</div>
 
-			<div class="auth-form">
+			<div class="auth-form showPhone" style="display: none;">
 				<label for="verificationCode" style="padding-left: 17px;">인증번호:</label>
-				<input type="text" id="verificationCode" name="verificationCode">
+				<input type="text" id="verificationCode" maxlength="6" name="verificationCode">
 				<button type="button" id="findIdButton" style="margin-top: 5px;">인증번호확인</button>
 			</div>
 			<div class="btn_div">
@@ -173,7 +174,7 @@
 
 		</form>
 	</div>
-	<div class="result" style="display: none; height: 300px; line-height: 300px;">
+	<div class="result" style="display: none; height: 150px; line-height: 150px; font-size: 12px;">
 		<h2 id="result">dd</h2>
 	</div>
 
@@ -181,12 +182,20 @@
 		const verifyButton = document.getElementById('verifyButton');
 		const findIdButton = document.getElementById('findIdButton');
 		const authForm = document.querySelector('.auth-form');
-
+		let phonePattern = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 		//폰 인증받기
 		let certification = 0;
 		let check = false;
 		$("#verifyButton").click(() => {
-			const phone = $('#phone').val();
+			const phone = $('#userphone').val();
+			if (phone == '') {
+				alert("연락처를 입력해주시기 바랍니다")
+				return;
+			} else if (!phonePattern.test(phone)) {
+				alert("올바른 형식의 번호를 입력해주세요.");
+				return;
+			}
+			$('.showPhone').show();
 			$.ajax({
 				url: "send-one",
 				method: "POST",
@@ -205,12 +214,12 @@
 				}
 			})
 		})
-
+		//인증번호확인 버튼
 		$("#findIdButton").click(() => {
 
 			let checkNumber = $('#verificationCode').val();
 			console.log(certification, checkNumber);
-			if (checkNumber == certification && checkNumber!=='') {
+			if (checkNumber == certification && checkNumber !== '') {
 				console.log(check);
 				alert("인증되었습니다.")
 				check = true;
@@ -225,25 +234,65 @@
 		$('#findIdButton2').click(() => {
 			if (check) {
 				$.ajax({
-					url : "searchId",
-					method : "POST",
-					data : {
-						"phone" : $('#phone').val()
+					url: "searchId",
+					method: "POST",
+					data: {
+						"phone": $('#userphone').val()
 					},
-					success : (data)=>{
+					success: (data) => {
 						$('.container').hide();
 						$('.result').show();
-						$('#result').text('아이디 : '+data);
+						if (data == '' || data == 'null') {
+							var $button = $('<button>', {
+								text: '회원가입',
+								id: 'joinBtn',
+								style: 'width: 100%;'
+									+ 'padding: 10px;'
+									+ 'background: #007BFF;'
+									+ 'color: #fff;'
+									+ 'border: none;'
+									+ 'font- size: 1rem;'
+									+ 'text - align: center;'
+									+ 'border - radius: 3px;'
+									+ 'cursor: pointer;'
+							})
+							$('#result').text('회원정보에 맞는 아이디가 없습니다. 회원가입 하시겠습니까?');
+							$('#result').append($button);
+							$button.on('click', function () {
+								alert('버튼이 클릭되었습니다!');
+							});
+						} else {
+							$('#result').text('아이디 : ' + data);
+						}
 					},
-					error : (status,error)=>{
+					error: (status, error) => {
 						console.log(status, error);
 					}
 				})
-			}else {
+			} else {
 				alert("인증번호 재확인 바랍니다.")
 			}
 		})
 
+
+		/////폰 번호 입력형식 010-0000-1111 로 변경하기
+		$('#phone').keyup(() => {
+			var phoneNumberField = document.getElementById("phone");
+			var formattedValue = phoneNumberField.value.replace(/\D/g, ''); // 숫자만 남기고 나머지 문자 제거
+
+			// 전화번호 포맷 적용 (예: 01012341234 -> 010-1234-1234)
+			if (formattedValue.length >= 3) {
+				formattedValue = formattedValue.replace(/(\d{3})(?=\d)/, "$1-");
+			}
+			if (formattedValue.length >= 8) {
+				formattedValue = formattedValue.replace(/(\d{4})(?=\d)/, "$1-");
+			}
+
+			phoneNumberField.value = formattedValue; // 포맷팅된 값으로 입력 필드 업데이트
+
+			$('#userphone').val(formattedValue.replace(/-/g, ''));
+
+		})
 	</script>
 </body>
 
