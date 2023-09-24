@@ -153,22 +153,20 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="vo, status : ${list}"
+										<tr th:each="vo, status : ${list}"  th:id="'notice_' + ${vo.notice_proper_num}" class="clickable-row"
 											style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
 											th:if="${vo.notice_title.startsWith('중요')}">
 											<td style="color: rgb(0, 0, 0);" data-cell-header="번호"></td>
-											<td style="color: rgb(0, 0, 0);" data-cell-header="대분류">
-												<a
-													th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
+											<a th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}"><td style="color: rgb(0, 0, 0);" data-cell-header="대분류">
+												[[${vo.notice_title}]]
 											</td>
 											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
-										<tr th:each=" vo, status : ${list}" style="cursor: pointer">
+										<tr th:each=" vo, status : ${list}" style="cursor: pointer" th:id="'notice_' + ${vo.notice_proper_num}" class="clickable-row">
 											<td data-cell-header="번호">[[${status.count}]]</td>
 											<td data-cell-header="대분류">
-												<a
-													th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
+												<a th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
 											</td>
 											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
@@ -226,6 +224,25 @@
 </th:block>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // 클릭 가능한 행에 대한 이벤트 핸들러 추가
+    var rows = document.querySelectorAll(".clickable-row");
+    rows.forEach(function (row) {
+        row.addEventListener("click", function () {
+            // 해당 공고의 notice_proper_num 가져오기
+            var noticeProperNum = this.id.replace("notice_", "");
+            // 공고 상세 페이지로 이동
+            window.location.href = "/notice/noticeDetail?notice_proper_num=" + noticeProperNum;
+        });
+    });
+});
+</script>
+위 코드에서 th:id로 각 <tr>에 id 속성을 설정하고, JavaScript를 사용하여 해당 행을 클릭할 때 URL을 생성하고 이동하도록 합니다. 클릭 가능한 행은 .clickable-row 클래스를 가진 행으로 선택됩니다. 페이지가 로드될 때 DOMContentLoaded 이벤트 리스너를 사용하여 이벤트 핸들러가 추가됩니다.
+
+
+
+
+
 
 
 

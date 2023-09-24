@@ -76,9 +76,11 @@
 														</dt>
 														<dd style="font-size: 15px;">
 															<p>[[${vo1.announce_start_date}]] ~
-															[[${vo1.announce_end_date}]]</p><br /><br /><br /></dd>
-														<dd class="oh" style="white-space: normal; font-size: 18px; overflow:  hidden;text-overflow: ellipsis; height:124px; max-height: 124px;">
-															 [[${vo1.announce_content}]]
+																[[${vo1.announce_end_date}]]</p><br /><br /><br />
+														</dd>
+														<dd class="oh"
+															style="white-space: normal; font-size: 18px; overflow:  hidden;text-overflow: ellipsis; height:124px; max-height: 124px;">
+															[[${vo1.announce_content}]]
 														</dd>
 													</dl>
 												</a>
@@ -112,7 +114,7 @@
 							</li>
 							<!-- 탭 한 상태에 따라 공지-->
 							<li th:each=" vo2, status : ${list2}" class="notice_left">
-								<a th:href="@{/notice/noticeDetail(__${vo2.notice_proper_num}__)}">
+								<a th:href="'/notice/noticeDetail?notice_proper_num=' +${vo2.notice_proper_num}">
 									<h4>[공지]</h4>[[${vo2.notice_title}]] <span
 										style="text-align: right; float: right;">[[${vo2.notice_date}]] </span>
 								</a>
@@ -206,18 +208,6 @@
 				</div>
 
 			</div>
-
-		</div>
-
-		<script>
-			$(".relatedSystem").each(function () {
-				$(".relatedSystem .rTit .moreBtn").click(function () {
-					$(".relatedSystem ul li.mHide").toggleClass("mShow");
-					$(this).toggleClass("mHideHidden");
-				});
-			});
-		</script>
-
 		<!--//////////////////////////모달창 작업////////////////////////////////////-->
 		<div>
 			<!-- The Modal -->
@@ -252,12 +242,23 @@
 				</div>
 
 			</div>
+		</div>
+
+
+
+
 
 			<script>
 				// 쿠키 생성
 				function setCookie(name, value, expiredays) {  // 쿠키저장
 					var todayDate = new Date();  //date객체 생성 후 변수에 저장
 					todayDate.setDate(todayDate.getDate() + expiredays);
+
+					// 중간 결과 디버깅
+					console.log("name: " + name);
+					console.log("value: " + value);
+					console.log("expiredays: " + expiredays);
+					console.log("todayDate: " + todayDate.toUTCString());
 					// 시간지정(현재시간 + 지정시간)
 					document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toUTCString() + ";"
 					//위 정보를 쿠키에 굽는다
@@ -293,8 +294,15 @@
 </th:block>
 
 
-
-
+<!--	<script>
+			$(".relatedSystem").each(function () {
+				$(".relatedSystem .rTit .moreBtn").click(function () {
+					$(".relatedSystem ul li.mHide").toggleClass("mShow");
+					$(this).toggleClass("mHideHidden");
+				});
+			});
+		</script>
+-->
 
 
 
