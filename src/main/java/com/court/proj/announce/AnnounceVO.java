@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AnnounceVO {
 
+	private AnnouncePageVO announcePageVO;
+
 	private int announce_proper_num;
 	private int admin_proper_num;
 	private int trial_fcltt_proper_num;

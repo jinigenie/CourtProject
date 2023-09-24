@@ -36,7 +36,8 @@ public interface AnnounceService {
 	// 선택한 재판조력자 pk 불러오기
 	public int getTrialNum1(String st1, String st2);
 
-	public Integer getTrialNum2(String st1, String st2, String st3);
+	public int getTrialNum2(String st1, String st2, String st3);
+
 
 	// 공고 등록 TB_002
 	public int announceRegistTB002(AnnounceVO vo);
@@ -49,5 +50,13 @@ public interface AnnounceService {
 
 	// 공고 수정
 	public int updateAnnounce(AnnounceVO vo);
+
+	// 선택된 조력자 유형 공고 불러오기
+	public ArrayList<AnnounceVO> getTrialAnnounce(String trial, AnnounceCriteria cri);
+
+	// 공고 조회
+	public ArrayList<AnnounceVO> getAnnList(AnnounceCriteria cri);
+	public int getAnnTotal(AnnounceCriteria cri);
+
 
 }

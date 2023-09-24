@@ -9,7 +9,12 @@ public class AnnounceCriteria {
 		private int amount; // 데이터개수
 
 		// 검색에 필요한 키워드를 선언
-		private String searchField;
+		private String selectedValue;	//선택한 분류
+		private String search_field;	//검색조건
+		private String search_cont; 	//검색어
+		private String start_date;		//기간검색 시작날짜
+		private String end_date;		//기간검색 끝날짜
+
 		private String searchName;
 		private String searchFcltt;
 		private String searchStatus;

@@ -104,7 +104,7 @@
                                 </tr>
                                 <tr>
                                     <th>모집유형</th>
-                                    <td> > ></td>
+                                    <td>[[${alist.trial_fcltt_main_code} + ' > ' + ${alist.trial_fcltt_clasifi_code} + (${alist.trial_fcltt_sbcls_code} == null? '' :  ' > ' + ${alist.trial_fcltt_sbcls_code}) ]]</td>
                                     <th>모집인원</th>
                                     <td>0명</td>
                                 </tr>
@@ -122,7 +122,7 @@
                                     <!-- 공고 내용 start -->
                                 <tr th:each="vo, status : ${alist}" style="border-bottom:3px solid #0057a1; border-top: 3px solid #0057a1">
                                     <td colspan="4" class="contArea" data-cell-header="내용">
-                                        <p th:text="${alist.announce_content}"></p>
+                                        <p th:utext="${alist.announce_content}"></p>
                                     </td>
                                 </tr>
                                 <!-- //공고 내용 end -->
@@ -133,12 +133,12 @@
                         <!-- //본문컨텐츠 영역 end -->
 
                         <!-- 페이지 이동 버튼 -->
-                        <div class="fclttRegist_btn">
+                        <div class="fclttRegist_btn" style="margin-bottom: 50px">
                             <button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a
                                     th:href="'/announce/announceModify?id=' + ${alist.announce_proper_num}">수정하기</a>
                             </button>
                             <button type="button" class="fcltt_btn2"><a
-                                    href="../announce/announceList">뒤로가기</a></button>
+                                    href="/announce/announceList">뒤로가기</a></button>
                         </div>
                         <!-- //페이지 이동 버튼 end -->
                     </form>
