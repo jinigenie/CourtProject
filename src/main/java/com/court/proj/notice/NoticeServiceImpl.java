@@ -39,6 +39,7 @@ public NoticeVO getDetail(String notice_proper_num) {
 public int noticeModify(NoticeVO vo) {
 	return noticeMapper.noticeModify(vo);
 }
+//공지 삭제
 @Override
 public int noticeDel(String notice_proper_num) {
 	return noticeMapper.noticeDel(notice_proper_num);
