@@ -99,10 +99,7 @@ public class FclttController {
 	public String fclttRegistFom(FclttVO vo, RedirectAttributes ra) {
 		
 		// 이메일 발송
-		//String to = vo.getUser_email_f() + "@" + vo.getUser_email_b(); // 수신자 이메일 주소
-		
-		
-		String to = "hyemin0629@naver.com"; // 수신자 이메일 주소
+		String to = vo.getUser_email_f() + "@" + vo.getUser_email_b(); // 수신자 이메일 주소
 		String subject = vo.getUser_name()+"님의 재판조력자 신청결과 입니다"; // 이메일 제목
 		String emailContent = 
 				"<html>" +
