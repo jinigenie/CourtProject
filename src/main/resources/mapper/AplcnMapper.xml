@@ -105,7 +105,7 @@
 		</if>
 		<if
 			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' ">
-			and aplicn_dtls_sts like concat('%', #{cri.searchContent},
+			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts},
 			'%')
 		</if>
 
@@ -164,8 +164,8 @@
 		T2.trial_fcltt_proper_num =
 		T4.trial_fcltt_proper_num
 
-
-		where 1=1
+		where T2.aplicn_dtls_sts in ('심사중', '서류반려', '평가완료', '합격')
+		
 		<if
 			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'user_name'">
 			and T1.${cri.searchField} like concat('%', #{cri.searchContent},
@@ -184,10 +184,9 @@
 		</if>
 		<if
 			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' ">
-			and aplicn_dtls_sts like concat('%', #{cri.searchContent},
+			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts},
 			'%')
 		</if>
-		
 
 	</select>
 
@@ -231,7 +230,8 @@
 	</select>
 
 	<update id="updateSts">
-		update TB_005 set aplicn_dtls_sts = '심사중' where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+		update TB_005 set aplicn_dtls_sts = '심사중' where
+		aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
 	</update>
 
 </mapper>
