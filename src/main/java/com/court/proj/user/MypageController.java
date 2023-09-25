@@ -96,9 +96,11 @@ public class MypageController {
 		int user_proper_num = user.getUser_proper_num();
 		
 		MypageStatusVO vo = mypageService.getStatus(user_proper_num);
-		model.addAttribute("vo", vo);
-
-		return "mypage/status";
+		
+			model.addAttribute("vo", vo);
+			return "mypage/status";
+	
+		
 	}
 
 

@@ -73,7 +73,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr th:if="${vo != null}">
                     <td data-cell-header="신청번호" style="display: none;" id="aplcnNumber">[[${vo.aplcn_dtls_proper_num}]] </td>
                     <td data-cell-header="신청일">[[${vo.aplicn_dtls_date}]]</td>
                     <td data-cell-header="재판조력자분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
@@ -113,9 +113,14 @@
 				      </div>
 				    </td>
                   </tr>
+                  
+                  <tr th:if="${vo == null}">
+					  <td colspan="4">신청 내역이 없습니다.</td>
+                  </tr>
                 </tbody>
  				
               </table>
+              
             </div>
           
           </div>
