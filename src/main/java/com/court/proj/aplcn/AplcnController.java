@@ -31,8 +31,8 @@ public class AplcnController {
 	@Qualifier("aplcnService")
 	private AplcnService aplcnService;
 
-	@Value("${s3downloadPath}")
-	private String s3downloadPath;
+	/*@Value("${s3downloadPath}")
+	private String s3downloadPath;*/
 
 	
 	// 신청자 리스트
@@ -75,7 +75,7 @@ public class AplcnController {
 		sum += vo.getJudge_recom_score();
 		model.addAttribute("score", sum);
 		
-		List<String> linkList = new ArrayList<String>();
+		/*List<String> linkList = new ArrayList<String>();
 
 		List<FileVO> fileList = aplcnService.getFileList(aplcn_dtls_proper_num);
 
@@ -90,7 +90,7 @@ public class AplcnController {
 			model.addAttribute("linkList", linkList);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		return "aplcn/aplcnDetails";
 
