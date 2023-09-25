@@ -37,8 +37,6 @@ public class NoticeController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
-		System.out.println(total);
-		System.out.println(pageVO.toString());
 		return "notice/noticeList";
 	}
 
@@ -102,9 +100,7 @@ public class NoticeController {
 	//공지 삭제
 	@GetMapping("/noticeDel")
 	public String noticeDel(@RequestParam(name = "notice_proper_num")String notice_proper_num) {
-		System.out.println(notice_proper_num);
 		int result = noticeService.noticeDel(notice_proper_num);
-		System.out.println("삭제결과 : " + result);
 		
 		return "redirect:/notice/noticeList";
 	}

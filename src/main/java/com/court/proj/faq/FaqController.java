@@ -34,7 +34,6 @@ public class FaqController {
 		cri.setDivVal(divVal);
 		var div =cri.getDivVal();
 		rs.addFlashAttribute("div", div);
-		 System.out.println(div+"---------------------------------");
 		
 		/*
 		 * ArrayList<FaqVO> list = faqService.getList(cri); int total =
@@ -60,7 +59,6 @@ public class FaqController {
 			FaqVO.setFclttPageVO(FclttPageVO);
 		}
 
-		System.out.println(list.toString());
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 
@@ -79,10 +77,6 @@ public class FaqController {
 	@PostMapping("/faqModifyForm")
 	public String faqModifyForm(@ModelAttribute("vo")FaqVO vo, Authentication auth, RedirectAttributes ra) {
 		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
-		System.out.println("=========getAdmin_auth==========: " + admin.getAdmin_auth());
-		System.out.println("=========hashCode==========: " + admin.hashCode());
-		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
-		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
 		int result = faqService.faqModify(vo);
 		String modifyMSG = result == 1? "수정 되었습니다" : "수정 실패";
 		ra.addFlashAttribute("modifyMSG", modifyMSG);
@@ -93,8 +87,6 @@ public class FaqController {
 	
 	@GetMapping("/faqDel")
 	public String faqDel(@RequestParam("faq_proper_num") String faq_proper_num, RedirectAttributes ra) {
-		System.out.println("================================");
-		System.out.println("faq_proper_num ? : " + faq_proper_num);
 		int result = faqService.faqDel(faq_proper_num);
 		return "redirect:/faq/faqList";
 	}
@@ -115,12 +107,6 @@ public class FaqController {
 	public String registForm(FaqVO vo, Authentication auth, RedirectAttributes ra) {
 	
 		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
-		
-		System.out.println("=========getAdmin_auth==========: " + admin.getAdmin_auth());
-		System.out.println("=========hashCode==========: " + admin.hashCode());
-		System.out.println("=========getAuthorities==========: " + admin.getAuthorities());
-		System.out.println("=========getAuthorities==========: " + admin.getUsername());
-		System.out.println("=========getAuthorities==========: " + admin.getClass());
 		// admin_proper_num 불러와야함 !
 		vo.setAdmin_proper_num("1");
 		int result = faqService.faqRag(vo);

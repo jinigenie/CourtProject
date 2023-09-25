@@ -58,7 +58,6 @@ public class FclttController {
 			@RequestParam("accept_proper_num") String accept_proper_num,
 			@RequestParam("user_proper_num") String user_proper_num) {
 
-		System.out.println("상세보기 컨트롤러");
 		Map<String, Object> map = new HashMap<>();
 		map.put("content1", fclttService.getFclttContent1(accept_proper_num));
 		map.put("content2", fclttService.getFclttContent2(user_proper_num));
@@ -79,8 +78,6 @@ public class FclttController {
 		String court_proper1 = vo.getCourt_proper1();
 		String court_proper2 = vo.getCourt_proper2();
 
-		System.out.println("user_proper_num: " + user_proper_num + ", court_proper1: " + court_proper1
-				+ ", court_proper2: " + court_proper1);
 
 		String court_proper_num1 = fclttService.getDetail1(court_proper1);
 		String court_proper_num2 = fclttService.getDetail2(court_proper2);
@@ -88,8 +85,6 @@ public class FclttController {
 		model.addAttribute("vo", vo);
 		model.addAttribute("court_proper_num1", court_proper_num1);
 		model.addAttribute("court_proper_num2", court_proper_num2);
-
-		System.out.println(vo.toString());
 
 		return "fcltt/fclttRegist";
 	}
