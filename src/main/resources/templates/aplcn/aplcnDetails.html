@@ -453,39 +453,30 @@
 										<tr>
 											<th scope="col" colspan="5"><strong>신청자 서류정보</strong></th>
 										</tr>
-
 									</thead>
 									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
 								</table>
-								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+								<table class="table" style="width: 100%; border-top: none;"> <!-- 표 전체 너비를 100%로 설정 -->
 									<colgroup>
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-										<col style="width: 25%;">
+										<col style="width: 50%;">
+										<col style="width: 50%;">
 									</colgroup>
 									<tbody>
 										<th:block th:each="file : ${linkList}">
 											<tr>
-												<td class="tg-0lax"><a th:href="${file}"></a></td>
-
+												<td class="tg-0lax"><a th:href="${file}">123</a></td>
 											</tr>
 										</th:block>
 									</tbody>
+									<tbody>
+										<th:block th:each="file : ${fileList}">
+											<tr>
+												<td class="tg-0lax">[[${file.original_file_name}]]</td>
+											</tr>
+										</th:block>
+										</th>
+									</tbody>
 								</table>
-								<div style="border-top: none;" class="table table-responsive">
-									<table>
-										<tbody>
-											<th:block th:each="file : ${linkList}">
-												<tr>
-													<td class="tg-0lax"><a th:href="${file}"></a></td>
-
-												</tr>
-											</th:block>
-
-										</tbody>
-									</table>
-								</div>
 							</div>
 							</br>
 
@@ -494,9 +485,11 @@
 									<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
 										<strong>평가 결과는 <span id="result">[[${score}]]</span> 점입니다.</strong>
 									</th:block>
-									<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
-            							<strong>평가 결과가 없습니다.<span id="result" th:text="${score == null or score == '' ? '' : score}"></span></strong>
-            						</th:block>
+									<th:block
+										th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+										<strong>평가 결과가 없습니다.<span id="result"
+												th:text="${score == null or score != '' ? '' : score}"></span></strong>
+									</th:block>
 								</div>
 							</div>
 
@@ -508,7 +501,8 @@
 
 
 							<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
-								<a href="#" class="fcltt_btn2" id="rejectBtn" onclick="return aplcnEvaluation();">서류반려</a>
+								<a href="#" class="fcltt_btn2" id="rejectBtn"
+									onclick="return aplcnEvaluation();">서류반려</a>
 							</th:block>
 							<!--<a th:href="@{/aplcn/aplcnReject(aplicn_dtls_sts=${vo1.aplicn_dtls_sts}, aplicn_dtls_sts='B') }" class="fcltt_btn2" id="modifyBtn">서류반려</a>-->
 							<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
