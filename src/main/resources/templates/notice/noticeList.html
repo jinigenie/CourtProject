@@ -193,7 +193,6 @@
 											
 											th:text="${pageNum}"></a>
 									</span>
-
 									<a href="#" class="arr next" title="다음으로" th:if="${pageVO.next}"
 										th:href="@{'/notice/noticeList?page=' + ${pageVO.cri.next}}"><strong
 											class="sr-only">다음페이지로 이동</strong></a>
@@ -201,10 +200,6 @@
 									<a href="#" class="arr last" title="마지막으로"
 										th:href="@{'/notice/noticeList?page=' + ${pageVO.realEnd}}"><strong
 											class="sr-only">맨 마지막 목록으로 이동</strong></a>
-
-
-
-
 								</div>
 							</div>
 
