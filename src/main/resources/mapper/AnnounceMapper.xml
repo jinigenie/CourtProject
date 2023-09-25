@@ -230,7 +230,7 @@
 				</choose>
 			</if>
 			<if test="cri.start_date != null and cri.start_date != '' and cri.end_date != null and cri.end_date != ''">
-				OR (announce_start_date > #{cri.start_date} AND #{cri.end_date} > announce_end_date)
+				OR (announce_start_date >= #{cri.start_date} AND #{cri.end_date} >= announce_end_date)
 			</if>
 
 
@@ -293,7 +293,7 @@
 				</choose>
 			</if>
 			<if test="cri.start_date != null and cri.start_date != '' and cri.end_date != null and cri.end_date != ''">
-				OR (announce_start_date > #{cri.start_date} AND #{cri.end_date} > announce_end_date)
+				OR (announce_start_date >= #{cri.start_date} AND #{cri.end_date} >= announce_end_date)
 			</if>
 
 			AND announce_end_date > sysdate()
