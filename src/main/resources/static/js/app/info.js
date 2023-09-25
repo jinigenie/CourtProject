@@ -200,6 +200,15 @@ function dataApi(){
     })
 }
 
+$('#certification').keypress(function(event) {
+    // 엔터 키의 키 코드는 13입니다.
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('#searchCerti-btn').click(); // 검색 버튼 클릭 이벤트 호출
+        event.preventDefault();
+    }
+});
+
 $('#searchCerti-btn').click(()=>{
 
     var search = $('#certification').val();
@@ -241,6 +250,15 @@ function dataApi2(){
     })
 }
 
+$('#highschool').keypress(function(event) {
+    // 엔터 키의 키 코드는 13입니다.
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('#searchHigh_btn').click(); // 검색 버튼 클릭 이벤트 호출
+        event.preventDefault();
+    }
+});
+
 $('#searchHigh_btn').click(()=>{
     var search2 = $('#highschool').val();
     var addLi2='';
@@ -281,6 +299,7 @@ function dataApi3(){
     })
 }
 
+
 //모달창4 : 대학교 검색창
 var parentTd;
 const modal4 = document.querySelector('.modal4');
@@ -294,6 +313,15 @@ $("#eduTable").on("click", ".UnivSearch", function (event) {
     modal4.style.display = 'block';
     dataApi3();
 })
+
+$('#univercity').keypress(function(event) {
+    // 엔터 키의 키 코드는 13입니다.
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        $('#searchUniv_btn').click(); // 검색 버튼 클릭 이벤트 호출
+        event.preventDefault();
+    }
+});
 
 $('#searchUniv_btn').click(()=>{
     var search3 = $('#univercity').val();
@@ -315,3 +343,5 @@ $(document).on('click', '.addLi3', function () {
     //parentTd.find('input.universityName').val($(this).text());
     modal4.style.display = 'none';
 });
+
+
