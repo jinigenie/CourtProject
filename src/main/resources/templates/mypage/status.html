@@ -69,7 +69,7 @@
                     <th scope="col">신청일</th>
                     <th scope="col">재판조력자 분류</th>
                     <th scope="col">신청상태</th>
-                    <th scope="col">관리</th>
+                    <th scope="col">비고</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,14 +86,25 @@
 				        <a href="#" class="case case1 delete" th:if="${vo.aplicn_dtls_sts == '신청중'}">
 							<em style="width: 50px;">취소</em>
 						</a>
+
+				        <a href="#" class="case case1 modify" th:if="${vo.aplicn_dtls_sts == '서류반려'}">
+							<em style="width: 50px;">수정</em>
+						</a>
+				        <a href="#" class="case case1 delete" th:if="${vo.aplicn_dtls_sts == '서류반려'}">
+							<em style="width: 50px;">취소</em>
+						</a>
 				      
 				      	<a href="#" class="case case1 complete" th:if="${vo.aplicn_dtls_sts == '신청완료'}" style="cursor: default;">
 							  <em style="width: 75px; background-color: #8c8c8c;">신청완료</em>
 						</a>
-						
-				      	<a href="#" class="case case1 complete" th:if="${vo.aplicn_dtls_sts == '합격'}" style="cursor: default;">
+
+				
+				      	
+				      	<a href="#" class="case case1 complete" th:if="${vo.aplicn_dtls_sts == '심사중'}" style="cursor: default;">
 							  <em style="width: 75px; background-color: #8c8c8c;">신청완료</em>
 						</a>
+						
+			
 
 				        <a href="#" class="case case1 modify" th:if="${vo.aplicn_dtls_sts == '신청취소'}">
 							<em style="width: 60px;">재신청</em>
