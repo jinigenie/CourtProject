@@ -38,7 +38,7 @@ public class AdminController {
 		
 		String pw = encode.encode(vo.getAdmin_pw());
 		vo.setAdmin_pw(pw);
-		
+		adminService.registAdmin(vo);
 		
 		return "redirect:/admin/list";
 	}
