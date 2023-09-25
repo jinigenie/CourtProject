@@ -129,13 +129,11 @@ public class S3RestController {
         int reg_num = aplcnRegService.getAdpnum(id);
         String del_path = "";
 
-        System.out.println(del_files);
 
         String del_file;
         for(int i = 0; i < del_files.size(); i++) {
             del_file = del_files.get(i);
             del_path = aplcnRegService.getFilePath(reg_num, del_file);
-            System.out.println(del_path);
             s3.deleteBucketObjects(del_path);
             aplcnRegService.deleteFileInfo(del_path);
         }
