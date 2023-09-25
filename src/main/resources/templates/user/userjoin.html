@@ -12,7 +12,7 @@
 
 	<div class="wrap">
 		<div id="main_con">
-			<form action="joinForm" id="joinForm" method="post">
+			<form action="/user/joinForm" id="joinForm" method="post">
 				<div id="contents" style="width: 70%; float: none; margin: 0 auto; padding-left: 120px;">
 					<div class="heading-wrap container">
 						<h3 class="heading1">
@@ -266,8 +266,7 @@
 													style="width: 150px; display: inline-block; margin-left: 5px">
 													<input name="user_bank_holder" id="userholder"
 														th:value="${vo!= null ? vo.user_bank_holder : ''}"
-														class="cm_inptxt" title="예금주" type="text"
-														 placeholder="예금주" />
+														class="cm_inptxt" title="예금주" type="text" placeholder="예금주" />
 												</div>
 											</div>
 										</td>
@@ -317,6 +316,13 @@
 		}).open();
 	}
 
+	//가입버튼
+	$('#joinBtn').click(function (event) {
+		// 폼을 제출
+		if (checkId && checkPhone && checkPw) {
+			$('#joinForm').submit();
+		}
+	});
 </script>
 
 
