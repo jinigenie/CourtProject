@@ -65,6 +65,7 @@ public class AplcnController {
 		
 		int sum = 0;
 		ListVO vo = aplcnService.getScore(aplcn_dtls_proper_num);
+		if (vo != null) {
 		sum += vo.getAll_carer_score();
 		sum += vo.getJrsdc_carer_score();
 		sum += vo.getOffice_score();
@@ -74,6 +75,7 @@ public class AplcnController {
 		sum += vo.getEvaluate_score();
 		sum += vo.getJudge_recom_score();
 		model.addAttribute("score", sum);
+		}
 		
 		/*List<String> linkList = new ArrayList<String>();
 
