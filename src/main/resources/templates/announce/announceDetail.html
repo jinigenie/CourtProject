@@ -133,7 +133,7 @@
 
                         <!-- 페이지 이동 버튼 -->
                         <div class="fclttRegist_btn" style="margin-bottom: 50px">
-                            <button type="button" class="fcltt_btn1" th:if="${alist.admin_id == 'admin1'}"><a
+                            <button type="button" class="fcltt_btn1" th:if="${#authorization.expression('hasAnyRole(''ROLE_SUPERADMIN'',''ROLE_JURIS'',''ROLE_COURT'')')}"><a
                                     th:href="'/announce/announceModify?id=' + ${alist.announce_proper_num}">수정하기</a>
                             </button>
                             <button type="button" class="fcltt_btn2"><a
