@@ -64,67 +64,7 @@
 						}
 					}
 
-					/* *********************************************************************************
-* pager
-* *********************************************************************************/
-					.pager {
-						overflow: hidden;
-						overflow-x: auto;
-						margin: 1.5rem 0;
-						text-align: center;
-						white-space: nowrap;
-						text-align: center;
-					}
-
-					.pager-wrap {
-						display: inline-block;
-					}
-
-					.pager-wrap>* {
-						display: inline-block;
-						overflow: hidden;
-						position: relative;
-						width: 40px;
-						height: 40px;
-						color: #292929;
-						text-align: center;
-						line-height: 40px;
-						font-size: 0.9rem;
-						font-weight: 400;
-						transition: background 0.3s, color 0.3s;
-						border-width: 1px;
-						border-style: solid;
-						border-color: #cdcdcd;
-						float: left;
-					}
-
-					.pager-wrap a+a {
-						border-left: 0;
-					}
-
-					.pager-wrap .active {
-						background: #2065c6;
-						border-color: #2065c6;
-						color: #fff;
-					}
-
-					.pager-wrap .arr {
-						position: relative;
-					}
-
-					.arr.first::after {
-						position: absolute;
-						top: 50%;
-						left: calc(50% - -1px);
-						transform: translate(-50%, -50%);
-						width: 40px;
-						height: 40px;
-						font-family: 'xeicon';
-						font-size: 0.9rem;
-						color: #292929;
-						content: '\e93c';
-					}
-
+				
 				</style>
 				<article id="detail-content">
 					<form id="listForm" name="searchForm" action="noticeList" method="get">
@@ -218,7 +158,7 @@
 													[[${vo.notice_title}]]
 												</td>
 												<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
-												<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
+												<td data-cell-header="작성일자">[[${vo.notice_date}]]</td></a>
 										</tr>
 										<tr th:each=" vo, status : ${list}" style="cursor: pointer"
 											th:id="'notice_' + ${vo.notice_proper_num}" class="clickable-row">
