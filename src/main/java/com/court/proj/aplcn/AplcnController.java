@@ -37,8 +37,6 @@ public class AplcnController {
 	// 신청자 리스트
 	@GetMapping("/aplcnList")
 	public String list(Model model, Criteria cri) {
-		System.out.println(cri.toString() + "========================");
-		
 		
 		ArrayList<ListVO> list = aplcnService.getList(cri);
 
