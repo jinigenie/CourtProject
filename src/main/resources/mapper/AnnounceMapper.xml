@@ -66,7 +66,7 @@
 
 	<select id="getTrialNum2" resultType="int">
 		select * from TB_010 where
-		trial_fcltt_main_code = #{st2}
+		trial_fcltt_main_code = #{st1}
 		and trial_fcltt_clasifi_code = #{st2}
 		and trial_fcltt_sbcls_code = #{st3}
 	</select>
