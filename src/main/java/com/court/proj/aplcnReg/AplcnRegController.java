@@ -316,12 +316,12 @@ public class AplcnRegController {
 
     //regCareer 정보 저장하기
     @PostMapping("/saveCareerForm")
-    public String saveCareer(@RequestParam("company_name[]") ArrayList<String> cn,
-                             @RequestParam("work_start_date[]") ArrayList<String> wsd,
-                             @RequestParam("work_end_date[]") ArrayList<String> wed,
-                             @RequestParam("work_description[]") ArrayList<String> wdc,
-                             @RequestParam("work_department[]") ArrayList<String> wdp,
-                             @RequestParam("work_position[]") ArrayList<String> wp,
+    public String saveCareer(@RequestParam(value = "company_name[]", required = false) ArrayList<String> cn,
+                             @RequestParam(value = "work_start_date[]", required = false) ArrayList<String> wsd,
+                             @RequestParam(value = "work_end_date[]", required = false) ArrayList<String> wed,
+                             @RequestParam(value = "work_description[]", required = false) ArrayList<String> wdc,
+                             @RequestParam(value = "work_department[]", required = false) ArrayList<String> wdp,
+                             @RequestParam(value = "work_position[]", required = false) ArrayList<String> wp,
                              @ModelAttribute AddInfoVO aivo,
                              @RequestParam("x") int x) {
 
@@ -379,12 +379,12 @@ public class AplcnRegController {
     @PostMapping("/saveEduForm")
     public String saveEdu(@ModelAttribute AddInfoVO aivo,
                           @ModelAttribute UserVO uvo,
-                          @RequestParam("edctn_school_name[]") ArrayList<String> esn,
-                          @RequestParam("edctn_major[]") ArrayList<String> em,
-                          @RequestParam("edctn_degree[]") ArrayList<String> ed,
-                          @RequestParam("edctn_final[]") ArrayList<String> ef,
-                          @RequestParam("edctn_admsn_date[]") ArrayList<String> adate,
-                          @RequestParam("edctn_grdtn_date[]") ArrayList<String> gdate,
+                          @RequestParam(value = "edctn_school_name[]", required = false) ArrayList<String> esn,
+                          @RequestParam(value = "edctn_major[]", required = false) ArrayList<String> em,
+                          @RequestParam(value = "edctn_degree[]", required = false) ArrayList<String> ed,
+                          @RequestParam(value = "edctn_final[]", required = false) ArrayList<String> ef,
+                          @RequestParam(value = "edctn_admsn_date[]", required = false) ArrayList<String> adate,
+                          @RequestParam(value = "edctn_grdtn_date[]", required = false) ArrayList<String> gdate,
                           @RequestParam("x") int x) {
 
         uvo.setUser_proper_num(user_num);

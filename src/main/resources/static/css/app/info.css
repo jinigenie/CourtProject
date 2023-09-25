@@ -416,7 +416,7 @@ element.style {
     width: 250px;
 }
 
-#searchResult2, #searchResult3 {
+#searchResult2, #searchResult3, #searchResult {
     width: 100%;
     padding: 20px;
     max-height: 150px;
