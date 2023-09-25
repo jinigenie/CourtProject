@@ -6,308 +6,305 @@
 
 <mapper namespace="com.court.proj.fcltt.FclttMapper">
 
-	<!-- 등록페이지 진입시 불러올 합격자 기본정보  -->
+	<!-- 등록페이지 진입시 불러올 합격자 기본정보 -->
 	<select id="getDetail" resultType="FclttVO">
-	
-	    select tb1.user_proper_num,
-			   tb1.user_name,
-               tb1.user_phone,
-               tb1.user_email_f,
-               tb1.user_email_b,
-               tb10.trial_fcltt_main_code,
-               tb10.trial_fcltt_description,
-               tb5.court_proper1,
-               tb5.court_proper2,
-               tb5.trial_fcltt_proper_num
-		from TB_001 tb1 
-        join TB_005 tb5 on tb5.user_proper_num = tb1.user_proper_num
-        join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb5.trial_fcltt_proper_num
-        where tb1.user_proper_num = #{user_proper_num};
+
+		select tb1.user_proper_num,
+		tb1.user_name,
+		tb1.user_phone,
+		tb1.user_email_f,
+		tb1.user_email_b,
+		tb10.trial_fcltt_main_code,
+		tb10.trial_fcltt_description,
+		tb5.court_proper1,
+		tb5.court_proper2,
+		tb5.trial_fcltt_proper_num
+		from TB_001 tb1
+		join TB_005 tb5 on tb5.user_proper_num = tb1.user_proper_num
+		join TB_010 tb10 on tb10.trial_fcltt_proper_num =
+		tb5.trial_fcltt_proper_num
+		where tb1.user_proper_num = #{user_proper_num};
 	</select>
-	<!-- 등록페이지 진입시 불러올 합격자 기본정보2  -->
+	<!-- 등록페이지 진입시 불러올 합격자 기본정보2 -->
 	<select id="getDetail1" resultType="String">
 
 		select court_proper_num
-        from TB_011
-        where court_name= #{court_proper1}
-	
+		from TB_011
+		where court_name= #{court_proper1}
+
 	</select>
-	<!-- 등록페이지 진입시 불러올 합격자 기본정보3  -->
+	<!-- 등록페이지 진입시 불러올 합격자 기본정보3 -->
 	<select id="getDetail2" resultType="String">
-	
+
 		select court_proper_num
-        from TB_011
-        where court_name= #{court_proper2}
-	
+		from TB_011
+		where court_name= #{court_proper2}
+
 	</select>
 
-	<!-- 명단 등록  -->
-    <insert id="fclttRegist" parameterType="FclttVO">
-    	insert into TB_014(user_proper_num,
-							trial_fcltt_proper_num,
-							court_proper_num,
-							accept_etc
-							)
+	<!-- 명단 등록 -->
+	<insert id="fclttRegist" parameterType="FclttVO">
+		insert into TB_014(user_proper_num,
+		trial_fcltt_proper_num,
+		court_proper_num,
+		accept_etc
+		)
 		values(#{user_proper_num},
-				#{trial_fcltt_proper_num},
-				#{court_proper_num},
-				#{accept_etc}
-				)
-    </insert>
-    
-	    <!-- 명단 불러오기 -->
-	   <select id="getList" resultType="FclttVO">
-	    SELECT tb14.accept_date,
-	           tb14.accept_act_yn,
-	           tb14.accept_etc,
-	           tb11.court_name,
-	           tb10.trial_fcltt_description,
-	           tb1.user_name,
-	           tb1.user_proper_num,
-	           tb14.accept_proper_num
-	    FROM TB_014 tb14
-	    JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
-	    JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
-	    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
-	
-	    <where>
-	        <if test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
-	            <choose>
-	                <when test="cri.searchContent2 =='searchNameCode'">
-	                    OR (trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	                <when test="cri.searchContent2 =='searchCourt'">
-	                    OR(court_region like concat('%', #{cri.searchContent}, '%')
-	                    OR court_name like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	                <when test="cri.searchContent2 =='searchUser_name'">
-	                    OR user_name like concat('%', #{cri.searchContent}, '%')
-	                </when>
-	                <when test="cri.searchContent2 =='searchAll'">
-	                    OR (court_region like concat('%', #{cri.searchContent}, '%')
-	                    OR court_name like concat('%', #{cri.searchContent}, '%')
-	                    OR user_name like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	            </choose>
-	        </if>
-	
-	        <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
-	            AND accept_act_yn = #{cri.searchAccept_act_yn}
-	        </if>
-	
-	        <if test="cri.searchContent != null and cri.searchContent != '' and cri.searchContent != 'null'">
-	            <choose>
-	                <when test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
-	                    OR (court_region like concat('%', #{cri.searchContent}, '%')
-	                    OR court_name like concat('%', #{cri.searchContent}, '%')
-	                    OR user_name like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	                <otherwise>
-	                </otherwise>
-	            </choose>
-	        </if>
-	    </where>
-	
-	    LIMIT #{cri.pageStart}, #{cri.amount}
+		#{trial_fcltt_proper_num},
+		#{court_proper_num},
+		#{accept_etc}
+		)
+	</insert>
+
+	<select id="getList" resultType="FclttVO">
+		SELECT
+		tb14.accept_date,
+		tb14.accept_act_yn,
+		tb14.accept_etc,
+		tb11.court_name,
+		tb10.trial_fcltt_description,
+		tb1.user_name,
+		tb1.user_proper_num,
+		tb14.accept_proper_num
+		FROM
+		TB_014 tb14
+		JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
+		JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num =
+		tb10.trial_fcltt_proper_num
+		JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
+  <where>
+    <!-- 검색 조건: accept_act_yn -->
+    <if test="cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != 'null'">
+      AND tb14.accept_act_yn = #{cri.searchAccept_act_yn}
+    </if>
+    <!-- 검색 조건: searchContent2 -->
+    <if test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
+      <!-- 검색 조건: 조력자분류 (searchNameCode) -->
+      <if test="cri.searchContent2 == 'searchNameCode'">
+        AND (tb10.trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
+      </if>
+      <!-- 검색 조건: 법원이름 (searchCourt) -->
+      <if test="cri.searchContent2 == 'searchCourt'">
+        OR (tb11.court_region like concat('%', #{cri.searchContent}, '%')
+        OR tb11.court_name like concat('%', #{cri.searchContent}, '%'))
+      </if>
+      <!-- 검색 조건: 사용자이름 (searchUser_name) -->
+      <if test="cri.searchContent2 == 'searchUser_name'">
+        OR tb1.user_name like concat('%', #{cri.searchContent}, '%')
+      </if>
+      <!-- 검색 조건: 전체 (searchAll) -->
+      <if test="cri.searchContent2 == 'searchAll'">
+        AND (tb11.court_region like concat('%', #{cri.searchContent}, '%')
+        OR tb11.court_name like concat('%', #{cri.searchContent}, '%')
+        OR tb1.user_name like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
+      </if>
+    </if>
+  </where>
+		<!-- LIMIT 및 페이징 처리 -->
+		LIMIT #{cri.pageStart}, #{cri.amount}
 	</select>
 
+	<!-- 등재명단 토탈 count -->
+<select id="getTotal" resultType="int">
+  SELECT COUNT(*)
+  FROM TB_014 tb14
+    JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
+    JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
+    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
+  <where>
+    <!-- 검색 조건: accept_act_yn -->
+    <if test="cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != 'null'">
+      AND tb14.accept_act_yn = #{cri.searchAccept_act_yn}
+    </if>
+    <!-- 검색 조건: searchContent2 -->
+    <if test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
+      <!-- 검색 조건: 조력자분류 (searchNameCode) -->
+      <if test="cri.searchContent2 == 'searchNameCode'">
+        AND (tb10.trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
+      </if>
+      <!-- 검색 조건: 법원이름 (searchCourt) -->
+      <if test="cri.searchContent2 == 'searchCourt'">
+        OR (tb11.court_region like concat('%', #{cri.searchContent}, '%')
+        OR tb11.court_name like concat('%', #{cri.searchContent}, '%'))
+      </if>
+      <!-- 검색 조건: 사용자이름 (searchUser_name) -->
+      <if test="cri.searchContent2 == 'searchUser_name'">
+        OR tb1.user_name like concat('%', #{cri.searchContent}, '%')
+      </if>
+      <!-- 검색 조건: 전체 (searchAll) -->
+      <if test="cri.searchContent2 == 'searchAll'">
+        AND (tb11.court_region like concat('%', #{cri.searchContent}, '%')
+        OR tb11.court_name like concat('%', #{cri.searchContent}, '%')
+        OR tb1.user_name like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
+        OR tb10.trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
+      </if>
+    </if>
+  </where>
+</select>
 
-	<!-- 등재명단 토탈 count --> 
-	<select id="getTotal" resultType="int">
-		    SELECT COUNT(*) FROM TB_014 tb14
-		    JOIN TB_011 tb11 ON tb11.court_proper_num = tb14.court_proper_num
-		    JOIN TB_010 tb10 ON tb14.trial_fcltt_proper_num = tb10.trial_fcltt_proper_num
-		    JOIN TB_001 tb1 ON tb14.user_proper_num = tb1.user_proper_num
-	    <where>
-	        <if test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
-	            <choose>
-	                <when test="cri.searchContent2 =='searchNameCode'">
-	                    OR (trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	                <when test="cri.searchContent2 =='searchCourt'">
-	                    OR (court_region like concat('%', #{cri.searchContent}, '%')
-	                    OR court_name like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	                <when test="cri.searchContent2 =='searchUser_name'">
-	                 OR user_name like concat('%', #{cri.searchContent}, '%')
-	                </when>
-	                <when test="cri.searchContent2 =='searchAll'">
-	                    OR (court_region like concat('%', #{cri.searchContent}, '%')
-	                    OR court_name like concat('%', #{cri.searchContent}, '%')
-	                    OR user_name like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_clasifi_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_description like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_main_code like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	            </choose>
-	        </if>
-	
-	        <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null and cri.searchAccept_act_yn != 'null'"> 
-	            AND accept_act_yn = #{cri.searchAccept_act_yn}
-	        </if>
-	
-	        <if test="cri.searchContent != null and cri.searchContent != '' and cri.searchContent != 'null'">
-	            <choose>
-	                <when test="cri.searchContent2 != null and cri.searchContent2 != '' and cri.searchContent2 != 'null'">
-	                    OR (court_region like concat('%', #{cri.searchContent}, '%')
-	                    OR court_name like concat('%', #{cri.searchContent}, '%')
-	                    OR user_name like concat('%', #{cri.searchContent}, '%')
-	                    OR trial_fcltt_sbcls_code like concat('%', #{cri.searchContent}, '%'))
-	                </when>
-	                <otherwise>
-	                </otherwise>
-	            </choose>
-	        </if>
-	    </where>
-	</select>
-		    
-    
-    
+
+
 	<!-- //////////////// List에서 상세모기 모달창 ajax //////////////// -->
-	<!-- 1, 기본정보  -->
+	<!-- 1, 기본정보 -->
 	<select id="getFclttContent1" resultType="FclttVO">
-		select tb1.user_proper_num,
-			   tb1.user_phone,
-			   tb1.user_name,
-               tb1.user_email_f,
-               tb1.user_email_b,
-			   tb14.accept_proper_num,
-		       tb10.trial_fcltt_clasifi_code,
-		       tb10.trial_fcltt_description,
-               tb11.court_region,
-               tb11.court_name,
-               tb14.accept_act_yn
-		from TB_014 tb14 
-		join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb14.trial_fcltt_proper_num
-		join TB_001 tb1 on tb1.user_proper_num = tb14.user_proper_num
-		join TB_005 tb5 on tb5.user_proper_num = tb14.user_proper_num
-        join TB_011 tb11 on tb11.court_proper_num = tb14.court_proper_num
-		where tb14.accept_proper_num = #{accept_proper_num}
-		
+		select
+		tb1.user_proper_num,
+		tb1.user_phone,
+		tb1.user_name,
+		tb1.user_email_f,
+		tb1.user_email_b,
+		tb14.accept_proper_num,
+		tb10.trial_fcltt_clasifi_code,
+		tb10.trial_fcltt_description,
+		tb11.court_region,
+		tb11.court_name,
+		tb14.accept_act_yn
+		from TB_014 tb14
+		join TB_010 tb10 on tb10.trial_fcltt_proper_num =
+		tb14.trial_fcltt_proper_num
+		join TB_001 tb1 on tb1.user_proper_num =
+		tb14.user_proper_num
+		join TB_005 tb5 on tb5.user_proper_num =
+		tb14.user_proper_num
+		join TB_011 tb11 on tb11.court_proper_num = tb14.court_proper_num
+		where
+		tb14.accept_proper_num = #{accept_proper_num}
+
 	</select>
-	
-	<!-- 2, 학력정보  -->
+
+	<!-- 2, 학력정보 -->
 	<select id="getFclttContent2" resultType="FclttVO">
-	
+
 		select tb6.edctn_school_name,
-				tb6.edctn_major,
-				tb6.edctn_degree
-         from TB_006 tb6
-         join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb6.aplcn_dtls_proper_num
-         where tb5.user_proper_num = #{user_proper_num}
-         
+		tb6.edctn_major,
+		tb6.edctn_degree
+		from TB_006 tb6
+		join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb6.aplcn_dtls_proper_num
+		where tb5.user_proper_num = #{user_proper_num}
+
 	</select>
-	
-	<!-- 3, 재판이력  -->
+
+	<!-- 3, 재판이력 -->
 	<select id="getFclttContent3" resultType="FclttVO">
-         
-        select tb12.trial_num,
-			   tb12.attendance_date,
-               tb12.act_complete_yn
-         from TB_012 tb12
-         join TB_014 tb14 on tb14.accept_proper_num = tb12.accept_proper_num
-         where tb14.user_proper_num = #{user_proper_num}
+
+		select tb12.trial_num,
+		tb12.attendance_date,
+		tb12.act_complete_yn
+		from TB_012 tb12
+		join TB_014 tb14 on tb14.accept_proper_num = tb12.accept_proper_num
+		where tb14.user_proper_num = #{user_proper_num}
 	</select>
-	
-	<!-- 4, 자격증정보  -->
+
+	<!-- 4, 자격증정보 -->
 	<select id="getFclttContent4" resultType="FclttVO">
-        
-         select tb8.crtfc_type,
-				tb8.issue_agency
-         from TB_008 tb8
-         join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb8.aplcn_dtls_proper_num
-         where tb5.user_proper_num =#{user_proper_num}
-         
-         
+
+		select tb8.crtfc_type,
+		tb8.issue_agency
+		from TB_008 tb8
+		join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb8.aplcn_dtls_proper_num
+		where tb5.user_proper_num =#{user_proper_num}
+
+
 	</select>
-	
-	<!-- 5, 경력정보  -->
+
+	<!-- 5, 경력정보 -->
 	<select id="getFclttContent5" resultType="FclttVO">
-		
-         select tb7.company_name,
-				tb7.carer_type,
-                tb7.work_department,
-                tb7.work_start_date,
-                tb7.work_end_date
-         from TB_007 tb7
-         join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb7.aplcn_dtls_proper_num
-         where tb5.user_proper_num = #{user_proper_num}
-         
+
+		select tb7.company_name,
+		tb7.carer_type,
+		tb7.work_department,
+		tb7.work_start_date,
+		tb7.work_end_date
+		from TB_007 tb7
+		join TB_005 tb5 on tb5.aplcn_dtls_proper_num = tb7.aplcn_dtls_proper_num
+		where tb5.user_proper_num = #{user_proper_num}
+
 	</select>
 
 
 
 
-	<!-- //////////////////////////////////////////////////////////////////////////////////-->
-		<!-- 중지 or 활동신청 리스트  -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 중지 or 활동신청 리스트 -->
 	<select id="getPauseList" resultType="PauseVO">
-			SELECT tb14_2.accept_status,
-		           tb14_2.accept_proper_num,
-		           tb14_2.pause_start_date,
-		           tb14_2.pause_end_date,
-		           tb14_2.pause_submit_date,
-		           tb14_2.accept_pause_etc,
-		           tb1.user_name,
-		           tb14.accept_act_yn
-		    FROM TB_014 tb14
-		    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14.user_proper_num
-		    JOIN TB_014_2 tb14_2 ON tb14_2.accept_proper_num = tb14.accept_proper_num
-		    WHERE accept_status != 'N'
-	    <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
-	        AND accept_act_yn = #{cri.searchAccept_act_yn}
-	    </if>
-	    <if test="cri.searchUser_name != '' and cri.searchUser_name != null">
-	        AND user_name = #{cri.searchUser_name}
-	    </if>
-	       LIMIT #{cri.pageStart}, #{cri.amount}
+		SELECT tb14_2.accept_status,
+		tb14_2.accept_proper_num,
+		tb14_2.pause_start_date,
+		tb14_2.pause_end_date,
+		tb14_2.pause_submit_date,
+		tb14_2.accept_pause_etc,
+		tb1.user_name,
+		tb14.accept_act_yn
+		FROM TB_014 tb14
+		JOIN TB_001 tb1 ON tb1.user_proper_num = tb14.user_proper_num
+		JOIN TB_014_2 tb14_2 ON tb14_2.accept_proper_num = tb14.accept_proper_num
+		WHERE accept_status != 'N'
+		<if
+			test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
+			AND accept_act_yn = #{cri.searchAccept_act_yn}
+		</if>
+		<if
+			test="cri.searchUser_name != '' and cri.searchUser_name != null">
+			AND user_name = #{cri.searchUser_name}
+		</if>
+		LIMIT #{cri.pageStart}, #{cri.amount}
 	</select>
 
-	
+
 	<!-- 중지 or 활동신청 데이터의 총 개수를 얻는 SQL 쿼리 -->
 	<select id="getPauseTotal" resultType="int">
-		SELECT COUNT(*) 
-	    FROM TB_014_2 tb14_2
-        JOIN TB_014 tb14 ON tb14.accept_proper_num = tb14_2.accept_proper_num
-	    JOIN TB_001 tb1 ON tb1.user_proper_num = tb14.user_proper_num
-	    WHERE accept_status != 'N'
-	    <if test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
-	        AND accept_act_yn = #{cri.searchAccept_act_yn}
-	    </if>
-	    <if test="cri.searchUser_name != '' and cri.searchUser_name != null">
-	        AND user_name = #{cri.searchUser_name}
-	    </if>
+		SELECT COUNT(*)
+		FROM TB_014_2 tb14_2
+		JOIN TB_014 tb14 ON tb14.accept_proper_num = tb14_2.accept_proper_num
+		JOIN TB_001 tb1 ON tb1.user_proper_num = tb14.user_proper_num
+		WHERE accept_status != 'N'
+		<if
+			test="cri.searchAccept_act_yn != '' and cri.searchAccept_act_yn != null">
+			AND accept_act_yn = #{cri.searchAccept_act_yn}
+		</if>
+		<if
+			test="cri.searchUser_name != '' and cri.searchUser_name != null">
+			AND user_name = #{cri.searchUser_name}
+		</if>
 	</select>
 
 	<!-- 활동중인경우 중지중으로 업데이트 -->
 	<update id="setPauseY" parameterType="FclttVO">
 		UPDATE TB_014 AS tb14
-		JOIN TB_014_2 AS tb14_2 ON tb14.accept_proper_num = tb14_2.accept_proper_num
+		JOIN
+		TB_014_2 AS tb14_2 ON tb14.accept_proper_num =
+		tb14_2.accept_proper_num
 		SET tb14.accept_act_yn = 'N',
-		    tb14_2.accept_status = 'N'
-		WHERE tb14.accept_proper_num = #{accept_proper_num};
+		tb14_2.accept_status = 'N'
+		WHERE tb14.accept_proper_num =
+		#{accept_proper_num};
 	</update>
-	
-	<!-- 중지중인경우 활동중으로 업데이트  -->
+
+	<!-- 중지중인경우 활동중으로 업데이트 -->
 	<update id="setPauseN" parameterType="FclttVO">
 		UPDATE TB_014 AS tb14
-		JOIN TB_014_2 AS tb14_2 ON tb14.accept_proper_num = tb14_2.accept_proper_num
+		JOIN
+		TB_014_2 AS tb14_2 ON tb14.accept_proper_num =
+		tb14_2.accept_proper_num
 		SET tb14.accept_act_yn = 'Y',
-		    tb14_2.accept_status = 'N'
-		WHERE tb14.accept_proper_num = #{accept_proper_num};
+		tb14_2.accept_status = 'N'
+		WHERE tb14.accept_proper_num =
+		#{accept_proper_num};
 	</update>
-	
+
 
 
 
