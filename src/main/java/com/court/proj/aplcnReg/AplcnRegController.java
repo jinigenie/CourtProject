@@ -189,7 +189,6 @@ public class AplcnRegController {
         for(AddInfoVO ctvo : ctList) {
             certiPk.add(ctvo.getAplcn_crtfc_proper_num());
         }
-        System.out.println(certiPk);
 
         return "app/aplcnRegEducation";
     }
@@ -286,7 +285,6 @@ public class AplcnRegController {
             ivo.setTrial_fcltt_proper_num(aplcnRegService.getTrialNum2(ivo.getSelectType1(), ivo.getSelectType2(), ivo.getSelectType3()));    // 선택 바꾸면 update 해줘야함
         }
 
-        System.out.println(ivo.toString());
 
         if (ivo.getSelectCourts().length > 1) {       // 선택한 법원 1, 2지망에 맞춰 저장
             ivo.setCourt_proper1(ivo.getSelectCourts()[0]);
@@ -299,19 +297,13 @@ public class AplcnRegController {
         // user 기본정보는 무조건 update
         int cnt = aplcnRegService.getDetailInfo(user_num);
         if (cnt == 0) {
-            System.out.println("새로운 정보");
-            System.out.println(ivo.toString());
             aplcnRegService.setDetailInfo(ivo);
         } else {
-            System.out.println("이미 있는 정보 업뎃");
-            System.out.println(ivo.toString());
             aplcnRegService.updateDetailInfo(ivo);
 
             ivo = aplcnRegService.getAllDetailInfo(user_num);
         }
 
-        System.out.println(uvo.toString());
-        System.out.println(ivo.toString());
         reg_num = ivo.getAplcn_dtls_proper_num();
         aplcnRegService.updateInfo(uvo);
 
@@ -352,7 +344,6 @@ public class AplcnRegController {
             addInfoVO.setWork_department(wdp.get(i));
             addInfoVO.setWork_position(wp.get(i));
             aivoList.add(addInfoVO);
-            System.out.println(addInfoVO);
         }
 
         int cntCareer = 0;
@@ -397,7 +388,6 @@ public class AplcnRegController {
                           @RequestParam("x") int x) {
 
         uvo.setUser_proper_num(user_num);
-        System.out.println(uvo);
         aplcnRegService.updateEdcFinal(uvo);
 
         aivo.setAplcn_dtls_proper_num(reg_num);
@@ -465,7 +455,6 @@ public class AplcnRegController {
             addInfoVO.setCrtfc_number(cNum[i]);
             addInfoVO.setIssue_date(issue[i]);
             certiList.add(addInfoVO);
-            System.out.println(addInfoVO);
         }
 
         int cntCerti = 0;
