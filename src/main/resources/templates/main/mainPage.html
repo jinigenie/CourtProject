@@ -15,6 +15,12 @@
 		body {
 			background-color: rgb(246, 246, 246);
 		}
+
+		@media (max-width: 1400px) {
+			faqList {
+				width: 70%;
+			}
+		}
 	</style>
 
 </head>
@@ -65,7 +71,7 @@
 								<swiper-slide>
 									<div class="main_slid_notice">
 										<ul class="notice_lists">
-											<li class="notice_li" style="height: 600px;">
+											<li class="notice_li" style="height: 600px; width: 60%">
 												<a th:href="'/announce/announceDetail?id=' + ${vo1.announce_proper_num}"
 													title="">
 
@@ -135,38 +141,40 @@
 
 							<li class="faq_right">
 								<a href="https://www.scourt.go.kr" target="_blank">
-									<div class="main_logo_img" style="background-image: url('../../img/main/대법원.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/대법원.png">
 									</div>
 									<p>대법원</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="http://ecfs.scourt.go.kr" target="_blank">
-									<div class="main_logo_img"
-										style="background-image: url('../../img/main/전자소송.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/전자소송.png">
 									</div>
 									<p>전자소송</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="http://glaw.scourt.go.kr" target="_blank">
-									<div class="main_logo_img"
-										style="background-image: url('../../img/main/법률정보.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/법률정보.png">
 									</div>
 									<p>종합법률정보</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="http://www.iros.go.kr" target="_blank">
-									<div class="main_logo_img" style="background-image: url('../../img/main/등기소.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/등기소.png">
 									</div>
 									<p>인터넷등기소</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="https://data.iros.go.kr/" target="_blank">
-									<div class="main_logo_img"
-										style="background-image: url('../../img/main/등기광장.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/등기광장.png">
 									</div>
 									<p>등기정보광장</p>
 								</a>
@@ -174,30 +182,32 @@
 
 							<li class="faq_right">
 								<a href="https://wrs.scourt.go.kr" target="_blank">
-									<div class="main_logo_img"
-										style="background-image: url('../../img/main/기록열람.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/기록열람.png">
 									</div>
 									<p>기록열람</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="https://www.gov.kr/portal/main/nologin" target="_blank">
-									<div class="main_logo_img" style="background-image: url('../../img/main/정부2.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/정부2.png">
 									</div>
 									<p>정부24</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="https://ekt.scourt.go.kr" target="_blank">
-									<div class="main_logo_img"
-										style="background-image: url('../../img/main/전자공탁.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/전자공탁.png">
 									</div>
 									<p>전자공탁</p>
 								</a>
 							</li>
 							<li class="faq_right">
 								<a href="https://gamjung.scourt.go.kr" target="_blank">
-									<div class="main_logo_img" style="background-image: url('../../img/main/감정인.png');">
+									<div class="main_logo_img">
+										<img src="../../img/main/감정인.png">
 									</div>
 									<p>온라인감정인</p>
 								</a>
