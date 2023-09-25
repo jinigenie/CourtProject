@@ -494,6 +494,9 @@
 									<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
 										<strong>평가 결과는 <span id="result">[[${score}]]</span> 점입니다.</strong>
 									</th:block>
+									<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+            							<strong>평가 결과가 없습니다.<span id="result" th:text="${score == null or score == '' ? '' : score}"></span></strong>
+            						</th:block>
 								</div>
 							</div>
 
