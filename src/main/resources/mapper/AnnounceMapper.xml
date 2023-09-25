@@ -153,19 +153,14 @@
 
 	<!-- 공고 수정 -->
 	<update id="updateAnnounce">
-		update TB_002 as a
-		inner join TB_010 as b on a.trial_fcltt_proper_num =
-		b.trial_fcltt_proper_num
+		update TB_002
 		set
-		a.announce_title = #{announce_title},
-		a.announce_start_date = #{announce_start_date},
-		a.announce_end_date = #{announce_end_date},
-		b.trial_fcltt_main_code = #{selectType1},
-		b.trial_fcltt_clasifi_code = #{selectType2},
-		b.trial_fcltt_sbcls_code = #{selectType3},
-		a.announce_content = #{announce_content}
+		announce_title = #{announce_title},
+		announce_start_date = #{announce_start_date},
+		announce_end_date = #{announce_end_date},
+		announce_content = #{announce_content}
 		where
-		a.announce_proper_num = #{announce_proper_num};
+		announce_proper_num = #{announce_proper_num};
 	</update>
 
 	<select id="getAnnList" resultType="AnnounceVO">
