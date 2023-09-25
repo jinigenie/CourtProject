@@ -164,7 +164,7 @@
 		T2.trial_fcltt_proper_num =
 		T4.trial_fcltt_proper_num
 
-		where T2.aplicn_dtls_sts in ('심사중', '서류반려', '평가완료', '합격')
+		where T2.aplicn_dtls_sts in ('신청완료', '심사중', '서류반려', '평가완료', '합격')
 		
 		<if
 			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'user_name'">
