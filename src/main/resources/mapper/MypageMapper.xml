@@ -96,7 +96,7 @@
 	    join TB_002 tb2 on tb5.TRIAL_FCLTT_PROPER_NUM = tb2.TRIAL_FCLTT_PROPER_NUM
         join TB_010 tb10 on tb10.TRIAL_FCLTT_PROPER_NUM = tb5.TRIAL_FCLTT_PROPER_NUM
 	    where tb5.USER_PROPER_NUM = #{user_proper_num}
-	    and tb5.aplicn_dtls_date between tb2.announce_start_date and tb2.ANNOUNCE_END_DATE;
+	    and tb5.aplicn_dtls_date between tb2.announce_start_date and tb2.ANNOUNCE_END_DATE
 	</select>
 	
 	<insert id="regPause">
