@@ -38,6 +38,8 @@ public class MainController {
 			if (notice.getNotice_title().contains("중요")) {
 				modalContent.add(notice.getNotice_title());
 				modalContent.add(notice.getNotice_content()); // 중요 공지사항 내용을 리스트에 추가
+				modalContent.add(notice.getNotice_date());
+
 			}
 		}
 

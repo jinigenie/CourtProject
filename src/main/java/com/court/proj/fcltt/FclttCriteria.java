@@ -34,6 +34,9 @@ public class FclttCriteria {
 	private String searchFaq_ask_comment; //답변 
 	private String searchFaq_ask_date; //작성일
 	
+	// 공지에 쓰일 검색값
+	private String serachNotice_title; //제목
+	private String serachNotice_content; //내용
 	
 	// 기본생성자로 만들 시 기본값 : page = 1; amount = 10;
 	public FclttCriteria() {

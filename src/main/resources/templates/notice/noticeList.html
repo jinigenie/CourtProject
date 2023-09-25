@@ -2,6 +2,7 @@
 <html>
 
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
@@ -62,9 +63,71 @@
 							margin-left: 6px;
 						}
 					}
+
+					/* *********************************************************************************
+* pager
+* *********************************************************************************/
+					.pager {
+						overflow: hidden;
+						overflow-x: auto;
+						margin: 1.5rem 0;
+						text-align: center;
+						white-space: nowrap;
+						text-align: center;
+					}
+
+					.pager-wrap {
+						display: inline-block;
+					}
+
+					.pager-wrap>* {
+						display: inline-block;
+						overflow: hidden;
+						position: relative;
+						width: 40px;
+						height: 40px;
+						color: #292929;
+						text-align: center;
+						line-height: 40px;
+						font-size: 0.9rem;
+						font-weight: 400;
+						transition: background 0.3s, color 0.3s;
+						border-width: 1px;
+						border-style: solid;
+						border-color: #cdcdcd;
+						float: left;
+					}
+
+					.pager-wrap a+a {
+						border-left: 0;
+					}
+
+					.pager-wrap .active {
+						background: #2065c6;
+						border-color: #2065c6;
+						color: #fff;
+					}
+
+					.pager-wrap .arr {
+						position: relative;
+					}
+
+					.arr.first::after {
+						position: absolute;
+						top: 50%;
+						left: calc(50% - -1px);
+						transform: translate(-50%, -50%);
+						width: 40px;
+						height: 40px;
+						font-family: 'xeicon';
+						font-size: 0.9rem;
+						color: #292929;
+						content: '\e93c';
+					}
+
 				</style>
 				<article id="detail-content">
-					<form id="listForm" name="listForm" action="#" method="post">
+					<form id="listForm" name="searchForm" action="noticeList" method="get">
 						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
 						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
 						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
@@ -72,41 +135,34 @@
 						<input type="hidden" id="cate_name" name="cate_name" value="" />
 						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
 						<div class="heading-wrap container">
-							<h3 class="heading1">
+							<h3 class="heading1" style="border-bottom: 2.5px solid #4860cc;">
 								<span>공지사항</span>
 							</h3>
 						</div>
 
 						<!-- 본문컨텐츠 영역 start -->
 						<div class="container">
-							<div class="box box1">
-								<p>공지사항 입니다 .<br />
-									<!-- <a href="" class="blank-new"> -->
-									<a class="blank-new" href="" title="정부24 새창열림" target="_blank">
-									</a>
-								</p>
-							</div>
 							<!-- searchform searchform2 start -->
 							<div class="searchform searchform2">
 								<div class="searchform-wrap">
 									<div class="select-box">
 										<label for="selectTit"></label>
-										<select class="info-select" id="selectTit" name="search_field"
+										<select class="info-select" id="selectTit" name="searchContent"
 											title="검색조건을 선택해주세요.">
-											<option value="0">전체</option>
-											<option value="1">제목</option>
-											<option value="2">내용</option>
+											<option value="searchAll">전체</option>
+											<option value="serachNotice_title">제목</option>
+											<option value="serachNotice_content">내용</option>
 										</select>
 									</div>
 
 									<div class="search-input-wrap">
 										<div class="input-wrap">
-											<input type="text" name="q_string" value=""
+											<input type="text" name="searchContent2" value=""
 												onkeypress="if(window.event.keyCode == 13) srchMinwonDoc();"
 												class="form-control" placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요"
 												id="q_string" />
 										</div>
-										<button type="button" class="search-btn" onclick="srchMinwonDoc()">
+										<button type="button" class="search-btn" id="searchBtn">
 											<i class="xi-search"></i>
 											<span class="sr-only">검색</span>
 										</button>
@@ -116,15 +172,13 @@
 										<label for="selectTit"></label>
 										<select name="view_cnt" id="view_cnt" class="info-select" title="게시판 목록보기 갯수선택"
 											style="min-width: 170px">
-											<!-- onchange="chgViewCount(this.value);" -->
-											<option value="10" selected=" selected">10개씩 보기</option>
+											<option value="10">10개씩 보기</option>
 											<option value="20">20개씩 보기</option>
 											<option value="50">50개씩 보기</option>
 										</select>
 									</div>
 								</div>
 							</div>
-							<!-- //searchform searchform2 end -->
 
 							<!-- table-t-wrap start -->
 							<div class="table-t-wrap">
@@ -153,20 +207,25 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="vo, status : ${list}"  th:id="'notice_' + ${vo.notice_proper_num}" class="clickable-row"
+										<tr th:each="vo, status : ${list}" th:id="'notice_' + ${vo.notice_proper_num}"
+											class="clickable-row"
 											style="cursor: pointer; color: red; font-weight: 800; background-color: rgb(219, 243, 255); "
 											th:if="${vo.notice_title.startsWith('중요')}">
 											<td style="color: rgb(0, 0, 0);" data-cell-header="번호"></td>
-											<a th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}"><td style="color: rgb(0, 0, 0);" data-cell-header="대분류">
-												[[${vo.notice_title}]]
-											</td>
-											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
-											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
+											<a
+												th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">
+												<td style="color: rgb(0, 0, 0);" data-cell-header="대분류">
+													[[${vo.notice_title}]]
+												</td>
+												<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
+												<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
 										</tr>
-										<tr th:each=" vo, status : ${list}" style="cursor: pointer" th:id="'notice_' + ${vo.notice_proper_num}" class="clickable-row">
+										<tr th:each=" vo, status : ${list}" style="cursor: pointer"
+											th:id="'notice_' + ${vo.notice_proper_num}" class="clickable-row">
 											<td data-cell-header="번호">[[${status.count}]]</td>
 											<td data-cell-header="대분류">
-												<a th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
+												<a
+													th:href="'/notice/noticeDetail?notice_proper_num=' + ${vo.notice_proper_num}">[[${vo.notice_title}]]</a>
 											</td>
 											<td data-cell-header="중분류">[[${vo.admin_name}]]</td>
 											<td data-cell-header="작성일자">[[${vo.notice_date}]]</td>
@@ -177,40 +236,38 @@
 							<!-- 게시판 시작 부분 end -->
 
 							<!-- pagenation -->
+							<!-- 페이지네이션 -->
 							<div class="pager">
 								<div class="pager-wrap">
 									<a href="#" class="arr first" title="처음으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">맨 처음 목록으로
-											이동</strong></a><a href="#" class="arr prev" title="이전으로"
-										onclick="fn_egov_link_page(1); return false;"><strong class="sr-only">이전페이지로
-											이동</strong></a><a href="#" class="active" title="현재 선택된 페이지는 1 페이지 입니다."
-										onclick="">1</a><a href="#" class=""
-										onclick="fn_egov_link_page(2); return false;">2</a><a href="#" class=""
-										onclick="fn_egov_link_page(3); return false;">3</a><a href="#" class=""
-										onclick="fn_egov_link_page(4); return false;">4</a><a href="#" class=""
-										onclick="fn_egov_link_page(5); return false;">5</a><a href="#" class=""
-										onclick="fn_egov_link_page(6); return false;">6</a><a href="#" class=""
-										onclick="fn_egov_link_page(7); return false;">7</a><a href="#" class=""
-										onclick="fn_egov_link_page(8); return false;">8</a><a href="#" class=""
-										onclick="fn_egov_link_page(9); return false;">9</a><a href="#" class=""
-										onclick="fn_egov_link_page(10); return false;">10</a><a href="#"
-										class="arr next" title="다음으로"
-										onclick="fn_egov_link_page(11); return false;"><strong class="sr-only">다음페이지로
-											이동</strong></a><a href="#" class="arr last" title="마지막으로"
-										onclick="fn_egov_link_page(25); return false;"><strong class="sr-only">맨 마지막
-											목록으로 이동</strong></a>
+										th:href="@{'/notice/noticeList?page=1&amount=' + ${pageVO.cri.amount}}"><strong
+											class="sr-only">맨 처음 목록으로 이동</strong></a>
+									<a href="#" class="arr prev" title="이전으로" th:if="${pageVO.prev}"
+										th:href="@{'/notice/noticeList?page=' + ${pageVO.prev}}"><strong
+											class="sr-only">이전페이지로 이동</strong></a>
 
-									<input id="pageIndex" name="pageIndex" type="hidden" value="1" />
-									<input id="pageSize" name="pageSize" type="hidden" value="10" />
-									<input id="pageUnit" name="pageUnit" type="hidden" value="10" />
-									<input id="large_category_idx" name="large_category_idx" type="hidden" value="" />
-									<input id="middle_category_idx" name="middle_category_idx" type="hidden" value="" />
-									<input id="tot_middle_category_idx" name="tot_middle_category_idx" type="hidden"
-										value="" />
-									<input id="large_category_cd" name="large_category_cd" type="hidden" value="" />
-									<input id="middle_category_cd" name="middle_category_cd" type="hidden" value="" />
+									<!-- 페이지 번호 -->
+									<span th:each="pageNum : ${pageVO.pageList}" th:classappend="${pageNum == pageVO.cri.page} ? 'active' : ''">
+										<a href="#"
+											th:href="@{'/notice/noticeList?page=' + ${pageNum} + '&amount=' + ${pageVO.cri.amount}}"
+											
+											th:text="${pageNum}"></a>
+									</span>
+
+									<a href="#" class="arr next" title="다음으로" th:if="${pageVO.next}"
+										th:href="@{'/notice/noticeList?page=' + ${pageVO.cri.next}}"><strong
+											class="sr-only">다음페이지로 이동</strong></a>
+
+									<a href="#" class="arr last" title="마지막으로"
+										th:href="@{'/notice/noticeList?page=' + ${pageVO.realEnd}}"><strong
+											class="sr-only">맨 마지막 목록으로 이동</strong></a>
+
+
+
+
 								</div>
 							</div>
+
 							<!-- //pagenation end -->
 						</div>
 						<!-- //본문컨텐츠 영역 end -->
@@ -224,20 +281,36 @@
 </th:block>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    // 클릭 가능한 행에 대한 이벤트 핸들러 추가
-    var rows = document.querySelectorAll(".clickable-row");
-    rows.forEach(function (row) {
-        row.addEventListener("click", function () {
-            // 해당 공고의 notice_proper_num 가져오기
-            var noticeProperNum = this.id.replace("notice_", "");
-            // 공고 상세 페이지로 이동
-            window.location.href = "/notice/noticeDetail?notice_proper_num=" + noticeProperNum;
-        });
-    });
-});
-</script>
-위 코드에서 th:id로 각 <tr>에 id 속성을 설정하고, JavaScript를 사용하여 해당 행을 클릭할 때 URL을 생성하고 이동하도록 합니다. 클릭 가능한 행은 .clickable-row 클래스를 가진 행으로 선택됩니다. 페이지가 로드될 때 DOMContentLoaded 이벤트 리스너를 사용하여 이벤트 핸들러가 추가됩니다.
+	document.addEventListener("DOMContentLoaded", function () {
+		// 클릭 가능한 행에 대한 이벤트 핸들러 추가
+		var rows = document.querySelectorAll(".clickable-row");
+		rows.forEach(function (row) {
+			row.addEventListener("click", function () {
+				// 해당 공고의 notice_proper_num 가져오기
+				var noticeProperNum = this.id.replace("notice_", "");
+				// 공고 상세 페이지로 이동
+				window.location.href = "/notice/noticeDetail?notice_proper_num=" + noticeProperNum;
+			});
+		});
+	});
+
+
+
+	//데이터 핸들링
+	function handleChange(event) {
+		document.searchForm.amount.value = event.target.value;
+		document.searchForm.submit();
+
+	}
+
+	// 검색버튼기능
+	var searchBtn = document.getElementById("searchBtn");
+
+	searchBtn.onclick = function () {
+
+		event.preventDefault(); // a 태그 중지버튼
+		document.searchForm.submit();	// 폼태그 서브밋
+	}
 
 
 
