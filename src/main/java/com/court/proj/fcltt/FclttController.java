@@ -202,9 +202,10 @@ public class FclttController {
 						"</body>" +
 						"</html>";
 		emailService.sendEmail(to, subject, emailContent);
-
+		
 
 		int result = fclttService.fclttRegist(vo);
+		int result2 = fclttService.fclttRegist2(vo.getAplcn_dtls_proper_num());
 		String msg = result == 1 ? "등록되었습니다" : "";
 		ra.addFlashAttribute("msg", msg);
 

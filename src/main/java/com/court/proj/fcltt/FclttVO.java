@@ -18,6 +18,7 @@ public class FclttVO {
 	private String user_email_f; //유저 이메일 앞 1tb
 	private String user_email_b; //유저 이메일 도메인 1tb
 	
+	private String aplcn_dtls_proper_num; //신청자 번호
 	private String accept_proper_num; //재판조력자 합격자 고유번호 14 tb
 	
 	private String trial_fcltt_description; //재판조력자 고유번호 

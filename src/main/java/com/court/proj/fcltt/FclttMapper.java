@@ -17,6 +17,7 @@ public interface FclttMapper {
 	
 	// 조력자 등재
 	public int fclttRegist(FclttVO vo);
+	public int fclttRegist2(String aplcn_dtls_proper_num);
 
 	// 조력자 조회
 	public ArrayList<FclttVO> getList(@Param("cri")FclttCriteria cri);  //조회  페이징하기 (criteria 객체생성)

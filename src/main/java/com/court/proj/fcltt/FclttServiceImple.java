@@ -36,6 +36,11 @@ public class FclttServiceImple implements FclttService {
 	public int fclttRegist(FclttVO vo) {
 		return fclttMapper.fclttRegist(vo);
 	}
+	
+	@Override
+	public int fclttRegist2(String aplcn_dtls_proper_num) {
+		return fclttMapper.fclttRegist2(aplcn_dtls_proper_num);
+	}
 
 	// 조력자명단조회
 	@Override
@@ -102,6 +107,7 @@ public class FclttServiceImple implements FclttService {
 		return fclttMapper.getFclttContent5(user_proper_num);
 	}
 	//------------------------------------------------------------------
+
 
 
 
