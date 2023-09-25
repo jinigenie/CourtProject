@@ -23,50 +23,12 @@
 		#{court_proper_num})
 	</insert>
 
-	<!-- 신청자 리스트 검색 -->
+	<!-- 평가완료 점수보기 -->
+	<select id="getScore">
+		select * from TB_013 where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num};
 
-	<select id="searchAll" resultType="ListVO">
-		SELECT
-		count(*) total from
-		FROM
-		TB_001 T1
-		INNER JOIN
-		TB_005 T2 ON
-		T1.user_proper_num =
-		T2.user_proper_num
-		INNER JOIN
-		TB_011 T3 ON
-		T2.court_proper1 =
-		T3.court_name
-		INNER JOIN
-		TB_010 T4 ON
-		T2.trial_fcltt_proper_num =
-		T4.trial_fcltt_proper_num
 	</select>
-
-	<select id="searchAplcnName" resultType="ListVO">
-		SELECT
-		count(*) total from TB_001
-		where user_name LIKE '%' ||
-		#{keyword} || '%'
-	</select>
-
-	<select id="searchAplcnFcltt" resultType="ListVO">
-		SELECT
-		count(*) total from TB_010
-		where trial_fcltt_clasifi_code
-		LIKE '%' ||
-		#{keyword} || '%'
-	</select>
-
-	<select id="searchAplcnCourt" resultType="ListVO">
-		SELECT
-		count(*) total from TB_010
-		where court_name LIKE '%' ||
-		#{keyword} ||
-		'%' 
-	</select>
-
 
 	<!-- 신청자 평가 -->
 	<insert id="aplcnEvaluate">
@@ -122,43 +84,47 @@
 		T2.trial_fcltt_proper_num =
 		T4.trial_fcltt_proper_num
 
-		where 1=1
-		<if test="cri.searchUserName != '' and cri.searchUserName != null">
-			and user_name like concat('%', #{cri.searchUserName}, '%')
+		where T2.aplicn_dtls_sts in ('심사중', '서류반려', '평가완료', '합격')
+
+
+		<if
+			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'user_name'">
+			and T1.${cri.searchField} like concat('%', #{cri.searchContent},
+			'%')
 		</if>
-		<if test="cri.searchNameCode != '' and cri.searchNameCode != null">
-			and trial_fcltt_clasifi_code like concat('%',
-			#{cri.searchNameCode}, '%')
+		<if
+			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'trial_fcltt_clasifi_code'">
+			and T4.${cri.searchField} like concat('%',
+			#{cri.searchContent},
+			'%')
 		</if>
-		<if test="cri.searchCourt != '' and cri.searchCourt != null">
-			and court_name like concat('%', #{cri.searchCourt}, '%')
+		<if
+			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'court_name'">
+			and T3.${cri.searchField} like concat('%', #{cri.searchContent},
+			'%')
 		</if>
 		<if
 			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' ">
-			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts},
+			and aplicn_dtls_sts like concat('%', #{cri.searchContent},
 			'%')
 		</if>
 
 		limit
 		#{cri.pageStart}, #{cri.amount}
 
-
-		<!-- <if test="cri.aplicn_dtls_startdate != '' and cri.aplicn_dtls_startdate 
-			!= null"> <![CDATA[and aplicn_dtls_date >= #{cri.aplicn_dtls_startdate}]]> 
-			</if> <if test="cri.aplicn_dtls_enddate != '' and cri.aplicn_dtls_enddate 
-			!= null"> <![CDATA[and aplicn_dtls_date <= #{cri.aplicn_dtls_enddate}]]> 
-			</if> -->
-
 	</select>
-	
-	<!-- 신청자 상세정보 (단수값)  -->
+
+	<!-- 신청자 상세정보 (단수값) -->
 	<select id="getDetail" parameterType="int">
 		select * from TB_005 tb5
-			join TB_001 tb1 on tb5.USER_PROPER_NUM = tb1.USER_PROPER_NUM
-			join TB_010 tb10 on tb10.trial_fcltt_proper_num = tb5.trial_fcltt_proper_num
-			where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num};
+		join TB_001 tb1 on tb5.USER_PROPER_NUM = tb1.USER_PROPER_NUM
+		join
+		TB_010 tb10 on tb10.trial_fcltt_proper_num =
+		tb5.trial_fcltt_proper_num
+		where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num};
 	</select>
-	
+
 
 	<!-- 신청자 상태변환 서류반려 -->
 	<update id="aplcnReject">
@@ -200,29 +166,28 @@
 
 
 		where 1=1
-		<if test="cri.searchUserName != '' and cri.searchUserName != null">
-			and user_name like concat('%', #{cri.searchUserName}, '%')
+		<if
+			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'user_name'">
+			and T1.${cri.searchField} like concat('%', #{cri.searchContent},
+			'%')
 		</if>
-		<if test="cri.searchNameCode != '' and cri.searchNameCode != null">
-			and trial_fcltt_clasifi_code like concat('%',
-			#{cri.searchNameCode}, '%')
+		<if
+			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'trial_fcltt_clasifi_code'">
+			and T4.${cri.searchField} like concat('%',
+			#{cri.searchContent},
+			'%')
 		</if>
-		<if test="cri.searchCourt != '' and cri.searchCourt != null">
-			and court_name like concat('%', #{cri.searchCourt}, '%')
+		<if
+			test="cri.searchField != '' and cri.searchField != null and cri.searchField == 'court_name'">
+			and T3.${cri.searchField} like concat('%', #{cri.searchContent},
+			'%')
 		</if>
 		<if
 			test="cri.aplicn_dtls_sts != '' and cri.aplicn_dtls_sts != null and cri.aplicn_dtls_sts != '선택' ">
-			and aplicn_dtls_sts like concat('%', #{cri.aplicn_dtls_sts},
+			and aplicn_dtls_sts like concat('%', #{cri.searchContent},
 			'%')
 		</if>
-
-
-
-		<!-- <if test="cri.aplicn_dtls_startdate != '' and cri.aplicn_dtls_startdate 
-			!= null"> <![CDATA[and aplicn_dtls_date >= #{cri.aplicn_dtls_startdate}]]> 
-			</if> <if test="cri.aplicn_dtls_enddate != '' and cri.aplicn_dtls_enddate 
-			!= null"> <![CDATA[and aplicn_dtls_date <= #{cri.aplicn_dtls_enddate}]]> 
-			</if> -->
+		
 
 	</select>
 
@@ -239,22 +204,34 @@
 		WHERE
 		t9.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num};
 	</select>
-	
+
 	<!-- 신청자 학력 상세 -->
 	<select id="getEdctnList">
-		select * from TB_006 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+		select * from TB_006 where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num}
 	</select>
-	
+
 	<!-- 신청자 경력 상세 -->
 	<select id="getCarerList">
-		select * from TB_007 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+		select * from TB_007 where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num}
 	</select>
-	
-	<!-- 신청자 자격증 상세 -->	
+
+	<!-- 신청자 자격증 상세 -->
 	<select id="getCrtfcList">
-		select * from TB_008 where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+		select * from TB_008 where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num}
 	</select>
-	
-	
+
+	<!-- 파일 다운로드 -->
+	<select id="getFileList">
+		select * from TB_009 where aplcn_dtls_proper_num =
+		#{aplcn_dtls_proper_num}
+
+	</select>
+
+	<update id="updateSts">
+		update TB_005 set aplicn_dtls_sts = '심사중' where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num}
+	</update>
 
 </mapper>

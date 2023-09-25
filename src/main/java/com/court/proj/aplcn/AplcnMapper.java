@@ -13,12 +13,6 @@ public interface AplcnMapper {
 	public ArrayList<ListVO> getList(@Param("cri") Criteria cri);
 
 	public int getTotal(@Param("cri") Criteria cri); // 전체게시글수
-	
-	// 신청자 리스트 검색
-	public ArrayList<ListVO> searchAll(String keyword);
-	public ArrayList<ListVO> searchAplcnName(String keyword);
-	public ArrayList<ListVO> searchAplcnFcltt(String keyword);
-	public ArrayList<ListVO> searchAplcnCourt(String keyword);
 
 	// 신청자 상태변환 (서류반려)
 	public int aplcnReject(ListVO vo);
@@ -34,20 +28,25 @@ public interface AplcnMapper {
 	// 신청자 평가
 	public int aplcnEvaluate(ListVO vo);
 
+	// 신청자 평가 평균점수
+	public ListVO getScore(@Param("aplcn_dtls_proper_num") int aplcn_dtls_proper_num);
+
 	// 파일 다운로드
 	public ArrayList<ListVO> aplcnFiles(@Param("aplcn_dtls_proper_num") int aplcn_dtls_proper_num);
 
 	// 신청자 학력 상세
-		public ArrayList<ListVO> getEdctnList(int aplcn_dtls_proper_num);
+	public ArrayList<ListVO> getEdctnList(int aplcn_dtls_proper_num);
 
-		// 신청자 경력 상세
-		public ArrayList<ListVO> getCarerList(int aplcn_dtls_proper_num);
+	// 신청자 경력 상세
+	public ArrayList<ListVO> getCarerList(int aplcn_dtls_proper_num);
 
-		// 신청자 자격증 상세
-		public ArrayList<ListVO> getCrtfcList(int aplcn_dtls_proper_num);
+	// 신청자 자격증 상세
+	public ArrayList<ListVO> getCrtfcList(int aplcn_dtls_proper_num);
 
-		// 신청자 서류 다운로드
-		//public ArrayList<FileVO> getFileList(int aplcn_dtls_proper_num);
+	// 신청자 서류 다운로드
+	public ArrayList<FileVO> getFileList(int aplcn_dtls_proper_num);
 
-	
+	// 신청자 상태 업데이트 (신청완료 -> 심사중)
+	public int updateSts(String aplcn_dtls_proper_num);
+
 }

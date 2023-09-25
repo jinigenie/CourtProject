@@ -20,13 +20,12 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">조력자 등재신청</a></li>
-									<li><a href="#">조력자 등재목록</a></li>
+									<li><a th:href="@{/fcltt/fclttList}">조력자 등재명단</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">신청자 목록</a></li>
+									<li><a th:href="@{/aplcn/aplcnList}">신청자 목록</a></li>
 								</ul>
 							</li>
 
@@ -275,81 +274,33 @@
 								<div class="searchform-wrap">
 									<div class="select-box" style="width: 200px" ;>
 										<label>이름</label>
-										<select class="info-select" id="searchTit" name="searchField"
+										<!--<select class="info-select" id="searchTit" name="searchField"
 											title="검색조건을 선택해주세요.">
 											<option value="0">전체</option>
 											<option value="1">이름</option>
 											<option value="2">재판조력자분류</option>
 											<option value="3">법원분류</option>
-										</select>
+										</select>-->
 
-										<!--<select class="info-select" id="selectTit" name="searchField"
+										<select class="info-select" id="selectTit" name="searchField"
 											title="검색조건을 선택해주세요." style="min-width: 200px">
 											<option value="searchContent"
 												th:selected="${pageVO.cri.searchContent == ''}">전체
 											</option>
-											<option value="searchUserName"
-												th:selected="${pageVO.cri.searchUserName == 'user_name'}">이름
+											<option value="user_name"
+												th:selected="${pageVO.cri.searchUserName == ''}">이름
 											</option>
-											<option value="searchNameCode"
+											<option value="trial_fcltt_clasifi_code"
 												th:selected="${pageVO.cri.searchNameCode == ''}">
 												재판조력자분류</option>
-											<option value="searchCourt" th:selected="${pageVO.cri.searchCourt == ''}">법원
+											<option value="court_name" th:selected="${pageVO.cri.searchCourt == ''}">법원
 												분류
 											</option>
-										</select>-->
+										</select>
 
 
 									</div>
-									<!--<script>
-
-										const selectElement = document.querySelector('.info-select');
-										const inputElement = document.querySelector('input[name="searchAll"]');
-
-										// select 요소의 값이 변경될 때 실행되는 함수
-										function updateInputName() {
-											const selectedValue = selectElement.value;
-
-											switch (selectedValue) {
-												case 'searchContent':
-													inputElement.name = 'searchContent';
-													break;
-												case 'SearchUserName':
-													inputElement.name = 'SearchUserName';
-													break;
-												case 'SearchNameCode':
-													inputElement.name = 'SearchNameCode';
-													break;
-												case 'SearchCourt':
-													inputElement.name = 'SearchCourt';
-													break;
-												default:
-
-													break;
-											}
-										}
-
-										// select 요소의 change 이벤트에 이벤트 리스너를 추가합니다.
-										selectElement.addEventListener('change', updateInputName);
-
-									</script>-->
 									
-									<script>
-										document.getElementById("searchTit").addEventListener("change", function () {
-											var searchField = document.getElementById("searchTit").value;
-
-											// 검색 조건에 따라 placeholder 변경
-											if (searchField === "0") {
-												document.getElementById("searchAll").placeholder = "검색어를 입력해주세요";
-											} else if (searchField === "1") {
-												document.getElementById("searchAll").placeholder = "이름을 입력해주세요";
-											} else if (searchField === "2") {
-												document.getElementById("searchAll").placeholder = "재판조력자 분류를 입력하세요";
-											} else if (searchField === "3") {
-												document.getElementById("searchAll").placeholder = "법원명을 입력해주세요";
-											}
-										});
-									</script>
 
 									<div class="search-input-wrap">
 										<div class="input-wrap" style="float: left;">
@@ -368,16 +319,11 @@
 										<label></label>
 										<select id="aplcnChange" class="info-select" style="min-width: 150px">
 
-											<option value="선택" th:selected="${pageVO.cri.aplicn_dtls_sts == '선택'}">선택
-											</option>
-											<option value="심사중" th:selected="${pageVO.cri.aplicn_dtls_sts == '심사중'}">심사중
-											</option>
-											<option value="서류반려" th:selected="${pageVO.cri.aplicn_dtls_sts == '서류반려'}">
-												서류반려</option>
-											<option value="평가완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '평가완료'}">
-												평가완료</option>
-											<option value="등재완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '등재완료'}">
-												등재완료</option>
+											<option value="선택" th:selected="${pageVO.cri.aplicn_dtls_sts == '선택'}">선택</option>
+											<option value="심사중" th:selected="${pageVO.cri.aplicn_dtls_sts == '심사중'}">심사중</option>
+											<option value="서류반려" th:selected="${pageVO.cri.aplicn_dtls_sts == '서류반려'}">서류반려</option>
+											<option value="평가완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '평가완료'}">평가완료</option>
+											<option value="합격" th:selected="${pageVO.cri.aplicn_dtls_sts == '합격'}">합격</option>
 
 										</select>
 									</div>
@@ -387,8 +333,8 @@
 											style="min-width: 170px">
 											<option value="5" th:selected="${pageVO.amount == 5}">5개씩 보기</option>
 											<option value="10" th:selected="${pageVO.amount == 10}">10개씩 보기</option>
+											<option value="20" th:selected="${pageVO.amount == 20}">20개씩 보기</option>
 											<option value="50" th:selected="${pageVO.amount == 50}">50개씩 보기</option>
-											<option value="100" th:selected="${pageVO.amount == 100}">100개씩 보기</option>
 
 										</select>
 									</div>
@@ -494,33 +440,11 @@
 </th:block>
 <script>
 	function searchAlls() {
-
-		// 테이블 내의 공고문 제목 검색
-		var queryString = document.getElementById("searchAll").value.toLowerCase();
-		var table = document.querySelector(".table-responsive table");
-		var rows = table.getElementsByTagName("tr");
-
-		for (var i = 1; i < rows.length; i++) { // 첫 번째 행은 테이블 헤더이므로 제외
-			var titleCell = rows[i].getElementsByTagName("td")[2]; // 제목이 있는 열(세 번째 열) 선택
-			var title = titleCell.textContent.toLowerCase(); // 공고문 제목을 소문자로 변환
-
-			// 검색어가 포함된 공고문만 표시
-			if (title.includes(queryString)) {
-				rows[i].style.display = ""; // 검색어가 포함된 공고문은 보이도록 설정
-			} else {
-				rows[i].style.display = "none"; // 검색어가 포함되지 않은 공고문은 숨김
-			}
-		}
+		event.preventDefault(); //a중지
+		document.listForm.submit(); //폼태그 서브밋
+		
 	}
 </script>
-
-<script>document.getElementById("searchAll").addEventListener("keyup", function (event) {
-		if (event.key === "Enter") {
-			searchAlls();
-		}
-	});
-</script>
-
 
 <script th:inline="javascript">
 
@@ -543,18 +467,6 @@
 		document.listForm.aplicn_dtls_sts.value = event.target.value;
 		document.listForm.submit();
 	})
-
-
-	//검색버튼
-	/*
-	var aplcnSearch_Btn = document.getElementById("aplcnSearch_Btn");
-	aplcnSearch_Btn.onclick = function () {
-
-		event.preventDefault(); //a중지
-		document.searchForm.submit(); //폼태그 서브밋
-	}*/
-
-
 
 
 </script>
