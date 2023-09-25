@@ -38,7 +38,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public ArrayList<MypageStatusVO> getStatus(int user_proper_num) {
+	public MypageStatusVO getStatus(int user_proper_num) {
 		return mypageMapper.getStatus(user_proper_num);
 	}
 
@@ -60,6 +60,11 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public boolean pauseAccess(int user_proper_num) {
 		return mypageMapper.pauseAccess(user_proper_num);
+	}
+
+	@Override
+	public int deleteAplicn(int aplcn_dtls_proper_num) {
+		return mypageMapper.deleteAplicn(aplcn_dtls_proper_num);
 	}
 
 
