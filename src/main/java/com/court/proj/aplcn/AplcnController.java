@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,8 @@ public class AplcnController {
 	@Qualifier("aplcnService")
 	private AplcnService aplcnService;
 
-	//@Value("${s3downloadPath}")
-	//private String s3downloadPath;
+	@Value("${s3downloadPath}")
+	private String s3downloadPath;
 
 	
 	// 신청자 리스트
@@ -80,18 +81,18 @@ public class AplcnController {
 
 		List<FileVO> fileList = aplcnService.getFileList(aplcn_dtls_proper_num);
 
-//		try { // encoededString이 고정주소/유저아이디/+ 여기에
-//
-//			for (FileVO v : fileList) {
-//				String downloadPath = s3downloadPath + "/" + vo1.getUser_id() + "/"
-//						+ URLEncoder.encode(v.getFile_path(), StandardCharsets.UTF_8.toString());
-//				linkList.add(downloadPath);
-//				System.out.println(v.getFile_path());
-//			}
-//			model.addAttribute("linkList", linkList);
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+		try { // encoededString이 고정주소/유저아이디/+ 여기에
+
+			for (FileVO v : fileList) {
+				String downloadPath = s3downloadPath + "/" + vo1.getUser_id() + "/"
+						+ URLEncoder.encode(v.getFile_path(), StandardCharsets.UTF_8.toString());
+				linkList.add(downloadPath);
+				System.out.println(v.getFile_path());
+			}
+			model.addAttribute("linkList", linkList);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
 		return "aplcn/aplcnDetails";
 
