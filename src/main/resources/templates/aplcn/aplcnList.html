@@ -285,15 +285,15 @@
 										<select class="info-select" id="selectTit" name="searchField"
 											title="검색조건을 선택해주세요." style="min-width: 200px">
 											<option value="searchContent"
-												th:selected="${pageVO.cri.searchContent == ''}">전체
+												th:selected="${pageVO.cri.searchContent == 'searchContent'}">전체
 											</option>
 											<option value="user_name"
-												th:selected="${pageVO.cri.searchUserName == ''}">이름
+												th:selected="${pageVO.cri.searchUserName == 'user_name'}">이름
 											</option>
 											<option value="trial_fcltt_clasifi_code"
-												th:selected="${pageVO.cri.searchNameCode == ''}">
+												th:selected="${pageVO.cri.searchNameCode == 'trial_fcltt_clasifi_code'}">
 												재판조력자분류</option>
-											<option value="court_name" th:selected="${pageVO.cri.searchCourt == ''}">법원
+											<option value="court_name" th:selected="${pageVO.cri.searchCourt == 'court_name'}">법원
 												분류
 											</option>
 										</select>
@@ -393,7 +393,7 @@
 						<!-- pageNation -->
 						<div class="pager">
 							<div class="pager-wrap">
-								<a th:href="@{page(page=1, amount=${total})}" class="arr first"><strong
+								<a th:href="@{aplcnList(page=1, amount=${total})}" class="arr first"><strong
 										class="sr-only">맨 처음 목록으로 이동</strong></a>
 
 								<th:block th:if="${pageVO.prev}">
