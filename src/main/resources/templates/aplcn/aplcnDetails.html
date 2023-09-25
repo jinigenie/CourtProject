@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
 	<div class="wrap">
@@ -13,13 +14,12 @@
 						<ul>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">조력자 등재신청</a></li>
-									<li><a href="#">조력자 등재목록</a></li>
+									<li><a th:href="@{/fcltt/fclttList}">조력자 등재명단</a></li>
 								</ul>
 							</li>
 							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
 								<ul class="sub" style="display: none;">
-									<li><a href="#">신청자 목록</a></li>
+									<li><a th:href="@{/aplcn/aplcnList}">신청자 목록</a></li>
 								</ul>
 							</li>
 
@@ -149,18 +149,6 @@
 
 				<article id="detail-content">
 					<form id="listForm" name="listForm" action="####" method="post">
-						<input type="hidden" id="cd_appeal_form" name="cd_appeal_form" value="ALL" />
-						<input type="hidden" id="srch_gubn" name="srch_gubn" value="" />
-						<input type="hidden" id="srch_cd_appeal_form" name="srch_cd_appeal_form" value="" />
-						<input type="hidden" id="search_capp_biz_cd" name="search_capp_biz_cd" value="" />
-						<input type="hidden" id="cate_name" name="cate_name" value="" />
-						<input type="hidden" id="sub_cate_name" name="sub_cate_name" value="" />
-
-						<input type="hidden" id="aplicn_dtls_sts" name="aplicn_dtls_sts" value="" />
-
-
-
-
 
 						<div class="heading-wrap container">
 							<h3 class="heading1">
@@ -190,16 +178,19 @@
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="col" colspan="5"><strong>중요 상세정보</strong></th>
+											<th scope="col" colspan="5"><strong>신청자 기본정보</strong></th>
 										</tr>
 									</thead>
-									<tbody><tr title="재판조력자 메뉴" style="cursor: pointer">
+									<tbody>
+										<tr title="재판조력자 메뉴" style="cursor: pointer">
 											<td style="color: #2065c6;" class="tg-0lax">이름</td>
 											<td>[[${vo1.user_name}]] </td>
 										</tr>
 										<tr title="법원 메뉴" style="cursor: pointer">
 											<td style="color: #2065c6;" class="tg-0lax">연락처</td>
-											<td>[[${#strings.substring(vo1.user_phone, 0, 3) + '-' + #strings.substring(vo1.user_phone, 3, 7) + '-' + #strings.substring(vo1.user_phone, 7)}]]</td>
+											<td>[[${#strings.substring(vo1.user_phone, 0, 3) + '-' +
+												#strings.substring(vo1.user_phone, 3, 7) + '-' +
+												#strings.substring(vo1.user_phone, 7)}]]</td>
 										</tr>
 										<tr title="신청 상태 메뉴" style="cursor: pointer">
 											<td style="color: #2065c6;" class="tg-0lax">생년월일</td>
@@ -242,9 +233,8 @@
 											th:value="${vo1.trial_fcltt_proper_num}">
 										<input type="hidden" name="court_proper_num" id="court_proper_num"
 											th:value="${vo1.court_proper_num}">
-										<input type="hidden" name="user_ar" id="user_ar"
-											th:value="${vo1.user_ar}">
-											
+										<input type="hidden" name="user_ar" id="user_ar" th:value="${vo1.user_ar}">
+
 
 										<tr title="재판조력자 메뉴" style="cursor: pointer">
 											<td data-cell-header="재판조력자 종류" style="color: #2065c6;" class="tg-0lax">
@@ -461,12 +451,9 @@
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="col" colspan="5"><strong>파일 다운받자</strong></th>
+											<th scope="col" colspan="5"><strong>신청자 서류정보</strong></th>
 										</tr>
-										<th data-cell-header="번호">자격증 종목</th>
-										<th data-cell-header="번호">발급 기관</th>
-										<th data-cell-header="번호">자격증/면허번호</th>
-										<th data-cell-header="담당법원">발급일</th>
+
 									</thead>
 									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
 								</table>
@@ -481,144 +468,178 @@
 										<th:block th:each="file : ${linkList}">
 											<tr>
 												<td class="tg-0lax"><a th:href="${file}"></a></td>
-												
+
 											</tr>
 										</th:block>
 									</tbody>
 								</table>
+								<div style="border-top: none;" class="table table-responsive">
+									<table>
+										<tbody>
+											<th:block th:each="file : ${linkList}">
+												<tr>
+													<td class="tg-0lax"><a th:href="${file}"></a></td>
 
-							</div>
-							</br>
+												</tr>
+											</th:block>
 
-								<div class="tab-wrap">
-									<strong>
-										<div id="result"></div>
-									</strong>
+										</tbody>
+									</table>
 								</div>
-
 							</div>
 							</br>
 
-
-
-							<div class="fclttRegist_btn">
-								<a href="/aplcn/aplcnList" class="fcltt_btn1">목록으로</a>
-
-
-								<a href="#" class="fcltt_btn2" id="rejectBtn"
-									onclick="return aplcnEvaluation();">서류반려</a>
-								<!--<a th:href="@{/aplcn/aplcnReject(aplicn_dtls_sts=${vo1.aplicn_dtls_sts}, aplicn_dtls_sts='B') }" class="fcltt_btn2" id="modifyBtn">서류반려</a>-->
-								<a href="#" class="fcltt_btn3" onclick="openPopup1()">평가하기</a>
-								<a th:href="@{/fcltt/fclttRegist(user_proper_num=${vo1.user_proper_num}, aplicn_dtls_sts='D') }"
-									class="fcltt_btn4" id="registerBtn" onclick="return confirmEvaluation();">등재하기</a>
+							<div style="text-align: center;">
+								<div class="tab-wrap">
+									<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+										<strong>평가 결과는 <span id="result">[[${score}]]</span> 점입니다.</strong>
+									</th:block>
+								</div>
 							</div>
 
+						</div>
+						</br>
+
+						<div class="fclttRegist_btn">
+							<a href="/aplcn/aplcnList" class="fcltt_btn1">목록으로</a>
 
 
-							<script type="text/javascript">
-								var popupWindow; // 팝업 창 객체를 저장할 변수
+							<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+								<a href="#" class="fcltt_btn2" id="rejectBtn" onclick="return aplcnEvaluation();">서류반려</a>
+							</th:block>
+							<!--<a th:href="@{/aplcn/aplcnReject(aplicn_dtls_sts=${vo1.aplicn_dtls_sts}, aplicn_dtls_sts='B') }" class="fcltt_btn2" id="modifyBtn">서류반려</a>-->
+							<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
 
-								function openPopup() {
-									// 현재 페이지에서 aplcn_dtls_proper_num 값을 가져옵니다.
-									var aplcnDtlsProperNum = document.getElementById("aplcn_dtls_proper_num").value;
-									console.log(aplcn_dtls_proper_num);
-
-
-									// URL에 aplcn_dtls_proper_num 값을 포함하여 팝업 창 열기
-									//var popupUrl = "http://localhost:8585/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=" + aplcnDtlsProperNum;
-									//popupWindow = window.open(popupUrl, "popup", "width=1920px, height=1080px");
-								}
-
-							</script>
-
-							<script type="text/javascript">
-								// 결과를 부모 창의 요소에 표시합니다.
-								var resultElement = window.opener.document.getElementById("result");
-								if (resultElement) {
-									resultElement.innerHTML = "평균 점수: " + average;
-								} else {
-									// 만약 결과를 표시할 요소가 없다면, 콘솔에 오류 메시지를 출력합니다.
-									console.error("결과를 표시할 요소를 찾을 수 없습니다.");
-								}
-
-							</script>
-							
-							<script>
-								function aplcnEvaluation() {
-									if (confirm('서류를 반려하시겠습니까?')) {
-										// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
-										return true;
-									} else {
-										return false;
-									}
-								}
-							</script>
-
-							<!--등재하기-->
-							<script>
-								function confirmEvaluation() {
-									if (confirm('등재하시겠습니까?')) {
-										// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
-										return true;
-									} else {
-										return false;
-									}
-								}
-							</script>
+							</th:block>
+							<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+								<a href="#" class="fcltt_btn3" onclick="openPopup1()">평가하기</a>
+							</th:block>
+							<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
+								<a th:href="@{/fcltt/fclttRegist(user_proper_num=${vo1.user_proper_num})}"
+									class="fcltt_btn4" id="registerBtn" onclick="return confirmEvaluation();">등재하기</a>
+							</th:block>
+						</div>
 
 
-							<script th:inline="javascript">
-								//버튼제어
-								document.getElementById("rejectBtn").addEventListener('click', function (e) {
+
+						<script type="text/javascript">
+							var popupWindow; // 팝업 창 객체를 저장할 변수
+
+							function openPopup() {
+								// 현재 페이지에서 aplcn_dtls_proper_num 값을 가져옵니다.
+								var aplcnDtlsProperNum = document.getElementById("aplcn_dtls_proper_num").value;
+								console.log(aplcn_dtls_proper_num);
+
+							}
+
+						</script>
+
+						<script type="text/javascript">
+							// 결과를 부모 창의 요소에 표시합니다.
+							var resultElement = window.opener.document.getElementById("result");
+							if (resultElement) {
+								resultElement.innerHTML = "평균 점수: " + average;
+							} else {
+								// 만약 결과를 표시할 요소가 없다면, 콘솔에 오류 메시지를 출력합니다.
+								console.error("결과를 표시할 요소를 찾을 수 없습니다.");
+							}
+
+						</script>
+
+						<script>
+							function aplcnEvaluation() {
+								if (confirm('서류를 반려하시겠습니까?')) {
+									// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
 									event.preventDefault();
 
 									document.listForm.action = 'aplcnReject';
-									document.listForm.aplicn_dtls_sts.value = '서류반려';
 									document.listForm.submit();
+									return true;
+								} else {
+									return false;
+								}
+							}
+						</script>
 
+						<!--등재하기-->
+						<script>
+							function confirmEvaluation() {
+								if (confirm('등재하시겠습니까?')) {
+									// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
+									return true;
+								} else {
+									return false;
+								}
+							}
+						</script>
+
+
+						<script th:inline="javascript">
+							//버튼제어
+							//document.getElementById("rejectBtn").addEventListener('click', function (e) {
+
+
+							//})
+
+						</script>
+
+						<script th:inline="javascript">
+							function openPopup1() {
+								//평가하기 버튼 누르는 순간에 신청상태 심사중으로 바꾸기
+								$.ajax({
+									url: "updateSts",
+									method: "POST",
+									data: {
+										"aplcn_dtls_proper_num": $('#aplcn_dtls_proper_num').val()
+									},
+									success: (data) => {
+										if (data == 1) {
+										}
+									},
+									error: (status, error) => {
+										console.log(status, error);
+									}
 								})
 
-							</script>
 
-							<script th:inline="javascript">
-								function openPopup1() {
-									// 평가하기 버튼을 눌렀을 때 팝업 창을 열기
-									var url = "/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=[[${vo1.aplcn_dtls_proper_num}]]";
-									var popup = window.open(url, "평가 팝업", "width=1920, height=1000");
-									if (popup) {
-										popup.focus();
-									} else {
-										alert("팝업 창이 차단되었습니다. 팝업 창을 허용해주세요.");
-									}
+
+								// 평가하기 버튼을 눌렀을 때 팝업 창을 열기
+								var url = "/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=[[${vo1.aplcn_dtls_proper_num}]]";
+								var popup = window.open(url, "평가 팝업", "width=1920, height=1000");
+								if (popup) {
+									popup.focus();
+								} else {
+									alert("팝업 창이 차단되었습니다. 팝업 창을 허용해주세요.");
 								}
+							}
 
-							</script>
-							<script th:inline="javascript">
-								function openPopup2() {
-									// 등재 완료 메시지를 alert 창으로 표시
-									alert("등재가 완료되었습니다.");
+						</script>
+						<script th:inline="javascript">
+							function openPopup2() {
+								// 등재 완료 메시지를 alert 창으로 표시
+								alert("등재가 완료되었습니다.");
 
-									// user_proper_num 값을 가져와서 URL에 추가하고 /fcltt/fclttRegist 로 이동
-									var user_proper_num = '[[${vo1.user_proper_num}]]';
-									window.location.href = "/fcltt/fclttRegist?user_proper_num=" + user_proper_num;
-								}
+								// user_proper_num 값을 가져와서 URL에 추가하고 /fcltt/fclttRegist 로 이동
+								var user_proper_num = '[[${vo1.user_proper_num}]]';
+								window.location.href = "/fcltt/fclttRegist?user_proper_num=" + user_proper_num;
+							}
 
-								if ('[[${msg}]]' == 1) {
-									alert('등재를 완료하였습니다.');
-									opener.location.href = '/aplcn/aplcnList';
-								} else if ('[[${msg}]]' == 0) {
-									alert('등재를 완료해주세요.')
-								}
-							</script>
+							if ('[[${msg}]]' == 1) {
+								alert('등재를 완료하였습니다.');
+								opener.location.href = '/aplcn/aplcnList';
+							} else if ('[[${msg}]]' == 0) {
+								alert('등재를 완료해주세요.')
+							}
+						</script>
 
-							</br>
-							</br>
-						</div>
-					</form>
-				</article>
+						</br>
+						</br>
 			</div>
+			</form>
+			</article>
 		</div>
-		<!-- //main_con  -->
+	</div>
+	<!-- //main_con  -->
 	</div>
 
 </th:block>

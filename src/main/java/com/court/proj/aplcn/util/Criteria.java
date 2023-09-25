@@ -18,6 +18,9 @@ public class Criteria {
 	private String searchNameCode;
 	private String searchCourt;
 	private String aplicn_dtls_sts;
+	private String user_name;
+	private String trial_fcltt_clasifi_code;
+	private String court_name;
 
 	// 기본생성자로 만들어지면 1, 10 기본값이다.
 	public Criteria() {
