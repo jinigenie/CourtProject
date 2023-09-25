@@ -74,15 +74,23 @@
                   </tr>
                 </thead>
                 <tbody th:if="${size != 0}">
-                  <tr style="cursor: pointer" th:each="vo, status : ${list}" id="tr">
+                  <tr th:each="vo, status : ${list}" id="tr">
                     <td data-cell-header="번호">[[${status.count}]] </td>
                     <td data-cell-header="신청일">[[${vo.aplicn_dtls_date}]]</td>
                     <td data-cell-header="재판조력자분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
                     <td data-cell-header="신청상태">[[${vo.aplicn_dtls_sts}]]</td>
                     <td id="expire">
 				      <div class="button-group">
-				        <a href="#" class="case case1 modify"><em style="width: 50px;">수정</em></a>
-				        <a href="#" class="case case1 delete"><em style="width: 50px;">삭제</em></a>
+				        <a href="#" class="case case1 modify" th:if="${vo.aplicn_dtls_sts == '신청중'}">
+							<em style="width: 50px;">수정</em>
+						</a>
+				        <a href="#" class="case case1 delete" th:if="${vo.aplicn_dtls_sts == '신청중'}">
+							<em style="width: 50px;">삭제</em>
+						</a>
+				      
+				      	<a href="#" class="case case1 complete" th:if="${vo.aplicn_dtls_sts != '신청중'}" style="cursor: default;">
+							  <em style="width: 75px; background-color: #8c8c8c;">신청완료</em>
+						</a>
 				      </div>
 				    </td>
                   </tr>
@@ -130,20 +138,11 @@
       const tr = group.closest("tr");
       if (confirm("삭제하시겠습니까?")) {
         tr.remove();
+        window.location.href="/mypage/deleteAplicn";
       }
     });
   });
 </script>
 
-<!-- 종료 버튼 -->
-<script>
-	const finish = document.querySelectorAll(".finish");
-	finish.forEach((e) => {
-		e.addEventListener('click', () => {
-			// 종료 버튼을 클릭할 때 수행할 동작을 여기에 추가하세요.
-			alert("종료 버튼 클릭");
-		})	
-	})
-</script>
 
 </html>

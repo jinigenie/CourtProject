@@ -95,8 +95,8 @@ public class MypageController {
 	public String status(Model model, Authentication auth) {
 		
 		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
-		
 		int user_proper_num = user.getUser_proper_num();
+		
 		ArrayList<MypageStatusVO> list = mypageService.getStatus(user_proper_num);
 		model.addAttribute("list", list);
 		System.out.println(list.size());
@@ -111,7 +111,7 @@ public class MypageController {
 		
 		int result = mypageService.deleteUpdate(vo);
 		
-		return "redirect:../main/";
+		return "redirect:/logout";
 	}
 
 	
@@ -145,4 +145,10 @@ public class MypageController {
 		boolean bool = bCryptPasswordEncoder.matches(pw, rawpw);
 		return new ResponseEntity<>(bool, HttpStatus.OK);
 	}
+	
+	@GetMapping("/deleteAplicn")
+	public String deleteAplicn() {
+		return "redirect:/mypage/status";
+	}
+	
 }

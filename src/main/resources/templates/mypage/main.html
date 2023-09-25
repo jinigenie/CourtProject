@@ -63,100 +63,99 @@
           <!-- 본문컨텐츠 영역 -->
           <div class="container">
           
-<article id="detail-content">
-<div class="container">
-
-
-  <div class="box box1">
-    <p>기록하신 개인정보는 개인정보보호법에 의거 철저하게 보호됩니다.</p>
-  </div>
-
-  <h4 class="heading2">회원정보 변경 및 탈퇴</h4>
-
-  <div class="table table-responsive">
-    <table>
-      <caption>회원정보입력 - 아이디, 성명, 성별, 전화번호, 휴대폰번호, 이메일주소, 수신여부 확인, 주소의 대한정보의 입력폼 제공</caption>
-
-      <colgroup>
-        <col style="width:30%;">
-        <col style="width:70%;">
-      </colgroup>
-      <form action="deleteForm" id="del" name="delete" method="post">
-		  <input type="hidden" name="user_proper_num" th:value="${userVO.user_proper_num}"/>
-      <tbody>
-        <tr>
-          <th scope="row" class="txt-left">
-            <label for="cvl_id">아이디</label>
-          </th>
-          <td data-cell-header="아이디" class="txt-left">
-               <span id="cvl_id">[[${userVO.user_id}]]</span>
-               
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="txt-left">
-            <span>성명</span>
-          </th>
-          <td data-cell-header="성명" class="txt-left">
-          	<span id="cvl_nm">[[${userVO.user_name}]]</span>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row" class="txt-left">
-            <span>비밀번호</span>
-          </th>
-          <td data-cell-header="전화번호" class="txt-left">
-          	<input id="pw" type="password"/>
-          	<input id="user_pw" hidden th:value="${userVO.user_pw}"/>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="txt-left">
-            <span>휴대폰번호</span>
-          </th>
-          <td data-cell-header="휴대폰번호" class="txt-left">
-			<span id="cvl_cel">[[${userVO.user_phone}]]</span>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="txt-left">
-            <span>이메일</span>
-          </th>
-          <td data-cell-header="이메일" class="txt-left">
-            <span id="cvl_mail" th:text="|${userVO.user_email_f}@${userVO.user_email_b}|"></span>
-          </td>
-        </tr>
-       
-        <tr>
-          <th scope="row" class="border-none txt-left">
-            <label for="address1">주소</label>
-          </th>
-          <td data-cell-header="주소" class="txt-left">
-            <span id="cvl_zip_addr" th:text="|[ ${userVO.user_ar_zonecode} ]  ${userVO.user_ar} ${userVO.user_ar_detail}|"/>
-          </td>
-        </tr>
-      </tbody>
-      </form>
-    </table>
-  </div>
-
-  <div class="btn-wrap txt-center" 
-  	   style=" margin-bottom: 20px; margin-top: 20px;">
-    <div class="btn-style-wrap btn-style-wrap2">
-      <a href="#" id="modify" class="btn-style btn-style39 btn-style-icon-none">
-        <span>회원정보 변경</span>
-      </a>
-    </div>
-    <div class="btn-style-wrap btn-style-wrap1" >
-      <a href="#" id="leave" class="btn-style btn-style39 btn-style-icon-none" style="background-color: #8c8c8c; border: #8c8c8c;">
-        <span>회원탈퇴</span>
-      </a>
-    </div>
-  </div>
-</div>
-</article>
-          
+			<article id="detail-content">
+			<div class="container">
+			
+			
+			  <div class="box box1">
+			    <p>기록하신 개인정보는 개인정보보호법에 의거 철저하게 보호됩니다.</p>
+			  </div>
+			
+			  <h4 class="heading2">회원정보 변경 및 탈퇴</h4>
+			
+			  <div class="table table-responsive">
+			    <table>
+			
+			      <colgroup>
+			        <col style="width:30%;">
+			        <col style="width:70%;">
+			      </colgroup>
+			      <form action="deleteForm" id="del" name="delete" method="post">
+					  <input type="hidden" name="user_proper_num" th:value="${userVO.user_proper_num}"/>
+			      <tbody>
+			        <tr>
+			          <th scope="row" class="txt-left">
+			            <label for="cvl_id">아이디</label>
+			          </th>
+			          <td data-cell-header="아이디" class="txt-left">
+			               <span id="cvl_id">[[${userVO.user_id}]]</span>
+			               
+			          </td>
+			        </tr>
+			        <tr>
+			          <th scope="row" class="txt-left">
+			            <span>성명</span>
+			          </th>
+			          <td data-cell-header="성명" class="txt-left">
+			          	<span id="cvl_nm">[[${userVO.user_name}]]</span>
+			          </td>
+			        </tr>
+			        
+			        <tr>
+			          <th scope="row" class="txt-left">
+			            <span>비밀번호</span>
+			          </th>
+			          <td data-cell-header="전화번호" class="txt-left">
+			          	<input id="pw" type="password"/>
+			          	<input id="user_pw" hidden th:value="${userVO.user_pw}"/>
+			          </td>
+			        </tr>
+			        <tr>
+			          <th scope="row" class="txt-left">
+			            <span>휴대폰번호</span>
+			          </th>
+			          <td data-cell-header="휴대폰번호" class="txt-left">
+						<span id="cvl_cel">[[${userVO.user_phone}]]</span>
+			          </td>
+			        </tr>
+			        <tr>
+			          <th scope="row" class="txt-left">
+			            <span>이메일</span>
+			          </th>
+			          <td data-cell-header="이메일" class="txt-left">
+			            <span id="cvl_mail" th:text="|${userVO.user_email_f}@${userVO.user_email_b}|"></span>
+			          </td>
+			        </tr>
+			       
+			        <tr>
+			          <th scope="row" class="border-none txt-left">
+			            <label for="address1">주소</label>
+			          </th>
+			          <td data-cell-header="주소" class="txt-left">
+			            <span id="cvl_zip_addr" th:text="|[ ${userVO.user_ar_zonecode} ]  ${userVO.user_ar} ${userVO.user_ar_detail}|"/>
+			          </td>
+			        </tr>
+			      </tbody>
+			      </form>
+			    </table>
+			  </div>
+			
+			  <div class="btn-wrap txt-center" 
+			  	   style=" margin-bottom: 20px; margin-top: 20px;">
+			    <div class="btn-style-wrap btn-style-wrap2">
+			      <a href="#" id="modify" class="btn-style btn-style39 btn-style-icon-none">
+			        <span>회원정보 변경</span>
+			      </a>
+			    </div>
+			    <div class="btn-style-wrap btn-style-wrap1" >
+			      <a href="#" id="leave" class="btn-style btn-style39 btn-style-icon-none" style="background-color: #8c8c8c; border: #8c8c8c;">
+			        <span>회원탈퇴</span>
+			      </a>
+			    </div>
+			  </div>
+			</div>
+			</article>
+			          
           
           </div>
           <!-- //본문컨텐츠 영역 -->
@@ -230,8 +229,6 @@
 							//비밀번호 맞았을 경우
 							if(confirm("탈퇴하시겠습니까?")){
 								del.submit();
-								alert("탈퇴 되었습니다.");
-								window.location.href="../logout";
 							}
 						} else {
 							//틀린 경우
