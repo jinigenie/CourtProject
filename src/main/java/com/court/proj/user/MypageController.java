@@ -37,7 +37,6 @@ public class MypageController {
 		int user_proper_num = user.getUser_proper_num();
 		UserVO userVO = mypageService.getUser(user_proper_num);
 		model.addAttribute("userVO", userVO);
-		System.out.println(userVO.toString());
 		
 		return "mypage/main";
 	}
@@ -51,7 +50,6 @@ public class MypageController {
 		int user_proper_num = user.getUser_proper_num();
 		UserVO userVO = mypageService.getUser(user_proper_num);
 		model.addAttribute("userVO", userVO);
-		System.out.println(userVO.toString());
 		
 		return "mypage/modify";
 	}
@@ -97,11 +95,9 @@ public class MypageController {
 		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
 		int user_proper_num = user.getUser_proper_num();
 		
-		ArrayList<MypageStatusVO> list = mypageService.getStatus(user_proper_num);
-		model.addAttribute("list", list);
-		System.out.println(list.size());
-		int size = list.size();
-		model.addAttribute("size",size);
+		MypageStatusVO vo = mypageService.getStatus(user_proper_num);
+		model.addAttribute("vo", vo);
+
 		return "mypage/status";
 	}
 
@@ -134,7 +130,6 @@ public class MypageController {
 		int result = mypageService.regPause(vo);
 		String msg = result == 1? "신청되었습니다." : "신청실패. 관리자에게 문의하세요";
 		rra.addFlashAttribute("msg", msg);
-		System.out.println(result);
 		return "redirect:/mypage/main";
 	}
 	
@@ -146,9 +141,15 @@ public class MypageController {
 		return new ResponseEntity<>(bool, HttpStatus.OK);
 	}
 	
-	@GetMapping("/deleteAplicn")
-	public String deleteAplicn() {
-		return "redirect:/mypage/status";
+	@PostMapping("/deleteAplicn")
+	public ResponseEntity<?> deleteAplicn(@RequestParam("aplicnNum") int aplcn_dtls_proper_num) {
+	    // aplicnDtlsProperNum을 사용하여 삭제 작업을 수행
+	    
+	    if (mypageService.deleteAplicn(aplcn_dtls_proper_num)== 1) {
+	        return ResponseEntity.ok().body("{\"success\": true}");
+	    } else {
+	        return ResponseEntity.badRequest().body("{\"success\": false}");
+	    }
 	}
 	
 }

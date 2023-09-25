@@ -130,5 +130,10 @@
 		where tb1.USER_PROPER_NUM = #{user_proper_num}
 	
 	</select>
+	
+	<update id="deleteAplicn">
+		update TB_005 set APLICN_DTLS_STS = '신청취소'
+		where APLCN_DTLS_PROPER_NUM = #{aplcn_dtls_proper_num}
+	</update>
 
 </mapper>       

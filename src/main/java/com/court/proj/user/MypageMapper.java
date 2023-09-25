@@ -15,11 +15,11 @@ public interface MypageMapper {
 										  @Param("cri") HistoryCriteria cri);
 	public int historyTotal(@Param("user_proper_num") int user_proper_num,
 			                @Param("cri") HistoryCriteria cri);	
-	public ArrayList<MypageStatusVO> getStatus(int user_proper_num);
+	public MypageStatusVO getStatus(int user_proper_num);
 	public ArrayList<MypageStatusVO> getDocu(int aplcn_dtls_proper_num);
 	public int regPause(PauseDataVO vo);
 	public PauseDataVO getPause(int user_proper_num);
 	public boolean pauseAccess(int user_proper_num);
-
+	public int deleteAplicn(int aplcn_dtls_proper_num);
 
 }
