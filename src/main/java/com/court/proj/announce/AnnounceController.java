@@ -75,15 +75,19 @@ public class AnnounceController {
 	public String announceDetail(@RequestParam(name = "id") int announce_proper_num, Model model) {
 		AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
 		model.addAttribute("alist", alist);
-		System.out.println(alist.toString());
+//em.out.println(alist.toString());
 
 		return "announce/announceDetail";
 	}
 
 	// 모집공고 수정 페이지
 	@GetMapping("announceModify")
-	public String announceModify(@RequestParam(name = "id") int announce_proper_num, Model model) {
+	public String announceModify(@RequestParam(name = "id") int announce_proper_num, Model model, Authentication auth) {
 
+		CourtAdminDetails admin = (CourtAdminDetails)auth.getPrincipal();
+
+		admin_id = admin.getUsername();
+		
 		AnnounceVO alist = announceService.getAnnounceDetail(announce_proper_num);
 		model.addAttribute("alist", alist);
 
@@ -107,6 +111,8 @@ public class AnnounceController {
 //		vo.setAdmin_auth(admin_auth);
 //		vo.setAdmin_name(admin_name);
 
+		vo.setAdmin_proper_num(announceService.getinfo(admin_id).getAdmin_proper_num());
+		
 		if (vo.getSelectType3().equals("선택")) {
 			vo.setTrial_fcltt_proper_num(announceService.getTrialNum1(vo.getSelectType1(), vo.getSelectType2()));
 		} else {
@@ -114,7 +120,7 @@ public class AnnounceController {
 					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3()));
 		}
 
-		System.out.println(vo.toString());
+//		System.out.println(vo.toString());
 		
 		announceService.updateAnnounce(vo);
 
@@ -153,7 +159,7 @@ public class AnnounceController {
 					announceService.getTrialNum2(vo.getSelectType1(), vo.getSelectType2(), vo.getSelectType3()));
 		}
 
-		System.out.println(vo.toString());
+//		System.out.println(vo.toString());
 		announceService.announceRegistTB002(vo);
 
 		return "redirect:/announce/announceList";

@@ -11,13 +11,13 @@ public class InfoController {
 	@GetMapping("/info")
 	public String info() {
 		
-		return "/info/info";
+		return "info/info";
 	}
 	
 	@GetMapping("/infoProcess")
 	public String infoProcess() {
 		
-		return "/info/infoProcess";
+		return "info/infoProcess";
 	}
 	
 }
