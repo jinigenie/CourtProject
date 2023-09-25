@@ -18,7 +18,8 @@
 		tb10.trial_fcltt_description,
 		tb5.court_proper1,
 		tb5.court_proper2,
-		tb5.trial_fcltt_proper_num
+		tb5.trial_fcltt_proper_num,
+		tb5.aplcn_dtls_proper_num
 		from TB_001 tb1
 		join TB_005 tb5 on tb5.user_proper_num = tb1.user_proper_num
 		join TB_010 tb10 on tb10.trial_fcltt_proper_num =
@@ -55,6 +56,14 @@
 		#{accept_etc}
 		)
 	</insert>
+	
+	<update id="fclttRegist2">
+		update TB_005 set APLICN_DTLS_STS = '합격'
+         where aplcn_dtls_proper_num = #{aplcn_dtls_proper_num};
+	
+	
+	</update>
+
 
 	<select id="getList" resultType="FclttVO">
 		SELECT
