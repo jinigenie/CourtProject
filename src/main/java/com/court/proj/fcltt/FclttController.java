@@ -93,8 +93,12 @@ public class FclttController {
 	@PostMapping("/fclttRegistForm")
 	public String fclttRegistFom(FclttVO vo, RedirectAttributes ra) {
 		
+		System.out.println("vo정보 ========================================= : "+vo.toString());
 		// 이메일 발송
-		String to = vo.getUser_email_f() + "@" + vo.getUser_email_b(); // 수신자 이메일 주소
+		String email1= vo.getUser_email_f() ;
+		String email2= vo.getUser_email_b() ;
+		String to = email1+"@"+email2;
+		// 수신자 이메일 주소
 		String subject = vo.getUser_name()+"님의 재판조력자 신청결과 입니다"; // 이메일 제목
 		String emailContent = 
 				"<html>" +
