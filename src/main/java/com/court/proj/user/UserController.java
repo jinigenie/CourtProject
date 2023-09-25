@@ -61,8 +61,6 @@ public class UserController {
 	public String test(Authentication auth) {
 		
 		CourtUserDetails user = (CourtUserDetails)auth.getPrincipal();
-		System.out.println(user.getUser_id());
-		System.out.println(user.getUsername());
 		return "user/test";
 	}
 
@@ -99,7 +97,6 @@ public class UserController {
 			List<FieldError> list = errors.getFieldErrors();
 			for (FieldError err : list) {
 				model.addAttribute("valid_" + err.getField(), err.getDefaultMessage());
-				System.out.println(err.getDefaultMessage());
 			}
 			return "user/userjoin";
 		}
@@ -163,7 +160,6 @@ public class UserController {
 		String newPassword = bCryptPasswordEncoder.encode(newPw);
 
 		int result = userService.updatePw(phone, newPassword);
-		System.out.println(result);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 

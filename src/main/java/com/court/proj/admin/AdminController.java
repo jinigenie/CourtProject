@@ -29,10 +29,6 @@ public class AdminController {
 	public String adminReg(Authentication auth) {
 		
 		
-		System.out.println(auth);
-		
-		//System.out.println( ((AdminVO)auth.getPrincipal()).toString() );
-		
 		return "admin/adminRegist";
 	}
 	
@@ -42,7 +38,6 @@ public class AdminController {
 		
 		String pw = encode.encode(vo.getAdmin_pw());
 		vo.setAdmin_pw(pw);
-		System.out.println(vo.toString());
 		
 		
 		return "redirect:/admin/list";

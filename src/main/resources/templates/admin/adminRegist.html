@@ -14,9 +14,23 @@
 					<h2 class="title">사용자 관리</h2>
 					<div class="menu">
 						<ul>
-							<li><a th:href="@{./regist}" title="">관리자 등록</a>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">관리자관리</a>
+								<ul class="sub" style="display: none;">
+									<li><a th:href="@{./../admin/regist}">관리자 등록</a></li>
+									<li><a th:href="@{./../admin/list}">관리자 목록</a></li>
+								</ul>
 							</li>
-							<li><a th:href="@{./list}" title="">관리자 목록</a>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 관리</a>
+								<ul class="sub" style="display: none;">
+									<li><a th:href="@{./../aplcn/aplcnList}">신청자 명단</a></li>
+								</ul>
+							</li>
+							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">재판조력자 관리</a>
+								<ul class="sub" style="display: none;">
+									<li><a th:href="@{./../fcltt/fclttList}">조력자 등재명단</a>
+									</li>
+									<li><a th:href="@{./../fcltt/pause}">활동 중지/해제 처리</a></li>
+								</ul>
 							</li>
 						</ul>
 					</div>
