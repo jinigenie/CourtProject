@@ -27,6 +27,9 @@ function modalCont() {
 			var content3 = fclttData.content3;
 			var content4 = fclttData.content4;
 			var content5 = fclttData.content5;
+			var phone = content1.user_phone; // 전화번호 특수문자추가
+			var user_phone = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7);
+
 
 			var str = '<div class="popup_cont2" style="overflow: hidden;">';
 			str += '<div class="popup_cont2_title">';
@@ -47,11 +50,11 @@ function modalCont() {
 			str += '<tbody>';
 			str += '<tr>';
 			str += '<th>조력자분류</th>';
-			str += '<td>' + content1.trial_fcltt_clasifi_code + '>' + content1.trial_fcltt_description + '</td>';
+			str += '<td style="font-size:13px;">' + content1.trial_fcltt_clasifi_code + ' > ' + content1.trial_fcltt_description + '</td>';
 			str += '</tr>';
 			str += '<tr>';
 			str += '<th>법원</th>';
-			str += '<td>' + content1.court_region + '>' + content1.court_name + '</td>';
+			str += '<td style="font-size:13px;">' + content1.court_region + ' > ' + content1.court_name + '</td>';
 			str += '</tr>';
 			str += '</tbody>';
 			str += '</table>';
@@ -66,11 +69,11 @@ function modalCont() {
 			str += '<tbody>';
 			str += '<tr>';
 			str += '<th>휴대전화</th>';
-			str += '<td>' + content1.user_phone + '</td>';
+			str += '<td style="font-size:14px;">' + user_phone + '</td>';
 			str += '</tr>';
 			str += '<tr>';
 			str += '<th>이메일</th>';
-			str += '<td>' + content1.user_email_f + '@' + content1.user_email_b + '</td>';
+			str += '<td style="font-size:14px;">' + content1.user_email_f + '@' + content1.user_email_b + '</td>';
 			str += '</tr>';
 			str += '</tbody>';
 			str += '</table>';
@@ -314,49 +317,49 @@ function loadList(selectedValue, searchContent2, searchCont, pageNumber, pageSiz
 }
 
 
-	// 승인처리 ajax
-	$(document).on("click", ".pauseResult1, .pauseResult2", function (event) {
-		event.preventDefault(); // a 링크의 기본 동작 중지
-		var accept_proper_num = $(this).closest("tr").find("input[name='accept_proper_num']").val();
-		var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
-		var selectedValue = $("#selectedValue").val();
-		console.log(accept_act_yn);
+// 승인처리 ajax
+$(document).on("click", ".pauseResult1, .pauseResult2", function(event) {
+	event.preventDefault(); // a 링크의 기본 동작 중지
+	var accept_proper_num = $(this).closest("tr").find("input[name='accept_proper_num']").val();
+	var accept_act_yn = $(this).hasClass("pauseResult1") ? "Y" : "N";
+	var selectedValue = $("#selectedValue").val();
+	console.log(accept_act_yn);
 
-		// 여기에 AJAX 요청 코드를 작성합니다.
-		$.ajax({
-			url: "../pauseResultSubmit", // 요청을 보낼 URL을 지정합니다.
-			type: "POST", // HTTP 요청 메서드 (GET 또는 POST)
-			data: {
-				"accept_proper_num": accept_proper_num,
-				"accept_act_yn": accept_act_yn
-			},
-			success: function (response) {
-				// 성공적으로 응답을 받았을 때 실행될 코드를 작성합니다.
-				console.log("AJAX 요청 성공");
-				// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다
+	// 여기에 AJAX 요청 코드를 작성합니다.
+	$.ajax({
+		url: "../pauseResultSubmit", // 요청을 보낼 URL을 지정합니다.
+		type: "POST", // HTTP 요청 메서드 (GET 또는 POST)
+		data: {
+			"accept_proper_num": accept_proper_num,
+			"accept_act_yn": accept_act_yn
+		},
+		success: function(response) {
+			// 성공적으로 응답을 받았을 때 실행될 코드를 작성합니다.
+			console.log("AJAX 요청 성공");
+			// 여기에서 응답 데이터를 처리하거나 필요한 작업을 수행합니다
 
-				// 목록을 다시 불러오는 AJAX 요청
-				// 목록을 다시 불러오는 함수 호출
-				pauseList(selectedValue, 1, 10);
-				alert("승인되었습니다.");
-				
-			},
-			error: function (xhr, status, error) {
-				// AJAX 요청 중 오류가 발생했을 때 실행될 코드를 작성합니다.
-				console.error("AJAX 요청 오류: " + error);
-			}
-		});
+			// 목록을 다시 불러오는 AJAX 요청
+			// 목록을 다시 불러오는 함수 호출
+			pauseList(selectedValue, 1, 10);
+			alert("승인되었습니다.");
 
+		},
+		error: function(xhr, status, error) {
+			// AJAX 요청 중 오류가 발생했을 때 실행될 코드를 작성합니다.
+			console.error("AJAX 요청 오류: " + error);
+		}
 	});
-	
+
+});
 
 
 
-	// 활동준비/ 승인준비 select change 값 별로 정렬
-	$("#selectedValue").change(function () {
-		var selectedValue = $(this).val();
 
-		pauseList(selectedValue, 1, 10); // pageNumber와 pageSize를 직접 지정
-	});
+// 활동준비/ 승인준비 select change 값 별로 정렬
+$("#selectedValue").change(function() {
+	var selectedValue = $(this).val();
+
+	pauseList(selectedValue, 1, 10); // pageNumber와 pageSize를 직접 지정
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
