@@ -116,6 +116,18 @@
 						padding: 10px;
 					}
 
+					.fclttRegist_btn .fcltt_btn5 {
+						display: inline-block;
+						height: 30px;
+						width: 100px;
+						background-color: rgb(0, 155, 155);
+						color: white;
+						border: none;
+						border-radius: 5px;
+						margin: 2px;
+						padding: 5px;
+					}
+
 
 					.fclttRegist_btn>.fcltt_btn2:hover {
 						color: white;
@@ -458,14 +470,16 @@
 								</table>
 								<table class="table" style="width: 100%; border-top: none;"> <!-- 표 전체 너비를 100%로 설정 -->
 									<colgroup>
-										<col style="width: 50%;">
-										<col style="width: 50%;">
+										<col style="width: 55%;">
+										<col style="width: 45%;">
+										
 									</colgroup>
 									<tbody>
-											<tr th:each="file : ${fileList}">
-												<td class="tg-0lax">[[${file.original_file_name}]]</td>
-												<td class="tg-0lax"><a th:href="${file.file_path}">파일 받기</a></td>
-											</tr>
+										<tr th:each="file : ${fileList}">
+											<td class="tg-0lax">[[${file.original_file_name}]]</td>
+											<td class="tg-0lax fclttRegist_btn" style="border-right: none"><a th:href="${file.file_path}" class="fcltt_btn5">파일 받기</a>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
