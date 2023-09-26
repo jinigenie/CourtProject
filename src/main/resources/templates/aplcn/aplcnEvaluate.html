@@ -220,7 +220,8 @@
 													name="interview_score" value="0" readonly>
 											</td>
 
-											<td class="tg-0lax" rowspan="2"><strong>감정 연구 연수</strong><div><strong>(국가기관연구소 문서감정실)</strong></div>
+											<td class="tg-0lax" rowspan="2"><strong>감정 연구 연수</strong>
+												<div><strong>(국가기관연구소 문서감정실)</strong></div>
 											</td>
 											<td class="tg-0lax"><input type="radio" name="expE" value="5"
 													onclick="updateReadOnly('expE', this.value); calculateTotal();">감정/연구
@@ -262,199 +263,200 @@
 										<tr>
 											<td class="tg-0lax"><input type="radio" name="expF" value="2"
 													onclick="updateReadOnly('expF', this.value); calculateTotal();">④토목시공기술사,
-												토목구조기술사, 도로 및 공항기술사</div>
-											</td>
-											<td class="tg-0lax" style="border-right: none">2점</td>
-										</tr>
-										<tr>
-											<td></td>
-										</tr>
+												토목구조기술사, 도로 및 공항기술사
+							</div>
+							</td>
+							<td class="tg-0lax" style="border-right: none">2점</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
 
-										<tr>
-											<td class="tg-0lax" colspan="2" style="color: #2065c6;"><strong>합계</strong>
-											</td>
-											<td class="tg-0lax" style="color: blue;">
-												<input class="tg-0lax" id="expTotal" style="color: blue;" value="0"
-													readonly>
-											</td>
-										</tr>
-										<tr>
-											<td></td>
-										</tr>
+							<tr>
+								<td class="tg-0lax" colspan="2" style="color: #2065c6;"><strong>합계</strong>
+								</td>
+								<td class="tg-0lax" style="color: blue;">
+									<input class="tg-0lax" id="expTotal" style="color: blue;" value="0" readonly>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
 
-										<tr>
-											<td class="tg-0lax" colspan="2"><strong>감정인 평점표 (종합평점)</strong>
-											</td>
-											<td class="tg-0lax"><input type="text" style="color: blue;"
-													name="evaluate_score" value="0" id="expG" onchange="updateTotal();"
-													onkeyup="calculateTotal();" onblur="validateInput(this);">
-												점</td>
-											<td class="tg-0lax" colspan="2" style="border-right: none">평점표 기준 (최대7점)
-											</td>
-										</tr>
+							<tr>
+								<td class="tg-0lax" colspan="2"><strong>감정인 평점표 (종합평점)</strong>
+								</td>
+								<td class="tg-0lax"><input type="text" style="color: blue;" name="evaluate_score"
+										value="0" id="expG" onchange="updateTotal();" onkeyup="calculateTotal();"
+										onblur="validateInput(this);">
+									점</td>
+								<td class="tg-0lax" colspan="2" style="border-right: none">평점표 기준 (최대7점)
+								</td>
+							</tr>
 
-										<tr>
-											<td></td>
-										</tr>
-										<tr>
-											<td class="tg-0lax"><strong>조정평점</strong></td>
-											<td class="tg-0lax">심사위원회 추천</td>
-											<td class="tg-0lax"><input type="text" style="color: blue;"
-													name="judge_recom_score" value="0" id="expH"
-													onchange="updateTotal()" onkeyup="calculateTotal();" onblur="validateInput(this);"> 점
-											</td>
-											<td class="tg-0lax" colspan="2" style="border-right: none">심사위원회에서 결정 (최대
-												7점)</td>
-										</tr>
-										<tr>
-											<td></td>
-										</tr>
+							<tr>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="tg-0lax"><strong>조정평점</strong></td>
+								<td class="tg-0lax">심사위원회 추천</td>
+								<td class="tg-0lax"><input type="text" style="color: blue;" name="judge_recom_score"
+										value="0" id="expH" onchange="updateTotal()" onkeyup="calculateTotal();"
+										onblur="validateInput(this);"> 점
+								</td>
+								<td class="tg-0lax" colspan="2" style="border-right: none">심사위원회에서 결정 (최대
+									7점)</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
 
-										<td class="tg-0lax" colspan="2" style="color: #2065c6;">
-											<strong>최종점수</strong>
-										<td class="tg-0lax" colspan="3" style="border-right: none" id="pointTotal">
-											<strong>
-												/ 40점</strong>
-										</td>
-										</tr>
-										<tr>
-											<td></td>
-										</tr>
-									</tbody>
+							<td class="tg-0lax" colspan="2" style="color: #2065c6;">
+								<strong>최종점수</strong>
+							<td class="tg-0lax" colspan="3" style="border-right: none" id="pointTotal">
+								<strong>
+									/ 40점</strong>
+							</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+							</tbody>
+							</table>
+
+							<div class="table">
+								<table>
+									<tr>
+										<td style="text-align: center;"><strong>검토 의견</strong></td>
+									</tr>
+									<tr>
+										<td><textarea rows="4" cols="50"
+												style="width: 600px; height: 150px; display: block; margin: 0 auto;"
+												name="review_etc" value=""></textarea></td>
+									</tr>
 								</table>
+							</div>
 
-								<div class="table">
-									<table>
-										<tr>
-											<td style="text-align: center;"><strong>검토 의견</strong></td>
-										</tr>
-										<tr>
-											<td><textarea rows="4" cols="50"
-													style="width: 600px; height: 150px; display: block; margin: 0 auto;"
-													name="review_etc" value=""></textarea></td>
-										</tr>
-									</table>
-								</div>
+							<script>
 
-								<script>
-
-									function updateReadOnly(id, value) {
-										const readonlyElement = document.getElementById(id);
-										readonlyElement.value = value
-										if (readonlyElement) {
-
-										}
+								function updateReadOnly(id, value) {
+									const readonlyElement = document.getElementById(id);
+									readonlyElement.value = value
+									if (readonlyElement) {
 
 									}
 
-									function calculateTotal() {
-										// 각 그룹의 값을 합산할 변수 초기화
-										let totalValueA = 0;
-										let totalValueB = 0;
-										let totalValueC = 0;
-										let totalValueD = 0;
-										let totalValueE = 0;
-										let totalValueF = 0;
-										let totalValueG = 0;
-										let totalValueH = 0;
+								}
 
-										// 그룹 A의 라디오 버튼 값을 합산
-										const expARadioButtons = document.querySelectorAll('input[type="radio"][name="expA"]');
-										expARadioButtons.forEach(function (radio) {
-											if (radio.checked) {
-												totalValueA += parseInt(radio.value);
-											}
-										});
+								function calculateTotal() {
+									// 각 그룹의 값을 합산할 변수 초기화
+									let totalValueA = 0;
+									let totalValueB = 0;
+									let totalValueC = 0;
+									let totalValueD = 0;
+									let totalValueE = 0;
+									let totalValueF = 0;
+									let totalValueG = 0;
+									let totalValueH = 0;
 
-										// 그룹 B의 라디오 버튼 값을 합산
-										const expBRadioButtons = document.querySelectorAll('input[type="radio"][name="expB"]');
-										expBRadioButtons.forEach(function (radio) {
-											if (radio.checked) {
-												totalValueB += parseInt(radio.value);
-											}
-										});
-
-										// 그룹 C의 라디오 버튼 값을 합산
-										const expCRadioButtons = document.querySelectorAll('input[type="radio"][name="expC"]');
-										expCRadioButtons.forEach(function (radio) {
-											if (radio.checked) {
-												totalValueC += parseInt(radio.value);
-											}
-										});
-
-										// 그룹 D의 라디오 버튼 값을 합산
-										const expDRadioButtons = document.querySelectorAll('input[type="radio"][name="expD"]');
-										expDRadioButtons.forEach(function (radio) {
-											if (radio.checked) {
-												totalValueD += parseInt(radio.value);
-											}
-										});
-
-										// 그룹 E의 라디오 버튼 값을 합산
-										const expERadioButtons = document.querySelectorAll('input[type="radio"][name="expE"]');
-										expERadioButtons.forEach(function (radio) {
-											if (radio.checked) {
-												totalValueE += parseInt(radio.value);
-											}
-										});
-										
-										// 그룹 F의 라디오 버튼 값을 합산
-										const expFRadioButtons = document.querySelectorAll('input[type="radio"][name="expF"]');
-										expFRadioButtons.forEach(function (radio) {
-											if (radio.checked) {
-												totalValueF += parseInt(radio.value);
-											}
-										});
-										
-										// 전체 합계 계산
-										const totalValue = totalValueA + totalValueB + totalValueC + totalValueD + totalValueE + totalValueF;
-										// 전체 합계를 "expTotal"의 input 요소에 표시
-										const expTotalElement = document.getElementById("expTotal");
-										if (expTotalElement) {
-											expTotalElement.value = totalValue.toFixed(1) + "점";
+									// 그룹 A의 라디오 버튼 값을 합산
+									const expARadioButtons = document.querySelectorAll('input[type="radio"][name="expA"]');
+									expARadioButtons.forEach(function (radio) {
+										if (radio.checked) {
+											totalValueA += parseInt(radio.value);
 										}
+									});
 
-
-										// 그룹 G의 입력된 값을 합산
-										const expGInput = document.querySelector('input[type="text"][id="expG"]');
-										if (expGInput.value !== "") {
-											totalValueG += parseInt(expGInput.value);
+									// 그룹 B의 라디오 버튼 값을 합산
+									const expBRadioButtons = document.querySelectorAll('input[type="radio"][name="expB"]');
+									expBRadioButtons.forEach(function (radio) {
+										if (radio.checked) {
+											totalValueB += parseInt(radio.value);
 										}
+									});
 
-										// 그룹 H의 입력된 값을 합산
-										const expHInput = document.querySelector('input[type="text"][id="expH"]');
-										if (expHInput.value !== "") {
-											totalValueH += parseInt(expHInput.value);
+									// 그룹 C의 라디오 버튼 값을 합산
+									const expCRadioButtons = document.querySelectorAll('input[type="radio"][name="expC"]');
+									expCRadioButtons.forEach(function (radio) {
+										if (radio.checked) {
+											totalValueC += parseInt(radio.value);
 										}
+									});
 
-										// 총점을 화면에 표시
+									// 그룹 D의 라디오 버튼 값을 합산
+									const expDRadioButtons = document.querySelectorAll('input[type="radio"][name="expD"]');
+									expDRadioButtons.forEach(function (radio) {
+										if (radio.checked) {
+											totalValueD += parseInt(radio.value);
+										}
+									});
+
+									// 그룹 E의 라디오 버튼 값을 합산
+									const expERadioButtons = document.querySelectorAll('input[type="radio"][name="expE"]');
+									expERadioButtons.forEach(function (radio) {
+										if (radio.checked) {
+											totalValueE += parseInt(radio.value);
+										}
+									});
+
+									// 그룹 F의 라디오 버튼 값을 합산
+									const expFRadioButtons = document.querySelectorAll('input[type="radio"][name="expF"]');
+									expFRadioButtons.forEach(function (radio) {
+										if (radio.checked) {
+											totalValueF += parseInt(radio.value);
+										}
+									});
+
+									// 전체 합계 계산
+									const totalValue = totalValueA + totalValueB + totalValueC + totalValueD + totalValueE + totalValueF;
+									// 전체 합계를 "expTotal"의 input 요소에 표시
+									const expTotalElement = document.getElementById("expTotal");
+									if (expTotalElement) {
+										expTotalElement.value = totalValue.toFixed(1) + "점";
+									}
+
+
+									// 그룹 G의 입력된 값을 합산
+									const expGInput = document.querySelector('input[type="text"][id="expG"]');
+									if (expGInput.value !== "") {
+										totalValueG += parseInt(expGInput.value);
+									}
+
+									// 그룹 H의 입력된 값을 합산
+									const expHInput = document.querySelector('input[type="text"][id="expH"]');
+									if (expHInput.value !== "") {
+										totalValueH += parseInt(expHInput.value);
+									}
+
+									// 총점을 화면에 표시
+									if (!isNaN(totalValue) && !isNaN(totalValueG) && !isNaN(totalValueH)) {
 										const pointTotalElement = document.getElementById("pointTotal");
 										if (pointTotalElement) {
 											pointTotalElement.textContent = (totalValue + totalValueG + totalValueH).toFixed(1) + " / 40점";
 										}
 									}
-								</script>
+								}
+							</script>
 
-								<script>
-									function validateInput(inputElement) {
-										const inputValue = inputElement.value;
-										const parsedValue = parseInt(inputValue);
+							<script>
+								function validateInput(inputElement) {
+									const inputValue = inputElement.value;
 
-										if (isNaN(parsedValue) || parsedValue < 0 || parsedValue > 7) {
-											alert("숫자는 0에서 7까지만 입력 가능합니다. 다시 입력하세요.");
-											inputElement.value = "";
-										}
+									// 정규 표현식을 사용하여 숫자가 아닌 문자를 검사
+									if (!/^[0-7]*$/.test(inputValue)) {
+										alert("0~7까지만 입력 가능하며, 특수문자는 불가능합니다. 다시 입력하세요.");
+										inputElement.value = "0";
 									}
+								}
+							</script>
 
-								</script>
+							<!-- pagenation -->
+							<div class="fclttRegist_btn">
 
-								<!-- pagenation -->
-								<div class="fclttRegist_btn">
+								<button type="submit" class="fcltt_btn2" id="evaluateBtn">평가완료</button>
 
-									<button type="submit" class="fcltt_btn2" id="evaluateBtn">평가완료</button>
-
-								</div>
 							</div>
+						</div>
 					</form>
 
 					<script>
