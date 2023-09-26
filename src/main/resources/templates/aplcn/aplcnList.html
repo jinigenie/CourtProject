@@ -373,8 +373,8 @@
 								</thead>
 								<tbody id="aplcnListId">
 
-									<tr title="etc" style="cursor: pointer" th:each="vo:${vo}">
-										<td data-cell-header="신청자 상세정보 고유번호">[[${vo.aplcn_dtls_proper_num}]]</td>
+									<tr title="etc" style="cursor: pointer" th:each="vo, status:${vo}">
+										<td data-cell-header="신청자 상세정보 고유번호">[[${status.index+1}]]</td>
 										<td data-cell-header="신청자 이름">[[${vo.user_name}]]</td>
 										<td data-cell-header="조력자 분류">[[${vo.trial_fcltt_clasifi_code}]]</td>
 										<td data-cell-header="담당법원">[[${vo.court_name}]]</td>

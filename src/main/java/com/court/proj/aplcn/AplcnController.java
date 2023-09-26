@@ -84,12 +84,13 @@ public class AplcnController {
 		try { // encoededString이 고정주소/유저아이디/+ 여기에
 
 			for (FileVO v : fileList) {
-				String downloadPath = s3downloadPath+"/" + vo1.getUser_id() + "/"
+				String downloadPath = s3downloadPath + vo1.getUser_id() + "/"
 						+ URLEncoder.encode(v.getFile_path(), "UTF-8");
-				linkList.add(downloadPath);
+				//linkList.add(downloadPath);
+				v.setFile_path(downloadPath);
 				System.out.println(downloadPath);
 			}
-			model.addAttribute("linkList", linkList);
+			//model.addAttribute("linkList", linkList);
 			model.addAttribute("fileList", fileList);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

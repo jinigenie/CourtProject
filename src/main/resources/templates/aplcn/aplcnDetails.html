@@ -462,19 +462,10 @@
 										<col style="width: 50%;">
 									</colgroup>
 									<tbody>
-										<th:block th:each="file : ${linkList}">
-											<tr>
-												<td class="tg-0lax"><a th:href="${file}">123</a></td>
-											</tr>
-										</th:block>
-									</tbody>
-									<tbody>
-										<th:block th:each="file : ${fileList}">
-											<tr>
+											<tr th:each="file : ${fileList}">
 												<td class="tg-0lax">[[${file.original_file_name}]]</td>
+												<td class="tg-0lax"><a th:href="${file.file_path}">파일 받기</a></td>
 											</tr>
-										</th:block>
-										</th>
 									</tbody>
 								</table>
 							</div>
