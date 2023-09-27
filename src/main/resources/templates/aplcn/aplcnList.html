@@ -233,7 +233,7 @@
 					}
 
 					.aplcnSearch_Btn {
-						width: 70px;
+						width: 60px;
 						border-radius: 5px;
 						text-align: center;
 						line-height: 38px;
@@ -242,12 +242,21 @@
 						color: white;
 						text-decoration: none;
 						margin-right: 50px;
+						position: relative;
 					}
 
 					.pager-wrap .active {
 						background: white;
 						border-color: lightgrey;
 						color: dimgrey;
+					}
+
+					.searchform .search-input-wrap {
+						position: relative;
+						display: inline-block;
+						min-width: 300px;
+						overflow: hidden;
+						float: left;
 					}
 				</style>
 
@@ -274,13 +283,6 @@
 								<div class="searchform-wrap">
 									<div class="select-box" style="width: 200px" ;>
 										<label>이름</label>
-										<!--<select class="info-select" id="searchTit" name="searchField"
-											title="검색조건을 선택해주세요.">
-											<option value="0">전체</option>
-											<option value="1">이름</option>
-											<option value="2">재판조력자분류</option>
-											<option value="3">법원분류</option>
-										</select>-->
 
 										<select class="info-select" id="selectTit" name="searchField"
 											title="검색조건을 선택해주세요." style="min-width: 200px">
@@ -293,23 +295,22 @@
 											<option value="trial_fcltt_clasifi_code"
 												th:selected="${pageVO.cri.searchNameCode == 'trial_fcltt_clasifi_code'}">
 												재판조력자분류</option>
-											<option value="court_name" th:selected="${pageVO.cri.searchCourt == 'court_name'}">법원
+											<option value="court_name"
+												th:selected="${pageVO.cri.searchCourt == 'court_name'}">법원
 												분류
 											</option>
 										</select>
 
 
 									</div>
-									
 
-									<div class="search-input-wrap">
+
+									<div class="search-input-wrap" style="width: 250px;">
 										<div class="input-wrap" style="float: left;">
 											<input type="text" name="searchContent" value="" class="form-control"
 												placeholder="검색어를 입력해주세요" title="검색어를 입력해주세요" id="searchAll"
-												style="width: 340px;">
+												style="width: 230px;">
 										</div>
-										<!--<button class="aplcnSearch_Btn" id="aplcnSearch_btn" type="submit"
-											style="float: left; margin: 0;">조회</button>-->
 										<button type="button" class="aplcnSearch_Btn" id="aplcnSearch_btn"
 											style="float: left; margin: 0;" onclick="searchAlls()">조회</button>
 
@@ -317,20 +318,25 @@
 
 									<div class="select-box" id="select-box-margin-left-10">
 										<label></label>
-										<select id="aplcnChange" class="info-select" style="min-width: 150px">
+										<select id="aplcnChange" class="info-select" style="min-width: 80px">
 
-											<option value="선택" th:selected="${pageVO.cri.aplicn_dtls_sts == '선택'}">선택</option>
-											<option value="신청완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '신청완료'}">신청완료</option>
-											<option value="심사중" th:selected="${pageVO.cri.aplicn_dtls_sts == '심사중'}">심사중</option>
-											<option value="서류반려" th:selected="${pageVO.cri.aplicn_dtls_sts == '서류반려'}">서류반려</option>
-											<option value="평가완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '평가완료'}">평가완료</option>
+											<option value="선택" th:selected="${pageVO.cri.aplicn_dtls_sts == '선택'}">선택
+											</option>
+											<option value="신청완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '신청완료'}">
+												신청완료</option>
+											<option value="심사중" th:selected="${pageVO.cri.aplicn_dtls_sts == '심사중'}">심사중
+											</option>
+											<option value="서류반려" th:selected="${pageVO.cri.aplicn_dtls_sts == '서류반려'}">
+												서류반려</option>
+											<option value="평가완료" th:selected="${pageVO.cri.aplicn_dtls_sts == '평가완료'}">
+												평가완료</option>
 
 										</select>
 									</div>
 
 									<div class="select-box" id="select-box-margin-left-10">
 										<select name="view_cnt" id="view_cnt" class="info-select" title="게시판 목록보기 갯수선택"
-											style="min-width: 170px">
+											style="min-width: 162px">
 											<option value="5" th:selected="${pageVO.amount == 5}">5개씩 보기</option>
 											<option value="10" th:selected="${pageVO.amount == 10}">10개씩 보기</option>
 											<option value="20" th:selected="${pageVO.amount == 20}">20개씩 보기</option>
@@ -442,7 +448,7 @@
 	function searchAlls() {
 		event.preventDefault(); //a중지
 		document.listForm.submit(); //폼태그 서브밋
-		
+
 	}
 </script>
 
