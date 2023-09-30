@@ -126,16 +126,16 @@ public class UserController {
 	// 휴대폰 인증번호
 	@PostMapping("/send-one")
 	public @ResponseBody ResponseEntity<Integer> sendOne(@RequestParam("phone") String phone) {
-		//Message message = new Message();
-		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-		//message.setFrom("01073251252");
+		Message message = new Message();
+		 //발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+		//message.setFrom("");
 		//message.setTo(phone);
 
 		Random random = new Random();
 		System.out.println(phone);
 		int randomNumber = random.nextInt(900000) + 100000;
 
-		//message.setText("인증번호 : " + randomNumber);
+		message.setText("인증번호 : " + randomNumber);
 
 		//SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 		//System.out.println(response);

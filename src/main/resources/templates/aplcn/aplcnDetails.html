@@ -1,648 +1,648 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-	crossorigin="anonymous"></script>
+   crossorigin="anonymous"></script>
 <th:block th:replace="~{./include/basicLayout :: setContent(~{::.wrap})}">
 
-	<div class="wrap">
-		<!-- main_con  -->
-		<div id="main_con">
-			<div id="nav_menu">
-				<div id="lnb">
-					<h2 class="title">조력자 등재신청</h2>
-					<div class="menu">
-						<ul>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
-								<ul class="sub" style="display: none;">
-									<li><a th:href="@{/fcltt/fclttList}">조력자 등재명단</a></li>
-								</ul>
-							</li>
-							<li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
-								<ul class="sub" style="display: none;">
-									<li><a th:href="@{/aplcn/aplcnList}">신청자 목록</a></li>
-								</ul>
-							</li>
-
-						</ul>
-					</div>
-
-				</div>
-			</div>
-			<div id="contents">
-
-				<style>
-					@media screen and (max-width: 1024px) {
-						.table-responsive>table>tbody>tr td[data-cell-header]:before {
-							width: 30%;
-							margin: 0 0 0 0;
-							vertical-align: unset;
-						}
-					}
-
-					.table-responsive>table>tbody>tr:hover {
-						background-color: #e6f8ff;
-					}
-
-					@media screen and (min-width: 1100px) {
-						#select-box-margin-left-10 {
-							margin-left: 6px;
-						}
-					}
-
-					.details_btn2 a {
-						height: 35px;
-						width: 77px;
-						border: 1px solid #2065c6;
-						border-radius: 5px;
-						margin: 5px;
-						padding: 5px;
-						text-align: center;
-						display: inline-block;
-						background: #2065c6;
-					}
-
-					.table table-responsive .shifted-td {
-						margin-left: 2cm;
-					}
-
-					.fclttRegist_btn {
-						margin-top: 20px;
-						text-align: center;
-					}
-
-					.fclttRegist_btn .fcltt_btn1 {
-						display: inline-block;
-						height: 43px;
-						width: 150px;
-						border: 1px solid #2065c6;
-						border-radius: 5px;
-						margin: 5px;
-						padding: 10px;
-					}
-
-					.fclttRegist_btn .fcltt_btn2 {
-						display: inline-block;
-						height: 43px;
-						width: 150px;
-						background-color: lightgrey;
-						color: black;
-						border: 1px solid lightgrey;
-						border-radius: 5px;
-						margin: 5px;
-						padding: 10px;
-					}
-
-					.fclttRegist_btn .fcltt_btn3 {
-						display: inline-block;
-						height: 43px;
-						width: 150px;
-						background-color: #2065c6;
-						color: white;
-						border: 1px solid #2065c6;
-						border-radius: 5px;
-						margin: 5px;
-						padding: 10px;
-					}
-
-					.fclttRegist_btn .fcltt_btn4 {
-						display: inline-block;
-						height: 43px;
-						width: 150px;
-						background-color: rgb(0, 128, 192);
-						color: white;
-						border: 1px solid rgb(0, 128, 192);
-						border-radius: 5px;
-						margin: 5px;
-						padding: 10px;
-					}
-
-					.fclttRegist_btn .fcltt_btn5 {
-						display: inline-block;
-						height: 30px;
-						width: 100px;
-						background-color: rgb(0, 155, 155);
-						color: white;
-						border: none;
-						border-radius: 5px;
-						margin: 2px;
-						padding: 5px;
-					}
-
-
-					.fclttRegist_btn>.fcltt_btn2:hover {
-						color: white;
-						border: none;
-						background-color: black;
-					}
-
-					.fclttRegist_btn>.fcltt_btn3:hover {
-						color: white;
-						border: none;
-						background-color: rgb(0, 155, 155);
-					}
-
-					.fclttRegist_btn>.fcltt_btn4:hover {
-						color: white;
-						border: none;
-						background-color: rgb(0, 72, 72);
-					}
-
-					.heading-wrap .heading1 {
-						font-size: 26px;
-
-					}
-
-					td.tg-0lax {
-						border-right: 1px solid lightgray;
-					}
-				</style>
-
-
-
-				<article id="detail-content">
-					<form id="listForm" name="listForm" action="####" method="post">
-
-						<div class="heading-wrap container">
-							<h3 class="heading1">
-								<!--<span>상세 정보</span>-->
-								<td>[[${vo1.user_name}]] ([[${vo1.user_id}]])님의 상세정보</td>
-							</h3>
-						</div>
-
-						<div class="contents">
-
-							<script type="text/javascript" src="/2017e/js/common/common_share_util.js"
-								charset="EUC-KR"></script>
-
-							<script type="text/javascript">
-								$(document).ready(function () {
-									Fn.TitleIcon.Call();
-								});
-							</script>
-
-							<!-- 게시판 시작 부분 -->
-							<div class="table" style="border-bottom: none;">
-								<table>
-									<caption></caption>
-									<colgroup>
-										<col style="width: 50%">
-										<col style="width: 50%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col" colspan="5"><strong>신청자 기본정보</strong></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr title="재판조력자 메뉴" style="cursor: pointer">
-											<td style="color: #2065c6;" class="tg-0lax">이름</td>
-											<td>[[${vo1.user_name}]] </td>
-										</tr>
-										<tr title="법원 메뉴" style="cursor: pointer">
-											<td style="color: #2065c6;" class="tg-0lax">연락처</td>
-											<td>[[${#strings.substring(vo1.user_phone, 0, 3) + '-' +
-												#strings.substring(vo1.user_phone, 3, 7) + '-' +
-												#strings.substring(vo1.user_phone, 7)}]]</td>
-										</tr>
-										<tr title="신청 상태 메뉴" style="cursor: pointer">
-											<td style="color: #2065c6;" class="tg-0lax">생년월일</td>
-											<td>[[${vo1.user_rrn_f}]]</td>
-										</tr>
-										<tr title="소송사건 메뉴" style="cursor: pointer">
-											<td style="color: #2065c6;" class="tg-0lax">이메일</td>
-											<td>[[${vo1.user_email_f}]]@[[${vo1.user_email_b}]]
-											</td>
-										</tr>
-										<tr>
-											<td style="color: #2065c6;" class="tg-0lax">최종 학력</td>
-											<td>[[${vo1.user_edctn_final}]]</td>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- 중요 상세정보 -->
-							<div class="table" style="border-bottom: none;">
-								<table>
-									<caption></caption>
-									<colgroup>
-										<col style="width: 50%">
-										<col style="width: 50%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col" colspan="5"><strong>중요 상세정보</strong></th>
-										</tr>
-									</thead>
-									<tbody>
-										<input type="hidden" name="aplcn_dtls_proper_num" id="aplcn_dtls_proper_num"
-											th:value="${vo1.aplcn_dtls_proper_num}">
-										<input type="hidden" name="user_name" id="user_name"
-											th:value="${vo1.user_name}">
-										<input type="hidden" name="user_proper_num" id="user_proper_num"
-											th:value="${vo1.user_proper_num}">
-										<input type="hidden" name="trial_fcltt_proper_num" id="trial_fcltt_proper_num"
-											th:value="${vo1.trial_fcltt_proper_num}">
-										<input type="hidden" name="court_proper_num" id="court_proper_num"
-											th:value="${vo1.court_proper_num}">
-										<input type="hidden" name="user_ar" id="user_ar" th:value="${vo1.user_ar}">
-
-
-										<tr title="재판조력자 메뉴" style="cursor: pointer">
-											<td data-cell-header="재판조력자 종류" style="color: #2065c6;" class="tg-0lax">
-												재판조력자 분류</td>
-											<td data-cell-header="재판조력자 분류">[[${vo1.trial_fcltt_clasifi_code}]]
-												[[${vo1.trial_fcltt_sbcls_code}]] </td>
-										</tr>
-										<tr title="법원 메뉴" style="cursor: pointer">
-											<td data-cell-header="법원 종류" style="color: #2065c6;" class="tg-0lax">신청 법원
-											</td>
-											<td data-cell-header="선택 법원">[[${vo1.court_proper1}]]
-												[[${vo1.court_proper2}]] </td>
-										</tr>
-										<tr title="신청 상태 메뉴" style="cursor: pointer">
-											<td data-cell-header="신청 상태" style="color: #2065c6;" class="tg-0lax">신청 상태
-											</td>
-											<td data-cell-header="서류 상태">[[${vo1.aplicn_dtls_sts}]]
-											</td>
-										</tr>
-										<tr title="소송사건 메뉴" style="cursor: pointer">
-											<td data-cell-header="소송 경력 구분" style="color: #2065c6;" class="tg-0lax">소송사건
-												당사자 경력</td>
-											<td data-cell-header="소송 경력">[[${vo1.ligtn_case_carer_yn}]]
-											</td>
-										</tr>
-										<tr>
-											<td data-cell-header="소송 경력 내용" style="color: #2065c6;" class="tg-0lax">소송사건
-												당사자 경력 내용</td>
-											<td data-cell-header="소송 경력">[[${vo1.ligtn_case_carer_etc}]]</td>
-											</td>
-										</tr>
-
-										<tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
-											style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">보험업계 경력
-											</td>
-											<td data-cell-header="민원서식명">[[${vo1.insrn_indst_carer_yn}]]
-											</td>
-										</tr>
-										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">보험업계 경력
-												내용</td>
-											<td data-cell-header="민원서식명">[[${vo1.insrn_indst_carer_etc}]]</td>
-										</tr>
-
-										<tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
-											<td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">형사처벌 받은 경력
-											</td>
-											<td data-cell-header="민원서식명">[[${vo1.criminal_penalty_carer_yn}]]</td>
-											</td>
-										</tr>
-										<tr>
-											<td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">형사처벌 받은
-												경력 내용</td>
-											<td data-cell-header="민원서식명">[[${vo1.criminal_penalty_carer_etc}]]</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- 학력 상세정보 -->
-							<div class="table" style="border-bottom: none;">
-								<table>
-									<caption></caption>
-									<colgroup>
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 10%">
-										<col style="width: 10%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col" colspan="6"><strong>학력 상세정보</strong></th>
-										</tr>
-										<th data-cell-header="번호">학교 이름</th>
-										<th data-cell-header="번호">학과 전공</th>
-										<th data-cell-header="번호">입학일</th>
-										<th data-cell-header="담당법원">졸업일</th>
-										<th data-cell-header="담당법원">학위</th>
-										<th data-cell-header="담당법원">졸업 구분</th>
-									</thead>
-									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
-								</table>
-								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
-									<colgroup>
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 10%">
-										<col style="width: 10%">
-									</colgroup>
-									<tbody>
-										<th:block th:each="obj : ${edcnList}">
-											<tr>
-												<td data-cell-header="민원서식명" class="tg-0lax">
-													[[${obj.edctn_school_name}]]</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.edctn_major}]]</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.edctn_admsn_date}]]
-												</td>
-												<td data-cell-header="민원서식명">[[${obj.edctn_grdtn_date}]]</td>
-												<td data-cell-header="민원서식명">[[${obj.edctn_degree}]]</td>
-												<td data-cell-header="민원서식명">[[${obj.edctn_final}]]</td>
-											</tr>
-										</th:block>
-									</tbody>
-								</table>
-
-							</div>
-							<!-- 경력 상세정보 -->
-							<div class="table" style="border-bottom: none;">
-								<table>
-									<caption></caption>
-									<colgroup>
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 10%">
-										<col style="width: 10%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col" colspan="6"><strong>경력 상세정보</strong></th>
-										</tr>
-										<th data-cell-header="번호">회사명/활동기관명</th>
-										<th data-cell-header="번호">경력 구분</th>
-										<th data-cell-header="번호">근무 시작 일자</th>
-										<th data-cell-header="담당법원">근무 종료 일자</th>
-										<th data-cell-header="담당법원">부서</th>
-										<th data-cell-header="담당법원">직책</th>
-									</thead>
-									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
-								</table>
-								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
-									<colgroup>
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 20%">
-										<col style="width: 10%">
-										<col style="width: 10%">
-									</colgroup>
-									<tbody>
-										<th:block th:each="obj : ${carerList}">
-											<tr>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.company_name}]]
-												</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.carer_type}]]</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.work_start_date}]]
-												</td>
-												<td data-cell-header="민원서식명">[[${obj.work_end_date}]]</td>
-												<td data-cell-header="민원서식명">[[${obj.work_department}]]</td>
-												<td data-cell-header="민원서식명">[[${obj.work_position}]]</td>
-											</tr>
-										</th:block>
-									</tbody>
-								</table>
-
-							</div>
-							<!-- 자격증 상세정보 -->
-							<div class="table" style="border-bottom: none;">
-								<table>
-									<caption></caption>
-									<colgroup>
-										<col style="width: 25%">
-										<col style="width: 25%">
-										<col style="width: 25%">
-										<col style="width: 25%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col" colspan="5"><strong>자격증 상세정보</strong></th>
-										</tr>
-										<th data-cell-header="번호">자격증 종목</th>
-										<th data-cell-header="번호">발급 기관</th>
-										<th data-cell-header="번호">자격증/면허번호</th>
-										<th data-cell-header="담당법원">발급일</th>
-									</thead>
-									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
-								</table>
-								<table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
-									<colgroup>
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-									</colgroup>
-									<tbody>
-										<th:block th:each="obj : ${crtfcList}">
-											<tr>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_type}]]</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.issue_agency}]]
-												</td>
-												<td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_number}]]
-												</td>
-												<td data-cell-header="민원서식명">[[${obj.issue_date}]]</td>
-											</tr>
-										</th:block>
-									</tbody>
-								</table>
-
-							</div>
-							<!-- 파일 목록 -->
-							<div class="table" style="border-bottom: none;">
-								<table>
-									<caption></caption>
-									<colgroup>
-										<col style="width: 25%">
-										<col style="width: 25%">
-										<col style="width: 25%">
-										<col style="width: 25%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col" colspan="5"><strong>신청자 서류정보</strong></th>
-										</tr>
-									</thead>
-									<input type="hidden" name="aplcn_crtfc_proper_num" value="">
-								</table>
-								<table class="table" style="width: 100%; border-top: none;"> <!-- 표 전체 너비를 100%로 설정 -->
-									<colgroup>
-										<col style="width: 55%;">
-										<col style="width: 45%;">
-										
-									</colgroup>
-									<tbody>
-										<tr th:each="file : ${fileList}">
-											<td class="tg-0lax">[[${file.original_file_name}]]</td>
-											<td class="tg-0lax fclttRegist_btn" style="border-right: none"><a th:href="${file.file_path}" class="fcltt_btn5">파일 받기</a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							</br>
-
-							<div style="text-align: center;">
-								<div class="tab-wrap">
-									<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
-										<strong>평가 결과는 <span id="result">[[${score}]]</span> 점입니다.</strong>
-									</th:block>
-									<th:block
-										th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
-										<strong>평가 결과가 없습니다.<span id="result"
-												th:text="${score == null or score != '' ? '' : score}"></span></strong>
-									</th:block>
-								</div>
-							</div>
-
-						</div>
-						</br>
-
-						<div class="fclttRegist_btn">
-							<a href="/aplcn/aplcnList" class="fcltt_btn1">목록으로</a>
-
-
-							<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
-								<a href="#" class="fcltt_btn2" id="rejectBtn"
-									onclick="return aplcnEvaluation();">서류반려</a>
-							</th:block>
-							<!--<a th:href="@{/aplcn/aplcnReject(aplicn_dtls_sts=${vo1.aplicn_dtls_sts}, aplicn_dtls_sts='B') }" class="fcltt_btn2" id="modifyBtn">서류반려</a>-->
-							<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
-
-							</th:block>
-							<th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
-								<a href="#" class="fcltt_btn3" onclick="openPopup1()">평가하기</a>
-							</th:block>
-							<th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
-								<a th:href="@{/fcltt/fclttRegist(user_proper_num=${vo1.user_proper_num})}"
-									class="fcltt_btn4" id="registerBtn" onclick="return confirmEvaluation();">등재하기</a>
-							</th:block>
-						</div>
-
-
-
-						<script type="text/javascript">
-							var popupWindow; // 팝업 창 객체를 저장할 변수
-
-							function openPopup() {
-								// 현재 페이지에서 aplcn_dtls_proper_num 값을 가져옵니다.
-								var aplcnDtlsProperNum = document.getElementById("aplcn_dtls_proper_num").value;
-								console.log(aplcn_dtls_proper_num);
-
-							}
-
-						</script>
-
-						<script type="text/javascript">
-							// 결과를 부모 창의 요소에 표시합니다.
-							var resultElement = window.opener.document.getElementById("result");
-							if (resultElement) {
-								resultElement.innerHTML = "평균 점수: " + average;
-							} else {
-								// 만약 결과를 표시할 요소가 없다면, 콘솔에 오류 메시지를 출력합니다.
-								console.error("결과를 표시할 요소를 찾을 수 없습니다.");
-							}
-
-						</script>
-
-						<script>
-							function aplcnEvaluation() {
-								if (confirm('서류를 반려하시겠습니까?')) {
-									// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
-									event.preventDefault();
-
-									document.listForm.action = 'aplcnReject';
-									document.listForm.submit();
-									return true;
-								} else {
-									return false;
-								}
-							}
-						</script>
-
-						<!--등재하기-->
-						<script>
-							function confirmEvaluation() {
-								if (confirm('등재하시겠습니까?')) {
-									// 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
-									return true;
-								} else {
-									return false;
-								}
-							}
-						</script>
-
-
-						<script th:inline="javascript">
-							//버튼제어
-							//document.getElementById("rejectBtn").addEventListener('click', function (e) {
-
-
-							//})
-
-						</script>
-
-						<script th:inline="javascript">
-							function openPopup1() {
-								//평가하기 버튼 누르는 순간에 신청상태 심사중으로 바꾸기
-								$.ajax({
-									url: "updateSts",
-									method: "POST",
-									data: {
-										"aplcn_dtls_proper_num": $('#aplcn_dtls_proper_num').val()
-									},
-									success: (data) => {
-										if (data == 1) {
-										}
-									},
-									error: (status, error) => {
-										console.log(status, error);
-									}
-								})
-
-
-
-								// 평가하기 버튼을 눌렀을 때 팝업 창을 열기
-								var url = "/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=[[${vo1.aplcn_dtls_proper_num}]]";
-								var popup = window.open(url, "평가 팝업", "width=1920, height=1000");
-								if (popup) {
-									popup.focus();
-								} else {
-									alert("팝업 창이 차단되었습니다. 팝업 창을 허용해주세요.");
-								}
-							}
-
-						</script>
-						<script th:inline="javascript">
-							function openPopup2() {
-								// 등재 완료 메시지를 alert 창으로 표시
-								alert("등재가 완료되었습니다.");
-
-								// user_proper_num 값을 가져와서 URL에 추가하고 /fcltt/fclttRegist 로 이동
-								var user_proper_num = '[[${vo1.user_proper_num}]]';
-								window.location.href = "/fcltt/fclttRegist?user_proper_num=" + user_proper_num;
-							}
-
-							if ('[[${msg}]]' == 1) {
-								alert('등재를 완료하였습니다.');
-								opener.location.href = '/aplcn/aplcnList';
-							} else if ('[[${msg}]]' == 0) {
-								alert('등재를 완료해주세요.')
-							}
-						</script>
-
-						</br>
-						</br>
-			</div>
-			</form>
-			</article>
-		</div>
-	</div>
-	<!-- //main_con  -->
-	</div>
+   <div class="wrap">
+      <!-- main_con  -->
+      <div id="main_con">
+         <div id="nav_menu">
+            <div id="lnb">
+               <h2 class="title">조력자 등재신청</h2>
+               <div class="menu">
+                  <ul>
+                     <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">조력자 등재</a>
+                        <ul class="sub" style="display: none;">
+                           <li><a th:href="@{/fcltt/fclttList}">조력자 등재명단</a></li>
+                        </ul>
+                     </li>
+                     <li class="has-sub"><a href="#" title="이용문의 닫기 (열림)">신청자 목록</a>
+                        <ul class="sub" style="display: none;">
+                           <li><a th:href="@{/aplcn/aplcnList}">신청자 목록</a></li>
+                        </ul>
+                     </li>
+
+                  </ul>
+               </div>
+
+            </div>
+         </div>
+         <div id="contents">
+
+            <style>
+               @media screen and (max-width: 1024px) {
+                  .table-responsive>table>tbody>tr td[data-cell-header]:before {
+                     width: 30%;
+                     margin: 0 0 0 0;
+                     vertical-align: unset;
+                  }
+               }
+
+               .table-responsive>table>tbody>tr:hover {
+                  background-color: #e6f8ff;
+               }
+
+               @media screen and (min-width: 1100px) {
+                  #select-box-margin-left-10 {
+                     margin-left: 6px;
+                  }
+               }
+
+               .details_btn2 a {
+                  height: 35px;
+                  width: 77px;
+                  border: 1px solid #2065c6;
+                  border-radius: 5px;
+                  margin: 5px;
+                  padding: 5px;
+                  text-align: center;
+                  display: inline-block;
+                  background: #2065c6;
+               }
+
+               .table table-responsive .shifted-td {
+                  margin-left: 2cm;
+               }
+
+               .fclttRegist_btn {
+                  margin-top: 20px;
+                  text-align: center;
+               }
+
+               .fclttRegist_btn .fcltt_btn1 {
+                  display: inline-block;
+                  height: 43px;
+                  width: 150px;
+                  border: 1px solid #2065c6;
+                  border-radius: 5px;
+                  margin: 5px;
+                  padding: 10px;
+               }
+
+               .fclttRegist_btn .fcltt_btn2 {
+                  display: inline-block;
+                  height: 43px;
+                  width: 150px;
+                  background-color: lightgrey;
+                  color: black;
+                  border: 1px solid lightgrey;
+                  border-radius: 5px;
+                  margin: 5px;
+                  padding: 10px;
+               }
+
+               .fclttRegist_btn .fcltt_btn3 {
+                  display: inline-block;
+                  height: 43px;
+                  width: 150px;
+                  background-color: #2065c6;
+                  color: white;
+                  border: 1px solid #2065c6;
+                  border-radius: 5px;
+                  margin: 5px;
+                  padding: 10px;
+               }
+
+               .fclttRegist_btn .fcltt_btn4 {
+                  display: inline-block;
+                  height: 43px;
+                  width: 150px;
+                  background-color: rgb(0, 128, 192);
+                  color: white;
+                  border: 1px solid rgb(0, 128, 192);
+                  border-radius: 5px;
+                  margin: 5px;
+                  padding: 10px;
+               }
+
+               .fclttRegist_btn .fcltt_btn5 {
+                  display: inline-block;
+                  height: 30px;
+                  width: 100px;
+                  background-color: rgb(0, 155, 155);
+                  color: white;
+                  border: none;
+                  border-radius: 5px;
+                  margin: 2px;
+                  padding: 5px;
+               }
+
+
+               .fclttRegist_btn>.fcltt_btn2:hover {
+                  color: white;
+                  border: none;
+                  background-color: black;
+               }
+
+               .fclttRegist_btn>.fcltt_btn3:hover {
+                  color: white;
+                  border: none;
+                  background-color: rgb(0, 155, 155);
+               }
+
+               .fclttRegist_btn>.fcltt_btn4:hover {
+                  color: white;
+                  border: none;
+                  background-color: rgb(0, 72, 72);
+               }
+
+               .heading-wrap .heading1 {
+                  font-size: 26px;
+
+               }
+
+               td.tg-0lax {
+                  border-right: 1px solid lightgray;
+               }
+            </style>
+
+
+
+            <article id="detail-content">
+               <form id="listForm" name="listForm" action="####" method="post">
+
+                  <div class="heading-wrap container">
+                     <h3 class="heading1">
+                        <!--<span>상세 정보</span>-->
+                        <td>[[${vo1.user_name}]] ([[${vo1.user_id}]])님의 상세정보</td>
+                     </h3>
+                  </div>
+
+                  <div class="contents">
+
+                     <script type="text/javascript" src="/2017e/js/common/common_share_util.js"
+                        charset="EUC-KR"></script>
+
+                     <script type="text/javascript">
+                        $(document).ready(function () {
+                           Fn.TitleIcon.Call();
+                        });
+                     </script>
+
+                     <!-- 게시판 시작 부분 -->
+                     <div class="table" style="border-bottom: none;">
+                        <table>
+                           <caption></caption>
+                           <colgroup>
+                              <col style="width: 50%">
+                              <col style="width: 50%">
+                           </colgroup>
+                           <thead>
+                              <tr>
+                                 <th scope="col" colspan="5"><strong>신청자 기본정보</strong></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr title="재판조력자 메뉴" style="cursor: pointer">
+                                 <td style="color: #2065c6;" class="tg-0lax">이름</td>
+                                 <td>[[${vo1.user_name}]] </td>
+                              </tr>
+                              <tr title="법원 메뉴" style="cursor: pointer">
+                                 <td style="color: #2065c6;" class="tg-0lax">연락처</td>
+                                 <td>[[${#strings.substring(vo1.user_phone, 0, 3) + '-' +
+                                    #strings.substring(vo1.user_phone, 3, 7) + '-' +
+                                    #strings.substring(vo1.user_phone, 7)}]]</td>
+                              </tr>
+                              <tr title="신청 상태 메뉴" style="cursor: pointer">
+                                 <td style="color: #2065c6;" class="tg-0lax">생년월일</td>
+                                 <td>[[${vo1.user_rrn_f}]]</td>
+                              </tr>
+                              <tr title="소송사건 메뉴" style="cursor: pointer">
+                                 <td style="color: #2065c6;" class="tg-0lax">이메일</td>
+                                 <td>[[${vo1.user_email_f}]]@[[${vo1.user_email_b}]]
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="color: #2065c6;" class="tg-0lax">최종 학력</td>
+                                 <td>[[${vo1.user_edctn_final}]]</td>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <!-- 중요 상세정보 -->
+                     <div class="table" style="border-bottom: none;">
+                        <table>
+                           <caption></caption>
+                           <colgroup>
+                              <col style="width: 50%">
+                              <col style="width: 50%">
+                           </colgroup>
+                           <thead>
+                              <tr>
+                                 <th scope="col" colspan="5"><strong>중요 상세정보</strong></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <input type="hidden" name="aplcn_dtls_proper_num" id="aplcn_dtls_proper_num"
+                                 th:value="${vo1.aplcn_dtls_proper_num}">
+                              <input type="hidden" name="user_name" id="user_name"
+                                 th:value="${vo1.user_name}">
+                              <input type="hidden" name="user_proper_num" id="user_proper_num"
+                                 th:value="${vo1.user_proper_num}">
+                              <input type="hidden" name="trial_fcltt_proper_num" id="trial_fcltt_proper_num"
+                                 th:value="${vo1.trial_fcltt_proper_num}">
+                              <input type="hidden" name="court_proper_num" id="court_proper_num"
+                                 th:value="${vo1.court_proper_num}">
+                              <input type="hidden" name="user_ar" id="user_ar" th:value="${vo1.user_ar}">
+
+
+                              <tr title="재판조력자 메뉴" style="cursor: pointer">
+                                 <td data-cell-header="재판조력자 종류" style="color: #2065c6;" class="tg-0lax">
+                                    재판조력자 분류</td>
+                                 <td data-cell-header="재판조력자 분류">[[${vo1.trial_fcltt_clasifi_code}]]
+                                    [[${vo1.trial_fcltt_sbcls_code}]] </td>
+                              </tr>
+                              <tr title="법원 메뉴" style="cursor: pointer">
+                                 <td data-cell-header="법원 종류" style="color: #2065c6;" class="tg-0lax">신청 법원
+                                 </td>
+                                 <td data-cell-header="선택 법원">[[${vo1.court_proper1}]]
+                                    [[${vo1.court_proper2}]] </td>
+                              </tr>
+                              <tr title="신청 상태 메뉴" style="cursor: pointer">
+                                 <td data-cell-header="신청 상태" style="color: #2065c6;" class="tg-0lax">신청 상태
+                                 </td>
+                                 <td data-cell-header="서류 상태">[[${vo1.aplicn_dtls_sts}]]
+                                 </td>
+                              </tr>
+                              <tr title="소송사건 메뉴" style="cursor: pointer">
+                                 <td data-cell-header="소송 경력 구분" style="color: #2065c6;" class="tg-0lax">소송사건
+                                    당사자 경력</td>
+                                 <td data-cell-header="소송 경력">[[${vo1.ligtn_case_carer_yn}]]
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td data-cell-header="소송 경력 내용" style="color: #2065c6;" class="tg-0lax">소송사건
+                                    당사자 경력 내용</td>
+                                 <td data-cell-header="소송 경력">[[${vo1.ligtn_case_carer_etc}]]</td>
+                                 </td>
+                              </tr>
+
+                              <tr title="직업능력 > 기술/자격 > 국가기술자격 부정행위 신고서 / 국가기술자격 부정행위 신고서"
+                                 style="cursor: pointer">
+                                 <td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">보험업계 경력
+                                 </td>
+                                 <td data-cell-header="민원서식명">[[${vo1.insrn_indst_carer_yn}]]
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">보험업계 경력
+                                    내용</td>
+                                 <td data-cell-header="민원서식명">[[${vo1.insrn_indst_carer_etc}]]</td>
+                              </tr>
+
+                              <tr title="산재예방 > 산업재해 > 산업재해 조사표 / 산업재해 조사표" style="cursor: pointer">
+                                 <td data-cell-header="번호" style="color: #2065c6;" class="tg-0lax">형사처벌 받은 경력
+                                 </td>
+                                 <td data-cell-header="민원서식명">[[${vo1.criminal_penalty_carer_yn}]]</td>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td data-cell-header="담당법원" style="color: #2065c6;" class="tg-0lax">형사처벌 받은
+                                    경력 내용</td>
+                                 <td data-cell-header="민원서식명">[[${vo1.criminal_penalty_carer_etc}]]</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <!-- 학력 상세정보 -->
+                     <div class="table" style="border-bottom: none;">
+                        <table>
+                           <caption></caption>
+                           <colgroup>
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 10%">
+                              <col style="width: 10%">
+                           </colgroup>
+                           <thead>
+                              <tr>
+                                 <th scope="col" colspan="6"><strong>학력 상세정보</strong></th>
+                              </tr>
+                              <th data-cell-header="번호">학교 이름</th>
+                              <th data-cell-header="번호">학과 전공</th>
+                              <th data-cell-header="번호">입학일</th>
+                              <th data-cell-header="담당법원">졸업일</th>
+                              <th data-cell-header="담당법원">학위</th>
+                              <th data-cell-header="담당법원">졸업 구분</th>
+                           </thead>
+                           <input type="hidden" name="aplcn_crtfc_proper_num" value="">
+                        </table>
+                        <table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+                           <colgroup>
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 10%">
+                              <col style="width: 10%">
+                           </colgroup>
+                           <tbody>
+                              <th:block th:each="obj : ${edcnList}">
+                                 <tr>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">
+                                       [[${obj.edctn_school_name}]]</td>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.edctn_major}]]</td>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.edctn_admsn_date}]]
+                                    </td>
+                                    <td data-cell-header="민원서식명">[[${obj.edctn_grdtn_date}]]</td>
+                                    <td data-cell-header="민원서식명">[[${obj.edctn_degree}]]</td>
+                                    <td data-cell-header="민원서식명">[[${obj.edctn_final}]]</td>
+                                 </tr>
+                              </th:block>
+                           </tbody>
+                        </table>
+
+                     </div>
+                     <!-- 경력 상세정보 -->
+                     <div class="table" style="border-bottom: none;">
+                        <table>
+                           <caption></caption>
+                           <colgroup>
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 10%">
+                              <col style="width: 10%">
+                           </colgroup>
+                           <thead>
+                              <tr>
+                                 <th scope="col" colspan="6"><strong>경력 상세정보</strong></th>
+                              </tr>
+                              <th data-cell-header="번호">회사명/활동기관명</th>
+                              <th data-cell-header="번호">경력 구분</th>
+                              <th data-cell-header="번호">근무 시작 일자</th>
+                              <th data-cell-header="담당법원">근무 종료 일자</th>
+                              <th data-cell-header="담당법원">부서</th>
+                              <th data-cell-header="담당법원">직책</th>
+                           </thead>
+                           <input type="hidden" name="aplcn_crtfc_proper_num" value="">
+                        </table>
+                        <table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+                           <colgroup>
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 20%">
+                              <col style="width: 10%">
+                              <col style="width: 10%">
+                           </colgroup>
+                           <tbody>
+                              <th:block th:each="obj : ${carerList}">
+                                 <tr>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.company_name}]]
+                                    </td>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.carer_type}]]</td>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.work_start_date}]]
+                                    </td>
+                                    <td data-cell-header="민원서식명">[[${obj.work_end_date}]]</td>
+                                    <td data-cell-header="민원서식명">[[${obj.work_department}]]</td>
+                                    <td data-cell-header="민원서식명">[[${obj.work_position}]]</td>
+                                 </tr>
+                              </th:block>
+                           </tbody>
+                        </table>
+
+                     </div>
+                     <!-- 자격증 상세정보 -->
+                     <div class="table" style="border-bottom: none;">
+                        <table>
+                           <caption></caption>
+                           <colgroup>
+                              <col style="width: 25%">
+                              <col style="width: 25%">
+                              <col style="width: 25%">
+                              <col style="width: 25%">
+                           </colgroup>
+                           <thead>
+                              <tr>
+                                 <th scope="col" colspan="5"><strong>자격증 상세정보</strong></th>
+                              </tr>
+                              <th data-cell-header="번호">자격증 종목</th>
+                              <th data-cell-header="번호">발급 기관</th>
+                              <th data-cell-header="번호">자격증/면허번호</th>
+                              <th data-cell-header="담당법원">발급일</th>
+                           </thead>
+                           <input type="hidden" name="aplcn_crtfc_proper_num" value="">
+                        </table>
+                        <table style="width: 100%;"> <!-- 표 전체 너비를 100%로 설정 -->
+                           <colgroup>
+                              <col style="width: 25%;">
+                              <col style="width: 25%;">
+                              <col style="width: 25%;">
+                              <col style="width: 25%;">
+                           </colgroup>
+                           <tbody>
+                              <th:block th:each="obj : ${crtfcList}">
+                                 <tr>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_type}]]</td>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.issue_agency}]]
+                                    </td>
+                                    <td data-cell-header="민원서식명" class="tg-0lax">[[${obj.crtfc_number}]]
+                                    </td>
+                                    <td data-cell-header="민원서식명">[[${obj.issue_date}]]</td>
+                                 </tr>
+                              </th:block>
+                           </tbody>
+                        </table>
+
+                     </div>
+                     <!-- 파일 목록 -->
+                     <div class="table" style="border-bottom: none;">
+                        <table>
+                           <caption></caption>
+                           <colgroup>
+                              <col style="width: 25%">
+                              <col style="width: 25%">
+                              <col style="width: 25%">
+                              <col style="width: 25%">
+                           </colgroup>
+                           <thead>
+                              <tr>
+                                 <th scope="col" colspan="5"><strong>신청자 서류정보</strong></th>
+                              </tr>
+                           </thead>
+                           <input type="hidden" name="aplcn_crtfc_proper_num" value="">
+                        </table>
+                        <table class="table" style="width: 100%; border-top: none;"> <!-- 표 전체 너비를 100%로 설정 -->
+                           <colgroup>
+                              <col style="width: 55%;">
+                              <col style="width: 45%;">
+                              
+                           </colgroup>
+                           <tbody>
+                              <tr th:each="file : ${fileList}">
+                                 <td class="tg-0lax">[[${file.original_file_name}]]</td>
+                                 <td class="tg-0lax fclttRegist_btn" style="border-right: none"><a th:href="${file.file_path}" class="fcltt_btn5">파일 받기</a>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     </br>
+
+                     <div style="text-align: center;">
+                        <div class="tab-wrap">
+                           <th:block th:if="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+                              <strong>평가 결과는 <span id="result">[[${score}]]</span> 점입니다.</strong>
+                           </th:block>
+                           <th:block
+                              th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+                              <strong>평가 결과가 없습니다.<span id="result"
+                                    th:text="${score == null or score != '' ? '' : score}"></span></strong>
+                           </th:block>
+                        </div>
+                     </div>
+
+                  </div>
+                  </br>
+
+                  <div class="fclttRegist_btn">
+                     <a href="/aplcn/aplcnList" class="fcltt_btn1">목록으로</a>
+
+
+                     <th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+                        <a href="#" class="fcltt_btn2" id="rejectBtn"
+                           onclick="return aplcnEvaluation();">서류반려</a>
+                     </th:block>
+                     <!--<a th:href="@{/aplcn/aplcnReject(aplicn_dtls_sts=${vo1.aplicn_dtls_sts}, aplicn_dtls_sts='B') }" class="fcltt_btn2" id="modifyBtn">서류반려</a>-->
+                     <th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
+
+                     </th:block>
+                     <th:block th:unless="${vo1.aplicn_dtls_sts == '평가완료' or vo1.aplicn_dtls_sts == '합격'}">
+                        <a href="#" class="fcltt_btn3" onclick="openPopup1()">평가하기</a>
+                     </th:block>
+                     <th:block th:if="${vo1.aplicn_dtls_sts == '평가완료'}">
+                        <a th:href="@{/fcltt/fclttRegist(user_proper_num=${vo1.user_proper_num})}"
+                           class="fcltt_btn4" id="registerBtn" onclick="return confirmEvaluation();">등재하기</a>
+                     </th:block>
+                  </div>
+
+
+
+                  <script type="text/javascript">
+                     var popupWindow; // 팝업 창 객체를 저장할 변수
+
+                     function openPopup() {
+                        // 현재 페이지에서 aplcn_dtls_proper_num 값을 가져옵니다.
+                        var aplcnDtlsProperNum = document.getElementById("aplcn_dtls_proper_num").value;
+                        console.log(aplcn_dtls_proper_num);
+
+                     }
+
+                  </script>
+
+                  <script type="text/javascript">
+                     // 결과를 부모 창의 요소에 표시합니다.
+                     var resultElement = window.opener.document.getElementById("result");
+                     if (resultElement) {
+                        resultElement.innerHTML = "평균 점수: " + average;
+                     } else {
+                        // 만약 결과를 표시할 요소가 없다면, 콘솔에 오류 메시지를 출력합니다.
+                        console.error("결과를 표시할 요소를 찾을 수 없습니다.");
+                     }
+
+                  </script>
+
+                  <script>
+                     function aplcnEvaluation() {
+                        if (confirm('서류를 반려하시겠습니까?')) {
+                           // 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
+                           event.preventDefault();
+
+                           document.listForm.action = 'aplcnReject';
+                           document.listForm.submit();
+                           return true;
+                        } else {
+                           return false;
+                        }
+                     }
+                  </script>
+
+                  <!--등재하기-->
+                  <script>
+                     function confirmEvaluation() {
+                        if (confirm('등재하시겠습니까?')) {
+                           // 사용자가 확인 버튼을 누르면 팝업 창을 닫습니다.
+                           return true;
+                        } else {
+                           return false;
+                        }
+                     }
+                  </script>
+
+
+                  <script th:inline="javascript">
+                     //버튼제어
+                     //document.getElementById("rejectBtn").addEventListener('click', function (e) {
+
+
+                     //})
+
+                  </script>
+
+                  <script th:inline="javascript">
+                     function openPopup1() {
+                        //평가하기 버튼 누르는 순간에 신청상태 심사중으로 바꾸기
+                        $.ajax({
+                           url: "updateSts",
+                           method: "POST",
+                           data: {
+                              "aplcn_dtls_proper_num": $('#aplcn_dtls_proper_num').val()
+                           },
+                           success: (data) => {
+                              if (data == 1) {
+                              }
+                           },
+                           error: (status, error) => {
+                              console.log(status, error);
+                           }
+                        })
+
+
+
+                        // 평가하기 버튼을 눌렀을 때 팝업 창을 열기
+                        var url = "/aplcn/aplcnEvaluate?aplcn_dtls_proper_num=[[${vo1.aplcn_dtls_proper_num}]]";
+                        var popup = window.open(url, "평가 팝업", "width=1920, height=1000");
+                        if (popup) {
+                           popup.focus();
+                        } else {
+                           alert("팝업 창이 차단되었습니다. 팝업 창을 허용해주세요.");
+                        }
+                     }
+
+                  </script>
+                  <script th:inline="javascript">
+                     function openPopup2() {
+                        // 등재 완료 메시지를 alert 창으로 표시
+                        alert("등재가 완료되었습니다.");
+
+                        // user_proper_num 값을 가져와서 URL에 추가하고 /fcltt/fclttRegist 로 이동
+                        var user_proper_num = '[[${vo1.user_proper_num}]]';
+                        window.location.href = "/fcltt/fclttRegist?user_proper_num=" + user_proper_num;
+                     }
+
+                     if ('[[${msg}]]' == 1) {
+                        alert('등재를 완료하였습니다.');
+                        opener.location.href = '/aplcn/aplcnList';
+                     } else if ('[[${msg}]]' == 0) {
+                        alert('등재를 완료해주세요.')
+                     }
+                  </script>
+
+                  </br>
+                  </br>
+         </div>
+         </form>
+         </article>
+      </div>
+   </div>
+   <!-- //main_con  -->
+   </div>
 
 </th:block>
 

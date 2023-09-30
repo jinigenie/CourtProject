@@ -128,7 +128,7 @@
 
 	<!-- 신청자 상태변환 서류반려 -->
 	<update id="aplcnReject">
-		update tb_005 set
+		update TB_005 set
 		aplicn_dtls_sts = #{aplicn_dtls_sts}
 		where aplcn_dtls_proper_num =
 		#{aplcn_dtls_proper_num} and
@@ -137,7 +137,7 @@
 
 	<!-- 신청자 상태변환 평가완료 -->
 	<update id="aplcnCompleted">
-		update tb_005 set
+		update TB_005 set
 		aplicn_dtls_sts = #{aplicn_dtls_sts}
 		where aplcn_dtls_proper_num =
 		#{aplcn_dtls_proper_num}
@@ -199,7 +199,7 @@
 		t9.file_type,
 		t9.original_file_name,
 		t9.file_path
-		FROM tb_009 t9
+		FROM TB_009 t9
 		WHERE
 		t9.aplcn_dtls_proper_num = #{aplcn_dtls_proper_num};
 	</select>

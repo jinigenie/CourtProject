@@ -51,7 +51,7 @@ public class S3RestController {
             byte[] originData = file.getBytes();
 
             aivo.setOriginal_file_name(originName);
-            aivo.setFile_path(folderpath + uploadName);
+            aivo.setFile_path(uploadName);
 
             s3.putS3Object(uploadName, originData, folderpath);
             aplcnRegService.uploadFileInfo(aivo);

@@ -49,11 +49,13 @@
 								<tbody>
 									<tr>
 										<th scope="row">
-											<span class="txt-left">사용자고유번호</span>
+											<span class="txt-left">신청자 아이디</span>
 										</th>
 										<td data-cell-header="사용자고유번호" class="txt-left">
 											<input name="user_proper_num" th:value="${vo.user_proper_num}"
-												class="cm_inptxt" type="text" readonly style="border: none;">
+												class="cm_inptxt" type="hidden" readonly style="border: none;">
+											<input name="user_id" th:value="${vo.user_id}" class="cm_inptxt" type="text"
+												readonly style="border: none;">
 										</td>
 									</tr>
 									<tr>
@@ -92,8 +94,8 @@
 												th:value="${vo.user_email_f}">
 											<input type="hidden" class="fcltt_email" name="user_email_b"
 												th:value="${vo. user_email_b}">
-											<input type="hidden" class="aplcn_dtls_proper_num" name="aplcn_dtls_proper_num"
-												th:value="${vo. aplcn_dtls_proper_num}">
+											<input type="hidden" class="aplcn_dtls_proper_num"
+												name="aplcn_dtls_proper_num" th:value="${vo. aplcn_dtls_proper_num}">
 										</td>
 									</tr>
 									<tr>
